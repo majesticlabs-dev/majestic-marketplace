@@ -1,6 +1,6 @@
 # Majestic Rails
 
-Ruby on Rails development tools. Includes 19 specialized agents, 3 commands, and 5 skills.
+Ruby on Rails development tools. Includes 21 specialized agents, 3 commands, and 5 skills.
 
 ## Installation
 
@@ -25,6 +25,8 @@ Invoke with: `agent majestic-rails:<name>` or `agent majestic-rails:<category>:<
 | `action-mailer-coder` | Create emails with parameterized mailers, previews, and background delivery |
 | `solid-queue-coder` | Configure Solid Queue for database-backed job processing (Rails 8 default) |
 | `solid-cache-coder` | Configure Solid Cache for database-backed caching (Rails 8 default) |
+| `database-optimizer` | Advanced query optimization, EXPLAIN analysis, complex SQL for PostgreSQL/SQLite |
+| `database-admin` | Database operations, backups, monitoring, connection pooling for PostgreSQL/SQLite |
 
 ### Frontend
 
@@ -102,6 +104,12 @@ agent majestic-rails:solid-queue-coder "Set up Solid Queue with recurring jobs"
 
 # Configure Solid Cache
 agent majestic-rails:solid-cache-coder "Configure Solid Cache with separate database"
+
+# Optimize database queries
+agent majestic-rails:database-optimizer "Analyze slow query with EXPLAIN and recommend indexes"
+
+# Database administration
+agent majestic-rails:database-admin "Set up pg_stat_statements monitoring and backup strategy"
 
 # Build Hotwire components
 agent majestic-rails:frontend:hotwire-coder "Create a live search with Turbo Frames"

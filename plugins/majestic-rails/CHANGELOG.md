@@ -2,6 +2,16 @@
 
 All notable changes to majestic-rails will be documented in this file.
 
+## [1.10.0] - 2025-11-27
+
+### Added
+- `database-optimizer` agent - Advanced query optimization, EXPLAIN ANALYZE interpretation, complex SQL (CTEs, window functions), indexing strategies for PostgreSQL/SQLite
+- `database-admin` agent - Database operations, backups (pg_dump), monitoring (pg_stat_statements), connection pooling (PgBouncer), maintenance for PostgreSQL/SQLite
+
+### Changed
+- Total agents increased from 19 to 21
+- Added keywords: postgresql, sqlite, database
+
 ## [1.9.0] - 2025-11-27
 
 ### Added
