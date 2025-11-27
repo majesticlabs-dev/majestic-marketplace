@@ -187,6 +187,11 @@ end
 For comprehensive patterns and examples, see:
 - `references/patterns.md` - Complete code patterns with explanations
 - `references/resources.md` - Links to source material and further reading
+- `references/activerecord-tips.md` - ActiveRecord query patterns, validations, associations
+- `references/controllers-tips.md` - Controller patterns, routing, rate limiting, form objects
+- `references/hotwire-tips.md` - Turbo Frames, Turbo Streams, Stimulus, ViewComponents
+- `references/activestorage-tips.md` - File uploads, attachments, blob handling
+- `references/config-tips.md` - Configuration, logging, deployment, PostgreSQL patterns
 
 ## Philosophy Summary
 

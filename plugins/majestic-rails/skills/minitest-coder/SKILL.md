@@ -784,3 +784,8 @@ When writing Minitest tests, ensure:
 - Complex object setup needed
 
 **Can mix both styles** in the same test file if it improves clarity.
+
+## References
+
+For additional testing patterns and tips:
+- `references/testing-tips.md` - Fixture DEFAULTS, CI configuration, Overcommit hooks, priority job testing

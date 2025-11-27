@@ -528,3 +528,4 @@ Document all exceptions with clear reasoning in code comments.
 
 For additional Sandi Metz guidance (code smells, refactoring, testing principles):
 - `references/sandi-metz.md`
+- `references/ruby-tips.md` - Type conversion, hash patterns, proc composition, refinements
