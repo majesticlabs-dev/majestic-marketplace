@@ -1,0 +1,72 @@
+{
+  "name": "majestic-marketplace",
+  "owner": {
+    "name": "Majestic Labs LLC",
+    "url": "https://majesticlabs.dev"
+  },
+  "metadata": {
+    "description": "Majestic Labs plugin marketplace for Claude Code extensions",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "majestic-engineer",
+      "description": "Language-agnostic engineering workflows. Includes 13 specialized agents, 7 commands, and 12 skills.",
+      "version": "1.7.0",
+      "author": {
+        "name": "David Paluy",
+        "url": "https://github.com/dpaluy",
+        "email": "marketplace@it.majesticlabs.dev"
+      },
+      "homepage": "https://github.com/majesticlabs-dev/majestic-marketplace/tree/master/plugins/majestic-engineer",
+      "tags": [
+        "engineering",
+        "workflow-automation",
+        "git",
+        "testing",
+        "security",
+        "architecture"
+      ],
+      "source": "./plugins/majestic-engineer"
+    },
+    {
+      "name": "majestic-rails",
+      "description": "Ruby on Rails development tools. Includes 14 specialized agents, 3 commands, and 5 skills.",
+      "version": "1.8.0",
+      "author": {
+        "name": "David Paluy",
+        "url": "https://github.com/dpaluy",
+        "email": "marketplace@it.majesticlabs.dev"
+      },
+      "homepage": "https://github.com/majesticlabs-dev/majestic-marketplace/tree/master/plugins/majestic-rails",
+      "tags": ["ruby", "rails", "rspec", "minitest", "hotwire", "stimulus", "tailwind", "avo", "rubocop", "github", "ci"],
+      "source": "./plugins/majestic-rails"
+    },
+    {
+      "name": "majestic-tools",
+      "description": "Claude Code customization tools. Includes 10 commands, 3 skills, and 2 hooks.",
+      "version": "1.1.0",
+      "author": {
+        "name": "David Paluy",
+        "url": "https://github.com/dpaluy",
+        "email": "marketplace@it.majesticlabs.dev"
+      },
+      "homepage": "https://github.com/majesticlabs-dev/majestic-marketplace/tree/master/plugins/majestic-tools",
+      "tags": ["claude-code", "agents", "hooks", "commands", "meta-tools"],
+      "source": "./plugins/majestic-tools"
+    },
+    {
+      "name": "majestic-marketing",
+      "description": "Marketing and content tools for Claude Code. Includes 1 skill.",
+      "version": "1.0.0",
+      "author": {
+        "name": "David Paluy",
+        "url": "https://github.com/dpaluy",
+        "email": "marketplace@it.majesticlabs.dev"
+      },
+      "homepage": "https://github.com/majesticlabs-dev/majestic-marketplace/tree/master/plugins/majestic-marketing",
+      "tags": ["marketing", "copywriting", "content", "editing"],
+      "source": "./plugins/majestic-marketing"
+    }
+  ]
+}

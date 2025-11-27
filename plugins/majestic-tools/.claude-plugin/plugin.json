@@ -1,0 +1,17 @@
+{
+  "name": "majestic-tools",
+  "version": "1.1.0",
+  "description": "Claude Code customization tools. Includes 10 commands, 3 skills, and 2 hooks.",
+  "author": {
+    "name": "David Paluy",
+    "url": "https://github.com/dpaluy",
+    "email": "marketplace@it.majesticlabs.dev"
+  },
+  "keywords": [
+    "claude-code",
+    "agents",
+    "hooks",
+    "commands",
+    "meta-tools"
+  ]
+}

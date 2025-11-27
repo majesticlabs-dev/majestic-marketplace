@@ -1,0 +1,26 @@
+{
+  "name": "majestic-rails",
+  "version": "1.8.0",
+  "description": "Ruby on Rails development tools. Includes 14 specialized agents, 3 commands, and 5 skills.",
+  "author": {
+    "name": "David Paluy",
+    "url": "https://github.com/dpaluy",
+    "email": "marketplace@it.majesticlabs.dev"
+  },
+  "keywords": [
+    "ruby",
+    "rails",
+    "rspec",
+    "minitest",
+    "gem-research",
+    "gem-builder",
+    "ruby-on-rails",
+    "hotwire",
+    "stimulus",
+    "tailwind",
+    "avo",
+    "rubocop",
+    "github",
+    "ci"
+  ]
+}

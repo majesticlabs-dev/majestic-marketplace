@@ -1,0 +1,7 @@
+{
+  "sequential-thinking": {
+    "description": "Enhanced reasoning for complex tasks",
+    "command": "npx",
+    "args": ["-y", "@anthropic/mcp-sequential-thinking"]
+  }
+}

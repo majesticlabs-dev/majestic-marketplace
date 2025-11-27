@@ -1,0 +1,17 @@
+{
+  "name": "majestic-marketing",
+  "version": "1.0.0",
+  "description": "Marketing and content tools for Claude Code. Includes 1 skill.",
+  "author": {
+    "name": "David Paluy",
+    "url": "https://github.com/dpaluy",
+    "email": "marketplace@it.majesticlabs.dev"
+  },
+  "keywords": [
+    "marketing",
+    "copywriting",
+    "content",
+    "editing",
+    "style-guide"
+  ]
+}
