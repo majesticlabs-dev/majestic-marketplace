@@ -10,6 +10,8 @@ claude /plugin install majestic-marketing
 
 ## Skills
 
+Invoke with: `skill majestic-marketing:<name>`
+
 | Skill | Description |
 |-------|-------------|
 | `copy-editor` | Review and edit copy for grammar, style, and clarity. Works with project style guides or uses sensible defaults. |
@@ -21,8 +23,8 @@ claude /plugin install majestic-marketing
 The `copy-editor` skill reviews any text for grammar, style, and clarity issues. It supports custom project style guides with a comprehensive default fallback.
 
 **Basic usage:**
-```
-claude skill copy-editor
+```bash
+skill majestic-marketing:copy-editor
 
 # Then provide the file or text to review
 ```

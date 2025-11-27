@@ -10,6 +10,8 @@ claude /plugin install majestic-rails
 
 ## Agents
 
+Invoke with: `agent majestic-rails:<name>` or `agent majestic-rails:<category>:<name>`
+
 ### Core
 
 | Agent | Description |
@@ -28,36 +30,40 @@ claude /plugin install majestic-rails
 
 | Agent | Description |
 |-------|-------------|
-| `frontend/hotwire-coder` | Build Turbo Drive, Frames, Streams with morphing, broadcasts, and real-time patterns |
-| `frontend/stimulus-coder` | Create Stimulus controllers with targets, values, actions, and Turbo integration |
-| `frontend/tailwind-coder` | Apply Tailwind CSS styling with responsive design patterns |
+| `frontend:hotwire-coder` | Build Turbo Drive, Frames, Streams with morphing, broadcasts, and real-time patterns |
+| `frontend:stimulus-coder` | Create Stimulus controllers with targets, values, actions, and Turbo integration |
+| `frontend:tailwind-coder` | Apply Tailwind CSS styling with responsive design patterns |
 
 ### Admin
 
 | Agent | Description |
 |-------|-------------|
-| `admin/avo-coder` | Build Avo admin interfaces (fetches latest docs dynamically) |
+| `admin:avo-coder` | Build Avo admin interfaces (fetches latest docs dynamically) |
 
 ### Research & Review
 
 | Agent | Description |
 |-------|-------------|
-| `research/gem-research` | Ruby gem evaluation, quality assessment, and implementation guidance |
-| `review/dhh-code-reviewer` | Review code following DHH's 37signals/Rails conventions |
-| `review/pragmatic-rails-reviewer` | Review code for quality, regressions, testability with pragmatic taste |
-| `review/performance-reviewer` | Analyze code for performance issues, query optimization, and scalability |
-| `review/data-integrity-reviewer` | Review migrations, data constraints, transactions, and privacy compliance |
-| `review/simplicity-reviewer` | Simplify code, detect anti-patterns, find duplication, enforce YAGNI |
+| `research:gem-research` | Ruby gem evaluation, quality assessment, and implementation guidance |
+| `review:dhh-code-reviewer` | Review code following DHH's 37signals/Rails conventions |
+| `review:pragmatic-rails-reviewer` | Review code for quality, regressions, testability with pragmatic taste |
+| `review:performance-reviewer` | Analyze code for performance issues, query optimization, and scalability |
+| `review:data-integrity-reviewer` | Review migrations, data constraints, transactions, and privacy compliance |
+| `review:simplicity-reviewer` | Simplify code, detect anti-patterns, find duplication, enforce YAGNI |
 
 ## Commands
 
+Invoke with: `/majestic-rails:workflows:<name>`
+
 | Command | Description |
 |---------|-------------|
-| `/workflows/build` | Execute work plans efficiently - build features following Rails conventions |
-| `/workflows/plan` | Transform feature descriptions into well-structured Rails project plans |
-| `/workflows/review` | Comprehensive code review using smart agent selection based on changed files |
+| `workflows:build` | Execute work plans efficiently - build features following Rails conventions |
+| `workflows:plan` | Transform feature descriptions into well-structured Rails project plans |
+| `workflows:review` | Comprehensive code review using smart agent selection based on changed files |
 
 ## Skills
+
+Invoke with: `skill majestic-rails:<name>`
 
 | Skill | Description |
 |-------|-------------|
@@ -71,67 +77,67 @@ claude /plugin install majestic-rails
 
 ```bash
 # Refactor Rails code
-claude agent rails-refactorer "Refactor the User model to follow Sandi Metz rules"
+agent majestic-rails:rails-refactorer "Refactor the User model to follow Sandi Metz rules"
 
 # Debug an issue
-claude agent rails-debugger "Investigate why user registration is failing"
+agent majestic-rails:rails-debugger "Investigate why user registration is failing"
 
 # Fix Rubocop violations
-claude agent rubocop-fixer "Fix all Style cops in app/models/"
+agent majestic-rails:rubocop-fixer "Fix all Style cops in app/models/"
 
 # Resolve CI failures or PR comments
-claude agent github-resolver "Fix the failing tests in PR #123"
+agent majestic-rails:github-resolver "Fix the failing tests in PR #123"
 
 # Lint before pushing
-claude agent lint "Run linters and fix issues"
+agent majestic-rails:lint "Run linters and fix issues"
 
 # Create background jobs
-claude agent active-job-coder "Create a job to process uploaded files"
+agent majestic-rails:active-job-coder "Create a job to process uploaded files"
 
 # Create emails
-claude agent action-mailer-coder "Create a welcome email with parameterized mailer"
+agent majestic-rails:action-mailer-coder "Create a welcome email with parameterized mailer"
 
 # Configure Solid Queue
-claude agent solid-queue-coder "Set up Solid Queue with recurring jobs"
+agent majestic-rails:solid-queue-coder "Set up Solid Queue with recurring jobs"
 
 # Configure Solid Cache
-claude agent solid-cache-coder "Configure Solid Cache with separate database"
+agent majestic-rails:solid-cache-coder "Configure Solid Cache with separate database"
 
 # Build Hotwire components
-claude agent frontend/hotwire-coder "Create a live search with Turbo Frames"
+agent majestic-rails:frontend:hotwire-coder "Create a live search with Turbo Frames"
 
 # Create Stimulus controllers
-claude agent frontend/stimulus-coder "Create a dropdown controller with keyboard navigation"
+agent majestic-rails:frontend:stimulus-coder "Create a dropdown controller with keyboard navigation"
 
 # Style with Tailwind
-claude agent frontend/tailwind-coder "Style the user profile page"
+agent majestic-rails:frontend:tailwind-coder "Style the user profile page"
 
 # Build Avo admin
-claude agent admin/avo-coder "Create an Avo resource for the Product model"
+agent majestic-rails:admin:avo-coder "Create an Avo resource for the Product model"
 
 # Research a gem
-claude agent research/gem-research "Evaluate devise vs rodauth for authentication"
+agent majestic-rails:research:gem-research "Evaluate devise vs rodauth for authentication"
 
 # DHH-style code review
-claude agent review/dhh-code-reviewer "Review my controller for Rails best practices"
+agent majestic-rails:review:dhh-code-reviewer "Review my controller for Rails best practices"
 
 # Pragmatic code review
-claude agent review/pragmatic-rails-reviewer "Review my recent changes for regressions"
+agent majestic-rails:review:pragmatic-rails-reviewer "Review my recent changes for regressions"
 
 # Performance review
-claude agent review/performance-reviewer "Check for N+1 queries and scalability issues"
+agent majestic-rails:review:performance-reviewer "Check for N+1 queries and scalability issues"
 
 # Data integrity review
-claude agent review/data-integrity-reviewer "Review this migration for safety"
+agent majestic-rails:review:data-integrity-reviewer "Review this migration for safety"
 
 # Simplicity review
-claude agent review/simplicity-reviewer "Simplify this implementation"
+agent majestic-rails:review:simplicity-reviewer "Simplify this implementation"
 
 # Comprehensive code review (smart agent selection)
-claude /workflows/review              # Review current branch vs main
-claude /workflows/review #123         # Review PR #123
-claude /workflows/review --staged     # Review staged changes
-claude /workflows/review app/models/  # Review specific files
+/majestic-rails:workflows:review              # Review current branch vs main
+/majestic-rails:workflows:review #123         # Review PR #123
+/majestic-rails:workflows:review --staged     # Review staged changes
+/majestic-rails:workflows:review app/models/  # Review specific files
 ```
 
 ## Ruby Coding Standards
