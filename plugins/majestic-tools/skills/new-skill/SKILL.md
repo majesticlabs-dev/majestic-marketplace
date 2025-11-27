@@ -109,8 +109,10 @@ Defines:
 **Template:**
 
 ```markdown
+---
 name: my-new-skill
 description: Brief description including keywords that trigger this skill. Mention topics, file types, and use cases. Be explicit about trigger terms.
+---
 
 # My New Skill
 
@@ -123,6 +125,13 @@ Specific scenarios and conditions
 ## Key Information
 The actual guidance, documentation, patterns, examples
 ```
+
+**Supported Frontmatter Fields:**
+- `name` (required) - Skill identifier
+- `description` (required) - Trigger keywords and purpose
+- `allowed-tools` (optional) - Restrict available tools
+
+**NOTE:** Skills do NOT support the `model:` field. Skills inherit the conversation's model.
 
 **Best Practices:**
 - ✅ **Name**: Lowercase, hyphens, gerund form (verb + -ing) preferred

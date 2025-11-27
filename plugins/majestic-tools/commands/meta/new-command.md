@@ -1,3 +1,8 @@
+---
+description: Generate any Claude Code command with production-quality patterns
+model: opus
+---
+
 # New Command Builder `/new-command`
 
 Generate any Claude Code command with production-quality patterns, real-world integrations, and intelligent features that make developers feel like they have superpowers.
@@ -270,9 +275,33 @@ Before finalizing any command, verify:
 - [ ] Provides quantifiable improvements
 - [ ] Builds institutional knowledge
 
+### 📋 Command Frontmatter Template
+
+Every generated command should start with proper YAML frontmatter:
+
+```yaml
+---
+description: Brief description of what the command does  # REQUIRED
+model: haiku | sonnet | opus  # OPTIONAL - inherits from conversation if omitted. Use 'haiku' for fast tasks, 'opus' for complex reasoning
+allowed-tools: Bash(git *), Read, Edit  # OPTIONAL - restricts available tools
+argument-hint: "[action] [target]"  # OPTIONAL - shows usage hint
+---
+```
+
+**Model Guidelines:**
+- **Omit `model:`** - Command inherits user's current model (most flexible)
+- **Use `haiku`** - Fast, cheap operations (git, simple analysis)
+- **Use `sonnet`** - Balanced tasks (default for most work)
+- **Use `opus`** - Complex reasoning, architecture decisions
+
 ### 🎨 Example: Generated Database Expert Command
 
 ```markdown
+---
+description: Intelligent database optimization and troubleshooting
+model: opus
+---
+
 # /project:db-expert
 
 Intelligent database optimization and troubleshooting across multiple database systems.

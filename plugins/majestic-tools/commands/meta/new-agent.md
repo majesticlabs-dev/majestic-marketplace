@@ -50,7 +50,7 @@ You must generate a single Markdown code block containing the complete agent def
 name: <generated-agent-name>
 description: <generated-action-oriented-description>
 tools: <inferred-tool-1>, <inferred-tool-2>
-model: haiku | sonnet | opus <default to opus unless otherwise specified>
+model: haiku | sonnet | opus  # OPTIONAL - defaults to 'sonnet' if omitted. Use 'haiku' for fast/cheap tasks, 'opus' for complex reasoning
 ---
 
 # Purpose
