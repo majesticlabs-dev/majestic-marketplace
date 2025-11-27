@@ -180,6 +180,16 @@ After receiving answers, generate the PRD using this structure:
 - **[Scenario]**: [How it's handled]
 - **[Error condition]**: [User feedback and recovery path]
 
+### Pages & Screens *(UI products only)*
+
+| Page | Purpose | Key Components |
+|------|---------|----------------|
+| [Landing] | [Convert visitors] | [Hero, features, CTA] |
+| [Dashboard] | [Main workspace] | [Nav, metrics, actions] |
+| [Settings] | [User configuration] | [Profile, preferences] |
+
+*Omit this section for APIs, CLIs, or backend services.*
+
 ---
 
 ## 7. Technical Considerations
