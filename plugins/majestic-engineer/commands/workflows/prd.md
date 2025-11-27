@@ -42,10 +42,9 @@ Analyze the product description to identify gaps in understanding. Focus on ques
 
 - **Problem/Goal**: What problem does this solve? What's the primary outcome?
 - **Target Users**: Who will use this? What are their technical levels?
-- **Scope Boundaries**: What should this explicitly NOT do? MVP vs full vision?
+- **MVP Boundaries**: What's the absolute minimum to ship? What can wait for later?
 - **Success Criteria**: How will we measure success? What metrics matter?
 - **Technical Context**: Any existing systems to integrate with? Constraints?
-- **Priority Features**: What's the single most important capability?
 
 **IMPORTANT:** Wait for user responses before proceeding to Phase 2.
 
@@ -135,17 +134,29 @@ After receiving answers, generate the PRD using this structure:
 
 ---
 
-## 5. Functional Requirements
+## 5. Feature Prioritization (MoSCoW)
 
-### FR-001: [Feature Name] (Priority: High)
+### Must Have (MVP Critical)
 
-- [Requirement detail]
-- [Requirement detail]
-- **Dependencies**: [Any dependencies]
+| ID | Feature | Description | Acceptance Criteria |
+|----|---------|-------------|---------------------|
+| FR-001 | [Name] | [What it does] | [How to verify] |
 
-### FR-002: [Feature Name] (Priority: Medium)
+### Should Have (Important)
 
-[Continue pattern...]
+| ID | Feature | Description | Acceptance Criteria |
+|----|---------|-------------|---------------------|
+| FR-002 | [Name] | [What it does] | [How to verify] |
+
+### Could Have (Nice-to-Have)
+
+| ID | Feature | Description | Acceptance Criteria |
+|----|---------|-------------|---------------------|
+| FR-003 | [Name] | [What it does] | [How to verify] |
+
+### Won't Have (Out of Scope)
+
+- [Feature] - *Rationale: [why excluded from this version]*
 
 ---
 
@@ -211,19 +222,24 @@ After receiving answers, generate the PRD using this structure:
 
 ## 9. Milestones
 
-### Estimated Complexity
+### MVP Scope
 
-**[Small/Medium/Large]**: [Brief rationale]
+Based on Must Have requirements:
+- [List of Must Have features forming MVP]
 
-### Suggested Phases
+### Phase 1: MVP
 
-#### Phase 1: [Name] (Est: [timeframe])
-- [ ] [Key deliverable]
-- [ ] [Key deliverable]
+**Complexity**: [Small/Medium/Large]
 
-#### Phase 2: [Name] (Est: [timeframe])
-- [ ] [Key deliverable]
-- [ ] [Key deliverable]
+- [ ] [Must Have deliverable]
+- [ ] [Must Have deliverable]
+
+### Phase 2: Enhancement
+
+**Complexity**: [Small/Medium/Large]
+
+- [ ] [Should Have deliverable]
+- [ ] [Could Have deliverable]
 
 ---
 
