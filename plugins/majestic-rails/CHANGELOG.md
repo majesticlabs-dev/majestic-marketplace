@@ -2,6 +2,19 @@
 
 All notable changes to majestic-rails will be documented in this file.
 
+## [1.9.0] - 2025-11-27
+
+### Added
+- `active-job-coder` agent - Create background jobs with Rails 8 conventions, Solid Queue patterns, retry strategies, and concurrency control
+- `action-mailer-coder` agent - Create emails with parameterized mailers, callbacks, previews, and background delivery
+- `frontend/stimulus-coder` agent - Create Stimulus controllers with targets, values, actions, and Turbo integration
+- `solid-queue-coder` agent - Configure Solid Queue for database-backed job processing (Rails 8 default)
+- `solid-cache-coder` agent - Configure Solid Cache for database-backed caching (Rails 8 default)
+
+### Changed
+- Enhanced `frontend/hotwire-coder` with Turbo 8 morphing, broadcasts with strict locals, and comprehensive patterns
+- Total agents increased from 14 to 19
+
 ## [1.8.0] - 2025-11-27
 
 ### Added

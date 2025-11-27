@@ -1,6 +1,6 @@
 # Majestic Rails
 
-Ruby on Rails development tools. Includes 14 specialized agents, 3 commands, and 5 skills.
+Ruby on Rails development tools. Includes 19 specialized agents, 3 commands, and 5 skills.
 
 ## Installation
 
@@ -19,12 +19,17 @@ claude /plugin install majestic-rails
 | `rubocop-fixer` | Fix Rubocop violations following project conventions |
 | `github-resolver` | Resolve CI failures and PR review comments from GitHub |
 | `lint` | Run rubocop, erblint, and brakeman before pushing |
+| `active-job-coder` | Create background jobs with Rails 8 conventions, Solid Queue patterns, and retry strategies |
+| `action-mailer-coder` | Create emails with parameterized mailers, previews, and background delivery |
+| `solid-queue-coder` | Configure Solid Queue for database-backed job processing (Rails 8 default) |
+| `solid-cache-coder` | Configure Solid Cache for database-backed caching (Rails 8 default) |
 
 ### Frontend
 
 | Agent | Description |
 |-------|-------------|
-| `frontend/hotwire-coder` | Build Hotwire/Turbo/Stimulus components following Rails 8 conventions |
+| `frontend/hotwire-coder` | Build Turbo Drive, Frames, Streams with morphing, broadcasts, and real-time patterns |
+| `frontend/stimulus-coder` | Create Stimulus controllers with targets, values, actions, and Turbo integration |
 | `frontend/tailwind-coder` | Apply Tailwind CSS styling with responsive design patterns |
 
 ### Admin
@@ -80,8 +85,23 @@ claude agent github-resolver "Fix the failing tests in PR #123"
 # Lint before pushing
 claude agent lint "Run linters and fix issues"
 
+# Create background jobs
+claude agent active-job-coder "Create a job to process uploaded files"
+
+# Create emails
+claude agent action-mailer-coder "Create a welcome email with parameterized mailer"
+
+# Configure Solid Queue
+claude agent solid-queue-coder "Set up Solid Queue with recurring jobs"
+
+# Configure Solid Cache
+claude agent solid-cache-coder "Configure Solid Cache with separate database"
+
 # Build Hotwire components
 claude agent frontend/hotwire-coder "Create a live search with Turbo Frames"
+
+# Create Stimulus controllers
+claude agent frontend/stimulus-coder "Create a dropdown controller with keyboard navigation"
 
 # Style with Tailwind
 claude agent frontend/tailwind-coder "Style the user profile page"
