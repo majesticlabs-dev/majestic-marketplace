@@ -1,7 +1,7 @@
 ---
 allowed-tools: Bash(git *)
 description: Create a git commit with proper message formatting
-model: haiku
+model: claude-haiku-4-5-20251101
 ---
 
 ## Context
