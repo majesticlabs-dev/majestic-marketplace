@@ -1,6 +1,6 @@
 # Majestic Company
 
-Business operations tools. Includes 2 specialized agents and 20 skills.
+Business operations tools. Includes 2 specialized agents and 21 skills.
 
 ## Installation
 
@@ -39,6 +39,7 @@ Invoke with: `skill majestic-company:ceo:<name>`
 | `startup-blueprint` | Interactive 10-phase startup planning tailored to your skills, budget, and goals |
 | `30-day-launch` | Tactical 30-day business launch with templates, schedules, and revenue forecasts |
 | `pricing-strategy` | Analyze competitor pricing models to develop optimal pricing structure with implementation roadmap |
+| `financial-model` | Build comprehensive financial models with revenue projections, unit economics, P&L forecasts, and scenario analysis |
 
 ### Choosing Between startup-blueprint and 30-day-launch
 
@@ -240,6 +241,31 @@ skill majestic-company:ceo:market-expansion
 ```
 
 The skill evaluates 3 entry strategies (direct, partnership, acquisition, etc.) through decision trees with quantified scoring (profitability, scalability, risk). Output includes 3-year financial projections, competitive positioning, resource requirements, and risk mitigation strategies.
+
+### Financial Model Usage
+
+```bash
+# Build a financial model
+skill majestic-company:ceo:financial-model
+
+# Then provide:
+# - Business model (SaaS, marketplace, e-commerce, services)
+# - Current stage (revenue, users, runway)
+# - Pricing structure
+# - Key metrics you track
+# - Purpose (fundraising, planning, board)
+```
+
+The skill builds investor-ready financial models with:
+
+1. **Revenue Model** - Bottoms-up MRR/ARR build with cohort analysis
+2. **Unit Economics** - CAC, LTV, payback period, LTV/CAC ratio
+3. **P&L Forecast** - Monthly and annual projections with expense breakdown
+4. **Cash Flow** - Runway analysis and burn rate evolution
+5. **Scenario Analysis** - Base, upside, downside, and survival cases
+6. **Fundraising Model** - Cap table, dilution, and use of funds
+
+All projections include formulas and assumptions so you can update the model as actuals come in.
 
 ### Startup Blueprint Usage
 

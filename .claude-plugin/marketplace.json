@@ -57,21 +57,21 @@
     },
     {
       "name": "majestic-marketing",
-      "description": "Marketing and SEO tools for Claude Code. Includes 13 specialized agents, 2 commands, and 24 skills.",
-      "version": "2.18.0",
+      "description": "Marketing and SEO tools for Claude Code. Includes 14 specialized agents, 2 commands, and 28 skills.",
+      "version": "2.19.0",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
         "email": "marketplace@it.majesticlabs.dev"
       },
       "homepage": "https://github.com/majesticlabs-dev/majestic-marketplace/tree/master/plugins/majestic-marketing",
-      "tags": ["marketing", "seo", "geo", "content", "copywriting", "llm-optimization", "ai-visibility", "value-proposition", "customer-discovery"],
+      "tags": ["marketing", "seo", "geo", "content", "copywriting", "llm-optimization", "ai-visibility", "value-proposition", "customer-discovery", "sales", "outbound", "google-ads", "paid-acquisition", "branding", "naming", "power-words"],
       "source": "./plugins/majestic-marketing"
     },
     {
       "name": "majestic-company",
-      "description": "Business operations tools. Includes 2 specialized agents and 20 skills.",
-      "version": "1.19.0",
+      "description": "Business operations tools. Includes 2 specialized agents and 21 skills.",
+      "version": "1.20.0",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",

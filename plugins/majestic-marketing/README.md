@@ -1,6 +1,6 @@
 # Majestic Marketing
 
-Marketing and SEO tools for Claude Code. Includes 13 specialized agents, 2 commands, and 24 skills.
+Marketing and SEO tools for Claude Code. Includes 14 specialized agents, 2 commands, and 28 skills.
 
 ## Installation
 
@@ -34,6 +34,12 @@ All SEO agents use the `seo:` prefix. Invoke with: `agent majestic-marketing:seo
 | `seo:llm-optimizer` | Optimize content for AI citation (ChatGPT, Perplexity, Gemini) |
 | `seo:entity-builder` | Brand entity and triplet optimization for LLM presence |
 | `seo:schema-architect` | Schema.org and llms.txt implementation for AI extraction |
+
+### Branding Agents
+
+| Agent | Description |
+|-------|-------------|
+| `branding:namer` | Generate category-defining brand, company, and product names using Igor naming methodology |
 
 ## Commands
 
@@ -72,6 +78,15 @@ Invoke with: `skill majestic-marketing:<name>`
 | `slogan-generator` | Generate and evaluate marketing slogans with scoring criteria and top recommendations |
 | `content-calendar` | Generate a complete 30-day content calendar with viral ideas, formats, hooks, and CTAs |
 | `content-writer` | Write articles with outline-first workflow, sentence variation, and readability guidelines |
+| `power-words` | Enhance copy with emotional trigger words from 18 psychological categories |
+
+### Sales & Acquisition Skills
+
+| Skill | Description |
+|-------|-------------|
+| `outbound-sequences` | Design cold outreach sequences for email and LinkedIn with personalization frameworks and response handling |
+| `sales-playbook` | Create sales playbooks with discovery frameworks, objection handling, competitive positioning, and closing techniques |
+| `google-ads-strategy` | Build Google Ads campaigns with keyword strategy, ad copy, audience targeting, and budget allocation |
 
 ## Usage Examples
 
@@ -99,6 +114,13 @@ agent majestic-marketing:seo:entity-builder
 
 # Implement schema for AI extraction
 agent majestic-marketing:seo:schema-architect
+```
+
+### Branding Agents
+
+```bash
+# Generate category-defining brand names
+agent majestic-marketing:branding:namer
 ```
 
 ### Commands
@@ -176,6 +198,18 @@ skill majestic-marketing:content-calendar
 
 # Write articles with outline-first workflow
 skill majestic-marketing:content-writer
+
+# Enhance copy with emotional trigger words
+skill majestic-marketing:power-words
+
+# Cold outreach sequences for sales
+skill majestic-marketing:outbound-sequences
+
+# Sales playbook with objection handling
+skill majestic-marketing:sales-playbook
+
+# Google Ads campaign strategy
+skill majestic-marketing:google-ads-strategy
 ```
 
 ## SEO vs GEO
@@ -193,10 +227,12 @@ The GEO-focused agents (`llm-optimizer`, `entity-builder`, `schema-architect`) h
 
 ## Key Features
 
-- **13 Specialized Agents** - Cover the full SEO/GEO workflow
+- **14 Specialized Agents** - Cover the full SEO/GEO workflow
 - **E-E-A-T Optimization** - Build authority and trust signals
 - **AI Citation Ready** - Optimize for LLM visibility
 - **Featured Snippets** - Format content for position zero
 - **Schema Markup** - Structured data implementation
 - **Content Audits** - Comprehensive quality assessment
 - **Retention Marketing** - Email nurture, referral programs, win-back campaigns
+- **Sales Enablement** - Outbound sequences, playbooks, objection handling
+- **Paid Acquisition** - Google Ads strategy and campaign planning

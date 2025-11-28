@@ -2,6 +2,16 @@
 
 All notable changes to majestic-marketing will be documented in this file.
 
+## [2.19.0] - 2025-11-28
+
+### Added
+
+**Agents (1)**
+- `branding:namer` - Generate category-defining brand, company, and product names using Igor naming methodology. Includes competitive taxonomy analysis, four name types (functional, invented, experiential, evocative), A.S.S. test (Associations + Slogans Score), NFX guidelines, and "Happy Idiot" anti-patterns to avoid.
+
+**Skills (1)**
+- `power-words` - Enhance copy with emotional trigger words from 18 psychological categories. Includes 401+ power words organized by emotional impact (impatience, beauty, lust, novelty, authority, exclusivity, etc.), strategic replacement methodology, and before/after enhancement workflow.
+
 ## [2.18.0] - 2025-11-28
 
 ### Added
