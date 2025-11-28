@@ -1,6 +1,6 @@
 # Majestic Marketing
 
-Marketing and content tools for Claude Code. Includes 1 skill.
+Marketing and SEO tools for Claude Code. Includes 13 specialized agents, 2 commands, and 3 skills.
 
 ## Installation
 
@@ -8,75 +8,119 @@ Marketing and content tools for Claude Code. Includes 1 skill.
 claude /plugin install majestic-marketing
 ```
 
+## Agents
+
+All SEO agents use the `seo:` prefix. Invoke with: `agent majestic-marketing:seo:<name>`
+
+### Traditional SEO Agents
+
+| Agent | Description |
+|-------|-------------|
+| `seo:authority-builder` | E-E-A-T analysis and authority signal optimization |
+| `seo:cannibalization-detector` | Keyword overlap and conflict detection |
+| `seo:content-auditor` | Content quality and SEO best practices audit |
+| `seo:content-planner` | Topic clusters and content calendar planning |
+| `seo:content-refresher` | Identify outdated content and suggest updates |
+| `seo:content-writer` | SEO-optimized content creation |
+| `seo:keyword-strategist` | Keyword density, LSI, semantic optimization |
+| `seo:meta-optimizer` | Meta titles, descriptions, URL optimization |
+| `seo:snippet-hunter` | Featured snippet and SERP feature optimization |
+| `seo:structure-architect` | Header hierarchy, schema, internal linking |
+
+### GEO (AI Visibility) Agents
+
+| Agent | Description |
+|-------|-------------|
+| `seo:llm-optimizer` | Optimize content for AI citation (ChatGPT, Perplexity, Gemini) |
+| `seo:entity-builder` | Brand entity and triplet optimization for LLM presence |
+| `seo:schema-architect` | Schema.org and llms.txt implementation for AI extraction |
+
+## Commands
+
+| Command | Description |
+|---------|-------------|
+| `/seo-audit [file]` | Quick SEO audit with actionable recommendations |
+| `/content-check [file]` | Comprehensive content check for SEO and AI readability |
+
 ## Skills
 
 Invoke with: `skill majestic-marketing:<name>`
 
 | Skill | Description |
 |-------|-------------|
-| `copy-editor` | Review and edit copy for grammar, style, and clarity. Works with project style guides or uses sensible defaults. |
+| `copy-editor` | Review and edit copy for grammar, style, and clarity |
+| `seo-audit` | Comprehensive SEO and GEO audit methodology |
+| `content-optimizer` | Content optimization workflow for search and AI |
 
-## Usage
+## Usage Examples
 
-### Copy Editor
+### SEO Agents
 
-The `copy-editor` skill reviews any text for grammar, style, and clarity issues. It supports custom project style guides with a comprehensive default fallback.
-
-**Basic usage:**
 ```bash
+# E-E-A-T analysis
+agent majestic-marketing:seo:authority-builder
+
+# Check for keyword cannibalization
+agent majestic-marketing:seo:cannibalization-detector
+
+# Optimize for featured snippets
+agent majestic-marketing:seo:snippet-hunter
+```
+
+### GEO (AI Visibility) Agents
+
+```bash
+# Optimize content for LLM citation
+agent majestic-marketing:seo:llm-optimizer
+
+# Build brand entity presence
+agent majestic-marketing:seo:entity-builder
+
+# Implement schema for AI extraction
+agent majestic-marketing:seo:schema-architect
+```
+
+### Commands
+
+```bash
+# Quick SEO audit
+/seo-audit path/to/content.md
+
+# Content quality check
+/content-check path/to/article.md
+```
+
+### Skills
+
+```bash
+# Full SEO audit methodology
+skill majestic-marketing:seo-audit
+
+# Content optimization workflow
+skill majestic-marketing:content-optimizer
+
+# Copy editing review
 skill majestic-marketing:copy-editor
-
-# Then provide the file or text to review
 ```
 
-**Example prompts:**
-- "Review my landing page copy for issues"
-- "Quick grammar check on this email"
-- "Edit the blog post in drafts/post.md"
-- "Check if this follows our style guide"
+## SEO vs GEO
 
-### Style Guide Priority
+This plugin covers both traditional SEO and modern GEO (Generative Engine Optimization):
 
-The skill looks for style guides in this order:
+| Aspect | Traditional SEO | GEO Focus |
+|--------|-----------------|-----------|
+| Goal | Rank in search results | Get cited in AI responses |
+| Focus | Keywords + backlinks | Semantic depth + fact-density |
+| Structure | Readable by humans | Extractable by AI |
+| Authority | Domain authority | Citation quality + source reputation |
 
-1. `STYLE_GUIDE.md` (project root)
-2. `.claude/style-guide.md`
-3. `docs/style-guide.md`
-4. Falls back to bundled `DEFAULT_STYLE_GUIDE.md`
+The GEO-focused agents (`llm-optimizer`, `entity-builder`, `schema-architect`) help ensure your content appears in AI-generated answers from ChatGPT, Perplexity, Gemini, and other LLMs.
 
-### Adding a Project Style Guide
+## Key Features
 
-Create a `STYLE_GUIDE.md` in your project root with your custom rules. The skill will automatically use it instead of the default.
-
-Example structure:
-```markdown
-# Company Style Guide
-
-## Voice & Tone
-- Always use first-person plural ("we", "our")
-- Keep tone professional but approachable
-
-## Terminology
-- Use "customers" not "users"
-- Use "platform" not "software"
-
-## Formatting
-- Headlines in Title Case
-- No Oxford comma (company preference)
-```
-
-## Output Formats
-
-The skill can provide:
-
-- **Full report**: Complete analysis with all categories
-- **Quick scan**: Top 5 most important issues only
-- **Category focus**: Deep dive on grammar, style, etc.
-- **Inline edits**: Apply fixes directly (with permission)
-
-## What Gets Checked
-
-- **Grammar**: Subject-verb agreement, punctuation, spelling
-- **Voice**: Active vs. passive, conciseness, clarity
-- **Style**: Consistency with style guide rules, tone
-- **Structure**: Headlines, paragraphs, transitions, CTAs
+- **13 Specialized Agents** - Cover the full SEO/GEO workflow
+- **E-E-A-T Optimization** - Build authority and trust signals
+- **AI Citation Ready** - Optimize for LLM visibility
+- **Featured Snippets** - Format content for position zero
+- **Schema Markup** - Structured data implementation
+- **Content Audits** - Comprehensive quality assessment
