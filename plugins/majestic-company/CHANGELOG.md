@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.9.0] - 2025-11-28
+
+### Added
+
+- `ceo:ai-advantage` skill for AI competitive intelligence research
+  - Multi-source research: academic, industry, market, social, media
+  - Verification protocol with cross-referencing and source credibility evaluation
+  - Implementation roadmap in three phases (0-6, 6-18, 18+ months)
+  - Competitive positioning matrix with research base and market validation
+  - References table with source types and key findings
+
 ## [1.8.0] - 2025-11-28
 
 ### Added

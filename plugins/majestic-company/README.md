@@ -1,6 +1,6 @@
 # Majestic Company
 
-Business operations tools. Includes 2 specialized agents and 7 skills.
+Business operations tools. Includes 2 specialized agents and 8 skills.
 
 ## Installation
 
@@ -31,6 +31,7 @@ Invoke with: `skill majestic-company:ceo:<name>`
 | `industry-pulse` | Real-time pulse check on any industry: trending tech, recent events, key shifts for operators/investors |
 | `growth-audit` | 360-degree business audit with evidence-backed blueprint to 5-10X growth trajectory |
 | `industry-research` | Research market, identify underserved pain, design venture to capture opportunity in 12 months |
+| `ai-advantage` | Develop research-backed AI competitive strategies combining academic research, market trends, and social sentiment |
 
 ### Research Skills
 
@@ -129,6 +130,20 @@ skill majestic-company:ceo:industry-research
 ```
 
 The skill executes a 10-step workflow: map macro landscape, identify pain points, select best opportunity via weighted scorecard, draft business thesis, design product, plan go-to-market, assess moat, build financial model, identify risks, and create 90-day action roadmap. Output is investor-ready with reasoning and executive summary.
+
+### AI Advantage Usage
+
+```bash
+# Develop AI competitive strategy
+skill majestic-company:ceo:ai-advantage
+
+# Then provide:
+# - Industry
+# - Priority business functions for AI enhancement
+# - Current AI maturity level
+```
+
+The skill combines academic research, market trends, and social sentiment analysis to deliver actionable AI competitive strategies with implementation roadmaps and a competitive positioning matrix.
 
 ### Problem Research Usage
 
