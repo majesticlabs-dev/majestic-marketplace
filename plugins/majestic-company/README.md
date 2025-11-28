@@ -1,6 +1,6 @@
 # Majestic Company
 
-Business operations tools. Includes 2 specialized agents and 10 skills.
+Business operations tools. Includes 2 specialized agents and 11 skills.
 
 ## Installation
 
@@ -42,6 +42,14 @@ Invoke with: `skill majestic-company:<name>`
 | Skill | Description |
 |-------|-------------|
 | `problem-research` | Research competitor pain points from review platforms (G2, Capterra, Reddit) to find wedge opportunities. SaaS/B2B focus. Brutally honest viability assessment. |
+
+### Legal Skills
+
+Invoke with: `skill majestic-company:legal:<name>`
+
+| Skill | Description |
+|-------|-------------|
+| `document-review` | Review legal documents as an experienced attorney. Analyzes contracts, ToS, privacy policies, NDAs section-by-section with specific replacement text for problematic clauses. |
 
 ### Founder Mode Usage
 
@@ -200,6 +208,22 @@ The skill will ask you to select:
 - Viability Assessment (GO/PROCEED WITH CAUTION/RECONSIDER/NO-GO)
 
 Every report concludes with brutally honest answers to: "What would make this fail?" and "Is this a vitamin or painkiller?"
+
+### Document Review Usage
+
+```bash
+# Review a legal document
+skill majestic-company:legal:document-review
+
+# Then provide:
+# - Document type (Contract, NDA, ToS, Privacy Policy, Employment Agreement, etc.)
+# - Your role (which party you represent)
+# - Attach or paste the document
+```
+
+The skill analyzes each section for: scope, payment terms, timelines, IP rights, termination clauses, liability, confidentiality, and governing law. Output includes section-by-section analysis, risk assessment (high/medium/low), and specific replacement text for problematic clauses.
+
+**Note:** This is for informational purposes only and does not constitute legal advice. Consult qualified counsel before signing.
 
 ## Usage Examples
 

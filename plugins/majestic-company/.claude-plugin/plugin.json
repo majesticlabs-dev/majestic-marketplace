@@ -1,7 +1,7 @@
 {
   "name": "majestic-company",
-  "version": "1.11.0",
-  "description": "Business operations tools. Includes 2 specialized agents and 10 skills.",
+  "version": "1.12.0",
+  "description": "Business operations tools. Includes 2 specialized agents and 11 skills.",
   "author": {
     "name": "David Paluy",
     "url": "https://github.com/dpaluy",
@@ -27,6 +27,9 @@
     "pain-points",
     "product-validation",
     "growth-strategy",
-    "business-audit"
+    "business-audit",
+    "legal",
+    "contract-review",
+    "document-review"
   ]
 }

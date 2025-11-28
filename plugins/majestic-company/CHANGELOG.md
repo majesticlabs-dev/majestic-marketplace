@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.12.0] - 2025-11-28
+
+### Added
+
+- `legal:document-review` skill for legal document analysis
+  - New `legal/` skill category
+  - 8-point analysis framework: scope, payment, timelines, IP, termination, liability, confidentiality, governing law
+  - Document type support: contracts, ToS, privacy policies, NDAs, employment agreements
+  - Section-by-section analysis with risk levels (high/medium/low)
+  - Specific replacement text for problematic clauses
+  - Questions to ask before signing
+
 ## [1.11.0] - 2025-11-28
 
 ### Added
