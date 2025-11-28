@@ -2,6 +2,13 @@
 
 All notable changes to majestic-marketing will be documented in this file.
 
+## [2.3.0] - 2025-11-28
+
+### Added
+
+**Skills (1)**
+- `traffic-magnet` - Research and compile organic traffic methods for new websites with zero ad spend, including 30-day action plans
+
 ## [2.2.0] - 2025-11-28
 
 ### Added
