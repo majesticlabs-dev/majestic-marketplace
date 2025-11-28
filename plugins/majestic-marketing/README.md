@@ -1,6 +1,6 @@
 # Majestic Marketing
 
-Marketing and SEO tools for Claude Code. Includes 14 specialized agents, 2 commands, and 28 skills.
+Marketing and SEO tools for Claude Code. Includes 14 specialized agents, 2 commands, and 29 skills.
 
 ## Installation
 
@@ -84,6 +84,7 @@ Invoke with: `skill majestic-marketing:<name>`
 
 | Skill | Description |
 |-------|-------------|
+| `icp-discovery` | Systematically discover and define your Ideal Customer Profile with firmographics, buyer personas, scoring matrices, and validation methodology |
 | `outbound-sequences` | Design cold outreach sequences for email and LinkedIn with personalization frameworks and response handling |
 | `sales-playbook` | Create sales playbooks with discovery frameworks, objection handling, competitive positioning, and closing techniques |
 | `google-ads-strategy` | Build Google Ads campaigns with keyword strategy, ad copy, audience targeting, and budget allocation |
@@ -201,6 +202,9 @@ skill majestic-marketing:content-writer
 
 # Enhance copy with emotional trigger words
 skill majestic-marketing:power-words
+
+# Define your Ideal Customer Profile
+skill majestic-marketing:icp-discovery
 
 # Cold outreach sequences for sales
 skill majestic-marketing:outbound-sequences
