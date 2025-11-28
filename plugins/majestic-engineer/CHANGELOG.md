@@ -2,6 +2,12 @@
 
 All notable changes to majestic-engineer will be documented in this file.
 
+## [1.9.0] - 2025-11-27
+
+### Added
+
+- `research:docs-architect` agent for creating comprehensive technical documentation from codebases
+
 ## [1.7.0] - 2024-11-27
 
 ### Changed
