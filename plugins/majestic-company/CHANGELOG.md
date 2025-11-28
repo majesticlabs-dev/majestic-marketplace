@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.16.0] - 2025-11-28
+
+### Added
+
+- `ceo:30-day-launch` skill for tactical 30-day business execution
+  - 4-question intake: business type, budget, time commitment, target market
+  - Business Model Blueprint with proven models and real examples
+  - "Do This, Not That" prioritized checklist for essential tasks only
+  - Copy-paste customer outreach templates (emails, LinkedIn, call scripts)
+  - Legal compliance shortcuts for minimum viable setup
+  - First-90-days revenue forecast with realistic milestones
+  - Common rookie mistakes and industry-specific pitfalls
+  - Hour-by-hour first week schedule for execution
+
+- Added differentiation guide in README between `startup-blueprint` and `30-day-launch`
+
 ## [1.15.0] - 2025-11-28
 
 ### Added

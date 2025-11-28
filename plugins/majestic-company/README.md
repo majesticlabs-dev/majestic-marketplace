@@ -1,6 +1,6 @@
 # Majestic Company
 
-Business operations tools. Includes 2 specialized agents and 14 skills.
+Business operations tools. Includes 2 specialized agents and 15 skills.
 
 ## Installation
 
@@ -37,6 +37,19 @@ Invoke with: `skill majestic-company:ceo:<name>`
 | `decisions` | Tree of Thoughts business decisions with expert consultants exploring multiple approaches |
 | `market-expansion` | Strategic market expansion analysis with quantified entry strategies and financial projections |
 | `startup-blueprint` | Interactive 10-phase startup planning tailored to your skills, budget, and goals |
+| `30-day-launch` | Tactical 30-day business launch with templates, schedules, and revenue forecasts |
+
+### Choosing Between startup-blueprint and 30-day-launch
+
+| Use startup-blueprint when... | Use 30-day-launch when... |
+|------------------------------|--------------------------|
+| You're exploring business ideas | You already know your business type |
+| You want comprehensive planning | You want to launch in 30 days |
+| You need product-market fit validation | You need execution templates |
+| You're building something new | You're launching a proven model |
+
+**startup-blueprint** = "What should I build and how should I plan it?"
+**30-day-launch** = "I know what I'm building, help me launch it fast."
 
 ### Research Skills
 
@@ -237,6 +250,25 @@ The skill begins with a 7-question assessment (skills, budget, industry interest
 10. **Implementation** - 30-60-90 day plan, resource allocation, success metrics
 
 Each phase includes research findings, strategic recommendations, action plans, and budget-conscious approaches. The skill maintains continuity across phases, referencing your specific inputs throughout.
+
+### 30-Day Launch Usage
+
+```bash
+# Start tactical launch planning
+skill majestic-company:ceo:30-day-launch
+```
+
+The skill asks for your business type, budget, time commitment, and target market, then provides:
+
+1. **Business Model Blueprint** - Proven models with real examples
+2. **"Do This, Not That" Checklist** - Prioritized essential tasks only
+3. **Copy-Paste Outreach Templates** - Ready-to-use emails, LinkedIn messages, call scripts
+4. **Legal Compliance Shortcuts** - Minimum viable legal setup without expensive lawyers
+5. **First-90-Days Revenue Forecast** - Realistic milestones with specific numbers
+6. **Common Rookie Mistakes** - Industry-specific pitfalls to avoid
+7. **Hour-by-Hour First Week Schedule** - Detailed 7-day execution plan
+
+Use this skill when you already know your business type and want to move fast. For business discovery and comprehensive planning, use `startup-blueprint` instead.
 
 ### Problem Research Usage
 
