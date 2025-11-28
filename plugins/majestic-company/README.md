@@ -1,6 +1,6 @@
 # Majestic Company
 
-Business operations tools. Includes 2 specialized agents.
+Business operations tools. Includes 2 specialized agents and 1 skill.
 
 ## Installation
 
@@ -16,6 +16,30 @@ Invoke with: `agent majestic-company:<name>`
 |-------|-------------|
 | `first-principles` | Strategic thinking using Elon Musk's first-principles methodology - problem-solving, decision-making, breakthrough thinking |
 | `people-ops` | People operations - hiring, onboarding, PTO policies, performance management, employee relations |
+
+## Skills
+
+Invoke with: `skill majestic-company:ceo:<name>`
+
+| Skill | Description |
+|-------|-------------|
+| `founder-mode` | Help founders run companies using contrarian principles that break conventional management wisdom |
+
+### Founder Mode Usage
+
+```bash
+# Strategic decision with conventional advice conflict
+skill majestic-company:ceo:founder-mode
+
+# Then provide:
+# - Company stage
+# - Specific challenge
+# - Current approach
+# - Conventional advice received
+# - Your founder instinct
+```
+
+The skill challenges "manager mode" thinking and helps founders leverage their unique capabilities: authority, vision, deep company knowledge, risk tolerance, and cultural connection.
 
 ## Usage Examples
 
