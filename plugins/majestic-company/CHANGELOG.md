@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.4.0] - 2025-11-28
+
+### Added
+
+- `ceo:decision-framework` skill for structured decision-making
+  - 3-part framework: first-principles, cost/benefit, second-order effects
+  - Includes examples from similar situations
+  - Structured output with recommendation and caveats
+
 ## [1.3.0] - 2025-11-28
 
 ### Added
