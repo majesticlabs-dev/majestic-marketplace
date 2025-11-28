@@ -2,6 +2,13 @@
 
 All notable changes to majestic-marketing will be documented in this file.
 
+## [2.2.0] - 2025-11-28
+
+### Added
+
+**Skills (1)**
+- `marketing-strategy` - Interactive interview to build a custom marketing strategy with JSON export
+
 ## [2.1.0] - 2025-11-28
 
 ### Added

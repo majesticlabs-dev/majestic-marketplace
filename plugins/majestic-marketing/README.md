@@ -1,6 +1,6 @@
 # Majestic Marketing
 
-Marketing and SEO tools for Claude Code. Includes 13 specialized agents, 2 commands, and 4 skills.
+Marketing and SEO tools for Claude Code. Includes 13 specialized agents, 2 commands, and 5 skills.
 
 ## Installation
 
@@ -52,6 +52,7 @@ Invoke with: `skill majestic-marketing:<name>`
 | `seo-audit` | Comprehensive SEO and GEO audit methodology |
 | `content-optimizer` | Content optimization workflow for search and AI |
 | `market-research` | Comprehensive market research with web data and competitive analysis |
+| `marketing-strategy` | Interactive interview to build a custom marketing strategy with JSON export |
 
 ## Usage Examples
 
@@ -105,6 +106,9 @@ skill majestic-marketing:copy-editor
 
 # Market research
 skill majestic-marketing:market-research
+
+# Marketing strategy builder
+skill majestic-marketing:marketing-strategy
 ```
 
 ## SEO vs GEO
