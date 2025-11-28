@@ -2,6 +2,13 @@
 
 All notable changes to majestic-marketing will be documented in this file.
 
+## [2.15.0] - 2025-11-28
+
+### Added
+
+**Skills (1)**
+- `linkedin-content` - Create high-performing LinkedIn content with algorithm-optimized hooks, content pillar strategy, posting cadence, and performance tracking. Includes 5 hook formula categories, post format templates (text, carousel, poll), weekly posting schedules, engagement optimization tactics, A/B testing framework, and performance benchmarks by follower count.
+
 ## [2.14.0] - 2025-11-28
 
 ### Added

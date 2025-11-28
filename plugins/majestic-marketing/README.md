@@ -1,6 +1,6 @@
 # Majestic Marketing
 
-Marketing and SEO tools for Claude Code. Includes 13 specialized agents, 2 commands, and 20 skills.
+Marketing and SEO tools for Claude Code. Includes 13 specialized agents, 2 commands, and 21 skills.
 
 ## Installation
 
@@ -68,6 +68,7 @@ Invoke with: `skill majestic-marketing:<name>`
 | `referral-program` | Design viral referral programs with incentive structures and viral coefficient optimization |
 | `win-back` | Design win-back campaigns to re-engage dormant customers and recover churned users |
 | `case-study-writer` | Create compelling customer case studies for marketing and sales enablement |
+| `linkedin-content` | Create high-performing LinkedIn content with hooks, content pillars, and posting strategy |
 
 ## Usage Examples
 
@@ -160,6 +161,9 @@ skill majestic-marketing:win-back
 
 # Customer case studies for social proof
 skill majestic-marketing:case-study-writer
+
+# LinkedIn content and posting strategy
+skill majestic-marketing:linkedin-content
 ```
 
 ## SEO vs GEO
