@@ -18,6 +18,14 @@ All notable changes to this project will be documented in this file.
 
 - Added differentiation guide in README between `startup-blueprint` and `30-day-launch`
 
+### Changed
+
+- Enhanced `ceo:startup-blueprint` Phase 2 (Product-Market Fit) with deeper validation framework
+  - Assumption mapping by risk level (high/medium/low)
+  - Validation methodology matrix with success criteria and timelines
+  - Decision framework (green/yellow/red light indicators for pivot vs proceed)
+  - Validation milestones connecting PMF to growth scaling
+
 ## [1.15.0] - 2025-11-28
 
 ### Added

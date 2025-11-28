@@ -85,6 +85,24 @@ Develop a systematic approach to achieve product-market fit:
 - Competitive solution analysis with specific examples
 - Documented market size and segmentation
 
+### Assumption Mapping
+
+Identify and prioritize critical assumptions by risk level:
+
+**High Risk (Must Validate First)**
+- Core value proposition: Does this solve a real problem?
+- Willingness to pay: Will customers pay enough to sustain the business?
+- Problem severity: Is the pain acute enough to drive action?
+
+**Medium Risk (Validate During MVP)**
+- Feature priority: Which features are must-haves vs. nice-to-haves?
+- Distribution channels: How will customers discover this solution?
+- Competitive positioning: Is the differentiation meaningful?
+
+**Low Risk (Validate Post-Launch)**
+- Scale assumptions: Can operations grow efficiently?
+- Expansion opportunities: Are adjacent markets viable?
+
 ### MVP Strategy
 
 - Minimum viable product definition focused on core value proposition
@@ -94,10 +112,40 @@ Develop a systematic approach to achieve product-market fit:
 
 ### Validation Methodology
 
+For each high-risk assumption, provide:
+
+| Assumption | Validation Method | Success Criteria | Timeline |
+|------------|------------------|------------------|----------|
+| Value proposition | Customer interviews (10+) | 7/10 say "I'd pay for this" | Week 1-2 |
+| Willingness to pay | Price testing, pre-orders | 3+ paying commitments | Week 2-3 |
+| Problem severity | Pain point scoring | Average severity 8+/10 | Week 1 |
+
 - Customer discovery interview script with 10-15 specific questions
 - Prototype testing framework with specific feedback mechanisms
 - Metrics that indicate product-market fit with benchmark targets
-- Iteration strategy with specific triggers for pivoting vs. persisting
+
+### Decision Framework
+
+**Green Light** (Proceed to Phase 3)
+- 70%+ of interview subjects confirm problem exists
+- At least 3 paying commitments or strong intent signals
+- Clear differentiation from existing solutions
+
+**Yellow Light** (Iterate Before Proceeding)
+- Mixed feedback on value proposition
+- Price resistance but interest in concept
+- Unclear competitive positioning
+
+**Red Light** (Consider Pivot)
+- Less than 30% problem confirmation
+- No willingness to pay signals
+- Existing solutions deemed "good enough"
+
+### Validation Milestones
+
+- **Milestone 1**: Problem validated → Proceed to MVP build
+- **Milestone 2**: Solution validated → Proceed to early customers
+- **Milestone 3**: PMF signals confirmed → Ready for Phase 8 Growth Scaling
 
 End with: "This product-market fit strategy will help validate your concept with real users before significant investment. What aspects would you like me to elaborate on? When ready, reply 'Continue' to develop the business model."
 
