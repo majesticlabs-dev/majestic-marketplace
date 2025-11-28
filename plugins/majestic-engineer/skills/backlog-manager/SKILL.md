@@ -1,243 +1,132 @@
 ---
 name: backlog-manager
-description: This skill manages file-based backlog tracking in the docs/todos/ directory. Use for creating backlog items, managing status and dependencies, conducting triage, and integrating with code review processes.
+description: Manage backlog items across multiple backends (files, GitHub Issues, Linear). Configure your preferred task system in project CLAUDE.md.
 ---
 
 # Backlog Manager Skill
 
 ## Overview
 
-The `docs/todos/` directory contains a file-based tracking system for managing code review feedback, technical debt, feature requests, and work items. Each backlog item is a markdown file with YAML frontmatter and structured sections.
+The backlog manager provides a unified interface for tracking work items across different task management systems. Choose your backend based on team preferences and existing tooling.
 
-This skill should be used when:
-- Creating new backlog items from findings or feedback
-- Managing item lifecycle (pending → ready → complete)
-- Triaging pending items for approval
-- Checking or managing dependencies
-- Converting PR comments or code findings into tracked work
-- Updating work logs during item execution
+**Supported Backends:**
 
-## File Naming Convention
+| Backend | Integration | Best For |
+|---------|-------------|----------|
+| **Files** | Local markdown in `docs/todos/` | Solo developers, simple projects |
+| **GitHub** | `gh` CLI | Teams using GitHub Issues |
+| **Linear** | MCP server | Teams using Linear |
 
-Backlog files follow this naming pattern:
+## Configuration
 
-```
-{issue_id}-{status}-{priority}-{description}.md
-```
+Configure your preferred backend in your project's CLAUDE.md:
 
-**Components:**
-- **issue_id**: Sequential number (001, 002, 003...) - never reused
-- **status**: `pending` (needs triage), `ready` (approved), `complete` (done)
-- **priority**: `p1` (critical), `p2` (important), `p3` (nice-to-have)
-- **description**: kebab-case, brief description
-
-**Examples:**
-```
-001-pending-p1-mailer-test.md
-002-ready-p1-fix-n-plus-1.md
-005-complete-p2-refactor-csv.md
-```
-
-## File Structure
-
-Each backlog item is a markdown file with YAML frontmatter and structured sections. Use the template at `assets/backlog-template.md` as a starting point when creating new items.
-
-**Required sections:**
-- **Problem Statement** - What is broken, missing, or needs improvement?
-- **Findings** - Investigation results, root cause, key discoveries
-- **Proposed Solutions** - Multiple options with pros/cons, effort, risk
-- **Recommended Action** - Clear plan (filled during triage)
-- **Acceptance Criteria** - Testable checklist items
-- **Work Log** - Chronological record with date, actions, learnings
-
-**Optional sections:**
-- **Technical Details** - Affected files, related components, DB changes
-- **Resources** - Links to errors, tests, PRs, documentation
-- **Notes** - Additional context or decisions
-
-**YAML frontmatter fields:**
 ```yaml
----
-status: ready              # pending | ready | complete
-priority: p1              # p1 | p2 | p3
-issue_id: "002"
-tags: [rails, performance, database]
-dependencies: ["001"]     # Issue IDs this is blocked by
----
+## Task Management
+
+backend: files  # Options: files, github, linear
+
+# GitHub configuration (when backend: github)
+# github_labels: ["backlog"]
+# github_assignee: "@me"
+
+# Linear configuration (when backend: linear)
+# linear_team_id: TEAM-123
+# linear_project_id: PROJECT-456
 ```
 
-## Common Workflows
+**Default:** If no configuration is found, uses file-based backend.
 
-### Creating a New Backlog Item
+## When to Use This Skill
 
-**To create a new item from findings or feedback:**
-
-1. Determine next issue ID: `ls docs/todos/ | grep -o '^[0-9]\+' | sort -n | tail -1`
-2. Copy template: `cp assets/backlog-template.md docs/todos/{NEXT_ID}-pending-{priority}-{description}.md`
-3. Edit and fill required sections:
-   - Problem Statement
-   - Findings (if from investigation)
-   - Proposed Solutions (multiple options)
-   - Acceptance Criteria
-   - Add initial Work Log entry
-4. Determine status: `pending` (needs triage) or `ready` (pre-approved)
-5. Add relevant tags for filtering
-
-**When to create a backlog item:**
-- Requires more than 15-20 minutes of work
+**Create a backlog item when:**
+- Work requires more than 15-20 minutes
 - Needs research, planning, or multiple approaches considered
 - Has dependencies on other work
-- Requires manager approval or prioritization
+- Requires approval or prioritization
 - Part of larger feature or refactor
 - Technical debt needing documentation
 
-**When to act immediately instead:**
+**Act immediately instead when:**
 - Issue is trivial (< 15 minutes)
 - Complete context available now
 - No planning needed
 - User explicitly requests immediate action
 - Simple bug fix with obvious solution
 
-### Triaging Pending Items
+## Core Concepts
 
-**To triage pending backlog items:**
+### Status Lifecycle
 
-1. List pending items: `ls docs/todos/*-pending-*.md`
-2. For each item:
-   - Read Problem Statement and Findings
-   - Review Proposed Solutions
-   - Make decision: approve, defer, or modify priority
-3. Update approved items:
-   - Rename file: `mv {file}-pending-{pri}-{desc}.md {file}-ready-{pri}-{desc}.md`
-   - Update frontmatter: `status: pending` → `status: ready`
-   - Fill "Recommended Action" section with clear plan
-   - Adjust priority if different from initial assessment
-4. Deferred items stay in `pending` status
+All backends follow this status workflow:
 
-### Managing Dependencies
-
-**To track dependencies:**
-
-```yaml
-dependencies: ["002", "005"]  # This item blocked by issues 002 and 005
-dependencies: []               # No blockers - can work immediately
+```
+pending → ready → complete
 ```
 
-**To check what blocks an item:**
-```bash
-grep "^dependencies:" docs/todos/003-*.md
-```
+| Status | Meaning |
+|--------|---------|
+| **pending** | Needs triage/approval before work begins |
+| **ready** | Approved and ready for implementation |
+| **complete** | Work finished, acceptance criteria met |
 
-**To find what an item blocks:**
-```bash
-grep -l 'dependencies:.*"002"' docs/todos/*.md
-```
+### Priority Levels
 
-**To verify blockers are complete before starting:**
-```bash
-for dep in 001 002 003; do
-  [ -f "docs/todos/${dep}-complete-*.md" ] || echo "Issue $dep not complete"
-done
-```
+| Priority | Meaning |
+|----------|---------|
+| **p1** | Critical - blocks other work or users |
+| **p2** | Important - should be done soon |
+| **p3** | Nice-to-have - can wait |
 
-### Updating Work Logs
+### Core Operations
 
-**When working on an item, always add a work log entry:**
+Each backend implements these operations:
 
-```markdown
-### YYYY-MM-DD - Session Title
+| Operation | Purpose |
+|-----------|---------|
+| **CREATE** | Add new backlog item |
+| **LIST** | Query existing items |
+| **UPDATE** | Modify item (status, priority, details) |
+| **COMPLETE** | Mark item as done |
 
-**By:** Claude Code / Developer Name
+## Backend Selection
 
-**Actions:**
-- Specific changes made (include file:line references)
-- Commands executed
-- Tests run
-- Results of investigation
+When this skill is invoked:
 
-**Learnings:**
-- What worked / what didn't
-- Patterns discovered
-- Key insights for future work
-```
+1. **Read configuration** from project CLAUDE.md
+2. **Load appropriate reference** based on `backend` setting:
+   - `files` → `references/file-backend.md`
+   - `github` → `references/github-backend.md`
+   - `linear` → `references/linear-backend.md`
+3. **Follow backend-specific instructions** for operations
 
-Work logs serve as:
-- Historical record of investigation
-- Documentation of approaches attempted
-- Knowledge sharing for team
-- Context for future similar work
+### Fallback Behavior
 
-### Completing a Backlog Item
-
-**To mark an item as complete:**
-
-1. Verify all acceptance criteria checked off
-2. Update Work Log with final session and results
-3. Rename file: `mv {file}-ready-{pri}-{desc}.md {file}-complete-{pri}-{desc}.md`
-4. Update frontmatter: `status: ready` → `status: complete`
-5. Check for unblocked work: `grep -l 'dependencies:.*"002"' docs/todos/*-ready-*.md`
-6. Commit with issue reference: `feat: resolve issue 002`
+If the configured backend is unavailable:
+- **GitHub unavailable** (gh not authenticated): Fall back to files
+- **Linear unavailable** (MCP not configured): Fall back to files
+- **Warn user** about the fallback
 
 ## Integration with Development Workflows
 
-| Trigger | Flow | Tool |
-|---------|------|------|
-| Code review | Review → Findings → Triage → Backlog items | Review agent + skill |
-| PR comments | Resolve PR → Individual fixes → Backlog items | gh CLI + skill |
-| Code TODOs | Resolve TODOs → Fixes + Complex items | Agent + skill |
-| Planning | Brainstorm → Create item → Work → Complete | Skill |
-| Feedback | Discussion → Create item → Triage → Work | Skill |
-
-## Quick Reference Commands
-
-**Finding work:**
-```bash
-# List highest priority unblocked work
-grep -l 'dependencies: \[\]' docs/todos/*-ready-p1-*.md
-
-# List all pending items needing triage
-ls docs/todos/*-pending-*.md
-
-# Find next issue ID
-ls docs/todos/ | grep -o '^[0-9]\+' | sort -n | tail -1 | awk '{printf "%03d", $1+1}'
-
-# Count by status
-for status in pending ready complete; do
-  echo "$status: $(ls -1 docs/todos/*-$status-*.md 2>/dev/null | wc -l)"
-done
-```
-
-**Dependency management:**
-```bash
-# What blocks this item?
-grep "^dependencies:" docs/todos/003-*.md
-
-# What does this item block?
-grep -l 'dependencies:.*"002"' docs/todos/*.md
-```
-
-**Searching:**
-```bash
-# Search by tag
-grep -l "tags:.*rails" docs/todos/*.md
-
-# Search by priority
-ls docs/todos/*-p1-*.md
-
-# Full-text search
-grep -r "payment" docs/todos/
-```
+| Trigger | Flow |
+|---------|------|
+| Code review findings | Review → Create items → Triage → Work |
+| PR comments | Resolve PR → Create items for complex fixes |
+| Planning sessions | Brainstorm → Create items → Prioritize → Work |
+| Technical debt | Document → Create item → Schedule |
+| Feature requests | Analyze → Create item → Prioritize |
 
 ## Key Distinctions
 
 **Backlog manager (this skill):**
-- Markdown files in `docs/todos/` directory
-- Development/project tracking
-- Standalone markdown files with YAML frontmatter
-- Used by humans and agents
+- Persisted tracking across sessions
+- Multiple backend options
+- Team collaboration
+- Project/sprint planning
 
 **TodoWrite tool:**
-- In-memory task tracking during agent sessions
-- Temporary tracking for single conversation
+- In-memory task tracking during single session
+- Temporary progress tracking
 - Not persisted to disk
-- Different purpose from this file-based system
+- Different purpose from backlog management

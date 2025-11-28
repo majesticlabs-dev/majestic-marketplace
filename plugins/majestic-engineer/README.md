@@ -153,6 +153,38 @@ flowchart LR
 | Plan a refactoring effort | `agent plan:refactor-plan` |
 | Analyze a spec for gaps | `agent plan:spec-reviewer` |
 
+## Task Management Configuration
+
+The `backlog-manager` skill supports multiple task management backends. Configure your preferred system in your project's CLAUDE.md:
+
+### Files (Default)
+
+No configuration needed. Items stored in `docs/todos/` as markdown files.
+
+### GitHub Issues
+
+```yaml
+## Task Management
+
+backend: github
+github_labels: ["backlog"]
+```
+
+Requires: GitHub CLI (`gh`) installed and authenticated.
+
+### Linear
+
+```yaml
+## Task Management
+
+backend: linear
+linear_team_id: YOUR-TEAM-ID
+```
+
+Requires: Linear MCP server configured.
+
+---
+
 ## Usage Examples
 
 ```bash

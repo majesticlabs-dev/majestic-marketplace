@@ -402,6 +402,50 @@ erDiagram
 
 ---
 
+## Phase 5: Create Backlog Items (Optional)
+
+After completing the PRD (and optional technical expansion), offer to create backlog items:
+
+```
+PRD complete. Would you like me to create backlog items from the user stories?
+
+This will create items in your configured task system.
+- **Backend:** [read from CLAUDE.md, or "files" if not configured]
+
+Reply with:
+- **"yes"** - Create items from Must Have features only
+- **"all"** - Create items from all prioritized features
+- **"no"** - Skip backlog creation
+```
+
+**If user accepts:**
+
+1. Read backlog configuration from project CLAUDE.md (see backlog-manager skill)
+2. For each user story or Must Have feature:
+   - Extract title from story/feature
+   - Format body with acceptance criteria
+   - Set priority based on MoSCoW (Must=p1, Should=p2, Could=p3)
+   - Create item using configured backend
+
+**Item format:**
+
+```markdown
+## Source
+
+From PRD: docs/prd/prd-[feature-name].md
+User Story: US-001
+
+## Problem Statement
+
+[Extracted from user story context]
+
+## Acceptance Criteria
+
+[Copied from PRD acceptance criteria]
+```
+
+---
+
 ## Best Practices Applied
 
 This PRD format follows industry best practices:
