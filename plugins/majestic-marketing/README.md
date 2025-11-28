@@ -1,6 +1,6 @@
 # Majestic Marketing
 
-Marketing and SEO tools for Claude Code. Includes 13 specialized agents, 2 commands, and 16 skills.
+Marketing and SEO tools for Claude Code. Includes 13 specialized agents, 2 commands, and 18 skills.
 
 ## Installation
 
@@ -64,6 +64,8 @@ Invoke with: `skill majestic-marketing:<name>`
 | `landing-page-builder` | Generate structured landing page copy - simpler/faster alternative to sales-page |
 | `email-nurture` | Design automated email nurture sequences with segmentation and behavioral triggers |
 | `retention-system` | Design customer retention systems with health scoring and churn prediction |
+| `referral-program` | Design viral referral programs with incentive structures and viral coefficient optimization |
+| `win-back` | Design win-back campaigns to re-engage dormant customers and recover churned users |
 
 ## Usage Examples
 
@@ -141,6 +143,18 @@ skill majestic-marketing:customer-discovery
 
 # Quick landing page copy (no research phase)
 skill majestic-marketing:landing-page-builder
+
+# Email nurture sequences
+skill majestic-marketing:email-nurture
+
+# Customer retention system
+skill majestic-marketing:retention-system
+
+# Viral referral program design
+skill majestic-marketing:referral-program
+
+# Win-back campaigns for churned users
+skill majestic-marketing:win-back
 ```
 
 ## SEO vs GEO
@@ -164,3 +178,4 @@ The GEO-focused agents (`llm-optimizer`, `entity-builder`, `schema-architect`) h
 - **Featured Snippets** - Format content for position zero
 - **Schema Markup** - Structured data implementation
 - **Content Audits** - Comprehensive quality assessment
+- **Retention Marketing** - Email nurture, referral programs, win-back campaigns

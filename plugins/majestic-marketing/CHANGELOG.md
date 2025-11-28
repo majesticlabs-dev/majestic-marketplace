@@ -2,6 +2,16 @@
 
 All notable changes to majestic-marketing will be documented in this file.
 
+## [2.12.0] - 2025-11-28
+
+### Added
+
+**Skills (4)** - Retention Marketing Suite
+- `email-nurture` - Design automated email nurture sequences and drip campaigns with segmentation strategies, behavioral triggers, and conversion-optimized copy for welcome, educational, re-engagement, and sales sequences
+- `retention-system` - Design comprehensive customer retention systems with health scoring, churn prediction, proactive engagement workflows, and customer success frameworks to maximize lifetime value
+- `referral-program` - Design viral referral programs with incentive structures, sharing mechanics, tracking systems, and optimization strategies to turn customers into advocates who drive new customer acquisition
+- `win-back` - Design win-back campaigns to re-engage dormant customers and recover churned users with targeted messaging, special offers, and feedback collection to understand and address churn reasons
+
 ## [2.11.0] - 2025-11-28
 
 ### Added
