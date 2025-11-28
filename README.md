@@ -52,9 +52,12 @@ You're done: use this source from Droid. You don't need to add it in Claude Code
 
 | Plugin | Description |
 |--------|-------------|
-| [majestic-engineer](plugins/majestic-engineer/README.md) | Language-agnostic engineering workflows (5 agents, 14 commands, 4 skills) |
-| [majestic-rails](plugins/majestic-rails/README.md) | Ruby on Rails development tools (2 agents, 4 skills) |
-| [majestic-tools](plugins/majestic-tools/README.md) | Claude Code customization tools (10 commands) |
+| [majestic-engineer](plugins/majestic-engineer/README.md) | Language-agnostic engineering workflows (17 agents, 8 commands, 12 skills) |
+| [majestic-rails](plugins/majestic-rails/README.md) | Ruby on Rails development tools (23 agents, 5 commands, 9 skills) |
+| [majestic-python](plugins/majestic-python/README.md) | Python development tools (2 agents) |
+| [majestic-marketing](plugins/majestic-marketing/README.md) | Marketing, SEO, and sales tools (14 agents, 2 commands, 30 skills) |
+| [majestic-company](plugins/majestic-company/README.md) | Business operations and CEO tools (2 agents, 21 skills) |
+| [majestic-tools](plugins/majestic-tools/README.md) | Claude Code customization tools (10 commands, 3 skills) |
 
 ## Recommended Plugins
 
