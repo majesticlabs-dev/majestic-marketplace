@@ -1,6 +1,6 @@
 # Majestic Marketing
 
-Marketing and SEO tools for Claude Code. Includes 13 specialized agents, 2 commands, and 23 skills.
+Marketing and SEO tools for Claude Code. Includes 13 specialized agents, 2 commands, and 24 skills.
 
 ## Installation
 
@@ -71,6 +71,7 @@ Invoke with: `skill majestic-marketing:<name>`
 | `linkedin-content` | Create high-performing LinkedIn content with hooks, content pillars, and posting strategy |
 | `slogan-generator` | Generate and evaluate marketing slogans with scoring criteria and top recommendations |
 | `content-calendar` | Generate a complete 30-day content calendar with viral ideas, formats, hooks, and CTAs |
+| `content-writer` | Write articles with outline-first workflow, sentence variation, and readability guidelines |
 
 ## Usage Examples
 
@@ -172,6 +173,9 @@ skill majestic-marketing:slogan-generator
 
 # 30-day content calendar with viral ideas
 skill majestic-marketing:content-calendar
+
+# Write articles with outline-first workflow
+skill majestic-marketing:content-writer
 ```
 
 ## SEO vs GEO

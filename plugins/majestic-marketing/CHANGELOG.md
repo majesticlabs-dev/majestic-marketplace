@@ -2,6 +2,13 @@
 
 All notable changes to majestic-marketing will be documented in this file.
 
+## [2.18.0] - 2025-11-28
+
+### Added
+
+**Skills (1)**
+- `content-writer` - Write well-structured articles using outline-first workflow. Includes two modes (outline/write), Gary Provost sentence variation technique, Flesch-Kincaid 8th grade readability, max 300 words/section, and words-to-avoid list for cleaner prose.
+
 ## [2.17.0] - 2025-11-28
 
 ### Added
