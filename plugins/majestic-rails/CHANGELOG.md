@@ -2,6 +2,12 @@
 
 All notable changes to majestic-rails will be documented in this file.
 
+## [1.12.0] - 2025-11-27
+
+### Added
+
+- `action-policy-coder` agent - Authorization with ActionPolicy including policies, scopes, caching, I18n, testing, and GraphQL integration
+
 ## [1.11.0] - 2025-11-27
 
 ### Added

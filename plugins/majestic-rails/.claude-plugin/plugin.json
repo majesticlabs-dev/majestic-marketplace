@@ -1,7 +1,7 @@
 {
   "name": "majestic-rails",
-  "version": "1.11.0",
-  "description": "Ruby on Rails development tools. Includes 22 specialized agents, 3 commands, and 5 skills.",
+  "version": "1.12.0",
+  "description": "Ruby on Rails development tools. Includes 23 specialized agents, 3 commands, and 5 skills.",
   "author": {
     "name": "David Paluy",
     "url": "https://github.com/dpaluy",
@@ -30,6 +30,8 @@
     "sqlite",
     "database",
     "graphql",
-    "graphql-ruby"
+    "graphql-ruby",
+    "action-policy",
+    "authorization"
   ]
 }
