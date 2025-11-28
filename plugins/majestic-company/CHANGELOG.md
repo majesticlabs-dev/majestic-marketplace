@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.7.0] - 2025-11-28
+
+### Added
+
+- `ceo:growth-audit` skill for comprehensive business growth audits
+  - 360-degree analysis across market, product, growth engine, retention, operations, and moat
+  - Evidence-backed growth acceleration blueprint
+  - 90-day quick wins with implementation steps
+  - Strategic growth initiatives with execution roadmaps
+  - Growth trajectory with quarterly milestones and measurement systems
+
 ## [1.6.0] - 2025-11-28
 
 ### Added

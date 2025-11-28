@@ -1,6 +1,6 @@
 # Majestic Company
 
-Business operations tools. Includes 2 specialized agents and 5 skills.
+Business operations tools. Includes 2 specialized agents and 6 skills.
 
 ## Installation
 
@@ -29,6 +29,7 @@ Invoke with: `skill majestic-company:ceo:<name>`
 | `strategic-planning` | Build one-page strategic briefs with core objective, milestones, leverage points, and risks |
 | `decision-framework` | Walk through decisions with first-principles, cost/benefit, and second-order effects analysis |
 | `industry-pulse` | Real-time pulse check on any industry: trending tech, recent events, key shifts for operators/investors |
+| `growth-audit` | 360-degree business audit with evidence-backed blueprint to 5-10X growth trajectory |
 
 ### Research Skills
 
@@ -94,6 +95,27 @@ skill majestic-company:ceo:industry-pulse
 ```
 
 The skill uses WebSearch to provide: trending technologies, notable events from the last 2 weeks, and 3 key shifts impacting operators and investors.
+
+### Growth Audit Usage
+
+```bash
+# Comprehensive business growth audit
+skill majestic-company:ceo:growth-audit
+
+# Then provide:
+# - Business Name/Description
+# - Unique Selling Point
+# - Current Monthly Revenue
+# - Annual Growth Rate
+# - Number of Customers
+# - Churn Rate
+# - Customer Acquisition Cost
+# - Team Size
+# - Growth Timeline Goal (months)
+# - Risk Tolerance (conservative/moderate/aggressive/ultra-aggressive)
+```
+
+The skill performs a 360-degree analysis across six dimensions: market dynamics, product positioning, growth engine, retention mechanics, operational excellence, and competitive moat. Output includes a growth scorecard, critical growth limiters, 90-day acceleration plan with 5-7 quick wins, 3-5 strategic growth initiatives with execution roadmaps, and a measurement system with quarterly milestones.
 
 ### Problem Research Usage
 
