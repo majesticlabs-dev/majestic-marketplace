@@ -1,6 +1,6 @@
 # Majestic Company
 
-Business operations tools. Includes 2 specialized agents and 13 skills.
+Business operations tools. Includes 2 specialized agents and 14 skills.
 
 ## Installation
 
@@ -36,6 +36,7 @@ Invoke with: `skill majestic-company:ceo:<name>`
 | `future-back` | Envision ideal future state, then reverse-engineer the pathway from vision to reality |
 | `decisions` | Tree of Thoughts business decisions with expert consultants exploring multiple approaches |
 | `market-expansion` | Strategic market expansion analysis with quantified entry strategies and financial projections |
+| `startup-blueprint` | Interactive 10-phase startup planning tailored to your skills, budget, and goals |
 
 ### Research Skills
 
@@ -214,6 +215,28 @@ skill majestic-company:ceo:market-expansion
 ```
 
 The skill evaluates 3 entry strategies (direct, partnership, acquisition, etc.) through decision trees with quantified scoring (profitability, scalability, risk). Output includes 3-year financial projections, competitive positioning, resource requirements, and risk mitigation strategies.
+
+### Startup Blueprint Usage
+
+```bash
+# Start interactive startup planning
+skill majestic-company:ceo:startup-blueprint
+```
+
+The skill begins with a 7-question assessment (skills, budget, industry interests, time commitment, goals, risk tolerance, previous attempts) then guides you through 10 phases:
+
+1. **Idea Generation** - Market research and personalized concept generation
+2. **Product-Market Fit** - Customer personas, MVP strategy, validation methodology
+3. **Business Model** - Value creation, revenue architecture, unit economics
+4. **Competitive Analysis** - Competitor profiles, SWOT, positioning strategy
+5. **Marketing Strategy** - Budget-optimized channels, guerrilla tactics, roadmap
+6. **Operations** - Product development, infrastructure, launch strategy
+7. **Conversion Funnel** - Lead generation, nurturing, optimization
+8. **Growth Scaling** - Growth engine design, scaling infrastructure
+9. **Financial Model** - Projections, funding strategy, cash flow management
+10. **Implementation** - 30-60-90 day plan, resource allocation, success metrics
+
+Each phase includes research findings, strategic recommendations, action plans, and budget-conscious approaches. The skill maintains continuity across phases, referencing your specific inputs throughout.
 
 ### Problem Research Usage
 

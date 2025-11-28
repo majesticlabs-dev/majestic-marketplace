@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.15.0] - 2025-11-28
+
+### Added
+
+- `ceo:startup-blueprint` skill for interactive 10-phase startup planning
+  - 7-question initial assessment: skills, budget, interests, time, goals, risk tolerance, experience
+  - Phase 1: Deep research and interactive idea generation with validation
+  - Phase 2: Product-market fit strategy with personas and MVP planning
+  - Phase 3: Business model development with unit economics
+  - Phase 4: Competitive landscape analysis with SWOT and positioning
+  - Phase 5: Budget-optimized marketing strategy with guerrilla tactics
+  - Phase 6: Operational execution roadmap with launch strategy
+  - Phase 7: Conversion funnel and customer journey design
+  - Phase 8: Growth scaling framework with expansion strategy
+  - Phase 9: Financial model and funding strategy
+  - Phase 10: Comprehensive implementation masterplan with 30-60-90 day plan
+  - Maintains continuity across phases with personalized recommendations
+
 ## [1.14.0] - 2025-11-28
 
 ### Added
