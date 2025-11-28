@@ -58,6 +58,15 @@ When invoked, you must follow these steps:
      - **Test Data Requirements**: Fixtures or data needed for each test case
      - **Mocking Strategy**: What external services/dependencies to mock and why
      - **Expected Outcomes**: What each test should verify (assertions, state changes)
+   - **Test Case Matrix** (use for complex scenarios with multiple parameters):
+     | Objective | Inputs | Expected Output | Test Type |
+     |-----------|--------|-----------------|-----------|
+     | Validate user creation | valid email, password | User created, returns 201 | Happy Path |
+     | Reject duplicate email | existing email | Error message, returns 422 | Sad Path |
+     | Handle empty password | valid email, "" | Validation error | Edge Case |
+   - **When to use each format**:
+     - **Checklist format**: Simple features, clear scenarios, sequential logic
+     - **Tabular format**: Multi-parameter functions, decision tables, boundary value analysis, API endpoints with varied inputs
    - Present the test plan to confirm coverage before implementation
    - Use TodoWrite to track test cases to be implemented as you write them
 
