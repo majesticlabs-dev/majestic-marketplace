@@ -1,6 +1,6 @@
 # Majestic Company
 
-Business operations tools. Includes 2 specialized agents and 16 skills.
+Business operations tools. Includes 2 specialized agents and 20 skills.
 
 ## Installation
 
@@ -67,6 +67,17 @@ Invoke with: `skill majestic-company:legal:<name>`
 | Skill | Description |
 |-------|-------------|
 | `document-review` | Review legal documents as an experienced attorney. Analyzes contracts, ToS, privacy policies, NDAs section-by-section with specific replacement text for problematic clauses. |
+
+### Fundraising Skills
+
+Invoke with: `skill majestic-company:fundraising:<name>`
+
+| Skill | Description |
+|-------|-------------|
+| `elevator-pitch` | Create compelling 30/60/90-second elevator pitches using Villain-Hero storytelling framework, customized for different investor types (technical, market-focused, customer-obsessed) |
+| `tam-calculator` | Calculate TAM/SAM/SOM using top-down, bottom-up, and value-theory approaches with credible data sources and VC-ready presentation |
+| `funding-ask-optimizer` | Craft compelling funding asks with multi-perspective justifications, comparables, and milestone roadmaps |
+| `objection-destroyer` | Create powerful 45-second pitch closings with market insights, proprietary advantages, and FOMO triggers |
 
 ### Founder Mode Usage
 

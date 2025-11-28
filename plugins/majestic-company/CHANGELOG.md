@@ -2,6 +2,48 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.19.0] - 2025-11-28
+
+### Added
+
+- `fundraising:tam-calculator` skill for market sizing
+  - Three calculation methodologies: top-down, bottom-up, and value-theory
+  - TAM/SAM/SOM funnel with visual representation
+  - Data source credibility assessment matrix
+  - Sensitivity analysis with scenario modeling (bear/base/bull)
+  - VC presentation package with slide-ready summary
+  - Investor Q&A preparation with anticipated questions
+  - Common pitfalls checklist
+
+### Enhanced
+
+- `fundraising:elevator-pitch` skill significantly expanded
+  - Villain-Hero storytelling framework as primary methodology
+  - Three investor-customized pitch versions (technical, market-focused, customer-obsessed)
+  - Word-for-word scripts with timing markers for 30s/60s/90s durations
+  - Pitch variations: emotional, success story, urgency, competitor comparison, one-liner
+  - Psychological hooks library
+  - Delivery coaching with body language and voice modulation
+  - A/B testing and iteration framework
+
+## [1.18.0] - 2025-11-28
+
+### Added
+
+- New `fundraising/` skill category with 3 skills:
+
+- `fundraising:elevator-pitch` - Create compelling 30/60/90-second elevator pitches using Villain-Hero storytelling framework (previously undocumented, now organized)
+
+- `fundraising:funding-ask-optimizer` - Craft compelling investment asks
+  - Multi-perspective justification (growth acceleration, historical comparables, risk mitigation)
+  - Month-by-month milestone roadmap with funding allocation breakdown
+  - Investment narrative script for verbal delivery
+
+- `fundraising:objection-destroyer` - Create powerful pitch closings
+  - 4-element framework: market insight, proprietary advantage, founder mission, FOMO trigger
+  - 45-second primary script with pacing guidance
+  - Variants for skeptical, excited, and analytical investors
+
 ## [1.17.0] - 2025-11-28
 
 ### Added

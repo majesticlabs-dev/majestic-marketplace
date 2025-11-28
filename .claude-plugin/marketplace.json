@@ -70,15 +70,15 @@
     },
     {
       "name": "majestic-company",
-      "description": "Business operations tools. Includes 2 specialized agents and 16 skills.",
-      "version": "1.17.0",
+      "description": "Business operations tools. Includes 2 specialized agents and 20 skills.",
+      "version": "1.19.0",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
         "email": "marketplace@it.majesticlabs.dev"
       },
       "homepage": "https://github.com/majesticlabs-dev/majestic-marketplace/tree/master/plugins/majestic-company",
-      "tags": ["hr", "people-ops", "hiring", "onboarding", "performance", "policies", "business", "strategy", "first-principles", "problem-solving", "founder-mode", "ceo", "leadership", "market-research", "competitive-analysis", "pain-points", "product-validation", "growth-strategy", "business-audit", "legal", "contract-review", "document-review", "startup", "business-plan", "30-day-launch", "business-launch"],
+      "tags": ["hr", "people-ops", "hiring", "onboarding", "performance", "policies", "business", "strategy", "first-principles", "problem-solving", "founder-mode", "ceo", "leadership", "market-research", "competitive-analysis", "pain-points", "product-validation", "growth-strategy", "business-audit", "legal", "contract-review", "document-review", "startup", "business-plan", "30-day-launch", "business-launch", "elevator-pitch", "tam", "market-sizing", "fundraising"],
       "source": "./plugins/majestic-company"
     },
     {
