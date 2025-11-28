@@ -1,6 +1,6 @@
 # Majestic Company
 
-Business operations tools. Includes 2 specialized agents and 11 skills.
+Business operations tools. Includes 2 specialized agents and 12 skills.
 
 ## Installation
 
@@ -34,6 +34,7 @@ Invoke with: `skill majestic-company:ceo:<name>`
 | `ai-advantage` | Develop research-backed AI competitive strategies combining academic research, market trends, and social sentiment |
 | `pareto` | Identify the vital 20% of activities that produce 80% of results using Pareto Principle analysis |
 | `future-back` | Envision ideal future state, then reverse-engineer the pathway from vision to reality |
+| `decisions` | Tree of Thoughts business decisions with expert consultants exploring multiple approaches |
 
 ### Research Skills
 
@@ -182,6 +183,22 @@ skill majestic-company:ceo:future-back
 ```
 
 The skill guides you through future visualization (outcome and experience dimensions), then maps backward from vision to present with prerequisite chains, critical path identification, resource requirements, and a horizon-based implementation blueprint with immediate actions.
+
+### Business Decisions Usage
+
+```bash
+# Get structured decision analysis
+skill majestic-company:ceo:decisions
+
+# Then provide your business challenge, such as:
+# - Market entry strategies
+# - Product feature prioritization
+# - Hiring decisions
+# - Pricing optimization
+# - Investment allocation
+```
+
+The skill assembles 4 expert consultants (Growth Strategist, Operations Expert, Financial Analyst, Skeptic Risk Analyst) who each explore 3 approaches with potential outcomes, debate disagreements, and deliver a unified recommendation with confidence level. For complex decisions, adds implementation milestones with contingency plans.
 
 ### Problem Research Usage
 

@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.13.0] - 2025-11-28
+
+### Added
+
+- `ceo:decisions` skill for Tree of Thoughts business decision-making
+  - 4 expert consultants: Growth Strategist, Operations Expert, Financial Analyst, Skeptic Risk Analyst
+  - Each consultant explores 3 approaches with 2-3 potential outcomes
+  - Pros/cons evaluation and consultant debate before recommendation
+  - Multi-level ToT for complex problems: 5 milestones, 3 strategies per milestone, contingency plans
+  - Decision confidence levels (High/Medium/Low)
+
 ## [1.12.0] - 2025-11-28
 
 ### Added
