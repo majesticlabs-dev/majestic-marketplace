@@ -1,6 +1,6 @@
 # Majestic Company
 
-Business operations tools. Includes 2 specialized agents and 12 skills.
+Business operations tools. Includes 2 specialized agents and 13 skills.
 
 ## Installation
 
@@ -35,6 +35,7 @@ Invoke with: `skill majestic-company:ceo:<name>`
 | `pareto` | Identify the vital 20% of activities that produce 80% of results using Pareto Principle analysis |
 | `future-back` | Envision ideal future state, then reverse-engineer the pathway from vision to reality |
 | `decisions` | Tree of Thoughts business decisions with expert consultants exploring multiple approaches |
+| `market-expansion` | Strategic market expansion analysis with quantified entry strategies and financial projections |
 
 ### Research Skills
 
@@ -199,6 +200,20 @@ skill majestic-company:ceo:decisions
 ```
 
 The skill assembles 4 expert consultants (Growth Strategist, Operations Expert, Financial Analyst, Skeptic Risk Analyst) who each explore 3 approaches with potential outcomes, debate disagreements, and deliver a unified recommendation with confidence level. For complex decisions, adds implementation milestones with contingency plans.
+
+### Market Expansion Usage
+
+```bash
+# Analyze market expansion opportunity
+skill majestic-company:ceo:market-expansion
+
+# Then provide:
+# - Company name
+# - Target market (region, segment, or vertical)
+# - Current market position
+```
+
+The skill evaluates 3 entry strategies (direct, partnership, acquisition, etc.) through decision trees with quantified scoring (profitability, scalability, risk). Output includes 3-year financial projections, competitive positioning, resource requirements, and risk mitigation strategies.
 
 ### Problem Research Usage
 

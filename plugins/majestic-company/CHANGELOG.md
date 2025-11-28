@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.14.0] - 2025-11-28
+
+### Added
+
+- `ceo:market-expansion` skill for strategic market expansion analysis
+  - Tree of Thoughts methodology with 3 entry strategies
+  - 3 decision branches per strategy with 2-3 outcomes each
+  - Scoring on profitability, scalability, and risk (1-10)
+  - Financial projections for Years 1-3
+  - Competitive positioning and resource allocation
+  - Top 3 risks with mitigation strategies
+
 ## [1.13.0] - 2025-11-28
 
 ### Added
