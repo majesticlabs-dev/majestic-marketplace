@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.11.0] - 2025-11-28
+
+### Added
+
+- `ceo:future-back` skill for vision-to-reality planning
+  - Future visualization framework with outcome and experience dimensions
+  - Backward mapping methodology with prerequisite chains and critical path
+  - Resource and capability roadmap with barrier/enabler analysis
+  - Horizon-based implementation blueprint (3 horizons)
+  - Immediate action blueprint with quick wins and review cadence
+
 ## [1.10.0] - 2025-11-28
 
 ### Added

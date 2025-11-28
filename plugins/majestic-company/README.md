@@ -1,6 +1,6 @@
 # Majestic Company
 
-Business operations tools. Includes 2 specialized agents and 9 skills.
+Business operations tools. Includes 2 specialized agents and 10 skills.
 
 ## Installation
 
@@ -33,6 +33,7 @@ Invoke with: `skill majestic-company:ceo:<name>`
 | `industry-research` | Research market, identify underserved pain, design venture to capture opportunity in 12 months |
 | `ai-advantage` | Develop research-backed AI competitive strategies combining academic research, market trends, and social sentiment |
 | `pareto` | Identify the vital 20% of activities that produce 80% of results using Pareto Principle analysis |
+| `future-back` | Envision ideal future state, then reverse-engineer the pathway from vision to reality |
 
 ### Research Skills
 
@@ -159,6 +160,20 @@ skill majestic-company:ceo:pareto
 ```
 
 The skill guides you through identifying all factors, determining impact through comparisons, isolating the vital few activities, and minimizing low-value work. Output includes a prioritized action plan with immediate, weekly, and ongoing actions.
+
+### Future Back Planning Usage
+
+```bash
+# Create a future back plan
+skill majestic-company:ceo:future-back
+
+# Then provide:
+# - Future timeframe (3, 5, or 10 years)
+# - Personal, professional, or organizational scope
+# - Current situation and aspirations
+```
+
+The skill guides you through future visualization (outcome and experience dimensions), then maps backward from vision to present with prerequisite chains, critical path identification, resource requirements, and a horizon-based implementation blueprint with immediate actions.
 
 ### Problem Research Usage
 
