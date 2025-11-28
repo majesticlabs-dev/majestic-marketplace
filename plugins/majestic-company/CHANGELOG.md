@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.5.0] - 2025-11-28
+
+### Added
+
+- `problem-research` skill for researching competitor pain points and market opportunities
+  - Analyzes reviews from G2, Capterra, TrustRadius, Reddit, and other platforms
+  - Pain Point Score (PPS) formula for ranking issues by opportunity potential
+  - Hidden Gem Score for finding underserved needs competitors ignore
+  - Viability Scorecard (30-point scale) for go/no-go decisions
+  - Brutally honest business viability assessment framework
+  - Supports both semi-automated (WebSearch) and agentic browsing (Browser MCP) execution modes
+  - Includes reference files: scoring-rubrics.md, output-template.md
+
 ## [1.4.0] - 2025-11-28
 
 ### Added

@@ -1,6 +1,6 @@
 # Majestic Company
 
-Business operations tools. Includes 2 specialized agents and 3 skills.
+Business operations tools. Includes 2 specialized agents and 4 skills.
 
 ## Installation
 
@@ -19,6 +19,8 @@ Invoke with: `agent majestic-company:<name>`
 
 ## Skills
 
+### CEO Skills
+
 Invoke with: `skill majestic-company:ceo:<name>`
 
 | Skill | Description |
@@ -26,6 +28,14 @@ Invoke with: `skill majestic-company:ceo:<name>`
 | `founder-mode` | Help founders run companies using contrarian principles that break conventional management wisdom |
 | `strategic-planning` | Build one-page strategic briefs with core objective, milestones, leverage points, and risks |
 | `decision-framework` | Walk through decisions with first-principles, cost/benefit, and second-order effects analysis |
+
+### Research Skills
+
+Invoke with: `skill majestic-company:<name>`
+
+| Skill | Description |
+|-------|-------------|
+| `problem-research` | Research competitor pain points from review platforms (G2, Capterra, Reddit) to find wedge opportunities. SaaS/B2B focus. Brutally honest viability assessment. |
 
 ### Founder Mode Usage
 
@@ -71,6 +81,32 @@ skill majestic-company:ceo:decision-framework
 ```
 
 The skill applies a 3-part framework: first-principles analysis, cost/benefit breakdown, and second-order effects. Includes examples from similar situations.
+
+### Problem Research Usage
+
+```bash
+# Start interactive research session
+skill majestic-company:problem-research
+
+# With initial context
+skill majestic-company:problem-research "Project management software for marketing teams"
+
+# Specific competitor focus
+skill majestic-company:problem-research "CRM alternatives to Salesforce for SMBs"
+```
+
+The skill will ask you to select:
+- **Research scope**: Light (3-5 competitors), Medium (5-10), or Deep (10+)
+- **Execution mode**: Semi-automated (WebSearch) or Agentic browsing (Browser MCP)
+
+**Output includes:**
+- Pain Points Table (ranked with quotes and scores)
+- Must-Haves Table (table stakes features)
+- Hidden Gems (underserved opportunities)
+- Opportunity Map (wedge strategies)
+- Viability Assessment (GO/PROCEED WITH CAUTION/RECONSIDER/NO-GO)
+
+Every report concludes with brutally honest answers to: "What would make this fail?" and "Is this a vitamin or painkiller?"
 
 ## Usage Examples
 
