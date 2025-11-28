@@ -1,0 +1,19 @@
+{
+  "name": "majestic-company",
+  "version": "1.0.0",
+  "description": "Business operations tools. Includes 1 specialized agent.",
+  "author": {
+    "name": "David Paluy",
+    "url": "https://github.com/dpaluy",
+    "email": "marketplace@it.majesticlabs.dev"
+  },
+  "keywords": [
+    "hr",
+    "human-resources",
+    "hiring",
+    "onboarding",
+    "performance",
+    "policies",
+    "business"
+  ]
+}

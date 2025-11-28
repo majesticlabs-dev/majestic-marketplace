@@ -67,6 +67,19 @@
       "homepage": "https://github.com/majesticlabs-dev/majestic-marketplace/tree/master/plugins/majestic-marketing",
       "tags": ["marketing", "seo", "geo", "content", "copywriting", "llm-optimization", "ai-visibility"],
       "source": "./plugins/majestic-marketing"
+    },
+    {
+      "name": "majestic-company",
+      "description": "Business operations tools. Includes 1 specialized agent.",
+      "version": "1.0.0",
+      "author": {
+        "name": "David Paluy",
+        "url": "https://github.com/dpaluy",
+        "email": "marketplace@it.majesticlabs.dev"
+      },
+      "homepage": "https://github.com/majesticlabs-dev/majestic-marketplace/tree/master/plugins/majestic-company",
+      "tags": ["hr", "people-ops", "hiring", "onboarding", "performance", "policies", "business"],
+      "source": "./plugins/majestic-company"
     }
   ]
 }
