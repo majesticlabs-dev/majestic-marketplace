@@ -2,6 +2,20 @@
 
 All notable changes to majestic-marketing will be documented in this file.
 
+## [2.9.0] - 2025-11-28
+
+### Added
+
+**Skills (1)**
+- `hook-writer` - Generate attention-grabbing hooks from 5 investor archetype perspectives (Numbers Shark, Consumer-Insight Expert, Tech Visionary, Founder-Story Investor, Scalability Strategist)
+
+## [2.8.0] - 2025-11-28
+
+### Added
+
+**Skills (1)**
+- `value-prop-sharpener` - Refine value propositions from emotional, logical, and status angles into 15-word statements with evolution process
+
 ## [2.7.0] - 2025-11-28
 
 ### Added
