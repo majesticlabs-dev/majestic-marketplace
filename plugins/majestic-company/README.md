@@ -1,6 +1,6 @@
 # Majestic Company
 
-Business operations tools. Includes 2 specialized agents and 6 skills.
+Business operations tools. Includes 2 specialized agents and 7 skills.
 
 ## Installation
 
@@ -30,6 +30,7 @@ Invoke with: `skill majestic-company:ceo:<name>`
 | `decision-framework` | Walk through decisions with first-principles, cost/benefit, and second-order effects analysis |
 | `industry-pulse` | Real-time pulse check on any industry: trending tech, recent events, key shifts for operators/investors |
 | `growth-audit` | 360-degree business audit with evidence-backed blueprint to 5-10X growth trajectory |
+| `industry-research` | Research market, identify underserved pain, design venture to capture opportunity in 12 months |
 
 ### Research Skills
 
@@ -116,6 +117,18 @@ skill majestic-company:ceo:growth-audit
 ```
 
 The skill performs a 360-degree analysis across six dimensions: market dynamics, product positioning, growth engine, retention mechanics, operational excellence, and competitive moat. Output includes a growth scorecard, critical growth limiters, 90-day acceleration plan with 5-7 quick wins, 3-5 strategic growth initiatives with execution roadmaps, and a measurement system with quarterly milestones.
+
+### Industry Research Usage
+
+```bash
+# Research a market and design a venture
+skill majestic-company:ceo:industry-research
+
+# Then provide:
+# - Industry to research (e.g., "healthcare SaaS", "fintech for SMBs")
+```
+
+The skill executes a 10-step workflow: map macro landscape, identify pain points, select best opportunity via weighted scorecard, draft business thesis, design product, plan go-to-market, assess moat, build financial model, identify risks, and create 90-day action roadmap. Output is investor-ready with reasoning and executive summary.
 
 ### Problem Research Usage
 

@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.8.0] - 2025-11-28
+
+### Added
+
+- `ceo:industry-research` skill for comprehensive venture design
+  - 10-step workflow from market mapping to 90-day action plan
+  - Weighted opportunity scorecard (TAM × urgency × ease × pricing power)
+  - Business thesis, product design, GTM plan, financials, risks
+  - Investor-ready output with reasoning and executive summary
+  - Requires triangulation of 3+ sources for key claims
+
 ## [1.7.0] - 2025-11-28
 
 ### Added
