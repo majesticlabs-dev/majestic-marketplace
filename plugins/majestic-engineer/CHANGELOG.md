@@ -2,6 +2,12 @@
 
 All notable changes to majestic-engineer will be documented in this file.
 
+## [1.11.0] - 2025-11-27
+
+### Added
+
+- `qa:visual-validator` agent for skeptical visual QA - verify UI changes through screenshot analysis, accessibility verification, and design system compliance
+
 ## [1.10.0] - 2025-11-27
 
 ### Added
@@ -36,4 +42,4 @@ All notable changes to majestic-engineer will be documented in this file.
 - Planning agents: architect, plan-review, spec-reviewer, refactor-plan
 - QA agents: security-review, test-create
 - Workflow agent: ship
-- Design agent: design-iterator
+- Design agent: ui-ux-designer

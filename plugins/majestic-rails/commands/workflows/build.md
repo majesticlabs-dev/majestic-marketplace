@@ -106,7 +106,7 @@ Parse the arguments to extract:
    For UI work:
 
    - Implement components following design specs or mockups
-   - Use `design-iterator` agent to iteratively refine the UI
+   - Use `ui-ux-designer` agent to iteratively refine the UI
    - Take screenshots and compare against requirements
    - Repeat until implementation meets expectations
 

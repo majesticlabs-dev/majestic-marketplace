@@ -1,6 +1,6 @@
 ---
-name: design-iterator
-description: Use proactively when design work isn't coming together on the first attempt. Specialist for iterative UI/UX refinement through screenshots, visual analysis, and progressive improvements over N iterations.
+name: ui-ux-designer
+description: Use proactively for UI/UX design work. Specialist for iterative refinement through screenshots, visual analysis, and progressive improvements.
 tools: Read, Write, Edit, MultiEdit, Grep, Glob, Bash, Skill
 model: opus
 color: violet
