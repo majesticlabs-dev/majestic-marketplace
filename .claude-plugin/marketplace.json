@@ -80,6 +80,19 @@
       "homepage": "https://github.com/majesticlabs-dev/majestic-marketplace/tree/master/plugins/majestic-company",
       "tags": ["hr", "people-ops", "hiring", "onboarding", "performance", "policies", "business"],
       "source": "./plugins/majestic-company"
+    },
+    {
+      "name": "majestic-python",
+      "description": "Python development tools. Includes 2 specialized agents.",
+      "version": "1.0.0",
+      "author": {
+        "name": "David Paluy",
+        "url": "https://github.com/dpaluy",
+        "email": "marketplace@it.majesticlabs.dev"
+      },
+      "homepage": "https://github.com/majesticlabs-dev/majestic-marketplace/tree/master/plugins/majestic-python",
+      "tags": ["python", "fastapi", "django", "flask", "pytest", "async", "uv", "ruff", "pydantic"],
+      "source": "./plugins/majestic-python"
     }
   ]
 }

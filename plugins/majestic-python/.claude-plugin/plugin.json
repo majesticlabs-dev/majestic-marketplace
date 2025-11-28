@@ -1,0 +1,21 @@
+{
+  "name": "majestic-python",
+  "version": "1.0.0",
+  "description": "Python development tools. Includes 2 specialized agents.",
+  "author": {
+    "name": "David Paluy",
+    "url": "https://github.com/dpaluy",
+    "email": "marketplace@it.majesticlabs.dev"
+  },
+  "keywords": [
+    "python",
+    "fastapi",
+    "django",
+    "flask",
+    "pytest",
+    "async",
+    "uv",
+    "ruff",
+    "pydantic"
+  ]
+}
