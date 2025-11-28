@@ -2,6 +2,13 @@
 
 All notable changes to majestic-marketing will be documented in this file.
 
+## [2.10.0] - 2025-11-28
+
+### Added
+
+**Skills (1)**
+- `customer-discovery` - Find where potential customers discuss problems online and extract their language patterns. Honest about web search limitations; provides starting points for manual community research.
+
 ## [2.9.0] - 2025-11-28
 
 ### Added

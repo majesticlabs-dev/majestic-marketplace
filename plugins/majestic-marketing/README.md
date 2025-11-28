@@ -1,6 +1,6 @@
 # Majestic Marketing
 
-Marketing and SEO tools for Claude Code. Includes 13 specialized agents, 2 commands, and 12 skills.
+Marketing and SEO tools for Claude Code. Includes 13 specialized agents, 2 commands, and 13 skills.
 
 ## Installation
 
@@ -60,6 +60,7 @@ Invoke with: `skill majestic-marketing:<name>`
 | `sales-page` | High-converting sales page templates with headline formulas and CTA psychology |
 | `value-prop-sharpener` | Refine value propositions from emotional, logical, and status angles into 15-word statements |
 | `hook-writer` | Generate attention-grabbing hooks from 5 investor archetype perspectives |
+| `customer-discovery` | Find where potential customers discuss problems online and extract their language patterns |
 
 ## Usage Examples
 
@@ -131,6 +132,9 @@ skill majestic-marketing:viral-content
 
 # High-converting sales pages
 skill majestic-marketing:sales-page
+
+# Find where customers hang out online
+skill majestic-marketing:customer-discovery
 ```
 
 ## SEO vs GEO
