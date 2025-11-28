@@ -2,6 +2,12 @@
 
 All notable changes to majestic-rails will be documented in this file.
 
+## [1.11.0] - 2025-11-27
+
+### Added
+
+- `graphql-architect` agent - Design GraphQL schemas, resolvers, and subscriptions using graphql-ruby, graphql-batch, and ActionCable patterns
+
 ## [1.10.0] - 2025-11-27
 
 ### Added
