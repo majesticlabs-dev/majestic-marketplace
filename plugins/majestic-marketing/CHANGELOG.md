@@ -2,6 +2,13 @@
 
 All notable changes to majestic-marketing will be documented in this file.
 
+## [2.11.0] - 2025-11-28
+
+### Added
+
+**Skills (1)**
+- `landing-page-builder` - Generate structured landing page copy with hero, problem, solution, benefits, proof, objections, offer, and CTA sections. Framework-agnostic approach that adapts based on audience awareness level. Simpler/faster alternative to `sales-page` when you already know your messaging.
+
 ## [2.10.0] - 2025-11-28
 
 ### Added
