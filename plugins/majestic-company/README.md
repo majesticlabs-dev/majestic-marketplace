@@ -1,6 +1,6 @@
 # Majestic Company
 
-Business operations tools. Includes 2 specialized agents and 8 skills.
+Business operations tools. Includes 2 specialized agents and 9 skills.
 
 ## Installation
 
@@ -32,6 +32,7 @@ Invoke with: `skill majestic-company:ceo:<name>`
 | `growth-audit` | 360-degree business audit with evidence-backed blueprint to 5-10X growth trajectory |
 | `industry-research` | Research market, identify underserved pain, design venture to capture opportunity in 12 months |
 | `ai-advantage` | Develop research-backed AI competitive strategies combining academic research, market trends, and social sentiment |
+| `pareto` | Identify the vital 20% of activities that produce 80% of results using Pareto Principle analysis |
 
 ### Research Skills
 
@@ -144,6 +145,20 @@ skill majestic-company:ceo:ai-advantage
 ```
 
 The skill combines academic research, market trends, and social sentiment analysis to deliver actionable AI competitive strategies with implementation roadmaps and a competitive positioning matrix.
+
+### Pareto Analysis Usage
+
+```bash
+# Identify your vital 20%
+skill majestic-company:ceo:pareto
+
+# Then provide:
+# - Area to optimize (learning, productivity, business, personal)
+# - Specific goals in that area
+# - Current activities involved
+```
+
+The skill guides you through identifying all factors, determining impact through comparisons, isolating the vital few activities, and minimizing low-value work. Output includes a prioritized action plan with immediate, weekly, and ongoing actions.
 
 ### Problem Research Usage
 

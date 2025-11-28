@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.10.0] - 2025-11-28
+
+### Added
+
+- `ceo:pareto` skill for Pareto Principle analysis
+  - 4-step method: identify factors, determine impact, isolate vital few, address trivial many
+  - Domain knowledge for learning, productivity, business, and personal contexts
+  - Structured output with vital 20%, minimize list, action plan, and success indicators
+  - Follow-up options for deeper exploration or additional areas
+
 ## [1.9.0] - 2025-11-28
 
 ### Added
