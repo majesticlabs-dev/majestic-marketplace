@@ -1,6 +1,6 @@
 # Majestic Company
 
-Business operations tools. Includes 2 specialized agents and 15 skills.
+Business operations tools. Includes 2 specialized agents and 16 skills.
 
 ## Installation
 
@@ -38,6 +38,7 @@ Invoke with: `skill majestic-company:ceo:<name>`
 | `market-expansion` | Strategic market expansion analysis with quantified entry strategies and financial projections |
 | `startup-blueprint` | Interactive 10-phase startup planning tailored to your skills, budget, and goals |
 | `30-day-launch` | Tactical 30-day business launch with templates, schedules, and revenue forecasts |
+| `pricing-strategy` | Analyze competitor pricing models to develop optimal pricing structure with implementation roadmap |
 
 ### Choosing Between startup-blueprint and 30-day-launch
 

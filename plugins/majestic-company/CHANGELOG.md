@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.17.0] - 2025-11-28
+
+### Added
+
+- `ceo:pricing-strategy` skill for competitor pricing analysis and optimization
+  - Comprehensive pricing analysis of 5-7 competitors
+  - Value-to-price ratio comparison
+  - Customer willingness-to-pay assessment by segment
+  - Recommended pricing tiers with profit margin analysis
+  - Pricing psychology insights specific to industry
+  - Promotional discount strategies and timing
+  - Implementation roadmap with KPIs
+
 ## [1.16.0] - 2025-11-28
 
 ### Added
