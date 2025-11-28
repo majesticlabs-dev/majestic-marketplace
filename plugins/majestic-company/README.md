@@ -1,6 +1,6 @@
 # Majestic Company
 
-Business operations tools. Includes 2 specialized agents and 1 skill.
+Business operations tools. Includes 2 specialized agents and 2 skills.
 
 ## Installation
 
@@ -24,6 +24,7 @@ Invoke with: `skill majestic-company:ceo:<name>`
 | Skill | Description |
 |-------|-------------|
 | `founder-mode` | Help founders run companies using contrarian principles that break conventional management wisdom |
+| `strategic-planning` | Build one-page strategic briefs with core objective, milestones, leverage points, and risks |
 
 ### Founder Mode Usage
 
@@ -40,6 +41,21 @@ skill majestic-company:ceo:founder-mode
 ```
 
 The skill challenges "manager mode" thinking and helps founders leverage their unique capabilities: authority, vision, deep company knowledge, risk tolerance, and cultural connection.
+
+### Strategic Planning Usage
+
+```bash
+# Build a strategic plan for a goal
+skill majestic-company:ceo:strategic-planning
+
+# Then provide:
+# - Goal: What you want to achieve
+# - Context: Current situation, constraints, resources
+# - Timeline: Desired timeframe (optional)
+# - Audience: Who will read/approve (optional)
+```
+
+The skill produces one-page briefs with: core objective, 3 key milestones, 5 leverage points, risk assessment, and next action.
 
 ## Usage Examples
 

@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.0] - 2025-11-28
+
+### Added
+
+- `ceo:strategic-planning` skill for building actionable strategic plans
+  - Creates one-page briefs with core objective, 3 key milestones, 5 leverage points, and risks
+  - Structured output format ready for pitching or execution
+  - Includes guiding questions and risk assessment framework
+
 ## [1.2.0] - 2025-11-28
 
 ### Added
