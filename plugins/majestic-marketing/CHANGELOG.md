@@ -2,6 +2,13 @@
 
 All notable changes to majestic-marketing will be documented in this file.
 
+## [2.13.0] - 2025-11-28
+
+### Added
+
+**Skills (1)**
+- `bofu-keywords` - Find bottom-of-funnel keywords with high purchase intent for any product. Generates transactional, comparative, evaluative, and problem-solution keywords with content recommendations. Uses Perplexity MCP for real-time validation.
+
 ## [2.12.0] - 2025-11-28
 
 ### Added

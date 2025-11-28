@@ -1,6 +1,6 @@
 # Majestic Marketing
 
-Marketing and SEO tools for Claude Code. Includes 13 specialized agents, 2 commands, and 18 skills.
+Marketing and SEO tools for Claude Code. Includes 13 specialized agents, 2 commands, and 19 skills.
 
 ## Installation
 
@@ -64,6 +64,7 @@ Invoke with: `skill majestic-marketing:<name>`
 | `landing-page-builder` | Generate structured landing page copy - simpler/faster alternative to sales-page |
 | `email-nurture` | Design automated email nurture sequences with segmentation and behavioral triggers |
 | `retention-system` | Design customer retention systems with health scoring and churn prediction |
+| `bofu-keywords` | Find bottom-of-funnel keywords with high purchase intent using Perplexity |
 | `referral-program` | Design viral referral programs with incentive structures and viral coefficient optimization |
 | `win-back` | Design win-back campaigns to re-engage dormant customers and recover churned users |
 
