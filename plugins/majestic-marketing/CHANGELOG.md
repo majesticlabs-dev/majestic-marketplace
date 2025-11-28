@@ -2,6 +2,13 @@
 
 All notable changes to majestic-marketing will be documented in this file.
 
+## [2.1.0] - 2025-11-28
+
+### Added
+
+**Skills (1)**
+- `market-research` - Comprehensive market research with web data, competitive analysis, and structured synthesis
+
 ## [2.0.0] - 2025-11-27
 
 ### Added
