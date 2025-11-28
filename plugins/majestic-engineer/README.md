@@ -1,6 +1,6 @@
 # Majestic Engineer
 
-Language-agnostic engineering workflows. Includes 14 specialized agents, 8 commands, and 12 skills.
+Language-agnostic engineering workflows. Includes 15 specialized agents, 8 commands, and 12 skills.
 
 ## Installation
 
@@ -27,6 +27,7 @@ Invoke with: `claude agent majestic-engineer:<category>:<name>`
 | `research:git-researcher` | Analyze git history, trace code evolution, and identify contributor expertise |
 | `research:web-research` | Internet research for debugging, finding solutions, and technical problems |
 | `research:best-practices-researcher` | Research external best practices and documentation with structured citations |
+| `research:repo-analyst` | Repository onboarding - analyze structure, conventions, templates, and patterns |
 | `design:design-iterator` | Iterative UI/UX refinement through screenshots and progressive improvements |
 
 ## Commands

@@ -2,6 +2,12 @@
 
 All notable changes to majestic-engineer will be documented in this file.
 
+## [1.10.0] - 2025-11-27
+
+### Added
+
+- `research:repo-analyst` agent for repository onboarding - analyze structure, conventions, issue templates, and implementation patterns
+
 ## [1.9.0] - 2025-11-27
 
 ### Added
