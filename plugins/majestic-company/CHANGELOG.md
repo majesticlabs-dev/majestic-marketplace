@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.6.0] - 2025-11-28
+
+### Added
+
+- `ceo:industry-pulse` skill for real-time industry pulse checks
+  - Trending technologies with adoption signals
+  - Notable events from the last 2 weeks
+  - 3 key shifts impacting operators and investors
+  - Uses WebSearch for current data
+
 ## [1.5.0] - 2025-11-28
 
 ### Added

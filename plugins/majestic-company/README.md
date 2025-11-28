@@ -1,6 +1,6 @@
 # Majestic Company
 
-Business operations tools. Includes 2 specialized agents and 4 skills.
+Business operations tools. Includes 2 specialized agents and 5 skills.
 
 ## Installation
 
@@ -28,6 +28,7 @@ Invoke with: `skill majestic-company:ceo:<name>`
 | `founder-mode` | Help founders run companies using contrarian principles that break conventional management wisdom |
 | `strategic-planning` | Build one-page strategic briefs with core objective, milestones, leverage points, and risks |
 | `decision-framework` | Walk through decisions with first-principles, cost/benefit, and second-order effects analysis |
+| `industry-pulse` | Real-time pulse check on any industry: trending tech, recent events, key shifts for operators/investors |
 
 ### Research Skills
 
@@ -81,6 +82,18 @@ skill majestic-company:ceo:decision-framework
 ```
 
 The skill applies a 3-part framework: first-principles analysis, cost/benefit breakdown, and second-order effects. Includes examples from similar situations.
+
+### Industry Pulse Usage
+
+```bash
+# Get pulse check on an industry
+skill majestic-company:ceo:industry-pulse
+
+# Then provide:
+# - Industry or niche (e.g., "AI infrastructure", "fintech payments")
+```
+
+The skill uses WebSearch to provide: trending technologies, notable events from the last 2 weeks, and 3 key shifts impacting operators and investors.
 
 ### Problem Research Usage
 
