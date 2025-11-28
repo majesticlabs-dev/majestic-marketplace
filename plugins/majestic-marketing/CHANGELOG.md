@@ -2,6 +2,19 @@
 
 All notable changes to majestic-marketing will be documented in this file.
 
+## [2.6.0] - 2025-11-28
+
+### Added
+
+**Skills (3)**
+- `irresistible-offer` - Craft irresistible offers using direct response marketing principles with 7-part formula
+- `free-tool-arsenal` - Build complete business tech stack with 100% free tools and automation workflows
+- `viral-content` - Create viral content frameworks with platform-specific patterns and psychological hooks
+
+### Changed
+
+- Enhanced `traffic-magnet` with guerrilla marketing elements: cold outreach scripts, social post templates, and zero-cost success stories
+
 ## [2.3.0] - 2025-11-28
 
 ### Added
