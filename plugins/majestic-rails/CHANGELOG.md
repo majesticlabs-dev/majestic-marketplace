@@ -2,6 +2,17 @@
 
 All notable changes to majestic-rails will be documented in this file.
 
+## [1.14.0] - 2025-11-27
+
+### Added
+
+- `gemfile:organize` command - Organize Gemfile with categorized sections and alphabetized gems
+- `gemfile:upgrade` command - Upgrade gems safely with changelog review and testing
+
+### Changed
+
+- Total commands increased from 3 to 5
+
 ## [1.13.0] - 2025-11-27
 
 ### Added

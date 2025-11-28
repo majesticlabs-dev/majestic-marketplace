@@ -1,6 +1,6 @@
 # Majestic Rails
 
-Ruby on Rails development tools. Includes 23 specialized agents, 3 commands, and 9 skills.
+Ruby on Rails development tools. Includes 23 specialized agents, 5 commands, and 9 skills.
 
 ## Installation
 
@@ -57,13 +57,15 @@ Invoke with: `agent majestic-rails:<name>` or `agent majestic-rails:<category>:<
 
 ## Commands
 
-Invoke with: `/majestic-rails:workflows:<name>`
+Invoke with: `/majestic-rails:<category>:<name>`
 
 | Command | Description |
 |---------|-------------|
 | `workflows:build` | Execute work plans efficiently - build features following Rails conventions |
 | `workflows:plan` | Transform feature descriptions into well-structured Rails project plans |
 | `workflows:review` | Comprehensive code review using smart agent selection based on changed files |
+| `gemfile:organize` | Organize Gemfile with categorized sections and alphabetized gems |
+| `gemfile:upgrade` | Upgrade a gem safely with changelog review and testing |
 
 ## Skills
 
@@ -158,6 +160,11 @@ agent majestic-rails:review:simplicity-reviewer "Simplify this implementation"
 /majestic-rails:workflows:review #123         # Review PR #123
 /majestic-rails:workflows:review --staged     # Review staged changes
 /majestic-rails:workflows:review app/models/  # Review specific files
+
+# Gemfile management
+/majestic-rails:gemfile:organize              # Organize Gemfile with categories
+/majestic-rails:gemfile:upgrade rails         # Upgrade a specific gem
+/majestic-rails:gemfile:upgrade --outdated    # Review all outdated gems
 ```
 
 ## Ruby Coding Standards
