@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.0] - 2025-11-28
+
+### Added
+
+- `first-principles` agent for strategic thinking using Elon Musk's first-principles methodology
+  - 15 core prompts organized into 6 categories
+  - Foundation, Ideal State, Risk Analysis, Breakthrough, Constraints & Politics, Scale & Leverage
+  - Meta-prompts for stacking multiple analysis approaches
+
 ## [1.0.0] - 2025-11-27
 
 ### Added

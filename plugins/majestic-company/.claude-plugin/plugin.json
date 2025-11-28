@@ -1,7 +1,7 @@
 {
   "name": "majestic-company",
-  "version": "1.0.0",
-  "description": "Business operations tools. Includes 1 specialized agent.",
+  "version": "1.1.0",
+  "description": "Business operations tools. Includes 2 specialized agents.",
   "author": {
     "name": "David Paluy",
     "url": "https://github.com/dpaluy",
@@ -14,6 +14,10 @@
     "onboarding",
     "performance",
     "policies",
-    "business"
+    "business",
+    "strategy",
+    "first-principles",
+    "problem-solving",
+    "decision-making"
   ]
 }

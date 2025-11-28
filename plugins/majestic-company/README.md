@@ -1,6 +1,6 @@
 # Majestic Company
 
-Business operations tools. Includes 1 specialized agent.
+Business operations tools. Includes 2 specialized agents.
 
 ## Installation
 
@@ -14,9 +14,28 @@ Invoke with: `agent majestic-company:<name>`
 
 | Agent | Description |
 |-------|-------------|
+| `first-principles` | Strategic thinking using Elon Musk's first-principles methodology - problem-solving, decision-making, breakthrough thinking |
 | `people-ops` | People operations - hiring, onboarding, PTO policies, performance management, employee relations |
 
 ## Usage Examples
+
+### First-Principles Thinking
+
+```bash
+# Strategic problem analysis
+agent majestic-company:first-principles "My business is plateauing at $1M ARR"
+
+# Decision making
+agent majestic-company:first-principles "Should I pivot from B2C to B2B?"
+
+# Product prioritization
+agent majestic-company:first-principles "My product roadmap has 50 items - help me cut 90%"
+
+# Clean slate thinking
+agent majestic-company:first-principles "My SaaS evolved randomly over 3 years - if I restarted today, what would I build?"
+```
+
+### People Operations
 
 ```bash
 # Create a structured interview kit
@@ -31,6 +50,37 @@ agent majestic-company:people-ops "Create 30/60/90 onboarding plan for remote Pr
 # Performance improvement plan
 agent majestic-company:people-ops "Create PIP template with coaching steps"
 ```
+
+## First-Principles Capabilities
+
+The first-principles agent uses 15 strategic prompts organized into 6 categories:
+
+### Foundation
+- Strip problems to objective reality ("physics")
+- Challenge existing assumptions
+- Break problems into fundamental components
+
+### Ideal State
+- Envision optimal solutions without cost constraints
+- Apply brutal prioritization (cut 90%)
+
+### Risk Analysis
+- Pre-mortem failure analysis
+- Challenge industry norms
+- Separate "actually impossible" from "feels impossible"
+
+### Breakthrough
+- Find minimum viable breakthrough (not MVP)
+- Clean slate thinking
+
+### Constraints & Politics
+- Identify hidden constraints
+- Remove social friction from problem-solving
+
+### Scale & Leverage
+- 10x acceleration thinking
+- Design for millions
+- Identify highest-leverage actions
 
 ## People-Ops Capabilities
 
