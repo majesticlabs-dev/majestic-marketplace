@@ -7,34 +7,34 @@
 - [Turbo Integration](#turbo-integration)
 - [Form Components](#form-components)
 - [Testing Patterns](#testing-patterns)
+- [File Organization](#file-organization)
+- [Preview Helpers](#preview-helpers)
 
 ## Slot Patterns
 
 ### Named Slots
 
 ```ruby
-class ModalComponent < ViewComponent::Base
+class ModalComponent < ApplicationViewComponent
   renders_one :header
   renders_one :body
   renders_one :footer
 
-  def initialize(title: nil, size: :medium)
-    @title = title
-    @size = size
-  end
+  option :title, default: -> { nil }
+  option :size, default: -> { :medium }
 end
 ```
 
 ```erb
 <%# app/components/modal_component.html.erb %>
-<div class="modal modal-<%= @size %>">
+<div class="modal modal-<%= size %>">
   <% if header %>
     <div class="modal-header">
       <%= header %>
     </div>
-  <% elsif @title %>
+  <% elsif title %>
     <div class="modal-header">
-      <h2><%= @title %></h2>
+      <h2><%= title %></h2>
     </div>
   <% end %>
 
@@ -57,14 +57,12 @@ end
 ### Typed Slots
 
 ```ruby
-class TabsComponent < ViewComponent::Base
+class TabsComponent < ApplicationViewComponent
   renders_many :tabs, "TabComponent"
 
-  class TabComponent < ViewComponent::Base
-    def initialize(title:, active: false)
-      @title = title
-      @active = active
-    end
+  class TabComponent < ApplicationViewComponent
+    option :title
+    option :active, default: -> { false }
   end
 end
 ```
@@ -84,7 +82,7 @@ end
 ### Lambda Slots
 
 ```ruby
-class ListComponent < ViewComponent::Base
+class ListComponent < ApplicationViewComponent
   renders_many :items, ->(item:, **options) do
     ListItemComponent.new(item: item, **options)
   end
@@ -96,13 +94,11 @@ end
 ### Rendering Collections
 
 ```ruby
-class ArticleListComponent < ViewComponent::Base
+class ArticleListComponent < ApplicationViewComponent
   with_collection_parameter :article
 
-  def initialize(article:, index: nil)
-    @article = article
-    @index = index
-  end
+  option :article
+  option :index, default: -> { nil }
 end
 ```
 
@@ -117,54 +113,68 @@ end
 ### Collection Counters
 
 ```ruby
-class ItemComponent < ViewComponent::Base
+class ItemComponent < ApplicationViewComponent
   with_collection_parameter :item
 
-  def initialize(item:, item_counter:, item_iteration:)
-    @item = item
-    @counter = item_counter      # 1-indexed position
-    @iteration = item_iteration  # Iteration object
-  end
+  option :item
+  option :item_counter, default: -> { nil }
+  option :item_iteration, default: -> { nil }
 
   def first?
-    @iteration.first?
+    item_iteration&.first?
   end
 
   def last?
-    @iteration.last?
+    item_iteration&.last?
   end
 end
 ```
 
 ## Polymorphic Components
 
-### Variant-Based Rendering
+### Variant-Based Rendering with Style Variants
 
 ```ruby
-class NotificationComponent < ViewComponent::Base
-  TYPES = {
-    info: { icon: "info-circle", bg: "bg-blue-50", text: "text-blue-800" },
-    success: { icon: "check-circle", bg: "bg-green-50", text: "text-green-800" },
-    warning: { icon: "exclamation", bg: "bg-yellow-50", text: "text-yellow-800" },
-    error: { icon: "x-circle", bg: "bg-red-50", text: "text-red-800" }
-  }.freeze
+class NotificationComponent < ApplicationViewComponent
+  include ViewComponentContrib::StyleVariants
 
-  def initialize(message:, type: :info, dismissible: true)
-    @message = message
-    @type = type
-    @dismissible = dismissible
-    @config = TYPES[@type]
+  option :message
+  option :type, default: -> { :info }
+  option :dismissible, default: -> { true }
+
+  style do
+    base { %w[p-4 rounded-lg flex items-center gap-3] }
+
+    variants {
+      type {
+        info { %w[bg-blue-50 text-blue-800] }
+        success { %w[bg-green-50 text-green-800] }
+        warning { %w[bg-yellow-50 text-yellow-800] }
+        error { %w[bg-red-50 text-red-800] }
+      }
+    }
+
+    defaults { { type: :info } }
   end
 
-  delegate :[], to: :@config
+  ICONS = {
+    info: "info-circle",
+    success: "check-circle",
+    warning: "exclamation",
+    error: "x-circle"
+  }.freeze
+
+  def icon
+    ICONS[type]
+  end
 end
 ```
 
 ```erb
-<div class="<%= self[:bg] %> <%= self[:text] %> p-4 rounded-lg">
-  <%= helpers.inline_svg_tag "icons/#{self[:icon]}.svg", class: "w-5 h-5" %>
-  <span><%= @message %></span>
-  <% if @dismissible %>
+<div class="<%= style(type:) %>">
+  <%= helpers.inline_svg_tag "icons/#{icon}.svg", class: "w-5 h-5" %>
+  <span><%= message %></span>
+  <% if dismissible %>
     <button data-action="notification#dismiss">
       <%= helpers.inline_svg_tag "icons/x.svg", class: "w-4 h-4" %>
     </button>
@@ -176,25 +186,26 @@ end
 
 ```ruby
 # Base component
-class BaseCardComponent < ViewComponent::Base
-  def initialize(title:, **options)
-    @title = title
-    @options = options
-  end
+class BaseCardComponent < ApplicationViewComponent
+  option :title
 end
 
 # Specialized variants
 class ArticleCardComponent < BaseCardComponent
+  option :article
+
   def initialize(article:, **options)
-    @article = article
     super(title: article.title, **options)
+    @article = article
   end
 end
 
 class UserCardComponent < BaseCardComponent
+  option :user
+
   def initialize(user:, **options)
-    @user = user
     super(title: user.name, **options)
+    @user = user
   end
 end
 ```
@@ -204,14 +215,12 @@ end
 ### Component with Turbo Frame
 
 ```ruby
-class EditableFieldComponent < ViewComponent::Base
-  def initialize(record:, field:)
-    @record = record
-    @field = field
-  end
+class EditableFieldComponent < ApplicationViewComponent
+  option :record
+  option :field
 
   def dom_id
-    "#{@record.model_name.singular}_#{@record.id}_#{@field}"
+    "#{record.model_name.singular}_#{record.id}_#{field}"
   end
 end
 ```
@@ -219,12 +228,12 @@ end
 ```erb
 <%= turbo_frame_tag dom_id do %>
   <% if editing? %>
-    <%= helpers.form_with model: @record, url: update_path do |f| %>
-      <%= f.text_field @field %>
+    <%= helpers.form_with model: record, url: update_path do |f| %>
+      <%= f.text_field field %>
       <%= f.submit "Save" %>
     <% end %>
   <% else %>
-    <span><%= @record.send(@field) %></span>
+    <span><%= record.send(field) %></span>
     <%= helpers.link_to "Edit", edit_path %>
   <% end %>
 <% end %>
@@ -233,20 +242,18 @@ end
 ### Component with Turbo Stream Target
 
 ```ruby
-class CommentsComponent < ViewComponent::Base
-  def initialize(commentable:)
-    @commentable = commentable
-  end
+class CommentsComponent < ApplicationViewComponent
+  option :commentable
 
   def target_id
-    "#{helpers.dom_id(@commentable)}_comments"
+    "#{helpers.dom_id(commentable)}_comments"
   end
 end
 ```
 
 ```erb
 <div id="<%= target_id %>">
-  <%= render CommentComponent.with_collection(@commentable.comments) %>
+  <%= render CommentComponent.with_collection(commentable.comments) %>
 </div>
 ```
 
@@ -255,18 +262,32 @@ end
 ### Input Component
 
 ```ruby
-class InputComponent < ViewComponent::Base
-  def initialize(form:, field:, type: :text, label: nil, hint: nil, **options)
-    @form = form
-    @field = field
-    @type = type
-    @label = label || field.to_s.humanize
-    @hint = hint
-    @options = options
+class InputComponent < ApplicationViewComponent
+  include ViewComponentContrib::StyleVariants
+
+  option :form
+  option :field
+  option :type, default: -> { :text }
+  option :label, default: -> { nil }
+  option :hint, default: -> { nil }
+
+  style do
+    base { "form-input" }
+
+    variants {
+      error {
+        yes { "border-red-500" }
+        no { "" }
+      }
+    }
+  end
+
+  def computed_label
+    label || field.to_s.humanize
   end
 
   def error_messages
-    @form.object.errors[@field]
+    form.object.errors[field]
   end
 
   def has_error?
@@ -277,14 +298,13 @@ end
 
 ```erb
 <div class="form-group <%= 'has-error' if has_error? %>">
-  <%= @form.label @field, @label, class: "form-label" %>
+  <%= form.label field, computed_label, class: "form-label" %>
 
-  <%= @form.send("#{@type}_field", @field,
-        class: "form-input #{has_error? ? 'border-red-500' : ''}",
-        **@options) %>
+  <%= form.send("#{type}_field", field,
+        class: style(error: has_error? ? :yes : :no)) %>
 
-  <% if @hint %>
-    <p class="form-hint"><%= @hint %></p>
+  <% if hint %>
+    <p class="form-hint"><%= hint %></p>
   <% end %>
 
   <% if has_error? %>
@@ -391,13 +411,13 @@ RSpec.describe "Articles", type: :system do
 end
 ```
 
-## Best Practices
+## File Organization
 
-### File Organization
+### Standard Organization
 
 ```
 app/components/
-├── application_component.rb    # Base class
+├── application_view_component.rb    # Base class
 ├── button_component.rb
 ├── button_component.html.erb
 ├── card_component.rb
@@ -410,33 +430,102 @@ app/components/
     └── modal_component.html.erb
 ```
 
-### Base Component
+### Sidecar Folder Organization (view_component-contrib)
+
+```
+app/components/
+├── application_view_component.rb
+├── button/
+│   ├── component.rb
+│   ├── component.html.erb
+│   ├── preview.rb
+│   └── component.css        # Optional scoped CSS
+├── card/
+│   ├── component.rb
+│   ├── component.html.erb
+│   └── preview.rb
+└── forms/
+    └── input/
+        ├── component.rb
+        ├── component.html.erb
+        └── preview.rb
+```
+
+Configure sidecar paths:
+```ruby
+# config/application.rb
+config.view_component.view_component_path = "app/components"
+config.view_component.component_parent_class = "ApplicationViewComponent"
+```
+
+## Preview Helpers
+
+### ViewComponentContrib::Preview Helpers
 
 ```ruby
-# app/components/application_component.rb
-class ApplicationComponent < ViewComponent::Base
-  include Turbo::FramesHelper
-  include Turbo::StreamsHelper
+class ButtonComponentPreview < ApplicationViewComponentPreview
+  # Auto-infers component from class name
+  def default
+    render_component(text: "Click me")
+  end
 
-  private
+  # Wrap in custom container
+  def with_dark_background
+    render_with(wrapper: :dark_container) do
+      render_component(text: "Light button", color: :secondary)
+    end
+  end
 
-  def helpers
-    ActionController::Base.helpers
+  # Multiple components in one preview
+  def all_variants
+    render_with(wrapper: :flex_row) do
+      safe_join([
+        render(ButtonComponent.new(text: "Primary", color: :primary)),
+        render(ButtonComponent.new(text: "Secondary", color: :secondary)),
+        render(ButtonComponent.new(text: "Danger", color: :danger))
+      ])
+    end
   end
 end
 ```
 
-### Stimulus Integration
+### Preview Configuration
+
+```ruby
+# config/application.rb
+config.view_component.preview_paths << Rails.root.join("spec/components/previews")
+config.view_component.preview_controller = "PreviewController"
+```
+
+## Stimulus Integration
 
 ```erb
 <%# Component with Stimulus controller %>
 <div data-controller="dropdown" class="relative">
   <button data-action="dropdown#toggle">
-    <%= @label %>
+    <%= label %>
   </button>
 
   <div data-dropdown-target="menu" class="hidden">
     <%= content %>
   </div>
 </div>
+```
+
+## Base Component with Common Helpers
+
+```ruby
+# app/components/application_view_component.rb
+class ApplicationViewComponent < ViewComponentContrib::Base
+  extend Dry::Initializer
+  include Turbo::FramesHelper
+  include Turbo::StreamsHelper
+
+  private
+
+  # Access all Rails helpers
+  def helpers
+    ActionController::Base.helpers
+  end
+end
 ```
