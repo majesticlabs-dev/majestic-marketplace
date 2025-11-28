@@ -16,6 +16,7 @@ The backlog manager provides a unified interface for tracking work items across 
 | **Files** | Local markdown in `docs/todos/` | Solo developers, simple projects |
 | **GitHub** | `gh` CLI | Teams using GitHub Issues |
 | **Linear** | MCP server | Teams using Linear |
+| **Beads** | `bd` CLI | Dependency-aware workflows, AI agents |
 
 ## Configuration
 
@@ -24,7 +25,7 @@ Configure your preferred backend in your project's CLAUDE.md:
 ```yaml
 ## Task Management
 
-backend: files  # Options: files, github, linear
+backend: files  # Options: files, github, linear, beads
 
 # GitHub configuration (when backend: github)
 # github_labels: ["backlog"]
@@ -33,6 +34,9 @@ backend: files  # Options: files, github, linear
 # Linear configuration (when backend: linear)
 # linear_team_id: TEAM-123
 # linear_project_id: PROJECT-456
+
+# Beads configuration (when backend: beads)
+# beads_prefix: myapp               # Optional: custom issue prefix
 ```
 
 **Default:** If no configuration is found, uses file-based backend.
@@ -98,6 +102,7 @@ When this skill is invoked:
    - `files` → `references/file-backend.md`
    - `github` → `references/github-backend.md`
    - `linear` → `references/linear-backend.md`
+   - `beads` → `references/beads-backend.md`
 3. **Follow backend-specific instructions** for operations
 
 ### Fallback Behavior
@@ -105,6 +110,7 @@ When this skill is invoked:
 If the configured backend is unavailable:
 - **GitHub unavailable** (gh not authenticated): Fall back to files
 - **Linear unavailable** (MCP not configured): Fall back to files
+- **Beads unavailable** (bd not installed or not initialized): Fall back to files
 - **Warn user** about the fallback
 
 ## Integration with Development Workflows

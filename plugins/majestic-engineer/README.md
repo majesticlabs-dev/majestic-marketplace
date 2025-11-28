@@ -165,6 +165,7 @@ The `backlog-manager` skill supports multiple task management backends. Choose b
 | **Files** | Solo/small projects, want git-tracked todos, no external dependencies |
 | **GitHub** | Already using GitHub Issues, team collaboration, want PR/issue linking |
 | **Linear** | Already using Linear, sprint planning, need project management features |
+| **Beads** | Dependency-aware workflows, AI agent coordination, need blocking/ready tracking |
 
 Configure your preferred system in your project's CLAUDE.md:
 
@@ -194,6 +195,17 @@ linear_team_id: YOUR-TEAM-ID
 
 Requires: Linear MCP server configured.
 
+### Beads
+
+```yaml
+## Task Management
+
+backend: beads
+beads_prefix: myapp  # Optional: custom issue prefix
+```
+
+Requires: beads CLI (`bd`) installed. See [External Dependencies](#external-dependencies).
+
 ### Copy to Your CLAUDE.md
 
 **Files:**
@@ -214,6 +226,12 @@ github_labels: ["backlog"]
 ## Task Management
 backend: linear
 linear_team_id: YOUR-TEAM-ID
+```
+
+**Beads:**
+```markdown
+## Task Management
+backend: beads
 ```
 
 ---
@@ -237,3 +255,11 @@ skill majestic-engineer:check-ci
 # Use git-worktree skill for parallel development
 skill majestic-engineer:git-worktree
 ```
+
+## External Dependencies
+
+Some features require external tools to be installed:
+
+| Tool | Required For | Installation |
+|------|--------------|--------------|
+| [beads](https://github.com/steveyegge/beads) | `backlog-manager` beads backend | `curl -fsSL https://raw.githubusercontent.com/steveyegge/beads/main/install.sh \| bash` |
