@@ -56,6 +56,15 @@ You're done: use this source from Droid. You don't need to add it in Claude Code
 | [majestic-rails](plugins/majestic-rails/README.md) | Ruby on Rails development tools (2 agents, 4 skills) |
 | [majestic-tools](plugins/majestic-tools/README.md) | Claude Code customization tools (10 commands) |
 
+## Recommended Plugins
+
+Third-party plugins that complement the Majestic suite:
+
+| Plugin | Description | Install |
+|--------|-------------|---------|
+| [osgrep](https://github.com/Ryandonofrio3/osgrep) | Semantic code search with natural language queries - find code by intent, not just keywords | `npm i -g osgrep && osgrep install-claude-code` |
+| [beads](https://github.com/steveyegge/beads) | Dependency-aware issue tracker - issues chained like beads with blocking relationships | `curl -fsSL https://raw.githubusercontent.com/steveyegge/beads/main/install.sh \| bash` |
+
 ## Project CLAUDE.md Setup
 
 Initialize a project-level CLAUDE.md with coding guidelines for your team:
