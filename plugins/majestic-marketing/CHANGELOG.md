@@ -2,6 +2,13 @@
 
 All notable changes to majestic-marketing will be documented in this file.
 
+## [2.16.0] - 2025-11-28
+
+### Added
+
+**Skills (1)**
+- `slogan-generator` - Generate and evaluate marketing slogans for any product or service. Creates 10-15 options across 6 categories (benefit-focused, emotional, wordplay, aspirational, problem-solution, brand promise), scores against 6 criteria, and recommends top 3 with rationale.
+
 ## [2.15.0] - 2025-11-28
 
 ### Added
