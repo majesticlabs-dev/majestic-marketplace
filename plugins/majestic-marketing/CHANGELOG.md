@@ -2,6 +2,13 @@
 
 All notable changes to majestic-marketing will be documented in this file.
 
+## [2.14.0] - 2025-11-28
+
+### Added
+
+**Skills (1)**
+- `case-study-writer` - Create compelling customer case studies for marketing and sales enablement. Guides through information gathering (customer details, challenge, solution, results) and produces polished case study documents in multiple formats (full, summary, social proof snippet).
+
 ## [2.13.0] - 2025-11-28
 
 ### Added
