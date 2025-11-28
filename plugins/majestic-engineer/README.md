@@ -158,7 +158,15 @@ flowchart LR
 
 ## Task Management Configuration
 
-The `backlog-manager` skill supports multiple task management backends. Configure your preferred system in your project's CLAUDE.md:
+The `backlog-manager` skill supports multiple task management backends. Choose based on your workflow:
+
+| Backend | Choose When |
+|---------|-------------|
+| **Files** | Solo/small projects, want git-tracked todos, no external dependencies |
+| **GitHub** | Already using GitHub Issues, team collaboration, want PR/issue linking |
+| **Linear** | Already using Linear, sprint planning, need project management features |
+
+Configure your preferred system in your project's CLAUDE.md:
 
 ### Files (Default)
 
@@ -185,6 +193,28 @@ linear_team_id: YOUR-TEAM-ID
 ```
 
 Requires: Linear MCP server configured.
+
+### Copy to Your CLAUDE.md
+
+**Files:**
+```markdown
+## Task Management
+backend: files
+```
+
+**GitHub:**
+```markdown
+## Task Management
+backend: github
+github_labels: ["backlog"]
+```
+
+**Linear:**
+```markdown
+## Task Management
+backend: linear
+linear_team_id: YOUR-TEAM-ID
+```
 
 ---
 

@@ -82,3 +82,4 @@ Available modules:
 - [Antrhopic Marketplace](https://github.com/anthropics/claude-code/tree/main/plugins)
 - [Every Marketplace](https://github.com/EveryInc/every-marketplace)
 - [Superpowers](https://github.com/obra/superpowers)
+- [Rails Development Skills](https://github.com/alec-c4/claude-skills-rails-dev)

@@ -2,6 +2,19 @@
 
 All notable changes to majestic-rails will be documented in this file.
 
+## [1.13.0] - 2025-11-27
+
+### Added
+
+- `viewcomponent-coder` skill - Build component-based UIs with ViewComponent, slots, variants, and Lookbook previews
+- `inertia-coder` skill - Build modern SPAs with Inertia.js + Rails using React, Vue, or Svelte (includes framework-specific reference docs)
+- `business-logic-coder` skill - Implement business logic with ActiveInteraction (typed operations, composition) and AASM state machines
+
+### Changed
+
+- Total skills increased from 5 to 8
+- Added keywords: viewcomponent, inertia, inertia-js, active-interaction, aasm, state-machine
+
 ## [1.12.0] - 2025-11-27
 
 ### Added
