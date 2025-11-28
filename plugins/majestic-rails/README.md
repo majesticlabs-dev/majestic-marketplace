@@ -1,6 +1,6 @@
 # Majestic Rails
 
-Ruby on Rails development tools. Includes 23 specialized agents, 3 commands, and 8 skills.
+Ruby on Rails development tools. Includes 23 specialized agents, 3 commands, and 9 skills.
 
 ## Installation
 
@@ -71,14 +71,15 @@ Invoke with: `skill majestic-rails:<name>`
 
 | Skill | Description |
 |-------|-------------|
-| `ruby-coder` | Write Ruby code following Ruby 3.x syntax and Sandi Metz's 4 Rules |
-| `rspec-coder` | Write comprehensive RSpec tests with proper describe/context organization |
-| `minitest-coder` | Write Minitest tests covering both traditional and spec styles |
+| `business-logic-coder` | Implement business logic with ActiveInteraction and AASM state machines |
 | `dhh-coder` | Code following DHH's standards for Rails elegance and simplicity |
 | `gem-builder` | Comprehensive guide for building production-quality Ruby gems |
-| `viewcomponent-coder` | Build component-based UIs with ViewComponent, slots, variants, and Lookbook |
 | `inertia-coder` | Build modern SPAs with Inertia.js + Rails using React, Vue, or Svelte |
-| `business-logic-coder` | Implement business logic with ActiveInteraction and AASM state machines |
+| `minitest-coder` | Write Minitest tests covering both traditional and spec styles |
+| `rspec-coder` | Write comprehensive RSpec tests with proper describe/context organization |
+| `ruby-coder` | Write Ruby code following Ruby 3.x syntax and Sandi Metz's 4 Rules |
+| `store-model-coder` | Wrap JSON-backed database columns with ActiveModel-like classes using store_model |
+| `viewcomponent-coder` | Build component-based UIs with ViewComponent, slots, variants, and Lookbook |
 
 ## Usage Examples
 

@@ -31,15 +31,15 @@
     },
     {
       "name": "majestic-rails",
-      "description": "Ruby on Rails development tools. Includes 23 specialized agents, 3 commands, and 8 skills.",
-      "version": "1.13.0",
+      "description": "Ruby on Rails development tools. Includes 23 specialized agents, 3 commands, and 9 skills.",
+      "version": "1.14.0",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
         "email": "marketplace@it.majesticlabs.dev"
       },
       "homepage": "https://github.com/majesticlabs-dev/majestic-marketplace/tree/master/plugins/majestic-rails",
-      "tags": ["ruby", "rails", "rspec", "minitest", "hotwire", "stimulus", "tailwind", "avo", "rubocop", "github", "ci", "active-job", "action-mailer", "solid-queue", "solid-cache", "postgresql", "sqlite", "database", "graphql", "action-policy", "authorization", "viewcomponent", "inertia", "active-interaction", "aasm"],
+      "tags": ["ruby", "rails", "rspec", "minitest", "hotwire", "stimulus", "tailwind", "avo", "rubocop", "github", "ci", "active-job", "action-mailer", "solid-queue", "solid-cache", "postgresql", "sqlite", "database", "graphql", "action-policy", "authorization", "viewcomponent", "inertia", "active-interaction", "aasm", "store-model"],
       "source": "./plugins/majestic-rails"
     },
     {
