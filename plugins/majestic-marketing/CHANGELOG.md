@@ -2,6 +2,13 @@
 
 All notable changes to majestic-marketing will be documented in this file.
 
+## [2.17.0] - 2025-11-28
+
+### Added
+
+**Skills (1)**
+- `content-calendar` - Generate a complete 30-day content calendar with viral content ideas, format variety, hooks, and CTAs tailored to your niche and platform. Includes content pillars (5 types with mix ratios), hook/CTA libraries by content type, batch creation workflow, and performance tracking templates.
+
 ## [2.16.0] - 2025-11-28
 
 ### Added
