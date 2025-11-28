@@ -30,6 +30,32 @@ Before writing, gather these from the user:
 
 If the user doesn't provide all inputs, ask for the missing ones before proceeding.
 
+## Conversation Starter
+
+If the user hasn't provided context, begin with:
+
+---
+
+I'll help you create landing page copy. Please share:
+
+**The Basics:**
+1. What product/service are you promoting? (name, price, offer details)
+2. What's the conversion goal? (lead, sale, demo, signup)
+3. Where is traffic coming from? (ads, email, organic - share the source copy if available)
+
+**Your Audience:**
+4. Who is this for? (role, situation, sophistication level)
+5. What's their current painful situation vs. dream outcome?
+6. What keeps them from taking action? (fears, objections, skepticism)
+
+**Your Proof:**
+7. Best testimonials or case studies? (specific results preferred)
+8. Any trust indicators? (logos, credentials, media mentions)
+
+I'll use this to create copy that matches your audience's awareness level.
+
+---
+
 ## Output Structure
 
 Produce copy in this order (a complete landing page):
@@ -91,6 +117,24 @@ Produce copy in this order (a complete landing page):
 - Lead with offer/deal
 - Focus on proof and objection handling
 - Shorter copy, faster to CTA
+
+## Audience Psychology Checklist
+
+When gathering inputs, ensure you understand:
+
+| Factor | Questions to Answer |
+|--------|---------------------|
+| **Current State** | What frustrations do they face daily? |
+| **Desired State** | What does success look like to them? |
+| **Hidden Fears** | What are they secretly afraid of? |
+| **Trust Barriers** | Why might they not believe you? |
+| **Decision Triggers** | What would make them act now? |
+
+Use these insights to:
+- Write problem sections that resonate emotionally
+- Choose headlines that match their awareness
+- Address objections before they arise
+- Create urgency that feels authentic
 
 ## Quality Standards
 
