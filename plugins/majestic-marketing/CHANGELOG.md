@@ -2,6 +2,13 @@
 
 All notable changes to majestic-marketing will be documented in this file.
 
+## [2.7.0] - 2025-11-28
+
+### Added
+
+**Skills (1)**
+- `sales-page` - High-converting sales page templates with headline formulas, bullet frameworks, and CTA psychology
+
 ## [2.6.0] - 2025-11-28
 
 ### Added
