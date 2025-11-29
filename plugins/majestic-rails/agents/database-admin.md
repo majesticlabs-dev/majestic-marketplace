@@ -145,15 +145,37 @@ production:
   prepared_statements: false  # Required for transaction pooling
 ```
 
-### Monitoring with pg_stat_statements
+### Monitoring Tools
 
-**Enable Extension:**
+**pg_stat_statements (Essential):**
 ```sql
 -- Add to postgresql.conf
 -- shared_preload_libraries = 'pg_stat_statements'
 
 CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
 ```
+
+**pghero gem (Recommended Dashboard):**
+```ruby
+# Gemfile
+gem "pghero"
+
+# config/routes.rb
+mount PgHero::Engine, at: "pghero"
+
+# Usage in code
+PgHero.slow_queries          # Queries by total time
+PgHero.missing_indexes       # Tables needing indexes
+PgHero.unused_indexes        # Candidates for removal
+PgHero.duplicate_indexes     # Redundant indexes
+PgHero.query_stats           # Full query statistics
+```
+
+**pg_analyze (Index Recommendations):**
+- Analyzes pg_stat_statements to suggest indexes
+- Install: `brew install pganalyze/tap/collector`
+- Cloud service or self-hosted collector
+- Automatic index recommendations from query patterns
 
 **Top Slow Queries:**
 ```sql
@@ -226,6 +248,58 @@ FROM pg_stat_user_tables
 WHERE n_dead_tup > 1000
 ORDER BY n_dead_tup DESC;
 ```
+
+### Autovacuum Tuning
+
+Default autovacuum is conservative. Tune for high-churn tables:
+
+**Key Parameters:**
+```sql
+-- Global settings (postgresql.conf)
+autovacuum_vacuum_scale_factor = 0.1    -- Default 0.2, trigger at 10% dead tuples
+autovacuum_analyze_scale_factor = 0.05  -- Default 0.1, keep statistics fresh
+autovacuum_vacuum_cost_limit = 2000     -- Default 200, faster vacuum
+
+-- Per-table settings for hot tables (logs, events, queues)
+ALTER TABLE events SET (
+  autovacuum_vacuum_scale_factor = 0.01,     -- Vacuum at 1% dead tuples
+  autovacuum_vacuum_cost_limit = 2000,       -- Higher throughput
+  autovacuum_vacuum_cost_delay = 2           -- Less delay between operations
+);
+```
+
+**Monitoring Autovacuum:**
+```sql
+-- Check last vacuum/analyze times
+SELECT
+  schemaname,
+  relname,
+  last_vacuum,
+  last_autovacuum,
+  last_analyze,
+  last_autoanalyze,
+  n_dead_tup
+FROM pg_stat_user_tables
+ORDER BY n_dead_tup DESC;
+
+-- Check if autovacuum is keeping up
+SELECT
+  relname,
+  n_dead_tup,
+  n_live_tup,
+  round(n_dead_tup::numeric / NULLIF(n_live_tup + n_dead_tup, 0) * 100, 1) AS dead_pct
+FROM pg_stat_user_tables
+WHERE n_dead_tup > 10000
+ORDER BY dead_pct DESC;
+
+-- Active autovacuum workers
+SELECT * FROM pg_stat_progress_vacuum;
+```
+
+**Warning Signs:**
+- Dead tuple ratio > 10% indicates vacuum falling behind
+- `last_autovacuum` older than expected for table's write rate
+- Autovacuum workers constantly at max (`autovacuum_max_workers`)
 
 **Index Maintenance:**
 ```sql
@@ -324,6 +398,107 @@ SELECT
   sum(heap_blks_hit) / NULLIF(sum(heap_blks_hit) + sum(heap_blks_read), 0) AS cache_hit_ratio
 FROM pg_statio_user_tables;
 ```
+
+### Data Lifecycle Management
+
+Manage data growth to maintain performance:
+
+**Archival Strategies:**
+```ruby
+# Move cold data to archive tables
+class ArchiveOldOrders
+  RETENTION_DAYS = 365
+
+  def call
+    cutoff = RETENTION_DAYS.days.ago
+
+    ActiveRecord::Base.transaction do
+      # Copy to archive
+      ActiveRecord::Base.connection.execute(<<~SQL)
+        INSERT INTO orders_archive
+        SELECT * FROM orders
+        WHERE created_at < '#{cutoff.to_fs(:db)}'
+      SQL
+
+      # Delete from main table
+      Order.where("created_at < ?", cutoff).delete_all
+    end
+  end
+end
+```
+
+**Table Partitioning (PostgreSQL 10+):**
+```sql
+-- Create partitioned table for time-series data
+CREATE TABLE events (
+  id bigserial,
+  event_type varchar(50),
+  payload jsonb,
+  created_at timestamptz NOT NULL
+) PARTITION BY RANGE (created_at);
+
+-- Create monthly partitions
+CREATE TABLE events_2024_01 PARTITION OF events
+  FOR VALUES FROM ('2024-01-01') TO ('2024-02-01');
+
+CREATE TABLE events_2024_02 PARTITION OF events
+  FOR VALUES FROM ('2024-02-01') TO ('2024-03-01');
+
+-- Drop old partitions (instant, no vacuum needed)
+DROP TABLE events_2023_01;
+```
+
+**Materialized Views:**
+```sql
+-- Pre-compute expensive aggregations
+CREATE MATERIALIZED VIEW daily_sales_summary AS
+SELECT
+  date_trunc('day', created_at) AS day,
+  product_id,
+  COUNT(*) as order_count,
+  SUM(total) as revenue
+FROM orders
+GROUP BY 1, 2;
+
+-- Refresh without locking reads
+REFRESH MATERIALIZED VIEW CONCURRENTLY daily_sales_summary;
+
+-- Schedule refresh (use pg_cron or Rails task)
+-- Run during low-traffic: 3am daily
+```
+
+**Rollups for Reporting:**
+```ruby
+# Aggregate detailed data into summary tables
+class DailyMetricsRollup
+  def call(date = Date.yesterday)
+    metrics = calculate_metrics(date)
+
+    DailyMetric.upsert(
+      { date: date, **metrics },
+      unique_by: :date
+    )
+
+    # Optionally delete raw data older than retention period
+    RawEvent.where("created_at < ?", 30.days.ago).delete_all
+  end
+
+  private
+
+  def calculate_metrics(date)
+    {
+      page_views: PageView.where(created_at: date.all_day).count,
+      unique_users: PageView.where(created_at: date.all_day).distinct.count(:user_id),
+      # ... more aggregations
+    }
+  end
+end
+```
+
+**Soft Delete vs Hard Delete:**
+- Soft delete (discard gem): Keeps data, grows table, slows queries
+- Hard delete: Requires careful FK handling, creates dead tuples
+- Best practice: Soft delete → archive after N days → hard delete from archive
 
 ## SQLite Administration
 

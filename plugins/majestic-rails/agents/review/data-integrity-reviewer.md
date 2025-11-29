@@ -12,6 +12,36 @@ Your mission is to protect data integrity, ensure migration safety, and maintain
 
 ### 1. Migration Safety
 
+**Safety-Linted SQL Tools:**
+
+Use automated tools to catch dangerous migrations before they run:
+
+```ruby
+# Gemfile - Add these for migration safety
+gem "strong_migrations"      # Catches dangerous operations automatically
+gem "database_consistency"   # Validates model constraints match DB
+```
+
+**strong_migrations gem:**
+- Blocks dangerous operations by default (adding NOT NULL without default, removing columns)
+- Provides safe alternatives with clear error messages
+- Customizable for your deployment process
+
+**database_consistency gem:**
+- Validates AR validations match database constraints
+- Catches: missing unique indexes for uniqueness validations, missing NOT NULL for presence
+- Run: `bundle exec database_consistency`
+
+**squawk (PostgreSQL raw SQL):**
+- Lints SQL files for production safety
+- Install: `npm install -g squawk-cli`
+- Catches: missing `CONCURRENTLY`, risky type changes, missing timeouts
+
+**anchor_migrations gem:**
+- DDL lock timeout protection
+- Automatic retry with exponential backoff
+- Prevents migrations from blocking production traffic
+
 **Reversibility:**
 ```ruby
 # PROBLEM: Irreversible migration

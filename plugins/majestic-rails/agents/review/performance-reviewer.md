@@ -51,6 +51,39 @@ User.all.select { |u| u.active? }
 User.where(active: true)
 ```
 
+**Counter Caches:**
+```ruby
+# PROBLEM: COUNT(*) on every page load
+def posts_count
+  user.posts.count  # Hits database every time
+end
+
+# SOLUTION: Counter cache column
+# Migration: add_column :users, :posts_count, :integer, default: 0
+class Post < ApplicationRecord
+  belongs_to :user, counter_cache: true
+end
+
+# For complex cases, use counter_culture gem
+# gem "counter_culture"
+counter_culture :user, column_name: :published_posts_count,
+                       column_names: { Post.published => :published_posts_count }
+```
+
+**Prepared Statements:**
+```ruby
+# Rails enables prepared statements by default for PostgreSQL
+# Reduces query parse overhead for repeated queries
+
+# Check if enabled
+ActiveRecord::Base.connection.prepared_statements  # => true
+
+# Disable for PgBouncer transaction pooling
+# database.yml
+production:
+  prepared_statements: false
+```
+
 ### 2. Algorithmic Complexity
 
 - Identify time complexity (Big O) for all algorithms
@@ -199,6 +232,72 @@ end
 
 send_notifications  # Outside transaction
 update_analytics    # Outside transaction
+```
+
+### 7. Defensive Patterns
+
+Protect your application from runaway queries and connection exhaustion.
+
+**strict_loading (Prevent N+1 at Runtime):**
+```ruby
+# Raises ActiveRecord::StrictLoadingViolationError on lazy load
+user = User.strict_loading.find(id)
+user.posts  # Raises! Must use includes/preload
+
+# Enable globally in development
+# config/environments/development.rb
+config.active_record.strict_loading_by_default = true
+
+# Per-model default
+class User < ApplicationRecord
+  self.strict_loading_by_default = true
+end
+
+# Per-association
+has_many :posts, strict_loading: true
+```
+
+**Query Timeouts:**
+```ruby
+# Global timeout in database.yml (PostgreSQL)
+production:
+  variables:
+    statement_timeout: 30000  # 30 seconds in milliseconds
+
+# Per-query timeout
+ActiveRecord::Base.connection.execute("SET LOCAL statement_timeout = '5s'")
+User.where(complex_condition).to_a
+
+# Gem: rack-timeout for request-level timeout
+# gem "rack-timeout"
+Rack::Timeout.service_timeout = 15  # seconds
+```
+
+**Idle Transaction Timeouts:**
+```ruby
+# Idle transactions hold locks and prevent vacuum
+# PostgreSQL setting (postgresql.conf or per-connection)
+idle_in_transaction_session_timeout = '60s'
+
+# Monitor idle transactions
+# SELECT * FROM pg_stat_activity WHERE state = 'idle in transaction';
+
+# Rails database.yml
+production:
+  variables:
+    idle_in_transaction_session_timeout: 60000  # 60 seconds
+```
+
+**Connection Pool Protection:**
+```ruby
+# Checkout timeout prevents indefinite waits
+production:
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  checkout_timeout: 5  # seconds - fail fast if no connection available
+
+# Monitor pool usage
+ActiveRecord::Base.connection_pool.stat
+# => { size: 5, connections: 3, busy: 1, dead: 0, idle: 2, waiting: 0, checkout_timeout: 5 }
 ```
 
 ## Performance Benchmarks

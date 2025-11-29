@@ -2,6 +2,15 @@
 
 All notable changes to majestic-rails will be documented in this file.
 
+## [1.14.1] - 2025-11-29
+
+### Enhanced
+
+- `database-optimizer` agent - Added mechanical sympathy section (pages/buffers/MVCC/HOT updates), keyset pagination strategies, pagy gem, query source logging
+- `database-admin` agent - Added pghero gem integration, autovacuum tuning, data lifecycle management (archival, partitioning, materialized views, rollups)
+- `data-integrity-reviewer` agent - Added safety-linted SQL tools section (strong_migrations, database_consistency, squawk, anchor_migrations)
+- `performance-reviewer` agent - Added defensive patterns (strict_loading, query timeouts, idle transaction timeouts), counter caches, prepared statements
+
 ## [1.14.0] - 2025-11-27
 
 ### Added
