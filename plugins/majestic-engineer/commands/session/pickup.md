@@ -1,7 +1,7 @@
 ---
 description: Resume work from a previous handoff session stored in .claude/handoffs
 allowed-tools: Bash, Read, AskUserQuestion
-model: haiku
+model: claude-haiku-4-5-20251001
 ---
 
 Resumes work from a previous handoff session which are stored in `.claude/handoffs`.

@@ -1,7 +1,7 @@
 ---
 description: Create a detailed handoff plan for continuing work in a new session
 allowed-tools: Read, Write, AskUserQuestion
-model: haiku
+model: claude-haiku-4-5-20251001
 ---
 
 Creates a detailed handoff plan of the conversation for continuing the work in a new session.

@@ -1,6 +1,6 @@
 ---
 description: List all available tools with detailed information
-model: haiku
+model: claude-haiku-4-5-20251001
 ---
 
 # How to list all available tools

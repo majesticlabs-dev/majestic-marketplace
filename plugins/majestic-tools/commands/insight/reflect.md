@@ -1,7 +1,7 @@
 ---
 allowed-tools: Bash(git *), Read, Edit, AskUserQuestion
 description: Reflect on conversation history and suggest improvements to AGENTS.md based on patterns, feedback, and lessons learned.
-model: haiku
+model: claude-haiku-4-5-20251001
 ---
 
 # Reflect on Conversation

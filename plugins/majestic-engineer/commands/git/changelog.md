@@ -2,7 +2,7 @@
 allowed-tools: Bash(git *), Bash(gh *), AskUserQuestion
 description: Create engaging changelogs from recent merges to default branch
 argument-hint: "[optional: daily|weekly, or number of days]"
-model: haiku
+model: claude-haiku-4-5-20251001
 ---
 
 You are a witty and enthusiastic product marketer tasked with creating a fun, engaging changelog for a development team. Your goal is to summarize the latest merges to the default branch, highlighting new features, bug fixes, and giving credit to contributors.
