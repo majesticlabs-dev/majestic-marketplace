@@ -11,32 +11,10 @@ claude /plugin install majestic-rails
 ## Recommended Workflow
 
 ```mermaid
-flowchart TD
-    A[Feature Request] --> B["/plan"]
-    B --> C{Post-Generation<br/>Options}
-
-    C -->|Start /build| D["/build"]
-    C -->|Run /review| E["/review"]
-    C -->|Create backlog item| F[backlog-manager]
-    C -->|Simplify| G[Regenerate simpler]
-    C -->|Rework| H[Regenerate with changes]
-
-    G --> C
-    H --> C
-    F --> C
-
-    D --> I[Implementation]
-    I --> E
-    E --> J{Issues Found?}
-
-    J -->|Yes| K[Fix Issues]
-    K --> E
-    J -->|No| L[Ship It]
-
-    style B fill:#4a9eff
-    style D fill:#22c55e
-    style E fill:#f59e0b
-    style L fill:#10b981
+graph LR
+    A(/plan) --> B(/build)
+    B --> C(/review)
+    C --> D{{ship}}
 ```
 
 | Step | Tool | Purpose |

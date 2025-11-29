@@ -11,37 +11,12 @@ claude /plugin install majestic-engineer
 ## Recommended Workflow
 
 ```mermaid
-flowchart LR
-    subgraph Define["1. Define"]
-        PRD["workflows:prd"]
-    end
-
-    subgraph Design["2. Design"]
-        ARCH["plan:architect"]
-        REVIEW["plan:plan-review"]
-    end
-
-    subgraph Build["3. Build"]
-        IMPL["Implementation"]
-        TEST["qa:test-create"]
-        SEC["qa:security-review"]
-    end
-
-    subgraph Ship["4. Ship"]
-        COMMIT["git:commit"]
-        PR["git:create-pr"]
-    end
-
-    PRD -->|"WHAT & WHY"| ARCH
-    ARCH -->|"HOW"| REVIEW
-    REVIEW -->|"Issues found"| ARCH
-    REVIEW -->|"Approved"| IMPL
-    IMPL --> TEST
-    TEST -->|"Failing"| IMPL
-    TEST -->|"Passing"| SEC
-    SEC -->|"Issues"| IMPL
-    SEC -->|"Clear"| COMMIT
-    COMMIT --> PR
+graph LR
+    A(/prd) --> B{{architect}}
+    B --> C{{plan-review}}
+    C --> D[Build]
+    D --> E{{test-create}}
+    E --> F{{ship}}
 ```
 
 | Step | Tool | Purpose |
