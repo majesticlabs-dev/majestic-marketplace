@@ -268,3 +268,9 @@ Follow these patterns for commit messages:
 _This section captures important learnings as we work on this repository._
 
 **Learning:** Stick to the official spec. Custom fields may confuse users or break compatibility with future versions.
+
+**Learning:** When updating files to add new patterns or tools, always preserve existing content. Don't simplify or remove example formats, question templates, or detailed instructions. Add the new pattern alongside existing content, not as a replacement.
+
+**Learning:** Interactive skills (those with "Conversation Starter" or "Begin by asking:" patterns) should include `AskUserQuestion` in their `allowed-tools:` frontmatter and use the format: "Use `AskUserQuestion` to gather initial context. Begin by asking:"
+
+**Learning:** Mermaid diagrams use different node shapes to distinguish component types: `()` creates stadium/rounded nodes for commands, `{{}}` creates hexagons for agents, and `[]` creates rectangles for manual actions or external steps.
