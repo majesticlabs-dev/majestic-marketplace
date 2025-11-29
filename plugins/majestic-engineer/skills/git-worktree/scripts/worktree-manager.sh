@@ -46,6 +46,36 @@ ensure_gitignore() {
     fi
 }
 
+# Copy .env files to worktree (excludes .env.example)
+copy_env_files() {
+    local source_dir="$1"
+    local target_dir="$2"
+
+    local env_files
+    env_files=$(find "$source_dir" -maxdepth 1 -name ".env*" -type f ! -name ".env.example" 2>/dev/null)
+
+    if [ -z "$env_files" ]; then
+        return 0
+    fi
+
+    echo ""
+    echo -e "${BLUE}Copying environment files...${NC}"
+
+    while IFS= read -r env_file; do
+        local filename
+        filename=$(basename "$env_file")
+        local target_file="$target_dir/$filename"
+
+        if [ -f "$target_file" ]; then
+            cp "$target_file" "$target_file.backup"
+            echo -e "  ${YELLOW}↺${NC} $filename (backed up existing)"
+        else
+            echo -e "  ${GREEN}✓${NC} $filename"
+        fi
+        cp "$env_file" "$target_file"
+    done <<< "$env_files"
+}
+
 # Create worktree
 cmd_create() {
     local branch_name="$1"
@@ -90,6 +120,9 @@ cmd_create() {
         git worktree add "$worktree_path" -b "$branch_name" "origin/$source_branch" 2>/dev/null || \
             git worktree add "$worktree_path" -b "$branch_name" "$source_branch"
     fi
+
+    # Copy environment files
+    copy_env_files "$repo_root" "$worktree_path"
 
     echo ""
     echo -e "${GREEN}Worktree created successfully!${NC}"
@@ -375,6 +408,37 @@ cmd_cleanup() {
     echo -e "${GREEN}Cleanup complete!${NC}"
 }
 
+# Copy env files to worktree
+cmd_copy_env() {
+    local worktree_path="${1:-}"
+    local repo_root
+    repo_root=$(get_repo_root)
+
+    # Auto-detect current worktree if not specified
+    if [ -z "$worktree_path" ]; then
+        local current_dir
+        current_dir=$(pwd)
+        if [ "$current_dir" != "$repo_root" ] && [ -f "$current_dir/.git" ]; then
+            worktree_path="$current_dir"
+        else
+            echo -e "${RED}Error: Not in a worktree. Specify worktree path or branch name.${NC}"
+            echo "Usage: worktree-manager.sh copy-env [worktree-path|branch-name]"
+            exit 1
+        fi
+    elif [ ! -d "$worktree_path" ]; then
+        # Try resolving as branch name
+        worktree_path="$repo_root/.worktrees/$worktree_path"
+        if [ ! -d "$worktree_path" ]; then
+            echo -e "${RED}Error: Worktree not found: $1${NC}"
+            exit 1
+        fi
+    fi
+
+    copy_env_files "$repo_root" "$worktree_path"
+    echo ""
+    echo -e "${GREEN}Environment files copied to: $worktree_path${NC}"
+}
+
 # Show help
 cmd_help() {
     echo "Git Worktree Manager"
@@ -386,6 +450,7 @@ cmd_help() {
     echo "  list                       List all worktrees"
     echo "  switch <branch|path>       Switch to worktree"
     echo "  cleanup [--force]          Remove merged/unused worktrees"
+    echo "  copy-env [worktree]        Copy .env files to worktree"
     echo "  help                       Show this help"
     echo ""
     echo "Worktrees are stored in .worktrees/ within the repository."
@@ -408,6 +473,9 @@ main() {
             ;;
         cleanup|clean)
             cmd_cleanup "${1:-}"
+            ;;
+        copy-env|env)
+            cmd_copy_env "${1:-}"
             ;;
         help|--help|-h)
             cmd_help

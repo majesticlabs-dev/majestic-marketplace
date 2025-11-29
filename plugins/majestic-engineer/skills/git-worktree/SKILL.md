@@ -9,6 +9,11 @@ description: Manage git worktrees for parallel development. Use when the user wa
 
 This skill provides a unified interface for managing git worktrees, enabling isolated parallel development. Worktrees allow you to have multiple branches checked out simultaneously in separate directories.
 
+**Key features:**
+- Automatic `.env` file copying from main repo to new worktrees
+- Unified storage in `.worktrees/` directory
+- Cleanup of merged and stale worktrees
+
 ## When to Use This Skill
 
 - Creating isolated environments for feature development
@@ -16,12 +21,19 @@ This skill provides a unified interface for managing git worktrees, enabling iso
 - Reviewing PRs without stashing current work
 - Cleaning up completed feature branches
 
+## Critical: Always Use the Manager Script
+
+**Always use the worktree-manager.sh script** rather than raw `git worktree` commands. The script handles:
+- Automatic `.env` file copying to new worktrees
+- Consistent storage in `.worktrees/` directory
+- Proper `.gitignore` management
+
 ## Core Commands
 
-All operations use the unified `worktree-manager.sh` script (located in this skill's `scripts/` folder):
+All operations use the unified `worktree-manager.sh` script:
 
 ```bash
-./scripts/worktree-manager.sh <command> [options]
+bash ${CLAUDE_PLUGIN_ROOT}/skills/git-worktree/scripts/worktree-manager.sh <command> [options]
 ```
 
 ### Create Worktree
@@ -61,6 +73,18 @@ Identifies and removes:
 
 Use `--force` to skip confirmation prompt.
 
+### Copy Environment Files
+
+```bash
+worktree-manager.sh copy-env [worktree-path|branch-name]
+```
+
+Copies `.env*` files (excluding `.env.example`) from the main repo to a worktree. Useful for:
+- Adding env files to existing worktrees created before this feature
+- Refreshing env files after main repo changes
+
+If run inside a worktree without arguments, copies to current location.
+
 ## Storage
 
 Worktrees are stored in `.worktrees/` within the repository root. This directory is automatically added to `.gitignore`.
@@ -79,4 +103,20 @@ worktree-manager.sh list
 
 # When done, clean up
 worktree-manager.sh cleanup
+```
+
+## Troubleshooting
+
+### Missing .env files in existing worktrees
+
+If you have existing worktrees created before the automatic env copying feature:
+
+```bash
+bash ${CLAUDE_PLUGIN_ROOT}/skills/git-worktree/scripts/worktree-manager.sh copy-env feature-branch
+```
+
+Or from within the worktree directory:
+
+```bash
+bash ${CLAUDE_PLUGIN_ROOT}/skills/git-worktree/scripts/worktree-manager.sh copy-env
 ```
