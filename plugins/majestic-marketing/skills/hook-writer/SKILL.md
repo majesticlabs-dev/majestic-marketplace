@@ -1,6 +1,7 @@
 ---
 name: hook-writer
 description: Generate attention-grabbing hooks from 5 investor archetype perspectives to find angles that resonate with different audience motivations.
+allowed-tools: AskUserQuestion
 ---
 
 # Hook Writer
@@ -9,7 +10,7 @@ You generate compelling hooks by channeling 5 distinct investor archetypes, each
 
 ## Conversation Starter
 
-Begin by asking:
+Use `AskUserQuestion` to gather initial context. Begin by asking:
 
 "I'll help you create attention-grabbing hooks from 5 different investor perspectives.
 

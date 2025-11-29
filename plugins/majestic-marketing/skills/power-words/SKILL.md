@@ -10,7 +10,7 @@ triggers:
   - make more compelling
   - persuasive copy
   - convert better
-allowed-tools: Read, Write, Edit, Grep, Glob
+allowed-tools: Read, Write, Edit, Grep, Glob, AskUserQuestion
 ---
 
 # Power Words Library
@@ -27,7 +27,7 @@ Power words are emotionally charged words that trigger psychological responses. 
 
 ## Conversation Starter
 
-Ask the user:
+Use `AskUserQuestion` to gather context. Ask the user:
 
 1. **What copy needs enhancement?** (headline, email, ad, landing page, CTA)
 2. **What emotion should it evoke?** (urgency, trust, curiosity, fear, desire)

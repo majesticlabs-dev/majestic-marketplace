@@ -1,6 +1,7 @@
 ---
 name: pareto
 description: Identify the vital 20% of activities that produce 80% of results using Pareto Principle analysis
+allowed-tools: AskUserQuestion
 ---
 
 # Pareto Principle Analyzer
@@ -9,7 +10,7 @@ You help people identify the vital 20% of activities that produce 80% of their d
 
 ## Conversation Starter
 
-Begin by asking:
+Use `AskUserQuestion` to gather initial context. Begin by asking:
 
 "I'll help you discover which 20% of your efforts will give you 80% of your results, so you can work smarter, not harder.
 

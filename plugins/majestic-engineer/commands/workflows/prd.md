@@ -2,6 +2,7 @@
 name: prd
 description: Create a Product Requirements Document (PRD) for a new product or feature
 argument-hint: "[product or feature description]"
+allowed-tools: Read, Write, Edit, WebSearch, WebFetch, AskUserQuestion
 ---
 
 # Create a Product Requirements Document (PRD)
@@ -16,26 +17,24 @@ $ARGUMENTS
 
 ## Phase 1: Clarifying Questions
 
-Before generating the PRD, ask the user 3-5 essential clarifying questions. Use this numbered format with lettered options for easy response:
+Before generating the PRD, use `AskUserQuestion` to ask 3-5 essential clarifying questions.
 
 <thinking>
 Analyze the product description to identify gaps in understanding. Focus on questions that would significantly impact the PRD's clarity. Only ask questions when the answer isn't reasonably inferable from the description.
 </thinking>
 
-**Format your questions like this:**
+**Example question format:**
 
 ```
 1. What is the primary problem this solves?
-   A. [Specific problem option]
-   B. [Another problem option]
-   C. [Third option]
-   D. Other (please specify)
+   - [Specific problem option]
+   - [Another problem option]
+   - [Third option]
 
 2. Who is the primary user?
-   A. [User type option]
-   B. [Another user type]
-   C. [Third option]
-   D. Other (please specify)
+   - [User type option]
+   - [Another user type]
+   - [Third option]
 ```
 
 **Question areas to consider (pick 3-5 most critical):**
@@ -45,6 +44,8 @@ Analyze the product description to identify gaps in understanding. Focus on ques
 - **MVP Boundaries**: What's the absolute minimum to ship? What can wait for later?
 - **Success Criteria**: How will we measure success? What metrics matter?
 - **Technical Context**: Any existing systems to integrate with? Constraints?
+
+Use `AskUserQuestion` with multiple questions (up to 4) and provide clear options for each. The tool automatically includes an "Other" option for custom responses.
 
 **IMPORTANT:** Wait for user responses before proceeding to Phase 2.
 
@@ -267,12 +268,7 @@ After generating the balanced PRD:
 
 1. **Save the file** to `docs/prd/prd-[feature-name].md`
 2. **Present summary** of what was created
-3. **Ask the user**:
-
-```
-PRD created at: docs/prd/prd-[feature-name].md
-
-Would you like me to expand this PRD with additional technical depth?
+3. Use `AskUserQuestion` to offer expansion options:
 
 **Technical expansion includes:**
 - API Specifications (endpoints, schemas, auth)
@@ -280,11 +276,10 @@ Would you like me to expand this PRD with additional technical depth?
 - Security Considerations (AuthN/AuthZ, OWASP mapping)
 - Performance & Scalability details (SLOs, scaling strategy)
 
-Reply with:
-- **"expand"** to add technical sections
-- **"done"** if the balanced PRD is sufficient
-- Or provide feedback on specific sections to revise
-```
+**Options:**
+- **Expand with technical depth** - Add the technical sections listed above
+- **Done** - The balanced PRD is sufficient
+- **Revise sections** - Provide feedback on specific sections to change
 
 ---
 
@@ -404,19 +399,12 @@ erDiagram
 
 ## Phase 5: Create Backlog Items (Optional)
 
-After completing the PRD (and optional technical expansion), offer to create backlog items:
+After completing the PRD (and optional technical expansion), use `AskUserQuestion` to offer backlog creation:
 
-```
-PRD complete. Would you like me to create backlog items from the user stories?
-
-This will create items in your configured task system.
-- **Backend:** [read from CLAUDE.md, or "files" if not configured]
-
-Reply with:
-- **"yes"** - Create items from Must Have features only
-- **"all"** - Create items from all prioritized features
-- **"no"** - Skip backlog creation
-```
+**Options:**
+- **Create Must Have items** - Create backlog items from Must Have features only
+- **Create all items** - Create items from all prioritized features
+- **Skip** - Don't create backlog items
 
 **If user accepts:**
 

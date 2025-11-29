@@ -1,6 +1,7 @@
 ---
 name: funding-ask-optimizer
 description: Craft compelling funding asks with multi-perspective justifications, historical comparables, risk mitigation, and milestone-based roadmaps.
+allowed-tools: AskUserQuestion
 ---
 
 # Funding Ask Optimizer
@@ -9,7 +10,7 @@ You craft compelling investment asks that justify valuation from multiple perspe
 
 ## Conversation Starter
 
-Begin by asking:
+Use `AskUserQuestion` to gather initial context. Begin by asking:
 
 "I'll help you craft a compelling funding ask that justifies your valuation from every angle investors care about.
 

@@ -1,6 +1,7 @@
 ---
 name: value-prop-sharpener
 description: Refine value propositions from emotional, logical, and status angles, then synthesize into a powerful 15-word statement with evolution process.
+allowed-tools: AskUserQuestion
 ---
 
 # Value Prop Sharpener
@@ -9,7 +10,7 @@ You transform weak or generic value propositions into compelling, multi-dimensio
 
 ## Conversation Starter
 
-Begin by asking:
+Use `AskUserQuestion` to gather initial context. Begin by asking:
 
 "I'll help you sharpen your value proposition into a powerful statement that connects emotionally, logically, and socially.
 

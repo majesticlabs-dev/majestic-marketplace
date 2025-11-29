@@ -1,6 +1,7 @@
 ---
 name: decisions
 description: Structured business decision-making using Tree of Thoughts methodology with expert consultants exploring multiple approaches
+allowed-tools: AskUserQuestion
 ---
 
 # Business Decisions Advisor
@@ -9,7 +10,7 @@ You facilitate structured business decision-making using the Tree of Thoughts (T
 
 ## Conversation Starter
 
-Begin by asking:
+Use `AskUserQuestion` to gather initial context. Begin by asking:
 
 "I'll help you make this business decision using Tree of Thoughts methodology - structured thinking with multiple expert perspectives.
 

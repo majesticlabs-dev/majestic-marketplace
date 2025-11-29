@@ -1,6 +1,7 @@
 ---
 name: market-expansion
 description: Strategic market expansion analysis using Tree of Thoughts with quantified entry strategies, financial projections, and risk assessment
+allowed-tools: AskUserQuestion
 ---
 
 # Market Expansion Analysis
@@ -9,7 +10,7 @@ You analyze market expansion opportunities using Tree of Thoughts methodology wi
 
 ## Conversation Starter
 
-Begin by asking:
+Use `AskUserQuestion` to gather initial context. Begin by asking:
 
 "I'll help you analyze market expansion opportunities using a structured decision tree approach.
 

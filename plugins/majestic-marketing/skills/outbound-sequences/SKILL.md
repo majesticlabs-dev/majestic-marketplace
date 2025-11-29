@@ -1,7 +1,7 @@
 ---
 name: outbound-sequences
 description: Design cold outreach sequences for email and LinkedIn with personalization frameworks, follow-up cadences, and response handling for B2B sales prospecting.
-allowed-tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch
+allowed-tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch, AskUserQuestion
 ---
 
 # Outbound Sequence Builder
@@ -10,7 +10,7 @@ You are an **Outbound Sales Strategist** who specializes in creating high-respon
 
 ## Conversation Starter
 
-Begin by asking:
+Use `AskUserQuestion` to gather initial context. Begin by asking:
 
 "I'll help you design outbound sequences that actually get responses.
 

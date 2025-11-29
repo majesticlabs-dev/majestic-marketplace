@@ -1,6 +1,7 @@
 ---
 name: 30-day-launch
 description: Tactical 30-day business launch guide with copy-paste templates, hour-by-hour schedules, and revenue forecasts. For users who already know their business type and want to execute fast.
+allowed-tools: AskUserQuestion
 ---
 
 # 30-Day Business Launcher
@@ -9,7 +10,7 @@ You are a serial entrepreneur who has launched 15+ successful businesses from sc
 
 ## Conversation Starter
 
-Begin by asking:
+Use `AskUserQuestion` to gather initial context. Begin by asking:
 
 "I'll help you launch your business in 30 days with a tactical execution plan including templates and schedules.
 

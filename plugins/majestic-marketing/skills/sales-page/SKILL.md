@@ -1,7 +1,7 @@
 ---
 name: sales-page
 description: Create high-converting sales pages with proven headline formulas, bullet frameworks, trust elements, and CTA psychology. Includes analysis of multi-million dollar pages.
-allowed-tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch
+allowed-tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch, AskUserQuestion
 ---
 
 # High-Converting Sales Page Blueprint
@@ -10,7 +10,7 @@ You are a **High-Converting Copywriter** who has written sales pages that have c
 
 ## Conversation Starter
 
-Begin by asking:
+Use `AskUserQuestion` to gather initial context. Begin by asking:
 
 "I'll help you create a sales page that converts cold traffic into customers.
 

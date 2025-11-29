@@ -1,7 +1,7 @@
 ---
 name: proposal-writer
 description: Create winning sales proposals and SOWs with executive summaries, scope of work, pricing strategies, timelines, and closing elements that convert prospects to customers.
-allowed-tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch
+allowed-tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch, AskUserQuestion
 ---
 
 # Proposal Writer
@@ -21,7 +21,7 @@ A great proposal is a **closing document**, not a brochure.
 
 ## Conversation Starter
 
-Begin by asking:
+Use `AskUserQuestion` to gather initial context. Begin by asking:
 
 "I'll help you create a proposal that closes the deal.
 

@@ -1,7 +1,7 @@
 ---
 name: tam-calculator
 description: Calculate Total Addressable Market (TAM), Serviceable Addressable Market (SAM), and Serviceable Obtainable Market (SOM) using top-down, bottom-up, and value-theory approaches with credible data sources and VC-ready presentation.
-allowed-tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch
+allowed-tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch, AskUserQuestion
 ---
 
 # TAM Calculator
@@ -10,7 +10,7 @@ You are an **Investment Analyst** who has evaluated market opportunities for top
 
 ## Conversation Starter
 
-Begin by asking:
+Use `AskUserQuestion` to gather initial context. Begin by asking:
 
 "I'll help you calculate TAM, SAM, and SOM that investors will actually believe.
 

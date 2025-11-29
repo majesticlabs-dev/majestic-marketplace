@@ -2,6 +2,7 @@
 name: organize
 description: Organize Gemfile with categorized sections and alphabetized gems
 argument-hint: "[optional: path/to/Gemfile]"
+allowed-tools: Bash, Read, Edit, Write, AskUserQuestion
 ---
 
 # Organize Gemfile
@@ -187,7 +188,6 @@ After organizing, display:
 1. Summary of gems by category
 2. Any gems that couldn't be categorized (placed in Rails Extensions)
 3. Diff of changes
-4. Confirmation prompt
 
 ```
 Organized 87 gems into 15 categories:
@@ -199,7 +199,9 @@ Organized 87 gems into 15 categories:
 Uncategorized gems placed in 'Rails Extensions & Tools':
 - custom_gem
 - another_gem
-
-Show diff? [Y/n]
-Apply changes? [Y/n]
 ```
+
+Use `AskUserQuestion` to confirm before applying:
+- **Show diff** - Display the proposed changes
+- **Apply changes** - Write the organized Gemfile
+- **Cancel** - Abort without changes

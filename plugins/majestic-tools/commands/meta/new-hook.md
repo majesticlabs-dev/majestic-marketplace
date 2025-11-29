@@ -1,6 +1,6 @@
 ---
 description: Create and configure Claude Code hooks for automating workflows and behavior control
-allowed-tools: Read, Edit, Write, Bash, WebFetch
+allowed-tools: Read, Edit, Write, Bash, WebFetch, AskUserQuestion
 model: opus
 ---
 
@@ -56,7 +56,7 @@ When creating hooks, follow these steps:
 3. **Design Matcher**: Create matcher patterns to target specific tools (use `*` for all tools)
 4. **Write Hook Command**: Create the shell command that will execute
 5. **Consider Security**: Review security implications and add safeguards
-6. **Choose Storage Location**: Decide between user settings (global) or project settings (local)
+6. **Choose Storage Location**: Use `AskUserQuestion` to ask: user settings (global) or project settings (local)?
 7. **Generate Configuration**: Create proper JSON configuration
 8. **Test Hook**: Verify the hook works as expected
 

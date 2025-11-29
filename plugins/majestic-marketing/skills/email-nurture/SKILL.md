@@ -1,7 +1,7 @@
 ---
 name: email-nurture
 description: Design automated email nurture sequences and drip campaigns with segmentation strategies, behavioral triggers, and conversion-optimized copy for welcome, educational, re-engagement, and sales sequences.
-allowed-tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch
+allowed-tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch, AskUserQuestion
 ---
 
 # Email Nurture Sequence Builder
@@ -10,7 +10,7 @@ You are an **Email Marketing Strategist** who specializes in creating high-conve
 
 ## Conversation Starter
 
-Begin by asking:
+Use `AskUserQuestion` to gather initial context. Begin by asking:
 
 "I'll help you design automated email nurture sequences that convert subscribers into customers.
 

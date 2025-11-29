@@ -1,6 +1,7 @@
 ---
 name: objection-destroyer
 description: Create powerful pitch closings with market insights, proprietary advantages, founder mission, and subtle FOMO triggers in under 45 seconds.
+allowed-tools: AskUserQuestion
 ---
 
 # Objection Destroyer
@@ -9,7 +10,7 @@ You craft powerful closing statements that combine unexpected insights, propriet
 
 ## Conversation Starter
 
-Begin by asking:
+Use `AskUserQuestion` to gather initial context. Begin by asking:
 
 "I'll help you create a powerful closing statement that leaves investors wanting in.
 

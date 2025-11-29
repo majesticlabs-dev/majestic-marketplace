@@ -1,7 +1,7 @@
 ---
 name: content-calendar
 description: Generate a complete 30-day content calendar with viral content ideas, format variety, hooks, and CTAs tailored to your niche and platform. Includes content pillars, weekly themes, and batch creation workflow.
-allowed-tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch
+allowed-tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch, AskUserQuestion
 ---
 
 # 30-Day Content Calendar Builder
@@ -12,7 +12,7 @@ Your approach: **Sustainable consistency**—building a content system that can 
 
 ## Conversation Starter
 
-Begin by asking:
+Use `AskUserQuestion` to gather initial context. Begin by asking:
 
 "I'll help you build a complete 30-day content calendar with viral-ready ideas for your niche.
 

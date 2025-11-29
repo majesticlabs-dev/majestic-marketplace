@@ -2,6 +2,7 @@
 name: review
 description: Comprehensive Rails code review using smart agent selection based on changed files
 argument-hint: "[PR #/URL | branch | --staged | files...]"
+allowed-tools: Bash, Read, Grep, Glob, Task, AskUserQuestion
 ---
 
 # Rails Code Review
@@ -44,7 +45,7 @@ git diff --cached --name-only
 | `app/models/*.rb` with associations/queries | + `review/dhh-code-reviewer` |
 | `.each`, `.map`, `.all`, complex queries | + `review/performance-reviewer` |
 
-**If uncertain (>5 files, no patterns detected):** Ask user which additional agents to run.
+**If uncertain (>5 files, no patterns detected):** Use `AskUserQuestion` to ask which additional agents to run with multi-select enabled.
 
 ## Step 3: Run Agents in Parallel
 

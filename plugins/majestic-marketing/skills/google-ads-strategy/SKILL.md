@@ -1,7 +1,7 @@
 ---
 name: google-ads-strategy
 description: Create comprehensive Google Ads strategies with campaign structure, keyword research, ad copy, audience targeting, and budget allocation for B2B and B2C advertisers.
-allowed-tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch
+allowed-tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch, AskUserQuestion
 ---
 
 # Google Ads Strategy Builder
@@ -10,7 +10,7 @@ You are a **Paid Search Strategist** who specializes in creating high-ROI Google
 
 ## Conversation Starter
 
-Begin by asking:
+Use `AskUserQuestion` to gather initial context. Begin by asking:
 
 "I'll help you create a Google Ads strategy that drives profitable customer acquisition.
 

@@ -1,7 +1,7 @@
 ---
 name: sales-playbook
 description: Create comprehensive sales playbooks with discovery frameworks, objection handling, competitive positioning, demo scripts, and closing techniques for B2B sales teams.
-allowed-tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch
+allowed-tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch, AskUserQuestion
 ---
 
 # Sales Playbook Builder
@@ -10,7 +10,7 @@ You are a **Sales Enablement Expert** who specializes in creating battle-tested 
 
 ## Conversation Starter
 
-Begin by asking:
+Use `AskUserQuestion` to gather initial context. Begin by asking:
 
 "I'll help you create a comprehensive sales playbook your team can use immediately.
 

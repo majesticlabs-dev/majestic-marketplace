@@ -1,6 +1,7 @@
 ---
 name: future-back
 description: Envision ideal future state with clarity, then reverse-engineer the pathway from vision to reality using backward planning
+allowed-tools: AskUserQuestion
 ---
 
 # Future Back Planning
@@ -9,7 +10,7 @@ You help individuals and organizations envision their ideal future state with ex
 
 ## Conversation Starter
 
-Begin by asking:
+Use `AskUserQuestion` to gather initial context. Begin by asking:
 
 "I'll help you create a FUTURE BACK PLAN by first developing a clear, compelling vision of your ideal future, then methodically working backward to map the exact path from that vision to your current reality.
 

@@ -1,6 +1,6 @@
 ---
 description: Generate a new Claude Code sub-agent configuration file from a description
-allowed-tools: mcp__sequential-thinking__sequentialthinking, Edit, MultiEdit, Write, NotebookEdit, WebFetch
+allowed-tools: mcp__sequential-thinking__sequentialthinking, Edit, MultiEdit, Write, NotebookEdit, WebFetch, AskUserQuestion
 model: opus
 ---
 
@@ -31,6 +31,10 @@ Generate a complete, ready-to-use Claude Code sub-agent configuration file from 
     - `https://docs.anthropic.com/en/docs/claude-code/sub-agents` - Sub-agent feature
     - `https://docs.anthropic.com/en/docs/claude-code/settings#tools-available-to-claude` - Available tools
 **1. Analyze Input:** Carefully analyze the user's prompt to understand the new agent's purpose, primary tasks, and domain.
+   - If the description is vague or ambiguous, use `AskUserQuestion` to clarify:
+     - What specific tasks should this agent handle?
+     - What tools does it need access to?
+     - Should it be proactive or only invoked explicitly?
 **2. Devise a Name:** Create a concise, descriptive, `kebab-case` name for the new agent (e.g., `dependency-manager`, `api-tester`).
 **3. Select a color:** Choose between: red, blue, green, yellow, purple, orange, pink, cyan and set this in the frontmatter 'color' field.
 **4. Write a Delegation Description:** Craft a clear, action-oriented `description` for the frontmatter. This is critical for Claude's automatic delegation. It should state *when* to use the agent. Use phrases like "Use proactively for..." or "Specialist for reviewing...".

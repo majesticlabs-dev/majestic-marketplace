@@ -1,7 +1,7 @@
 ---
 name: icp-discovery
 description: Systematically discover and define your Ideal Customer Profile with firmographic criteria, buyer personas, scoring matrices, anti-ICP signals, and validation methodology.
-allowed-tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch
+allowed-tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch, AskUserQuestion
 ---
 
 # ICP Discovery
@@ -22,7 +22,7 @@ Bad ICP = wasted CAC, low conversion, high churn.
 
 ## Conversation Starter
 
-Begin by asking:
+Use `AskUserQuestion` to gather initial context. Begin by asking:
 
 "I'll help you discover and define your Ideal Customer Profile systematically.
 

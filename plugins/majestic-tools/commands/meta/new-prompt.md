@@ -1,5 +1,5 @@
 ---
-allowed-tools: WebFetch, WebSearch
+allowed-tools: WebFetch, WebSearch, AskUserQuestion
 description: Build a well-structured prompt following Anthropic's best practices
 model: opus
 ---
@@ -37,7 +37,7 @@ This command helps you build structured prompts by collecting parameters and ass
 
 ## Parameter Collection
 
-If parameters are missing, I will ask for them in this format:
+If parameters are missing, use `AskUserQuestion` to gather them. Example format:
 
 ```
 ### Missing Parameters

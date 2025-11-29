@@ -2,6 +2,7 @@
 name: work
 description: Execute work plans efficiently while maintaining quality and finishing Rails features
 argument-hint: "[plan file] [optional: branch-name]"
+allowed-tools: Read, Write, Edit, Bash, Grep, Glob, Task, Skill, TodoWrite, AskUserQuestion
 ---
 
 # Work Plan Execution Command
@@ -38,17 +39,20 @@ Parse the arguments to extract:
    - **If branch name provided**: Use it exactly as-is (e.g., `my-branch`)
    - **If NOT provided**: Derive from plan title with `feature/` prefix (e.g., `feature/user-auth`)
 
-   **Option A: Live work on current branch**
+   Use `AskUserQuestion` to determine environment setup:
 
+   **Options:**
+   - **Live work on current branch** - Standard checkout workflow
+   - **Parallel work with worktree** - Recommended for parallel development
+
+   **If live work:**
    ```bash
    git checkout master && git pull origin master
    git checkout -b <branch-name>
    ```
 
-   **Option B: Parallel work with worktree (recommended for parallel development)**
+   **If worktree:**
    ```bash
-   # Ask user first: "Work in parallel with worktree or on current branch?"
-   # If worktree:
    skill: git-worktree
    # Pass the branch name to the skill
    ```

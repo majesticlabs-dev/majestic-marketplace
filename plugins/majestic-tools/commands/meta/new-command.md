@@ -1,6 +1,7 @@
 ---
 description: Generate any Claude Code command with production-quality patterns
 model: opus
+allowed-tools: Read, Write, Edit, WebFetch, AskUserQuestion
 ---
 
 # New Command Builder `/new-command`
@@ -33,6 +34,14 @@ claude /new-command "debug microservices" --style interactive
 # Build a learning code reviewer
 claude /new-command "review code like senior dev" --style learning
 ```
+
+## Clarify Options
+
+If style, complexity, or location are not provided in `$ARGUMENTS`, use `AskUserQuestion` to clarify:
+
+- **Style**: expert (multiple modes, deep analysis), interactive (guided flows), autonomous (minimal interaction), learning (builds knowledge)
+- **Complexity**: simple (<100 lines), standard (<300 lines), advanced (300+ lines)
+- **Location**: project (.claude/commands/) or user (~/.claude/commands/)
 
 ## Meta-Prompt for Command Generation
 

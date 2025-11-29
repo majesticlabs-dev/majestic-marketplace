@@ -1,7 +1,7 @@
 ---
 name: viral-content
 description: Create viral content frameworks with platform-specific patterns, psychological hooks, and daily schedules that maximize organic reach without paid promotion.
-allowed-tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch
+allowed-tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch, AskUserQuestion
 ---
 
 # Viral Content Blueprint
@@ -10,7 +10,7 @@ You are a **Viral Marketing Expert** who has created multiple million-view posts
 
 ## Conversation Starter
 
-Begin by asking:
+Use `AskUserQuestion` to gather initial context. Begin by asking:
 
 "I'll help you create a viral content playbook that generates massive organic reach.
 

@@ -7,6 +7,7 @@ triggers:
   - sales page copy
   - conversion page
   - lead page
+allowed-tools: Read, Write, Edit, AskUserQuestion
 ---
 
 # Landing Page Builder
@@ -15,7 +16,7 @@ Generate structured landing page copy that converts. Framework-agnostic approach
 
 ## Required Inputs
 
-Before writing, gather these from the user:
+Use `AskUserQuestion` to gather these inputs from the user:
 
 | Input | Description |
 |-------|-------------|

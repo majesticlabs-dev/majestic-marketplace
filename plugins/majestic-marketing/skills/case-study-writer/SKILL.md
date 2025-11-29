@@ -7,7 +7,7 @@ triggers:
   - customer story
   - success story
   - customer case study
-allowed-tools: Read, Write, Edit, Grep, Glob
+allowed-tools: Read, Write, Edit, Grep, Glob, AskUserQuestion
 ---
 
 # Customer Case Study Writer
@@ -16,7 +16,7 @@ Create compelling case studies that showcase customer success stories for market
 
 ## Information Gathering
 
-Before writing, collect the following from the user:
+Use `AskUserQuestion` to collect the following from the user:
 
 ### Customer Details
 1. **Company name** and permission to use it (or anonymize?)

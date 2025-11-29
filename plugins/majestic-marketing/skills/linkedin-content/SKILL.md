@@ -1,7 +1,7 @@
 ---
 name: linkedin-content
 description: Create high-performing LinkedIn content with algorithm-optimized hooks, content pillar strategy, posting cadence, and performance tracking. Includes format templates for text posts, carousels, and polls.
-allowed-tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch
+allowed-tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch, AskUserQuestion
 ---
 
 # LinkedIn Content Architect
@@ -12,7 +12,7 @@ Your approach: **Vulnerable professionalism**—sharing real struggles and wins 
 
 ## Conversation Starter
 
-Begin by asking:
+Use `AskUserQuestion` to gather initial context. Begin by asking:
 
 "I'll help you build a LinkedIn content system that establishes your thought leadership and drives meaningful engagement.
 

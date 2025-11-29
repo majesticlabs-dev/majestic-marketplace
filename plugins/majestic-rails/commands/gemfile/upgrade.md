@@ -2,6 +2,7 @@
 name: upgrade
 description: Upgrade a gem safely with changelog review and testing
 argument-hint: "[gem_name | --outdated]"
+allowed-tools: Bash, Read, Edit, WebFetch, AskUserQuestion
 ---
 
 # Upgrade Gem
@@ -90,18 +91,18 @@ Present summary:
 
 ### 4. Present Options to User
 
+Use `AskUserQuestion` to present upgrade options:
+
 ```
 Current: sidekiq 6.5.12
 Latest:  sidekiq 7.2.0
-
-Options:
-1. Upgrade to latest (7.2.0) - MAJOR update, review changes above
-2. Upgrade to latest minor (6.5.latest) - Safer, bug fixes only
-3. Upgrade to specific version
-4. Skip this gem
-
-Choice [1/2/3/4]:
 ```
+
+**Options:**
+- **Upgrade to latest (7.2.0)** - MAJOR update, review changes above
+- **Upgrade to latest minor (6.5.latest)** - Safer, bug fixes only
+- **Upgrade to specific version** - Enter custom version number
+- **Skip this gem** - Skip and continue to next
 
 ### 5. Update Gemfile
 
@@ -183,25 +184,14 @@ When using `--outdated`:
    - **Minor updates** (1.0.0 → 1.1.0): Review recommended
    - **Major updates** (1.0.0 → 2.0.0): Careful review required
 
-3. Present interactive selection:
+3. Use `AskUserQuestion` to present gem selection with multi-select enabled:
 
-```
-Outdated gems found:
+**Categorized by risk level:**
+- **PATCH updates (safe):** rack 3.0.8 → 3.0.9, puma 6.4.0 → 6.4.2
+- **MINOR updates (review recommended):** devise 4.9.2 → 4.9.4, sidekiq 6.5.10 → 6.5.12
+- **MAJOR updates (breaking changes likely):** rails 7.1.3 → 7.2.0, graphql 2.2.0 → 2.3.0
 
-PATCH updates (safe):
-  [ ] rack 3.0.8 → 3.0.9
-  [ ] puma 6.4.0 → 6.4.2
-
-MINOR updates (review recommended):
-  [ ] devise 4.9.2 → 4.9.4
-  [ ] sidekiq 6.5.10 → 6.5.12
-
-MAJOR updates (breaking changes likely):
-  [ ] rails 7.1.3 → 7.2.0
-  [ ] graphql 2.2.0 → 2.3.0
-
-Select gems to upgrade (space to toggle, enter to proceed):
-```
+Present as multi-select options so user can choose which gems to upgrade.
 
 4. Process selected gems one at a time with full workflow
 
