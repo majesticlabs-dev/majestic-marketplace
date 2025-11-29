@@ -2,6 +2,43 @@
 
 Ruby on Rails development tools. Includes 23 specialized agents, 5 commands, and 9 skills.
 
+## Recommended Workflow
+
+```mermaid
+flowchart TD
+    A[Feature Request] --> B["/plan"]
+    B --> C{Post-Generation<br/>Options}
+
+    C -->|Start /build| D["/build"]
+    C -->|Run /review| E["/review"]
+    C -->|Create backlog item| F[backlog-manager]
+    C -->|Simplify| G[Regenerate simpler]
+    C -->|Rework| H[Regenerate with changes]
+
+    G --> C
+    H --> C
+    F --> C
+
+    D --> I[Implementation]
+    I --> E
+    E --> J{Issues Found?}
+
+    J -->|Yes| K[Fix Issues]
+    K --> E
+    J -->|No| L[Ship It]
+
+    style B fill:#4a9eff
+    style D fill:#22c55e
+    style E fill:#f59e0b
+    style L fill:#10b981
+```
+
+**Quick start:**
+1. `/majestic-rails:workflows:plan "your feature"` - Research and create plan
+2. Choose next step: build, review, create backlog item, or refine
+3. `/majestic-rails:workflows:build docs/plans/your-feature.md` - Implement
+4. `/majestic-rails:workflows:review` - Smart multi-agent code review
+
 ## Installation
 
 ```bash
@@ -154,6 +191,12 @@ agent majestic-rails:review:data-integrity-reviewer "Review this migration for s
 
 # Simplicity review
 agent majestic-rails:review:simplicity-reviewer "Simplify this implementation"
+
+# Plan a feature (with post-generation options: build, review, backlog, simplify, rework)
+/majestic-rails:workflows:plan "Add user authentication with OAuth"
+
+# Build from a plan
+/majestic-rails:workflows:build docs/plans/add-user-authentication.md
 
 # Comprehensive code review (smart agent selection)
 /majestic-rails:workflows:review              # Review current branch vs main

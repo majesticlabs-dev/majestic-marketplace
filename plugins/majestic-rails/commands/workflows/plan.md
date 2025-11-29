@@ -14,6 +14,10 @@ Transform feature descriptions, bug reports, or improvement ideas into well-stru
 
 <feature_description> $ARGUMENTS </feature_description>
 
+**If the feature description above is empty, ask the user:** "What would you like to plan? Please describe the feature, bug fix, or improvement you have in mind."
+
+Do not proceed until you have a clear feature description from the user.
+
 ## Main Tasks
 
 ### 1. Repository Research & Context Gathering
@@ -361,11 +365,45 @@ end
 
 ## Output Format
 
-write to docs/plans/<issue_title>.md
+Write the plan to `docs/plans/<issue_title>.md`
 
-Now run the plan-review agent with the plan file:
+## Post-Generation Options
 
-`agent plan-review "[path to plan file]"`
+After writing the plan file, use the **AskUserQuestion tool** to present these options:
+
+**Question:** "Plan ready at `docs/plans/<issue_title>.md`. What would you like to do next?"
+
+**Options:**
+1. **Start `/build`** - Begin implementing this plan
+2. **Run `/review`** - Get feedback from reviewers
+3. **Create backlog item** - Add to your configured task system
+4. **Simplify** - Reduce detail level
+5. **Rework** - Change approach or request specific changes
+
+Based on selection:
+- **`/build`** → Call `/majestic-rails:workflows/build` with the plan file path
+- **`/review`** → Call `/majestic-rails:workflows/review` with the plan file path
+- **Create backlog item** → Invoke `backlog-manager` skill (see Backlog Integration below)
+- **Simplify** → Ask "What should I simplify?" then regenerate simpler version
+- **Rework** → Ask "What would you like changed?" then regenerate with changes
+- **Other** (automatically provided) → Accept free text, act on it
+
+Loop back to options after Simplify/Rework until user selects `/build` or `/review`.
+
+## Backlog Integration
+
+When user selects "Create backlog item":
+
+1. **Check for configuration** in project's CLAUDE.md for `backend:` setting
+2. **If configured** → Invoke `skill backlog-manager` to create the item using their preferred backend
+3. **If not configured** → Ask user which system they use and recommend adding to CLAUDE.md:
+
+   ```markdown
+   ## Task Management
+   backend: github  # Options: files, github, linear, beads
+   ```
+
+   Then proceed with their selection.
 
 ## Reasoning Approaches
 
@@ -374,8 +412,4 @@ Now run the plan-review agent with the plan file:
 - **Technical:** Evaluate implementation complexity and architecture fit
 - **Strategic:** Align with project goals and roadmap
 
-After you get the review back, ask the user questions about the current state of the plan and what the reviewers came back with. Make sure to underatand if this plan is too big or thinks are missing. Are there any other considerations that should be included? Keep askign questions until the user is happy with the plan. THEN update the plan file with the user's feedback.
-
-Optional you can ask to create a Github issue from the plan file.
-
-Do not write code until we have a complete plan and it is approved.
+This is a planning-only command. Don't write implementation code - just research and write the plan.
