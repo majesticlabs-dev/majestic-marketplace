@@ -1,5 +1,6 @@
 ---
 description: Create a detailed handoff plan for continuing work in a new session
+allowed-tools: Read, Write, AskUserQuestion
 model: haiku
 ---
 
@@ -9,7 +10,7 @@ The user specified purpose:
 
 <purpose>$ARGUMENTS</purpose>
 
-You are creating a summary specifically so that it can be continued by another agent.  For this to work you MUST have a purpose.  If no specified purpose was provided in the `<purpose>...</purpose>` tag you must STOP IMMEDIATELY and ask the user what the purpose is.
+You are creating a summary specifically so that it can be continued by another agent.  For this to work you MUST have a purpose.  If no specified purpose was provided in the `<purpose>...</purpose>` tag you must STOP IMMEDIATELY and use `AskUserQuestion` to ask the user what the purpose is.
 
 Do not continue before asking for the purpose as you will otherwise not understand the instructions and do not assume a purpose!
 

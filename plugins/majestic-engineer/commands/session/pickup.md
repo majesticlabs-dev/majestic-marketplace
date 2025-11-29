@@ -1,5 +1,6 @@
 ---
 description: Resume work from a previous handoff session stored in .claude/handoffs
+allowed-tools: Bash, Read, AskUserQuestion
 model: haiku
 ---
 
@@ -22,7 +23,7 @@ Before listing or reading handoffs:
 
 ### 1. Check for Handoff File Argument
 
-If no handoff file was provided in `$ARGUMENTS`, list all available handoffs and wait for user selection.
+If no handoff file was provided in `$ARGUMENTS`, list all available handoffs and use `AskUserQuestion` to let user select which handoff to resume.
 
 To list handoffs, use this bash command:
 

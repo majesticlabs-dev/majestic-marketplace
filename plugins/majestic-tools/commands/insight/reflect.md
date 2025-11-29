@@ -1,5 +1,5 @@
 ---
-allowed-tools: Bash(git *)
+allowed-tools: Bash(git *), Read, Edit, AskUserQuestion
 description: Reflect on conversation history and suggest improvements to AGENTS.md based on patterns, feedback, and lessons learned.
 model: haiku
 ---
@@ -31,7 +31,7 @@ Analyze our conversation history and suggest improvements to AGENTS.md based on 
    - Group related improvements together
 
 5. **Apply Changes (if approved)**
-   - Ask user: "Would you like me to apply these improvements to AGENTS.md?"
+   - Use `AskUserQuestion` to ask: "Would you like me to apply these improvements to AGENTS.md?"
    - If yes, use Edit tool to update AGENTS.md
    - Confirm changes were applied successfully
 
