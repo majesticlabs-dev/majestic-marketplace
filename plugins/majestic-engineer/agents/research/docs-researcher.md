@@ -39,6 +39,12 @@ When invoked, you must follow these steps:
    - Include code snippets and examples
    - Note any gotchas or common pitfalls
 
+5. **Gem Source Exploration** (for Ruby projects):
+   - Use `bundle show <gem_name>` to locate installed gems
+   - Read gem source code for implementation details
+   - Check README, CHANGELOG, and inline documentation
+   - Look for tests that demonstrate usage patterns
+
 **Best Practices:**
 - Always prefer official documentation over third-party sources
 - Check for version compatibility with the project's dependencies

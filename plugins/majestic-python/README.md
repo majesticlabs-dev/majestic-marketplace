@@ -8,6 +8,15 @@ Python development tools. Includes 2 specialized agents.
 claude /plugin install majestic-python
 ```
 
+## Quick Reference
+
+| I want to... | Use this |
+|--------------|----------|
+| Write modern Python code | `agent python-coder` |
+| Review Python code | `agent python-reviewer` |
+| Set up a FastAPI project | `agent python-coder "Set up FastAPI with uv"` |
+| Optimize async code | `agent python-coder "Optimize async performance"` |
+
 ## Agents
 
 Invoke with: `agent majestic-python:<name>`
@@ -16,22 +25,6 @@ Invoke with: `agent majestic-python:<name>`
 |-------|-------------|
 | `python-coder` | Modern Python 3.12+ development with uv, ruff, FastAPI, async patterns |
 | `python-reviewer` | Code review with high quality bar for type hints, Pythonic patterns |
-
-## Usage Examples
-
-```bash
-# Set up a modern Python project
-agent majestic-python:python-coder "Set up a FastAPI project with uv, ruff, and pytest"
-
-# Optimize async code
-agent majestic-python:python-coder "Optimize this async code for better performance"
-
-# Review Python code
-agent majestic-python:python-reviewer "Review the changes in src/services/"
-
-# Create a data pipeline
-agent majestic-python:python-coder "Design a high-performance ETL pipeline with pandas"
-```
 
 ## Python-Coder Capabilities
 
@@ -72,6 +65,22 @@ agent majestic-python:python-coder "Design a high-performance ETL pipeline with 
 - **Pragmatic on new code** - If isolated and works, acceptable
 - **Testability focus** - Hard to test = needs refactoring
 - **5-second naming rule** - Names should be self-documenting
+
+## Usage Examples
+
+```bash
+# Set up a modern Python project
+agent majestic-python:python-coder "Set up a FastAPI project with uv, ruff, and pytest"
+
+# Optimize async code
+agent majestic-python:python-coder "Optimize this async code for better performance"
+
+# Review Python code
+agent majestic-python:python-reviewer "Review the changes in src/services/"
+
+# Create a data pipeline
+agent majestic-python:python-coder "Design a high-performance ETL pipeline with pandas"
+```
 
 ## Important Notes
 

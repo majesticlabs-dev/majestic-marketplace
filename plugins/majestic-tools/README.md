@@ -8,31 +8,45 @@ Claude Code customization tools. Includes 10 commands, 3 skills, and 2 hooks.
 claude /plugin install majestic-tools
 ```
 
+## Quick Reference
+
+| I want to... | Use this |
+|--------------|----------|
+| Create a new agent | `/majestic-tools:meta:new-agent` |
+| Create a new command | `/majestic-tools:meta:new-command` |
+| Create a new hook | `/majestic-tools:meta:new-hook` |
+| Track token usage | `/majestic-tools:insight:ccusage` |
+| Brainstorm ideas | `skill brainstorming` |
+| Deep multi-option analysis | `/majestic-tools:workflows:ultra-options` |
+
 ## Commands
 
 Invoke with: `/majestic-tools:<category>:<name>`
 
-### meta
-| Command | Description |
-|---------|-------------|
-| `meta:new-agent` | Generate new Claude Code sub-agent configuration files |
-| `meta:new-hook` | Create and configure Claude Code hooks for automation |
-| `meta:new-command` | Generate any Claude Code command with production patterns |
-| `meta:new-prompt` | Build a well-structured prompt following Anthropic's best practices |
-| `meta:list-tools` | List all available tools with detailed information |
-
 ### insight
+
 | Command | Description |
 |---------|-------------|
 | `insight:ccusage` | Analyze Claude Code token usage and costs |
 | `insight:reflect` | Suggest improvements to AGENTS.md based on patterns |
 | `insight:spotlight` | Activate aggressive intellectual challenge mode |
 
-### workflows
+### meta
+
 | Command | Description |
 |---------|-------------|
-| `workflows:ultrathink-task` | Plan tasks with multiple agents (Architect, Research, Coder, Tester) |
+| `meta:list-tools` | List all available tools with detailed information |
+| `meta:new-agent` | Generate new Claude Code sub-agent configuration files |
+| `meta:new-command` | Generate any Claude Code command with production patterns |
+| `meta:new-hook` | Create and configure Claude Code hooks for automation |
+| `meta:new-prompt` | Build a well-structured prompt following Anthropic's best practices |
+
+### workflows
+
+| Command | Description |
+|---------|-------------|
 | `workflows:ultra-options` | Deep analysis generating multiple solution options |
+| `workflows:ultrathink-task` | Plan tasks with multiple agents (Architect, Research, Coder, Tester) |
 
 ## Skills
 
@@ -65,7 +79,7 @@ Triggers Raycast confetti celebration when Claude completes a task.
 
 Fails silently if Raycast is not installed.
 
-## Prerequisites
+## Configuration
 
 ### Sequential Thinking MCP Server
 
@@ -108,4 +122,10 @@ The `workflows:ultrathink-task` and `workflows:ultra-options` commands require t
 
 # Deep analysis with multiple options (requires Sequential Thinking MCP)
 /majestic-tools:workflows:ultra-options "How should we implement caching?"
+
+# Brainstorm before implementing
+skill majestic-tools:brainstorming
+
+# Create a new skill
+skill majestic-tools:new-skill
 ```

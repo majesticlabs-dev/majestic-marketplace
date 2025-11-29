@@ -8,40 +8,82 @@ Business operations tools. Includes 2 specialized agents and 21 skills.
 claude /plugin install majestic-company
 ```
 
+## Quick Reference
+
+| I want to... | Use this |
+|--------------|----------|
+| Strategic problem analysis | `agent first-principles` |
+| Create interview kit | `agent people-ops` |
+| Build a strategic plan | `skill ceo:strategic-planning` |
+| Make a business decision | `skill ceo:decision-framework` |
+| Design a startup | `skill ceo:startup-blueprint` |
+| Launch in 30 days | `skill ceo:30-day-launch` |
+| Build financial model | `skill ceo:financial-model` |
+| Research competitor pain points | `skill problem-research` |
+| Review legal document | `skill legal:document-review` |
+| Create elevator pitch | `skill fundraising:elevator-pitch` |
+
 ## Agents
 
 Invoke with: `agent majestic-company:<name>`
 
 | Agent | Description |
 |-------|-------------|
-| `first-principles` | Strategic thinking using Elon Musk's first-principles methodology - problem-solving, decision-making, breakthrough thinking |
-| `people-ops` | People operations - hiring, onboarding, PTO policies, performance management, employee relations |
+| `first-principles` | Strategic thinking using Elon Musk's first-principles methodology |
+| `people-ops` | People operations - hiring, onboarding, PTO, performance management |
 
 ## Skills
 
-### CEO Skills
+### ceo
 
 Invoke with: `skill majestic-company:ceo:<name>`
 
 | Skill | Description |
 |-------|-------------|
-| `founder-mode` | Help founders run companies using contrarian principles that break conventional management wisdom |
-| `strategic-planning` | Build one-page strategic briefs with core objective, milestones, leverage points, and risks |
-| `decision-framework` | Walk through decisions with first-principles, cost/benefit, and second-order effects analysis |
-| `industry-pulse` | Real-time pulse check on any industry: trending tech, recent events, key shifts for operators/investors |
-| `growth-audit` | 360-degree business audit with evidence-backed blueprint to 5-10X growth trajectory |
-| `industry-research` | Research market, identify underserved pain, design venture to capture opportunity in 12 months |
-| `ai-advantage` | Develop research-backed AI competitive strategies combining academic research, market trends, and social sentiment |
-| `pareto` | Identify the vital 20% of activities that produce 80% of results using Pareto Principle analysis |
-| `future-back` | Envision ideal future state, then reverse-engineer the pathway from vision to reality |
-| `decisions` | Tree of Thoughts business decisions with expert consultants exploring multiple approaches |
-| `market-expansion` | Strategic market expansion analysis with quantified entry strategies and financial projections |
-| `startup-blueprint` | Interactive 10-phase startup planning tailored to your skills, budget, and goals |
-| `30-day-launch` | Tactical 30-day business launch with templates, schedules, and revenue forecasts |
-| `pricing-strategy` | Analyze competitor pricing models to develop optimal pricing structure with implementation roadmap |
-| `financial-model` | Build comprehensive financial models with revenue projections, unit economics, P&L forecasts, and scenario analysis |
+| `30-day-launch` | Tactical 30-day business launch with templates and revenue forecasts |
+| `ai-advantage` | AI competitive strategies combining research, trends, and sentiment |
+| `decision-framework` | First-principles, cost/benefit, and second-order effects analysis |
+| `decisions` | Tree of Thoughts business decisions with expert consultants |
+| `financial-model` | Revenue projections, unit economics, P&L, and scenario analysis |
+| `founder-mode` | Contrarian principles that break conventional management wisdom |
+| `future-back` | Reverse-engineer pathway from vision to reality |
+| `growth-audit` | 360-degree business audit with 5-10X growth blueprint |
+| `industry-pulse` | Real-time pulse check on any industry for operators/investors |
+| `industry-research` | Research market, identify pain, design venture for 12-month capture |
+| `market-expansion` | Strategic expansion analysis with financial projections |
+| `pareto` | Identify the vital 20% that produces 80% of results |
+| `pricing-strategy` | Competitor pricing analysis with optimal structure roadmap |
+| `startup-blueprint` | Interactive 10-phase startup planning tailored to your profile |
+| `strategic-planning` | One-page strategic briefs with objective, milestones, and risks |
 
-### Choosing Between startup-blueprint and 30-day-launch
+### fundraising
+
+Invoke with: `skill majestic-company:fundraising:<name>`
+
+| Skill | Description |
+|-------|-------------|
+| `elevator-pitch` | 30/60/90-second pitches with Villain-Hero storytelling |
+| `funding-ask-optimizer` | Compelling asks with comparables and milestone roadmaps |
+| `objection-destroyer` | 45-second pitch closings with FOMO triggers |
+| `tam-calculator` | TAM/SAM/SOM with top-down, bottom-up, and value-theory approaches |
+
+### legal
+
+Invoke with: `skill majestic-company:legal:<name>`
+
+| Skill | Description |
+|-------|-------------|
+| `document-review` | Legal document analysis with specific replacement text |
+
+### research
+
+Invoke with: `skill majestic-company:<name>`
+
+| Skill | Description |
+|-------|-------------|
+| `problem-research` | Competitor pain points from G2, Capterra, Reddit with viability assessment |
+
+## Choosing Between startup-blueprint and 30-day-launch
 
 | Use startup-blueprint when... | Use 30-day-launch when... |
 |------------------------------|--------------------------|
@@ -52,303 +94,6 @@ Invoke with: `skill majestic-company:ceo:<name>`
 
 **startup-blueprint** = "What should I build and how should I plan it?"
 **30-day-launch** = "I know what I'm building, help me launch it fast."
-
-### Research Skills
-
-Invoke with: `skill majestic-company:<name>`
-
-| Skill | Description |
-|-------|-------------|
-| `problem-research` | Research competitor pain points from review platforms (G2, Capterra, Reddit) to find wedge opportunities. SaaS/B2B focus. Brutally honest viability assessment. |
-
-### Legal Skills
-
-Invoke with: `skill majestic-company:legal:<name>`
-
-| Skill | Description |
-|-------|-------------|
-| `document-review` | Review legal documents as an experienced attorney. Analyzes contracts, ToS, privacy policies, NDAs section-by-section with specific replacement text for problematic clauses. |
-
-### Fundraising Skills
-
-Invoke with: `skill majestic-company:fundraising:<name>`
-
-| Skill | Description |
-|-------|-------------|
-| `elevator-pitch` | Create compelling 30/60/90-second elevator pitches using Villain-Hero storytelling framework, customized for different investor types (technical, market-focused, customer-obsessed) |
-| `tam-calculator` | Calculate TAM/SAM/SOM using top-down, bottom-up, and value-theory approaches with credible data sources and VC-ready presentation |
-| `funding-ask-optimizer` | Craft compelling funding asks with multi-perspective justifications, comparables, and milestone roadmaps |
-| `objection-destroyer` | Create powerful 45-second pitch closings with market insights, proprietary advantages, and FOMO triggers |
-
-### Founder Mode Usage
-
-```bash
-# Strategic decision with conventional advice conflict
-skill majestic-company:ceo:founder-mode
-
-# Then provide:
-# - Company stage
-# - Specific challenge
-# - Current approach
-# - Conventional advice received
-# - Your founder instinct
-```
-
-The skill challenges "manager mode" thinking and helps founders leverage their unique capabilities: authority, vision, deep company knowledge, risk tolerance, and cultural connection.
-
-### Strategic Planning Usage
-
-```bash
-# Build a strategic plan for a goal
-skill majestic-company:ceo:strategic-planning
-
-# Then provide:
-# - Goal: What you want to achieve
-# - Context: Current situation, constraints, resources
-# - Timeline: Desired timeframe (optional)
-# - Audience: Who will read/approve (optional)
-```
-
-The skill produces one-page briefs with: core objective, 3 key milestones, 5 leverage points, risk assessment, and next action.
-
-### Decision Framework Usage
-
-```bash
-# Walk through a decision
-skill majestic-company:ceo:decision-framework
-
-# Then provide:
-# - Option A: First choice
-# - Option B: Second choice
-# - Context: Situation and constraints (optional)
-```
-
-The skill applies a 3-part framework: first-principles analysis, cost/benefit breakdown, and second-order effects. Includes examples from similar situations.
-
-### Industry Pulse Usage
-
-```bash
-# Get pulse check on an industry
-skill majestic-company:ceo:industry-pulse
-
-# Then provide:
-# - Industry or niche (e.g., "AI infrastructure", "fintech payments")
-```
-
-The skill uses WebSearch to provide: trending technologies, notable events from the last 2 weeks, and 3 key shifts impacting operators and investors.
-
-### Growth Audit Usage
-
-```bash
-# Comprehensive business growth audit
-skill majestic-company:ceo:growth-audit
-
-# Then provide:
-# - Business Name/Description
-# - Unique Selling Point
-# - Current Monthly Revenue
-# - Annual Growth Rate
-# - Number of Customers
-# - Churn Rate
-# - Customer Acquisition Cost
-# - Team Size
-# - Growth Timeline Goal (months)
-# - Risk Tolerance (conservative/moderate/aggressive/ultra-aggressive)
-```
-
-The skill performs a 360-degree analysis across six dimensions: market dynamics, product positioning, growth engine, retention mechanics, operational excellence, and competitive moat. Output includes a growth scorecard, critical growth limiters, 90-day acceleration plan with 5-7 quick wins, 3-5 strategic growth initiatives with execution roadmaps, and a measurement system with quarterly milestones.
-
-### Industry Research Usage
-
-```bash
-# Research a market and design a venture
-skill majestic-company:ceo:industry-research
-
-# Then provide:
-# - Industry to research (e.g., "healthcare SaaS", "fintech for SMBs")
-```
-
-The skill executes a 10-step workflow: map macro landscape, identify pain points, select best opportunity via weighted scorecard, draft business thesis, design product, plan go-to-market, assess moat, build financial model, identify risks, and create 90-day action roadmap. Output is investor-ready with reasoning and executive summary.
-
-### AI Advantage Usage
-
-```bash
-# Develop AI competitive strategy
-skill majestic-company:ceo:ai-advantage
-
-# Then provide:
-# - Industry
-# - Priority business functions for AI enhancement
-# - Current AI maturity level
-```
-
-The skill combines academic research, market trends, and social sentiment analysis to deliver actionable AI competitive strategies with implementation roadmaps and a competitive positioning matrix.
-
-### Pareto Analysis Usage
-
-```bash
-# Identify your vital 20%
-skill majestic-company:ceo:pareto
-
-# Then provide:
-# - Area to optimize (learning, productivity, business, personal)
-# - Specific goals in that area
-# - Current activities involved
-```
-
-The skill guides you through identifying all factors, determining impact through comparisons, isolating the vital few activities, and minimizing low-value work. Output includes a prioritized action plan with immediate, weekly, and ongoing actions.
-
-### Future Back Planning Usage
-
-```bash
-# Create a future back plan
-skill majestic-company:ceo:future-back
-
-# Then provide:
-# - Future timeframe (3, 5, or 10 years)
-# - Personal, professional, or organizational scope
-# - Current situation and aspirations
-```
-
-The skill guides you through future visualization (outcome and experience dimensions), then maps backward from vision to present with prerequisite chains, critical path identification, resource requirements, and a horizon-based implementation blueprint with immediate actions.
-
-### Business Decisions Usage
-
-```bash
-# Get structured decision analysis
-skill majestic-company:ceo:decisions
-
-# Then provide your business challenge, such as:
-# - Market entry strategies
-# - Product feature prioritization
-# - Hiring decisions
-# - Pricing optimization
-# - Investment allocation
-```
-
-The skill assembles 4 expert consultants (Growth Strategist, Operations Expert, Financial Analyst, Skeptic Risk Analyst) who each explore 3 approaches with potential outcomes, debate disagreements, and deliver a unified recommendation with confidence level. For complex decisions, adds implementation milestones with contingency plans.
-
-### Market Expansion Usage
-
-```bash
-# Analyze market expansion opportunity
-skill majestic-company:ceo:market-expansion
-
-# Then provide:
-# - Company name
-# - Target market (region, segment, or vertical)
-# - Current market position
-```
-
-The skill evaluates 3 entry strategies (direct, partnership, acquisition, etc.) through decision trees with quantified scoring (profitability, scalability, risk). Output includes 3-year financial projections, competitive positioning, resource requirements, and risk mitigation strategies.
-
-### Financial Model Usage
-
-```bash
-# Build a financial model
-skill majestic-company:ceo:financial-model
-
-# Then provide:
-# - Business model (SaaS, marketplace, e-commerce, services)
-# - Current stage (revenue, users, runway)
-# - Pricing structure
-# - Key metrics you track
-# - Purpose (fundraising, planning, board)
-```
-
-The skill builds investor-ready financial models with:
-
-1. **Revenue Model** - Bottoms-up MRR/ARR build with cohort analysis
-2. **Unit Economics** - CAC, LTV, payback period, LTV/CAC ratio
-3. **P&L Forecast** - Monthly and annual projections with expense breakdown
-4. **Cash Flow** - Runway analysis and burn rate evolution
-5. **Scenario Analysis** - Base, upside, downside, and survival cases
-6. **Fundraising Model** - Cap table, dilution, and use of funds
-
-All projections include formulas and assumptions so you can update the model as actuals come in.
-
-### Startup Blueprint Usage
-
-```bash
-# Start interactive startup planning
-skill majestic-company:ceo:startup-blueprint
-```
-
-The skill begins with a 7-question assessment (skills, budget, industry interests, time commitment, goals, risk tolerance, previous attempts) then guides you through 10 phases:
-
-1. **Idea Generation** - Market research and personalized concept generation
-2. **Product-Market Fit** - Customer personas, MVP strategy, validation methodology
-3. **Business Model** - Value creation, revenue architecture, unit economics
-4. **Competitive Analysis** - Competitor profiles, SWOT, positioning strategy
-5. **Marketing Strategy** - Budget-optimized channels, guerrilla tactics, roadmap
-6. **Operations** - Product development, infrastructure, launch strategy
-7. **Conversion Funnel** - Lead generation, nurturing, optimization
-8. **Growth Scaling** - Growth engine design, scaling infrastructure
-9. **Financial Model** - Projections, funding strategy, cash flow management
-10. **Implementation** - 30-60-90 day plan, resource allocation, success metrics
-
-Each phase includes research findings, strategic recommendations, action plans, and budget-conscious approaches. The skill maintains continuity across phases, referencing your specific inputs throughout.
-
-### 30-Day Launch Usage
-
-```bash
-# Start tactical launch planning
-skill majestic-company:ceo:30-day-launch
-```
-
-The skill asks for your business type, budget, time commitment, and target market, then provides:
-
-1. **Business Model Blueprint** - Proven models with real examples
-2. **"Do This, Not That" Checklist** - Prioritized essential tasks only
-3. **Copy-Paste Outreach Templates** - Ready-to-use emails, LinkedIn messages, call scripts
-4. **Legal Compliance Shortcuts** - Minimum viable legal setup without expensive lawyers
-5. **First-90-Days Revenue Forecast** - Realistic milestones with specific numbers
-6. **Common Rookie Mistakes** - Industry-specific pitfalls to avoid
-7. **Hour-by-Hour First Week Schedule** - Detailed 7-day execution plan
-
-Use this skill when you already know your business type and want to move fast. For business discovery and comprehensive planning, use `startup-blueprint` instead.
-
-### Problem Research Usage
-
-```bash
-# Start interactive research session
-skill majestic-company:problem-research
-
-# With initial context
-skill majestic-company:problem-research "Project management software for marketing teams"
-
-# Specific competitor focus
-skill majestic-company:problem-research "CRM alternatives to Salesforce for SMBs"
-```
-
-The skill will ask you to select:
-- **Research scope**: Light (3-5 competitors), Medium (5-10), or Deep (10+)
-- **Execution mode**: Semi-automated (WebSearch) or Agentic browsing (Browser MCP)
-
-**Output includes:**
-- Pain Points Table (ranked with quotes and scores)
-- Must-Haves Table (table stakes features)
-- Hidden Gems (underserved opportunities)
-- Opportunity Map (wedge strategies)
-- Viability Assessment (GO/PROCEED WITH CAUTION/RECONSIDER/NO-GO)
-
-Every report concludes with brutally honest answers to: "What would make this fail?" and "Is this a vitamin or painkiller?"
-
-### Document Review Usage
-
-```bash
-# Review a legal document
-skill majestic-company:legal:document-review
-
-# Then provide:
-# - Document type (Contract, NDA, ToS, Privacy Policy, Employment Agreement, etc.)
-# - Your role (which party you represent)
-# - Attach or paste the document
-```
-
-The skill analyzes each section for: scope, payment terms, timelines, IP rights, termination clauses, liability, confidentiality, and governing law. Output includes section-by-section analysis, risk assessment (high/medium/low), and specific replacement text for problematic clauses.
-
-**Note:** This is for informational purposes only and does not constitute legal advice. Consult qualified counsel before signing.
 
 ## Usage Examples
 
@@ -363,9 +108,6 @@ agent majestic-company:first-principles "Should I pivot from B2C to B2B?"
 
 # Product prioritization
 agent majestic-company:first-principles "My product roadmap has 50 items - help me cut 90%"
-
-# Clean slate thinking
-agent majestic-company:first-principles "My SaaS evolved randomly over 3 years - if I restarted today, what would I build?"
 ```
 
 ### People Operations
@@ -379,71 +121,98 @@ agent majestic-company:people-ops "Draft accrual-based PTO policy for 50-person 
 
 # Generate onboarding plan
 agent majestic-company:people-ops "Create 30/60/90 onboarding plan for remote Product Manager"
+```
 
-# Performance improvement plan
-agent majestic-company:people-ops "Create PIP template with coaching steps"
+### CEO Skills
+
+```bash
+# Build a strategic plan
+skill majestic-company:ceo:strategic-planning
+
+# Walk through a decision
+skill majestic-company:ceo:decision-framework
+
+# Get industry pulse check
+skill majestic-company:ceo:industry-pulse
+
+# Comprehensive growth audit
+skill majestic-company:ceo:growth-audit
+
+# Research a market and design a venture
+skill majestic-company:ceo:industry-research
+
+# Develop AI competitive strategy
+skill majestic-company:ceo:ai-advantage
+
+# Identify your vital 20%
+skill majestic-company:ceo:pareto
+
+# Create a future back plan
+skill majestic-company:ceo:future-back
+
+# Get structured decision analysis
+skill majestic-company:ceo:decisions
+
+# Analyze market expansion opportunity
+skill majestic-company:ceo:market-expansion
+
+# Build a financial model
+skill majestic-company:ceo:financial-model
+
+# Start interactive startup planning
+skill majestic-company:ceo:startup-blueprint
+
+# Start tactical launch planning
+skill majestic-company:ceo:30-day-launch
+```
+
+### Research & Legal
+
+```bash
+# Research competitor pain points
+skill majestic-company:problem-research "Project management software for marketing teams"
+
+# Review a legal document
+skill majestic-company:legal:document-review
+```
+
+### Fundraising
+
+```bash
+# Create elevator pitch
+skill majestic-company:fundraising:elevator-pitch
+
+# Calculate TAM/SAM/SOM
+skill majestic-company:fundraising:tam-calculator
+
+# Craft funding ask
+skill majestic-company:fundraising:funding-ask-optimizer
+
+# Create pitch closing
+skill majestic-company:fundraising:objection-destroyer
 ```
 
 ## First-Principles Capabilities
 
 The first-principles agent uses 15 strategic prompts organized into 6 categories:
 
-### Foundation
-- Strip problems to objective reality ("physics")
-- Challenge existing assumptions
-- Break problems into fundamental components
-
-### Ideal State
-- Envision optimal solutions without cost constraints
-- Apply brutal prioritization (cut 90%)
-
-### Risk Analysis
-- Pre-mortem failure analysis
-- Challenge industry norms
-- Separate "actually impossible" from "feels impossible"
-
-### Breakthrough
-- Find minimum viable breakthrough (not MVP)
-- Clean slate thinking
-
-### Constraints & Politics
-- Identify hidden constraints
-- Remove social friction from problem-solving
-
-### Scale & Leverage
-- 10x acceleration thinking
-- Design for millions
-- Identify highest-leverage actions
+- **Foundation** - Strip problems to objective reality, challenge assumptions
+- **Ideal State** - Envision optimal solutions, apply brutal prioritization
+- **Risk Analysis** - Pre-mortem failure analysis, challenge industry norms
+- **Breakthrough** - Find minimum viable breakthrough, clean slate thinking
+- **Constraints & Politics** - Identify hidden constraints, remove social friction
+- **Scale & Leverage** - 10x acceleration, design for millions, highest-leverage actions
 
 ## People-Ops Capabilities
 
-### Hiring & Recruiting
-- Job descriptions with competencies and EOE statements
-- Structured interview kits with rubrics and scorecards
-- Candidate communication templates
-
-### Onboarding & Offboarding
-- 30/60/90 day plans
-- IT access and compliance checklists
-- Exit interview guides
-
-### PTO & Leave
-- Accrual-based and grant-based policies
-- Pro-rating rules and coverage plans
-- Jurisdiction-aware templates
-
-### Performance Management
-- Competency matrices by level
-- SMART goal setting frameworks
-- PIP templates with objective measures
-
-### Employee Relations
-- Issue intake and investigation templates
-- Documentation standards
-- Conflict resolution frameworks
+- **Hiring & Recruiting** - Job descriptions, interview kits, candidate communication
+- **Onboarding & Offboarding** - 30/60/90 plans, IT checklists, exit interviews
+- **PTO & Leave** - Accrual/grant-based policies, jurisdiction-aware templates
+- **Performance Management** - Competency matrices, SMART goals, PIP templates
+- **Employee Relations** - Investigation templates, documentation standards
 
 ## Important Notes
 
 - **Not legal advice** - Consult qualified counsel before implementing policies
-- **Jurisdiction-aware** - Agent will ask for location to provide appropriate guidance
+- **Jurisdiction-aware** - Agents ask for location to provide appropriate guidance
 - **Compliance-focused** - Templates follow labor law best practices

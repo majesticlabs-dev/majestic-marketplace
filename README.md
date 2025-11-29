@@ -32,21 +32,19 @@ Then install a plugin:
 /plugin install {plugin-name}
 ```
 
-#### Factory (Droid)
+#### Factory AI (Droid)
 
-1) Install Droid (Factory):
+Use [droid-factory](https://github.com/iannuttall/droid-factory) to import Claude Code marketplace agents:
 
 ```bash
 bunx droid-factory
 ```
 
-What this does: copies Claude Code marketplace commands/agents/subagents and converts them to Droid format.
+This launches a guided installer that can import agents from Claude Code marketplaces into Factory's `.factory/droids/` directory.
 
-Next:
-- Start Droid
-- In Settings, enable Sub-agents
+**Prerequisites:** Enable Custom Droids in Factory (`/settings` → Experimental → Custom Droids)
 
-You're done: use this source from Droid. You don't need to add it in Claude Code anymore.
+**Note:** Skills and commands are Claude Code-specific and won't transfer directly.
 
 ## Majestic Plugins
 

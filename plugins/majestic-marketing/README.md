@@ -8,11 +8,34 @@ Marketing and SEO tools for Claude Code. Includes 14 specialized agents, 2 comma
 claude /plugin install majestic-marketing
 ```
 
+## Quick Reference
+
+| I want to... | Use this |
+|--------------|----------|
+| Quick SEO audit | `/majestic-marketing:workflows:seo-audit` |
+| Comprehensive content check | `/majestic-marketing:workflows:content-check` |
+| Optimize for AI citation | `agent seo:llm-optimizer` |
+| Build brand authority | `agent seo:authority-builder` |
+| Generate brand names | `agent branding:namer` |
+| Create sales page | `skill sales-page` |
+| Design email nurture | `skill email-nurture` |
+| Build content calendar | `skill content-calendar` |
+
 ## Agents
 
-All SEO agents use the `seo:` prefix. Invoke with: `agent majestic-marketing:seo:<name>`
+### branding
 
-### Traditional SEO Agents
+Invoke with: `agent majestic-marketing:branding:<name>`
+
+| Agent | Description |
+|-------|-------------|
+| `branding:namer` | Generate category-defining brand, company, and product names using Igor naming methodology |
+
+### seo
+
+Invoke with: `agent majestic-marketing:seo:<name>`
+
+#### Traditional SEO
 
 | Agent | Description |
 |-------|-------------|
@@ -27,68 +50,89 @@ All SEO agents use the `seo:` prefix. Invoke with: `agent majestic-marketing:seo
 | `seo:snippet-hunter` | Featured snippet and SERP feature optimization |
 | `seo:structure-architect` | Header hierarchy, schema, internal linking |
 
-### GEO (AI Visibility) Agents
+#### GEO (AI Visibility)
 
 | Agent | Description |
 |-------|-------------|
-| `seo:llm-optimizer` | Optimize content for AI citation (ChatGPT, Perplexity, Gemini) |
 | `seo:entity-builder` | Brand entity and triplet optimization for LLM presence |
+| `seo:llm-optimizer` | Optimize content for AI citation (ChatGPT, Perplexity, Gemini) |
 | `seo:schema-architect` | Schema.org and llms.txt implementation for AI extraction |
-
-### Branding Agents
-
-| Agent | Description |
-|-------|-------------|
-| `branding:namer` | Generate category-defining brand, company, and product names using Igor naming methodology |
 
 ## Commands
 
+Invoke with: `/majestic-marketing:workflows:<name>`
+
 | Command | Description |
 |---------|-------------|
-| `/seo-audit [file]` | Quick SEO audit with actionable recommendations |
-| `/content-check [file]` | Comprehensive content check for SEO and AI readability |
+| `workflows:content-check` | Comprehensive content check for SEO and AI readability |
+| `workflows:seo-audit` | Quick SEO audit with actionable recommendations |
 
 ## Skills
 
 Invoke with: `skill majestic-marketing:<name>`
 
+### Content & Copy
+
 | Skill | Description |
 |-------|-------------|
-| `copy-editor` | Review and edit copy for grammar, style, and clarity |
-| `seo-audit` | Comprehensive SEO and GEO audit methodology |
+| `content-calendar` | 30-day content calendar with viral ideas, formats, hooks, and CTAs |
 | `content-optimizer` | Content optimization workflow for search and AI |
-| `market-research` | Comprehensive market research with web data and competitive analysis |
-| `marketing-strategy` | Interactive interview to build a custom marketing strategy with JSON export |
-| `traffic-magnet` | Research organic traffic and customer acquisition methods with zero ad spend |
-| `irresistible-offer` | Craft irresistible offers using direct response marketing principles |
-| `free-tool-arsenal` | Build complete business tech stack with 100% free tools |
-| `viral-content` | Create viral content frameworks with platform-specific patterns |
-| `sales-page` | High-converting sales page templates with headline formulas and CTA psychology |
-| `value-prop-sharpener` | Refine value propositions from emotional, logical, and status angles into 15-word statements |
-| `hook-writer` | Generate attention-grabbing hooks from 5 investor archetype perspectives |
-| `customer-discovery` | Find where potential customers discuss problems online and extract their language patterns |
-| `landing-page-builder` | Generate structured landing page copy - simpler/faster alternative to sales-page |
-| `email-nurture` | Design automated email nurture sequences with segmentation and behavioral triggers |
-| `retention-system` | Design customer retention systems with health scoring and churn prediction |
-| `bofu-keywords` | Find bottom-of-funnel keywords with high purchase intent using Perplexity |
-| `referral-program` | Design viral referral programs with incentive structures and viral coefficient optimization |
-| `win-back` | Design win-back campaigns to re-engage dormant customers and recover churned users |
-| `case-study-writer` | Create compelling customer case studies for marketing and sales enablement |
-| `linkedin-content` | Create high-performing LinkedIn content with hooks, content pillars, and posting strategy |
-| `slogan-generator` | Generate and evaluate marketing slogans with scoring criteria and top recommendations |
-| `content-calendar` | Generate a complete 30-day content calendar with viral ideas, formats, hooks, and CTAs |
-| `content-writer` | Write articles with outline-first workflow, sentence variation, and readability guidelines |
-| `power-words` | Enhance copy with emotional trigger words from 18 psychological categories |
+| `content-writer` | Articles with outline-first workflow and readability guidelines |
+| `copy-editor` | Review and edit copy for grammar, style, and clarity |
+| `hook-writer` | Attention-grabbing hooks from 5 investor archetype perspectives |
+| `linkedin-content` | LinkedIn content with hooks, pillars, and posting strategy |
+| `power-words` | Enhance copy with emotional trigger words from 18 categories |
+| `seo-audit` | Comprehensive SEO and GEO audit methodology |
+| `slogan-generator` | Marketing slogans with scoring and recommendations |
+| `viral-content` | Viral content frameworks with platform-specific patterns |
 
-### Sales & Acquisition Skills
+### Marketing & Strategy
 
 | Skill | Description |
 |-------|-------------|
-| `icp-discovery` | Systematically discover and define your Ideal Customer Profile with firmographics, buyer personas, scoring matrices, and validation methodology |
-| `outbound-sequences` | Design cold outreach sequences for email and LinkedIn with personalization frameworks and response handling |
-| `sales-playbook` | Create sales playbooks with discovery frameworks, objection handling, competitive positioning, and closing techniques |
-| `proposal-writer` | Create winning sales proposals with executive summaries, scope of work, pricing options, and ROI justification |
-| `google-ads-strategy` | Build Google Ads campaigns with keyword strategy, ad copy, audience targeting, and budget allocation |
+| `bofu-keywords` | Bottom-of-funnel keywords with high purchase intent |
+| `customer-discovery` | Find where customers discuss problems, extract language |
+| `free-tool-arsenal` | Complete business tech stack with 100% free tools |
+| `irresistible-offer` | Craft offers using direct response marketing principles |
+| `landing-page-builder` | Structured landing page copy (simpler than sales-page) |
+| `market-research` | Comprehensive research with web data and competitive analysis |
+| `marketing-strategy` | Interactive interview to build custom strategy with JSON export |
+| `sales-page` | High-converting templates with headline formulas and CTA psychology |
+| `traffic-magnet` | Organic traffic and customer acquisition with zero ad spend |
+| `value-prop-sharpener` | Refine value propositions into 15-word statements |
+
+### Sales & Acquisition
+
+| Skill | Description |
+|-------|-------------|
+| `case-study-writer` | Customer case studies for marketing and sales enablement |
+| `google-ads-strategy` | Google Ads campaigns with keyword strategy and budget allocation |
+| `icp-discovery` | Ideal Customer Profile with firmographics and scoring matrices |
+| `outbound-sequences` | Cold outreach sequences for email and LinkedIn |
+| `proposal-writer` | Sales proposals with scope, pricing, and ROI justification |
+| `sales-playbook` | Discovery frameworks, objection handling, closing techniques |
+
+### Retention & Growth
+
+| Skill | Description |
+|-------|-------------|
+| `email-nurture` | Automated email sequences with segmentation and triggers |
+| `referral-program` | Viral referral programs with incentive structures |
+| `retention-system` | Customer retention with health scoring and churn prediction |
+| `win-back` | Win-back campaigns to re-engage dormant customers |
+
+## SEO vs GEO
+
+This plugin covers both traditional SEO and modern GEO (Generative Engine Optimization):
+
+| Aspect | Traditional SEO | GEO Focus |
+|--------|-----------------|-----------|
+| Goal | Rank in search results | Get cited in AI responses |
+| Focus | Keywords + backlinks | Semantic depth + fact-density |
+| Structure | Readable by humans | Extractable by AI |
+| Authority | Domain authority | Citation quality + source reputation |
+
+The GEO-focused agents (`llm-optimizer`, `entity-builder`, `schema-architect`) help ensure your content appears in AI-generated answers from ChatGPT, Perplexity, Gemini, and other LLMs.
 
 ## Usage Examples
 
@@ -118,7 +162,7 @@ agent majestic-marketing:seo:entity-builder
 agent majestic-marketing:seo:schema-architect
 ```
 
-### Branding Agents
+### Branding
 
 ```bash
 # Generate category-defining brand names
@@ -129,13 +173,13 @@ agent majestic-marketing:branding:namer
 
 ```bash
 # Quick SEO audit
-/seo-audit path/to/content.md
+/majestic-marketing:workflows:seo-audit path/to/content.md
 
 # Content quality check
-/content-check path/to/article.md
+/majestic-marketing:workflows:content-check path/to/article.md
 ```
 
-### Skills
+### Content & Copy Skills
 
 ```bash
 # Full SEO audit methodology
@@ -144,58 +188,7 @@ skill majestic-marketing:seo-audit
 # Content optimization workflow
 skill majestic-marketing:content-optimizer
 
-# Copy editing review
-skill majestic-marketing:copy-editor
-
-# Market research
-skill majestic-marketing:market-research
-
-# Marketing strategy builder
-skill majestic-marketing:marketing-strategy
-
-# Organic traffic generation
-skill majestic-marketing:traffic-magnet
-
-# Direct response offer creation
-skill majestic-marketing:irresistible-offer
-
-# Free business tools research
-skill majestic-marketing:free-tool-arsenal
-
-# Viral content frameworks
-skill majestic-marketing:viral-content
-
-# High-converting sales pages
-skill majestic-marketing:sales-page
-
-# Find where customers hang out online
-skill majestic-marketing:customer-discovery
-
-# Quick landing page copy (no research phase)
-skill majestic-marketing:landing-page-builder
-
-# Email nurture sequences
-skill majestic-marketing:email-nurture
-
-# Customer retention system
-skill majestic-marketing:retention-system
-
-# Viral referral program design
-skill majestic-marketing:referral-program
-
-# Win-back campaigns for churned users
-skill majestic-marketing:win-back
-
-# Customer case studies for social proof
-skill majestic-marketing:case-study-writer
-
-# LinkedIn content and posting strategy
-skill majestic-marketing:linkedin-content
-
-# Marketing slogans and taglines
-skill majestic-marketing:slogan-generator
-
-# 30-day content calendar with viral ideas
+# 30-day content calendar
 skill majestic-marketing:content-calendar
 
 # Write articles with outline-first workflow
@@ -203,11 +196,34 @@ skill majestic-marketing:content-writer
 
 # Enhance copy with emotional trigger words
 skill majestic-marketing:power-words
+```
 
+### Marketing & Strategy Skills
+
+```bash
+# Market research
+skill majestic-marketing:market-research
+
+# Marketing strategy builder
+skill majestic-marketing:marketing-strategy
+
+# Direct response offer creation
+skill majestic-marketing:irresistible-offer
+
+# High-converting sales pages
+skill majestic-marketing:sales-page
+
+# Quick landing page copy
+skill majestic-marketing:landing-page-builder
+```
+
+### Sales & Acquisition Skills
+
+```bash
 # Define your Ideal Customer Profile
 skill majestic-marketing:icp-discovery
 
-# Cold outreach sequences for sales
+# Cold outreach sequences
 skill majestic-marketing:outbound-sequences
 
 # Sales playbook with objection handling
@@ -220,27 +236,21 @@ skill majestic-marketing:proposal-writer
 skill majestic-marketing:google-ads-strategy
 ```
 
-## SEO vs GEO
+### Retention & Growth Skills
 
-This plugin covers both traditional SEO and modern GEO (Generative Engine Optimization):
+```bash
+# Email nurture sequences
+skill majestic-marketing:email-nurture
 
-| Aspect | Traditional SEO | GEO Focus |
-|--------|-----------------|-----------|
-| Goal | Rank in search results | Get cited in AI responses |
-| Focus | Keywords + backlinks | Semantic depth + fact-density |
-| Structure | Readable by humans | Extractable by AI |
-| Authority | Domain authority | Citation quality + source reputation |
+# Customer retention system
+skill majestic-marketing:retention-system
 
-The GEO-focused agents (`llm-optimizer`, `entity-builder`, `schema-architect`) help ensure your content appears in AI-generated answers from ChatGPT, Perplexity, Gemini, and other LLMs.
+# Viral referral program design
+skill majestic-marketing:referral-program
 
-## Key Features
+# Win-back campaigns
+skill majestic-marketing:win-back
 
-- **14 Specialized Agents** - Cover the full SEO/GEO workflow
-- **E-E-A-T Optimization** - Build authority and trust signals
-- **AI Citation Ready** - Optimize for LLM visibility
-- **Featured Snippets** - Format content for position zero
-- **Schema Markup** - Structured data implementation
-- **Content Audits** - Comprehensive quality assessment
-- **Retention Marketing** - Email nurture, referral programs, win-back campaigns
-- **Sales Enablement** - Outbound sequences, playbooks, objection handling
-- **Paid Acquisition** - Google Ads strategy and campaign planning
+# Customer case studies
+skill majestic-marketing:case-study-writer
+```
