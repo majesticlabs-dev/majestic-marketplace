@@ -1,6 +1,6 @@
 # Majestic Company
 
-Business operations tools. Includes 2 specialized agents and 21 skills.
+Business operations tools. Includes 3 specialized agents and 21 skills.
 
 ## Installation
 
@@ -12,6 +12,7 @@ claude /plugin install majestic-company
 
 | I want to... | Use this |
 |--------------|----------|
+| Validate a business idea | `agent idea-validator` |
 | Strategic problem analysis | `agent first-principles` |
 | Create interview kit | `agent people-ops` |
 | Build a strategic plan | `skill ceo:strategic-planning` |
@@ -29,6 +30,7 @@ Invoke with: `agent majestic-company:<name>`
 
 | Agent | Description |
 |-------|-------------|
+| `idea-validator` | Validate startup ideas with real market research - orchestrates problem-research, customer-discovery, competitive-positioning for GO/NO-GO verdict |
 | `first-principles` | Strategic thinking using Elon Musk's first-principles methodology |
 | `people-ops` | People operations - hiring, onboarding, PTO, performance management |
 
@@ -96,6 +98,19 @@ Invoke with: `skill majestic-company:<name>`
 **30-day-launch** = "I know what I'm building, help me launch it fast."
 
 ## Usage Examples
+
+### Idea Validation
+
+```bash
+# Quick validation of a business idea
+agent majestic-company:idea-validator "AI tool that summarizes meeting notes for sales teams"
+
+# With more context
+agent majestic-company:idea-validator "I want to build a project management tool for marketing agencies. I've worked at 3 agencies."
+
+# Specific question
+agent majestic-company:idea-validator "Should I build a Notion competitor for developers?"
+```
 
 ### First-Principles Thinking
 
@@ -191,6 +206,18 @@ skill majestic-company:fundraising:funding-ask-optimizer
 # Create pitch closing
 skill majestic-company:fundraising:objection-destroyer
 ```
+
+## Idea-Validator Capabilities
+
+The idea-validator agent orchestrates real research tools for evidence-based validation:
+
+- **Problem Validation** - Uses `problem-research` to find real pain points from G2/Capterra/Reddit
+- **Customer Discovery** - Uses `customer-discovery` to find where customers talk and their language
+- **Market Sizing** - Uses `market-research` and `tam-calculator` for TAM/SAM/SOM
+- **Competitive Positioning** - Uses `competitive-positioning` to find differentiation opportunities
+- **Synthesis** - Delivers GO / PROCEED WITH CAUTION / PIVOT / NO-GO verdict
+
+Three validation depths: Quick (10-15 min), Standard (20-30 min), Full (45-60 min).
 
 ## First-Principles Capabilities
 

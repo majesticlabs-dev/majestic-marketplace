@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.21.0] - 2025-11-30
+
+### Added
+
+- `idea-validator` agent for evidence-based startup idea validation
+  - Orchestrates existing research tools: `problem-research`, `customer-discovery`, `market-research`, `competitive-positioning`, `tam-calculator`
+  - Three validation depths: Quick (10-15 min), Standard (20-30 min), Full (45-60 min)
+  - Structured validation phases: Problem Validation, Customer Discovery, Market Sizing, Competitive Positioning, Synthesis
+  - Delivers GO / PROCEED WITH CAUTION / PIVOT / NO-GO verdict with evidence
+  - Includes kill criteria and next steps for each verdict
+  - Brutally honest assessment framework with blind spot identification
+  - Does NOT simulate or fabricate data - uses real market research
+
 ## [1.19.0] - 2025-11-28
 
 ### Added
