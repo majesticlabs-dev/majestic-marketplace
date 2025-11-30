@@ -88,6 +88,31 @@ source ~/.zshrc
 | `CLAUDE_BASH_MAINTAIN_PROJECT_WORKING_DIR` | Keeps bash commands in project directory |
 | `cly` alias | Launches Claude Code with auto-approve for trusted projects |
 
+## Output Styles
+
+Configure how Claude Code communicates with you using the `/output-style` command:
+
+```bash
+/output-style
+```
+
+![Output Style Selection](instructions/select-style.png)
+
+| Style | Description |
+|-------|-------------|
+| Bullet Points | Hierarchical bullet points for quick scanning |
+| Explanatory | Claude explains its implementation choices and codebase patterns |
+| GenUI | Generative UI with embedded modern styling |
+| HTML Structured | Clean semantic HTML with proper structure |
+| Learning | Claude pauses and asks you to write small pieces of code for hands-on practice |
+| Markdown Focused | Full markdown features for maximum readability |
+| Table Based | Markdown tables for better organization and scanning |
+| TTS Summary | Audio task completion announcements with TTS |
+| Ultra Concise | Minimal words maximum speed direct actions |
+| YAML Structured | Machine-readable YAML format for structured data and easy parsing |
+
+See [Output Styles](output-styles/README.md) for full documentation and customization.
+
 ## Project CLAUDE.md Setup
 
 Initialize a project-level CLAUDE.md with coding guidelines for your team:
