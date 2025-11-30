@@ -2,7 +2,7 @@
 name: lint
 description: Run linting and code quality checks on Ruby and ERB files. Use before pushing to origin.
 tools: Read, Bash, Grep, Glob
-model: haiku
+model: claude-haiku-4-5-20251001
 ---
 
 Run linting tools and fix issues before pushing code.

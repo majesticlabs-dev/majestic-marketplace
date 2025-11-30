@@ -1,6 +1,5 @@
 ---
 description: Generate any Claude Code command with production-quality patterns
-model: opus
 allowed-tools: Read, Write, Edit, WebFetch, AskUserQuestion
 ---
 
@@ -291,24 +290,25 @@ Every generated command should start with proper YAML frontmatter:
 ```yaml
 ---
 description: Brief description of what the command does  # REQUIRED
-model: haiku | sonnet | opus  # OPTIONAL - inherits from conversation if omitted. Use 'haiku' for fast tasks, 'opus' for complex reasoning
+model: claude-haiku-4-5-20251001  # OPTIONAL - use full model ID, inherits from conversation if omitted
 allowed-tools: Bash(git *), Read, Edit  # OPTIONAL - restricts available tools
 argument-hint: "[action] [target]"  # OPTIONAL - shows usage hint
 ---
 ```
 
 **Model Guidelines:**
-- **Omit `model:`** - Command inherits user's current model (most flexible)
-- **Use `haiku`** - Fast, cheap operations (git, simple analysis)
-- **Use `sonnet`** - Balanced tasks (default for most work)
-- **Use `opus`** - Complex reasoning, architecture decisions
+- **Omit `model:`** - Command inherits user's current model (most flexible, RECOMMENDED)
+- **Use `claude-haiku-4-5-20251001`** - Fast, cheap operations (git, simple analysis)
+- **Use `claude-sonnet-4-5-20250929`** - Balanced tasks
+- **Use `claude-opus-4-5-20251101`** - Complex reasoning, architecture decisions
+
+**IMPORTANT:** Always use full model identifiers, never short names like `haiku`, `sonnet`, or `opus`.
 
 ### 🎨 Example: Generated Database Expert Command
 
 ```markdown
 ---
 description: Intelligent database optimization and troubleshooting
-model: opus
 ---
 
 # /project:db-expert

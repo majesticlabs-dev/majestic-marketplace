@@ -1,7 +1,6 @@
 ---
 allowed-tools: WebFetch, WebSearch, AskUserQuestion
 description: Build a well-structured prompt following Anthropic's best practices
-model: opus
 ---
 
 # Build Prompt

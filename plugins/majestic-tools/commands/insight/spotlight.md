@@ -1,6 +1,5 @@
 ---
 name: spotlight
-model: opus
 ---
 
 🎯 **SPOTLIGHT MODE ACTIVATED**

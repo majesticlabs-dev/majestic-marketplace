@@ -2,7 +2,6 @@
 name: security-review
 description: Use PROACTIVELY after code changes to review for security vulnerabilities, hardcoded secrets, OWASP Top 10 issues, and insecure practices. MUST BE USED before pull requests, when implementing auth features, handling sensitive data, or integrating external services.
 tools: Read, Grep, Glob, Bash
-model: opus
 color: cyan
 ---
 

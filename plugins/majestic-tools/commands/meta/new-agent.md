@@ -1,7 +1,6 @@
 ---
 description: Generate a new Claude Code sub-agent configuration file from a description
 allowed-tools: mcp__sequential-thinking__sequentialthinking, Edit, MultiEdit, Write, NotebookEdit, WebFetch, AskUserQuestion
-model: opus
 ---
 
 # New Agent Builder `/new-agent`

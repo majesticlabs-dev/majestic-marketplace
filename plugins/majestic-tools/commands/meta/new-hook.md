@@ -1,7 +1,6 @@
 ---
 description: Create and configure Claude Code hooks for automating workflows and behavior control
 allowed-tools: Read, Edit, Write, Bash, WebFetch, AskUserQuestion
-model: opus
 ---
 
 # New Hook Builder `/new-hook`

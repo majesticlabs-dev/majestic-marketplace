@@ -274,3 +274,5 @@ _This section captures important learnings as we work on this repository._
 **Learning:** Interactive skills (those with "Conversation Starter" or "Begin by asking:" patterns) should include `AskUserQuestion` in their `allowed-tools:` frontmatter and use the format: "Use `AskUserQuestion` to gather initial context. Begin by asking:"
 
 **Learning:** Mermaid diagrams use different node shapes to distinguish component types: `()` creates stadium/rounded nodes for commands, `{{}}` creates hexagons for agents, and `[]` creates rectangles for manual actions or external steps.
+
+**Learning:** The `model:` field in command/agent frontmatter requires full model IDs (e.g., `claude-haiku-4-5-20251001`), not short names like `haiku`, `sonnet`, or `opus`. Prefer omitting the field entirely to inherit from user's session, except for explicitly cheap/fast operations where haiku is appropriate.
