@@ -2,6 +2,11 @@
 
 All notable changes to majestic-tools will be documented in this file.
 
+## [1.2.0] - 2025-11-30
+
+### Added
+- `reasoning-verifier` agent using Reverse Chain-of-Thought (RCoT) methodology to verify and correct LLM reasoning by detecting overlooked conditions and hallucinated assumptions
+
 ## [1.1.1] - 2025-11-30
 
 ### Enhanced

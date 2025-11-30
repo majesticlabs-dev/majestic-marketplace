@@ -1,6 +1,6 @@
 # Majestic Tools
 
-Claude Code customization tools. Includes 10 commands, 3 skills, and 2 hooks.
+Claude Code customization tools. Includes 1 agent, 10 commands, 3 skills, and 2 hooks.
 
 ## Installation
 
@@ -18,6 +18,14 @@ claude /plugin install majestic-tools
 | Track token usage | `/majestic-tools:insight:ccusage` |
 | Brainstorm ideas | `skill brainstorming` |
 | Deep multi-option analysis | `/majestic-tools:workflows:ultra-options` |
+
+## Agents
+
+Invoke with: `agent majestic-tools:<name>`
+
+| Agent | Description |
+|-------|-------------|
+| `reasoning-verifier` | Verify LLM reasoning using RCoT - detect overlooked conditions and hallucinations |
 
 ## Commands
 
