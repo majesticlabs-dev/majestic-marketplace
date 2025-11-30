@@ -2,6 +2,12 @@
 
 All notable changes to majestic-engineer will be documented in this file.
 
+## [1.12.2] - 2025-11-30
+
+### Changed
+
+- Added short aliases for git commands: `/commit`, `/create-pr`, `/changelog`, `/pr-review`
+
 ## [1.12.1] - 2025-11-30
 
 ### Fixed

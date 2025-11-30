@@ -1,4 +1,5 @@
 ---
+name: changelog
 allowed-tools: Bash(git *), Bash(gh *), AskUserQuestion
 description: Create engaging changelogs from recent merges to default branch
 argument-hint: "[optional: daily|weekly, or number of days]"

@@ -47,6 +47,8 @@ This launches a guided installer that can import agents from Claude Code marketp
 
 **Note:** Skills and commands are Claude Code-specific and won't transfer directly.
 
+![Droid Factory Installer](instructions/droid-factory.png)
+
 ## Majestic Plugins
 
 | Plugin | Description |
@@ -59,7 +61,7 @@ This launches a guided installer that can import agents from Claude Code marketp
 | [majestic-company](plugins/majestic-company/README.md) | Business operations and CEO tools (2 agents, 21 skills) |
 | [majestic-tools](plugins/majestic-tools/README.md) | Claude Code customization tools (10 commands, 3 skills) |
 
-## Recommended Plugins
+## Recommended Tools
 
 Third-party plugins that complement the Majestic suite:
 
@@ -102,7 +104,6 @@ This pulls the latest changes from the marketplace repository and updates all in
 
 ```bash
 /plugin update majestic-engineer
-/plugin update majestic-rails
 ```
 
 ### Check Installed Versions
