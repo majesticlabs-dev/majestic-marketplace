@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.22.0] - 2025-11-30
+
+### Added
+
+- `blind-spot-analyzer` agent for strategic self-awareness
+  - Identifies the single most critical blind spot limiting founder/business growth
+  - 7 structured intake questions to gather context (replacing memory requirement)
+  - 10 blind spot archetypes: 5 founder psychology + 5 strategic gaps
+  - Three-part output: Diagnosis with evidence, Consequences, Prescription
+  - Evidence-based analysis citing founder's own words
+  - Brutally honest, single-focus approach
+
 ## [1.21.0] - 2025-11-30
 
 ### Added

@@ -1,6 +1,6 @@
 # Majestic Company
 
-Business operations tools. Includes 3 specialized agents and 21 skills.
+Business operations tools. Includes 4 specialized agents and 21 skills.
 
 ## Installation
 
@@ -12,6 +12,7 @@ claude /plugin install majestic-company
 
 | I want to... | Use this |
 |--------------|----------|
+| Identify my blind spots | `agent blind-spot-analyzer` |
 | Validate a business idea | `agent idea-validator` |
 | Strategic problem analysis | `agent first-principles` |
 | Create interview kit | `agent people-ops` |
@@ -30,6 +31,7 @@ Invoke with: `agent majestic-company:<name>`
 
 | Agent | Description |
 |-------|-------------|
+| `blind-spot-analyzer` | Identify the single most critical blind spot limiting founder/business growth through integrated analysis of thinking patterns and strategic gaps |
 | `idea-validator` | Validate startup ideas with real market research - orchestrates problem-research, customer-discovery, competitive-positioning for GO/NO-GO verdict |
 | `first-principles` | Strategic thinking using Elon Musk's first-principles methodology |
 | `people-ops` | People operations - hiring, onboarding, PTO, performance management |
@@ -98,6 +100,22 @@ Invoke with: `skill majestic-company:<name>`
 **30-day-launch** = "I know what I'm building, help me launch it fast."
 
 ## Usage Examples
+
+### Blind Spot Analysis
+
+```bash
+# General self-assessment
+agent majestic-company:blind-spot-analyzer "Help me identify what I'm missing"
+
+# After a setback
+agent majestic-company:blind-spot-analyzer "We lost our biggest customer and I don't understand why"
+
+# Pre-fundraise check
+agent majestic-company:blind-spot-analyzer "I'm about to raise - what am I not seeing?"
+
+# Growth plateau
+agent majestic-company:blind-spot-analyzer "Stuck at $50K MRR for 8 months - what am I avoiding?"
+```
 
 ### Idea Validation
 
@@ -206,6 +224,15 @@ skill majestic-company:fundraising:funding-ask-optimizer
 # Create pitch closing
 skill majestic-company:fundraising:objection-destroyer
 ```
+
+## Blind-Spot-Analyzer Capabilities
+
+The blind-spot-analyzer agent uses structured intake questions to surface the ONE most critical blind spot:
+
+- **Founder Psychology** - Optimism bias, sunk cost attachment, identity-business fusion, fear-driven avoidance, expertise trap
+- **Strategic Gaps** - Market timing blindness, competition underestimation, customer misunderstanding, premature scaling, metric misdirection
+
+Output includes diagnosis with evidence from your own words, consequences analysis, and highest-leverage prescription.
 
 ## Idea-Validator Capabilities
 
