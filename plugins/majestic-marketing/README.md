@@ -1,6 +1,6 @@
 # Majestic Marketing
 
-Marketing and SEO tools for Claude Code. Includes 14 specialized agents, 2 commands, and 24 skills.
+Marketing and SEO tools for Claude Code. Includes 14 specialized agents, 2 commands, and 25 skills.
 
 ## Installation
 
@@ -91,6 +91,7 @@ Invoke with: `skill majestic-marketing:<name>`
 | Skill | Description |
 |-------|-------------|
 | `bofu-keywords` | Bottom-of-funnel keywords with high purchase intent |
+| `competitive-positioning` | Analyze competitors, craft differentiators, taglines, and pitches |
 | `customer-discovery` | Find where customers discuss problems, extract language |
 | `free-tool-arsenal` | Complete business tech stack with 100% free tools |
 | `irresistible-offer` | Craft offers using direct response marketing principles |

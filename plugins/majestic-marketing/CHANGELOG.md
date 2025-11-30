@@ -2,6 +2,13 @@
 
 All notable changes to majestic-marketing will be documented in this file.
 
+## [2.23.0] - 2025-11-30
+
+### Added
+
+**Skills (1)**
+- `competitive-positioning` - Analyze competitors, identify positioning weaknesses, and craft sharp differentiators with taglines and tweet-length pitches. Includes competitor snapshot analysis, gap identification, differentiation strategies, and buyer-facing messaging assets.
+
 ## [2.22.0] - 2024-11-30
 
 ### Changed
