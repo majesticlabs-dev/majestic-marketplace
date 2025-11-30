@@ -88,6 +88,29 @@ source ~/.zshrc
 | `CLAUDE_BASH_MAINTAIN_PROJECT_WORKING_DIR` | Keeps bash commands in project directory |
 | `cly` alias | Launches Claude Code with auto-approve for trusted projects |
 
+## Updating Marketplace & Plugins
+
+### Update Everything
+
+```bash
+/plugin marketplace update majestic-marketplace
+```
+
+This pulls the latest changes from the marketplace repository and updates all installed plugins.
+
+### Update Individual Plugin
+
+```bash
+/plugin update majestic-engineer
+/plugin update majestic-rails
+```
+
+### Check Installed Versions
+
+```bash
+/plugin list
+```
+
 ## Output Styles
 
 Configure how Claude Code communicates with you using the `/output-style` command:

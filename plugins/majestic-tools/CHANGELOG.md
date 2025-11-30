@@ -2,6 +2,13 @@
 
 All notable changes to majestic-tools will be documented in this file.
 
+## [1.2.1] - 2025-11-30
+
+### Fixed
+
+- Removed `name:` from `spotlight` command frontmatter, added missing description
+- Added documentation about `name:` field trade-offs in `/new-command` template
+
 ## [1.2.0] - 2025-11-30
 
 ### Added

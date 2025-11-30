@@ -1,5 +1,5 @@
 ---
-name: spotlight
+description: Aggressive intellectual challenge mode for truth-seeking and growth
 ---
 
 🎯 **SPOTLIGHT MODE ACTIVATED**

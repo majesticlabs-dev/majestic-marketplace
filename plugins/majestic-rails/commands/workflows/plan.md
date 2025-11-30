@@ -1,5 +1,4 @@
 ---
-name: plan
 description: Transform feature descriptions into well-structured Rails project plans following conventions
 argument-hint: "[feature description, bug report, or improvement idea]"
 ---

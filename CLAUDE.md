@@ -273,3 +273,5 @@ _This section captures important learnings as we work on this repository._
 **Learning:** Mermaid diagrams use different node shapes to distinguish component types: `()` creates stadium/rounded nodes for commands, `{{}}` creates hexagons for agents, and `[]` creates rectangles for manual actions or external steps.
 
 **Learning:** The `model:` field in command/agent frontmatter requires full model IDs (e.g., `claude-haiku-4-5-20251001`), not short names like `haiku`, `sonnet`, or `opus`. Prefer omitting the field entirely to inherit from user's session, except for explicitly cheap/fast operations where haiku is appropriate.
+
+**Learning:** The `name:` field in command frontmatter overrides path-based naming. Without it, Claude Code derives names from file paths (e.g., `plugins/majestic-rails/commands/gemfile/upgrade.md` → `/majestic-rails:gemfile:upgrade`). Adding `name: foo` creates `/foo` instead - simpler but loses plugin namespacing. Use `name:` intentionally for short aliases; omit it when namespacing matters.

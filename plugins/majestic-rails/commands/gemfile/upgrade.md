@@ -1,5 +1,4 @@
 ---
-name: upgrade
 description: Upgrade a gem safely with changelog review and testing
 argument-hint: "[gem_name | --outdated]"
 allowed-tools: Bash, Read, Edit, WebFetch, AskUserQuestion

@@ -1,5 +1,4 @@
 ---
-name: guided-prd
 description: Discover and refine a product idea through guided questioning, then generate a PRD
 allowed-tools: AskUserQuestion, SlashCommand, Read, Grep, Glob
 ---

@@ -2,6 +2,12 @@
 
 All notable changes to majestic-engineer will be documented in this file.
 
+## [1.12.1] - 2025-11-30
+
+### Fixed
+
+- Removed `name:` from command frontmatter to restore path-based naming (`/majestic-engineer:workflows:*`)
+
 ## [1.12.0] - 2025-11-30
 
 ### Added

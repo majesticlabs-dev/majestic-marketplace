@@ -304,6 +304,8 @@ argument-hint: "[action] [target]"  # OPTIONAL - shows usage hint
 
 **IMPORTANT:** Always use full model identifiers, never short names like `haiku`, `sonnet`, or `opus`.
 
+**Note on `name:` field:** Claude Code derives command names from file paths (e.g., `commands/gemfile/upgrade.md` → `/plugin:gemfile:upgrade`). Adding `name: foo` overrides this to create `/foo` - simpler but loses plugin namespacing. Use `name:` intentionally for short aliases; omit when namespacing matters to avoid collisions.
+
 ### 🎨 Example: Generated Database Expert Command
 
 ```markdown

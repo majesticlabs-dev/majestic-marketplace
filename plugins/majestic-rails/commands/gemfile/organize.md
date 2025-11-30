@@ -1,5 +1,4 @@
 ---
-name: organize
 description: Organize Gemfile with categorized sections and alphabetized gems
 argument-hint: "[optional: path/to/Gemfile]"
 allowed-tools: Bash, Read, Edit, Write, AskUserQuestion

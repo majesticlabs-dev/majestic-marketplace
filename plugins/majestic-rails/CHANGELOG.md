@@ -2,6 +2,12 @@
 
 All notable changes to majestic-rails will be documented in this file.
 
+## [1.14.2] - 2025-11-30
+
+### Fixed
+
+- Removed `name:` from command frontmatter to restore path-based naming (`/majestic-rails:gemfile:*`, `/majestic-rails:workflows:*`)
+
 ## [1.14.1] - 2025-11-29
 
 ### Enhanced
