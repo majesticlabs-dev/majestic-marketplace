@@ -1,15 +1,126 @@
 ---
 allowed-tools: WebFetch, WebSearch, AskUserQuestion
-description: Build a well-structured prompt following Anthropic's best practices
+description: Build or optimize prompts following Anthropic's best practices
 ---
 
-# Build Prompt
+# Prompt Engineer
 
-Create a professional prompt following Anthropic's prompt engineering best practices. This command will guide you through building a comprehensive prompt with all necessary components.
+Build new prompts or optimize existing ones following Anthropic's best practices.
 
-## Instructions
+## Mode Detection
 
-This command helps you build structured prompts by collecting parameters and assembling them according to Anthropic's recommended format. If parameters are missing, I will ask for them interactively.
+First, determine which mode to use based on the arguments:
+
+**Optimization Mode** - Use when:
+- Arguments contain `optimize:` followed by a prompt
+- Arguments contain keywords like "improve", "optimize", "refine", "enhance" followed by a prompt
+- User provides an existing prompt and asks for improvements
+
+**Creation Mode** - Use when:
+- Arguments contain prompt component parameters (taskContext, finalRequest, etc.)
+- No existing prompt is provided
+- User wants to build a new prompt from scratch
+
+If the mode is unclear, use `AskUserQuestion` to ask:
+- "Would you like to optimize an existing prompt or create a new one?"
+
+---
+
+# Optimization Mode
+
+When optimizing an existing prompt, follow this methodology.
+
+## Assessment Steps
+
+Evaluate the prompt in order:
+
+1. **Check user intent** - Can you understand what they want the LLM to do?
+2. **Evaluate structure** - Would restructuring improve response quality?
+3. **Identify missing context** - What information does the LLM need to succeed?
+4. **Assess organization** - Would better organization help?
+
+## Optimization Rules
+
+- Only change what meaningfully improves outcomes - don't change things that already work
+- Preserve the user's voice and personality - keep their writing style and tone
+- Add structure only when needed - don't over-engineer simple requests
+- Don't add complexity for complexity's sake - simpler is usually better
+
+## Optimization Strategies
+
+Apply these techniques based on the issues identified:
+
+### For Vague Prompts
+- Add specific aspects to examine
+- Define the desired output format
+- Specify the analysis depth
+
+### For Missing Context
+- Add relevant constraints
+- Specify the target audience
+- Include necessary background
+
+### For Complex Prompts
+- Break into numbered steps
+- Add clear section headers
+- Define success criteria
+
+### For Unclear Scope
+- Set boundaries
+- Specify depth level
+- Define completion criteria
+
+## Output Formats
+
+Choose exactly one format based on assessment:
+
+### When Improvements Needed
+
+```markdown
+## Optimized Prompt
+
+[Enhanced version of the prompt]
+
+## Key Improvements
+
+1. **[Change]**: [Why it helps]
+2. **[Change]**: [Why it helps]
+```
+
+### When Prompt Is Already Good
+
+```markdown
+## Assessment
+
+Your prompt is clear and well-structured. [Optional minor suggestion if any]
+```
+
+### When Intent Is Unclear
+
+Do not attempt optimization. Instead, ask clarifying questions:
+
+```markdown
+## Clarification Needed
+
+To optimize your prompt effectively, please clarify:
+
+- [Specific question about intent]
+- [Alternative interpretation to confirm]
+```
+
+## Optimization Principles
+
+- Less is often more - avoid unnecessary additions
+- Respect the user's expertise
+- Remove friction, don't add it
+- Focus on practical improvements only
+- Ask for clarification rather than guessing intent
+
+---
+
+# Creation Mode
+
+Build new prompts by collecting parameters and assembling them according to Anthropic's recommended format. If parameters are missing, ask for them interactively.
 
 ## Process
 
@@ -148,6 +259,8 @@ The final prompt will be formatted as:
 
 ## Example Usage
 
+### Creation Mode
+
 ```bash
 # Minimal usage - will ask for required parameters
 /new-prompt
@@ -157,6 +270,19 @@ The final prompt will be formatted as:
 
 # With detailed parameters
 /new-prompt taskContext:"Review code for security issues" toneContext:"Professional and thorough" chainOfThought:"yes" outputFormatting:"Use markdown with code blocks"
+```
+
+### Optimization Mode
+
+```bash
+# Optimize an existing prompt
+/new-prompt optimize:"Write a blog post about AI"
+
+# Natural language
+/new-prompt improve this prompt: "You are a helpful assistant. Answer questions about cooking."
+
+# Refine a complex prompt
+/new-prompt enhance:"As a senior developer, review this code for bugs and security issues. Be thorough."
 ```
 
 ## Arguments Format

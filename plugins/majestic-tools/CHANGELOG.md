@@ -2,6 +2,14 @@
 
 All notable changes to majestic-tools will be documented in this file.
 
+## [1.1.1] - 2025-11-30
+
+### Enhanced
+- `/new-prompt` command now supports prompt optimization in addition to prompt creation
+  - Optimization mode: analyze and improve existing prompts
+  - Creation mode: build new prompts from scratch (existing behavior)
+  - Automatic mode detection based on arguments
+
 ## [1.1.0] - 2024-11-26
 
 ### Added
