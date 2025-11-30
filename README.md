@@ -14,7 +14,8 @@ This gives you options to:
 1. Add marketplace (enables plugin installation)
 2. Add output styles (formatting guides)
 3. Add MCP servers (Sequential Thinking)
-4. Install all
+4. Configure shell settings (env vars + alias)
+5. Install all
 
 ### Manual Installation
 
@@ -67,12 +68,32 @@ Third-party plugins that complement the Majestic suite:
 | [osgrep](https://github.com/Ryandonofrio3/osgrep) | Semantic code search with natural language queries - find code by intent, not just keywords | `npm i -g osgrep && osgrep install-claude-code` |
 | [beads](https://github.com/steveyegge/beads) | Dependency-aware issue tracker - issues chained like beads with blocking relationships | `curl -fsSL https://raw.githubusercontent.com/steveyegge/beads/main/install.sh \| bash` |
 
+## Recommended Settings
+
+Add Claude Code environment variables to your shell profile:
+
+```bash
+# Option 1: Use the installer (menu option 4)
+curl -fsSL https://raw.githubusercontent.com/majesticlabs-dev/majestic-marketplace/master/install.sh | bash
+
+# Option 2: Manual - append to ~/.zshrc or ~/.bashrc
+curl -fsSL https://raw.githubusercontent.com/majesticlabs-dev/majestic-marketplace/master/instructions/shell-settings.sh >> ~/.zshrc
+source ~/.zshrc
+```
+
+| Setting | Description |
+|---------|-------------|
+| `ENABLE_BACKGROUND_TASKS` | Enables background task execution |
+| `FORCE_AUTO_BACKGROUND_TASKS` | Automatically runs eligible tasks in background |
+| `CLAUDE_BASH_MAINTAIN_PROJECT_WORKING_DIR` | Keeps bash commands in project directory |
+| `cly` alias | Launches Claude Code with auto-approve for trusted projects |
+
 ## Project CLAUDE.md Setup
 
 Initialize a project-level CLAUDE.md with coding guidelines for your team:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/majesticlabs-dev/majestic-marketplace/master/init-claude.sh | bash
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/majesticlabs-dev/majestic-marketplace/master/install.sh)"
 ```
 
 Available modules:

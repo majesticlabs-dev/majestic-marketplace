@@ -28,7 +28,8 @@ print_menu() {
   echo "  1) Add marketplace (enables plugin installation)"
   echo "  2) Add output styles (formatting guides)"
   echo "  3) Add MCP servers"
-  echo "  4) Install all"
+  echo "  4) Configure shell settings"
+  echo "  5) Install all"
   echo "  0) Exit"
   echo ""
 }
@@ -182,6 +183,49 @@ install_single_mcp() {
   jq --arg n "$name" --argjson config "$mcp_config" '.mcpServers[$n] = $config' "$settings_file" > "$temp_file" && mv "$temp_file" "$settings_file"
 }
 
+install_shell_settings() {
+  echo -e "${CYAN}Configuring shell settings...${NC}"
+
+  # Detect shell profile
+  local profile_file
+  if [ -f "$HOME/.zshrc" ]; then
+    profile_file="$HOME/.zshrc"
+  elif [ -f "$HOME/.bashrc" ]; then
+    profile_file="$HOME/.bashrc"
+  else
+    profile_file="$HOME/.bashrc"
+    touch "$profile_file"
+  fi
+
+  local marker="# Majestic Marketplace - Claude Code Settings"
+
+  # Check if already installed (idempotent)
+  if grep -q "$marker" "$profile_file" 2>/dev/null; then
+    echo -e "${GREEN}✓ Shell settings already configured in $profile_file${NC}"
+    return 0
+  fi
+
+  # Fetch and append settings from repo
+  echo "  Downloading shell settings..."
+  local settings
+  settings=$(curl -fsSL "$REPO_RAW/instructions/shell-settings.sh")
+
+  if [ -z "$settings" ]; then
+    echo -e "${RED}✗ Error: Could not fetch shell settings${NC}"
+    return 1
+  fi
+
+  echo "" >> "$profile_file"
+  echo "$settings" >> "$profile_file"
+
+  echo -e "${GREEN}✓ Shell settings added to $profile_file${NC}"
+  echo ""
+  echo "Settings added:"
+  echo "$settings" | grep -E "^export|^alias" | sed 's/^/  /'
+  echo ""
+  echo "Run 'source $profile_file' or restart your terminal to apply."
+}
+
 main() {
   print_header
 
@@ -190,7 +234,7 @@ main() {
     choice="$1"
   else
     print_menu
-    read -p "Enter choice [0-4]: " choice
+    read -p "Enter choice [0-5]: " choice
   fi
 
   echo ""
@@ -206,11 +250,16 @@ main() {
       install_mcp_servers
       ;;
     4)
+      install_shell_settings
+      ;;
+    5)
       install_marketplace
       echo ""
       install_output_styles
       echo ""
       install_mcp_servers
+      echo ""
+      install_shell_settings
       ;;
     0)
       echo "Goodbye!"
