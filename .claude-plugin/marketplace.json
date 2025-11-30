@@ -57,16 +57,29 @@
     },
     {
       "name": "majestic-marketing",
-      "description": "Marketing and SEO tools for Claude Code. Includes 14 specialized agents, 2 commands, and 30 skills.",
-      "version": "2.21.0",
+      "description": "Marketing and SEO tools for Claude Code. Includes 14 specialized agents, 2 commands, and 24 skills.",
+      "version": "2.22.0",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
         "email": "marketplace@it.majesticlabs.dev"
       },
       "homepage": "https://github.com/majesticlabs-dev/majestic-marketplace/tree/master/plugins/majestic-marketing",
-      "tags": ["marketing", "seo", "geo", "content", "copywriting", "llm-optimization", "ai-visibility", "value-proposition", "customer-discovery", "sales", "outbound", "google-ads", "paid-acquisition", "branding", "naming", "power-words", "icp", "ideal-customer-profile"],
+      "tags": ["marketing", "seo", "geo", "content", "copywriting", "llm-optimization", "ai-visibility", "value-proposition", "google-ads", "paid-acquisition", "branding", "naming", "power-words"],
       "source": "./plugins/majestic-marketing"
+    },
+    {
+      "name": "majestic-sales",
+      "description": "Sales acceleration and revenue tools. Includes 1 command and 6 skills.",
+      "version": "1.0.0",
+      "author": {
+        "name": "David Paluy",
+        "url": "https://github.com/dpaluy",
+        "email": "marketplace@it.majesticlabs.dev"
+      },
+      "homepage": "https://github.com/majesticlabs-dev/majestic-marketplace/tree/master/plugins/majestic-sales",
+      "tags": ["sales", "funnels", "revenue", "conversion", "prospecting", "proposals", "playbooks", "outbound", "icp", "referrals"],
+      "source": "./plugins/majestic-sales"
     },
     {
       "name": "majestic-company",

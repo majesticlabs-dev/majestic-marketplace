@@ -1,6 +1,6 @@
-# Majestic Marketplace - Claude Code Plugin Marketplace
+# Majestic Marketplace - Ultimate Company Management Toolkit
 
-This repository is a Claude Code plugin marketplace that distributes the `majestic` plugins to build with AI-powered tools.
+This repository is a Claude Code plugin marketplace that provides an **ultimate company management toolkit** - AI-powered tools covering every business function: Engineering, Marketing, Sales, and Company Operations.
 
 ## Repository Structure
 
@@ -10,26 +10,23 @@ majestic-marketplace/
 │   └── marketplace.json          # Marketplace catalog (lists available plugins)
 └── plugins/
     ├── majestic-engineer/        # Language-agnostic engineering workflows
-    │   ├── .claude-plugin/
-    │   │   └── plugin.json
-    │   ├── agents/               # 5 agents
-    │   ├── commands/             # 18 commands
-    │   ├── skills/               # 4 skills
-    │   └── README.md
     ├── majestic-rails/           # Ruby/Rails development tools
-    │   ├── .claude-plugin/
-    │   │   └── plugin.json
-    │   ├── agents/               # 2 agents
-    │   ├── skills/               # 4 skills
-    │   └── README.md
+    ├── majestic-python/          # Python development tools
+    ├── majestic-marketing/       # Marketing and SEO tools
+    ├── majestic-sales/           # Sales acceleration tools
+    ├── majestic-company/         # Business operations tools
     └── majestic-tools/           # Claude Code customization tools
-        ├── .claude-plugin/
-        │   └── plugin.json
-        ├── agents/               # 2 agents
-        ├── commands/             # 12 commands
-        ├── output-styles/        # 8 output format guides
-        └── README.md
 ```
+
+## Business Function Coverage
+
+| Function | Plugin | Focus |
+|----------|--------|-------|
+| Engineering | majestic-engineer, majestic-rails, majestic-python | Development workflows, code quality, testing |
+| Marketing | majestic-marketing | SEO, content, GEO (AI visibility), branding |
+| Sales | majestic-sales | Funnels, playbooks, prospecting, proposals |
+| Operations | majestic-company | Strategy, hiring, legal, business planning |
+| Meta | majestic-tools | Claude Code customization |
 
 ## Architecture Principles
 

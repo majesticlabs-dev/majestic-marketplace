@@ -1,0 +1,22 @@
+{
+  "name": "majestic-sales",
+  "version": "1.0.0",
+  "description": "Sales acceleration and revenue tools. Includes 1 command and 6 skills.",
+  "author": {
+    "name": "David Paluy",
+    "url": "https://github.com/dpaluy",
+    "email": "marketplace@it.majesticlabs.dev"
+  },
+  "keywords": [
+    "sales",
+    "funnels",
+    "revenue",
+    "conversion",
+    "prospecting",
+    "proposals",
+    "playbooks",
+    "outbound",
+    "icp",
+    "referrals"
+  ]
+}

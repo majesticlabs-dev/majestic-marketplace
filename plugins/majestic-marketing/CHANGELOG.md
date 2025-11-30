@@ -2,6 +2,21 @@
 
 All notable changes to majestic-marketing will be documented in this file.
 
+## [2.22.0] - 2024-11-30
+
+### Changed
+
+**Skills Migrated to majestic-sales (6)**
+
+The following sales-focused skills have been moved to the new `majestic-sales` plugin for better organization:
+
+- `sales-playbook` - Now at `majestic-sales:sales-playbook`
+- `outbound-sequences` - Now at `majestic-sales:outbound-sequences`
+- `proposal-writer` - Now at `majestic-sales:proposal-writer`
+- `icp-discovery` - Now at `majestic-sales:icp-discovery`
+- `referral-program` - Now at `majestic-sales:referral-program`
+- `win-back` - Now at `majestic-sales:win-back`
+
 ## [2.19.0] - 2025-11-28
 
 ### Added

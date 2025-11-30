@@ -1,6 +1,6 @@
 # Majestic Marketing
 
-Marketing and SEO tools for Claude Code. Includes 14 specialized agents, 2 commands, and 30 skills.
+Marketing and SEO tools for Claude Code. Includes 14 specialized agents, 2 commands, and 24 skills.
 
 ## Installation
 
@@ -101,25 +101,19 @@ Invoke with: `skill majestic-marketing:<name>`
 | `traffic-magnet` | Organic traffic and customer acquisition with zero ad spend |
 | `value-prop-sharpener` | Refine value propositions into 15-word statements |
 
-### Sales & Acquisition
+### Acquisition & Ads
 
 | Skill | Description |
 |-------|-------------|
 | `case-study-writer` | Customer case studies for marketing and sales enablement |
 | `google-ads-strategy` | Google Ads campaigns with keyword strategy and budget allocation |
-| `icp-discovery` | Ideal Customer Profile with firmographics and scoring matrices |
-| `outbound-sequences` | Cold outreach sequences for email and LinkedIn |
-| `proposal-writer` | Sales proposals with scope, pricing, and ROI justification |
-| `sales-playbook` | Discovery frameworks, objection handling, closing techniques |
 
-### Retention & Growth
+### Retention & Nurture
 
 | Skill | Description |
 |-------|-------------|
 | `email-nurture` | Automated email sequences with segmentation and triggers |
-| `referral-program` | Viral referral programs with incentive structures |
 | `retention-system` | Customer retention with health scoring and churn prediction |
-| `win-back` | Win-back campaigns to re-engage dormant customers |
 
 ## SEO vs GEO
 
@@ -217,26 +211,17 @@ skill majestic-marketing:sales-page
 skill majestic-marketing:landing-page-builder
 ```
 
-### Sales & Acquisition Skills
+### Acquisition & Ads Skills
 
 ```bash
-# Define your Ideal Customer Profile
-skill majestic-marketing:icp-discovery
-
-# Cold outreach sequences
-skill majestic-marketing:outbound-sequences
-
-# Sales playbook with objection handling
-skill majestic-marketing:sales-playbook
-
-# Create winning proposals
-skill majestic-marketing:proposal-writer
-
 # Google Ads campaign strategy
 skill majestic-marketing:google-ads-strategy
+
+# Customer case studies
+skill majestic-marketing:case-study-writer
 ```
 
-### Retention & Growth Skills
+### Retention & Nurture Skills
 
 ```bash
 # Email nurture sequences
@@ -244,13 +229,4 @@ skill majestic-marketing:email-nurture
 
 # Customer retention system
 skill majestic-marketing:retention-system
-
-# Viral referral program design
-skill majestic-marketing:referral-program
-
-# Win-back campaigns
-skill majestic-marketing:win-back
-
-# Customer case studies
-skill majestic-marketing:case-study-writer
 ```
