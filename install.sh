@@ -37,22 +37,33 @@ print_menu() {
 install_marketplace() {
   echo -e "${CYAN}Adding marketplace...${NC}"
 
-  if command -v claude &> /dev/null; then
-    claude /plugin marketplace add https://github.com/majesticlabs-dev/majestic-marketplace
-    echo -e "${GREEN}✓ Marketplace added successfully!${NC}"
-    echo ""
-    echo "Available plugins:"
-    echo "  - majestic-engineer: Language-agnostic engineering workflows"
-    echo "  - majestic-rails: Ruby on Rails development tools"
-    echo "  - majestic-tools: Claude Code customization tools"
-    echo ""
-    echo "Install a plugin with:"
-    echo "  claude /plugin install <plugin-name>"
-  else
+  if ! command -v claude &> /dev/null; then
     echo -e "${RED}✗ Error: claude command not found${NC}"
     echo "Please install Claude Code first: https://docs.anthropic.com/en/docs/claude-code"
     return 1
   fi
+
+  echo -e "${GREEN}✓ Claude Code detected${NC}"
+  echo ""
+  echo -e "${BOLD}To add the marketplace, follow these steps:${NC}"
+  echo ""
+  echo "  1. Start Claude Code:"
+  echo -e "     ${CYAN}claude${NC}"
+  echo ""
+  echo "  2. Once inside the Claude prompt, run:"
+  echo -e "     ${CYAN}/plugin marketplace add https://github.com/majesticlabs-dev/majestic-marketplace.git${NC}"
+  echo ""
+  echo "  3. Install plugins with:"
+  echo -e "     ${CYAN}/plugin install <plugin-name>${NC}"
+  echo ""
+  echo "Available plugins:"
+  echo "  - majestic-engineer: Language-agnostic engineering workflows"
+  echo "  - majestic-rails: Ruby on Rails development tools"
+  echo "  - majestic-python: Python development tools"
+  echo "  - majestic-marketing: Marketing and SEO tools"
+  echo "  - majestic-sales: Sales acceleration tools"
+  echo "  - majestic-company: Business operations tools"
+  echo "  - majestic-tools: Claude Code customization tools"
 }
 
 install_output_styles() {
