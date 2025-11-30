@@ -1,6 +1,6 @@
 # Majestic Engineer
 
-Language-agnostic engineering workflows. Includes 17 specialized agents, 8 commands, and 13 skills.
+Language-agnostic engineering workflows. Includes 17 specialized agents, 9 commands, and 13 skills.
 
 ## Installation
 
@@ -12,7 +12,8 @@ claude /plugin install majestic-engineer
 
 ```mermaid
 graph LR
-    A(/prd) --> B{{architect}}
+    A0(/guided-prd) --> A(/prd)
+    A --> B{{architect}}
     B --> C{{plan-review}}
     C --> D[Build]
     D --> E{{test-create}}
@@ -111,6 +112,7 @@ Invoke with: `/majestic-engineer:<category>:<name>`
 
 | Command | Description |
 |---------|-------------|
+| `workflows:guided-prd` | Discover and refine a product idea through guided questioning, then generate a PRD |
 | `workflows:prd` | Create a Product Requirements Document (PRD) for a new product or feature |
 | `workflows:question` | Answer questions about project structure without coding |
 

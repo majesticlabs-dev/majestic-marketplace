@@ -2,6 +2,12 @@
 
 All notable changes to majestic-engineer will be documented in this file.
 
+## [1.12.0] - 2025-11-30
+
+### Added
+
+- `/workflows:guided-prd` command for discovering and refining product ideas through guided questioning before PRD generation
+
 ## [1.11.0] - 2025-11-27
 
 ### Added
