@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.23.0] - 2025-11-30
+
+### Enhanced
+
+- `ceo:pricing-strategy` skill with new Expansion Revenue Strategy section
+  - Expansion model options table (usage-based, seat expansion, feature upsell, add-on)
+  - Recommended expansion play template with trigger, timing, and messaging fields
+  - Key questions for identifying value metrics that scale with customer success
+
 ## [1.22.0] - 2025-11-30
 
 ### Added

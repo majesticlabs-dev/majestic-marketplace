@@ -277,7 +277,40 @@ For each competitor:
 - [ ] Review metrics monthly
 - [ ] Adjust based on data
 
-### KPIs to Track
+### 8. Expansion Revenue Strategy
+
+Design how existing customers will generate additional revenue over time.
+
+**Expansion Model Options:**
+
+| Model | Value Metric | Best For | Example |
+|-------|-------------|----------|---------|
+| Usage-based | Units consumed | Variable usage products | Per API call, per GB, per transaction |
+| Seat expansion | Users/seats | Team software | Per additional user/seat |
+| Feature upsell | Tier upgrade | Products with clear tiers | Basic → Pro → Enterprise |
+| Add-on | Supplementary product | Core + extras | Support packages, integrations |
+
+**Recommended Expansion Play:**
+
+```markdown
+## Expansion Play: [Type]
+
+| Element | Recommendation |
+|---------|---------------|
+| Model | [Usage-based / Seat / Upsell / Add-on] |
+| Trigger | [Usage threshold / Time / Behavior signal] |
+| Target Segment | [Which tier/customer type] |
+| Timing | [When to present the expansion offer] |
+| Messaging | [How to position the upgrade] |
+| Estimated Lift | X% revenue expansion per customer |
+```
+
+**Key Questions:**
+- What value metric scales with customer success?
+- At what usage level do customers see enough value to pay more?
+- What features would power users pay extra for?
+
+### 9. KPIs to Track
 
 | Metric | Current | Target | Measurement |
 |--------|---------|--------|-------------|
@@ -334,7 +367,12 @@ For each competitor:
 
 ---
 
-## SECTION 8: KPIs & MEASUREMENT
+## SECTION 8: EXPANSION REVENUE
+[Expansion model and recommended play]
+
+---
+
+## SECTION 9: KPIs & MEASUREMENT
 [Metrics to track success]
 
 ---
