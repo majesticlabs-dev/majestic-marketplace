@@ -2,6 +2,12 @@
 
 All notable changes to majestic-engineer will be documented in this file.
 
+## [1.14.0] - 2025-11-30
+
+### Added
+
+- `/workflows:ship-it` command - Invokes the ship agent for complete checkout workflow (lint, commit, PR)
+
 ## [1.13.0] - 2025-11-30
 
 ### Added
