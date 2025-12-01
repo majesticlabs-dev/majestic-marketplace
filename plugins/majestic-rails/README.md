@@ -1,6 +1,6 @@
 # Majestic Rails
 
-Ruby on Rails development tools. Includes 23 specialized agents, 5 commands, and 9 skills.
+Ruby on Rails development tools. Includes 22 specialized agents, 5 commands, and 9 skills.
 
 ## Installation
 
@@ -57,7 +57,6 @@ Invoke with: `agent majestic-rails:<name>` or `agent majestic-rails:<category>:<
 | `active-job-coder` | Create background jobs with Rails 8 conventions, Solid Queue patterns, and retry strategies |
 | `database-admin` | Database operations, backups, monitoring, connection pooling for PostgreSQL/SQLite |
 | `database-optimizer` | Advanced query optimization, EXPLAIN analysis, complex SQL for PostgreSQL/SQLite |
-| `github-resolver` | Resolve CI failures and PR review comments from GitHub |
 | `graphql-architect` | Design GraphQL schemas, resolvers, subscriptions using graphql-ruby patterns |
 | `lint` | Run rubocop, erblint, and brakeman before pushing |
 | `rails-debugger` | Debug Rails issues and validate bug reports by analyzing errors and reproducing issues |
@@ -153,9 +152,6 @@ agent majestic-rails:rails-debugger "Investigate why user registration is failin
 
 # Fix Rubocop violations
 agent majestic-rails:rubocop-fixer "Fix all Style cops in app/models/"
-
-# Resolve CI failures or PR comments
-agent majestic-rails:github-resolver "Fix the failing tests in PR #123"
 
 # Create background jobs
 agent majestic-rails:active-job-coder "Create a job to process uploaded files"

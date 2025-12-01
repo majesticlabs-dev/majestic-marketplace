@@ -1,6 +1,6 @@
 # Majestic Engineer
 
-Language-agnostic engineering workflows. Includes 17 specialized agents, 9 commands, and 13 skills.
+Language-agnostic engineering workflows. Includes 18 specialized agents, 9 commands, and 13 skills.
 
 ## Installation
 
@@ -86,6 +86,7 @@ Invoke with: `agent majestic-engineer:<category>:<name>`
 | Agent | Description |
 |-------|-------------|
 | `workflow:always-works-verifier` | Verify implementations actually work before declaring completion |
+| `workflow:github-resolver` | Resolve CI failures and PR review comments (auto-detects project type) |
 | `workflow:ship` | Complete shipping workflow: lint, commit, PR |
 
 ## Commands

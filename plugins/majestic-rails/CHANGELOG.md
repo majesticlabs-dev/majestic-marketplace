@@ -2,6 +2,12 @@
 
 All notable changes to majestic-rails will be documented in this file.
 
+## [1.15.0] - 2025-11-30
+
+### Removed
+
+- `github-resolver` agent - Migrated to majestic-engineer as a generic, language-agnostic agent (use `agent majestic-engineer:workflow:github-resolver` instead)
+
 ## [1.14.2] - 2025-11-30
 
 ### Fixed

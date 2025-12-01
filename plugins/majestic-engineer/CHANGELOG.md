@@ -2,6 +2,12 @@
 
 All notable changes to majestic-engineer will be documented in this file.
 
+## [1.13.0] - 2025-11-30
+
+### Added
+
+- `workflow:github-resolver` agent - Resolve CI failures and PR review comments with auto-detection for Ruby, Node.js, Python, Go, and Rust projects (migrated from majestic-rails and generalized)
+
 ## [1.12.2] - 2025-11-30
 
 ### Changed
