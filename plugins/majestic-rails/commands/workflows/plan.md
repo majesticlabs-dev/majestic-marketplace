@@ -1,4 +1,5 @@
 ---
+name: rails:plan
 description: Transform feature descriptions into well-structured Rails project plans following conventions
 argument-hint: "[feature description, bug report, or improvement idea]"
 ---
@@ -380,8 +381,8 @@ After writing the plan file, use the **AskUserQuestion tool** to present these o
 5. **Rework** - Change approach or request specific changes
 
 Based on selection:
-- **`/build`** → Call `/majestic-rails:workflows/build` with the plan file path
-- **`/code-review`** → Call `/majestic-rails:workflows:code-review` with the plan file path
+- **`/build`** → Call `/rails:build` with the plan file path
+- **`/code-review`** → Call `/rails:code-review` with the plan file path
 - **Create backlog item** → Invoke `backlog-manager` skill (see Backlog Integration below)
 - **Simplify** → Ask "What should I simplify?" then regenerate simpler version
 - **Rework** → Ask "What would you like changed?" then regenerate with changes

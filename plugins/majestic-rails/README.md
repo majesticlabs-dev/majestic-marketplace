@@ -19,18 +19,18 @@ graph LR
 
 | Step | Tool | Purpose |
 |------|------|---------|
-| 1 | `/majestic-rails:workflows:plan` | Research and create plan |
+| 1 | `/rails:plan` | Research and create plan |
 | 2 | Choose next step | Build, review, backlog, or refine |
-| 3 | `/majestic-rails:workflows:build` | Implement the plan |
-| 4 | `/majestic-rails:workflows:review` | Smart multi-agent code review |
+| 3 | `/rails:build` | Implement the plan |
+| 4 | `/rails:code-review` | Smart multi-agent code review |
 
 ## Quick Reference
 
 | I want to... | Use this |
 |--------------|----------|
-| Plan a new feature | `/majestic-rails:workflows:plan "feature"` |
-| Build from a plan | `/majestic-rails:workflows:build docs/plans/feature.md` |
-| Review code changes | `/majestic-rails:workflows:review` |
+| Plan a new feature | `/rails:plan "feature"` |
+| Build from a plan | `/rails:build docs/plans/feature.md` |
+| Review code changes | `/rails:code-review` |
 | Debug Rails issues | `agent rails-debugger` |
 | Fix Rubocop violations | `agent rubocop-fixer` |
 | Optimize database queries | `agent database-optimizer` |
@@ -104,9 +104,9 @@ Invoke with: `/majestic-rails:<category>:<name>`
 
 | Command | Description |
 |---------|-------------|
-| `workflows:build` | Execute work plans efficiently - build features following Rails conventions |
-| `workflows:plan` | Transform feature descriptions into well-structured Rails project plans |
-| `workflows:review` | Comprehensive code review using smart agent selection based on changed files |
+| `/rails:build` | Execute work plans efficiently - build features following Rails conventions |
+| `/rails:plan` | Transform feature descriptions into well-structured Rails project plans |
+| `/rails:code-review` | Comprehensive code review using smart agent selection based on changed files |
 
 ## Skills
 
@@ -128,16 +128,16 @@ Invoke with: `skill majestic-rails:<name>`
 
 ```bash
 # Plan a feature (with post-generation options: build, review, backlog, simplify, rework)
-/majestic-rails:workflows:plan "Add user authentication with OAuth"
+/rails:plan "Add user authentication with OAuth"
 
 # Build from a plan
-/majestic-rails:workflows:build docs/plans/add-user-authentication.md
+/rails:build docs/plans/add-user-authentication.md
 
 # Comprehensive code review (smart agent selection)
-/majestic-rails:workflows:review              # Review current branch vs main
-/majestic-rails:workflows:review #123         # Review PR #123
-/majestic-rails:workflows:review --staged     # Review staged changes
-/majestic-rails:workflows:review app/models/  # Review specific files
+/rails:code-review              # Review current branch vs main
+/rails:code-review #123         # Review PR #123
+/rails:code-review --staged     # Review staged changes
+/rails:code-review app/models/  # Review specific files
 
 # Gemfile management
 /majestic-rails:gemfile:organize              # Organize Gemfile with categories

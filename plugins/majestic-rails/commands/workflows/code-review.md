@@ -1,4 +1,5 @@
 ---
+name: rails:code-review
 description: Comprehensive Rails code review using smart agent selection based on changed files
 argument-hint: "[PR #/URL | branch | --staged | files...]"
 allowed-tools: Bash, Read, Grep, Glob, Task, AskUserQuestion
