@@ -1,6 +1,6 @@
 # Majestic Rails
 
-Ruby on Rails development tools. Includes 22 specialized agents, 5 commands, and 9 skills.
+Ruby on Rails development tools. Includes 22 specialized agents, 4 commands, and 9 skills.
 
 ## Installation
 
@@ -12,14 +12,14 @@ claude /plugin install majestic-rails
 
 ```mermaid
 graph LR
-    A(/plan) --> B(/build)
-    B --> C(/code-review)
+    A(/plan) --> B(/rails:build)
+    B --> C(/rails:code-review)
     C --> D{{ship}}
 ```
 
 | Step | Tool | Purpose |
 |------|------|---------|
-| 1 | `/rails:plan` | Research and create plan |
+| 1 | `/plan` | Research and create plan (from majestic-engineer) |
 | 2 | Choose next step | Build, review, backlog, or refine |
 | 3 | `/rails:build` | Implement the plan |
 | 4 | `/rails:code-review` | Smart multi-agent code review |
@@ -28,7 +28,7 @@ graph LR
 
 | I want to... | Use this |
 |--------------|----------|
-| Plan a new feature | `/rails:plan "feature"` |
+| Plan a new feature | `/plan "feature"` |
 | Build from a plan | `/rails:build docs/plans/feature.md` |
 | Review code changes | `/rails:code-review` |
 | Debug Rails issues | `agent rails-debugger` |
@@ -105,7 +105,6 @@ Invoke with: `/majestic-rails:<category>:<name>`
 | Command | Description |
 |---------|-------------|
 | `/rails:build` | Execute work plans efficiently - build features following Rails conventions |
-| `/rails:plan` | Transform feature descriptions into well-structured Rails project plans |
 | `/rails:code-review` | Comprehensive code review using smart agent selection based on changed files |
 
 ## Skills
@@ -127,8 +126,8 @@ Invoke with: `skill majestic-rails:<name>`
 ## Usage Examples
 
 ```bash
-# Plan a feature (with post-generation options: build, review, backlog, simplify, rework)
-/rails:plan "Add user authentication with OAuth"
+# Plan a feature (use generic /plan from majestic-engineer)
+/plan "Add user authentication with OAuth"
 
 # Build from a plan
 /rails:build docs/plans/add-user-authentication.md

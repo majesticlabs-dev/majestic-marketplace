@@ -1,6 +1,6 @@
 # Majestic Engineer
 
-Language-agnostic engineering workflows. Includes 18 specialized agents, 11 commands, and 13 skills.
+Language-agnostic engineering workflows. Includes 18 specialized agents, 12 commands, and 13 skills.
 
 ## Installation
 
@@ -8,7 +8,9 @@ Language-agnostic engineering workflows. Includes 18 specialized agents, 11 comm
 claude /plugin install majestic-engineer
 ```
 
-## Recommended Workflow
+## Recommended Workflows
+
+### PRD-First (New Products/Features)
 
 ```mermaid
 graph LR
@@ -22,13 +24,32 @@ graph LR
 
 | Step | Tool | Purpose |
 |------|------|---------|
-| 1 | `/majestic-engineer:workflows:prd` | Define requirements (WHAT & WHY) |
-| 2 | `agent plan:architect` | Design implementation (HOW) |
-| 3 | `agent plan:plan-review` | Validate before coding |
-| 4 | Implementation | Write the code |
-| 5 | `agent qa:test-create` | Write tests |
-| 6 | `agent qa:security-review` | Security audit |
-| 7 | `/majestic-engineer:git:commit` + `git:create-pr` | Ship it |
+| 1 | `/guided-prd` | Discover and refine product idea |
+| 2 | `/prd` | Generate Product Requirements Document |
+| 3 | `agent plan:architect` | Design implementation (HOW) |
+| 4 | `agent plan:plan-review` | Validate before coding |
+| 5 | Implementation | Write the code |
+| 6 | `agent qa:test-create` | Write tests |
+| 7 | `/git:commit` + `/git:create-pr` | Ship it |
+
+### Plan-First (Features/Bugs/Improvements)
+
+```mermaid
+graph LR
+    A(/plan) --> B{{plan-review}}
+    B --> C[Build]
+    C --> D{{test-create}}
+    D --> E{{ship}}
+```
+
+| Step | Tool | Purpose |
+|------|------|---------|
+| 1 | `/plan` | Create structured implementation plan |
+| 2 | `agent plan:plan-review` | Validate before coding |
+| 3 | Implementation | Write the code |
+| 4 | `agent qa:test-create` | Write tests |
+| 5 | `agent qa:security-review` | Security audit |
+| 6 | `/git:commit` + `/git:create-pr` | Ship it |
 
 > **Note:** For Rails projects, use `/majestic-rails:workflows:build` for implementation.
 
@@ -36,8 +57,9 @@ graph LR
 
 | I want to... | Use this |
 |--------------|----------|
+| Plan a feature or bug fix | `/plan` |
 | Analyze a spec for gaps | `agent plan:spec-reviewer` |
-| Define what to build (requirements) | `/majestic-engineer:workflows:prd` |
+| Define what to build (requirements) | `/prd` |
 | Design how to build it (architecture) | `agent plan:architect` |
 | Plan a refactoring effort | `agent plan:refactor-plan` |
 | Review a plan before implementing | `agent plan:plan-review` |
@@ -115,6 +137,7 @@ Invoke with: `/majestic-engineer:<category>:<name>`
 |---------|-------------|
 | `workflows:debug` | Debug errors, test failures, or unexpected behavior (auto-detects project type) |
 | `workflows:guided-prd` | Discover and refine a product idea through guided questioning, then generate a PRD |
+| `workflows:plan` | Transform feature descriptions into well-structured project plans |
 | `workflows:prd` | Create a Product Requirements Document (PRD) for a new product or feature |
 | `workflows:question` | Answer questions about project structure without coding |
 | `workflows:ship-it` | Complete checkout workflow - runs linting, creates commit, and opens PR |

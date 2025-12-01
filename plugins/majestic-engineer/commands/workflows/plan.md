@@ -1,6 +1,6 @@
 ---
-name: rails:plan
-description: Transform feature descriptions into well-structured Rails project plans following conventions
+name: plan
+description: Transform feature descriptions into well-structured project plans following conventions
 argument-hint: "[feature description, bug report, or improvement idea]"
 ---
 
@@ -8,7 +8,7 @@ argument-hint: "[feature description, bug report, or improvement idea]"
 
 ## Introduction
 
-Transform feature descriptions, bug reports, or improvement ideas into well-structured markdown files issues that follow project conventions and best practices. This command provides flexible detail levels to match your needs.
+Transform feature descriptions, bug reports, or improvement ideas into well-structured markdown files that follow project conventions and best practices. This command provides flexible detail levels to match your needs.
 
 ## Feature Description
 
@@ -23,7 +23,7 @@ Do not proceed until you have a clear feature description from the user.
 ### 1. Repository Research & Context Gathering
 
 <thinking>
-First, I need to understand the project's conventions and existing patterns, leveraging all available resources and use paralel subagents to do this.
+First, I need to understand the project's conventions and existing patterns, leveraging all available resources and use parallel subagents to do this.
 </thinking>
 
 Run these agents in parallel at the same time:
@@ -34,7 +34,7 @@ Run these agents in parallel at the same time:
 
 **Reference Collection:**
 
-- [ ] Document all research findings with specific file paths (e.g., `app/services/example_service.rb:42`)
+- [ ] Document all research findings with specific file paths (e.g., `src/services/example_service.ts:42`)
 - [ ] Include URLs to external documentation and best practices guides
 - [ ] Create a reference list of similar issues or PRs (e.g., `#123`, `#456`)
 - [ ] Note any team conventions discovered in `CLAUDE.md` or team documentation
@@ -78,7 +78,7 @@ After planning the issue structure, run the spec reviewer to validate and refine
 
 Select how comprehensive you want the issue to be, simpler is mostly better.
 
-#### 📄 MINIMAL (Quick Issue)
+#### MINIMAL (Quick Issue)
 
 **Best for:** Simple bugs, small improvements, clear features
 
@@ -90,7 +90,7 @@ Select how comprehensive you want the issue to be, simpler is mostly better.
 
 **Structure:**
 
-````markdown
+```markdown
 [Brief problem/feature description]
 
 ## Acceptance Criteria
@@ -104,22 +104,17 @@ Select how comprehensive you want the issue to be, simpler is mostly better.
 
 ## MVP
 
-### test.rb
+### example_file.ts
 
-```ruby
-class Test
-  def initialize
-    @name = "test"
-  end
-end
-```
+[Code example with appropriate language syntax highlighting]
 
 ## References
 
 - Related issue: #[issue_number]
 - Documentation: [relevant_docs_url]
+```
 
-#### 📋 MORE (Standard Issue)
+#### MORE (Standard Issue)
 
 **Best for:** Most features, complex bugs, team collaboration
 
@@ -173,7 +168,7 @@ end
 - Related PRs: #[pr_number]
 ```
 
-#### 📚 A LOT (Comprehensive Issue)
+#### A LOT (Comprehensive Issue)
 
 **Best for:** Major features, architectural changes, complex integrations
 
@@ -308,7 +303,6 @@ Apply best practices for clarity and actionability, making the issue easy to sca
 - [ ] Add screenshots/mockups if UI-related (drag & drop or use image hosting)
 - [ ] Use task lists (- [ ]) for trackable items that can be checked off
 - [ ] Add collapsible sections for lengthy logs or optional details using `<details>` tags
-- [ ] Apply appropriate emoji for visual scanning (🐛 bug, ✨ feature, 📚 docs, ♻️ refactor)
 
 **Cross-Referencing:**
 
@@ -322,26 +316,16 @@ Apply best practices for clarity and actionability, making the issue easy to sca
 
 ```markdown
 # Good example with syntax highlighting and line references
-```
-
-```ruby
-# app/services/user_service.rb:42
-def process_user(user)
-
-# Implementation here
-
-end
-```
-````
 
 # Collapsible error logs
 
 <details>
 <summary>Full error stacktrace</summary>
 
-`Error details here...`
+Error details here...
 
 </details>
+```
 
 **AI-Era Considerations:**
 
@@ -374,21 +358,21 @@ After writing the plan file, use the **AskUserQuestion tool** to present these o
 **Question:** "Plan ready at `docs/plans/<issue_title>.md`. What would you like to do next?"
 
 **Options:**
-1. **Start `/build`** - Begin implementing this plan
-2. **Run `/code-review`** - Get feedback from reviewers
+1. **Start building** - Begin implementing this plan
+2. **Get review** - Get feedback from reviewers
 3. **Create backlog item** - Add to your configured task system
 4. **Simplify** - Reduce detail level
 5. **Rework** - Change approach or request specific changes
 
 Based on selection:
-- **`/build`** → Call `/rails:build` with the plan file path
-- **`/code-review`** → Call `/rails:code-review` with the plan file path
+- **Start building** → Begin implementation using the plan
+- **Get review** → Run plan-review agent on the plan file
 - **Create backlog item** → Invoke `backlog-manager` skill (see Backlog Integration below)
 - **Simplify** → Ask "What should I simplify?" then regenerate simpler version
 - **Rework** → Ask "What would you like changed?" then regenerate with changes
 - **Other** (automatically provided) → Accept free text, act on it
 
-Loop back to options after Simplify/Rework until user selects `/build` or `/code-review`.
+Loop back to options after Simplify/Rework until user selects to build or review.
 
 ## Backlog Integration
 

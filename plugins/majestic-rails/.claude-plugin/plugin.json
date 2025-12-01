@@ -1,7 +1,7 @@
 {
   "name": "majestic-rails",
-  "version": "1.15.0",
-  "description": "Ruby on Rails development tools. Includes 22 specialized agents, 5 commands, and 9 skills.",
+  "version": "1.16.0",
+  "description": "Ruby on Rails development tools. Includes 22 specialized agents, 4 commands, and 9 skills.",
   "author": {
     "name": "David Paluy",
     "url": "https://github.com/dpaluy",
