@@ -13,9 +13,21 @@ argument-hint: "[error message or description]"
 
 Do not proceed until you have a clear bug description.
 
-## Project Type Detection
+## Project Context Detection
 
-Detect project type to route to the appropriate debugger:
+**Step 1: Check AGENTS.md first**
+
+Look for `AGENTS.md` in the project root. This file is the authoritative source for:
+- Project type and stack
+- Debugging workflows
+- Testing commands
+- Project-specific conventions
+
+If AGENTS.md exists and contains debugging guidance, follow those instructions.
+
+**Step 2: Fall back to file-based detection only if needed**
+
+If AGENTS.md is missing or lacks debugging context, detect project type from files:
 
 ```bash
 ls Gemfile package.json pyproject.toml setup.py go.mod Cargo.toml 2>/dev/null
@@ -31,7 +43,7 @@ ls Gemfile package.json pyproject.toml setup.py go.mod Cargo.toml 2>/dev/null
 
 ## Workflow
 
-### For Rails Projects (Gemfile detected)
+### For Rails Projects (from AGENTS.md or Gemfile detected)
 
 Invoke the specialized Rails debugger agent:
 
