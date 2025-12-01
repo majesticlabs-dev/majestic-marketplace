@@ -1,6 +1,6 @@
 # Majestic Engineer
 
-Language-agnostic engineering workflows. Includes 18 specialized agents, 12 commands, and 13 skills.
+Language-agnostic engineering workflows. Includes 18 specialized agents, 13 commands, and 13 skills.
 
 ## Installation
 
@@ -130,6 +130,12 @@ Invoke with: `/majestic-engineer:<category>:<name>`
 |---------|-------------|
 | `session:handoff` | Create a detailed handoff plan for continuing work |
 | `session:pickup` | Resume work from a previous handoff session |
+
+### tasks
+
+| Command | Description |
+|---------|-------------|
+| `tasks:backlog` | Manage backlog items across files, GitHub Issues, Linear, or Beads |
 
 ### workflows
 
