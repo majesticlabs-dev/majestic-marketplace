@@ -13,7 +13,7 @@ claude /plugin install majestic-rails
 ```mermaid
 graph LR
     A(/plan) --> B(/build)
-    B --> C(/review)
+    B --> C(/code-review)
     C --> D{{ship}}
 ```
 

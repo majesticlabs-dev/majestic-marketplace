@@ -71,8 +71,8 @@ Collect agent outputs and categorize:
 ## Example Usage
 
 ```bash
-/review                    # Branch vs main
-/review #123               # PR
-/review --staged           # Pre-commit
-/review app/models/*.rb    # Specific files
+/code-review                    # Branch vs main
+/code-review #123               # PR
+/code-review --staged           # Pre-commit
+/code-review app/models/*.rb    # Specific files
 ```

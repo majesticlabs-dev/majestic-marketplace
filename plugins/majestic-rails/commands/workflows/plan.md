@@ -374,20 +374,20 @@ After writing the plan file, use the **AskUserQuestion tool** to present these o
 
 **Options:**
 1. **Start `/build`** - Begin implementing this plan
-2. **Run `/review`** - Get feedback from reviewers
+2. **Run `/code-review`** - Get feedback from reviewers
 3. **Create backlog item** - Add to your configured task system
 4. **Simplify** - Reduce detail level
 5. **Rework** - Change approach or request specific changes
 
 Based on selection:
 - **`/build`** → Call `/majestic-rails:workflows/build` with the plan file path
-- **`/review`** → Call `/majestic-rails:workflows/review` with the plan file path
+- **`/code-review`** → Call `/majestic-rails:workflows:code-review` with the plan file path
 - **Create backlog item** → Invoke `backlog-manager` skill (see Backlog Integration below)
 - **Simplify** → Ask "What should I simplify?" then regenerate simpler version
 - **Rework** → Ask "What would you like changed?" then regenerate with changes
 - **Other** (automatically provided) → Accept free text, act on it
 
-Loop back to options after Simplify/Rework until user selects `/build` or `/review`.
+Loop back to options after Simplify/Rework until user selects `/build` or `/code-review`.
 
 ## Backlog Integration
 
