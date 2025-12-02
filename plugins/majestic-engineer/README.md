@@ -1,6 +1,6 @@
 # Majestic Engineer
 
-Language-agnostic engineering workflows. Includes 18 specialized agents, 14 commands, and 13 skills.
+Language-agnostic engineering workflows. Includes 18 specialized agents, 15 commands, and 13 skills.
 
 ## Installation
 
@@ -141,6 +141,7 @@ Invoke with: `/majestic-engineer:<category>:<name>`
 
 | Command | Description |
 |---------|-------------|
+| `workflows:build-task` | Autonomous task implementation from GitHub Issues - research, plan, build, review, fix, ship |
 | `workflows:debug` | Debug errors, test failures, or unexpected behavior (auto-detects project type) |
 | `workflows:guided-prd` | Discover and refine a product idea through guided questioning, then generate a PRD |
 | `workflows:init-agents-md` | Initialize AGENTS.md with hierarchical structure and create CLAUDE.md symlink |

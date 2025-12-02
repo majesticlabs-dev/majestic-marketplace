@@ -2,6 +2,12 @@
 
 All notable changes to majestic-engineer will be documented in this file.
 
+## [1.16.0] - 2025-12-01
+
+### Added
+
+- `/workflows:build-task` command - Autonomous task implementation from GitHub Issues. Orchestrates the full development lifecycle: fetch issue, research (conditional), plan with architect agent, build with general-purpose agent, code review, fix feedback loop (max 3 iterations), and ship via PR with issue closure.
+
 ## [1.15.1] - 2025-12-01
 
 ### Added
