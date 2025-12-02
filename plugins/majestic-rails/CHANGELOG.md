@@ -2,6 +2,25 @@
 
 All notable changes to majestic-rails will be documented in this file.
 
+## [1.16.1] - 2025-12-02
+
+### Enhanced
+
+- `dhh-coder` skill - Added 5 new reference files based on 37signals Fizzy SaaS patterns:
+  - `concerns-organization.md` - Model-specific vs common concerns, facade pattern
+  - `delegated-types.md` - Polymorphism without STI problems
+  - `caching-strategies.md` - Russian Doll caching, Solid Cache, performance analysis formula
+  - `turbo-morphing.md` - Turbo 8 page refresh with morphing (`broadcast_refresh`)
+  - `recording-pattern.md` - Unifying abstraction for diverse content types
+- `dhh-coder` skill - Updated `resources.md` with Fizzy SaaS repository links and 37signals Dev blog articles
+- Added "Fizzy" as trigger keyword in skill description
+
+## [1.16.0] - 2025-11-30
+
+### Added
+
+- `store-model-coder` skill - Wrap JSON-backed database columns with ActiveModel-like classes using store_model gem
+
 ## [1.15.0] - 2025-11-30
 
 ### Removed

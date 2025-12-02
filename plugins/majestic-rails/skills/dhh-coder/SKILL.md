@@ -1,11 +1,13 @@
 ---
 name: dhh-coder
-description: Write Ruby and Rails code in DHH's distinctive 37signals style. Use this skill when writing Ruby code, Rails applications, creating models, controllers, or any Ruby file. Triggers on Ruby/Rails code generation, refactoring requests, or when the user mentions DHH, 37signals, Basecamp, HEY, or Campfire style.
+description: Write Ruby and Rails code in DHH's distinctive 37signals style. Use this skill when writing Ruby code, Rails applications, creating models, controllers, or any Ruby file. Triggers on Ruby/Rails code generation, refactoring requests, or when the user mentions DHH, 37signals, Basecamp, HEY, Fizzy, or Campfire style.
 ---
 
 # DHH Ruby/Rails Style Guide
 
 Write Ruby and Rails code following DHH's philosophy: **clarity over cleverness**, **convention over configuration**, **developer happiness** above all.
+
+Patterns derived from 37signals' production applications: Basecamp, HEY, Campfire, and the open-source **Fizzy SaaS** project.
 
 ## Quick Reference
 
@@ -185,13 +187,24 @@ end
 ## Detailed References
 
 For comprehensive patterns and examples, see:
+
+### Core Patterns
 - `references/patterns.md` - Complete code patterns with explanations
-- `references/resources.md` - Links to source material and further reading
+- `references/concerns-organization.md` - Model-specific vs common concerns, facade pattern
+- `references/delegated-types.md` - Polymorphism without STI problems
+- `references/recording-pattern.md` - Unifying abstraction for diverse content types
+
+### Rails Components
 - `references/activerecord-tips.md` - ActiveRecord query patterns, validations, associations
 - `references/controllers-tips.md` - Controller patterns, routing, rate limiting, form objects
 - `references/hotwire-tips.md` - Turbo Frames, Turbo Streams, Stimulus, ViewComponents
+- `references/turbo-morphing.md` - Turbo 8 page refresh with morphing patterns
 - `references/activestorage-tips.md` - File uploads, attachments, blob handling
+
+### Performance & Infrastructure
+- `references/caching-strategies.md` - Russian Doll caching, Solid Cache, cache analysis
 - `references/config-tips.md` - Configuration, logging, deployment, PostgreSQL patterns
+- `references/resources.md` - Links to source material and further reading
 
 ## Philosophy Summary
 

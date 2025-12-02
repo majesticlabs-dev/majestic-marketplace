@@ -4,6 +4,12 @@ Links to source material, documentation, and further reading.
 
 ## Primary Source Code
 
+### Fizzy SaaS
+The latest open-source reference from 37signals, demonstrating modern Rails 8 patterns.
+
+- **Repository**: https://github.com/basecamp/fizzy-saas
+- **Fizzy (base app)**: https://github.com/basecamp/fizzy
+
 ### Campfire (Once)
 The main codebase this style guide is derived from.
 
@@ -25,9 +31,44 @@ The main codebase this style guide is derived from.
   - Definitive article on REST-pure controller design
   - Documents the "only 7 actions" philosophy
 
+### 37signals Dev Blog - Architecture
+- **Vanilla Rails is Plenty**: https://dev.37signals.com/vanilla-rails-is-plenty/
+  - Pure MVC without service objects, interactors, or repositories
+- **Active Record, Nice and Blended**: https://dev.37signals.com/active-record-nice-and-blended/
+  - Rich domain models with concerns as facades
+- **Good Concerns**: https://dev.37signals.com/good-concerns/
+  - How to organize concerns as cohesive traits
+- **Globals, Callbacks, and Other Sacrileges**: https://dev.37signals.com/globals-callbacks-and-other-sacrileges/
+  - CurrentAttributes, callbacks, and large models
+
+### 37signals Dev Blog - Performance
+- **YJIT is Fast**: https://dev.37signals.com/yjit-is-fast/
+  - 22% faster median response with Ruby's JIT
+- **The Performance Impact of Russian Doll Caching**: https://signalvnoise.com/posts/3690-the-performance-impact-of-russian-doll-caching
+  - Cache hit rates and benefit analysis
+
+### 37signals Dev Blog - Hotwire
+- **A Happier Happy Path in Turbo with Morphing**: https://dev.37signals.com/a-happier-happy-path-in-turbo-with-morphing/
+  - Turbo 8 page refreshes with morphing
+- **Building Basecamp Project Stacks with Hotwire**: https://dev.37signals.com/building-basecamp-project-stacks-with-hotwire/
+  - Real-world Hotwire patterns
+
+### 37signals Dev Blog - Infrastructure
+- **Kamal 2.0**: https://dev.37signals.com/kamal-2/
+  - Zero-downtime deployment with kamal-proxy
+- **Introducing Solid Queue**: https://dev.37signals.com/introducing-solid-queue/
+  - Database-backed job processing (18M jobs/day at HEY)
+- **Kamal + Prometheus**: https://dev.37signals.com/kamal-prometheus/
+  - Monitoring with OpenTelemetry Collector
+
 ### Testing Philosophy
 - **37signals Dev - Pending Tests**: https://dev.37signals.com/pending-tests/
 - **37signals Dev - All About QA**: https://dev.37signals.com/all-about-qa/
+- **Making Rails Run Just a Few Tests Faster**: https://world.hey.com/jorge/making-rails-run-just-a-few-tests-faster-2c82dc4b
+
+### Code Review
+- **Minding the Small Stuff in PR Reviews**: https://dev.37signals.com/minding-the-small-stuff-in-pr-reviews/
+  - Code review priorities: consistency, aesthetics, architecture
 
 ## Official Documentation
 
