@@ -151,14 +151,21 @@ Append to the **HOW** section:
 
 ### Advanced Level - Add These Sections
 
-If user selected **Advanced** or **Full**, also add:
+If user selected **Advanced** or **Full**, detect available skills and add:
+
+**Skill Detection:** Check the `Skill` tool's `<available_skills>` section in the system prompt to see which skills are installed. Common skills to look for:
+- `majestic-engineer:ripgrep-search` - Fast text/code search
+- `majestic-engineer:ast-grep-searching` - Structural code search and refactoring
+
+**Template (customize based on detected skills):**
 
 ```markdown
 ### Tool Preferences
-1. Read/Edit over bash cat/sed
-2. Glob/Grep over find commands
-3. Task (subagent) for complex exploration
-4. Bash for system commands, git, running tests/builds
+1. **Read/Edit** over bash cat/sed for file operations
+2. **`skill ripgrep-search`** for text/code search patterns (if available)
+3. **`skill ast-grep-searching`** for structural code search and refactoring (if available)
+4. **Task (subagent)** for complex exploration and multi-file analysis
+5. **Bash** for git, running tests/builds, system commands
 
 ### Extended Thinking Triggers
 Use for: architecture decisions, debugging after initial failures, multi-file refactors, complex PR reviews
