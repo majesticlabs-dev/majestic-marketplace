@@ -2,6 +2,12 @@
 
 All notable changes to majestic-engineer will be documented in this file.
 
+## [1.15.1] - 2025-12-01
+
+### Added
+
+- `beads-viewer.md` reference in backlog-manager skill - Documents bv robot mode commands for AI agent graph analysis
+
 ## [1.14.0] - 2025-11-30
 
 ### Added

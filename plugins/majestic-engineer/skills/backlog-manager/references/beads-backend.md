@@ -213,3 +213,7 @@ bd dep add bd-1 bd-2
 # Complete
 bd close bd-1 --reason "Fixed in commit abc123"
 ```
+
+## See Also
+
+For advanced graph analysis and robot mode, see [beads-viewer.md](./beads-viewer.md).
