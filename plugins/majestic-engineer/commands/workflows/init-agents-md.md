@@ -107,7 +107,39 @@ Use `AskUserQuestion` to ask about task management:
 4. **File-based** - Track tasks in local markdown files (docs/backlog/)
 5. **None** - No task management integration needed
 
-## Step 4: Add Sections Based on Configuration Level
+## Step 4: Application Status Configuration
+
+Use `AskUserQuestion` to ask about the application's lifecycle stage:
+
+**Question:** "What is the application's current status?"
+
+**Options:**
+1. **Development** - Pre-production, no users yet, breaking changes acceptable
+2. **Production** - Live users, backward compatibility required
+
+Add the Application Status section immediately after the project title in AGENTS.md:
+
+#### Development:
+```markdown
+## Application Status: DEVELOPMENT
+
+- **Stage**: Pre-production, active development
+- **Users**: None yet (no existing data to migrate)
+- **Backward Compatibility**: NOT required - breaking changes are acceptable
+- **Data Migrations**: Keep simple - no need to handle existing records
+```
+
+#### Production:
+```markdown
+## Application Status: PRODUCTION
+
+- **Stage**: Live application with real users
+- **Users**: Existing data must be preserved
+- **Backward Compatibility**: REQUIRED - no breaking changes
+- **Data Migrations**: Must handle existing records gracefully
+```
+
+## Step 5: Add Sections Based on Configuration Level
 
 ### Basic Level - Task Management Only
 
@@ -196,7 +228,7 @@ Then add:
 - [Additional preferences based on selection]
 ```
 
-## Step 5: Create CLAUDE.md Symlink
+## Step 6: Create CLAUDE.md Symlink
 
 ```bash
 ln -s AGENTS.md CLAUDE.md
@@ -207,7 +239,7 @@ ln -s AGENTS.md CLAUDE.md
 2. **Replace** - Backup to CLAUDE.md.bak, then symlink
 3. **Skip** - Leave as-is (not recommended)
 
-## Step 6: Final Verification
+## Step 7: Final Verification
 
 ```bash
 # Check line count (should be under 300)
@@ -223,6 +255,7 @@ readlink CLAUDE.md
 Report to user:
 - AGENTS.md created with WHAT/WHY/HOW structure
 - Configuration level: [Basic/Advanced/Full]
+- Application status: [Development/Production]
 - Line count: X lines (warn if over 300)
 - Task management: [selected system]
 - CLAUDE.md symlink: created/merged/skipped
