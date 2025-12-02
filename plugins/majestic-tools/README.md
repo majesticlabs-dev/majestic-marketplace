@@ -1,6 +1,6 @@
 # Majestic Tools
 
-Claude Code customization tools. Includes 1 agent, 10 commands, 3 skills, and 2 hooks.
+Claude Code customization tools. Includes 1 agent, 11 commands, 3 skills, and 2 hooks.
 
 ## Installation
 
@@ -12,6 +12,7 @@ claude /plugin install majestic-tools
 
 | I want to... | Use this |
 |--------------|----------|
+| Find the right tool for my task | `/majestic-guide "what I want to do"` |
 | Create a new agent | `/majestic-tools:meta:new-agent` |
 | Create a new command | `/majestic-tools:meta:new-command` |
 | Create a new hook | `/majestic-tools:meta:new-hook` |
@@ -28,6 +29,14 @@ Invoke with: `agent majestic-tools:<name>`
 | `reasoning-verifier` | Verify LLM reasoning using RCoT - detect overlooked conditions and hallucinations |
 
 ## Commands
+
+### Standalone
+
+| Command | Description |
+|---------|-------------|
+| `/majestic-guide` | Guide to the right skill, command, or agent for any task |
+
+### Categorized Commands
 
 Invoke with: `/majestic-tools:<category>:<name>`
 
@@ -113,6 +122,11 @@ The `workflows:ultrathink-task` and `workflows:ultra-options` commands require t
 ## Usage Examples
 
 ```bash
+# Find the right tool for a task
+/majestic-guide "write tests for my Rails model"
+/majestic-guide "optimize database queries"
+/majestic-guide "create a landing page"
+
 # Create a new agent
 /majestic-tools:meta:new-agent "Create an agent for database migrations"
 
