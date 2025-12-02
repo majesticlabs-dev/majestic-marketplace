@@ -27,9 +27,10 @@ print_menu() {
   echo ""
   echo "  1) Add marketplace (enables plugin installation)"
   echo "  2) Add output styles (formatting guides)"
-  echo "  3) Add MCP servers"
-  echo "  4) Configure shell settings"
-  echo "  5) Install all"
+  echo "  3) Add MCP servers (Sequential Thinking)"
+  echo "  4) Configure shell settings (env vars + alias)"
+  echo "  5) Install Beads (AI agent memory)"
+  echo "  6) Install all"
   echo "  0) Exit"
   echo ""
 }
@@ -64,6 +65,44 @@ install_marketplace() {
   echo "  - majestic-sales: Sales acceleration tools"
   echo "  - majestic-company: Business operations tools"
   echo "  - majestic-tools: Claude Code customization tools"
+}
+
+install_beads() {
+  echo -e "${CYAN}Installing Beads (AI agent memory)...${NC}"
+
+  # Check for Homebrew
+  if ! command -v brew &> /dev/null; then
+    echo -e "${RED}✗ Error: Homebrew is required to install Beads${NC}"
+    echo "Install Homebrew: https://brew.sh"
+    return 1
+  fi
+
+  echo -e "${GREEN}✓ Homebrew detected${NC}"
+
+  # Install via Homebrew
+  echo "  Tapping steveyegge/beads..."
+  brew tap steveyegge/beads
+
+  echo "  Installing bd..."
+  brew install bd
+
+  echo -e "${GREEN}✓ Beads CLI installed${NC}"
+  echo ""
+  echo -e "${BOLD}To add the Beads plugin to Claude Code:${NC}"
+  echo ""
+  echo "  1. Start Claude Code:"
+  echo -e "     ${CYAN}claude${NC}"
+  echo ""
+  echo "  2. Add the marketplace and install plugin:"
+  echo -e "     ${CYAN}/plugin marketplace add steveyegge/beads${NC}"
+  echo -e "     ${CYAN}/plugin install beads${NC}"
+  echo ""
+  echo "  3. Restart Claude Code to load the plugin"
+  echo ""
+  echo "Beads provides persistent memory for AI agents with:"
+  echo "  - Dependency tracking (blocks, related, parent-child)"
+  echo "  - Ready work detection (bd ready)"
+  echo "  - Git-native distribution"
 }
 
 install_output_styles() {
@@ -245,7 +284,7 @@ main() {
     choice="$1"
   else
     print_menu
-    read -p "Enter choice [0-5]: " choice
+    read -p "Enter choice [0-6]: " choice
   fi
 
   echo ""
@@ -264,6 +303,9 @@ main() {
       install_shell_settings
       ;;
     5)
+      install_beads
+      ;;
+    6)
       install_marketplace
       echo ""
       install_output_styles
@@ -271,6 +313,8 @@ main() {
       install_mcp_servers
       echo ""
       install_shell_settings
+      echo ""
+      install_beads
       ;;
     0)
       echo "Goodbye!"

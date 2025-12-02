@@ -15,7 +15,8 @@ This gives you options to:
 2. Add output styles (formatting guides)
 3. Add MCP servers (Sequential Thinking)
 4. Configure shell settings (env vars + alias)
-5. Install all
+5. Install Beads (AI agent memory)
+6. Install all
 
 ### Manual Installation
 
