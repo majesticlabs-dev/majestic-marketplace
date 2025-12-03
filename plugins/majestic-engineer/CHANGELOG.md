@@ -2,6 +2,12 @@
 
 All notable changes to majestic-engineer will be documented in this file.
 
+## [1.20.0] - 2025-12-03
+
+### Added
+
+- `/git:code-story` command - Generate documentary-style narrative of repository development history. Features 5-pass analysis (overview, timeline, decision points, synthesis, output), smart sampling for large repos, configurable detail levels (minimal/standard/comprehensive), and optional time/commit filtering.
+
 ## [1.16.0] - 2025-12-01
 
 ### Added

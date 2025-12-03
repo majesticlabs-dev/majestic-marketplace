@@ -1,6 +1,6 @@
 # Majestic Engineer
 
-Language-agnostic engineering workflows. Includes 18 specialized agents, 15 commands, and 13 skills.
+Language-agnostic engineering workflows. Includes 19 specialized agents, 18 commands, and 13 skills.
 
 ## Installation
 
@@ -120,6 +120,7 @@ Invoke with: `/majestic-engineer:<category>:<name>`
 | Command | Description |
 |---------|-------------|
 | `git:changelog` | Create engaging changelogs from recent merges |
+| `git:code-story` | Generate documentary-style narrative of repository development history |
 | `git:commit` | Create git commit with proper message formatting |
 | `git:create-pr` | Create a pull request for the current feature branch |
 | `git:pr-review` | Review and address Pull Request comments from GitHub |
