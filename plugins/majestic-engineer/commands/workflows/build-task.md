@@ -97,6 +97,18 @@ gh issue view <NUMBER> --json title,body,labels,assignees,milestone
 
 **Create TodoWrite** with high-level steps based on issue content.
 
+## Step 1.5: Set Terminal Title
+
+After fetching the issue, set the terminal title to identify this session:
+
+```
+Task (majestic-tools:set-title):
+  prompt: |
+    Set title to "🔨 #<NUMBER>: <issue-title-truncated-to-40-chars>"
+```
+
+This helps identify the terminal when running multiple Claude Code sessions.
+
 ## Step 2: Check Git Workflow Preferences
 
 **Read AGENTS.md** to check for Feature Development workflow preferences:

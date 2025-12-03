@@ -2,6 +2,12 @@
 
 All notable changes to majestic-tools will be documented in this file.
 
+## [1.4.0] - 2025-12-03
+
+### Added
+
+- `set-title` agent - Set terminal window title via ANSI escape sequences to identify what each Claude Code session is working on. Supports `CLAUDE_TITLE_PREFIX` environment variable for custom prefixes. Compatible with Ghostty, iTerm2, Alacritty, Kitty, and other modern terminals.
+
 ## [1.2.1] - 2025-11-30
 
 ### Fixed
