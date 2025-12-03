@@ -285,15 +285,7 @@ SlashCommand: /majestic-engineer:workflows:ship-it
 gh issue close <NUMBER> --comment "Implemented in PR #<PR_NUMBER>"
 ```
 
-**If using worktree, clean up:**
-
-```bash
-# Return to main repository
-cd ../<original-repo>
-
-# Remove the worktree
-git worktree remove ../[repo]-worktrees/issue-<NUMBER>-<slug>
-```
+**Note:** If using a worktree, it remains active until the PR is merged. Use `skill git-worktree` to manage worktrees manually after merge.
 
 ## Output Summary
 
@@ -311,7 +303,7 @@ After completion, provide:
 - Plan: [X steps identified]
 - Build: [X files changed, X tests added]
 - Review: [Passed on attempt X]
-- Ship: PR #456 created, issue closed, [worktree cleaned up]
+- Ship: PR #456 created, issue closed
 
 ### Files Changed
 - `path/to/file.rb` - [description]
