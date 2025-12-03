@@ -1,13 +1,15 @@
 ---
 name: rails:code-review
-description: Comprehensive Rails code review using smart agent selection based on changed files
+description: Rails-specific code review using smart agent selection based on changed files
 argument-hint: "[PR #/URL | --staged | --branch | files...]"
-allowed-tools: Bash, Read, Grep, Glob, Task, AskUserQuestion
+allowed-tools: Bash, Read, Grep, Glob, Task
 ---
 
 # Rails Code Review
 
-Review code changes using specialized agents run in parallel.
+Rails-specific code review that invokes the Rails code review orchestrator.
+
+> **Note:** For generic code review with auto-detection, use `/majestic:code-review` instead.
 
 ## Arguments
 
@@ -24,61 +26,61 @@ Review code changes using specialized agents run in parallel.
 
 ```bash
 # Default (unstaged changes)
-git diff --name-only
+git diff --name-only --diff-filter=d
 
 # Staged mode
-git diff --cached --name-only
+git diff --cached --name-only --diff-filter=d
 
 # Branch mode (auto-detect main or master)
-bash -c 'DEFAULT=$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed "s@^refs/remotes/origin/@@" || echo master); git diff ${DEFAULT}...HEAD --name-only'
+DEFAULT=$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed "s@^refs/remotes/origin/@@" || echo master)
+git diff ${DEFAULT}...HEAD --name-only --diff-filter=d
 
 # PR mode
 gh pr diff <PR_NUMBER> --name-only
 ```
 
-## Step 2: Select Agents
+## Step 2: Invoke Rails Code Review Orchestrator
 
-**Always run:**
-- `review/simplicity-reviewer`
-- `review/pragmatic-rails-reviewer`
-
-**Add if detected:**
-| Pattern | Agent |
-|---------|-------|
-| `db/migrate/*` | + `review/data-integrity-reviewer` |
-| `app/models/*.rb` with associations/queries | + `review/dhh-code-reviewer` |
-| `.each`, `.map`, `.all`, complex queries | + `review/performance-reviewer` |
-
-**If uncertain (>5 files, no patterns detected):** Use `AskUserQuestion` to ask which additional agents to run with multi-select enabled.
-
-## Step 3: Run Agents in Parallel
-
-Launch ALL selected agents in a SINGLE message with multiple Task tool calls:
+Use the Task tool to invoke the Rails code review orchestrator agent:
 
 ```
-Task 1: review/simplicity-reviewer → "Review [files] for YAGNI, anti-patterns"
-Task 2: review/pragmatic-rails-reviewer → "Review [files] for Rails conventions"
-Task 3: (if selected) review/data-integrity-reviewer → "Review [files] for migration safety"
-Task 4: (if selected) review/performance-reviewer → "Review [files] for N+1, performance"
-Task 5: (if selected) review/dhh-code-reviewer → "Review [files] for Rails philosophy"
+Task: majestic-rails:review/code-review-orchestrator
+
+Prompt: "Review these Rails files. Scope: [scope mode from arguments]
+
+Changed files:
+[file list from Step 1]"
 ```
 
-## Step 4: Synthesize Output
+The orchestrator will:
+1. Select appropriate specialized agents based on file patterns
+2. Load project-specific review topics (if configured)
+3. Run all agents in parallel
+4. Synthesize findings into P1/P2/P3 severity levels
+5. Return a comprehensive review report
 
-Collect agent outputs and categorize:
+## Step 3: Present Results
 
-**P1 - Critical (Blocks Merge):** Security, data integrity, breaking changes
-**P2 - Important (Should Fix):** Performance, convention violations, complexity
-**P3 - Suggestions:** Style, optional improvements
+The orchestrator returns a synthesized report with:
+- **Status:** BLOCKED / NEEDS CHANGES / APPROVED
+- **P1 Critical Issues:** Security, data integrity, breaking changes
+- **P2 Important Issues:** Performance, conventions, project topics
+- **P3 Suggestions:** Style, optional improvements
+- **Agent Reports:** Full details in collapsible sections
 
-**Status:** BLOCKED (any P1) | NEEDS CHANGES (P2 only) | APPROVED (P3 or clean)
+Present this report to the user.
 
 ## Example Usage
 
 ```bash
-/code-review                    # Unstaged changes (default)
-/code-review --staged           # Pre-commit
-/code-review --branch           # Branch vs default branch
-/code-review #123               # PR
-/code-review app/models/*.rb    # Specific files
+/rails:code-review                    # Unstaged changes (default)
+/rails:code-review --staged           # Pre-commit
+/rails:code-review --branch           # Branch vs default branch
+/rails:code-review #123               # PR
+/rails:code-review app/models/*.rb    # Specific files
 ```
+
+## Related Commands
+
+- `/majestic:code-review` - Generic code review with tech stack auto-detection
+- `/majestic:init-agents-md` - Configure review topics and tech stack

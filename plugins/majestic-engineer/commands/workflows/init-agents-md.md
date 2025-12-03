@@ -194,7 +194,87 @@ Add the Application Status section immediately after the project title in AGENTS
 - **Data Migrations**: Must handle existing records gracefully
 ```
 
-## Step 6: Add Sections Based on Configuration Level
+## Step 6: Tech Stack Configuration
+
+Use `AskUserQuestion` to ask about the project's tech stack:
+
+**Question:** "What is the primary tech stack for this project?"
+
+**Options:**
+1. **Rails** - Ruby on Rails application
+2. **Python** - Python application (FastAPI, Django, etc.)
+3. **Auto-detect** - Let code review detect automatically from project files
+4. **Other** - Specify manually or use generic reviewers
+
+Based on selection, add to AGENTS.md Project Configuration section:
+
+```markdown
+## Project Configuration
+
+tech_stack: rails  # rails | python | generic
+```
+
+If **Auto-detect** selected, omit `tech_stack:` line (will be detected from Gemfile, pyproject.toml, etc.).
+
+## Step 7: Code Review Topics Configuration
+
+Use `AskUserQuestion` to ask about project-specific review topics:
+
+**Question:** "Where should project-specific code review topics be stored?"
+
+**Options:**
+1. **Default (docs/agents/review-topics.md)** - Dedicated file in docs/agents directory
+2. **Inline in AGENTS.md** - Keep topics in the Code Review Topics section
+3. **Custom path** - Specify your own location
+4. **Skip** - Don't configure review topics now
+
+Based on selection:
+
+### If Default or Custom Path Selected
+
+Add to AGENTS.md Project Configuration:
+
+```markdown
+review_topics_path: docs/agents/review-topics.md  # or custom path
+```
+
+Create the file at the selected location with starter template:
+
+```markdown
+# Code Review Topics
+
+Project-specific topics checked during every code review.
+Add your team's conventions, gotchas, and quality standards here.
+
+### Example Category
+- Example topic to always check during reviews
+- Another important convention
+
+<!--
+Tips:
+- Use any markdown format - headers, bullets, paragraphs
+- Be specific: "API calls need 30s timeout" not "handle errors properly"
+- Focus on project-specific rules, not general best practices
+-->
+```
+
+### If Inline Selected
+
+Add placeholder section to AGENTS.md:
+
+```markdown
+## Code Review Topics
+
+<!-- Add project-specific review topics here -->
+### Example Category
+- Example topic to always check during reviews
+```
+
+### If Skip Selected
+
+Do not add any review topics configuration.
+
+## Step 8: Add Sections Based on Configuration Level
 
 ### Basic Level - Task Management Only
 
@@ -283,7 +363,7 @@ Then add:
 - [Additional preferences based on selection]
 ```
 
-## Step 7: Create CLAUDE.md Symlink
+## Step 9: Create CLAUDE.md Symlink
 
 ```bash
 ln -s AGENTS.md CLAUDE.md
@@ -294,7 +374,7 @@ ln -s AGENTS.md CLAUDE.md
 2. **Replace** - Backup to CLAUDE.md.bak, then symlink
 3. **Skip** - Leave as-is (not recommended)
 
-## Step 8: Final Verification
+## Step 10: Final Verification
 
 ```bash
 # Check line count (should be under 300)
@@ -313,6 +393,8 @@ Report to user:
 - Application status: [Development/Production]
 - Feature workflow: [Git Worktrees/Feature Branches]
 - Branch naming: [selected pattern, e.g., `type/issue-description`]
+- Tech stack: [Rails/Python/Auto-detect/Other]
+- Review topics: [path or inline or skipped]
 - Line count: X lines (warn if over 300)
 - Task management: [selected system]
 - CLAUDE.md symlink: created/merged/skipped
