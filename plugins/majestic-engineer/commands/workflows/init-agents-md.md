@@ -1,5 +1,5 @@
 ---
-name: init-agents-md
+name: majestic:init-agents-md
 description: Initialize AGENTS.md with hierarchical structure and create CLAUDE.md symlink
 allowed-tools: AskUserQuestion, Skill, Bash, Write, Read, Grep, Glob
 ---

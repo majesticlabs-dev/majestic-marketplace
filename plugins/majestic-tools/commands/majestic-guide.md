@@ -33,7 +33,7 @@ Guide users to the most appropriate skill, command, or agent for their task.
 
    **Engineering (majestic-engineer)**
    - Git workflows → `/majestic-engineer:git:*` commands
-   - Planning/architecture → `plan:architect` agent, `/plan` command
+   - Planning/architecture → `plan:architect` agent, `/majestic:plan` command
    - Testing/TDD → `tdd-workflow` skill, `test-create` agent
    - Security review → `security-review` agent
    - CI/CD issues → `github-resolver` agent, `check-ci` skill

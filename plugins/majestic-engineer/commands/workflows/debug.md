@@ -1,4 +1,5 @@
 ---
+name: majestic:debug
 description: Debug errors, test failures, or unexpected behavior. Auto-detects project type.
 argument-hint: "[error message or description]"
 ---

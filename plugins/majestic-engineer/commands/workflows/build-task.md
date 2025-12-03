@@ -1,4 +1,5 @@
 ---
+name: majestic:build-task
 description: Autonomous task implementation from GitHub Issues - research, plan, build, review, fix, ship
 argument-hint: "<issue-url-or-number>"
 allowed-tools: Bash, Read, Grep, Glob, Task, WebFetch, SlashCommand, TodoWrite
@@ -51,7 +52,7 @@ flowchart TD
     end
 
     subgraph "7. Ship"
-        I(/ship-it)
+        I(/majestic:ship-it)
         J[gh issue close]
     end
 
@@ -271,11 +272,11 @@ https://github.com/owner/repo/pull/456
 
 ```bash
 # By issue number
-/build-task #42
+/majestic:build-task #42
 
 # By URL
-/build-task https://github.com/myorg/myrepo/issues/42
+/majestic:build-task https://github.com/myorg/myrepo/issues/42
 
 # Bare number
-/build-task 42
+/majestic:build-task 42
 ```

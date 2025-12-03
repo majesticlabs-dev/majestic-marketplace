@@ -1,11 +1,12 @@
 ---
+name: majestic:guided-prd
 description: Discover and refine a product idea through guided questioning, then generate a PRD
 allowed-tools: AskUserQuestion, SlashCommand, Read, Grep, Glob
 ---
 
 # Guided PRD Discovery
 
-Help users discover and refine their product idea through incremental questioning, then feed the refined description into `/prd` for PRD generation.
+Help users discover and refine their product idea through incremental questioning, then feed the refined description into `/majestic:prd` for PRD generation.
 
 ## Phase 1: Context Gathering
 
@@ -116,10 +117,10 @@ After gathering sufficient information:
 When user confirms, execute the PRD command:
 
 ```
-Use SlashCommand to execute: /majestic-engineer:workflows:prd [refined description]
+Use SlashCommand to execute: /majestic:prd [refined description]
 ```
 
-The `/prd` command will:
+The `/majestic:prd` command will:
 - Ask its own clarifying questions if needed
 - Generate a comprehensive PRD document
 - Save to `docs/prd/prd-[feature-name].md`
@@ -216,4 +217,4 @@ Claude: [Executes /majestic-engineer:workflows:prd with the refined description]
 - **Conversational, not interrogative** - Build on previous answers naturally
 - **Multiple choice when possible** - Faster for users, clearer options
 - **Summarize frequently** - Confirm understanding, catch misalignments early
-- **End with a clear description** - Ready for `/prd` to process
+- **End with a clear description** - Ready for `/majestic:prd` to process

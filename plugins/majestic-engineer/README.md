@@ -14,7 +14,7 @@ claude /plugin install majestic-engineer
 
 ```mermaid
 graph LR
-    A0(/guided-prd) --> A(/prd)
+    A0(/majestic:guided-prd) --> A(/majestic:prd)
     A --> B{{architect}}
     B --> C{{plan-review}}
     C --> D[Build]
@@ -24,8 +24,8 @@ graph LR
 
 | Step | Tool | Purpose |
 |------|------|---------|
-| 1 | `/guided-prd` | Discover and refine product idea |
-| 2 | `/prd` | Generate Product Requirements Document |
+| 1 | `/majestic:guided-prd` | Discover and refine product idea |
+| 2 | `/majestic:prd` | Generate Product Requirements Document |
 | 3 | `agent plan:architect` | Design implementation (HOW) |
 | 4 | `agent plan:plan-review` | Validate before coding |
 | 5 | Implementation | Write the code |
@@ -36,7 +36,7 @@ graph LR
 
 ```mermaid
 graph LR
-    A(/plan) --> B{{plan-review}}
+    A(/majestic:plan) --> B{{plan-review}}
     B --> C[Build]
     C --> D{{test-create}}
     D --> E{{ship}}
@@ -44,7 +44,7 @@ graph LR
 
 | Step | Tool | Purpose |
 |------|------|---------|
-| 1 | `/plan` | Create structured implementation plan |
+| 1 | `/majestic:plan` | Create structured implementation plan |
 | 2 | `agent plan:plan-review` | Validate before coding |
 | 3 | Implementation | Write the code |
 | 4 | `agent qa:test-create` | Write tests |
@@ -57,9 +57,9 @@ graph LR
 
 | I want to... | Use this |
 |--------------|----------|
-| Plan a feature or bug fix | `/plan` |
+| Plan a feature or bug fix | `/majestic:plan` |
 | Analyze a spec for gaps | `agent plan:spec-reviewer` |
-| Define what to build (requirements) | `/prd` |
+| Define what to build (requirements) | `/majestic:prd` |
 | Design how to build it (architecture) | `agent plan:architect` |
 | Plan a refactoring effort | `agent plan:refactor-plan` |
 | Review a plan before implementing | `agent plan:plan-review` |

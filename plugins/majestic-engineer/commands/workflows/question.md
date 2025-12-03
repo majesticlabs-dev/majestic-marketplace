@@ -1,4 +1,5 @@
 ---
+name: majestic:question
 allowed-tools: Bash(git ls-files:*), Read
 description: Answer questions about the project structure and documentation without coding
 ---

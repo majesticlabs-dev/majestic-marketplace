@@ -1,4 +1,5 @@
 ---
+name: majestic:ship-it
 description: Complete checkout workflow - runs linting, creates commit, and opens PR
 ---
 

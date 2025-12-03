@@ -12,14 +12,14 @@ claude /plugin install majestic-rails
 
 ```mermaid
 graph LR
-    A(/plan) --> B(/rails:build)
+    A(/majestic:plan) --> B(/rails:build)
     B --> C(/rails:code-review)
     C --> D{{ship}}
 ```
 
 | Step | Tool | Purpose |
 |------|------|---------|
-| 1 | `/plan` | Research and create plan (from majestic-engineer) |
+| 1 | `/majestic:plan` | Research and create plan (from majestic-engineer) |
 | 2 | Choose next step | Build, review, backlog, or refine |
 | 3 | `/rails:build` | Implement the plan |
 | 4 | `/rails:code-review` | Smart multi-agent code review |
@@ -28,7 +28,7 @@ graph LR
 
 | I want to... | Use this |
 |--------------|----------|
-| Plan a new feature | `/plan "feature"` |
+| Plan a new feature | `/majestic:plan "feature"` |
 | Build from a plan | `/rails:build docs/plans/feature.md` |
 | Review code changes | `/rails:code-review` |
 | Debug Rails issues | `agent rails-debugger` |

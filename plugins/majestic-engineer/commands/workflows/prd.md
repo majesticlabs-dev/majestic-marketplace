@@ -1,4 +1,5 @@
 ---
+name: majestic:prd
 description: Create a Product Requirements Document (PRD) for a new product or feature
 argument-hint: "[product or feature description]"
 allowed-tools: Read, Write, Edit, WebSearch, WebFetch, AskUserQuestion
