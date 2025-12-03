@@ -2,7 +2,7 @@
 name: majestic:build-task
 description: Autonomous task implementation from GitHub Issues - research, plan, build, review, fix, ship
 argument-hint: "<issue-url-or-number>"
-allowed-tools: Bash, Read, Grep, Glob, Task, WebFetch, SlashCommand, TodoWrite
+allowed-tools: Bash, Read, Grep, Glob, Task, WebFetch, SlashCommand, TodoWrite, Skill
 ---
 
 # Build Task
@@ -30,34 +30,41 @@ flowchart TD
         B[gh issue view]
     end
 
-    subgraph "2. Research (conditional)"
+    subgraph "2. Worktree Check"
+        W{Worktrees in AGENTS.md?}
+        WT[Create worktree]
+    end
+
+    subgraph "3. Research (conditional)"
         C{{web-research}}
     end
 
-    subgraph "3. Plan"
+    subgraph "4. Plan"
         D{{architect}}
     end
 
-    subgraph "4. Build"
+    subgraph "5. Build"
         E{{general-purpose}}
     end
 
-    subgraph "5. Review"
+    subgraph "6. Review"
         F(/code-review)
     end
 
-    subgraph "6. Fix Loop"
+    subgraph "7. Fix Loop"
         G{{general-purpose}}
         H{Attempt < 3?}
     end
 
-    subgraph "7. Ship"
+    subgraph "8. Ship"
         I(/majestic:ship-it)
         J[gh issue close]
     end
 
     A --> B
-    B --> K{Research needed?}
+    B --> W
+    W -->|Yes| WT --> K{Research needed?}
+    W -->|No| K
     K -->|Yes| C --> D
     K -->|No| D
     D --> E
@@ -90,7 +97,52 @@ gh issue view <NUMBER> --json title,body,labels,assignees,milestone
 
 **Create TodoWrite** with high-level steps based on issue content.
 
-## Step 2: Research (Conditional)
+## Step 2: Check Git Workflow Preferences
+
+**Read AGENTS.md** to check for Feature Development workflow preferences:
+
+```bash
+# Check workflow and branch naming preferences
+grep -A 5 "Feature Development" AGENTS.md 2>/dev/null || echo "No preference found"
+```
+
+**Extract from AGENTS.md:**
+- **Workflow**: Git Worktrees or Feature Branches
+- **Branch naming**: The configured pattern
+
+**Generate branch name based on pattern:**
+
+| Pattern in AGENTS.md | Generated Branch Name |
+|---------------------|----------------------|
+| `feature/description` | `feature/<issue-title-slug>` |
+| `issue-number-description` | `<NUMBER>-<issue-title-slug>` |
+| `type/issue-description` | `feat/<NUMBER>-<issue-title-slug>` (or `fix/` for bugs) |
+| `username/description` | `<git-user>/<issue-title-slug>` |
+| No preference | `<NUMBER>-<issue-title-slug>` (default) |
+
+**If AGENTS.md specifies "Git Worktrees":**
+
+1. Create a worktree for this feature:
+   ```
+   skill git-worktree
+   ```
+   - Branch name: generated from pattern above
+   - Base branch: main/master
+
+2. All subsequent steps run inside the worktree directory
+
+3. After shipping, clean up the worktree
+
+**If "Feature Branches" or no preference:**
+
+1. Create branch with generated name:
+   ```bash
+   git checkout -b <generated-branch-name>
+   ```
+
+2. Continue with standard workflow
+
+## Step 3: Research (Conditional)
 
 **Trigger research if issue body contains:**
 - "research", "investigate", "best practice", "how to"
@@ -116,7 +168,7 @@ Task (majestic-engineer:research:web-research):
     Return concise, actionable findings.
 ```
 
-## Step 3: Plan Implementation
+## Step 4: Plan Implementation
 
 ```
 Task (majestic-engineer:plan:architect):
@@ -141,7 +193,7 @@ Task (majestic-engineer:plan:architect):
 
 **Update TodoWrite** with specific implementation tasks from the plan.
 
-## Step 4: Build Implementation
+## Step 5: Build Implementation
 
 ```
 Task (general-purpose):
@@ -164,7 +216,7 @@ Task (general-purpose):
     Work autonomously until complete.
 ```
 
-## Step 5: Code Review
+## Step 6: Code Review
 
 **Detect project type and select reviewer:**
 
@@ -194,7 +246,7 @@ Task (appropriate-reviewer):
     Return: APPROVED, NEEDS CHANGES (with specific fixes), or BLOCKED (with blockers)
 ```
 
-## Step 6: Fix Review Feedback (Loop)
+## Step 7: Fix Review Feedback (Loop)
 
 **If review returns NEEDS CHANGES or BLOCKED:**
 
@@ -213,13 +265,13 @@ Task (general-purpose):
     4. Report what you fixed
 ```
 
-**Re-run Step 5 (Code Review)**
+**Re-run Step 6 (Code Review)**
 
 **Loop limits:**
 - Max 3 iterations
 - After 3 failures: pause and report to user
 
-## Step 7: Ship
+## Step 8: Ship
 
 **Once review passes (APPROVED):**
 
@@ -233,6 +285,16 @@ SlashCommand: /majestic-engineer:workflows:ship-it
 gh issue close <NUMBER> --comment "Implemented in PR #<PR_NUMBER>"
 ```
 
+**If using worktree, clean up:**
+
+```bash
+# Return to main repository
+cd ../<original-repo>
+
+# Remove the worktree
+git worktree remove ../[repo]-worktrees/issue-<NUMBER>-<slug>
+```
+
 ## Output Summary
 
 After completion, provide:
@@ -244,11 +306,12 @@ After completion, provide:
 **Status:** Shipped
 
 ### Workflow Summary
+- Branch: `feat/42-add-authentication` [worktree | standard]
 - Research: [Skipped | Completed - key findings]
 - Plan: [X steps identified]
 - Build: [X files changed, X tests added]
 - Review: [Passed on attempt X]
-- Ship: PR #456 created, issue closed
+- Ship: PR #456 created, issue closed, [worktree cleaned up]
 
 ### Files Changed
 - `path/to/file.rb` - [description]

@@ -117,6 +117,61 @@ Use `AskUserQuestion` to ask about the application's lifecycle stage:
 1. **Development** - Pre-production, no users yet, breaking changes acceptable
 2. **Production** - Live users, backward compatibility required
 
+## Step 5: Git Workflow Preferences
+
+### 5a: Worktree vs Branch Preference
+
+Use `AskUserQuestion` to ask about feature development workflow:
+
+**Question:** "How do you prefer to work on new features?"
+
+**Options:**
+1. **Git Worktrees** - Isolated directories per feature (parallel work, clean separation)
+2. **Feature Branches** - Traditional branches in same directory (simpler, familiar)
+
+### 5b: Branch Naming Convention
+
+Use `AskUserQuestion` to ask about branch naming:
+
+**Question:** "What branch naming convention do you use?"
+
+**Options:**
+1. **feature/description** - e.g., `feature/add-authentication`
+2. **issue-number-description** - e.g., `42-add-authentication`
+3. **type/issue-description** - e.g., `feat/42-add-authentication`, `fix/123-login-bug`
+4. **username/description** - e.g., `david/add-authentication`
+
+Add to AGENTS.md HOW section based on selections:
+
+#### If worktrees selected:
+
+```markdown
+### Feature Development
+- **Workflow**: Git Worktrees
+- **Branch naming**: [selected pattern]
+- New features should be developed in isolated worktrees
+- Use `skill git-worktree` to create/manage worktrees
+- Location: `../[repo-name]-worktrees/[branch-name]/`
+```
+
+#### If feature branches selected:
+
+```markdown
+### Feature Development
+- **Workflow**: Feature Branches
+- **Branch naming**: [selected pattern]
+- Create feature branches from main: `git checkout -b [pattern]`
+```
+
+#### Branch naming pattern examples:
+
+| Pattern | Example | Use Case |
+|---------|---------|----------|
+| `feature/description` | `feature/add-auth` | Simple, descriptive |
+| `issue-number-description` | `42-add-auth` | Issue-linked |
+| `type/issue-description` | `feat/42-add-auth` | Conventional commits style |
+| `username/description` | `david/add-auth` | Team attribution |
+
 Add the Application Status section immediately after the project title in AGENTS.md:
 
 #### Development:
@@ -139,7 +194,7 @@ Add the Application Status section immediately after the project title in AGENTS
 - **Data Migrations**: Must handle existing records gracefully
 ```
 
-## Step 5: Add Sections Based on Configuration Level
+## Step 6: Add Sections Based on Configuration Level
 
 ### Basic Level - Task Management Only
 
@@ -228,7 +283,7 @@ Then add:
 - [Additional preferences based on selection]
 ```
 
-## Step 6: Create CLAUDE.md Symlink
+## Step 7: Create CLAUDE.md Symlink
 
 ```bash
 ln -s AGENTS.md CLAUDE.md
@@ -239,7 +294,7 @@ ln -s AGENTS.md CLAUDE.md
 2. **Replace** - Backup to CLAUDE.md.bak, then symlink
 3. **Skip** - Leave as-is (not recommended)
 
-## Step 7: Final Verification
+## Step 8: Final Verification
 
 ```bash
 # Check line count (should be under 300)
@@ -256,6 +311,8 @@ Report to user:
 - AGENTS.md created with WHAT/WHY/HOW structure
 - Configuration level: [Basic/Advanced/Full]
 - Application status: [Development/Production]
+- Feature workflow: [Git Worktrees/Feature Branches]
+- Branch naming: [selected pattern, e.g., `type/issue-description`]
 - Line count: X lines (warn if over 300)
 - Task management: [selected system]
 - CLAUDE.md symlink: created/merged/skipped
