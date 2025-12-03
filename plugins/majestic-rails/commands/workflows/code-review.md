@@ -29,9 +29,8 @@ git diff --name-only
 # Staged mode
 git diff --cached --name-only
 
-# Branch mode (detect default branch first)
-DEFAULT_BRANCH=$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/remotes/origin/@@')
-git diff ${DEFAULT_BRANCH:-master}...HEAD --name-only
+# Branch mode (auto-detect main or master)
+bash -c 'DEFAULT=$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed "s@^refs/remotes/origin/@@" || echo master); git diff ${DEFAULT}...HEAD --name-only'
 
 # PR mode
 gh pr diff <PR_NUMBER> --name-only
