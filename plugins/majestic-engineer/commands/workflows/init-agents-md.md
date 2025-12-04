@@ -32,6 +32,8 @@ Set up AI agent documentation and machine-readable config for this project.
 
 Load config: @.agents.yml
 
+Ask more questions until you have enough context to give an accurate & confident answer.
+
 ## WHAT (Architecture)
 - Tech stack, project structure
 - Major directories and their purpose
