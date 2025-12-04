@@ -1,6 +1,6 @@
 {
   "name": "majestic-engineer",
-  "version": "1.26.0",
+  "version": "1.27.0",
   "description": "Language-agnostic engineering workflows. Includes 19 specialized agents, 19 commands, and 13 skills.",
   "author": {
     "name": "David Paluy",

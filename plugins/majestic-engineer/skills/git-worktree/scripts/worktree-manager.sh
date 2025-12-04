@@ -25,9 +25,10 @@ get_main_branch() {
     repo_root=$(git rev-parse --show-toplevel 2>/dev/null)
     local main_branch
 
-    # First, check .agents.yml config
-    if [ -n "$repo_root" ] && [ -f "$repo_root/.agents.yml" ]; then
-        main_branch=$(grep "default_branch:" "$repo_root/.agents.yml" 2>/dev/null | awk '{print $2}')
+    # First, check .agents.yml config (supports AGENTS_CONFIG override)
+    local config_file="${AGENTS_CONFIG:-.agents.yml}"
+    if [ -n "$repo_root" ] && [ -f "$repo_root/$config_file" ]; then
+        main_branch=$(grep "default_branch:" "$repo_root/$config_file" 2>/dev/null | awk '{print $2}')
     fi
 
     # Fallback to git detection if not configured

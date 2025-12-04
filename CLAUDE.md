@@ -367,15 +367,26 @@ branch_naming: type/issue-desc
 - **Cross-shell compatible** - Avoids shell-specific parsing issues
 - **Single source of truth** - Config in one place, referenced everywhere
 
+### Custom Config Path (AGENTS_CONFIG)
+
+Override the default config filename with the `AGENTS_CONFIG` environment variable:
+
+```bash
+# Use custom config file
+export AGENTS_CONFIG=".my-config.yml"
+```
+
+All commands and scripts respect this override, falling back to `.agents.yml` if not set.
+
 ### Reading Config in Commands
 
 ```bash
-# Read single value with fallback
-TECH=$(grep "tech_stack:" .agents.yml 2>/dev/null | awk '{print $2}')
+# Read single value with fallback (supports AGENTS_CONFIG override)
+TECH=$(grep "tech_stack:" "${AGENTS_CONFIG:-.agents.yml}" 2>/dev/null | awk '{print $2}')
 TECH=${TECH:-generic}
 
 # Check boolean-like values
-if grep -q "app_status: production" .agents.yml 2>/dev/null; then
+if grep -q "app_status: production" "${AGENTS_CONFIG:-.agents.yml}" 2>/dev/null; then
   echo "Production mode - backward compatibility required"
 fi
 ```

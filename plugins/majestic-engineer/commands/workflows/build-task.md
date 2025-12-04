@@ -115,8 +115,8 @@ This helps identify the terminal when running multiple Claude Code sessions.
 
 ```bash
 # Read workflow and branch naming from config
-WORKFLOW=$(grep "workflow:" .agents.yml 2>/dev/null | awk '{print $2}')
-BRANCH_NAMING=$(grep "branch_naming:" .agents.yml 2>/dev/null | awk '{print $2}')
+WORKFLOW=$(grep "workflow:" "${AGENTS_CONFIG:-.agents.yml}" 2>/dev/null | awk '{print $2}')
+BRANCH_NAMING=$(grep "branch_naming:" "${AGENTS_CONFIG:-.agents.yml}" 2>/dev/null | awk '{print $2}')
 
 # Defaults
 WORKFLOW=${WORKFLOW:-branches}

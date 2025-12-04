@@ -13,7 +13,7 @@ Before proceeding, detect the project type to use appropriate tools:
 
 **Step 1: Check .agents.yml config**
 ```bash
-TECH_STACK=$(grep "tech_stack:" .agents.yml 2>/dev/null | awk '{print $2}')
+TECH_STACK=$(grep "tech_stack:" "${AGENTS_CONFIG:-.agents.yml}" 2>/dev/null | awk '{print $2}')
 ```
 
 **Step 2: Fall back to file detection if not configured**

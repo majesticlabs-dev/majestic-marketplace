@@ -17,7 +17,7 @@ When invoked, you must follow these steps in sequence:
 1. **Detect Project Type and Run Linters**
    - First check `.agents.yml` for `tech_stack` config:
      ```bash
-     grep "tech_stack:" .agents.yml 2>/dev/null | awk '{print $2}'
+     grep "tech_stack:" "${AGENTS_CONFIG:-.agents.yml}" 2>/dev/null | awk '{print $2}'
      ```
    - If not configured, use Glob to identify project type by checking for configuration files:
      - Ruby: Look for `Gemfile`, `.rubocop.yml`

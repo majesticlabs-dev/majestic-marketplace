@@ -32,7 +32,7 @@ git diff --name-only --diff-filter=d
 git diff --cached --name-only --diff-filter=d
 
 # Branch mode (read from .agents.yml, fallback to main)
-DEFAULT=$(grep "default_branch:" .agents.yml 2>/dev/null | awk '{print $2}')
+DEFAULT=$(grep "default_branch:" "${AGENTS_CONFIG:-.agents.yml}" 2>/dev/null | awk '{print $2}')
 DEFAULT=${DEFAULT:-main}
 git diff ${DEFAULT}...HEAD --name-only --diff-filter=d
 

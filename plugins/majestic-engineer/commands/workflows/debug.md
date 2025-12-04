@@ -19,7 +19,7 @@ Do not proceed until you have a clear bug description.
 **Step 1: Check .agents.yml config**
 
 ```bash
-TECH_STACK=$(grep "tech_stack:" .agents.yml 2>/dev/null | awk '{print $2}')
+TECH_STACK=$(grep "tech_stack:" "${AGENTS_CONFIG:-.agents.yml}" 2>/dev/null | awk '{print $2}')
 ```
 
 If `tech_stack` is configured, use it to determine project type.

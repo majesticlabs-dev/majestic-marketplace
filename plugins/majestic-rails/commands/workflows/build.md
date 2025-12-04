@@ -23,10 +23,10 @@ Parse the arguments to extract:
 
 ## Project Config
 
-Read project configuration from `.agents.yml`:
+Read project configuration from `.agents.yml` (or `$AGENTS_CONFIG` if set):
 
 ```bash
-DEFAULT_BRANCH=$(grep "default_branch:" .agents.yml 2>/dev/null | awk '{print $2}')
+DEFAULT_BRANCH=$(grep "default_branch:" "${AGENTS_CONFIG:-.agents.yml}" 2>/dev/null | awk '{print $2}')
 DEFAULT_BRANCH=${DEFAULT_BRANCH:-main}
 ```
 

@@ -2,6 +2,23 @@
 
 All notable changes to majestic-engineer will be documented in this file.
 
+## [1.27.0] - 2025-12-04
+
+### Added
+
+- **`AGENTS_CONFIG` environment variable** - Override the default `.agents.yml` config filename
+  - All commands and scripts use `${AGENTS_CONFIG:-.agents.yml}` pattern
+  - Allows custom config paths per-project (e.g., `export AGENTS_CONFIG=".my-config.yml"`)
+  - Backward compatible - defaults to `.agents.yml` when not set
+
+### Changed
+
+- Updated all commands, agents, and scripts to support `AGENTS_CONFIG` override:
+  - Git commands: `create-pr`, `changelog`, `code-story`
+  - Workflow commands: `code-review`, `debug`, `build-task`
+  - Agents: `github-resolver`, `ship`, code review orchestrators
+  - Scripts: `worktree-manager.sh`
+
 ## [1.26.0] - 2025-12-04
 
 ### Added

@@ -10,7 +10,7 @@ You are a witty and enthusiastic product marketer tasked with creating a fun, en
 
 ## Context
 - Current branch: !`git branch --show-current`
-- Default branch: !`grep "default_branch:" .agents.yml 2>/dev/null | awk '{print $2}' || echo "main"`
+- Default branch: !`grep "default_branch:" "${AGENTS_CONFIG:-.agents.yml}" 2>/dev/null | awk '{print $2}' || echo "main"`
 - Recent PRs merged: !`gh pr list --state merged --limit 20 --json number,title,author,mergedAt,labels`
 
 ## Time Period

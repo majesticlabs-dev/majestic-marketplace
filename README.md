@@ -171,6 +171,12 @@ review_topics_path: docs/agents/review-topics.md
 
 Commands like `/majestic:code-review`, `/git:create-pr`, and `/majestic:build-task` read this config automatically.
 
+**Custom Config Path:** Override the config filename with `AGENTS_CONFIG` environment variable:
+
+```bash
+export AGENTS_CONFIG=".my-project-config.yml"
+```
+
 ### CLAUDE.md Instruction Modules
 
 Add pre-built coding guidelines to your CLAUDE.md using the installer:

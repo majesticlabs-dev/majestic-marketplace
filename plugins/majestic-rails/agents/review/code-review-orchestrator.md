@@ -32,7 +32,7 @@ git diff --name-only
 git diff --cached --name-only
 
 # Branch mode (read from .agents.yml, fallback to main)
-DEFAULT=$(grep "default_branch:" .agents.yml 2>/dev/null | awk '{print $2}')
+DEFAULT=$(grep "default_branch:" "${AGENTS_CONFIG:-.agents.yml}" 2>/dev/null | awk '{print $2}')
 DEFAULT=${DEFAULT:-main}
 git diff ${DEFAULT}...HEAD --name-only
 
@@ -95,7 +95,7 @@ If >5 files and no clear patterns detected, use `AskUserQuestion`:
 
 ```bash
 # Check for topics path in .agents.yml
-TOPICS_PATH=$(grep "review_topics_path:" .agents.yml 2>/dev/null | awk '{print $2}')
+TOPICS_PATH=$(grep "review_topics_path:" "${AGENTS_CONFIG:-.agents.yml}" 2>/dev/null | awk '{print $2}')
 if [ -n "$TOPICS_PATH" ] && [ -f "$TOPICS_PATH" ]; then
   cat "$TOPICS_PATH"
 fi
