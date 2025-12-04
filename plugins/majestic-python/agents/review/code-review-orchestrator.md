@@ -20,7 +20,24 @@ You receive:
 - **Scope** - One of: PR number, `--staged`, `--branch`, file paths, or empty (unstaged changes)
 - **Changed files** - List of files to review (may be provided or need gathering)
 
-## Step 1: Gather Changed Files
+## Step 1: Gather Changed Files and Config
+
+### Read Project Config
+
+```bash
+# Read config values from .agents.yml
+DEFAULT=$(grep "default_branch:" "${AGENTS_CONFIG:-.agents.yml}" 2>/dev/null | awk '{print $2}')
+DEFAULT=${DEFAULT:-main}
+
+APP_STATUS=$(grep "app_status:" "${AGENTS_CONFIG:-.agents.yml}" 2>/dev/null | awk '{print $2}')
+APP_STATUS=${APP_STATUS:-development}
+```
+
+**App Status Impact:**
+- `production` → Breaking changes are **P1 Critical** (blocker)
+- `development` → Breaking changes are **P2 Important** (informational)
+
+### Gather Changed Files
 
 If changed files not provided, gather them based on scope:
 
@@ -31,9 +48,7 @@ git diff --name-only
 # Staged mode
 git diff --cached --name-only
 
-# Branch mode (read from .agents.yml, fallback to main)
-DEFAULT=$(grep "default_branch:" "${AGENTS_CONFIG:-.agents.yml}" 2>/dev/null | awk '{print $2}')
-DEFAULT=${DEFAULT:-main}
+# Branch mode
 git diff ${DEFAULT}...HEAD --name-only
 
 # PR mode
@@ -115,11 +130,12 @@ Collect all agent outputs and categorize findings by severity:
 ### P1 - Critical (Blocks Merge)
 - Security vulnerabilities
 - Type safety issues that could cause runtime errors
-- Breaking changes to public APIs
+- Breaking changes to public APIs **(only if `app_status: production`)**
 - Regressions (deleted functionality)
 - Missing error handling for critical paths
 
 ### P2 - Important (Should Fix)
+- Breaking changes to public APIs **(if `app_status: development`)**
 - Missing type hints on public functions
 - Non-Pythonic patterns (getter/setter instead of properties)
 - Import organization issues

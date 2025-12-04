@@ -2,6 +2,14 @@
 
 All notable changes to majestic-rails will be documented in this file.
 
+## [1.22.0] - 2025-12-04
+
+### Enhanced
+
+- **Code review orchestrator** - Now reads `app_status` from `.agents.yml` to adjust breaking change severity
+  - `production` → Breaking changes are P1 Critical (blocker)
+  - `development` → Breaking changes are P2 Important (informational)
+
 ## [1.20.0] - 2025-12-03
 
 ### Changed
