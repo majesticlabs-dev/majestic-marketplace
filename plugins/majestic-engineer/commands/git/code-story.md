@@ -1,5 +1,4 @@
 ---
-name: majestic-engineer:git:code-story
 description: Generate documentary-style narrative of repository development history
 argument-hint: "[--output PATH] [--detail minimal|standard|comprehensive] [--since DATE] [--commits N]"
 allowed-tools: Bash, Read, Grep, Glob, Task, Write, TodoWrite

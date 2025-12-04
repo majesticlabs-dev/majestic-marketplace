@@ -50,6 +50,59 @@ All agents use the simplified `mj:` prefix for easier invocation:
 - `mj:rails-code-review` (from majestic-rails)
 - `mj:python-code-review` (from majestic-python)
 
+### Skill Naming Convention
+
+Skills use simple, descriptive names without prefixes. Claude Code automatically namespaces them:
+
+- **Pattern**: Simple kebab-case names in `name:` field
+- **Example**: `ruby-coder`, `frontend-design`, `bofu-keywords`
+- **Invocation**: Claude Code namespaces as `plugin-name:skill-name`
+- **Actual usage**: `majestic-rails:ruby-coder`, `majestic-engineer:frontend-design`
+
+**Why different from agents?**
+- Skills use the `Skill` tool with automatic namespacing by Claude Code
+- Plugin namespace provides important context (e.g., `majestic-rails:ruby-coder` clearly indicates Rails-specific skill)
+- No collision risk due to automatic plugin-level namespacing
+- Consistency with broader Claude Code plugin ecosystem
+
+**Implementation**:
+- Set `name: skill-name` in SKILL.md frontmatter (no prefix, no namespace)
+- Keep directory structure as `plugins/{plugin-name}/skills/{skill-name}/SKILL.md`
+- Claude Code handles the namespacing automatically
+
+### Command Naming Convention
+
+Commands use a strategic three-tier naming system based on scope and purpose:
+
+**1. Generic/Cross-Project Commands** - Use `majestic:` prefix for workflows that work across all project types:
+- **Pattern**: `name: majestic:command-name`
+- **Examples**: `/majestic:plan`, `/majestic:debug`, `/majestic:prd`, `/majestic:code-review`
+- **When to use**: Workflows that are language/framework-agnostic
+- **Location**: `plugins/majestic-engineer/commands/workflows/`
+
+**2. Framework-Specific Commands** - Use framework prefix for workflows tied to specific technologies:
+- **Pattern**: `name: framework:command-name`
+- **Examples**: `/rails:build`, `/rails:code-review`
+- **When to use**: Workflows specific to Rails, Python, etc.
+- **Location**: `plugins/majestic-{framework}/commands/workflows/`
+
+**3. Utility Commands** - Omit `name:` field to use automatic path-based naming:
+- **Pattern**: No `name:` field → auto-named as `/category:command-name`
+- **Examples**: `/git:commit`, `/gemfile:organize`, `/tasks:backlog`
+- **When to use**: Category-specific utilities (git operations, gemfile management, etc.)
+- **Location**: `plugins/*/commands/{category}/{command-name}.md`
+- **Result**: Invoked as `/{category}:{command-name}`
+
+**Why three tiers?**
+- Generic `majestic:` commands work everywhere and are easy to discover
+- Framework prefixes provide context (e.g., `/rails:build` clearly indicates Rails workflow)
+- Path-based naming organizes utilities by category without manual naming
+
+**Implementation rules**:
+- Only add `name:` field for tier 1 (majestic:) and tier 2 (framework:) commands
+- Omit `name:` field for tier 3 (utility) commands to use automatic naming
+- Never use full plugin prefix (e.g., `majestic-engineer:git:commit`) - inconsistent with convention
+
 ### ⛔ FORBIDDEN: Never Modify ~/.claude/
 
 **NEVER modify `~/.claude/` when working on this repository.** All plugin files belong in `majestic-marketplace/plugins/`. The user's personal `~/.claude/` directory is separate from this plugin marketplace.
