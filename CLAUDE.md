@@ -337,28 +337,128 @@ Commands and scripts read project configuration from `.agents.yml` in the projec
 
 ### Structure
 
+The config file has **core fields** plus **stack-specific fields** based on tech stack.
+
+#### Rails Project Example
+
 ```yaml
 # .agents.yml - Project configuration for Claude Code commands
 default_branch: main
-tech_stack: rails
 app_status: development
+
+# Tech Stack
+tech_stack: rails
+ruby_version: "3.4.1"
+rails_version: "8.0"
+database: sqlite
+frontend: hotwire
+css: tailwind
+assets: propshaft
+js: importmap
+deployment: kamal
+extras:
+  - solid_cache
+  - solid_queue
+  - solid_cable
+
+# Workflow
 task_management: github
-review_topics_path: docs/agents/review-topics.md
 workflow: worktrees
 branch_naming: type/issue-desc
+review_topics_path: docs/agents/review-topics.md
 ```
 
-### Supported Fields
+#### Python Project Example
+
+```yaml
+# .agents.yml - Project configuration for Claude Code commands
+default_branch: main
+app_status: development
+
+# Tech Stack
+tech_stack: python
+python_version: "3.12"
+framework: fastapi
+package_manager: uv
+database: postgres
+
+# Workflow
+task_management: github
+workflow: worktrees
+branch_naming: type/issue-desc
+review_topics_path: docs/agents/review-topics.md
+```
+
+#### Node Project Example
+
+```yaml
+# .agents.yml - Project configuration for Claude Code commands
+default_branch: main
+app_status: development
+
+# Tech Stack
+tech_stack: node
+node_version: "22"
+framework: nextjs
+package_manager: pnpm
+typescript: true
+styling: tailwind
+testing: vitest
+deployment: vercel
+
+# Workflow
+task_management: github
+workflow: worktrees
+branch_naming: type/issue-desc
+review_topics_path: docs/agents/review-topics.md
+```
+
+### Core Fields
 
 | Field | Description | Values | Default |
 |-------|-------------|--------|---------|
 | `default_branch` | Main branch for git operations | branch name | `main` |
-| `tech_stack` | Primary tech stack for code review | `rails` \| `python` \| `generic` | `generic` |
+| `tech_stack` | Primary tech stack | `rails` \| `python` \| `generic` | `generic` |
 | `app_status` | Application lifecycle stage | `development` \| `production` | `development` |
 | `task_management` | Task tracking system | `github` \| `linear` \| `beads` \| `file` \| `none` | `none` |
-| `review_topics_path` | Path to review topics file | file path | (none) |
 | `workflow` | Feature development workflow | `worktrees` \| `branches` | `branches` |
 | `branch_naming` | Branch naming convention | `feature/desc` \| `issue-desc` \| `type/issue-desc` \| `user/desc` | `feature/desc` |
+| `review_topics_path` | Path to review topics file | file path | (none) |
+
+### Rails-Specific Fields
+
+| Field | Description | Values | Default |
+|-------|-------------|--------|---------|
+| `ruby_version` | Ruby version | version string | auto-detected |
+| `rails_version` | Rails version | version string | auto-detected |
+| `database` | Database type | `sqlite` \| `postgres` \| `mysql` | `sqlite` |
+| `frontend` | Frontend approach | `hotwire` \| `inertia` \| `api-only` | `hotwire` |
+| `css` | CSS framework | `tailwind` \| `bootstrap` \| `none` | `tailwind` |
+| `assets` | Asset pipeline | `propshaft` \| `sprockets` | `propshaft` |
+| `js` | JavaScript strategy | `importmap` \| `esbuild` \| `vite` | `importmap` |
+| `deployment` | Deployment tool | `kamal` \| `fly` \| `heroku` \| `render` | (none) |
+| `extras` | Rails 8 Solid gems | list of: `solid_cache`, `solid_queue`, `solid_cable` | (none) |
+
+### Python-Specific Fields
+
+| Field | Description | Values | Default |
+|-------|-------------|--------|---------|
+| `python_version` | Python version | version string | auto-detected |
+| `framework` | Web framework | `fastapi` \| `django` \| `flask` \| `none` | auto-detected |
+| `package_manager` | Package manager | `uv` \| `poetry` \| `pip` | `pip` |
+| `database` | Database type | `postgres` \| `sqlite` \| `none` | `postgres` |
+
+### Node-Specific Fields
+
+| Field | Description | Values | Default |
+|-------|-------------|--------|---------|
+| `node_version` | Node.js version | version string | auto-detected |
+| `framework` | Framework | `nextjs` \| `react` \| `vue` \| `nuxt` \| `svelte` \| `express` \| `fastify` \| `none` | auto-detected |
+| `package_manager` | Package manager | `pnpm` \| `npm` \| `yarn` \| `bun` | `npm` |
+| `typescript` | TypeScript enabled | `true` \| `false` | auto-detected |
+| `styling` | CSS approach | `tailwind` \| `css-modules` \| `styled-components` \| `sass` \| `none` | `tailwind` |
+| `testing` | Testing framework | `vitest` \| `jest` \| `playwright` \| `cypress` \| `none` | (none) |
+| `deployment` | Deployment platform | `vercel` \| `cloudflare` \| `netlify` \| `railway` \| `none` | (none) |
 
 ### Why .agents.yml?
 

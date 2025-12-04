@@ -60,37 +60,213 @@ wc -l AGENTS.md
 
 ## Step 2: Gather Configuration
 
-Use `AskUserQuestion` to gather ALL config in one consolidated question set:
+**IMPORTANT:** You MUST use `AskUserQuestion` to interactively gather configuration from the user. Do NOT assume values or skip questions.
 
-### Question 1: Tech Stack
+### Flow
+
+1. Ask **Core Questions** (4 questions) in a single AskUserQuestion call
+2. Based on tech_stack answer:
+   - If **Rails**: Ask Rails-specific questions (6 questions)
+   - If **Python**: Ask Python-specific questions (3 questions)
+   - If **Node**: Ask Node-specific questions (6 questions)
+   - If **Generic**: Skip to Final Questions
+3. Ask **Final Questions** (3 questions) in a single AskUserQuestion call
+
+### Core Questions (Ask First)
+
+Use a single `AskUserQuestion` call with these 4 questions:
+
+#### Question 1: Tech Stack
 **Question:** "What is the primary tech stack?"
 **Options:**
 1. **Rails** - Ruby on Rails
 2. **Python** - Python (FastAPI, Django, etc.)
-3. **Generic** - Other or auto-detect
+3. **Node** - JavaScript/TypeScript (React, Next.js, Express, etc.)
+4. **Generic** - Other or auto-detect
 
-### Question 2: App Status
+#### Question 2: App Status
 **Question:** "What is the application's current status?"
 **Options:**
 1. **Development** - Pre-production, breaking changes OK
 2. **Production** - Live users, backward compatibility required
 
-### Question 3: Task Management
+#### Question 3: Task Management
 **Question:** "What task management system do you use?"
 **Options:**
 1. **GitHub Issues**
 2. **Linear**
 3. **Beads**
 4. **File-based** (docs/backlog/)
-5. **None**
 
-### Question 4: Workflow
+#### Question 4: Workflow
 **Question:** "How do you prefer to work on features?"
 **Options:**
 1. **Worktrees** - Isolated directories per feature
 2. **Branches** - Traditional feature branches
 
-### Question 5: Branch Naming
+### Rails-Specific Questions (If Rails Selected)
+
+Auto-detect versions first, then ask remaining questions in two `AskUserQuestion` calls (max 4 questions each):
+
+```bash
+# Auto-detect Ruby version
+grep -E "^ruby" Gemfile 2>/dev/null | sed 's/ruby "\([^"]*\)".*/\1/'
+
+# Auto-detect Rails version
+grep -E "gem ['\"]rails['\"]" Gemfile 2>/dev/null | sed "s/.*['\"]~> \([0-9.]*\)['\"].*/\1/"
+```
+
+**First AskUserQuestion call (4 questions):**
+
+#### Question R1: Database
+**Question:** "What database are you using?"
+**Options:**
+1. **SQLite** - Default Rails 8 database
+2. **PostgreSQL** - Production-ready relational DB
+3. **MySQL** - Alternative relational DB
+
+#### Question R2: Frontend
+**Question:** "What frontend approach?"
+**Options:**
+1. **Hotwire** - Turbo + Stimulus (Rails default)
+2. **Inertia** - React/Vue/Svelte with Rails backend
+3. **API-only** - JSON API, separate frontend
+
+#### Question R3: CSS Framework
+**Question:** "What CSS framework?"
+**Options:**
+1. **Tailwind** - Utility-first CSS
+2. **Bootstrap** - Component framework
+3. **None** - Custom CSS only
+
+#### Question R4: JavaScript Strategy
+**Question:** "How do you manage JavaScript?"
+**Options:**
+1. **Importmap** - Rails 8 default, no bundler
+2. **esbuild** - Fast JS bundler
+3. **Vite** - Modern dev server + bundler
+
+**Second AskUserQuestion call (2 questions):**
+
+#### Question R5: Deployment (multiSelect: true)
+**Question:** "What deployment tools do you use?"
+**Options:**
+1. **Kamal** - Docker-based deployment
+2. **Fly.io** - Platform-as-a-service
+3. **Heroku** - Classic PaaS
+4. **Render** - Modern PaaS
+
+#### Question R6: Rails 8 Extras (multiSelect: true)
+**Question:** "Which Solid gems are you using?"
+**Options:**
+1. **Solid Cache** - Database-backed caching
+2. **Solid Queue** - Database-backed job queue
+3. **Solid Cable** - Database-backed Action Cable
+
+### Python-Specific Questions (If Python Selected)
+
+Auto-detect framework first, then ask all 3 questions in a single `AskUserQuestion` call:
+
+```bash
+# Check for common frameworks
+[ -f pyproject.toml ] && grep -E "fastapi|django|flask" pyproject.toml 2>/dev/null
+[ -f requirements.txt ] && grep -E "fastapi|django|flask" requirements.txt 2>/dev/null
+```
+
+**Single AskUserQuestion call (3 questions):**
+
+#### Question P1: Framework
+**Question:** "What Python framework?"
+**Options:**
+1. **FastAPI** - Modern async API framework
+2. **Django** - Full-stack web framework
+3. **Flask** - Lightweight microframework
+4. **None** - Library or CLI tool
+
+#### Question P2: Package Manager
+**Question:** "What package manager?"
+**Options:**
+1. **uv** - Fast modern package manager
+2. **Poetry** - Dependency management
+3. **pip** - Standard pip + requirements.txt
+
+#### Question P3: Database
+**Question:** "What database?"
+**Options:**
+1. **PostgreSQL** - Production relational DB
+2. **SQLite** - Lightweight local DB
+3. **None** - No database
+
+### Node-Specific Questions (If Node Selected)
+
+Auto-detect first:
+
+```bash
+# Auto-detect Node version
+node -v 2>/dev/null | sed 's/v//'
+
+# Check for TypeScript
+[ -f tsconfig.json ] && echo "typescript"
+
+# Check for common frameworks
+[ -f package.json ] && grep -E "next|react|vue|nuxt|svelte|express|fastify" package.json 2>/dev/null
+```
+
+**First AskUserQuestion call (4 questions):**
+
+#### Question N1: Framework
+**Question:** "What framework are you using?"
+**Options:**
+1. **Next.js** - React framework with SSR/SSG
+2. **React** - React SPA (Vite, CRA)
+3. **Vue/Nuxt** - Vue ecosystem
+4. **Express/Fastify** - Node.js backend
+
+#### Question N2: Package Manager
+**Question:** "What package manager?"
+**Options:**
+1. **pnpm** - Fast, disk-efficient
+2. **npm** - Node default
+3. **yarn** - Classic alternative
+4. **bun** - All-in-one toolkit
+
+#### Question N3: TypeScript
+**Question:** "Are you using TypeScript?"
+**Options:**
+1. **Yes** - TypeScript enabled
+2. **No** - JavaScript only
+
+#### Question N4: Styling
+**Question:** "What styling approach?"
+**Options:**
+1. **Tailwind** - Utility-first CSS
+2. **CSS Modules** - Scoped CSS files
+3. **Styled Components** - CSS-in-JS
+4. **Sass** - CSS preprocessor
+
+**Second AskUserQuestion call (2 questions):**
+
+#### Question N5: Testing
+**Question:** "What testing tools?"
+**Options:**
+1. **Vitest** - Vite-native testing
+2. **Jest** - Classic test runner
+3. **Playwright** - E2E testing
+4. **Cypress** - E2E testing
+
+#### Question N6: Deployment
+**Question:** "What deployment platform?"
+**Options:**
+1. **Vercel** - Next.js optimized
+2. **Cloudflare** - Edge workers/pages
+3. **Netlify** - JAMstack hosting
+4. **Railway** - Container platform
+
+### Final Questions (Ask All Users)
+
+Use a single `AskUserQuestion` call with these 3 questions:
+
+#### Question F1: Branch Naming
 **Question:** "What branch naming convention?"
 **Options:**
 1. **feature/desc** - e.g., `feature/add-auth`
@@ -98,13 +274,13 @@ Use `AskUserQuestion` to gather ALL config in one consolidated question set:
 3. **type/issue-desc** - e.g., `feat/42-add-auth`
 4. **user/desc** - e.g., `david/add-auth`
 
-### Question 6: Review Topics
+#### Question F2: Review Topics
 **Question:** "Where should code review topics be stored?"
 **Options:**
 1. **Default** - `docs/agents/review-topics.md`
 2. **Skip** - Don't configure now
 
-### Question 7: Track in Git?
+#### Question F3: Track in Git?
 **Question:** "Should `.agents.yml` be tracked in git?"
 **Options:**
 1. **Yes** - Shared config for team
@@ -136,14 +312,96 @@ Use first successful result, default to `main`.
 
 ## Step 4: Write .agents.yml
 
-Create the config file with ALL gathered values:
+Create the config file with ALL gathered values. Use the appropriate template based on tech stack.
+
+### Rails Template
 
 ```yaml
 # .agents.yml - Project configuration for Claude Code commands
 # Generated by /majestic:init-agents-md
 
 default_branch: main
+app_status: development
+
+# Tech Stack
 tech_stack: rails
+ruby_version: "3.4.1"      # Auto-detected from Gemfile
+rails_version: "8.0"        # Auto-detected from Gemfile
+database: sqlite            # sqlite | postgres | mysql
+frontend: hotwire           # hotwire | inertia | api-only
+css: tailwind               # tailwind | bootstrap | none
+assets: propshaft           # propshaft | sprockets
+js: importmap               # importmap | esbuild | vite
+deployment: kamal           # kamal | fly | heroku | render
+extras:                     # Rails 8 Solid gems in use
+  - solid_cache
+  - solid_queue
+  - solid_cable
+
+# Workflow
+task_management: github
+workflow: worktrees
+branch_naming: type/issue-desc
+review_topics_path: docs/agents/review-topics.md
+```
+
+### Python Template
+
+```yaml
+# .agents.yml - Project configuration for Claude Code commands
+# Generated by /majestic:init-agents-md
+
+default_branch: main
+app_status: development
+
+# Tech Stack
+tech_stack: python
+python_version: "3.12"      # Auto-detected from pyproject.toml
+framework: fastapi          # fastapi | django | flask | none
+package_manager: uv         # uv | poetry | pip
+database: postgres          # postgres | sqlite | none
+
+# Workflow
+task_management: github
+workflow: worktrees
+branch_naming: type/issue-desc
+review_topics_path: docs/agents/review-topics.md
+```
+
+### Node Template
+
+```yaml
+# .agents.yml - Project configuration for Claude Code commands
+# Generated by /majestic:init-agents-md
+
+default_branch: main
+app_status: development
+
+# Tech Stack
+tech_stack: node
+node_version: "22"          # Auto-detected from node -v
+framework: nextjs           # nextjs | react | vue | nuxt | svelte | express | fastify | none
+package_manager: pnpm       # pnpm | npm | yarn | bun
+typescript: true            # true | false
+styling: tailwind           # tailwind | css-modules | styled-components | sass | none
+testing: vitest             # vitest | jest | playwright | cypress | none
+deployment: vercel          # vercel | cloudflare | netlify | railway | none
+
+# Workflow
+task_management: github
+workflow: worktrees
+branch_naming: type/issue-desc
+review_topics_path: docs/agents/review-topics.md
+```
+
+### Generic Template
+
+```yaml
+# .agents.yml - Project configuration for Claude Code commands
+# Generated by /majestic:init-agents-md
+
+default_branch: main
+tech_stack: generic
 app_status: development
 task_management: github
 workflow: worktrees
@@ -151,7 +409,11 @@ branch_naming: type/issue-desc
 review_topics_path: docs/agents/review-topics.md
 ```
 
-Only include `review_topics_path` if user selected Default (not Skip).
+### Notes
+
+- Only include `review_topics_path` if user selected Default (not Skip)
+- Only include `extras` list if user selected any Solid gems
+- Auto-detect versions where possible, omit if not found
 
 If user selected "No" for git tracking:
 ```bash
@@ -221,6 +483,8 @@ ls -la CLAUDE.md
 
 ## Output Summary
 
+### Rails Project Example
+
 ```
 ✅ AGENTS.md initialized
    - Line count: X lines
@@ -228,12 +492,76 @@ ls -la CLAUDE.md
 
 ✅ .agents.yml created
    - default_branch: main
-   - tech_stack: rails
    - app_status: development
-   - task_management: github
-   - workflow: worktrees
-   - branch_naming: type/issue-desc
-   - review_topics_path: docs/agents/review-topics.md
+   - Tech Stack:
+     - tech_stack: rails
+     - ruby_version: 3.4.1
+     - rails_version: 8.0
+     - database: sqlite
+     - frontend: hotwire
+     - css: tailwind
+     - js: importmap
+     - deployment: kamal
+     - extras: solid_cache, solid_queue, solid_cable
+   - Workflow:
+     - task_management: github
+     - workflow: worktrees
+     - branch_naming: type/issue-desc
+
+✅ CLAUDE.md symlink created
+
+⚠️  Remember: Review and refine AGENTS.md manually
+```
+
+### Python Project Example
+
+```
+✅ AGENTS.md initialized
+   - Line count: X lines
+   - Config reference added
+
+✅ .agents.yml created
+   - default_branch: main
+   - app_status: development
+   - Tech Stack:
+     - tech_stack: python
+     - python_version: 3.12
+     - framework: fastapi
+     - package_manager: uv
+     - database: postgres
+   - Workflow:
+     - task_management: github
+     - workflow: worktrees
+     - branch_naming: type/issue-desc
+
+✅ CLAUDE.md symlink created
+
+⚠️  Remember: Review and refine AGENTS.md manually
+```
+
+### Node Project Example
+
+```
+✅ AGENTS.md initialized
+   - Line count: X lines
+   - Config reference added
+
+✅ .agents.yml created
+   - default_branch: main
+   - app_status: development
+   - Tech Stack:
+     - tech_stack: node
+     - node_version: 22
+     - framework: nextjs
+     - package_manager: pnpm
+     - typescript: true
+     - styling: tailwind
+     - testing: vitest
+     - deployment: vercel
+   - Workflow:
+     - task_management: github
+     - workflow: worktrees
+     - branch_naming: type/issue-desc
 
 ✅ CLAUDE.md symlink created
 
