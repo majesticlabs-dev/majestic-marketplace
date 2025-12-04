@@ -2,6 +2,17 @@
 
 All notable changes to majestic-engineer will be documented in this file.
 
+## [1.29.0] - 2025-12-04
+
+### Added
+
+- **`pr-screenshot-docs` skill** - Capture and document UI changes with before/after screenshots for pull requests
+  - Mobile-first screenshot workflow (320px default viewport)
+  - PR description template with before/after comparison table
+  - Viewport recommendations for different component sizes
+  - Best practices for visual documentation in code review
+  - Integrates with `visual-validator` and `ui-ux-designer` agents
+
 ## [1.27.0] - 2025-12-04
 
 ### Added

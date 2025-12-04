@@ -1,6 +1,6 @@
 # Majestic Engineer
 
-Language-agnostic engineering workflows. Includes 19 specialized agents, 18 commands, and 13 skills.
+Language-agnostic engineering workflows. Includes 19 specialized agents, 19 commands, and 14 skills.
 
 ## Installation
 
@@ -166,6 +166,7 @@ Invoke with: `skill majestic-engineer:<name>`
 | `git-worktree` | Manage git worktrees for parallel development |
 | `hierarchical-agents` | Generate hierarchical AGENTS.md structure for codebases |
 | `mermaid-builder` | Create syntactically correct Mermaid diagrams |
+| `pr-screenshot-docs` | Capture and document UI changes with before/after screenshots for PRs |
 | `ripgrep-search` | Fast, intelligent code and text searching with ripgrep |
 | `subagent-driven-development` | Execute plans with fresh subagent per task and code review between tasks |
 | `tdd-workflow` | Test-driven development using red-green-refactor cycle |
