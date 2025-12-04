@@ -2,7 +2,7 @@
 
 All notable changes to majestic-marketing will be documented in this file.
 
-## [2.24.0] - 2025-12-03
+## [2.26.0] - 2025-12-03
 
 ### Changed
 

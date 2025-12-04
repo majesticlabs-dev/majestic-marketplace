@@ -2,7 +2,7 @@
 
 All notable changes to majestic-rails will be documented in this file.
 
-## [1.18.0] - 2025-12-03
+## [1.20.0] - 2025-12-03
 
 ### Changed
 

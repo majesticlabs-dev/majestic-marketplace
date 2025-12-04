@@ -2,7 +2,7 @@
 
 All notable changes to majestic-tools will be documented in this file.
 
-## [1.5.0] - 2025-12-03
+## [1.7.0] - 2025-12-03
 
 ### Changed
 
@@ -11,7 +11,7 @@ All notable changes to majestic-tools will be documented in this file.
   - New: `agent reasoning-verifier`
 - Updated all documentation with new agent names
 
-## [1.4.0] - 2025-12-03
+## [1.7.0] - 2025-12-03
 
 ### Added
 

@@ -2,7 +2,7 @@
 
 All notable changes to majestic-engineer will be documented in this file.
 
-## [1.22.0] - 2025-12-03
+## [1.24.0] - 2025-12-03
 
 ### Changed
 
@@ -11,13 +11,13 @@ All notable changes to majestic-engineer will be documented in this file.
   - New: `agent web-research`
 - Updated all documentation with new agent names
 
-## [1.21.0] - 2025-12-03
+## [1.24.0] - 2025-12-03
 
 ### Changed
 
 - Updated `build-task` command to set terminal title after fetching the issue using `majestic-tools:set-title` agent (e.g., "🔨 #42: Add user authentication")
 
-## [1.20.0] - 2025-12-03
+## [1.24.0] - 2025-12-03
 
 ### Added
 
