@@ -207,6 +207,30 @@
         "referrals"
       ],
       "source": "./plugins/majestic-sales"
+    },
+    {
+      "name": "majestic-react",
+      "description": "Modern React development toolkit for TypeScript/React stacks. Includes 3 specialized agents and 3 skills.",
+      "version": "0.1.0",
+      "author": {
+        "name": "David Paluy",
+        "url": "https://github.com/dpaluy",
+        "email": "marketplace@it.majesticlabs.dev"
+      },
+      "homepage": "https://github.com/majesticlabs-dev/majestic-marketplace/tree/master/plugins/majestic-react",
+      "tags": [
+        "react",
+        "typescript",
+        "testing",
+        "vitest",
+        "tailwind",
+        "hooks",
+        "nextjs",
+        "vite",
+        "ai-powered",
+        "workflow-automation"
+      ],
+      "source": "./plugins/majestic-react"
     }
   ]
 }
