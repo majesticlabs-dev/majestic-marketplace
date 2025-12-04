@@ -12,7 +12,7 @@
     {
       "name": "majestic-engineer",
       "description": "Language-agnostic engineering workflows. Includes 19 specialized agents, 18 commands, and 13 skills.",
-      "version": "1.22.0",
+      "version": "1.23.0",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -32,41 +32,157 @@
     {
       "name": "majestic-rails",
       "description": "Ruby on Rails development tools. Includes 23 specialized agents, 4 commands, and 9 skills.",
-      "version": "1.18.0",
+      "version": "1.19.0",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
         "email": "marketplace@it.majesticlabs.dev"
       },
       "homepage": "https://github.com/majesticlabs-dev/majestic-marketplace/tree/master/plugins/majestic-rails",
-      "tags": ["ruby", "rails", "rspec", "minitest", "hotwire", "stimulus", "tailwind", "avo", "rubocop", "github", "ci", "active-job", "action-mailer", "solid-queue", "solid-cache", "postgresql", "sqlite", "database", "graphql", "action-policy", "authorization", "viewcomponent", "inertia", "active-interaction", "aasm", "store-model"],
+      "tags": [
+        "ruby",
+        "rails",
+        "rspec",
+        "minitest",
+        "hotwire",
+        "stimulus",
+        "tailwind",
+        "avo",
+        "rubocop",
+        "github",
+        "ci",
+        "active-job",
+        "action-mailer",
+        "solid-queue",
+        "solid-cache",
+        "postgresql",
+        "sqlite",
+        "database",
+        "graphql",
+        "action-policy",
+        "authorization",
+        "viewcomponent",
+        "inertia",
+        "active-interaction",
+        "aasm",
+        "store-model"
+      ],
       "source": "./plugins/majestic-rails"
     },
     {
       "name": "majestic-tools",
       "description": "Claude Code customization tools. Includes 2 agents, 11 commands, 3 skills, and 2 hooks.",
-      "version": "1.5.0",
+      "version": "1.6.0",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
         "email": "marketplace@it.majesticlabs.dev"
       },
       "homepage": "https://github.com/majesticlabs-dev/majestic-marketplace/tree/master/plugins/majestic-tools",
-      "tags": ["claude-code", "agents", "hooks", "commands", "meta-tools"],
+      "tags": [
+        "claude-code",
+        "agents",
+        "hooks",
+        "commands",
+        "meta-tools"
+      ],
       "source": "./plugins/majestic-tools"
+    },
+    {
+      "name": "majestic-python",
+      "description": "Python development tools. Includes 3 specialized agents.",
+      "version": "1.3.0",
+      "author": {
+        "name": "David Paluy",
+        "url": "https://github.com/dpaluy",
+        "email": "marketplace@it.majesticlabs.dev"
+      },
+      "homepage": "https://github.com/majesticlabs-dev/majestic-marketplace/tree/master/plugins/majestic-python",
+      "tags": [
+        "python",
+        "fastapi",
+        "django",
+        "flask",
+        "pytest",
+        "async",
+        "uv",
+        "ruff",
+        "pydantic"
+      ],
+      "source": "./plugins/majestic-python"
     },
     {
       "name": "majestic-marketing",
       "description": "Marketing and SEO tools for Claude Code. Includes 14 specialized agents, 2 commands, and 25 skills.",
-      "version": "2.24.0",
+      "version": "2.25.0",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
         "email": "marketplace@it.majesticlabs.dev"
       },
       "homepage": "https://github.com/majesticlabs-dev/majestic-marketplace/tree/master/plugins/majestic-marketing",
-      "tags": ["marketing", "seo", "geo", "content", "copywriting", "llm-optimization", "ai-visibility", "value-proposition", "google-ads", "paid-acquisition", "branding", "naming", "power-words"],
+      "tags": [
+        "marketing",
+        "seo",
+        "geo",
+        "content",
+        "copywriting",
+        "llm-optimization",
+        "ai-visibility",
+        "value-proposition",
+        "google-ads",
+        "paid-acquisition",
+        "branding",
+        "naming",
+        "power-words"
+      ],
       "source": "./plugins/majestic-marketing"
+    },
+    {
+      "name": "majestic-company",
+      "description": "Business operations tools. Includes 4 specialized agents and 21 skills.",
+      "version": "1.25.0",
+      "author": {
+        "name": "David Paluy",
+        "url": "https://github.com/dpaluy",
+        "email": "marketplace@it.majesticlabs.dev"
+      },
+      "homepage": "https://github.com/majesticlabs-dev/majestic-marketplace/tree/master/plugins/majestic-company",
+      "tags": [
+        "hr",
+        "people-ops",
+        "hiring",
+        "onboarding",
+        "performance",
+        "policies",
+        "business",
+        "strategy",
+        "first-principles",
+        "problem-solving",
+        "founder-mode",
+        "ceo",
+        "leadership",
+        "market-research",
+        "competitive-analysis",
+        "pain-points",
+        "product-validation",
+        "idea-validation",
+        "startup-validation",
+        "growth-strategy",
+        "business-audit",
+        "legal",
+        "contract-review",
+        "document-review",
+        "startup",
+        "business-plan",
+        "30-day-launch",
+        "business-launch",
+        "elevator-pitch",
+        "tam",
+        "market-sizing",
+        "fundraising"
+      ],
+      "source": "./plugins/majestic-company"
     },
     {
       "name": "majestic-sales",
@@ -78,34 +194,19 @@
         "email": "marketplace@it.majesticlabs.dev"
       },
       "homepage": "https://github.com/majesticlabs-dev/majestic-marketplace/tree/master/plugins/majestic-sales",
-      "tags": ["sales", "funnels", "revenue", "conversion", "prospecting", "proposals", "playbooks", "outbound", "icp", "referrals"],
+      "tags": [
+        "sales",
+        "funnels",
+        "revenue",
+        "conversion",
+        "prospecting",
+        "proposals",
+        "playbooks",
+        "outbound",
+        "icp",
+        "referrals"
+      ],
       "source": "./plugins/majestic-sales"
-    },
-    {
-      "name": "majestic-company",
-      "description": "Business operations tools. Includes 4 specialized agents and 21 skills.",
-      "version": "1.24.0",
-      "author": {
-        "name": "David Paluy",
-        "url": "https://github.com/dpaluy",
-        "email": "marketplace@it.majesticlabs.dev"
-      },
-      "homepage": "https://github.com/majesticlabs-dev/majestic-marketplace/tree/master/plugins/majestic-company",
-      "tags": ["hr", "people-ops", "hiring", "onboarding", "performance", "policies", "business", "strategy", "first-principles", "problem-solving", "founder-mode", "ceo", "leadership", "market-research", "competitive-analysis", "pain-points", "product-validation", "idea-validation", "startup-validation", "growth-strategy", "business-audit", "legal", "contract-review", "document-review", "startup", "business-plan", "30-day-launch", "business-launch", "elevator-pitch", "tam", "market-sizing", "fundraising"],
-      "source": "./plugins/majestic-company"
-    },
-    {
-      "name": "majestic-python",
-      "description": "Python development tools. Includes 3 specialized agents.",
-      "version": "1.2.0",
-      "author": {
-        "name": "David Paluy",
-        "url": "https://github.com/dpaluy",
-        "email": "marketplace@it.majesticlabs.dev"
-      },
-      "homepage": "https://github.com/majesticlabs-dev/majestic-marketplace/tree/master/plugins/majestic-python",
-      "tags": ["python", "fastapi", "django", "flask", "pytest", "async", "uv", "ruff", "pydantic"],
-      "source": "./plugins/majestic-python"
     }
   ]
 }

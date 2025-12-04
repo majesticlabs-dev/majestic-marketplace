@@ -1,6 +1,7 @@
 ---
 name: mj:content-planner
 description: Creates comprehensive content outlines and topic clusters for SEO. Plans content calendars and identifies topic gaps. Use PROACTIVELY for content strategy and planning.
+color: orange
 tools: Read, Write, Edit, Grep, Glob, WebSearch
 ---
 

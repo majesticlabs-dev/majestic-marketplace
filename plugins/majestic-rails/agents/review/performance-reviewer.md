@@ -1,6 +1,7 @@
 ---
 name: mj:performance-reviewer
 description: Use this agent to analyze Rails code for performance issues, optimize queries, identify bottlenecks, and ensure scalability. Invoke after implementing features or when performance concerns arise.
+color: yellow
 tools: Read, Grep, Glob, Bash
 ---
 

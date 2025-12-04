@@ -1,6 +1,7 @@
 ---
 name: mj:lint
 description: Run linting and code quality checks on Ruby and ERB files. Use before pushing to origin.
+color: yellow
 tools: Read, Bash, Grep, Glob
 model: claude-haiku-4-5-20251001
 ---

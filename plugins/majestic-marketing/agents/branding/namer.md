@@ -1,6 +1,7 @@
 ---
 name: mj:namer
 description: Generate and evaluate brand, company, and product names using Igor naming methodology. Creates evocative names that differentiate and dominate categories. Use when naming companies, products, features, or apps.
+color: violet
 tools: Read, Write, Edit, Grep, Glob, WebSearch
 ---
 

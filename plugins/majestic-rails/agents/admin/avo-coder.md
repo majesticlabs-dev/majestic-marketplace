@@ -1,6 +1,7 @@
 ---
 name: mj:avo-coder
 description: Use when building Avo admin interfaces. Creates resources, actions, filters, and dashboards following Avo conventions. Fetches latest docs dynamically.
+color: violet
 tools: Read, Write, Edit, Grep, Glob, Bash, WebFetch
 ---
 

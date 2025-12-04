@@ -1,6 +1,7 @@
 ---
 name: mj:github-resolver
 description: Use this agent to resolve CI failures and PR review comments from GitHub. Fetches CI logs, analyzes failures, implements fixes, and addresses reviewer feedback with clear resolution reports.
+color: red
 tools: Read, Write, Edit, Grep, Glob, Bash, WebFetch
 ---
 

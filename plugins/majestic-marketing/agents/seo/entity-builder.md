@@ -1,6 +1,7 @@
 ---
 name: mj:entity-builder
 description: Optimizes brand entity presence and triplet relationships for LLM visibility. Ensures consistent brand associations across platforms. Use PROACTIVELY for brand authority and AI presence.
+color: violet
 tools: Read, Write, Edit, Grep, Glob, WebSearch
 ---
 

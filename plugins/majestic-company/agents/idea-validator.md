@@ -1,6 +1,7 @@
 ---
 name: mj:idea-validator
 description: Validate startup ideas through structured research using real data. Orchestrates problem-research, customer-discovery, market-research, competitive-positioning, and tam-calculator to deliver an evidence-based GO/NO-GO verdict.
+color: purple
 tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch, AskUserQuestion, TodoWrite
 ---
 

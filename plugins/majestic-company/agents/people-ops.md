@@ -1,6 +1,7 @@
 ---
 name: mj:people-ops
 description: Use proactively for people operations - hiring, onboarding/offboarding, PTO policies, performance management, and employee relations. Produces structured, compliance-aware templates with jurisdiction awareness.
+color: blue
 tools: Read, Write, Edit, Grep, Glob
 ---
 

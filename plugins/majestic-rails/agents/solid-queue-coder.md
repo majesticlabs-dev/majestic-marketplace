@@ -1,6 +1,7 @@
 ---
 name: mj:solid-queue-coder
 description: Use when configuring or working with Solid Queue for background jobs. Applies Rails 8 conventions, database-backed job processing, concurrency settings, recurring jobs, and production deployment patterns.
+color: cyan
 tools: Read, Write, Edit, Grep, Glob, Bash
 ---
 
