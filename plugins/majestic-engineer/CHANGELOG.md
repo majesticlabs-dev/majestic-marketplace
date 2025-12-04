@@ -2,6 +2,12 @@
 
 All notable changes to majestic-engineer will be documented in this file.
 
+## [1.25.0] - 2025-12-04
+
+### Added
+
+- `/majestic:design-plan` command - Plan UI/UX design direction through guided discovery before implementation. Covers aesthetic direction, typography, color, motion, and integrates with `frontend-design` skill and `ui-ux-designer` agent.
+
 ## [1.24.1] - 2025-12-04
 
 ### Fixed
