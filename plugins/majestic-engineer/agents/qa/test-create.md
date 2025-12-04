@@ -1,5 +1,5 @@
 ---
-name: test-create
+name: mj:test-create
 description: Use for writing automated tests. Creates test plan first, identifies testing framework (RSpec/Minitest/Jest), invokes appropriate skill (rspec-coder/minitest-coder), writes comprehensive tests, runs tests to verify, and reports on definition of done criteria. Invoke with context of changes needing testing.
 tools: Read, Grep, Glob, Write, MultiEdit, Bash, WebFetch, Skill, TodoWrite
 color: red

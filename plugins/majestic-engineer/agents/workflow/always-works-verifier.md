@@ -1,5 +1,5 @@
 ---
-name: always-works-verifier
+name: mj:always-works-verifier
 description: Use proactively after implementing features or fixes to verify they actually work. Enforces systematic verification before declaring completion.
 tools: Bash, Read, Grep, Glob
 color: yellow

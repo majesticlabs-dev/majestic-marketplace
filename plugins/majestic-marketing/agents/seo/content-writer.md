@@ -1,5 +1,5 @@
 ---
-name: seo:content-writer
+name: mj:content-writer
 description: Writes SEO-optimized content based on provided keywords and topic briefs. Creates engaging, comprehensive content following best practices. Use PROACTIVELY for content creation tasks.
 tools: Read, Write, Edit, Grep, Glob, WebSearch
 ---

@@ -1,5 +1,5 @@
 ---
-name: data-integrity-reviewer
+name: mj:data-integrity-reviewer
 description: Use this agent to review database migrations, data models, or code that manipulates persistent data. Checks migration safety, data constraints, transaction boundaries, referential integrity, and privacy compliance.
 tools: Read, Grep, Glob, Bash
 ---

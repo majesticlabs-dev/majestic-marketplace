@@ -1,5 +1,5 @@
 ---
-name: rails-code-review-orchestrator
+name: mj:rails-code-review
 description: Orchestrate Rails code reviews by selecting appropriate specialized agents based on changed files, loading project topics, and synthesizing results into prioritized findings.
 tools: Read, Grep, Glob, Bash, Task, AskUserQuestion
 ---

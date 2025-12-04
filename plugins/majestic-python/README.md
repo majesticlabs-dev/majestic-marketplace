@@ -12,19 +12,19 @@ claude /plugin install majestic-python
 
 | I want to... | Use this |
 |--------------|----------|
-| Write modern Python code | `agent python-coder` |
-| Review Python code | `agent python-reviewer` |
+| Write modern Python code | `agent mj:python-coder` |
+| Review Python code | `agent mj:python-reviewer` |
 | Set up a FastAPI project | `agent python-coder "Set up FastAPI with uv"` |
 | Optimize async code | `agent python-coder "Optimize async performance"` |
 
 ## Agents
 
-Invoke with: `agent majestic-python:<name>`
+Invoke with: `agent mj:<name>`
 
 | Agent | Description |
 |-------|-------------|
-| `python-coder` | Modern Python 3.12+ development with uv, ruff, FastAPI, async patterns |
-| `python-reviewer` | Code review with high quality bar for type hints, Pythonic patterns |
+| `mj:python-coder` | Modern Python 3.12+ development with uv, ruff, FastAPI, async patterns |
+| `mj:python-reviewer` | Code review with high quality bar for type hints, Pythonic patterns |
 
 ## Python-Coder Capabilities
 

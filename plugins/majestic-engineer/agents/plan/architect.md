@@ -1,5 +1,5 @@
 ---
-name: architect
+name: mj:architect
 description: Use proactively for designing non-trivial features requiring architectural planning. Specialist for transforming user requirements into detailed implementation approaches, researching libraries, and creating elegant system designs.
 tools: Read, Write, Edit, MultiEdit, Grep, Glob, Bash, WebSearch, WebFetch, TodoWrite
 color: blue

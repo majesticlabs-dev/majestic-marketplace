@@ -1,5 +1,5 @@
 ---
-name: seo:structure-architect
+name: mj:structure-architect
 description: Analyzes and optimizes content structure including header hierarchy, suggests schema markup, and internal linking opportunities. Creates search-friendly content organization. Use PROACTIVELY for content structuring.
 tools: Read, Write, Edit, Grep, Glob, WebSearch
 ---

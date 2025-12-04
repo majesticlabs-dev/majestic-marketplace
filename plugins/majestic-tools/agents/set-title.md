@@ -1,5 +1,5 @@
 ---
-name: set-title
+name: mj:set-title
 description: Set terminal window title to identify what the current session is working on. Use from workflows like build-task to display the active task.
 tools: Bash
 ---

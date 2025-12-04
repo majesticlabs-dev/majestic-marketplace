@@ -1,5 +1,5 @@
 ---
-name: seo:keyword-strategist
+name: mj:keyword-strategist
 description: Analyzes keyword usage in provided content, calculates density, suggests semantic variations and LSI keywords based on the topic. Prevents over-optimization. Use PROACTIVELY for content optimization.
 tools: Read, Write, Edit, Grep, Glob, WebSearch
 ---

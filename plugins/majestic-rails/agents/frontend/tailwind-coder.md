@@ -1,5 +1,5 @@
 ---
-name: tailwind-coder
+name: mj:tailwind-coder
 description: Use when applying Tailwind CSS styling to Rails views. Uses utility classes, responsive design patterns, and integrates with Rails view helpers.
 tools: Read, Write, Edit, Grep, Glob, WebSearch
 ---

@@ -1,5 +1,5 @@
 ---
-name: seo:llm-optimizer
+name: mj:llm-optimizer
 description: Optimizes content for AI citation and visibility in ChatGPT, Perplexity, Gemini, and other LLMs. Analyzes content structure, fact-density, and extractability for generative engines. Use PROACTIVELY for content targeting AI visibility.
 tools: Read, Write, Edit, Grep, Glob, WebSearch
 ---

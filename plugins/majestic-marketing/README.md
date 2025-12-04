@@ -14,9 +14,9 @@ claude /plugin install majestic-marketing
 |--------------|----------|
 | Quick SEO audit | `/majestic-marketing:workflows:seo-audit` |
 | Comprehensive content check | `/majestic-marketing:workflows:content-check` |
-| Optimize for AI citation | `agent seo:llm-optimizer` |
-| Build brand authority | `agent seo:authority-builder` |
-| Generate brand names | `agent branding:namer` |
+| Optimize for AI citation | `agent mj:llm-optimizer` |
+| Build brand authority | `agent mj:authority-builder` |
+| Generate brand names | `agent mj:namer` |
 | Create sales page | `skill sales-page` |
 | Design email nurture | `skill email-nurture` |
 | Build content calendar | `skill content-calendar` |
@@ -25,38 +25,38 @@ claude /plugin install majestic-marketing
 
 ### branding
 
-Invoke with: `agent majestic-marketing:branding:<name>`
+Invoke with: `agent mj:<name>`
 
 | Agent | Description |
 |-------|-------------|
-| `branding:namer` | Generate category-defining brand, company, and product names using Igor naming methodology |
+| `mj:namer` | Generate category-defining brand, company, and product names using Igor naming methodology |
 
 ### seo
 
-Invoke with: `agent majestic-marketing:seo:<name>`
+Invoke with: `agent mj:<name>`
 
 #### Traditional SEO
 
 | Agent | Description |
 |-------|-------------|
-| `seo:authority-builder` | E-E-A-T analysis and authority signal optimization |
-| `seo:cannibalization-detector` | Keyword overlap and conflict detection |
-| `seo:content-auditor` | Content quality and SEO best practices audit |
-| `seo:content-planner` | Topic clusters and content calendar planning |
-| `seo:content-refresher` | Identify outdated content and suggest updates |
-| `seo:content-writer` | SEO-optimized content creation |
-| `seo:keyword-strategist` | Keyword density, LSI, semantic optimization |
-| `seo:meta-optimizer` | Meta titles, descriptions, URL optimization |
-| `seo:snippet-hunter` | Featured snippet and SERP feature optimization |
-| `seo:structure-architect` | Header hierarchy, schema, internal linking |
+| `mj:authority-builder` | E-E-A-T analysis and authority signal optimization |
+| `mj:cannibalization-detector` | Keyword overlap and conflict detection |
+| `mj:content-auditor` | Content quality and SEO best practices audit |
+| `mj:content-planner` | Topic clusters and content calendar planning |
+| `mj:content-refresher` | Identify outdated content and suggest updates |
+| `mj:content-writer` | SEO-optimized content creation |
+| `mj:keyword-strategist` | Keyword density, LSI, semantic optimization |
+| `mj:meta-optimizer` | Meta titles, descriptions, URL optimization |
+| `mj:snippet-hunter` | Featured snippet and SERP feature optimization |
+| `mj:structure-architect` | Header hierarchy, schema, internal linking |
 
 #### GEO (AI Visibility)
 
 | Agent | Description |
 |-------|-------------|
-| `seo:entity-builder` | Brand entity and triplet optimization for LLM presence |
-| `seo:llm-optimizer` | Optimize content for AI citation (ChatGPT, Perplexity, Gemini) |
-| `seo:schema-architect` | Schema.org and llms.txt implementation for AI extraction |
+| `mj:entity-builder` | Brand entity and triplet optimization for LLM presence |
+| `mj:llm-optimizer` | Optimize content for AI citation (ChatGPT, Perplexity, Gemini) |
+| `mj:schema-architect` | Schema.org and llms.txt implementation for AI extraction |
 
 ## Commands
 
@@ -77,7 +77,7 @@ Invoke with: `skill majestic-marketing:<name>`
 |-------|-------------|
 | `content-calendar` | 30-day content calendar with viral ideas, formats, hooks, and CTAs |
 | `content-optimizer` | Content optimization workflow for search and AI |
-| `content-writer` | Articles with outline-first workflow and readability guidelines |
+| `mj:content-writer` | Articles with outline-first workflow and readability guidelines |
 | `copy-editor` | Review and edit copy for grammar, style, and clarity |
 | `hook-writer` | Attention-grabbing hooks from 5 investor archetype perspectives |
 | `linkedin-content` | LinkedIn content with hooks, pillars, and posting strategy |

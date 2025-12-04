@@ -1,5 +1,5 @@
 ---
-name: seo:schema-architect
+name: mj:schema-architect
 description: Designs and implements comprehensive Schema.org structured data for AI extraction and rich results. Covers llms.txt implementation and knowledge graph optimization. Use PROACTIVELY for structured data strategy.
 tools: Read, Write, Edit, Grep, Glob, WebSearch
 ---

@@ -1,5 +1,5 @@
 ---
-name: seo:entity-builder
+name: mj:entity-builder
 description: Optimizes brand entity presence and triplet relationships for LLM visibility. Ensures consistent brand associations across platforms. Use PROACTIVELY for brand authority and AI presence.
 tools: Read, Write, Edit, Grep, Glob, WebSearch
 ---

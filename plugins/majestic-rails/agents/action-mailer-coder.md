@@ -1,5 +1,5 @@
 ---
-name: action-mailer-coder
+name: mj:action-mailer-coder
 description: Use when creating or refactoring Action Mailer emails. Applies Rails 7.1+ conventions, parameterized mailers, preview workflows, background delivery, and email design best practices.
 tools: Read, Write, Edit, Grep, Glob, Bash
 ---

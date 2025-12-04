@@ -1,5 +1,5 @@
 ---
-name: seo:content-refresher
+name: mj:content-refresher
 description: Identifies outdated elements in provided content and suggests updates to maintain freshness. Finds statistics, dates, and examples that need updating. Use PROACTIVELY for older content.
 tools: Read, Write, Edit, Grep, Glob, WebSearch
 ---

@@ -1,5 +1,5 @@
 ---
-name: simplicity-reviewer
+name: mj:simplicity-reviewer
 description: Use this agent for a final review pass to ensure code is simple and minimal. Identifies simplification opportunities, anti-patterns, code smells, duplication, and enforces YAGNI principles.
 tools: Read, Grep, Glob, Bash
 ---

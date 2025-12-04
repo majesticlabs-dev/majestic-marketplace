@@ -1,5 +1,5 @@
 ---
-name: docs-architect
+name: mj:docs-architect
 description: Use proactively for system documentation, architecture guides, or technical deep-dives. Creates comprehensive technical documentation from existing codebases.
 tools: Read, Grep, Glob, Write, Edit
 ---

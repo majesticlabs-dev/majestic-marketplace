@@ -1,5 +1,5 @@
 ---
-name: dhh-code-reviewer
+name: mj:dhh-code-reviewer
 description: Use this agent when you need a DHH-style code review. Reviews Ruby, Rails, and JavaScript code for convention violations, framework contamination, and unnecessary complexity.
 ---
 

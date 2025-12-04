@@ -1,5 +1,5 @@
 ---
-name: web-research
+name: mj:web-research
 description: Use proactively for researching information on the internet, debugging issues, finding solutions to technical problems, or gathering comprehensive information from multiple sources. Specialist for finding relevant discussions in GitHub issues, Reddit threads, Stack Overflow, forums, and other community resources.
 tools: WebSearch, WebFetch, Read, Grep, Glob, Bash
 color: blue

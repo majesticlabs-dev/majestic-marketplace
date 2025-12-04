@@ -1,5 +1,5 @@
 ---
-name: docs-researcher
+name: mj:docs-researcher
 description: Use proactively when implementing features that require up-to-date library documentation. Specialist for fetching and summarizing API documentation from Rails, Tailwind CSS, ReductoAI, or other external library websites before implementation tasks.
 tools: WebFetch, WebSearch, Read, Write
 model: claude-haiku-4-5-20251001

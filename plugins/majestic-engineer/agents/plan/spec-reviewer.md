@@ -1,5 +1,5 @@
 ---
-name: spec-reviewer
+name: mj:spec-reviewer
 description: Analyze specifications, plans, or feature descriptions for user flows, gaps, and missing requirements. Use before implementation begins.
 tools: Read, Grep, Glob
 ---

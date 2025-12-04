@@ -1,5 +1,5 @@
 ---
-name: best-practices-researcher
+name: mj:best-practices-researcher
 description: Research external best practices, documentation, and examples for any technology or framework. Returns structured findings with citations. Use when you need industry standards, official guidelines, or patterns from successful projects.
 ---
 

@@ -1,5 +1,5 @@
 ---
-name: ship
+name: mj:ship
 description: Use proactively for completing the full checkout workflow - runs linting, creates commit, and opens PR. Specialist for shipping code when user says "checkout", "ready to ship", "finish up", or wants to complete the full workflow.
 tools: Bash, SlashCommand, Read, Grep, Glob
 model: claude-haiku-4-5-20251001

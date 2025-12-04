@@ -1,5 +1,5 @@
 ---
-name: pragmatic-rails-reviewer
+name: mj:pragmatic-rails-reviewer
 description: Use this agent to review Rails code changes with a high quality bar. Invoke after implementing features, modifying existing code, or creating new Rails components. Applies strict review for existing code modifications, pragmatic review for new isolated code.
 tools: Read, Grep, Glob, Bash
 ---

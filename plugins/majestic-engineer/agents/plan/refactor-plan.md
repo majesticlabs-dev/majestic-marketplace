@@ -1,5 +1,5 @@
 ---
-name: refactor-plan
+name: mj:refactor-plan
 description: Use PROACTIVELY for analyzing code structure and creating comprehensive refactoring plans. Specialist for refactoring requests, code restructuring, modernizing legacy code, or optimizing existing implementations. Analyzes current state, identifies improvement opportunities, and produces detailed step-by-step plans with risk assessment.
 tools: Read, Edit, Write, Grep, Glob, Bash, WebSearch, NotebookRead, Task
 color: purple

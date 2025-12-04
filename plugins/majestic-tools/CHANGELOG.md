@@ -2,6 +2,15 @@
 
 All notable changes to majestic-tools will be documented in this file.
 
+## [1.5.0] - 2025-12-03
+
+### Changed
+
+- **BREAKING**: All agents now use simplified `mj:` prefix for easier invocation
+  - Old: `agent majestic-tools:reasoning-verifier`
+  - New: `agent mj:reasoning-verifier`
+- Updated all documentation with new agent names
+
 ## [1.4.0] - 2025-12-03
 
 ### Added

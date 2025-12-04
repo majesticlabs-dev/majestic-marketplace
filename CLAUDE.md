@@ -37,6 +37,19 @@ majestic-marketplace/
 
 ## Rules for This Repository
 
+### Agent Naming Convention
+
+All agents use the simplified `mj:` prefix for easier invocation:
+
+- **Pattern**: `mj:agent-name`
+- **Example**: `mj:gem-research`, `mj:web-research`, `mj:rails-code-review`
+- **Implementation**: Add `name: mj:agent-name` to agent frontmatter
+- **Directory structure**: Keep subdirectories (`agents/research/gem-research.md`), only change the `name:` field
+
+**Collision handling**: When multiple plugins have similar agents, use descriptive prefixes:
+- `mj:rails-code-review` (from majestic-rails)
+- `mj:python-code-review` (from majestic-python)
+
 ### ⛔ FORBIDDEN: Never Modify ~/.claude/
 
 **NEVER modify `~/.claude/` when working on this repository.** All plugin files belong in `majestic-marketplace/plugins/`. The user's personal `~/.claude/` directory is separate from this plugin marketplace.

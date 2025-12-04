@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.24.0] - 2025-12-03
+
+### Changed
+
+- **BREAKING**: All agents now use simplified `mj:` prefix for easier invocation
+  - Old: `agent majestic-company:first-principles`
+  - New: `agent mj:first-principles`
+- Updated all documentation with new agent names
+
 ## [1.23.0] - 2025-11-30
 
 ### Enhanced

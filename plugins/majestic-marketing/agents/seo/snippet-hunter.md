@@ -1,5 +1,5 @@
 ---
-name: seo:snippet-hunter
+name: mj:snippet-hunter
 description: Formats content to be eligible for featured snippets and SERP features. Creates snippet-optimized content blocks based on best practices. Use PROACTIVELY for question-based content.
 tools: Read, Write, Edit, Grep, Glob, WebSearch
 ---

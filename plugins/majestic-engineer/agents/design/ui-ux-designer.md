@@ -1,5 +1,5 @@
 ---
-name: ui-ux-designer
+name: mj:ui-ux-designer
 description: Use proactively for UI/UX design work. Specialist for iterative refinement through screenshots, visual analysis, and progressive improvements.
 tools: Read, Write, Edit, MultiEdit, Grep, Glob, Bash, Skill
 color: violet

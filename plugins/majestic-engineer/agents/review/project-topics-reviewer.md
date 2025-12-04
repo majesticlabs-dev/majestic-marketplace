@@ -1,5 +1,5 @@
 ---
-name: project-topics-reviewer
+name: mj:project-topics-reviewer
 description: Review code against project-specific topics defined in AGENTS.md or a dedicated file. Use at the end of code reviews to check custom team conventions, gotchas, and quality standards.
 tools: Read, Grep, Glob, Bash
 ---

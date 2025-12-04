@@ -2,6 +2,15 @@
 
 All notable changes to majestic-marketing will be documented in this file.
 
+## [2.24.0] - 2025-12-03
+
+### Changed
+
+- **BREAKING**: All agents now use simplified `mj:` prefix for easier invocation
+  - Old: `agent majestic-marketing:seo:llm-optimizer`
+  - New: `agent mj:llm-optimizer`
+- Updated all documentation with new agent names
+
 ## [2.23.0] - 2025-11-30
 
 ### Added
