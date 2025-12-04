@@ -40,10 +40,12 @@ ensure_gitignore() {
     local repo_root="$1"
     local gitignore="$repo_root/.gitignore"
 
-    if [ ! -f "$gitignore" ] || ! grep -q "^\.worktrees/?$" "$gitignore" 2>/dev/null; then
-        echo ".worktrees/" >> "$gitignore"
-        echo -e "${BLUE}Added .worktrees/ to .gitignore${NC}"
+    # Check if .worktrees/ already exists (handles trailing whitespace/CRLF)
+    if [ -f "$gitignore" ] && grep -qE "^\.worktrees/?[[:space:]]*$" "$gitignore" 2>/dev/null; then
+        return 0  # Already present, skip
     fi
+    echo ".worktrees/" >> "$gitignore"
+    echo -e "${BLUE}Added .worktrees/ to .gitignore${NC}"
 }
 
 # Copy .env files to worktree (excludes .env.example)

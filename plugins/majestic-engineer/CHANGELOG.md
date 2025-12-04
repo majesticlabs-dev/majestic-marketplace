@@ -2,6 +2,12 @@
 
 All notable changes to majestic-engineer will be documented in this file.
 
+## [1.24.1] - 2025-12-04
+
+### Fixed
+
+- Fixed duplicate `.worktrees/` entries in `.gitignore` - improved regex pattern to handle trailing whitespace and CRLF line endings
+
 ## [1.24.0] - 2025-12-03
 
 ### Changed
