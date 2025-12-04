@@ -1,7 +1,7 @@
 {
   "name": "majestic-react",
-  "version": "1.0.0",
-  "description": "Modern React development toolkit for Node.js/React stacks. Includes 1 specialized agent and 2 skills for code review, patterns, and testing.",
+  "version": "0.1.0",
+  "description": "Modern React development toolkit for TypeScript/React stacks. Includes 3 specialized agents and 3 skills.",
   "author": {
     "name": "Majestic Labs LLC",
     "email": "hello@majesticlabs.dev",
@@ -15,20 +15,33 @@
   },
   "keywords": [
     "react",
-    "nodejs",
     "typescript",
     "testing",
-    "code-review",
-    "patterns",
+    "vitest",
+    "tailwind",
     "hooks",
     "nextjs",
-    "vite"
+    "vite",
+    "ai-powered",
+    "workflow-automation"
   ],
   "components": {
-    "agents": 1,
-    "skills": 2
+    "agents": 3,
+    "skills": 3
   },
   "agents": {
+    "code": [
+      {
+        "name": "react-coder",
+        "description": "Write modern React components with TypeScript, hooks, and best practices",
+        "use_cases": [
+          "Generate functional components with proper typing",
+          "Create custom hooks with cleanup logic",
+          "Implement compound components and composition patterns",
+          "Build forms with validation and error handling"
+        ]
+      }
+    ],
     "review": [
       {
         "name": "react-reviewer",
@@ -39,6 +52,18 @@
           "Accessibility compliance checking",
           "Hook dependency validation",
           "TypeScript type safety review"
+        ]
+      }
+    ],
+    "plan": [
+      {
+        "name": "react-architect",
+        "description": "Design React application architecture and component hierarchies",
+        "use_cases": [
+          "Plan component structure and state management",
+          "Design scalable folder organization",
+          "Recommend performance optimization strategies",
+          "Create testing strategy and coverage plan"
         ]
       }
     ]
@@ -54,6 +79,12 @@
       {
         "name": "react-testing",
         "description": "React Testing Library and Vitest patterns for component and integration testing"
+      }
+    ],
+    "styling": [
+      {
+        "name": "tailwind-styling",
+        "description": "Responsive, performant Tailwind CSS styling for React components"
       }
     ]
   }
