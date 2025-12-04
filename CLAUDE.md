@@ -39,16 +39,19 @@ majestic-marketplace/
 
 ### Agent Naming Convention
 
-All agents use the simplified `mj:` prefix for easier invocation:
+Agents use simple, descriptive names without prefixes. Claude Code automatically namespaces them with plugin name and directory path:
 
-- **Pattern**: `mj:agent-name`
-- **Example**: `mj:gem-research`, `mj:web-research`, `mj:rails-code-review`
-- **Implementation**: Add `name: mj:agent-name` to agent frontmatter
-- **Directory structure**: Keep subdirectories (`agents/research/gem-research.md`), only change the `name:` field
+- **Pattern**: Simple kebab-case names in `name:` field
+- **Example**: `gem-research`, `web-research`, `rails-code-review`
+- **Implementation**: Add `name: agent-name` to agent frontmatter (no prefix)
+- **Directory structure**: Keep subdirectories (`agents/research/gem-research.md`)
+- **Display**: Claude Code shows as `plugin-name:directory:agent-name` (e.g., `majestic-rails:research:gem-research`)
+- **Invocation**: Use simple name: `agent gem-research`
 
-**Collision handling**: When multiple plugins have similar agents, use descriptive prefixes:
-- `mj:rails-code-review` (from majestic-rails)
-- `mj:python-code-review` (from majestic-python)
+**Why no prefix?**
+- Claude Code automatically namespaces with plugin name + directory path
+- Prevents collisions across plugins
+- Simpler invocation and shorter names
 
 ### Skill Naming Convention
 

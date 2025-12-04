@@ -1,5 +1,5 @@
 ---
-name: mj:action-policy-coder
+name: action-policy-coder
 description: Use proactively for authorization with ActionPolicy. Creates policies, scopes, and integrates with GraphQL/ActionCable. Preferred over Pundit for composable, cacheable authorization.
 color: cyan
 tools: Read, Write, Edit, Grep, Glob, Bash, WebFetch

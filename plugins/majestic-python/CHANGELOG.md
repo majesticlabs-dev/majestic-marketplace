@@ -6,9 +6,9 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
-- **BREAKING**: All agents now use simplified `mj:` prefix for easier invocation
+- **BREAKING**: All agents now use simplified simple naming without prefixes (Claude Code auto-namespaces) prefix for easier invocation
   - Old: `agent majestic-python:review:code-review-orchestrator`
-  - New: `agent mj:python-code-review`
+  - New: `agent python-code-review`
   - Code review orchestrator renamed to avoid collision with Rails plugin
 - Updated all documentation with new agent names
 

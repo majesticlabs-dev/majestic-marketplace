@@ -1,5 +1,5 @@
 ---
-name: mj:docs-architect
+name: docs-architect
 description: Use proactively for system documentation, architecture guides, or technical deep-dives. Creates comprehensive technical documentation from existing codebases.
 color: cyan
 tools: Read, Grep, Glob, Write, Edit

@@ -1,5 +1,5 @@
 ---
-name: mj:gem-research
+name: gem-research
 description: Use proactively for researching Ruby gems, evaluating gem quality, checking maintenance status, finding alternatives, and providing implementation guidance for Ruby dependencies.
 tools: WebFetch, WebSearch, Read, Grep, Glob, Bash, mcp__context7
 model: claude-haiku-4-5-20251001

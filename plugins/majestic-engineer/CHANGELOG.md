@@ -6,9 +6,9 @@ All notable changes to majestic-engineer will be documented in this file.
 
 ### Changed
 
-- **BREAKING**: All agents now use simplified `mj:` prefix for easier invocation
+- **BREAKING**: All agents now use simplified simple naming without prefixes (Claude Code auto-namespaces) prefix for easier invocation
   - Old: `agent majestic-engineer:research:web-research`
-  - New: `agent mj:web-research`
+  - New: `agent web-research`
 - Updated all documentation with new agent names
 
 ## [1.21.0] - 2025-12-03

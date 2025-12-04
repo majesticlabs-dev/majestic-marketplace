@@ -1,5 +1,5 @@
 ---
-name: mj:rails-debugger
+name: rails-debugger
 description: Use proactively when encountering Rails errors, test failures, build issues, or unexpected behavior. Analyzes errors, reproduces issues, and identifies root causes.
 color: red
 tools: Read, Grep, Glob, Bash

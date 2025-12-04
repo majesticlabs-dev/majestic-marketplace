@@ -1,5 +1,5 @@
 ---
-name: mj:stimulus-coder
+name: stimulus-coder
 description: Use when creating or refactoring Stimulus controllers. Applies Hotwire conventions, controller design patterns, targets/values usage, action handling, and JavaScript best practices.
 color: violet
 tools: Read, Write, Edit, Grep, Glob, Bash

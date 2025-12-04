@@ -14,9 +14,9 @@ claude /plugin install majestic-marketing
 |--------------|----------|
 | Quick SEO audit | `/majestic-marketing:workflows:seo-audit` |
 | Comprehensive content check | `/majestic-marketing:workflows:content-check` |
-| Optimize for AI citation | `agent mj:llm-optimizer` |
-| Build brand authority | `agent mj:authority-builder` |
-| Generate brand names | `agent mj:namer` |
+| Optimize for AI citation | `agent llm-optimizer` |
+| Build brand authority | `agent authority-builder` |
+| Generate brand names | `agent namer` |
 | Create sales page | `skill sales-page` |
 | Design email nurture | `skill email-nurture` |
 | Build content calendar | `skill content-calendar` |
@@ -25,38 +25,38 @@ claude /plugin install majestic-marketing
 
 ### branding
 
-Invoke with: `agent mj:<name>`
+Invoke with: `agent <name>`
 
 | Agent | Description |
 |-------|-------------|
-| `mj:namer` | Generate category-defining brand, company, and product names using Igor naming methodology |
+| `namer` | Generate category-defining brand, company, and product names using Igor naming methodology |
 
 ### seo
 
-Invoke with: `agent mj:<name>`
+Invoke with: `agent <name>`
 
 #### Traditional SEO
 
 | Agent | Description |
 |-------|-------------|
-| `mj:authority-builder` | E-E-A-T analysis and authority signal optimization |
-| `mj:cannibalization-detector` | Keyword overlap and conflict detection |
-| `mj:content-auditor` | Content quality and SEO best practices audit |
-| `mj:content-planner` | Topic clusters and content calendar planning |
-| `mj:content-refresher` | Identify outdated content and suggest updates |
-| `mj:content-writer` | SEO-optimized content creation |
-| `mj:keyword-strategist` | Keyword density, LSI, semantic optimization |
-| `mj:meta-optimizer` | Meta titles, descriptions, URL optimization |
-| `mj:snippet-hunter` | Featured snippet and SERP feature optimization |
-| `mj:structure-architect` | Header hierarchy, schema, internal linking |
+| `authority-builder` | E-E-A-T analysis and authority signal optimization |
+| `cannibalization-detector` | Keyword overlap and conflict detection |
+| `content-auditor` | Content quality and SEO best practices audit |
+| `content-planner` | Topic clusters and content calendar planning |
+| `content-refresher` | Identify outdated content and suggest updates |
+| `content-writer` | SEO-optimized content creation |
+| `keyword-strategist` | Keyword density, LSI, semantic optimization |
+| `meta-optimizer` | Meta titles, descriptions, URL optimization |
+| `snippet-hunter` | Featured snippet and SERP feature optimization |
+| `structure-architect` | Header hierarchy, schema, internal linking |
 
 #### GEO (AI Visibility)
 
 | Agent | Description |
 |-------|-------------|
-| `mj:entity-builder` | Brand entity and triplet optimization for LLM presence |
-| `mj:llm-optimizer` | Optimize content for AI citation (ChatGPT, Perplexity, Gemini) |
-| `mj:schema-architect` | Schema.org and llms.txt implementation for AI extraction |
+| `entity-builder` | Brand entity and triplet optimization for LLM presence |
+| `llm-optimizer` | Optimize content for AI citation (ChatGPT, Perplexity, Gemini) |
+| `schema-architect` | Schema.org and llms.txt implementation for AI extraction |
 
 ## Commands
 
@@ -77,7 +77,7 @@ Invoke with: `skill majestic-marketing:<name>`
 |-------|-------------|
 | `content-calendar` | 30-day content calendar with viral ideas, formats, hooks, and CTAs |
 | `content-optimizer` | Content optimization workflow for search and AI |
-| `mj:content-writer` | Articles with outline-first workflow and readability guidelines |
+| `content-writer` | Articles with outline-first workflow and readability guidelines |
 | `copy-editor` | Review and edit copy for grammar, style, and clarity |
 | `hook-writer` | Attention-grabbing hooks from 5 investor archetype perspectives |
 | `linkedin-content` | LinkedIn content with hooks, pillars, and posting strategy |

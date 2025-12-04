@@ -1,5 +1,5 @@
 ---
-name: mj:graphql-architect
+name: graphql-architect
 description: Use proactively for GraphQL API design, schema optimization, or N+1 query issues. Designs schemas, resolvers, and subscriptions using graphql-ruby patterns.
 color: blue
 tools: Read, Write, Edit, Grep, Glob, Bash, WebSearch

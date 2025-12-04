@@ -1,5 +1,5 @@
 ---
-name: mj:first-principles
+name: first-principles
 description: Use proactively for strategic decisions, complex problem-solving, and breakthrough thinking. Applies Elon Musk's first-principles methodology to break down problems into fundamental truths and rebuild solutions from the ground up.
 tools: Read, Grep, Glob
 color: purple

@@ -1,5 +1,5 @@
 ---
-name: mj:meta-optimizer
+name: meta-optimizer
 description: Creates optimized meta titles, descriptions, and URL suggestions based on character limits and best practices. Generates compelling, keyword-rich metadata. Use PROACTIVELY for new content.
 color: cyan
 tools: Read, Write, Edit, Grep, Glob

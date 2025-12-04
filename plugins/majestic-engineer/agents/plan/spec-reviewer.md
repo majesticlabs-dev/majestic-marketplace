@@ -1,5 +1,5 @@
 ---
-name: mj:spec-reviewer
+name: spec-reviewer
 description: Analyze specifications, plans, or feature descriptions for user flows, gaps, and missing requirements. Use before implementation begins.
 color: yellow
 tools: Read, Grep, Glob

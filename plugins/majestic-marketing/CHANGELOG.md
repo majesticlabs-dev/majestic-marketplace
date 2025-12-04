@@ -6,9 +6,9 @@ All notable changes to majestic-marketing will be documented in this file.
 
 ### Changed
 
-- **BREAKING**: All agents now use simplified `mj:` prefix for easier invocation
+- **BREAKING**: All agents now use simplified simple naming without prefixes (Claude Code auto-namespaces) prefix for easier invocation
   - Old: `agent majestic-marketing:seo:llm-optimizer`
-  - New: `agent mj:llm-optimizer`
+  - New: `agent llm-optimizer`
 - Updated all documentation with new agent names
 
 ## [2.23.0] - 2025-11-30

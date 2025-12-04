@@ -1,5 +1,5 @@
 ---
-name: mj:reasoning-verifier
+name: reasoning-verifier
 description: Verify and correct LLM reasoning using Reverse Chain-of-Thought (RCoT) methodology. Use after complex multi-step reasoning tasks, code analysis, or any solution where correctness is critical. Detects overlooked conditions and hallucinated assumptions.
 tools: Read, Grep, Glob
 color: yellow

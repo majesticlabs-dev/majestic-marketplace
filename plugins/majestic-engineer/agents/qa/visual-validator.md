@@ -1,5 +1,5 @@
 ---
-name: mj:visual-validator
+name: visual-validator
 description: Use proactively after UI changes to verify they achieved their intended goals. Skeptical visual QA through screenshot analysis, accessibility verification, and design system compliance checking.
 color: yellow
 tools: Read, Grep, Glob, Bash

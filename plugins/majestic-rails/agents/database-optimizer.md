@@ -1,5 +1,5 @@
 ---
-name: mj:database-optimizer
+name: database-optimizer
 description: Use this agent for advanced database query optimization, complex SQL writing, EXPLAIN ANALYZE interpretation, and index strategy design. Works with PostgreSQL and SQLite in Rails applications. Use PROACTIVELY when optimizing slow queries, writing complex SQL beyond ActiveRecord, or analyzing query performance.
 color: blue
 tools: Read, Grep, Glob, Bash

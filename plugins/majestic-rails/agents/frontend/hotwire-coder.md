@@ -1,5 +1,5 @@
 ---
-name: mj:hotwire-coder
+name: hotwire-coder
 description: Use when implementing Hotwire features with Turbo Drive, Turbo Frames, and Turbo Streams. Applies Rails 8 conventions, morphing, broadcasts, lazy loading, and real-time update patterns.
 color: violet
 tools: Read, Write, Edit, Grep, Glob, Bash, WebSearch

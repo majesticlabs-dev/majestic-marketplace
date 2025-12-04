@@ -1,5 +1,5 @@
 ---
-name: mj:python-code-review
+name: python-code-review
 description: Orchestrate Python code reviews by selecting appropriate specialized agents based on changed files, loading project topics, and synthesizing results into prioritized findings.
 color: yellow
 tools: Read, Grep, Glob, Bash, Task, AskUserQuestion

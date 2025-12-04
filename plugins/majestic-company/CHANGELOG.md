@@ -6,9 +6,9 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
-- **BREAKING**: All agents now use simplified `mj:` prefix for easier invocation
+- **BREAKING**: All agents now use simplified simple naming without prefixes (Claude Code auto-namespaces) prefix for easier invocation
   - Old: `agent majestic-company:first-principles`
-  - New: `agent mj:first-principles`
+  - New: `agent first-principles`
 - Updated all documentation with new agent names
 
 ## [1.23.0] - 2025-11-30

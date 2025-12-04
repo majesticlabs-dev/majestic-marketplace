@@ -12,10 +12,10 @@ claude /plugin install majestic-company
 
 | I want to... | Use this |
 |--------------|----------|
-| Identify my blind spots | `agent mj:blind-spot-analyzer` |
-| Validate a business idea | `agent mj:idea-validator` |
-| Strategic problem analysis | `agent mj:first-principles` |
-| Create interview kit | `agent mj:people-ops` |
+| Identify my blind spots | `agent blind-spot-analyzer` |
+| Validate a business idea | `agent idea-validator` |
+| Strategic problem analysis | `agent first-principles` |
+| Create interview kit | `agent people-ops` |
 | Build a strategic plan | `skill ceo:strategic-planning` |
 | Make a business decision | `skill ceo:decision-framework` |
 | Design a startup | `skill ceo:startup-blueprint` |
@@ -27,14 +27,14 @@ claude /plugin install majestic-company
 
 ## Agents
 
-Invoke with: `agent mj:<name>`
+Invoke with: `agent <name>`
 
 | Agent | Description |
 |-------|-------------|
-| `mj:blind-spot-analyzer` | Identify the single most critical blind spot limiting founder/business growth through integrated analysis of thinking patterns and strategic gaps |
-| `mj:idea-validator` | Validate startup ideas with real market research - orchestrates problem-research, customer-discovery, competitive-positioning for GO/NO-GO verdict |
-| `mj:first-principles` | Strategic thinking using Elon Musk's first-principles methodology |
-| `mj:people-ops` | People operations - hiring, onboarding, PTO, performance management |
+| `blind-spot-analyzer` | Identify the single most critical blind spot limiting founder/business growth through integrated analysis of thinking patterns and strategic gaps |
+| `idea-validator` | Validate startup ideas with real market research - orchestrates problem-research, customer-discovery, competitive-positioning for GO/NO-GO verdict |
+| `first-principles` | Strategic thinking using Elon Musk's first-principles methodology |
+| `people-ops` | People operations - hiring, onboarding, PTO, performance management |
 
 ## Skills
 

@@ -1,5 +1,5 @@
 ---
-name: mj:lint
+name: lint
 description: Run linting and code quality checks on Ruby and ERB files. Use before pushing to origin.
 color: yellow
 tools: Read, Bash, Grep, Glob

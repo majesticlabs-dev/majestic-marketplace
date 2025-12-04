@@ -26,10 +26,10 @@ graph LR
 |------|------|---------|
 | 1 | `/majestic:guided-prd` | Discover and refine product idea |
 | 2 | `/majestic:prd` | Generate Product Requirements Document |
-| 3 | `agent mj:architect` | Design implementation (HOW) |
-| 4 | `agent mj:plan-review` | Validate before coding |
+| 3 | `agent architect` | Design implementation (HOW) |
+| 4 | `agent plan-review` | Validate before coding |
 | 5 | Implementation | Write the code |
-| 6 | `agent mj:test-create` | Write tests |
+| 6 | `agent test-create` | Write tests |
 | 7 | `/git:commit` + `/git:create-pr` | Ship it |
 
 ### Plan-First (Features/Bugs/Improvements)
@@ -45,10 +45,10 @@ graph LR
 | Step | Tool | Purpose |
 |------|------|---------|
 | 1 | `/majestic:plan` | Create structured implementation plan |
-| 2 | `agent mj:plan-review` | Validate before coding |
+| 2 | `agent plan-review` | Validate before coding |
 | 3 | Implementation | Write the code |
-| 4 | `agent mj:test-create` | Write tests |
-| 5 | `agent mj:security-review` | Security audit |
+| 4 | `agent test-create` | Write tests |
+| 5 | `agent security-review` | Security audit |
 | 6 | `/git:commit` + `/git:create-pr` | Ship it |
 
 > **Note:** For Rails projects, use `/majestic-rails:workflows:build` for implementation.
@@ -58,58 +58,58 @@ graph LR
 | I want to... | Use this |
 |--------------|----------|
 | Plan a feature or bug fix | `/majestic:plan` |
-| Analyze a spec for gaps | `agent mj:spec-reviewer` |
+| Analyze a spec for gaps | `agent spec-reviewer` |
 | Define what to build (requirements) | `/majestic:prd` |
-| Design how to build it (architecture) | `agent mj:architect` |
-| Plan a refactoring effort | `agent mj:refactor-plan` |
-| Review a plan before implementing | `agent mj:plan-review` |
+| Design how to build it (architecture) | `agent architect` |
+| Plan a refactoring effort | `agent refactor-plan` |
+| Review a plan before implementing | `agent plan-review` |
 
 ## Agents
 
-Invoke with: `agent mj:<name>`
+Invoke with: `agent <name>`
 
 ### design
 
 | Agent | Description |
 |-------|-------------|
-| `mj:ui-ux-designer` | Iterative UI/UX refinement through screenshots and progressive improvements |
+| `ui-ux-designer` | Iterative UI/UX refinement through screenshots and progressive improvements |
 
 ### plan
 
 | Agent | Description |
 |-------|-------------|
-| `mj:architect` | Design non-trivial features, system architecture planning |
-| `mj:plan-review` | Thorough review of development plans before implementation |
-| `mj:refactor-plan` | Analyze code structure and create comprehensive refactoring plans |
-| `mj:spec-reviewer` | Analyze specs and plans for user flows, gaps, and missing requirements |
+| `architect` | Design non-trivial features, system architecture planning |
+| `plan-review` | Thorough review of development plans before implementation |
+| `refactor-plan` | Analyze code structure and create comprehensive refactoring plans |
+| `spec-reviewer` | Analyze specs and plans for user flows, gaps, and missing requirements |
 
 ### qa
 
 | Agent | Description |
 |-------|-------------|
-| `mj:security-review` | OWASP Top 10 vulnerability scanning, secrets detection |
-| `mj:test-create` | Automated test creation across frameworks (RSpec, Minitest, Jest) |
-| `mj:test-reviewer` | Review test quality, coverage, edge cases, and assertion quality |
-| `mj:visual-validator` | Verify UI changes achieved their goals through skeptical visual analysis |
+| `security-review` | OWASP Top 10 vulnerability scanning, secrets detection |
+| `test-create` | Automated test creation across frameworks (RSpec, Minitest, Jest) |
+| `test-reviewer` | Review test quality, coverage, edge cases, and assertion quality |
+| `visual-validator` | Verify UI changes achieved their goals through skeptical visual analysis |
 
 ### research
 
 | Agent | Description |
 |-------|-------------|
-| `mj:best-practices-researcher` | Research external best practices and documentation with structured citations |
-| `mj:docs-architect` | Create comprehensive technical documentation from codebases |
-| `mj:docs-researcher` | Fetch and summarize library documentation |
-| `mj:git-researcher` | Analyze git history, trace code evolution, and identify contributor expertise |
-| `mj:repo-analyst` | Repository onboarding - analyze structure, conventions, templates, and patterns |
-| `mj:web-research` | Internet research for debugging, finding solutions, and technical problems |
+| `best-practices-researcher` | Research external best practices and documentation with structured citations |
+| `docs-architect` | Create comprehensive technical documentation from codebases |
+| `docs-researcher` | Fetch and summarize library documentation |
+| `git-researcher` | Analyze git history, trace code evolution, and identify contributor expertise |
+| `repo-analyst` | Repository onboarding - analyze structure, conventions, templates, and patterns |
+| `web-research` | Internet research for debugging, finding solutions, and technical problems |
 
 ### workflow
 
 | Agent | Description |
 |-------|-------------|
-| `mj:always-works-verifier` | Verify implementations actually work before declaring completion |
+| `always-works-verifier` | Verify implementations actually work before declaring completion |
 | `workflow:github-resolver` | Resolve CI failures and PR review comments (auto-detects project type) |
-| `mj:ship` | Complete shipping workflow: lint, commit, PR |
+| `ship` | Complete shipping workflow: lint, commit, PR |
 
 ## Commands
 

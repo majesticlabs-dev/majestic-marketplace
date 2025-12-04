@@ -22,12 +22,12 @@ claude /plugin install majestic-tools
 
 ## Agents
 
-Invoke with: `agent mj:<name>`
+Invoke with: `agent <name>`
 
 | Agent | Description |
 |-------|-------------|
-| `mj:reasoning-verifier` | Verify LLM reasoning using RCoT - detect overlooked conditions and hallucinations |
-| `mj:set-title` | Set terminal window title to identify what the current session is working on |
+| `reasoning-verifier` | Verify LLM reasoning using RCoT - detect overlooked conditions and hallucinations |
+| `set-title` | Set terminal window title to identify what the current session is working on |
 
 ## Commands
 

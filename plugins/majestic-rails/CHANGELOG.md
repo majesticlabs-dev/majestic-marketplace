@@ -6,10 +6,11 @@ All notable changes to majestic-rails will be documented in this file.
 
 ### Changed
 
-- **BREAKING**: All agents now use simplified `mj:` prefix for easier invocation
+- **BREAKING**: All agents now use simple naming without prefixes - Claude Code auto-namespaces with plugin + directory path
   - Old: `agent majestic-rails:research:gem-research`
-  - New: `agent mj:gem-research`
-  - Code review orchestrator renamed: `mj:rails-code-review` (to avoid collision with Python plugin)
+  - New: `agent gem-research`
+  - Display: `majestic-rails:research:gem-research`
+  - Code review orchestrator renamed: `rails-code-review` (to avoid collision with Python plugin)
 - Updated all documentation with new agent names
 
 ## [1.16.1] - 2025-12-02

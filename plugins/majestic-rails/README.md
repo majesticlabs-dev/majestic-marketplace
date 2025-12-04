@@ -31,63 +31,63 @@ graph LR
 | Plan a new feature | `/majestic:plan "feature"` |
 | Build from a plan | `/rails:build docs/plans/feature.md` |
 | Review code changes | `/rails:code-review` |
-| Debug Rails issues | `agent mj:rails-debugger` |
-| Fix Rubocop violations | `agent mj:rubocop-fixer` |
-| Optimize database queries | `agent mj:database-optimizer` |
-| Build Hotwire components | `agent mj:hotwire-coder` |
-| Research a gem | `agent mj:gem-research` |
-| DHH-style code review | `agent mj:dhh-code-reviewer` |
+| Debug Rails issues | `agent rails-debugger` |
+| Fix Rubocop violations | `agent rubocop-fixer` |
+| Optimize database queries | `agent database-optimizer` |
+| Build Hotwire components | `agent hotwire-coder` |
+| Research a gem | `agent gem-research` |
+| DHH-style code review | `agent dhh-code-reviewer` |
 
 ## Agents
 
-Invoke with: `agent mj:<name>`
+Invoke with: `agent <name>`
 
 ### admin
 
 | Agent | Description |
 |-------|-------------|
-| `mj:avo-coder` | Build Avo admin interfaces (fetches latest docs dynamically) |
+| `avo-coder` | Build Avo admin interfaces (fetches latest docs dynamically) |
 
 ### core
 
 | Agent | Description |
 |-------|-------------|
-| `mj:action-mailer-coder` | Create emails with parameterized mailers, previews, and background delivery |
-| `mj:action-policy-coder` | Authorization with ActionPolicy - policies, scopes, caching, GraphQL integration |
-| `mj:active-job-coder` | Create background jobs with Rails 8 conventions, Solid Queue patterns, and retry strategies |
-| `mj:database-admin` | Database operations, backups, monitoring, connection pooling for PostgreSQL/SQLite |
-| `mj:database-optimizer` | Advanced query optimization, EXPLAIN analysis, complex SQL for PostgreSQL/SQLite |
-| `mj:graphql-architect` | Design GraphQL schemas, resolvers, subscriptions using graphql-ruby patterns |
-| `mj:lint` | Run rubocop, erblint, and brakeman before pushing |
-| `mj:rails-debugger` | Debug Rails issues and validate bug reports by analyzing errors and reproducing issues |
-| `mj:rails-refactorer` | Refactor Rails code following conventions, Sandi Metz rules, and idiomatic Ruby patterns |
-| `mj:rubocop-fixer` | Fix Rubocop violations following project conventions |
-| `mj:solid-cache-coder` | Configure Solid Cache for database-backed caching (Rails 8 default) |
-| `mj:solid-queue-coder` | Configure Solid Queue for database-backed job processing (Rails 8 default) |
+| `action-mailer-coder` | Create emails with parameterized mailers, previews, and background delivery |
+| `action-policy-coder` | Authorization with ActionPolicy - policies, scopes, caching, GraphQL integration |
+| `active-job-coder` | Create background jobs with Rails 8 conventions, Solid Queue patterns, and retry strategies |
+| `database-admin` | Database operations, backups, monitoring, connection pooling for PostgreSQL/SQLite |
+| `database-optimizer` | Advanced query optimization, EXPLAIN analysis, complex SQL for PostgreSQL/SQLite |
+| `graphql-architect` | Design GraphQL schemas, resolvers, subscriptions using graphql-ruby patterns |
+| `lint` | Run rubocop, erblint, and brakeman before pushing |
+| `rails-debugger` | Debug Rails issues and validate bug reports by analyzing errors and reproducing issues |
+| `rails-refactorer` | Refactor Rails code following conventions, Sandi Metz rules, and idiomatic Ruby patterns |
+| `rubocop-fixer` | Fix Rubocop violations following project conventions |
+| `solid-cache-coder` | Configure Solid Cache for database-backed caching (Rails 8 default) |
+| `solid-queue-coder` | Configure Solid Queue for database-backed job processing (Rails 8 default) |
 
 ### frontend
 
 | Agent | Description |
 |-------|-------------|
-| `mj:hotwire-coder` | Build Turbo Drive, Frames, Streams with morphing, broadcasts, and real-time patterns |
-| `mj:stimulus-coder` | Create Stimulus controllers with targets, values, actions, and Turbo integration |
-| `mj:tailwind-coder` | Apply Tailwind CSS styling with responsive design patterns |
+| `hotwire-coder` | Build Turbo Drive, Frames, Streams with morphing, broadcasts, and real-time patterns |
+| `stimulus-coder` | Create Stimulus controllers with targets, values, actions, and Turbo integration |
+| `tailwind-coder` | Apply Tailwind CSS styling with responsive design patterns |
 
 ### research
 
 | Agent | Description |
 |-------|-------------|
-| `mj:gem-research` | Ruby gem evaluation, quality assessment, and implementation guidance |
+| `gem-research` | Ruby gem evaluation, quality assessment, and implementation guidance |
 
 ### review
 
 | Agent | Description |
 |-------|-------------|
-| `mj:data-integrity-reviewer` | Review migrations, data constraints, transactions, and privacy compliance |
-| `mj:dhh-code-reviewer` | Review code following DHH's 37signals/Rails conventions |
-| `mj:performance-reviewer` | Analyze code for performance issues, query optimization, and scalability |
-| `mj:pragmatic-rails-reviewer` | Review code for quality, regressions, testability with pragmatic taste |
-| `mj:simplicity-reviewer` | Simplify code, detect anti-patterns, find duplication, enforce YAGNI |
+| `data-integrity-reviewer` | Review migrations, data constraints, transactions, and privacy compliance |
+| `dhh-code-reviewer` | Review code following DHH's 37signals/Rails conventions |
+| `performance-reviewer` | Analyze code for performance issues, query optimization, and scalability |
+| `pragmatic-rails-reviewer` | Review code for quality, regressions, testability with pragmatic taste |
+| `simplicity-reviewer` | Simplify code, detect anti-patterns, find duplication, enforce YAGNI |
 
 ## Commands
 

@@ -1,5 +1,5 @@
 ---
-name: mj:blind-spot-analyzer
+name: blind-spot-analyzer
 description: Use proactively for strategic self-awareness. Identifies the single most critical blind spot limiting founder/business growth through integrated analysis of thinking patterns and strategic gaps.
 color: purple
 tools: Read, Grep, Glob, AskUserQuestion

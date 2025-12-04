@@ -1,5 +1,5 @@
 ---
-name: mj:solid-cache-coder
+name: solid-cache-coder
 description: Use when configuring or working with Solid Cache for database-backed caching. Applies Rails 8 conventions, cache key design, expiration strategies, database setup, and performance tuning patterns.
 color: cyan
 tools: Read, Write, Edit, Grep, Glob, Bash

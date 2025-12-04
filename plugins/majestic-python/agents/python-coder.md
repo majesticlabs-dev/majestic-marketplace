@@ -1,5 +1,5 @@
 ---
-name: mj:python-coder
+name: python-coder
 description: Use proactively for Python development - modern Python 3.12+ with async programming, performance optimization, and production-ready practices. Expert in uv, ruff, pydantic, FastAPI, and the 2024/2025 Python ecosystem.
 color: cyan
 tools: Read, Write, Edit, Grep, Glob, Bash, WebSearch
