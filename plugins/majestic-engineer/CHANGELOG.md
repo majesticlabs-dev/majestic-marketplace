@@ -2,6 +2,24 @@
 
 All notable changes to majestic-engineer will be documented in this file.
 
+## [1.26.0] - 2025-12-04
+
+### Added
+
+- **`.agents.yml` config file** - New machine-readable config for project settings
+  - `default_branch`, `tech_stack`, `app_status`, `task_management`, `workflow`, `branch_naming`, `review_topics_path`
+  - Commands now read config from `.agents.yml` instead of parsing AGENTS.md
+  - Avoids shell parsing issues with complex `$()` substitution
+
+### Changed
+
+- `/majestic:init-agents-md` - Refactored to create `.agents.yml` with all config, simplified AGENTS.md to reference config file
+- `/majestic:code-review` - Reads `tech_stack` from `.agents.yml`
+- `/majestic:build-task` - Reads `workflow` and `branch_naming` from `.agents.yml`
+- `/git:code-story` and `/git:changelog` - Read `default_branch` from `.agents.yml`
+- Code review orchestrators - Read `review_topics_path` from `.agents.yml`
+- `worktree-manager.sh` - Checks `.agents.yml` first for `default_branch`
+
 ## [1.25.0] - 2025-12-04
 
 ### Added

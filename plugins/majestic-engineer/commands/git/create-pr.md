@@ -6,18 +6,18 @@ model: claude-haiku-4-5-20251001
 ---
 
 ## Context
+- Default branch: !`grep "default_branch:" .agents.yml 2>/dev/null | awk '{print $2}' || echo "main"`
 - Current git status: !`git status`
 - Current branch: !`git branch --show-current`
 - Pending changes: !`git diff --stat`
 - Recent commits: !`git log --oneline -5`
-- Base branch diff: !`git diff master...HEAD --stat`
 
 ## Your task
 Create a pull request for the current feature branch. Follow these steps:
 
 1. **Analyze the current state**:
    - Check if there are uncommitted changes that need to be committed first
-   - Verify the current branch is different from master/main
+   - Verify the current branch is different from the default branch (shown in Context)
    - Review all commits that will be included in the PR
 
 2. **Push branch if needed**:

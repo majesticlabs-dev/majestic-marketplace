@@ -329,6 +329,57 @@ Follow these patterns for commit messages:
 - [Plugin Marketplace Documentation](https://docs.claude.com/en/docs/claude-code/plugin-marketplaces)
 - [Plugin Reference](https://docs.claude.com/en/docs/claude-code/plugins-reference)
 
+## Project Configuration: .agents.yml
+
+Commands and scripts read project configuration from `.agents.yml` in the project root. This file is created by `/majestic:init-agents-md` during project setup.
+
+**AGENTS.md should reference this file:** `Load config: @.agents.yml`
+
+### Structure
+
+```yaml
+# .agents.yml - Project configuration for Claude Code commands
+default_branch: main
+tech_stack: rails
+app_status: development
+task_management: github
+review_topics_path: docs/agents/review-topics.md
+workflow: worktrees
+branch_naming: type/issue-desc
+```
+
+### Supported Fields
+
+| Field | Description | Values | Default |
+|-------|-------------|--------|---------|
+| `default_branch` | Main branch for git operations | branch name | `main` |
+| `tech_stack` | Primary tech stack for code review | `rails` \| `python` \| `generic` | `generic` |
+| `app_status` | Application lifecycle stage | `development` \| `production` | `development` |
+| `task_management` | Task tracking system | `github` \| `linear` \| `beads` \| `file` \| `none` | `none` |
+| `review_topics_path` | Path to review topics file | file path | (none) |
+| `workflow` | Feature development workflow | `worktrees` \| `branches` | `branches` |
+| `branch_naming` | Branch naming convention | `feature/desc` \| `issue-desc` \| `type/issue-desc` \| `user/desc` | `feature/desc` |
+
+### Why .agents.yml?
+
+- **Machine-readable** - YAML for commands, AGENTS.md for human guidance
+- **Simple reads** - `grep "key:" .agents.yml | awk '{print $2}'`
+- **Cross-shell compatible** - Avoids shell-specific parsing issues
+- **Single source of truth** - Config in one place, referenced everywhere
+
+### Reading Config in Commands
+
+```bash
+# Read single value with fallback
+TECH=$(grep "tech_stack:" .agents.yml 2>/dev/null | awk '{print $2}')
+TECH=${TECH:-generic}
+
+# Check boolean-like values
+if grep -q "app_status: production" .agents.yml 2>/dev/null; then
+  echo "Production mode - backward compatibility required"
+fi
+```
+
 ## Key Learnings
 
 _This section captures important learnings as we work on this repository._

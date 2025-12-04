@@ -19,10 +19,21 @@ get_repo_root() {
     }
 }
 
-# Get main branch name
+# Get main branch name (reads from .agents.yml if available)
 get_main_branch() {
+    local repo_root
+    repo_root=$(git rev-parse --show-toplevel 2>/dev/null)
     local main_branch
-    main_branch=$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/remotes/origin/@@')
+
+    # First, check .agents.yml config
+    if [ -n "$repo_root" ] && [ -f "$repo_root/.agents.yml" ]; then
+        main_branch=$(grep "default_branch:" "$repo_root/.agents.yml" 2>/dev/null | awk '{print $2}')
+    fi
+
+    # Fallback to git detection if not configured
+    if [ -z "$main_branch" ]; then
+        main_branch=$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/remotes/origin/@@')
+    fi
     if [ -z "$main_branch" ]; then
         if git show-ref --verify --quiet refs/heads/main; then
             main_branch="main"

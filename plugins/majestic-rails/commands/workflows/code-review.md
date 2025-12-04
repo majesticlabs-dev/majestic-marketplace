@@ -31,8 +31,9 @@ git diff --name-only --diff-filter=d
 # Staged mode
 git diff --cached --name-only --diff-filter=d
 
-# Branch mode (auto-detect main or master)
-DEFAULT=$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed "s@^refs/remotes/origin/@@" || echo master)
+# Branch mode (read from .agents.yml, fallback to main)
+DEFAULT=$(grep "default_branch:" .agents.yml 2>/dev/null | awk '{print $2}')
+DEFAULT=${DEFAULT:-main}
 git diff ${DEFAULT}...HEAD --name-only --diff-filter=d
 
 # PR mode

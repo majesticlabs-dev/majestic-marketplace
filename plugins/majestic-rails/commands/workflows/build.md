@@ -21,6 +21,15 @@ Parse the arguments to extract:
 
 <input_arguments> $ARGUMENTS </input_arguments>
 
+## Project Config
+
+Read project configuration from `.agents.yml`:
+
+```bash
+DEFAULT_BRANCH=$(grep "default_branch:" .agents.yml 2>/dev/null | awk '{print $2}')
+DEFAULT_BRANCH=${DEFAULT_BRANCH:-main}
+```
+
 ## Execution Workflow
 
 ### Phase 1: Quick Start
@@ -47,7 +56,7 @@ Parse the arguments to extract:
 
    **If live work:**
    ```bash
-   git checkout master && git pull origin master
+   git checkout $DEFAULT_BRANCH && git pull origin $DEFAULT_BRANCH
    git checkout -b <branch-name>
    ```
 

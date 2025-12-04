@@ -22,17 +22,17 @@ Generic code review command that detects your project's tech stack and delegates
 
 ## Step 1: Detect Tech Stack
 
-### Check AGENTS.md Configuration
+### Check .agents.yml Configuration
 
 ```bash
-grep "tech_stack:" AGENTS.md 2>/dev/null | head -1
+grep "tech_stack:" .agents.yml 2>/dev/null | awk '{print $2}'
 ```
 
-If `tech_stack:` is found, use that value.
+If `tech_stack:` is found in `.agents.yml`, use that value.
 
 ### Auto-Detection Fallback
 
-If not configured in AGENTS.md, detect from project files:
+If not configured in `.agents.yml`, detect from project files:
 
 | Detection | Tech Stack |
 |-----------|------------|
@@ -59,8 +59,9 @@ git diff --name-only --diff-filter=d
 # Staged mode
 git diff --cached --name-only --diff-filter=d
 
-# Branch mode
-DEFAULT=$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed "s@^refs/remotes/origin/@@" || echo master)
+# Branch mode (read from .agents.yml, fallback to main)
+DEFAULT=$(grep "default_branch:" .agents.yml 2>/dev/null | awk '{print $2}')
+DEFAULT=${DEFAULT:-main}
 git diff ${DEFAULT}...HEAD --name-only --diff-filter=d
 
 # PR mode

@@ -16,19 +16,24 @@ Do not proceed until you have a clear bug description.
 
 ## Project Context Detection
 
-**Step 1: Check AGENTS.md first**
+**Step 1: Check .agents.yml config**
 
-Look for `AGENTS.md` in the project root. This file is the authoritative source for:
-- Project type and stack
+```bash
+TECH_STACK=$(grep "tech_stack:" .agents.yml 2>/dev/null | awk '{print $2}')
+```
+
+If `tech_stack` is configured, use it to determine project type.
+
+**Step 2: Check AGENTS.md for debugging guidance**
+
+Look for `AGENTS.md` in the project root for:
 - Debugging workflows
 - Testing commands
 - Project-specific conventions
 
-If AGENTS.md exists and contains debugging guidance, follow those instructions.
+**Step 3: Fall back to file-based detection only if needed**
 
-**Step 2: Fall back to file-based detection only if needed**
-
-If AGENTS.md is missing or lacks debugging context, detect project type from files:
+If neither config nor AGENTS.md provides context, detect project type from files:
 
 ```bash
 ls Gemfile package.json pyproject.toml setup.py go.mod Cargo.toml 2>/dev/null

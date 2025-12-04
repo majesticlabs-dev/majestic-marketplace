@@ -54,9 +54,10 @@ The skill will:
 
 If no backend is configured, the skill defaults to file-based storage in `docs/todos/`.
 
-To configure a different backend, add to your project's CLAUDE.md:
+Configure your backend in `.agents.yml`:
 
 ```yaml
-## Task Management
-backend: github  # Options: files, github, linear, beads
+task_management: github  # Options: file, github, linear, beads, none
 ```
+
+Run `/majestic:init-agents-md` to set up project configuration.

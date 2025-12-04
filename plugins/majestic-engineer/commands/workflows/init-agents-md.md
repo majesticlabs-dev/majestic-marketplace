@@ -1,68 +1,51 @@
 ---
 name: majestic:init-agents-md
-description: Initialize AGENTS.md with hierarchical structure and create CLAUDE.md symlink
+description: Initialize AGENTS.md with hierarchical structure and .agents.yml config
 allowed-tools: AskUserQuestion, Skill, Bash, Write, Read, Grep, Glob
 ---
 
 # Initialize AGENTS.md
 
-Set up hierarchical AI agent documentation for this project with task management configuration.
+Set up AI agent documentation and machine-readable config for this project.
+
+## Architecture
+
+- **AGENTS.md** - Human-readable guidance (WHAT/WHY/HOW)
+- **.agents.yml** - Machine-readable config for commands
+- **CLAUDE.md** - Symlink to AGENTS.md
 
 ## AGENTS.md Best Practices
 
-Before generating, understand these critical principles:
-
-### The Stateless Reality
-
-LLMs begin every session with zero codebase knowledge. AGENTS.md is the primary onboarding mechanism - it must be concise and high-signal.
-
-### Root File Constraints
+### Constraints
 
 | Constraint | Reason |
 |------------|--------|
 | **Under 300 lines** | Ideally 60-100 for simple projects |
-| **~150 instruction limit** | Claude Code's system prompt uses ~50, leaving ~100-150 for you |
-| **Universal rules only** | Non-universal instructions get ignored ("only if highly relevant") |
-| **No style policing** | Use linters/hooks, not agent instructions |
+| **~150 instruction limit** | Claude Code's system prompt uses ~50 |
+| **Universal rules only** | Non-universal instructions get ignored |
+| **No config data** | Config belongs in `.agents.yml` |
 
 ### The WHAT/WHY/HOW Framework
-
-Structure the root AGENTS.md with these sections:
 
 ```markdown
 # Project Name
 
+Load config: @.agents.yml
+
 ## WHAT (Architecture)
 - Tech stack, project structure
 - Major directories and their purpose
-- Especially important for monorepos
 
 ## WHY (Purpose)
 - What this project does
-- Functional divisions
 - Where to find relevant code
 
 ## HOW (Workflows)
 - Essential commands (build, test, lint)
 - Verification procedures
-- Task management system
 ```
 
-### Progressive Disclosure
-
-- **Root file**: Only universal, always-applicable guidance
-- **Sub-folder AGENTS.md**: Detailed patterns, examples, technology-specific conventions
-- **Nearest-wins**: Agents read the closest AGENTS.md to the file being edited
-
-### Manual Refinement Required
-
-The generated output is a **starting point**, not a final product. You must:
-- Review and trim unnecessary content
-- Verify line count stays under 300
-- Remove any instructions that aren't universally applicable
-- Move specific patterns to sub-folder AGENTS.md files
-
-## Step 1: Generate Hierarchical AGENTS.md
+## Step 1: Generate AGENTS.md
 
 Invoke the hierarchical-agents skill to analyze the codebase:
 
@@ -70,333 +53,189 @@ Invoke the hierarchical-agents skill to analyze the codebase:
 skill hierarchical-agents
 ```
 
-Follow the skill's complete process:
-1. Repository Analysis
-2. Generate Root AGENTS.md (keep under 300 lines!)
-3. Generate Sub-Folder AGENTS.md files (if applicable)
-4. Quality verification
-
-**After generation, verify line count:**
+Follow the skill's process, then verify line count:
 ```bash
 wc -l AGENTS.md
 ```
 
-If over 300 lines, move detailed content to sub-folder files.
+## Step 2: Gather Configuration
 
-## Step 2: Choose Configuration Level
+Use `AskUserQuestion` to gather ALL config in one consolidated question set:
 
-Use `AskUserQuestion` to ask:
-
-**Question:** "What level of AGENTS.md configuration do you need?"
-
+### Question 1: Tech Stack
+**Question:** "What is the primary tech stack?"
 **Options:**
-1. **Basic** - WHAT/WHY/HOW + Task Management only
-2. **Advanced** - Add Tool Preferences, Thinking Triggers, Subagent Triggers
-3. **Full** - Add Communication Style and custom sections
+1. **Rails** - Ruby on Rails
+2. **Python** - Python (FastAPI, Django, etc.)
+3. **Generic** - Other or auto-detect
 
-## Step 3: Task Management Configuration
-
-Use `AskUserQuestion` to ask about task management:
-
-**Question:** "What task management system do you use for this project?"
-
-**Options:**
-1. **GitHub Issues** - Track tasks directly in GitHub
-2. **Linear** - Use Linear for issue tracking
-3. **Beads** - Use Beads task management
-4. **File-based** - Track tasks in local markdown files (docs/backlog/)
-5. **None** - No task management integration needed
-
-## Step 4: Application Status Configuration
-
-Use `AskUserQuestion` to ask about the application's lifecycle stage:
-
+### Question 2: App Status
 **Question:** "What is the application's current status?"
-
 **Options:**
-1. **Development** - Pre-production, no users yet, breaking changes acceptable
+1. **Development** - Pre-production, breaking changes OK
 2. **Production** - Live users, backward compatibility required
 
-## Step 5: Git Workflow Preferences
-
-### 5a: Worktree vs Branch Preference
-
-Use `AskUserQuestion` to ask about feature development workflow:
-
-**Question:** "How do you prefer to work on new features?"
-
+### Question 3: Task Management
+**Question:** "What task management system do you use?"
 **Options:**
-1. **Git Worktrees** - Isolated directories per feature (parallel work, clean separation)
-2. **Feature Branches** - Traditional branches in same directory (simpler, familiar)
+1. **GitHub Issues**
+2. **Linear**
+3. **Beads**
+4. **File-based** (docs/backlog/)
+5. **None**
 
-### 5b: Branch Naming Convention
-
-Use `AskUserQuestion` to ask about branch naming:
-
-**Question:** "What branch naming convention do you use?"
-
+### Question 4: Workflow
+**Question:** "How do you prefer to work on features?"
 **Options:**
-1. **feature/description** - e.g., `feature/add-authentication`
-2. **issue-number-description** - e.g., `42-add-authentication`
-3. **type/issue-description** - e.g., `feat/42-add-authentication`, `fix/123-login-bug`
-4. **username/description** - e.g., `david/add-authentication`
+1. **Worktrees** - Isolated directories per feature
+2. **Branches** - Traditional feature branches
 
-Add to AGENTS.md HOW section based on selections:
-
-#### If worktrees selected:
-
-```markdown
-### Feature Development
-- **Workflow**: Git Worktrees
-- **Branch naming**: [selected pattern]
-- New features should be developed in isolated worktrees
-- Use `skill git-worktree` to create/manage worktrees
-- Location: `../[repo-name]-worktrees/[branch-name]/`
-```
-
-#### If feature branches selected:
-
-```markdown
-### Feature Development
-- **Workflow**: Feature Branches
-- **Branch naming**: [selected pattern]
-- Create feature branches from main: `git checkout -b [pattern]`
-```
-
-#### Branch naming pattern examples:
-
-| Pattern | Example | Use Case |
-|---------|---------|----------|
-| `feature/description` | `feature/add-auth` | Simple, descriptive |
-| `issue-number-description` | `42-add-auth` | Issue-linked |
-| `type/issue-description` | `feat/42-add-auth` | Conventional commits style |
-| `username/description` | `david/add-auth` | Team attribution |
-
-Add the Application Status section immediately after the project title in AGENTS.md:
-
-#### Development:
-```markdown
-## Application Status: DEVELOPMENT
-
-- **Stage**: Pre-production, active development
-- **Users**: None yet (no existing data to migrate)
-- **Backward Compatibility**: NOT required - breaking changes are acceptable
-- **Data Migrations**: Keep simple - no need to handle existing records
-```
-
-#### Production:
-```markdown
-## Application Status: PRODUCTION
-
-- **Stage**: Live application with real users
-- **Users**: Existing data must be preserved
-- **Backward Compatibility**: REQUIRED - no breaking changes
-- **Data Migrations**: Must handle existing records gracefully
-```
-
-## Step 6: Tech Stack Configuration
-
-Use `AskUserQuestion` to ask about the project's tech stack:
-
-**Question:** "What is the primary tech stack for this project?"
-
+### Question 5: Branch Naming
+**Question:** "What branch naming convention?"
 **Options:**
-1. **Rails** - Ruby on Rails application
-2. **Python** - Python application (FastAPI, Django, etc.)
-3. **Auto-detect** - Let code review detect automatically from project files
-4. **Other** - Specify manually or use generic reviewers
+1. **feature/desc** - e.g., `feature/add-auth`
+2. **issue-desc** - e.g., `42-add-auth`
+3. **type/issue-desc** - e.g., `feat/42-add-auth`
+4. **user/desc** - e.g., `david/add-auth`
 
-Based on selection, add to AGENTS.md Project Configuration section:
-
-```markdown
-## Project Configuration
-
-tech_stack: rails  # rails | python | generic
-```
-
-If **Auto-detect** selected, omit `tech_stack:` line (will be detected from Gemfile, pyproject.toml, etc.).
-
-## Step 7: Code Review Topics Configuration
-
-Use `AskUserQuestion` to ask about project-specific review topics:
-
-**Question:** "Where should project-specific code review topics be stored?"
-
+### Question 6: Review Topics
+**Question:** "Where should code review topics be stored?"
 **Options:**
-1. **Default (docs/agents/review-topics.md)** - Dedicated file in docs/agents directory
-2. **Inline in AGENTS.md** - Keep topics in the Code Review Topics section
-3. **Custom path** - Specify your own location
-4. **Skip** - Don't configure review topics now
+1. **Default** - `docs/agents/review-topics.md`
+2. **Skip** - Don't configure now
 
-Based on selection:
+### Question 7: Track in Git?
+**Question:** "Should `.agents.yml` be tracked in git?"
+**Options:**
+1. **Yes** - Shared config for team
+2. **No** - Local-only (add to .gitignore)
 
-### If Default or Custom Path Selected
+## Step 3: Auto-Detect Values
 
-Add to AGENTS.md Project Configuration:
+### Default Branch
 
-```markdown
-review_topics_path: docs/agents/review-topics.md  # or custom path
+```bash
+# Try remote HEAD first
+git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/remotes/origin/@@'
+
+# Fallback: check for main
+git show-ref --verify refs/heads/main 2>/dev/null && echo "main"
+
+# Fallback: check for master
+git show-ref --verify refs/heads/master 2>/dev/null && echo "master"
 ```
 
-Create the file at the selected location with starter template:
+Use first successful result, default to `main`.
+
+### Tech Stack (if Generic selected)
+
+```bash
+[ -f Gemfile ] && echo "rails"
+[ -f pyproject.toml ] || [ -f requirements.txt ] && echo "python"
+```
+
+## Step 4: Write .agents.yml
+
+Create the config file with ALL gathered values:
+
+```yaml
+# .agents.yml - Project configuration for Claude Code commands
+# Generated by /majestic:init-agents-md
+
+default_branch: main
+tech_stack: rails
+app_status: development
+task_management: github
+workflow: worktrees
+branch_naming: type/issue-desc
+review_topics_path: docs/agents/review-topics.md
+```
+
+Only include `review_topics_path` if user selected Default (not Skip).
+
+If user selected "No" for git tracking:
+```bash
+echo ".agents.yml" >> .gitignore
+```
+
+## Step 5: Update AGENTS.md
+
+Add config reference at the top of AGENTS.md, right after the title:
+
+```markdown
+# Project Name
+
+Load config: @.agents.yml
+```
+
+Remove any existing config sections from AGENTS.md (tech_stack, review_topics_path, etc.) - all config now lives in `.agents.yml`.
+
+## Step 6: Create Review Topics File
+
+If user selected Default for review topics, create the file:
+
+```bash
+mkdir -p docs/agents
+```
+
+Write `docs/agents/review-topics.md`:
 
 ```markdown
 # Code Review Topics
 
 Project-specific topics checked during every code review.
-Add your team's conventions, gotchas, and quality standards here.
 
 ### Example Category
-- Example topic to always check during reviews
+- Example topic to always check
 - Another important convention
 
 <!--
 Tips:
-- Use any markdown format - headers, bullets, paragraphs
-- Be specific: "API calls need 30s timeout" not "handle errors properly"
+- Be specific: "API calls need 30s timeout" not "handle errors"
 - Focus on project-specific rules, not general best practices
 -->
 ```
 
-### If Inline Selected
-
-Add placeholder section to AGENTS.md:
-
-```markdown
-## Code Review Topics
-
-<!-- Add project-specific review topics here -->
-### Example Category
-- Example topic to always check during reviews
-```
-
-### If Skip Selected
-
-Do not add any review topics configuration.
-
-## Step 8: Add Sections Based on Configuration Level
-
-### Basic Level - Task Management Only
-
-Append to the **HOW** section:
-
-#### GitHub Issues:
-```markdown
-### Task Management
-- System: GitHub Issues
-- Create: `backlog add "task"` or via GitHub UI
-- Reference: `#issue-number` in commits
-```
-
-#### Linear:
-```markdown
-### Task Management
-- System: Linear
-- Create: `backlog add "task"` or via Linear UI
-- Reference: Issue ID in commits
-```
-
-#### Beads:
-```markdown
-### Task Management
-- System: Beads
-- Create: `backlog add "task"`
-```
-
-#### File-based:
-```markdown
-### Task Management
-- System: File-based (`docs/backlog/`)
-- Create: `backlog add "task"`
-```
-
-#### None:
-```markdown
-### Task Management
-- Not configured
-```
-
-### Advanced Level - Add These Sections
-
-If user selected **Advanced** or **Full**, detect available skills and add:
-
-**Skill Detection:** Check the `Skill` tool's `<available_skills>` section in the system prompt to see which skills are installed. Common skills to look for:
-- `majestic-engineer:ripgrep-search` - Fast text/code search
-- `majestic-engineer:ast-grep-searching` - Structural code search and refactoring
-
-**Template (customize based on detected skills):**
-
-```markdown
-### Tool Preferences
-1. **Read/Edit** over bash cat/sed for file operations
-2. **`skill ripgrep-search`** for text/code search patterns (if available)
-3. **`skill ast-grep-searching`** for structural code search and refactoring (if available)
-4. **Task (subagent)** for complex exploration and multi-file analysis
-5. **Bash** for git, running tests/builds, system commands
-
-### Extended Thinking Triggers
-Use for: architecture decisions, debugging after initial failures, multi-file refactors, complex PR reviews
-Skip for: simple CRUD, obvious bug fixes, file reads, running commands
-
-### Subagent Triggers
-Spawn when: exploring unfamiliar codebases, parallel investigations, fully describable independent tasks, deep research with summary needed
-Do yourself when: simple sequential work, loaded context, tight feedback loops, immediate file edit feedback
-```
-
-### Full Level - Add Communication Style
-
-If user selected **Full**, also ask:
-
-**Question:** "How should Claude communicate with you?"
-
-**Options:**
-1. **Direct** - Terse, no fluff, execute don't explain
-2. **Balanced** - Clear explanations with concise execution
-3. **Detailed** - Thorough explanations and reasoning
-4. **Sparring Partner** - Challenge assumptions, disagree when warranted
-
-Then add:
-
-```markdown
-### Communication Style
-- Mode: [selected style]
-- [Additional preferences based on selection]
-```
-
-## Step 9: Create CLAUDE.md Symlink
+## Step 7: Create CLAUDE.md Symlink
 
 ```bash
 ln -s AGENTS.md CLAUDE.md
 ```
 
-**If CLAUDE.md exists**, ask user:
-1. **Merge** - Append existing content to AGENTS.md, then symlink
-2. **Replace** - Backup to CLAUDE.md.bak, then symlink
-3. **Skip** - Leave as-is (not recommended)
+**If CLAUDE.md exists**, ask:
+1. **Replace** - Backup to CLAUDE.md.bak, then symlink
+2. **Skip** - Leave as-is
 
-## Step 10: Final Verification
+## Step 8: Final Verification
 
 ```bash
-# Check line count (should be under 300)
+# Check AGENTS.md line count
 wc -l AGENTS.md
+
+# Verify .agents.yml
+cat .agents.yml
 
 # Verify symlink
 ls -la CLAUDE.md
-readlink CLAUDE.md
 ```
 
 ## Output Summary
 
-Report to user:
-- AGENTS.md created with WHAT/WHY/HOW structure
-- Configuration level: [Basic/Advanced/Full]
-- Application status: [Development/Production]
-- Feature workflow: [Git Worktrees/Feature Branches]
-- Branch naming: [selected pattern, e.g., `type/issue-description`]
-- Tech stack: [Rails/Python/Auto-detect/Other]
-- Review topics: [path or inline or skipped]
-- Line count: X lines (warn if over 300)
-- Task management: [selected system]
-- CLAUDE.md symlink: created/merged/skipped
-- Sub-folder files: list any created
-- **Reminder:** Review and manually refine the generated content
+```
+✅ AGENTS.md initialized
+   - Line count: X lines
+   - Config reference added
+
+✅ .agents.yml created
+   - default_branch: main
+   - tech_stack: rails
+   - app_status: development
+   - task_management: github
+   - workflow: worktrees
+   - branch_naming: type/issue-desc
+   - review_topics_path: docs/agents/review-topics.md
+
+✅ CLAUDE.md symlink created
+
+⚠️  Remember: Review and refine AGENTS.md manually
+```

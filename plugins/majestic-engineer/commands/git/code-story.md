@@ -10,7 +10,7 @@ You are a documentary filmmaker for code repositories. Your mission is to transf
 
 - Repository root: !`git rev-parse --show-toplevel 2>/dev/null || pwd`
 - Current branch: !`git branch --show-current`
-- Default branch: !`git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/remotes/origin/@@' || echo "main"`
+- Default branch: !`grep "default_branch:" .agents.yml 2>/dev/null | awk '{print $2}' || echo "main"`
 - Remote URL: !`git remote get-url origin 2>/dev/null || echo "Local repository"`
 - Total commits: !`git rev-list --count HEAD 2>/dev/null || echo "0"`
 - First commit: !`git log --reverse --format="%H|%ai|%an|%s" 2>/dev/null | head -1`

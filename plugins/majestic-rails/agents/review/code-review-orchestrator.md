@@ -31,8 +31,9 @@ git diff --name-only
 # Staged mode
 git diff --cached --name-only
 
-# Branch mode (vs default branch)
-DEFAULT=$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed "s@^refs/remotes/origin/@@" || echo master)
+# Branch mode (read from .agents.yml, fallback to main)
+DEFAULT=$(grep "default_branch:" .agents.yml 2>/dev/null | awk '{print $2}')
+DEFAULT=${DEFAULT:-main}
 git diff ${DEFAULT}...HEAD --name-only
 
 # PR mode
@@ -87,18 +88,17 @@ If >5 files and no clear patterns detected, use `AskUserQuestion`:
 
 ### Check for Topics Configuration
 
-1. Read `AGENTS.md` from project root
-2. Look for `review_topics_path:` in Project Configuration section
+1. Read `.agents.yml` from project root
+2. Look for `review_topics_path:` config
 3. If found → read topics from that file path
-4. If not found → look for `## Code Review Topics` section in AGENTS.md
-5. If neither → no project topics (skip project-topics-reviewer)
+4. If not found → no project topics (skip project-topics-reviewer)
 
 ```bash
-# Check for topics path
-grep "review_topics_path:" AGENTS.md 2>/dev/null
-
-# Check for inline topics
-grep -A 100 "## Code Review Topics" AGENTS.md 2>/dev/null
+# Check for topics path in .agents.yml
+TOPICS_PATH=$(grep "review_topics_path:" .agents.yml 2>/dev/null | awk '{print $2}')
+if [ -n "$TOPICS_PATH" ] && [ -f "$TOPICS_PATH" ]; then
+  cat "$TOPICS_PATH"
+fi
 ```
 
 ### If Topics Found

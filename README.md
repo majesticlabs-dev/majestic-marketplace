@@ -139,9 +139,41 @@ Configure how Claude Code communicates with you using the `/output-style` comman
 
 See [Output Styles](output-styles/README.md) for full documentation and customization.
 
-## Project CLAUDE.md Setup
+## Project Setup
 
-Initialize a project-level CLAUDE.md with coding guidelines for your team:
+### Initialize Project Configuration
+
+After installing plugins, run this command in your project to set up AI agent configuration:
+
+```bash
+/majestic:init-agents-md
+```
+
+This creates:
+- **AGENTS.md** - Human-readable guidance for Claude (WHAT/WHY/HOW framework)
+- **.agents.yml** - Machine-readable config for commands
+- **CLAUDE.md** - Symlink to AGENTS.md
+
+### .agents.yml Config
+
+The `.agents.yml` file stores project-specific settings that commands read automatically:
+
+```yaml
+# .agents.yml - Project configuration for Claude Code commands
+default_branch: main
+tech_stack: rails              # rails | python | generic
+app_status: development        # development | production
+task_management: github        # github | linear | beads | file | none
+workflow: worktrees            # worktrees | branches
+branch_naming: type/issue-desc # feature/desc | issue-desc | type/issue-desc | user/desc
+review_topics_path: docs/agents/review-topics.md
+```
+
+Commands like `/majestic:code-review`, `/git:create-pr`, and `/majestic:build-task` read this config automatically.
+
+### CLAUDE.md Instruction Modules
+
+Add pre-built coding guidelines to your CLAUDE.md using the installer:
 
 ```bash
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/majesticlabs-dev/majestic-marketplace/master/install.sh)"

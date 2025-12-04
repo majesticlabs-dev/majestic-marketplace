@@ -31,7 +31,7 @@ flowchart TD
     end
 
     subgraph "2. Worktree Check"
-        W{Worktrees in AGENTS.md?}
+        W{workflow: worktrees?}
         WT[Create worktree]
     end
 
@@ -111,28 +111,29 @@ This helps identify the terminal when running multiple Claude Code sessions.
 
 ## Step 2: Check Git Workflow Preferences
 
-**Read AGENTS.md** to check for Feature Development workflow preferences:
+**Read `.agents.yml`** for workflow preferences:
 
 ```bash
-# Check workflow and branch naming preferences
-grep -A 5 "Feature Development" AGENTS.md 2>/dev/null || echo "No preference found"
-```
+# Read workflow and branch naming from config
+WORKFLOW=$(grep "workflow:" .agents.yml 2>/dev/null | awk '{print $2}')
+BRANCH_NAMING=$(grep "branch_naming:" .agents.yml 2>/dev/null | awk '{print $2}')
 
-**Extract from AGENTS.md:**
-- **Workflow**: Git Worktrees or Feature Branches
-- **Branch naming**: The configured pattern
+# Defaults
+WORKFLOW=${WORKFLOW:-branches}
+BRANCH_NAMING=${BRANCH_NAMING:-issue-desc}
+```
 
 **Generate branch name based on pattern:**
 
-| Pattern in AGENTS.md | Generated Branch Name |
-|---------------------|----------------------|
-| `feature/description` | `feature/<issue-title-slug>` |
-| `issue-number-description` | `<NUMBER>-<issue-title-slug>` |
-| `type/issue-description` | `feat/<NUMBER>-<issue-title-slug>` (or `fix/` for bugs) |
-| `username/description` | `<git-user>/<issue-title-slug>` |
-| No preference | `<NUMBER>-<issue-title-slug>` (default) |
+| Pattern in .agents.yml | Generated Branch Name |
+|-----------------------|----------------------|
+| `feature/desc` | `feature/<issue-title-slug>` |
+| `issue-desc` | `<NUMBER>-<issue-title-slug>` |
+| `type/issue-desc` | `feat/<NUMBER>-<issue-title-slug>` (or `fix/` for bugs) |
+| `user/desc` | `<git-user>/<issue-title-slug>` |
+| Not configured | `<NUMBER>-<issue-title-slug>` (default) |
 
-**If AGENTS.md specifies "Git Worktrees":**
+**If workflow is "worktrees":**
 
 1. Create a worktree for this feature:
    ```
@@ -145,7 +146,7 @@ grep -A 5 "Feature Development" AGENTS.md 2>/dev/null || echo "No preference fou
 
 3. After shipping, clean up the worktree
 
-**If "Feature Branches" or no preference:**
+**If workflow is "branches" or not configured:**
 
 1. Create branch with generated name:
    ```bash

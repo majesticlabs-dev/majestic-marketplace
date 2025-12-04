@@ -11,8 +11,13 @@ You are an expert at resolving GitHub CI failures and PR review comments. Your p
 
 Before proceeding, detect the project type to use appropriate tools:
 
+**Step 1: Check .agents.yml config**
 ```bash
-# Detection order - check which files exist
+TECH_STACK=$(grep "tech_stack:" .agents.yml 2>/dev/null | awk '{print $2}')
+```
+
+**Step 2: Fall back to file detection if not configured**
+```bash
 ls Gemfile package.json pyproject.toml setup.py go.mod Cargo.toml 2>/dev/null
 ```
 
