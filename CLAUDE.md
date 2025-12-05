@@ -35,6 +35,54 @@ majestic-marketplace/
 - KISS: keep it simple, stupid
 - Separation of concerns
 
+## Plugin Architecture
+
+### Hub-and-Spoke Dependency Model
+
+This marketplace uses a **hub-and-spoke architecture** where `majestic-engineer` serves as the central orchestration hub:
+
+```
+              ┌─────────────────────────────────────┐
+              │          majestic-engineer          │
+              │        (Central Orchestrator)       │
+              └─────────────────────────────────────┘
+                    │         │          │
+           ┌───────┼─────────┼──────────┼───────┐
+           │       │         │          │       │
+           ▼       ▼         ▼          ▼       ▼
+      rails    python     react     tools    (generic)
+           │       │                    │
+           └───────┴────────────────────┘
+                   │
+                   ▼ (back-references for shared reviewers)
+            majestic-engineer
+```
+
+### Dependency Rules
+
+1. **`majestic-engineer` is the central orchestrator** - It may reference language-specific plugins (rails, python, react) and utility plugins (tools) for quality gates and code review orchestration.
+
+2. **Language-specific plugins depend on `majestic-engineer`** - They inherit shared reviewers (simplicity-reviewer, project-topics-reviewer) and generic workflows.
+
+3. **Business function plugins are isolated** - `majestic-marketing`, `majestic-sales`, and `majestic-company` have NO cross-plugin dependencies.
+
+4. **`majestic-tools` provides utilities** - Referenced by `majestic-engineer` for external LLM reviewers and terminal utilities.
+
+5. **Documentation references are allowed** - `majestic-guide` may reference all plugins for discovery purposes (no runtime dependency).
+
+### Allowed Dependencies
+
+| Plugin | Can Reference |
+|--------|--------------|
+| `majestic-engineer` | rails, python, react, tools |
+| `majestic-rails` | engineer |
+| `majestic-python` | engineer |
+| `majestic-react` | engineer |
+| `majestic-tools` | (none at runtime, all for docs) |
+| `majestic-marketing` | (none) |
+| `majestic-sales` | (none) |
+| `majestic-company` | (none) |
+
 ## Rules for This Repository
 
 ### Agent Naming Convention
