@@ -26,37 +26,38 @@ Autonomous implementation from any task management system:
 
 ```mermaid
 graph TD
-    subgraph "/build-task"
-        F{{task-fetcher}} --> CL{{task-status-updater}}
-        CL --> W{{workspace-setup}}
-        W --> WR{{web-research}}
-        WR --> AR{{architect}}
-        AR --> GP{{general-purpose}}
-        GP --> QG{{quality-gate}}
+    F{{task-fetcher}}
 
-        subgraph "parallel reviewers"
-            QG --> R1{{security-review}}
-            QG --> R2{{simplicity-reviewer}}
-            QG --> R3{{...stack-specific}}
-        end
+    F --> CL{{claim}}
+    F --> W{{workspace-setup}}
 
-        R1 --> SH{{ship}}
-        R2 --> SH
-        R3 --> SH
-        SH --> TSU{{task-status-updater}}
-    end
+    CL --> R{{web-research}}
+    W --> R
+
+    R --> AR{{architect}}
+    AR --> GP{{general-purpose}}
+    GP --> QG{{quality-gate}}
+
+    QG --> R1{{security}}
+    QG --> R2{{simplicity}}
+    QG --> R3{{stack-specific}}
+
+    R1 --> SH{{ship}}
+    R2 --> SH
+    R3 --> SH
+
+    SH --> TSU{{complete}}
 ```
 
-| Agent | Reads from `.agents.yml` | Purpose |
-|-------|--------------------------|---------|
-| `task-fetcher` | `task_management` | Fetch task from GitHub/Beads/Linear/file |
-| `workspace-setup` | `workflow`, `branch_naming` | Create branch or worktree |
-| `web-research` | - | Research context and best practices |
-| `architect` | - | Design implementation approach |
-| `general-purpose` | - | Implement the feature |
-| `quality-gate` | `tech_stack` | Launch parallel reviewers |
-| `ship` | - | Lint, commit, create PR |
-| `task-status-updater` | `task_management` | Update claim/ship status |
+| Stage | Agents | Config | Purpose |
+|-------|--------|--------|---------|
+| Fetch | `task-fetcher` | `task_management` | Get task from GitHub/Beads/Linear/file |
+| Setup | `claim` + `workspace-setup` | `workflow`, `branch_naming` | Mark in-progress, create branch/worktree |
+| Research | `web-research` | - | Find best practices and context |
+| Plan | `architect` | - | Design implementation approach |
+| Build | `general-purpose` | - | Implement the feature |
+| Review | `quality-gate` → parallel reviewers | `tech_stack` | Security, simplicity, stack-specific |
+| Ship | `ship` → `complete` | `task_management` | Create PR, mark ready for review |
 
 ---
 
