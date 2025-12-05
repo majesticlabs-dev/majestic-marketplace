@@ -1,6 +1,6 @@
 ---
 description: Clean up merged and stale git worktrees
-allowed-tools: Skill, Bash
+allowed-tools: Bash
 model: claude-haiku-4-5-20251001
 ---
 

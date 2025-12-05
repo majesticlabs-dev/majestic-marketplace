@@ -1,7 +1,7 @@
 ---
 name: majestic:design-plan
 description: Plan UI/UX design direction through guided discovery before implementation
-allowed-tools: AskUserQuestion, Read, Grep, Glob, WebSearch, WebFetch, Skill
+allowed-tools: Read, Grep, Glob, WebSearch, WebFetch
 argument-hint: "[component, page, or feature to design]"
 ---
 

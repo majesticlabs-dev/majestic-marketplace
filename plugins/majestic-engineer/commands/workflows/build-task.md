@@ -2,7 +2,7 @@
 name: majestic:build-task
 description: Autonomous task implementation from any task management system - research, plan, build, review, fix, ship
 argument-hint: "<task-reference>"
-allowed-tools: Bash, Read, Grep, Glob, Task, WebFetch, SlashCommand, TodoWrite, Skill
+allowed-tools: Bash, Read, Grep, Glob, WebFetch, TodoWrite
 ---
 
 # Build Task

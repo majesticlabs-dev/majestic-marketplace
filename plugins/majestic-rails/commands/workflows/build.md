@@ -2,7 +2,7 @@
 name: rails:build
 description: Execute work plans efficiently while maintaining quality and finishing Rails features
 argument-hint: "[plan file] [optional: branch-name]"
-allowed-tools: Read, Write, Edit, Bash, Grep, Glob, Task, Skill, TodoWrite, AskUserQuestion
+allowed-tools: Read, Write, Edit, Bash, Grep, Glob, TodoWrite
 ---
 
 # Work Plan Execution Command

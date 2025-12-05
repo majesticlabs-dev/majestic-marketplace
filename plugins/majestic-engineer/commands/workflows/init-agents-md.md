@@ -1,7 +1,7 @@
 ---
 name: majestic:init-agents-md
 description: Initialize AGENTS.md with hierarchical structure and .agents.yml config
-allowed-tools: AskUserQuestion, Skill, Bash, Write, Read, Grep, Glob
+allowed-tools: Bash, Write, Read, Grep, Glob
 ---
 
 # Initialize AGENTS.md
