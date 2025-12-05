@@ -223,7 +223,19 @@ Task (general-purpose):
 
 ---
 
-## Step 8: Quality Gate
+## Step 8: Remove AI Slop
+
+```
+Task (majestic-engineer:qa:slop-remover):
+  prompt: |
+    Clean up AI-generated patterns from the current branch.
+```
+
+Removes over-commenting, defensive overkill, type escape hatches, and style inconsistencies before code review.
+
+---
+
+## Step 9: Quality Gate
 
 ```
 Task (majestic-engineer:workflow:quality-gate):
@@ -245,7 +257,7 @@ The agent reads `tech_stack` from `.agents.yml` and launches appropriate reviewe
 
 ---
 
-## Step 9: Fix Loop
+## Step 10: Fix Loop
 
 **If quality-gate returns NEEDS CHANGES:**
 
@@ -270,7 +282,7 @@ Task (general-purpose):
 
 ---
 
-## Step 10: Ship
+## Step 11: Ship
 
 **Once quality-gate returns APPROVED:**
 
@@ -280,7 +292,7 @@ SlashCommand: /majestic-engineer:workflows:ship-it
 
 ---
 
-## Step 11: Mark Ready for Review
+## Step 12: Mark Ready for Review
 
 ```
 Task (majestic-engineer:workflow:task-status-updater):
