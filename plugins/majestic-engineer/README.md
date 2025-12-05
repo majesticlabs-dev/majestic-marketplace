@@ -10,9 +10,47 @@ claude /plugin install majestic-engineer
 
 ## Recommended Workflows
 
-**Legend:** `(/command)` = user triggers | `{{agent}}` = runs automatically | `[state]` = status
+**Legend:** `(/command)` = user triggers | `{{agent}}` = runs automatically | `((state))` = outcome
 
-### The `/build-task` Command
+### PRD-First (New Products/Features)
+
+```mermaid
+graph LR
+    subgraph "Choose One"
+        A1[Clear idea] --> P(/prd)
+        A2[Fuzzy idea] --> G(/guided-prd) --> P
+    end
+    P --> AR{{architect}}
+    AR --> PR{{plan-review}}
+    PR --> BT(/build-task)
+    BT --> Done((Ready for Review))
+```
+
+| When | Use | Purpose |
+|------|-----|---------|
+| **Clear idea** | `/majestic:prd` | Generate PRD directly (asks clarifying questions) |
+| **Fuzzy idea** | `/majestic:guided-prd` | Discover through conversation → then generates PRD |
+
+---
+
+### Plan-First (Features/Bugs/Improvements)
+
+```mermaid
+graph LR
+    PL(/plan) --> PR{{plan-review}}
+    PR --> BT(/build-task)
+    BT --> Done((Ready for Review))
+```
+
+| Step | Tool | Purpose |
+|------|------|---------|
+| 1 | `/majestic:plan` | Create structured implementation plan |
+| 2 | `agent plan-review` | Validate before coding |
+| 3 | `/majestic:build-task` | Build → test → review → ship (autonomous) |
+
+---
+
+### Inside `/build-task`
 
 Autonomous implementation from any task management system:
 
@@ -22,7 +60,7 @@ Autonomous implementation from any task management system:
 /majestic:build-task LIN-456      # Linear issue
 ```
 
-**What happens inside `/build-task`:**
+**What happens:**
 
 ```mermaid
 graph TD
@@ -46,7 +84,7 @@ graph TD
     R2 --> SH
     R3 --> SH
 
-    SH --> TSU{{complete}}
+    SH --> Done((Ready for Review))
 ```
 
 | Stage | Agents | Config | Purpose |
@@ -57,45 +95,7 @@ graph TD
 | Plan | `architect` | - | Design implementation approach |
 | Build | `general-purpose` | - | Implement the feature |
 | Review | `quality-gate` → parallel reviewers | `tech_stack` | Security, simplicity, stack-specific |
-| Ship | `ship` → `complete` | `task_management` | Create PR, mark ready for review |
-
----
-
-### PRD-First (New Products/Features)
-
-```mermaid
-graph LR
-    subgraph "Choose One"
-        A1[Clear idea] --> P(/prd)
-        A2[Fuzzy idea] --> G(/guided-prd) --> P
-    end
-    P --> AR{{architect}}
-    AR --> PR{{plan-review}}
-    PR --> BT(/build-task)
-    BT --> Done[Ready for Review]
-```
-
-| When | Use | Purpose |
-|------|-----|---------|
-| **Clear idea** | `/majestic:prd` | Generate PRD directly (asks clarifying questions) |
-| **Fuzzy idea** | `/majestic:guided-prd` | Discover through conversation → then generates PRD |
-
----
-
-### Plan-First (Features/Bugs/Improvements)
-
-```mermaid
-graph LR
-    PL(/plan) --> PR{{plan-review}}
-    PR --> BT(/build-task)
-    BT --> Done[Ready for Review]
-```
-
-| Step | Tool | Purpose |
-|------|------|---------|
-| 1 | `/majestic:plan` | Create structured implementation plan |
-| 2 | `agent plan-review` | Validate before coding |
-| 3 | `/majestic:build-task` | Build → test → review → ship (autonomous) |
+| Ship | `ship` | - | Create PR, mark ready for review |
 
 ## Quick Reference
 
