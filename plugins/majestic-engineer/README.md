@@ -41,16 +41,18 @@ graph LR
 
 ```mermaid
 graph LR
-    PL(/plan) --> PR{{plan-review}}
+    subgraph "/plan"
+        PL[task] --> PR{{plan-review}}
+    end
+
     PR --> BT(/build-task)
     BT --> Done((Ready for Review))
 ```
 
-| Step | Tool | Purpose |
-|------|------|---------|
-| 1 | `/majestic:plan` | Create structured implementation plan |
-| 2 | `agent plan-review` | Validate before coding |
-| 3 | `/majestic:build-task` | Build → test → review → ship (autonomous) |
+| Command | Purpose |
+|---------|---------|
+| `/majestic:plan` | Create plan → plan-review validates |
+| `/majestic:build-task` | Build → test → review → ship (autonomous) |
 
 ---
 
