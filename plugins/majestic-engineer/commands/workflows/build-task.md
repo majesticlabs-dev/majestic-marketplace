@@ -30,6 +30,10 @@ flowchart TD
         B[gh issue view]
     end
 
+    subgraph "1.5 Claim"
+        CL{{task-status-updater}}
+    end
+
     subgraph "2. Worktree Check"
         W{workflow: worktrees?}
         WT[Create worktree]
@@ -58,11 +62,15 @@ flowchart TD
 
     subgraph "8. Ship"
         I(/majestic:ship-it)
-        J[gh issue close]
+    end
+
+    subgraph "9. CI & Review Status"
+        CI{{task-status-updater}}
     end
 
     A --> B
-    B --> W
+    B --> CL
+    CL --> W
     W -->|Yes| WT --> K{Research needed?}
     W -->|No| K
     K -->|Yes| C --> D
@@ -75,8 +83,8 @@ flowchart TD
     G --> H
     H -->|Yes| F
     H -->|No| M[Pause & Report]
-    I --> J
-    J --> N[Done]
+    I --> CI
+    CI --> N[Done - Awaiting PR Review]
 ```
 
 **Legend:**
@@ -97,7 +105,18 @@ gh issue view <NUMBER> --json title,body,labels,assignees,milestone
 
 **Create TodoWrite** with high-level steps based on issue content.
 
-## Step 1.5: Set Terminal Title
+## Step 1.5: Claim Task (Mark In Progress)
+
+```
+Task (majestic-engineer:workflow:task-status-updater):
+  prompt: |
+    Action: claim
+    Task: <NUMBER>
+```
+
+The agent reads `task_management` from `.agents.yml` and updates status across GitHub, Beads, Linear, or file backends.
+
+## Step 1.6: Set Terminal Title
 
 After fetching the issue, set the terminal title to identify this session:
 
@@ -292,11 +311,24 @@ Task (general-purpose):
 SlashCommand: /majestic-engineer:workflows:ship-it
 ```
 
-**After PR is created, close the issue:**
+## Step 9: Wait for CI & Mark Ready for Review
 
-```bash
-gh issue close <NUMBER> --comment "Implemented in PR #<PR_NUMBER>"
 ```
+Task (majestic-engineer:workflow:task-status-updater):
+  prompt: |
+    Action: ship
+    Task: <NUMBER>
+    PR: <PR_NUMBER>
+```
+
+The agent will:
+1. Check CI status (waits for completion)
+2. If CI fails → reports BLOCKED status to parent, stops
+3. If CI passes → updates task to "ready-for-review"
+
+**Important:** The issue remains open until PR is merged. Closing happens either:
+- Automatically via GitHub's "Fixes #123" in PR description
+- Manually after PR merge
 
 **Note:** If using a worktree, it remains active until the PR is merged. Use `skill git-worktree` to manage worktrees manually after merge.
 
@@ -308,7 +340,7 @@ After completion, provide:
 ## Build Task Complete
 
 **Issue:** #123 - [title]
-**Status:** Shipped
+**Status:** Ready for Review
 
 ### Workflow Summary
 - Branch: `feat/42-add-authentication` [worktree | standard]
@@ -316,7 +348,8 @@ After completion, provide:
 - Plan: [X steps identified]
 - Build: [X files changed, X tests added]
 - Review: [Passed on attempt X]
-- Ship: PR #456 created, issue closed
+- Ship: PR #456 created, CI passed
+- Task Status: Marked as "ready-for-review"
 
 ### Files Changed
 - `path/to/file.rb` - [description]
@@ -324,6 +357,10 @@ After completion, provide:
 
 ### PR Link
 https://github.com/owner/repo/pull/456
+
+### Next Steps
+- PR awaits human review
+- Issue will close automatically when PR merges (via "Fixes #123")
 ```
 
 ## Error Handling
