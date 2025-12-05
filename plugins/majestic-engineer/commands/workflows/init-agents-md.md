@@ -345,6 +345,21 @@ task_management: github
 workflow: worktrees
 branch_naming: type/issue-desc
 review_topics_path: docs/agents/review-topics.md
+
+# Quality Gate - Reviewers run during quality checks
+# Override: This list replaces defaults. Remove section to use defaults.
+quality_gate:
+  reviewers:
+    - security-review           # OWASP security scanning
+    - pragmatic-rails-reviewer  # Rails conventions and patterns
+    - performance-reviewer      # N+1 queries, slow operations
+    - test-reviewer            # Test coverage and quality
+    - project-topics-reviewer  # Custom rules (if review_topics_path set)
+    # Optional - uncomment to enable:
+    # - dhh-code-reviewer       # Strict DHH/37signals Rails style
+    # - data-integrity-reviewer # Migration safety (recommended for production)
+    # - codex-reviewer          # External LLM (requires Codex CLI)
+    # - gemini-reviewer         # External LLM (requires Gemini API)
 ```
 
 ### Python Template
@@ -368,6 +383,18 @@ task_management: github
 workflow: worktrees
 branch_naming: type/issue-desc
 review_topics_path: docs/agents/review-topics.md
+
+# Quality Gate - Reviewers run during quality checks
+# Override: This list replaces defaults. Remove section to use defaults.
+quality_gate:
+  reviewers:
+    - security-review           # OWASP security scanning
+    - python-reviewer           # Python conventions and idioms
+    - test-reviewer            # Test coverage and quality
+    - project-topics-reviewer  # Custom rules (if review_topics_path set)
+    # Optional - uncomment to enable:
+    # - codex-reviewer          # External LLM (requires Codex CLI)
+    # - gemini-reviewer         # External LLM (requires Gemini API)
 ```
 
 ### Node Template
@@ -394,6 +421,18 @@ task_management: github
 workflow: worktrees
 branch_naming: type/issue-desc
 review_topics_path: docs/agents/review-topics.md
+
+# Quality Gate - Reviewers run during quality checks
+# Override: This list replaces defaults. Remove section to use defaults.
+quality_gate:
+  reviewers:
+    - security-review           # OWASP security scanning
+    - react-reviewer           # React best practices (if React/Next.js project)
+    - test-reviewer            # Test coverage and quality
+    - project-topics-reviewer  # Custom rules (if review_topics_path set)
+    # Optional - uncomment to enable:
+    # - codex-reviewer          # External LLM (requires Codex CLI)
+    # - gemini-reviewer         # External LLM (requires Gemini API)
 ```
 
 ### Generic Template
@@ -409,6 +448,18 @@ task_management: github
 workflow: worktrees
 branch_naming: type/issue-desc
 review_topics_path: docs/agents/review-topics.md
+
+# Quality Gate - Reviewers run during quality checks
+# Override: This list replaces defaults. Remove section to use defaults.
+quality_gate:
+  reviewers:
+    - security-review           # OWASP security scanning
+    - test-reviewer            # Test coverage and quality
+    - project-topics-reviewer  # Custom rules (if review_topics_path set)
+    # Optional - uncomment to enable:
+    # - simplicity-reviewer     # Complexity and overengineering
+    # - codex-reviewer          # External LLM (requires Codex CLI)
+    # - gemini-reviewer         # External LLM (requires Gemini API)
 ```
 
 ### Notes
@@ -509,6 +560,9 @@ ls -la CLAUDE.md
      - task_management: github
      - workflow: worktrees
      - branch_naming: type/issue-desc
+   - Quality Gate:
+     - security-review, pragmatic-rails-reviewer, performance-reviewer
+     - test-reviewer, project-topics-reviewer
 
 ✅ CLAUDE.md symlink created
 
@@ -535,6 +589,8 @@ ls -la CLAUDE.md
      - task_management: github
      - workflow: worktrees
      - branch_naming: type/issue-desc
+   - Quality Gate:
+     - security-review, python-reviewer, test-reviewer, project-topics-reviewer
 
 ✅ CLAUDE.md symlink created
 
@@ -564,6 +620,8 @@ ls -la CLAUDE.md
      - task_management: github
      - workflow: worktrees
      - branch_naming: type/issue-desc
+   - Quality Gate:
+     - security-review, react-reviewer, test-reviewer, project-topics-reviewer
 
 ✅ CLAUDE.md symlink created
 

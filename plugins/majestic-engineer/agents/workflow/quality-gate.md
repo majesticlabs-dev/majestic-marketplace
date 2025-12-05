@@ -18,21 +18,64 @@ Branch: <branch name or --staged>
 
 ## Instructions
 
-### 1. Read Tech Stack Configuration
+### 1. Read Configuration
 
 ```bash
-TECH_STACK=$(grep "tech_stack:" "${AGENTS_CONFIG:-.agents.yml}" 2>/dev/null | awk '{print $2}')
-APP_STATUS=$(grep "app_status:" "${AGENTS_CONFIG:-.agents.yml}" 2>/dev/null | awk '{print $2}')
-REVIEW_TOPICS=$(grep "review_topics_path:" "${AGENTS_CONFIG:-.agents.yml}" 2>/dev/null | awk '{print $2}')
+CONFIG_FILE="${AGENTS_CONFIG:-.agents.yml}"
+TECH_STACK=$(grep "tech_stack:" "$CONFIG_FILE" 2>/dev/null | awk '{print $2}')
+APP_STATUS=$(grep "app_status:" "$CONFIG_FILE" 2>/dev/null | awk '{print $2}')
+REVIEW_TOPICS=$(grep "review_topics_path:" "$CONFIG_FILE" 2>/dev/null | awk '{print $2}')
 
 # Defaults
 TECH_STACK=${TECH_STACK:-generic}
 APP_STATUS=${APP_STATUS:-development}
 ```
 
-### 2. Determine Review Agents
+Then read the full config file to check for custom `quality_gate` configuration:
 
-Based on `tech_stack`, select the appropriate reviewers to run **in parallel**:
+```
+Read: ${AGENTS_CONFIG:-.agents.yml}
+```
+
+### 2. Check for Custom Reviewers
+
+If the config contains a `quality_gate:` section with `reviewers:`, use those reviewers (**override behavior**). Otherwise, fall back to tech_stack-based defaults in Step 3.
+
+**Example custom config:**
+```yaml
+quality_gate:
+  reviewers:
+    - security-review
+    - pragmatic-rails-reviewer
+    - performance-reviewer
+```
+
+### 2.1 Resolve Reviewer Names
+
+Map shorthand names to full agent paths:
+
+| Shorthand | Full Agent Path |
+|-----------|-----------------|
+| `security-review` | `majestic-engineer:qa:security-review` |
+| `test-reviewer` | `majestic-engineer:qa:test-reviewer` |
+| `project-topics-reviewer` | `majestic-engineer:review:project-topics-reviewer` |
+| `simplicity-reviewer` | `majestic-engineer:review:simplicity-reviewer` |
+| `pragmatic-rails-reviewer` | `majestic-rails:review:pragmatic-rails-reviewer` |
+| `performance-reviewer` | `majestic-rails:review:performance-reviewer` |
+| `data-integrity-reviewer` | `majestic-rails:review:data-integrity-reviewer` |
+| `dhh-code-reviewer` | `majestic-rails:review:dhh-code-reviewer` |
+| `python-reviewer` | `majestic-python:python-reviewer` |
+| `react-reviewer` | `majestic-react:review:react-reviewer` |
+| `codex-reviewer` | `majestic-tools:external-llm:codex-reviewer` |
+| `gemini-reviewer` | `majestic-tools:external-llm:gemini-reviewer` |
+
+If a name already contains `:`, use it as-is. Unknown names should be logged as warnings and skipped.
+
+### 3. Determine Review Agents
+
+**If `quality_gate.reviewers` is configured:** Use the configured list directly. Resolve shorthand names using the lookup table above. Launch all configured reviewers in parallel.
+
+**If `quality_gate` is NOT configured:** Use the tech_stack-based defaults below:
 
 #### Rails (`tech_stack: rails`)
 
@@ -90,7 +133,7 @@ Task (majestic-engineer:qa:security-review):
   prompt: Review changes on branch <BRANCH> for security vulnerabilities.
 ```
 
-### 3. Apply Production Strictness
+### 4. Apply Production Strictness
 
 If `app_status: production`, add additional scrutiny:
 
@@ -101,7 +144,7 @@ Task (majestic-rails:review:data-integrity-reviewer):  # For Rails
 
 Flag any breaking changes as HIGH severity in production apps.
 
-### 4. Aggregate Results
+### 5. Aggregate Results
 
 Collect all reviewer responses and categorize findings:
 
@@ -120,7 +163,7 @@ Collect all reviewer responses and categorize findings:
 | Only MEDIUM/LOW | APPROVED (with notes) |
 | No issues | APPROVED |
 
-### 5. Structure Findings for Fix Loop
+### 6. Structure Findings for Fix Loop
 
 Format findings so the fix loop can address them systematically:
 

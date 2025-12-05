@@ -460,6 +460,43 @@ review_topics_path: docs/agents/review-topics.md
 | `testing` | Testing framework | `vitest` \| `jest` \| `playwright` \| `cypress` \| `none` | (none) |
 | `deployment` | Deployment platform | `vercel` \| `cloudflare` \| `netlify` \| `railway` \| `none` | (none) |
 
+### Quality Gate Fields
+
+| Field | Description | Values | Default |
+|-------|-------------|--------|---------|
+| `quality_gate.reviewers` | List of reviewers to run | list of agent names | (tech-stack defaults) |
+
+**Behavior:** When `quality_gate.reviewers` is configured, it **completely overrides** the default reviewers. Omit the section to use tech-stack defaults.
+
+#### Available Reviewers
+
+| Reviewer | Plugin | Description |
+|----------|--------|-------------|
+| `security-review` | majestic-engineer | OWASP Top 10, secrets, vulnerabilities |
+| `test-reviewer` | majestic-engineer | Test coverage, quality, edge cases |
+| `project-topics-reviewer` | majestic-engineer | Custom rules from review_topics_path |
+| `simplicity-reviewer` | majestic-engineer | Complexity and overengineering |
+| `pragmatic-rails-reviewer` | majestic-rails | Rails conventions, thin controllers |
+| `performance-reviewer` | majestic-rails | N+1 queries, slow operations |
+| `data-integrity-reviewer` | majestic-rails | Migration safety, constraints |
+| `dhh-code-reviewer` | majestic-rails | DHH's strict Rails philosophy |
+| `python-reviewer` | majestic-python | Python conventions and idioms |
+| `react-reviewer` | majestic-react | React best practices, hooks, a11y |
+| `codex-reviewer` | majestic-tools | External LLM (OpenAI Codex) |
+| `gemini-reviewer` | majestic-tools | External LLM (Google Gemini) |
+
+#### Example Configuration
+
+```yaml
+quality_gate:
+  reviewers:
+    - security-review
+    - pragmatic-rails-reviewer
+    - performance-reviewer
+    - test-reviewer
+    - project-topics-reviewer
+```
+
 ### Why .agents.yml?
 
 - **Machine-readable** - YAML for commands, AGENTS.md for human guidance

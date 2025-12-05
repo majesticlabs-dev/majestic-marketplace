@@ -2,6 +2,22 @@
 
 All notable changes to majestic-engineer will be documented in this file.
 
+## [1.34.0] - 2025-12-05
+
+### Added
+
+- **`quality_gate` config section** - Customize which reviewers run during quality gate checks
+  - Override semantics: configured list completely replaces defaults
+  - Shorthand names resolve to full agent paths (e.g., `security-review` → `majestic-engineer:qa:security-review`)
+  - 12 reviewers available: security, test, project-topics, simplicity, pragmatic-rails, performance, data-integrity, dhh, python, react, codex, gemini
+  - Tech stack-specific defaults when not configured
+
+### Changed
+
+- **`quality-gate` agent** - Now reads `quality_gate.reviewers` from `.agents.yml` before falling back to tech stack defaults
+- **`/majestic:init-agents-md`** - Generates `quality_gate` section in all templates (Rails, Python, Node, Generic)
+- **`CLAUDE.md`** - Added Quality Gate Fields documentation with available reviewers table
+
 ## [1.29.0] - 2025-12-04
 
 ### Added
