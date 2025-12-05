@@ -1,6 +1,6 @@
 # Majestic Engineer
 
-Language-agnostic engineering workflows. Includes 19 specialized agents, 19 commands, and 12 skills.
+Language-agnostic engineering workflows. Includes 20 specialized agents, 19 commands, and 12 skills.
 
 ## Installation
 
@@ -138,6 +138,7 @@ Invoke with: `agent <name>`
 | Agent | Description |
 |-------|-------------|
 | `security-review` | OWASP Top 10 vulnerability scanning, secrets detection |
+| `slop-remover` | Remove AI-generated code slop (over-commenting, defensive overkill, type escapes) |
 | `test-create` | Automated test creation across frameworks (RSpec, Minitest, Jest) |
 | `test-reviewer` | Review test quality, coverage, edge cases, and assertion quality |
 | `visual-validator` | Verify UI changes achieved their goals through skeptical visual analysis |
