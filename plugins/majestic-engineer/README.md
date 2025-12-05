@@ -20,16 +20,20 @@ graph LR
         A1[Clear idea] --> P(/prd)
         A2[Fuzzy idea] --> G(/guided-prd) --> P
     end
-    P --> AR{{architect}}
-    AR --> PR{{plan-review}}
+
+    subgraph "/prd"
+        P --> AR{{architect}}
+        AR --> PR{{plan-review}}
+    end
+
     PR --> BT(/build-task)
     BT --> Done((Ready for Review))
 ```
 
 | When | Use | Purpose |
 |------|-----|---------|
-| **Clear idea** | `/majestic:prd` | Generate PRD directly (asks clarifying questions) |
-| **Fuzzy idea** | `/majestic:guided-prd` | Discover through conversation → then generates PRD |
+| **Clear idea** | `/majestic:prd` | Generate PRD → architect designs → plan-review validates |
+| **Fuzzy idea** | `/majestic:guided-prd` | Discover through conversation → then runs `/prd` |
 
 ---
 
