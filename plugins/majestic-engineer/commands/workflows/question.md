@@ -1,6 +1,6 @@
 ---
 name: majestic:question
-allowed-tools: Bash(git ls-files:*), Read
+allowed-tools: Bash(git ls-files:*), Read, WebSearch, WebFetch, AskUserQuestion
 description: Answer questions about the project structure and documentation without coding
 ---
 
@@ -40,4 +40,3 @@ Answer the user's question by analyzing the project structure and documentation.
 ## Question
 
 $ARGUMENTS
-

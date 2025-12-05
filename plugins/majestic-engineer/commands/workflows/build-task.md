@@ -1,78 +1,77 @@
 ---
 name: majestic:build-task
-description: Autonomous task implementation from GitHub Issues - research, plan, build, review, fix, ship
-argument-hint: "<issue-url-or-number>"
+description: Autonomous task implementation from any task management system - research, plan, build, review, fix, ship
+argument-hint: "<task-reference>"
 allowed-tools: Bash, Read, Grep, Glob, Task, WebFetch, SlashCommand, TodoWrite, Skill
 ---
 
 # Build Task
 
-Autonomously implement a task from a GitHub Issue through the full development lifecycle.
+Autonomously implement a task through the full development lifecycle.
 
 ## Arguments
 
 <task_reference> $ARGUMENTS </task_reference>
 
-**Accepted formats:**
-- `#123` - Issue number
-- `123` - Issue number (bare)
-- `https://github.com/owner/repo/issues/123` - Full URL
+**Accepted formats (based on `task_management` in `.agents.yml`):**
+- `#123` or `123` - Issue/task number
+- `https://github.com/owner/repo/issues/123` - GitHub URL
+- `PROJ-123` - Beads or Linear ID
+- `path/to/task.md` - File path
 
 ## Workflow Overview
 
 ```mermaid
 flowchart TD
     subgraph Input
-        A[GitHub Issue #123]
+        A[Task Reference]
     end
 
     subgraph "1. Fetch"
-        B[gh issue view]
+        B{{task-fetcher}}
     end
 
-    subgraph "1.5 Claim"
+    subgraph "2. Claim"
         CL{{task-status-updater}}
     end
 
-    subgraph "2. Worktree Check"
-        W{workflow: worktrees?}
-        WT[Create worktree]
+    subgraph "3. Workspace"
+        W{{workspace-setup}}
     end
 
-    subgraph "3. Research (conditional)"
+    subgraph "4. Research"
         C{{web-research}}
     end
 
-    subgraph "4. Plan"
+    subgraph "5. Plan"
         D{{architect}}
     end
 
-    subgraph "5. Build"
+    subgraph "6. Build"
         E{{general-purpose}}
     end
 
-    subgraph "6. Review"
-        F(/code-review)
+    subgraph "7. Quality Gate"
+        F{{quality-gate}}
     end
 
-    subgraph "7. Fix Loop"
+    subgraph "8. Fix Loop"
         G{{general-purpose}}
         H{Attempt < 3?}
     end
 
-    subgraph "8. Ship"
-        I(/majestic:ship-it)
+    subgraph "9. Ship"
+        I(/ship-it)
     end
 
-    subgraph "9. CI & Review Status"
+    subgraph "10. Complete"
         CI{{task-status-updater}}
     end
 
     A --> B
     B --> CL
     CL --> W
-    W -->|Yes| WT --> K{Research needed?}
-    W -->|No| K
+    W --> K{Research needed?}
     K -->|Yes| C --> D
     K -->|No| D
     D --> E
@@ -87,301 +86,275 @@ flowchart TD
     CI --> N[Done - Awaiting PR Review]
 ```
 
-**Legend:**
-- `[ ]` Bash/CLI commands
-- `{{ }}` Agents (Task tool)
-- `( )` Slash commands
-- `{ }` Decision points
+**Legend:** `{{ }}` = Agents | `( )` = Commands | `{ }` = Decisions
 
-## Step 1: Fetch & Parse Issue
+---
 
-```bash
-# Extract issue number from input
-# If URL: parse out the number
-# If #123 or 123: use directly
+## Step 1: Fetch Task
 
-gh issue view <NUMBER> --json title,body,labels,assignees,milestone
+```
+Task (majestic-engineer:workflow:task-fetcher):
+  prompt: |
+    Task: $ARGUMENTS
 ```
 
-**Create TodoWrite** with high-level steps based on issue content.
+The agent reads `task_management` from `.agents.yml` and fetches from the appropriate backend (GitHub, Beads, Linear, or file).
 
-## Step 1.5: Claim Task (Mark In Progress)
+**Returns:** Task ID, title, description, type, labels, status.
+
+**Create TodoWrite** with high-level steps based on task content.
+
+---
+
+## Step 2: Claim Task
 
 ```
 Task (majestic-engineer:workflow:task-status-updater):
   prompt: |
     Action: claim
-    Task: <NUMBER>
+    Task: <TASK_ID>
 ```
 
-The agent reads `task_management` from `.agents.yml` and updates status across GitHub, Beads, Linear, or file backends.
+Marks task as "in progress" in the configured backend.
 
-## Step 1.6: Set Terminal Title
+---
 
-After fetching the issue, set the terminal title to identify this session:
+## Step 3: Set Terminal Title
 
 ```
 Task (majestic-tools:set-title):
   prompt: |
-    Set title to "🔨 #<NUMBER>: <issue-title-truncated-to-40-chars>"
+    Set title to "🔨 #<TASK_ID>: <title-truncated-to-40-chars>"
 ```
 
-This helps identify the terminal when running multiple Claude Code sessions.
+---
 
-## Step 2: Check Git Workflow Preferences
+## Step 4: Setup Workspace
 
-**Read `.agents.yml`** for workflow preferences:
-
-```bash
-# Read workflow and branch naming from config
-WORKFLOW=$(grep "workflow:" "${AGENTS_CONFIG:-.agents.yml}" 2>/dev/null | awk '{print $2}')
-BRANCH_NAMING=$(grep "branch_naming:" "${AGENTS_CONFIG:-.agents.yml}" 2>/dev/null | awk '{print $2}')
-
-# Defaults
-WORKFLOW=${WORKFLOW:-branches}
-BRANCH_NAMING=${BRANCH_NAMING:-issue-desc}
+```
+Task (majestic-engineer:workflow:workspace-setup):
+  prompt: |
+    Task ID: <TASK_ID>
+    Title: <title>
+    Type: <type from task-fetcher>
 ```
 
-**Generate branch name based on pattern:**
+The agent reads `workflow` and `branch_naming` from `.agents.yml` and creates the appropriate workspace (worktree or branch).
 
-| Pattern in .agents.yml | Generated Branch Name |
-|-----------------------|----------------------|
-| `feature/desc` | `feature/<issue-title-slug>` |
-| `issue-desc` | `<NUMBER>-<issue-title-slug>` |
-| `type/issue-desc` | `feat/<NUMBER>-<issue-title-slug>` (or `fix/` for bugs) |
-| `user/desc` | `<git-user>/<issue-title-slug>` |
-| Not configured | `<NUMBER>-<issue-title-slug>` (default) |
+**Returns:** Branch name, workspace path.
 
-**If workflow is "worktrees":**
+---
 
-1. Create a worktree for this feature:
-   ```
-   skill git-worktree
-   ```
-   - Branch name: generated from pattern above
-   - Base branch: main/master
+## Step 5: Research (Conditional)
 
-2. All subsequent steps run inside the worktree directory
-
-3. After shipping, clean up the worktree
-
-**If workflow is "branches" or not configured:**
-
-1. Create branch with generated name:
-   ```bash
-   git checkout -b <generated-branch-name>
-   ```
-
-2. Continue with standard workflow
-
-## Step 3: Research (Conditional)
-
-**Trigger research if issue body contains:**
+**Trigger if task description contains:**
 - "research", "investigate", "best practice", "how to"
 - Links to external documentation
 - Questions about approach
 - New library/framework mentions
 
-**If triggered:**
 ```
 Task (majestic-engineer:research:web-research):
   prompt: |
-    Research the following for implementation:
+    Research for implementation:
 
-    Issue: [title]
-    Context: [relevant body excerpts]
+    Task: <title>
+    Context: <relevant description excerpts>
 
     Find:
-    - Best practices for this approach
-    - Common pitfalls to avoid
+    - Best practices
+    - Common pitfalls
     - Example implementations
     - Relevant documentation
 
     Return concise, actionable findings.
 ```
 
-## Step 4: Plan Implementation
+---
+
+## Step 6: Plan Implementation
 
 ```
 Task (majestic-engineer:plan:architect):
   prompt: |
-    Create an implementation plan for this GitHub Issue:
+    Create implementation plan:
 
-    ## Issue
-    Title: [title]
-    Body: [body]
+    ## Task
+    Title: <title>
+    Description: <description>
 
     ## Research Findings (if any)
-    [research output]
+    <research output>
 
     ## Requirements
-    - Create a clear, step-by-step implementation plan
-    - Identify files to create/modify
-    - Note any dependencies or prerequisites
-    - Include test strategy
+    - Step-by-step implementation plan
+    - Files to create/modify
+    - Dependencies/prerequisites
+    - Test strategy
 
-    Return a structured plan I can execute.
+    Return structured, executable plan.
 ```
 
-**Update TodoWrite** with specific implementation tasks from the plan.
+**Update TodoWrite** with specific tasks from the plan.
 
-## Step 5: Build Implementation
+---
+
+## Step 7: Build Implementation
 
 ```
 Task (general-purpose):
   prompt: |
-    Implement this task following the plan below.
+    Implement this task:
 
-    ## GitHub Issue
-    Title: [title]
-    Body: [body]
+    ## Task
+    Title: <title>
+    Description: <description>
 
-    ## Implementation Plan
-    [architect output]
+    ## Plan
+    <architect output>
 
     ## Instructions
     1. Follow the plan step-by-step
     2. Write tests alongside implementation
-    3. Commit your work with clear messages
-    4. Report back: files changed, tests written, any blockers
+    3. Commit with clear messages
+    4. Report: files changed, tests written, blockers
 
     Work autonomously until complete.
 ```
 
-## Step 6: Code Review
+---
 
-**Detect project type and select reviewer:**
+## Step 8: Quality Gate
 
-| Project Type | Detection | Review Command/Agent |
-|--------------|-----------|---------------------|
-| Rails | `Gemfile` with `rails` | `/majestic-rails:workflows:code-review --branch` |
-| Ruby | `Gemfile` (no rails) | `majestic-rails:review:pragmatic-rails-reviewer` |
-| Python | `pyproject.toml` or `requirements.txt` | `majestic-python:python-reviewer` |
-| Other | Default | `majestic-engineer:review:simplicity-reviewer` |
-
-**For Rails projects:**
 ```
-SlashCommand: /majestic-rails:workflows:code-review --branch
-```
-
-**For other projects:**
-```
-Task (appropriate-reviewer):
+Task (majestic-engineer:workflow:quality-gate):
   prompt: |
-    Review the changes on this branch for:
-    - Code quality and conventions
-    - Test coverage
-    - Potential issues
-
-    Context: Implementing [issue title]
-
-    Return: APPROVED, NEEDS CHANGES (with specific fixes), or BLOCKED (with blockers)
+    Context: <task title>
+    Branch: <branch-name>
 ```
 
-## Step 7: Fix Review Feedback (Loop)
+The agent reads `tech_stack` from `.agents.yml` and launches appropriate reviewers **in parallel**:
 
-**If review returns NEEDS CHANGES or BLOCKED:**
+| Tech Stack | Reviewers |
+|------------|-----------|
+| `rails` | pragmatic-rails-reviewer, security-review, performance-reviewer, project-topics |
+| `python` | python-reviewer, security-review, project-topics |
+| `node` | simplicity-reviewer, security-review, project-topics |
+| `generic` | simplicity-reviewer, security-review |
+
+**Returns:** `APPROVED`, `NEEDS CHANGES` (with findings), or `BLOCKED`
+
+---
+
+## Step 9: Fix Loop
+
+**If quality-gate returns NEEDS CHANGES:**
 
 ```
 Task (general-purpose):
   prompt: |
-    Fix these code review issues:
+    Fix these quality issues:
 
-    ## Review Feedback
-    [review output with specific issues]
+    ## Findings
+    <quality-gate findings with severity, file, issue, fix>
 
     ## Instructions
-    1. Address each issue listed
+    1. Address each finding by severity (CRITICAL → HIGH → MEDIUM)
     2. Run tests to verify fixes
     3. Commit the fixes
     4. Report what you fixed
 ```
 
-**Re-run Step 6 (Code Review)**
+**Re-run Step 8 (Quality Gate)**
 
-**Loop limits:**
-- Max 3 iterations
-- After 3 failures: pause and report to user
+**Limits:** Max 3 iterations. After 3 failures → pause and report to user.
 
-## Step 8: Ship
+---
 
-**Once review passes (APPROVED):**
+## Step 10: Ship
+
+**Once quality-gate returns APPROVED:**
 
 ```
 SlashCommand: /majestic-engineer:workflows:ship-it
 ```
 
-## Step 9: Wait for CI & Mark Ready for Review
+---
+
+## Step 11: Mark Ready for Review
 
 ```
 Task (majestic-engineer:workflow:task-status-updater):
   prompt: |
     Action: ship
-    Task: <NUMBER>
+    Task: <TASK_ID>
     PR: <PR_NUMBER>
 ```
 
-The agent will:
-1. Check CI status (waits for completion)
-2. If CI fails → reports BLOCKED status to parent, stops
+The agent:
+1. Checks CI status (waits for completion)
+2. If CI fails → reports BLOCKED, stops
 3. If CI passes → updates task to "ready-for-review"
 
-**Important:** The issue remains open until PR is merged. Closing happens either:
-- Automatically via GitHub's "Fixes #123" in PR description
-- Manually after PR merge
+**Note:** Issue remains open until PR is merged.
 
-**Note:** If using a worktree, it remains active until the PR is merged. Use `skill git-worktree` to manage worktrees manually after merge.
+---
 
 ## Output Summary
-
-After completion, provide:
 
 ```
 ## Build Task Complete
 
-**Issue:** #123 - [title]
+**Task:** #<ID> - <title>
+**Backend:** <github|beads|linear|file>
 **Status:** Ready for Review
 
 ### Workflow Summary
-- Branch: `feat/42-add-authentication` [worktree | standard]
-- Research: [Skipped | Completed - key findings]
-- Plan: [X steps identified]
-- Build: [X files changed, X tests added]
-- Review: [Passed on attempt X]
-- Ship: PR #456 created, CI passed
-- Task Status: Marked as "ready-for-review"
+- Workspace: `<branch>` [worktree | branch]
+- Research: [Skipped | Completed]
+- Plan: [X steps]
+- Build: [X files, X tests]
+- Quality: [Passed on attempt X]
+- Ship: PR #<NUMBER>, CI passed
 
 ### Files Changed
-- `path/to/file.rb` - [description]
-- `spec/path/to_spec.rb` - [tests added]
+- `path/to/file` - [description]
 
 ### PR Link
-https://github.com/owner/repo/pull/456
+<PR URL>
 
 ### Next Steps
 - PR awaits human review
-- Issue will close automatically when PR merges (via "Fixes #123")
+- Task closes when PR merges
 ```
+
+---
 
 ## Error Handling
 
 | Scenario | Action |
 |----------|--------|
-| Issue not found | Report error, exit |
-| Research fails | Continue without research, note in summary |
-| Build fails (tests don't pass) | Attempt fix, max 2 retries, then pause |
-| Review blocked 3 times | Pause, report issues to user |
-| Ship fails (lint/CI) | Use github-resolver agent to fix |
+| Task not found | Report error, exit |
+| Backend not configured | Default to `github` |
+| Research fails | Continue without, note in summary |
+| Build fails | Attempt fix, max 2 retries, pause |
+| Quality blocked 3× | Pause, report to user |
+| Ship/CI fails | Use github-resolver to fix |
+
+---
 
 ## Example Usage
 
 ```bash
-# By issue number
+# GitHub issue
 /majestic:build-task #42
 
-# By URL
-/majestic:build-task https://github.com/myorg/myrepo/issues/42
+# Beads task
+/majestic:build-task PROJ-123
 
-# Bare number
-/majestic:build-task 42
+# Linear issue
+/majestic:build-task LIN-456
+
+# File task
+/majestic:build-task docs/tasks/feature-x.md
 ```

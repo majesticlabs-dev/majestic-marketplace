@@ -1,6 +1,6 @@
 # Majestic Engineer
 
-Language-agnostic engineering workflows. Includes 19 specialized agents, 19 commands, and 14 skills.
+Language-agnostic engineering workflows. Includes 23 specialized agents, 19 commands, and 14 skills.
 
 ## Installation
 
@@ -53,6 +53,44 @@ graph LR
 
 > **Note:** For Rails projects, use `/majestic-rails:workflows:build` for implementation.
 
+### Autonomous Build Task
+
+For fully autonomous implementation from any task management system:
+
+```bash
+/majestic:build-task #42          # GitHub Issue
+/majestic:build-task PROJ-123     # Beads task
+/majestic:build-task LIN-456      # Linear issue
+```
+
+**Architecture:**
+
+```
+.agents.yml
+    ↓
+┌─────────────────┐
+│  build-task     │ (orchestrator)
+└────────┬────────┘
+         │
+    ┌────┴────┬────────────┬─────────────┐
+    ▼         ▼            ▼             ▼
+task-      workspace-   quality-    task-status-
+fetcher    setup        gate        updater
+    │         │            │             │
+    ▼         ▼            ▼             ▼
+GitHub     branches/    parallel     claim/
+Beads      worktrees    reviewers    ship
+Linear                  by stack     status
+file
+```
+
+| Agent | Reads from `.agents.yml` | Purpose |
+|-------|--------------------------|---------|
+| `task-fetcher` | `task_management` | Fetch task from GitHub/Beads/Linear/file |
+| `workspace-setup` | `workflow`, `branch_naming` | Create branch or worktree |
+| `quality-gate` | `tech_stack` | Launch parallel reviewers |
+| `task-status-updater` | `task_management` | Update claim/ship status |
+
 ## Quick Reference
 
 | I want to... | Use this |
@@ -103,13 +141,23 @@ Invoke with: `agent <name>`
 | `repo-analyst` | Repository onboarding - analyze structure, conventions, templates, and patterns |
 | `web-research` | Internet research for debugging, finding solutions, and technical problems |
 
+### review
+
+| Agent | Description |
+|-------|-------------|
+| `project-topics-reviewer` | Review code against project-specific topics defined in AGENTS.md |
+
 ### workflow
 
 | Agent | Description |
 |-------|-------------|
 | `always-works-verifier` | Verify implementations actually work before declaring completion |
-| `workflow:github-resolver` | Resolve CI failures and PR review comments (auto-detects project type) |
+| `github-resolver` | Resolve CI failures and PR review comments (auto-detects project type) |
+| `quality-gate` | Orchestrate parallel code review based on tech stack configuration |
 | `ship` | Complete shipping workflow: lint, commit, PR |
+| `task-fetcher` | Fetch task from configured backend (GitHub, Beads, Linear, file) |
+| `task-status-updater` | Update task status (claim/ship) across backends |
+| `workspace-setup` | Create branch or worktree based on project configuration |
 
 ## Commands
 
@@ -142,7 +190,7 @@ Invoke with: `/majestic-engineer:<category>:<name>`
 
 | Command | Description |
 |---------|-------------|
-| `workflows:build-task` | Autonomous task implementation from GitHub Issues - research, plan, build, review, fix, ship |
+| `workflows:build-task` | Autonomous task implementation from any task management system (GitHub, Beads, Linear, file) |
 | `workflows:debug` | Debug errors, test failures, or unexpected behavior (auto-detects project type) |
 | `workflows:guided-prd` | Discover and refine a product idea through guided questioning, then generate a PRD |
 | `workflows:init-agents-md` | Initialize AGENTS.md with hierarchical structure and create CLAUDE.md symlink |
