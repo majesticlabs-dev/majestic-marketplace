@@ -10,50 +10,11 @@ claude /plugin install majestic-engineer
 
 ## Recommended Workflows
 
-### PRD-First (New Products/Features)
+**Legend:** `(/command)` = user triggers | `{{agent}}` = runs automatically | `[state]` = status
 
-```mermaid
-graph LR
-    subgraph "Choose One"
-        A1[Clear idea] --> P(/majestic:prd)
-        A2[Fuzzy idea] --> G(/majestic:guided-prd) --> P
-    end
-    P --> B{{architect}}
-    B --> C{{plan-review}}
-    C --> D(/majestic:build-task)
-    D --> E[Ready for Review]
-```
+### The `/build-task` Command
 
-| When | Use | Purpose |
-|------|-----|---------|
-| **Clear idea** | `/majestic:prd` | Generate PRD directly (asks clarifying questions) |
-| **Fuzzy idea** | `/majestic:guided-prd` | Discover through conversation → then generates PRD |
-
-| Step | Tool | Purpose |
-|------|------|---------|
-| 1 | `/majestic:prd` or `/majestic:guided-prd` | Define WHAT to build |
-| 2 | `agent architect` | Design implementation (HOW) |
-| 3 | `agent plan-review` | Validate before coding |
-| 4 | `/majestic:build-task` | Build → test → review → ship (autonomous) |
-
-### Plan-First (Features/Bugs/Improvements)
-
-```mermaid
-graph LR
-    A(/majestic:plan) --> B{{plan-review}}
-    B --> C(/majestic:build-task)
-    C --> D[Ready for Review]
-```
-
-| Step | Tool | Purpose |
-|------|------|---------|
-| 1 | `/majestic:plan` | Create structured implementation plan |
-| 2 | `agent plan-review` | Validate before coding |
-| 3 | `/majestic:build-task` | Build → test → review → ship (autonomous) |
-
-### Autonomous Build Task
-
-For fully autonomous implementation from any task management system:
+Autonomous implementation from any task management system:
 
 ```bash
 /majestic:build-task #42          # GitHub Issue
@@ -61,33 +22,79 @@ For fully autonomous implementation from any task management system:
 /majestic:build-task LIN-456      # Linear issue
 ```
 
-**Architecture:**
+**What happens inside `/build-task`:**
 
-```
-.agents.yml
-    ↓
-┌─────────────────┐
-│  build-task     │ (orchestrator)
-└────────┬────────┘
-         │
-    ┌────┴────┬────────────┬─────────────┐
-    ▼         ▼            ▼             ▼
-task-      workspace-   quality-    task-status-
-fetcher    setup        gate        updater
-    │         │            │             │
-    ▼         ▼            ▼             ▼
-GitHub     branches/    parallel     claim/
-Beads      worktrees    reviewers    ship
-Linear                  by stack     status
-file
+```mermaid
+graph TD
+    subgraph "/build-task"
+        F{{task-fetcher}} --> CL{{task-status-updater}}
+        CL --> W{{workspace-setup}}
+        W --> WR{{web-research}}
+        WR --> AR{{architect}}
+        AR --> GP{{general-purpose}}
+        GP --> QG{{quality-gate}}
+
+        subgraph "parallel reviewers"
+            QG --> R1{{security-review}}
+            QG --> R2{{simplicity-reviewer}}
+            QG --> R3{{...stack-specific}}
+        end
+
+        R1 --> SH{{ship}}
+        R2 --> SH
+        R3 --> SH
+        SH --> TSU{{task-status-updater}}
+    end
 ```
 
 | Agent | Reads from `.agents.yml` | Purpose |
 |-------|--------------------------|---------|
 | `task-fetcher` | `task_management` | Fetch task from GitHub/Beads/Linear/file |
 | `workspace-setup` | `workflow`, `branch_naming` | Create branch or worktree |
+| `web-research` | - | Research context and best practices |
+| `architect` | - | Design implementation approach |
+| `general-purpose` | - | Implement the feature |
 | `quality-gate` | `tech_stack` | Launch parallel reviewers |
+| `ship` | - | Lint, commit, create PR |
 | `task-status-updater` | `task_management` | Update claim/ship status |
+
+---
+
+### PRD-First (New Products/Features)
+
+```mermaid
+graph LR
+    subgraph "Choose One"
+        A1[Clear idea] --> P(/prd)
+        A2[Fuzzy idea] --> G(/guided-prd) --> P
+    end
+    P --> AR{{architect}}
+    AR --> PR{{plan-review}}
+    PR --> BT(/build-task)
+    BT --> Done[Ready for Review]
+```
+
+| When | Use | Purpose |
+|------|-----|---------|
+| **Clear idea** | `/majestic:prd` | Generate PRD directly (asks clarifying questions) |
+| **Fuzzy idea** | `/majestic:guided-prd` | Discover through conversation → then generates PRD |
+
+---
+
+### Plan-First (Features/Bugs/Improvements)
+
+```mermaid
+graph LR
+    PL(/plan) --> PR{{plan-review}}
+    PR --> BT(/build-task)
+    BT --> Done[Ready for Review]
+```
+
+| Step | Tool | Purpose |
+|------|------|---------|
+| 1 | `/majestic:plan` | Create structured implementation plan |
+| 2 | `agent plan-review` | Validate before coding |
+| 3 | `/majestic:build-task` | Build → test → review → ship (autonomous) |
 
 ## Quick Reference
 
