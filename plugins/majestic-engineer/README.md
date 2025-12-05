@@ -37,7 +37,7 @@ graph LR
 | 3 | `agent plan-review` | Validate before coding |
 | 4 | Build (see below) | Write the code |
 | 5 | `agent test-create` | Write tests |
-| 6 | `/git:commit` + `/git:create-pr` | Ship it |
+| 6 | `agent ship` | Lint, commit, create PR |
 
 **Build step is framework-dependent:**
 
@@ -63,7 +63,7 @@ graph LR
 | 3 | Build (see above) | Write the code |
 | 4 | `agent test-create` | Write tests |
 | 5 | `agent security-review` | Security audit |
-| 6 | `/git:commit` + `/git:create-pr` | Ship it |
+| 6 | `agent ship` | Lint, commit, create PR |
 
 ### Autonomous Build Task
 
