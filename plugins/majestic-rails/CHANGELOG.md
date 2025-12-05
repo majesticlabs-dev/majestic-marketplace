@@ -2,6 +2,14 @@
 
 All notable changes to majestic-rails will be documented in this file.
 
+## [1.22.1] - 2025-12-04
+
+### Enhanced
+
+- **action-policy-coder** agent - Added advanced caching patterns from AppSignal blog:
+  - External cache stores (Redis) - configuration for cross-request persistence
+  - Policy instance memoization - `policy_cache_key` override and collection permission preloading
+
 ## [1.22.0] - 2025-12-04
 
 ### Enhanced

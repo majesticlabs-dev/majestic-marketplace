@@ -217,9 +217,71 @@ end
 ```ruby
 # config/initializers/action_policy.rb
 ActionPolicy.configure do |config|
-  # Use Rails cache for distributed caching
+  # Use Rails cache (in-memory, Redis, Memcached, etc.)
   config.cache_store = Rails.cache
 end
+```
+
+### External Cache Stores (Redis)
+
+For high-traffic apps needing cross-request cache persistence:
+
+```ruby
+# config/initializers/action_policy.rb
+ActionPolicy.configure do |config|
+  # Redis for distributed caching across requests/servers
+  config.cache_store = ActiveSupport::Cache::RedisCacheStore.new(
+    url: ENV.fetch("REDIS_URL", "redis://localhost:6379/1"),
+    namespace: "action_policy",
+    expires_in: 1.hour
+  )
+end
+```
+
+When to use external cache:
+- Expensive authorization checks (complex DB queries)
+- Multi-server deployments needing shared cache
+- Authorization rules that rarely change
+
+### Policy Instance Memoization
+
+Avoid redundant authorization checks on the same object within a request:
+
+```ruby
+class PostPolicy < ApplicationPolicy
+  # ActionPolicy uses record.policy_cache_key by default
+  # Override for custom cache keys
+  def policy_cache_key
+    record.cache_key_with_version
+  end
+
+  def update?
+    # This check is memoized per policy instance
+    cache { owner_or_collaborator? }
+  end
+end
+```
+
+For views checking permissions on collections:
+
+```ruby
+# app/controllers/posts_controller.rb
+class PostsController < ApplicationController
+  def index
+    @posts = authorized_scope(Post.all).includes(:user)
+    # Preload policies to avoid N+1 authorization checks
+    @posts.each { |post| allowed_to?(:edit?, post) }
+  end
+end
+```
+
+```erb
+<%# Subsequent checks reuse memoized results %>
+<% @posts.each do |post| %>
+  <% if allowed_to?(:edit?, post) %>
+    <%= link_to "Edit", edit_post_path(post) %>
+  <% end %>
+<% end %>
 ```
 
 ## I18n Failure Messages
