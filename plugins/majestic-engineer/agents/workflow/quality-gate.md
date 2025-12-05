@@ -2,6 +2,7 @@
 name: quality-gate
 description: Orchestrate parallel code review based on tech stack configuration. Aggregates findings from multiple specialized reviewers and returns unified quality verdict.
 tools: Bash, Read, Grep, Glob, Task
+color: green
 ---
 
 # Purpose

@@ -3,6 +3,7 @@ name: workspace-setup
 description: Create development workspace (branch or worktree) based on project configuration. Handles branch naming patterns and git workflow preferences.
 tools: Bash, Read, Grep, Glob, Skill
 model: claude-haiku-4-5-20251001
+color: blue
 ---
 
 # Purpose

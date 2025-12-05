@@ -2,6 +2,7 @@
 name: codex-brainstorm
 description: Get alternative perspectives on architectural decisions and feature planning from OpenAI Codex. Use when you want a second opinion from a different LLM on design approaches, trade-offs, or implementation strategies.
 tools: Bash, Read, Grep, Glob
+color: purple
 ---
 
 # Codex Brainstorming Agent

@@ -2,6 +2,7 @@
 name: codex-reviewer
 description: Get code review feedback from OpenAI Codex. Use when you want a second opinion from a different LLM on code changes, identifying issues Claude might miss.
 tools: Bash, Read, Grep, Glob
+color: purple
 ---
 
 # Codex Code Review Agent

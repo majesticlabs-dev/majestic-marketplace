@@ -2,6 +2,7 @@
 name: gemini-brainstorm
 description: Get alternative perspectives on architectural decisions and feature planning from Google Gemini. Use when you want a second opinion from a different LLM on design approaches, trade-offs, or implementation strategies.
 tools: Bash, Read, Grep, Glob
+color: violet
 ---
 
 # Gemini Brainstorming Agent

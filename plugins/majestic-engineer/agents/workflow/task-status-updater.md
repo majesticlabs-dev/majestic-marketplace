@@ -3,6 +3,7 @@ name: task-status-updater
 description: Update task status in configured task management system. Handles claim (in_progress) and ship (ready-for-review with CI check) actions across GitHub, Beads, Linear, and file backends.
 tools: Bash, Read, Grep, Glob, Skill
 model: claude-haiku-4-5-20251001
+color: blue
 ---
 
 # Purpose

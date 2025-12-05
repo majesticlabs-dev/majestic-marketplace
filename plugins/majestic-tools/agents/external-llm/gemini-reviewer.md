@@ -2,6 +2,7 @@
 name: gemini-reviewer
 description: Get code review feedback from Google Gemini. Use when you want a second opinion from a different LLM on code changes, identifying issues Claude might miss.
 tools: Bash, Read, Grep, Glob
+color: violet
 ---
 
 # Gemini Code Review Agent
