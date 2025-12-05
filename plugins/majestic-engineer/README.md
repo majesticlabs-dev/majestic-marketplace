@@ -14,23 +14,30 @@ claude /plugin install majestic-engineer
 
 ```mermaid
 graph LR
-    A0(/majestic:guided-prd) --> A(/majestic:prd)
-    A --> B{{architect}}
+    subgraph "Choose One"
+        A1[Clear idea] --> P(/majestic:prd)
+        A2[Fuzzy idea] --> G(/majestic:guided-prd) --> P
+    end
+    P --> B{{architect}}
     B --> C{{plan-review}}
     C --> D[Build]
     D --> E{{test-create}}
     E --> F{{ship}}
 ```
 
+| When | Use | Purpose |
+|------|-----|---------|
+| **Clear idea** | `/majestic:prd` | Generate PRD directly (asks clarifying questions) |
+| **Fuzzy idea** | `/majestic:guided-prd` | Discover through conversation → then generates PRD |
+
 | Step | Tool | Purpose |
 |------|------|---------|
-| 1 | `/majestic:guided-prd` | Discover and refine product idea |
-| 2 | `/majestic:prd` | Generate Product Requirements Document |
-| 3 | `agent architect` | Design implementation (HOW) |
-| 4 | `agent plan-review` | Validate before coding |
-| 5 | Implementation | Write the code |
-| 6 | `agent test-create` | Write tests |
-| 7 | `/git:commit` + `/git:create-pr` | Ship it |
+| 1 | `/majestic:prd` or `/majestic:guided-prd` | Define WHAT to build |
+| 2 | `agent architect` | Design implementation (HOW) |
+| 3 | `agent plan-review` | Validate before coding |
+| 4 | Implementation | Write the code |
+| 5 | `agent test-create` | Write tests |
+| 6 | `/git:commit` + `/git:create-pr` | Ship it |
 
 ### Plan-First (Features/Bugs/Improvements)
 
