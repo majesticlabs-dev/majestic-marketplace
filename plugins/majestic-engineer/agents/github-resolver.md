@@ -11,9 +11,21 @@ You are an expert at resolving GitHub CI failures and PR review comments. Your p
 
 Before proceeding, detect the project type to use appropriate tools:
 
-**Step 1: Check .agents.yml config**
+**Step 1: Check config (with local override support)**
 ```bash
-TECH_STACK=$(grep "tech_stack:" "${AGENTS_CONFIG:-.agents.yml}" 2>/dev/null | awk '{print $2}')
+# Config reader with local override support
+config_get() {
+  local key="$1" val=""
+  if [ -z "${AGENTS_CONFIG:-}" ]; then
+    val=$(grep "^${key}:" .agents.local.yml 2>/dev/null | head -1 | awk '{print $2}')
+    [ -z "$val" ] && val=$(grep "^${key}:" .agents.yml 2>/dev/null | head -1 | awk '{print $2}')
+  else
+    val=$(grep "^${key}:" "$AGENTS_CONFIG" 2>/dev/null | head -1 | awk '{print $2}')
+  fi
+  echo "$val"
+}
+
+TECH_STACK=$(config_get tech_stack)
 ```
 
 **Step 2: Fall back to file detection if not configured**

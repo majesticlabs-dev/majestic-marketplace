@@ -11,7 +11,19 @@ Add a custom lesson or convention to your project's review topics file for autom
 ## Step 1: Find Topics File
 
 ```bash
-TOPICS_PATH=$(grep "review_topics_path:" "${AGENTS_CONFIG:-.agents.yml}" 2>/dev/null | awk '{print $2}')
+# Config reader with local override support
+config_get() {
+  local key="$1" val=""
+  if [ -z "${AGENTS_CONFIG:-}" ]; then
+    val=$(grep "^${key}:" .agents.local.yml 2>/dev/null | head -1 | awk '{print $2}')
+    [ -z "$val" ] && val=$(grep "^${key}:" .agents.yml 2>/dev/null | head -1 | awk '{print $2}')
+  else
+    val=$(grep "^${key}:" "$AGENTS_CONFIG" 2>/dev/null | head -1 | awk '{print $2}')
+  fi
+  echo "$val"
+}
+
+TOPICS_PATH=$(config_get review_topics_path)
 ```
 
 If `TOPICS_PATH` is empty:

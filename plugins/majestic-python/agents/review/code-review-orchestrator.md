@@ -25,11 +25,22 @@ You receive:
 ### Read Project Config
 
 ```bash
-# Read config values from .agents.yml
-DEFAULT=$(grep "default_branch:" "${AGENTS_CONFIG:-.agents.yml}" 2>/dev/null | awk '{print $2}')
+# Config reader with local override support
+config_get() {
+  local key="$1" val=""
+  if [ -z "${AGENTS_CONFIG:-}" ]; then
+    val=$(grep "^${key}:" .agents.local.yml 2>/dev/null | head -1 | awk '{print $2}')
+    [ -z "$val" ] && val=$(grep "^${key}:" .agents.yml 2>/dev/null | head -1 | awk '{print $2}')
+  else
+    val=$(grep "^${key}:" "$AGENTS_CONFIG" 2>/dev/null | head -1 | awk '{print $2}')
+  fi
+  echo "$val"
+}
+
+DEFAULT=$(config_get default_branch)
 DEFAULT=${DEFAULT:-main}
 
-APP_STATUS=$(grep "app_status:" "${AGENTS_CONFIG:-.agents.yml}" 2>/dev/null | awk '{print $2}')
+APP_STATUS=$(config_get app_status)
 APP_STATUS=${APP_STATUS:-development}
 ```
 
@@ -88,8 +99,8 @@ For now, only the core reviewers are used.
 4. If not found → no project topics (skip project-topics-reviewer)
 
 ```bash
-# Check for topics path in .agents.yml
-TOPICS_PATH=$(grep "review_topics_path:" "${AGENTS_CONFIG:-.agents.yml}" 2>/dev/null | awk '{print $2}')
+# Use config_get function defined earlier
+TOPICS_PATH=$(config_get review_topics_path)
 if [ -n "$TOPICS_PATH" ] && [ -f "$TOPICS_PATH" ]; then
   cat "$TOPICS_PATH"
 fi

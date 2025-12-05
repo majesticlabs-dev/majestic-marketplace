@@ -23,10 +23,22 @@ Parse the arguments to extract:
 
 ## Project Config
 
-Read project configuration from `.agents.yml` (or `$AGENTS_CONFIG` if set):
+Read project configuration (with local override support):
 
 ```bash
-DEFAULT_BRANCH=$(grep "default_branch:" "${AGENTS_CONFIG:-.agents.yml}" 2>/dev/null | awk '{print $2}')
+# Config reader with local override support
+config_get() {
+  local key="$1" val=""
+  if [ -z "${AGENTS_CONFIG:-}" ]; then
+    val=$(grep "^${key}:" .agents.local.yml 2>/dev/null | head -1 | awk '{print $2}')
+    [ -z "$val" ] && val=$(grep "^${key}:" .agents.yml 2>/dev/null | head -1 | awk '{print $2}')
+  else
+    val=$(grep "^${key}:" "$AGENTS_CONFIG" 2>/dev/null | head -1 | awk '{print $2}')
+  fi
+  echo "$val"
+}
+
+DEFAULT_BRANCH=$(config_get default_branch)
 DEFAULT_BRANCH=${DEFAULT_BRANCH:-main}
 ```
 

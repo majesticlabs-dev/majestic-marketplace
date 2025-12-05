@@ -22,13 +22,25 @@ Generic code review command that detects your project's tech stack and delegates
 
 ## Step 1: Detect Tech Stack
 
-### Check .agents.yml Configuration
+### Check Configuration
 
 ```bash
-grep "tech_stack:" "${AGENTS_CONFIG:-.agents.yml}" 2>/dev/null | awk '{print $2}'
+# Config reader with local override support
+config_get() {
+  local key="$1" val=""
+  if [ -z "${AGENTS_CONFIG:-}" ]; then
+    val=$(grep "^${key}:" .agents.local.yml 2>/dev/null | head -1 | awk '{print $2}')
+    [ -z "$val" ] && val=$(grep "^${key}:" .agents.yml 2>/dev/null | head -1 | awk '{print $2}')
+  else
+    val=$(grep "^${key}:" "$AGENTS_CONFIG" 2>/dev/null | head -1 | awk '{print $2}')
+  fi
+  echo "$val"
+}
+
+config_get tech_stack
 ```
 
-If `tech_stack:` is found in `.agents.yml`, use that value.
+If `tech_stack` is found in config, use that value.
 
 ### Auto-Detection Fallback
 
@@ -59,8 +71,8 @@ git diff --name-only --diff-filter=d
 # Staged mode
 git diff --cached --name-only --diff-filter=d
 
-# Branch mode (read from .agents.yml, fallback to main)
-DEFAULT=$(grep "default_branch:" "${AGENTS_CONFIG:-.agents.yml}" 2>/dev/null | awk '{print $2}')
+# Branch mode (read from config, fallback to main)
+DEFAULT=$(config_get default_branch)
 DEFAULT=${DEFAULT:-main}
 git diff ${DEFAULT}...HEAD --name-only --diff-filter=d
 

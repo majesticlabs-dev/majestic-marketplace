@@ -21,21 +21,44 @@ Branch: <branch name or --staged>
 ### 1. Read Configuration
 
 ```bash
-CONFIG_FILE="${AGENTS_CONFIG:-.agents.yml}"
-TECH_STACK=$(grep "tech_stack:" "$CONFIG_FILE" 2>/dev/null | awk '{print $2}')
-APP_STATUS=$(grep "app_status:" "$CONFIG_FILE" 2>/dev/null | awk '{print $2}')
-REVIEW_TOPICS=$(grep "review_topics_path:" "$CONFIG_FILE" 2>/dev/null | awk '{print $2}')
+# Config reader with local override support
+config_get() {
+  local key="$1" val=""
+  if [ -z "${AGENTS_CONFIG:-}" ]; then
+    val=$(grep "^${key}:" .agents.local.yml 2>/dev/null | head -1 | awk '{print $2}')
+    [ -z "$val" ] && val=$(grep "^${key}:" .agents.yml 2>/dev/null | head -1 | awk '{print $2}')
+  else
+    val=$(grep "^${key}:" "$AGENTS_CONFIG" 2>/dev/null | head -1 | awk '{print $2}')
+  fi
+  echo "$val"
+}
+
+TECH_STACK=$(config_get tech_stack)
+APP_STATUS=$(config_get app_status)
+REVIEW_TOPICS=$(config_get review_topics_path)
 
 # Defaults
 TECH_STACK=${TECH_STACK:-generic}
 APP_STATUS=${APP_STATUS:-development}
 ```
 
-Then read the full config file to check for custom `quality_gate` configuration:
+Then read config files to check for custom `quality_gate` configuration:
 
+```bash
+# Check which config file to read for quality_gate section
+if [ -z "${AGENTS_CONFIG:-}" ]; then
+  # Check local first for quality_gate section (section-level override)
+  if [ -f .agents.local.yml ] && grep -q "^quality_gate:" .agents.local.yml 2>/dev/null; then
+    CONFIG_TO_READ=".agents.local.yml"
+  else
+    CONFIG_TO_READ=".agents.yml"
+  fi
+else
+  CONFIG_TO_READ="$AGENTS_CONFIG"
+fi
 ```
-Read: ${AGENTS_CONFIG:-.agents.yml}
-```
+
+Read: $CONFIG_TO_READ
 
 ### 2. Check for Custom Reviewers
 

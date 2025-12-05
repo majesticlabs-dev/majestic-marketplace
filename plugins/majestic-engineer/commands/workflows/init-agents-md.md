@@ -288,6 +288,13 @@ Use a single `AskUserQuestion` call with these 3 questions:
 1. **Yes** - Shared config for team
 2. **No** - Local-only (add to .gitignore)
 
+#### Question F4: Local Overrides (Conditional)
+**Condition:** Only ask if F3 answer was "Yes" (tracked in git)
+**Question:** "Do you want personal config overrides?"
+**Options:**
+1. **Yes** - Create `.agents.local.yml` with examples (auto-added to .gitignore)
+2. **No** - Skip, use team config only
+
 ## Step 3: Auto-Detect Values
 
 ### Default Branch
@@ -473,6 +480,31 @@ If user selected "No" for git tracking:
 echo ".agents.yml" >> .gitignore
 ```
 
+If user selected "Yes" for F4 (local overrides), create `.agents.local.yml`:
+
+```bash
+# Auto-add to .gitignore if not already there
+if [ ! -f .gitignore ] || ! grep -q "^\.agents\.local\.yml$" .gitignore; then
+  echo ".agents.local.yml" >> .gitignore
+fi
+```
+
+Write `.agents.local.yml`:
+
+```yaml
+# .agents.local.yml - Personal overrides (not tracked in git)
+# Uncomment and modify values you want to override from .agents.yml
+
+# workflow: worktrees        # worktrees | branches
+# branch_naming: user/desc   # Override team naming convention
+
+# Override quality gate reviewers (replaces team list entirely):
+# quality_gate:
+#   reviewers:
+#     - security-review
+#     - simplicity-reviewer
+```
+
 ## Step 5: Update AGENTS.md
 
 Add config reference at the top of AGENTS.md, right after the title:
@@ -565,6 +597,10 @@ ls -la CLAUDE.md
      - test-reviewer, project-topics-reviewer
 
 ✅ CLAUDE.md symlink created
+
+✅ .agents.local.yml created (if requested)
+   - Added to .gitignore
+   - Contains commented override examples
 
 ⚠️  Remember: Review and refine AGENTS.md manually
 ```

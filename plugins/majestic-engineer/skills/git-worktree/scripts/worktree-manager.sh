@@ -19,16 +19,28 @@ get_repo_root() {
     }
 }
 
-# Get main branch name (reads from .agents.yml if available)
+# Get main branch name (reads from config with local override support)
 get_main_branch() {
     local repo_root
     repo_root=$(git rev-parse --show-toplevel 2>/dev/null)
-    local main_branch
+    local main_branch=""
 
-    # First, check .agents.yml config (supports AGENTS_CONFIG override)
-    local config_file="${AGENTS_CONFIG:-.agents.yml}"
-    if [ -n "$repo_root" ] && [ -f "$repo_root/$config_file" ]; then
-        main_branch=$(grep "default_branch:" "$repo_root/$config_file" 2>/dev/null | awk '{print $2}')
+    # Check config with local override support
+    if [ -n "$repo_root" ]; then
+        if [ -z "${AGENTS_CONFIG:-}" ]; then
+            # Normal mode: local overrides main
+            if [ -f "$repo_root/.agents.local.yml" ]; then
+                main_branch=$(grep "^default_branch:" "$repo_root/.agents.local.yml" 2>/dev/null | head -1 | awk '{print $2}')
+            fi
+            if [ -z "$main_branch" ] && [ -f "$repo_root/.agents.yml" ]; then
+                main_branch=$(grep "^default_branch:" "$repo_root/.agents.yml" 2>/dev/null | head -1 | awk '{print $2}')
+            fi
+        else
+            # Custom config: use only specified file
+            if [ -f "$repo_root/$AGENTS_CONFIG" ]; then
+                main_branch=$(grep "^default_branch:" "$repo_root/$AGENTS_CONFIG" 2>/dev/null | head -1 | awk '{print $2}')
+            fi
+        fi
     fi
 
     # Fallback to git detection if not configured

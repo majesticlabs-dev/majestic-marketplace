@@ -15,9 +15,21 @@ You are a checkout workflow automation specialist. Your role is to execute the c
 When invoked, you must follow these steps in sequence:
 
 1. **Detect Project Type and Run Linters**
-   - First check `.agents.yml` for `tech_stack` config:
+   - First check config for `tech_stack`:
      ```bash
-     grep "tech_stack:" "${AGENTS_CONFIG:-.agents.yml}" 2>/dev/null | awk '{print $2}'
+     # Config reader with local override support
+     config_get() {
+       local key="$1" val=""
+       if [ -z "${AGENTS_CONFIG:-}" ]; then
+         val=$(grep "^${key}:" .agents.local.yml 2>/dev/null | head -1 | awk '{print $2}')
+         [ -z "$val" ] && val=$(grep "^${key}:" .agents.yml 2>/dev/null | head -1 | awk '{print $2}')
+       else
+         val=$(grep "^${key}:" "$AGENTS_CONFIG" 2>/dev/null | head -1 | awk '{print $2}')
+       fi
+       echo "$val"
+     }
+
+     config_get tech_stack
      ```
    - If not configured, use Glob to identify project type by checking for configuration files:
      - Ruby: Look for `Gemfile`, `.rubocop.yml`

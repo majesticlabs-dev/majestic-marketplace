@@ -563,11 +563,40 @@ export AGENTS_CONFIG=".my-config.yml"
 
 All commands and scripts respect this override, falling back to `.agents.yml` if not set.
 
+### Local Overrides (.agents.local.yml)
+
+For personal preferences that shouldn't be tracked in git, create `.agents.local.yml`:
+
+```yaml
+# .agents.local.yml - Personal overrides (not tracked in git)
+workflow: worktrees          # Override team's default branch workflow
+branch_naming: user/desc     # Personal branch naming preference
+```
+
+**Merge behavior:**
+- Local values override team values key-by-key (deep merge)
+- If both files have same key, local wins
+- For nested sections (quality_gate), local replaces entire section
+- If `AGENTS_CONFIG` is set, local file is ignored
+
+**Auto-created:** Running `/majestic:init-agents-md` prompts to create local overrides when `.agents.yml` is tracked.
+
 ### Reading Config in Commands
 
 ```bash
-# Read single value with fallback (supports AGENTS_CONFIG override)
-TECH=$(grep "tech_stack:" "${AGENTS_CONFIG:-.agents.yml}" 2>/dev/null | awk '{print $2}')
+# Config reader with local override support
+config_get() {
+  local key="$1" val=""
+  if [ -z "${AGENTS_CONFIG:-}" ]; then
+    val=$(grep "^${key}:" .agents.local.yml 2>/dev/null | head -1 | awk '{print $2}')
+    [ -z "$val" ] && val=$(grep "^${key}:" .agents.yml 2>/dev/null | head -1 | awk '{print $2}')
+  else
+    val=$(grep "^${key}:" "$AGENTS_CONFIG" 2>/dev/null | head -1 | awk '{print $2}')
+  fi
+  echo "$val"
+}
+
+TECH=$(config_get tech_stack)
 TECH=${TECH:-generic}
 
 # Check boolean-like values
