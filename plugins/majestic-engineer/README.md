@@ -8,6 +8,21 @@ Language-agnostic engineering workflows. Includes 20 specialized agents, 19 comm
 claude /plugin install majestic-engineer
 ```
 
+## QuickStart
+
+After installing, initialize your project:
+
+```bash
+/majestic:init-agents-md
+```
+
+This creates:
+- **AGENTS.md** - Hierarchical guidance structure for your codebase
+- **.agents.yml** - Machine-readable configuration for commands
+- **CLAUDE.md** - Symlink to AGENTS.md (Claude Code's default)
+
+The command auto-detects your tech stack (Rails, Python, Node, etc.) and configures workflows accordingly.
+
 ## Recommended Workflows
 
 **Legend:** `(/command)` = user triggers | `{{agent}}` = runs automatically | `((state))` = outcome
