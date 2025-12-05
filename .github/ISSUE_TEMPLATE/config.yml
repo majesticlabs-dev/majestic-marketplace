@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Wiki Documentation
+    url: https://github.com/majesticlabs-dev/majestic-marketplace/wiki
+    about: Check the wiki for setup guides and documentation
+  - name: Claude Code Docs
+    url: https://docs.anthropic.com/en/docs/claude-code
+    about: Official Claude Code documentation

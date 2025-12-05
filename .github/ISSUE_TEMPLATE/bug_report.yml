@@ -1,0 +1,91 @@
+name: Bug Report
+description: Report a bug with a plugin, agent, command, or skill
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: dropdown
+    id: plugin
+    attributes:
+      label: Plugin
+      description: Which plugin is affected?
+      options:
+        - majestic-engineer
+        - majestic-rails
+        - majestic-python
+        - majestic-react
+        - majestic-marketing
+        - majestic-sales
+        - majestic-company
+        - majestic-tools
+        - Installer (install.sh)
+        - Other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: component
+    attributes:
+      label: Component Type
+      description: What type of component has the issue?
+      options:
+        - Agent
+        - Command
+        - Skill
+        - Hook
+        - Documentation
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: component-name
+    attributes:
+      label: Component Name
+      description: Name of the specific agent, command, or skill
+      placeholder: "e.g., rails-code-review, /majestic:plan, ruby-coder"
+    validations:
+      required: false
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      description: What happened? What did you expect to happen?
+      placeholder: |
+        **What happened:**
+
+        **Expected behavior:**
+    validations:
+      required: true
+
+  - type: textarea
+    id: error
+    attributes:
+      label: Error Message
+      description: Any error messages or unexpected output
+      render: shell
+    validations:
+      required: false
+
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to Reproduce
+      description: How can we reproduce this issue?
+      placeholder: |
+        1. Run command...
+        2. See error...
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Your setup details
+      value: |
+        - Claude Code version:
+        - OS:
+        - Plugin version:
+    validations:
+      required: false

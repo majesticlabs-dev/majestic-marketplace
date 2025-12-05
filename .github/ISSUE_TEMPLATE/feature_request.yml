@@ -1,0 +1,77 @@
+name: Feature Request
+description: Request a new agent, command, skill, or enhancement
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: dropdown
+    id: plugin
+    attributes:
+      label: Plugin
+      description: Which plugin should this be added to?
+      options:
+        - majestic-engineer
+        - majestic-rails
+        - majestic-python
+        - majestic-react
+        - majestic-marketing
+        - majestic-sales
+        - majestic-company
+        - majestic-tools
+        - New Plugin (describe below)
+        - Not sure
+    validations:
+      required: true
+
+  - type: dropdown
+    id: component
+    attributes:
+      label: Component Type
+      description: What type of component are you requesting?
+      options:
+        - Agent
+        - Command
+        - Skill
+        - Hook
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: name
+    attributes:
+      label: Suggested Name
+      description: What would you call this component?
+      placeholder: "e.g., go-coder, /majestic:deploy, terraform-reviewer"
+    validations:
+      required: false
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: What should this feature do?
+      placeholder: |
+        **Problem it solves:**
+
+        **How it should work:**
+    validations:
+      required: true
+
+  - type: textarea
+    id: use-cases
+    attributes:
+      label: Use Cases
+      description: When would you use this?
+      placeholder: |
+        - When I need to...
+        - After running...
+    validations:
+      required: false
+
+  - type: textarea
+    id: examples
+    attributes:
+      label: Examples
+      description: Any examples of similar tools or expected output?
+    validations:
+      required: false

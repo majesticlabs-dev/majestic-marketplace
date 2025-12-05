@@ -1,0 +1,80 @@
+name: Plugin Request
+description: Request a new plugin for a language, framework, or domain
+title: "[Plugin]: majestic-"
+labels: ["plugin-request"]
+body:
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      description: What category does this plugin fall under?
+      options:
+        - Engineering (language/framework)
+        - Marketing
+        - Sales
+        - Operations
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: name
+    attributes:
+      label: Plugin Name
+      description: Suggested name for the plugin
+      placeholder: "e.g., majestic-go, majestic-rust, majestic-terraform"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: What would this plugin do? What tools/workflows would it provide?
+      placeholder: |
+        **Target audience:**
+
+        **Key capabilities:**
+    validations:
+      required: true
+
+  - type: textarea
+    id: agents
+    attributes:
+      label: Suggested Agents
+      description: What agents should this plugin include?
+      placeholder: |
+        - go-coder: Write idiomatic Go code
+        - go-reviewer: Review Go code for best practices
+    validations:
+      required: false
+
+  - type: textarea
+    id: commands
+    attributes:
+      label: Suggested Commands
+      description: What commands should this plugin include?
+      placeholder: |
+        - /go:build - Build and test workflow
+        - /go:mod - Manage Go modules
+    validations:
+      required: false
+
+  - type: textarea
+    id: skills
+    attributes:
+      label: Suggested Skills
+      description: What skills should this plugin include?
+      placeholder: |
+        - go-patterns: Go design patterns and idioms
+        - go-testing: Table-driven tests, benchmarks
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: contribution
+    attributes:
+      label: Contribution
+      description: Would you be willing to help build this?
+      options:
+        - label: I'd be willing to contribute to this plugin
