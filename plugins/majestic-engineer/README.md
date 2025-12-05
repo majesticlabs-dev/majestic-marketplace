@@ -35,9 +35,16 @@ graph LR
 | 1 | `/majestic:prd` or `/majestic:guided-prd` | Define WHAT to build |
 | 2 | `agent architect` | Design implementation (HOW) |
 | 3 | `agent plan-review` | Validate before coding |
-| 4 | Implementation | Write the code |
+| 4 | Build (see below) | Write the code |
 | 5 | `agent test-create` | Write tests |
 | 6 | `/git:commit` + `/git:create-pr` | Ship it |
+
+**Build step is framework-dependent:**
+
+| Framework | Command |
+|-----------|---------|
+| Rails | `/rails:build [plan-file]` |
+| Generic | Manual or `/majestic:build-task` for autonomous |
 
 ### Plan-First (Features/Bugs/Improvements)
 
@@ -53,12 +60,10 @@ graph LR
 |------|------|---------|
 | 1 | `/majestic:plan` | Create structured implementation plan |
 | 2 | `agent plan-review` | Validate before coding |
-| 3 | Implementation | Write the code |
+| 3 | Build (see above) | Write the code |
 | 4 | `agent test-create` | Write tests |
 | 5 | `agent security-review` | Security audit |
 | 6 | `/git:commit` + `/git:create-pr` | Ship it |
-
-> **Note:** For Rails projects, use `/majestic-rails:workflows:build` for implementation.
 
 ### Autonomous Build Task
 
