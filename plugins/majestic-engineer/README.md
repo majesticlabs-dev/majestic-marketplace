@@ -20,7 +20,7 @@ graph LR
     end
     P --> B{{architect}}
     B --> C{{plan-review}}
-    C --> D[Build]
+    C --> D(/majestic:build-task)
     D --> E{{test-create}}
     E --> F{{ship}}
 ```
@@ -35,23 +35,16 @@ graph LR
 | 1 | `/majestic:prd` or `/majestic:guided-prd` | Define WHAT to build |
 | 2 | `agent architect` | Design implementation (HOW) |
 | 3 | `agent plan-review` | Validate before coding |
-| 4 | Build (see below) | Write the code |
+| 4 | `/majestic:build-task` | Autonomous implementation |
 | 5 | `agent test-create` | Write tests |
 | 6 | `agent ship` | Lint, commit, create PR |
-
-**Build step is framework-dependent:**
-
-| Framework | Command |
-|-----------|---------|
-| Rails | `/rails:build [plan-file]` |
-| Generic | Manual or `/majestic:build-task` for autonomous |
 
 ### Plan-First (Features/Bugs/Improvements)
 
 ```mermaid
 graph LR
     A(/majestic:plan) --> B{{plan-review}}
-    B --> C[Build]
+    B --> C(/majestic:build-task)
     C --> D{{test-create}}
     D --> E{{ship}}
 ```
@@ -60,7 +53,7 @@ graph LR
 |------|------|---------|
 | 1 | `/majestic:plan` | Create structured implementation plan |
 | 2 | `agent plan-review` | Validate before coding |
-| 3 | Build (see above) | Write the code |
+| 3 | `/majestic:build-task` | Autonomous implementation |
 | 4 | `agent test-create` | Write tests |
 | 5 | `agent security-review` | Security audit |
 | 6 | `agent ship` | Lint, commit, create PR |
