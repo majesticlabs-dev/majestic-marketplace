@@ -122,9 +122,8 @@ Marks task as "in progress" in the configured backend.
 ## Step 3: Set Terminal Title
 
 ```
-Task (majestic-tools:set-title):
-  prompt: |
-    Set title to "🔨 #<TASK_ID>: <title-truncated-to-40-chars>"
+Skill: majestic-tools:set-title
+Title: "🔨 #<TASK_ID>: <title-truncated-to-40-chars>"
 ```
 
 ---

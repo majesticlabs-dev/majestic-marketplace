@@ -1,6 +1,6 @@
 # Majestic Tools
 
-Claude Code customization tools. Includes 2 agents, 11 commands, 3 skills, and 2 hooks.
+Claude Code customization tools. Includes 1 agent, 11 commands, 4 skills, and 2 hooks.
 
 ## Installation
 
@@ -27,7 +27,6 @@ Invoke with: `agent <name>`
 | Agent | Description |
 |-------|-------------|
 | `reasoning-verifier` | Verify LLM reasoning using RCoT - detect overlooked conditions and hallucinations |
-| `set-title` | Set terminal window title to identify what the current session is working on |
 
 ## Commands
 
@@ -74,6 +73,7 @@ Invoke with: `skill majestic-tools:<name>`
 |-------|-------------|
 | `brainstorming` | Refine rough ideas into fully-formed designs through collaborative questioning |
 | `new-skill` | Create and manage Claude Code skills following Anthropic best practices |
+| `set-title` | Set terminal window title to identify what the current session is working on |
 | `skill-first` | Check for relevant skills before starting any task |
 
 ## Hooks
