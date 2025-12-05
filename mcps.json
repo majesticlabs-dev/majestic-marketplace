@@ -3,5 +3,10 @@
     "description": "Enhanced reasoning for complex tasks",
     "command": "npx",
     "args": ["-y", "@anthropic/mcp-sequential-thinking"]
+  },
+  "playwright": {
+    "description": "Browser automation with Playwright",
+    "command": "npx",
+    "args": ["-y", "@playwright/mcp@latest"]
   }
 }
