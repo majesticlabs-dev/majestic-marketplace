@@ -1,6 +1,6 @@
 # Majestic Rails
 
-Ruby on Rails development tools. Includes 23 specialized agents, 4 commands, and 10 skills.
+Ruby on Rails development tools. Includes 23 specialized agents, 4 commands, and 11 skills.
 
 ## Installation
 
@@ -115,6 +115,7 @@ Invoke with: `skill majestic-rails:<name>`
 |-------|-------------|
 | `business-logic-coder` | Implement business logic with ActiveInteraction and AASM state machines |
 | `dhh-coder` | Code following DHH's standards for Rails elegance and simplicity |
+| `dialog-patterns` | Native HTML dialog patterns for Rails with Turbo and Stimulus (modals, confirmations, toasts) |
 | `event-sourcing-coder` | Record domain events and dispatch to inbox handlers for audit trails and activity feeds |
 | `gem-builder` | Comprehensive guide for building production-quality Ruby gems |
 | `inertia-coder` | Build modern SPAs with Inertia.js + Rails using React, Vue, or Svelte |
