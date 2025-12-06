@@ -2,6 +2,18 @@
 
 All notable changes to majestic-rails will be documented in this file.
 
+## [1.23.0] - 2025-12-05
+
+### Added
+
+- `event-sourcing-coder` skill - Pragmatic event sourcing for Rails monoliths
+  - Record domain events with typed metadata and throttling
+  - Inbox pattern for decoupled event processing (notifications, webhooks, automation)
+  - Activity feeds, audit trails, and analytics patterns
+  - Integration with AASM state machines
+  - Based on BoringRails "Event Sourcing for Smooth Brains" pattern
+  - Includes 3 reference files: event-model.md, inbox-pattern.md, use-cases.md
+
 ## [1.22.1] - 2025-12-04
 
 ### Enhanced

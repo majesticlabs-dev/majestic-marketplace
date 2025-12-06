@@ -302,3 +302,7 @@ end
 For advanced patterns:
 - `references/active-interaction.md` - Composition, error handling, custom types
 - `references/aasm-patterns.md` - Callbacks, multiple state machines, persistence
+
+## Related Skills
+
+- **`event-sourcing-coder`** - For recording domain events and dispatching to inbox handlers. Use when AASM state transitions should trigger notifications, webhooks, or audit trails.
