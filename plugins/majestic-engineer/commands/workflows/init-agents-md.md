@@ -21,9 +21,10 @@ Set up AI agent documentation and machine-readable config for this project.
 | Constraint | Reason |
 |------------|--------|
 | **Under 300 lines** | Ideally 60-100 for simple projects |
-| **~150 instruction limit** | Claude Code's system prompt uses ~50 |
-| **Universal rules only** | Non-universal instructions get ignored |
+| **~100 usable instructions** | Claude's ~150 limit minus ~50 system prompt |
+| **Universal rules only** | Claude is told context "may or may not be relevant" - non-universal = ignored |
 | **No config data** | Config belongs in `.agents.yml` |
+| **Manual > auto-generated** | Hand-crafted instructions get more leverage |
 
 ### The WHAT/WHY/HOW Framework
 

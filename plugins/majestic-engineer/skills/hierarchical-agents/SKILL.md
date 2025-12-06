@@ -44,6 +44,8 @@ Use this skill when:
 - Examples point to actual files in codebase
 - Single-line commands that can be executed
 
+**Why this matters:** Claude Code's system prompt includes ~50 instructions, leaving ~100 usable slots from Claude's ~150 instruction capacity. The system also tells Claude that AGENTS.md context "may or may not be relevant" - so non-universal instructions get ignored uniformly. Manual crafting beats auto-generation for leverage.
+
 ### 5. Sub-Folder Detail
 - Sub-folder AGENTS.md files have MORE detail
 - Specific patterns with file examples
