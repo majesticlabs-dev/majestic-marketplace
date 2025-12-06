@@ -11,8 +11,8 @@
   "plugins": [
     {
       "name": "majestic-engineer",
-      "description": "Language-agnostic engineering workflows. Includes 20 specialized agents, 20 commands, and 12 skills.",
-      "version": "1.34.0",
+      "description": "Language-agnostic engineering workflows. Includes 20 specialized agents, 20 commands, and 13 skills.",
+      "version": "1.35.0",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -25,7 +25,8 @@
         "git",
         "testing",
         "security",
-        "architecture"
+        "architecture",
+        "cloudflare-workers"
       ],
       "source": "./plugins/majestic-engineer"
     },

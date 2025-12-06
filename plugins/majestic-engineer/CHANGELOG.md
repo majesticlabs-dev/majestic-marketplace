@@ -2,6 +2,17 @@
 
 All notable changes to majestic-engineer will be documented in this file.
 
+## [1.35.0] - 2025-12-06
+
+### Added
+
+- **`cloudflare-worker` skill** - Build edge-first TypeScript applications on Cloudflare Workers
+  - Covers Workers API, Hono framework, KV/D1/R2 storage, Durable Objects, Queues
+  - Testing patterns with Vitest + Miniflare
+  - WebSocket Hibernation API patterns for Durable Objects
+  - Common patterns: API key auth, rate limiting, caching, background tasks
+  - CLI command reference for wrangler
+
 ## [1.34.0] - 2025-12-05
 
 ### Added

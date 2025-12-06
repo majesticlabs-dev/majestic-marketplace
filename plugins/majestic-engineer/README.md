@@ -1,6 +1,6 @@
 # Majestic Engineer
 
-Language-agnostic engineering workflows. Includes 20 specialized agents, 19 commands, and 12 skills.
+Language-agnostic engineering workflows. Includes 20 specialized agents, 19 commands, and 13 skills.
 
 ## Installation
 
@@ -236,6 +236,7 @@ Invoke with: `skill majestic-engineer:<name>`
 | `ast-grep-searching` | Structural code search and AST-based pattern matching for safe refactoring |
 | `backlog-manager` | Manage project backlogs and task prioritization |
 | `check-ci` | Monitor PR CI checks by polling GitHub status |
+| `cloudflare-worker` | Build edge-first TypeScript apps on Cloudflare Workers (Hono, KV, D1, R2, Durable Objects) |
 | `create-adr` | Create Architecture Decision Records for significant technical decisions |
 | `fix-reporter` | Capture solved problems as categorized documentation with YAML frontmatter |
 | `frontend-design` | Create distinctive, production-grade frontend interfaces for Tailwind, React, Vue, and Rails/Hotwire |
