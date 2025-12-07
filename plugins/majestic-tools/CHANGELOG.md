@@ -2,6 +2,16 @@
 
 All notable changes to majestic-tools will be documented in this file.
 
+## [1.10.1] - 2025-12-07
+
+### Changed
+
+- Renamed external LLM "brainstorm" agents to "consult" for clearer intent
+  - `codex-brainstorm` → `codex-consult`
+  - `gemini-brainstorm` → `gemini-consult`
+  - `/external-llm:brainstorm` → `/external-llm:consult`
+- Updated `multi-llm-coordinator` references to use new naming
+
 ## [1.7.0] - 2025-12-03
 
 ### Changed
