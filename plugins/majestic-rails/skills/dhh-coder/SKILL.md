@@ -190,6 +190,7 @@ For comprehensive patterns and examples, see:
 
 ### Core Patterns
 - `references/patterns.md` - Complete code patterns with explanations
+- `references/palkan-patterns.md` - Namespaced model classes, counter caches, model organization order, PostgreSQL enums
 - `references/concerns-organization.md` - Model-specific vs common concerns, facade pattern
 - `references/delegated-types.md` - Polymorphism without STI problems
 - `references/recording-pattern.md` - Unifying abstraction for diverse content types
