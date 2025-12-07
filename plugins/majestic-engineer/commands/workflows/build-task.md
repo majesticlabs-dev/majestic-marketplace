@@ -51,20 +51,24 @@ flowchart TD
         E{{general-purpose}}
     end
 
-    subgraph "7. Quality Gate"
+    subgraph "7. Verify"
+        V{{always-works-verifier}}
+    end
+
+    subgraph "8. Quality Gate"
         F{{quality-gate}}
     end
 
-    subgraph "8. Fix Loop"
+    subgraph "9. Fix Loop"
         G{{general-purpose}}
         H{Attempt < 3?}
     end
 
-    subgraph "9. Ship"
+    subgraph "10. Ship"
         I(/ship-it)
     end
 
-    subgraph "10. Complete"
+    subgraph "11. Complete"
         CI{{task-status-updater}}
     end
 
@@ -75,12 +79,15 @@ flowchart TD
     K -->|Yes| C --> D
     K -->|No| D
     D --> E
-    E --> F
+    E --> V
+    V --> VR{Works?}
+    VR -->|Yes| F
+    VR -->|No| G
     F --> L{Approved?}
     L -->|Yes| I
     L -->|No| G
     G --> H
-    H -->|Yes| F
+    H -->|Yes| V
     H -->|No| M[Pause & Report]
     I --> CI
     CI --> N[Done - Awaiting PR Review]
@@ -235,7 +242,29 @@ Removes over-commenting, defensive overkill, type escape hatches, and style inco
 
 ---
 
-## Step 9: Quality Gate
+## Step 9: Verify Implementation
+
+```
+Task (majestic-engineer:workflow:always-works-verifier):
+  prompt: |
+    Verify the implementation works.
+    Branch: <branch-name>
+```
+
+The agent:
+1. Reads `tech_stack` from `.agents.yml`
+2. Runs build/compile checks
+3. Executes relevant tests
+4. Verifies the changed behavior
+
+**Returns:** Verification report with confidence level.
+
+**If verification fails:** → Fix Loop (Step 11)
+**If verification passes:** → Quality Gate (Step 10)
+
+---
+
+## Step 10: Quality Gate
 
 ```
 Task (majestic-engineer:workflow:quality-gate):
@@ -257,17 +286,19 @@ The agent reads `tech_stack` from `.agents.yml` and launches appropriate reviewe
 
 ---
 
-## Step 10: Fix Loop
+## Step 11: Fix Loop
 
-**If quality-gate returns NEEDS CHANGES:**
+**Triggered when:**
+- Verification fails (Step 9)
+- Quality gate returns NEEDS CHANGES (Step 10)
 
 ```
 Task (general-purpose):
   prompt: |
-    Fix these quality issues:
+    Fix these issues:
 
     ## Findings
-    <quality-gate findings with severity, file, issue, fix>
+    <verification failures OR quality-gate findings>
 
     ## Instructions
     1. Address each finding by severity (CRITICAL → HIGH → MEDIUM)
@@ -276,13 +307,13 @@ Task (general-purpose):
     4. Report what you fixed
 ```
 
-**Re-run Step 8 (Quality Gate)**
+**Re-run Step 9 (Verify)** → then Step 10 (Quality Gate) if verification passes.
 
 **Limits:** Max 3 iterations. After 3 failures → pause and report to user.
 
 ---
 
-## Step 11: Ship
+## Step 12: Ship
 
 **Once quality-gate returns APPROVED:**
 
@@ -292,7 +323,7 @@ SlashCommand: /majestic-engineer:workflows:ship-it
 
 ---
 
-## Step 12: Mark Ready for Review
+## Step 13: Mark Ready for Review
 
 ```
 Task (majestic-engineer:workflow:task-status-updater):
