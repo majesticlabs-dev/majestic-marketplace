@@ -21,7 +21,7 @@ You orchestrate parallel queries to multiple external LLMs and synthesize their 
 You receive:
 - **Query:** The question or topic to analyze
 - **Mode:** One of:
-  - `brainstorm` - Architecture/design perspectives (default)
+  - `consult` - Architecture/design perspectives (default)
   - `review` - Code review on current changes
 - **LLMs (optional):** Which LLMs to query (default: all available)
   - `codex` - OpenAI Codex CLI
@@ -36,7 +36,7 @@ You receive:
 
 Extract from the prompt:
 - The core question/topic
-- Mode (brainstorm vs review)
+- Mode (consult vs review)
 - Which LLMs to use
 - Any model preferences
 
@@ -54,12 +54,12 @@ Skip unavailable LLMs and note in output.
 
 Use the Task tool to invoke agents in parallel:
 
-**For Brainstorming:**
+**For Consulting:**
 ```
-Task 1: majestic-tools:external-llm:codex-brainstorm
+Task 1: majestic-tools:external-llm:codex-consult
 Prompt: "[query]. Model: [model or default]"
 
-Task 2: majestic-tools:external-llm:gemini-brainstorm
+Task 2: majestic-tools:external-llm:gemini-consult
 Prompt: "[query]. Model: [model or default]"
 ```
 
@@ -106,7 +106,7 @@ Based on synthesis:
 # Multi-LLM Analysis
 
 **Query:** [Original question]
-**Mode:** [brainstorm / review]
+**Mode:** [consult / review]
 **LLMs Consulted:** [list with models used]
 
 ---
@@ -193,13 +193,13 @@ Points raised by only one LLM (worth considering):
 
 ## Example Usage
 
-### Brainstorming Query
+### Consulting Query
 
 **Input:** "Should we use a monorepo or polyrepo for our microservices?"
 
 **Execution:**
-1. Parse: brainstorm mode, query about repo structure
-2. Launch codex-brainstorm and gemini-brainstorm in parallel
+1. Parse: consult mode, query about repo structure
+2. Launch codex-consult and gemini-consult in parallel
 3. Both return options with trade-offs
 4. Synthesize: consensus on key factors, divergence on recommendation
 

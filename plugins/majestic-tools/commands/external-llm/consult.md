@@ -4,7 +4,7 @@ allowed-tools: Bash, Read, Grep, Glob, Task
 argument-hint: "<question> [--llm codex|gemini|all] [--codex-model <model>] [--gemini-model <model>]"
 ---
 
-# External Brainstorm
+# External Consult
 
 Get alternative AI perspectives on architectural decisions and feature planning from external LLMs (Codex, Gemini).
 
@@ -23,10 +23,10 @@ Get alternative AI perspectives on architectural decisions and feature planning 
 
 **Example:**
 ```
-/external-llm:brainstorm Should we use Redis or PostgreSQL for caching?
-/external-llm:brainstorm --llm codex What's the best way to structure this API?
-/external-llm:brainstorm --codex-model gpt-5.1-codex-max Critical architecture decision
-/external-llm:brainstorm --codex-model gpt-5.1-codex-max --gemini-model gemini-2.5-pro Compare approaches
+/external-llm:consult Should we use Redis or PostgreSQL for caching?
+/external-llm:consult --llm codex What's the best way to structure this API?
+/external-llm:consult --codex-model gpt-5.1-codex-max Critical architecture decision
+/external-llm:consult --codex-model gpt-5.1-codex-max --gemini-model gemini-2.5-pro Compare approaches
 ```
 
 ## Available Models
@@ -78,17 +78,17 @@ Read project context to include in prompts:
 **Single LLM Mode:**
 Use Task tool with appropriate agent:
 ```
-Task: majestic-tools:external-llm:codex-brainstorm
+Task: majestic-tools:external-llm:codex-consult
 Prompt: "[question with context]. Model: [codex-model]"
 ```
 
 **Multi-LLM Mode:**
 Launch BOTH agents in parallel using Task tool:
 ```
-Task 1: majestic-tools:external-llm:codex-brainstorm
+Task 1: majestic-tools:external-llm:codex-consult
 Prompt: "[question]. Model: [codex-model]"
 
-Task 2: majestic-tools:external-llm:gemini-brainstorm
+Task 2: majestic-tools:external-llm:gemini-consult
 Prompt: "[question]. Model: [gemini-model]"
 ```
 
@@ -106,7 +106,7 @@ Prompt: "[question]. Model: [gemini-model]"
 ### Single LLM
 
 ```markdown
-## External Brainstorm Results
+## External Consult Results
 
 **Question:** [question]
 **LLM:** [Codex/Gemini] ([model])
@@ -124,7 +124,7 @@ Prompt: "[question]. Model: [gemini-model]"
 ### Multi-LLM
 
 ```markdown
-## External Brainstorm Results
+## External Consult Results
 
 **Question:** [question]
 **LLMs:** Codex ([model]), Gemini ([model])
@@ -171,22 +171,22 @@ Where they disagree:
 
 ### Simple Query (Both LLMs with Defaults)
 ```
-/external-llm:brainstorm Should we use a service object or concern for this logic?
+/external-llm:consult Should we use a service object or concern for this logic?
 ```
 
 ### Specific LLM
 ```
-/external-llm:brainstorm --llm gemini How should we structure the API versioning?
+/external-llm:consult --llm gemini How should we structure the API versioning?
 ```
 
 ### High-Stakes with Max Codex Model
 ```
-/external-llm:brainstorm --codex-model gpt-5.1-codex-max Critical: Database migration strategy for 10M rows
+/external-llm:consult --codex-model gpt-5.1-codex-max Critical: Database migration strategy for 10M rows
 ```
 
 ### Both LLMs with Custom Models
 ```
-/external-llm:brainstorm --codex-model gpt-5.1-codex-max --gemini-model gemini-2.5-pro Architecture review
+/external-llm:consult --codex-model gpt-5.1-codex-max --gemini-model gemini-2.5-pro Architecture review
 ```
 
 ## Error Handling
