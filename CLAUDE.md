@@ -371,6 +371,17 @@ Follow these patterns for commit messages:
 - `Refactor [component] to [improvement]` - Refactoring
 
 
+## Wiki
+
+The GitHub wiki is maintained in a **sibling repository**: `../majestic-marketplace.wiki/`
+
+**To update the wiki:**
+```bash
+cd ../majestic-marketplace.wiki
+# Edit files
+git add -A && git commit -m "docs: ..." && git push
+```
+
 ## Resources to search for when needing more information
 
 - [Claude Code Plugin Documentation](https://docs.claude.com/en/docs/claude-code/plugins)
