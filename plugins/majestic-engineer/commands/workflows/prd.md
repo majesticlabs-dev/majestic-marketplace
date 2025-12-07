@@ -267,8 +267,20 @@ Based on Must Have requirements:
 After generating the balanced PRD:
 
 1. **Save the file** to `docs/prd/prd-[feature-name].md`
-2. **Present summary** of what was created
-3. Use `AskUserQuestion` to offer expansion options:
+
+2. **Check Preview Config**
+
+   Check `.agents.local.yml` then `.agents.yml` for `preview_created_files: true`:
+
+   **If preview_created_files is true:**
+   - Run `open docs/prd/prd-[feature-name].md` to open in default editor
+   - Inform user: "Opened PRD in your editor for preview."
+
+   **If missing or false:** Skip auto-preview, offer "Preview in editor" option below.
+
+3. **Present summary** of what was created
+
+4. Use `AskUserQuestion` to offer options:
 
 **Technical expansion includes:**
 - API Specifications (endpoints, schemas, auth)
@@ -276,7 +288,13 @@ After generating the balanced PRD:
 - Security Considerations (AuthN/AuthZ, OWASP mapping)
 - Performance & Scalability details (SLOs, scaling strategy)
 
-**Options:**
+**Options (if NOT auto-previewed):**
+- **Preview in editor** - Open the PRD file (`open <path>`)
+- **Expand with technical depth** - Add the technical sections listed above
+- **Done** - The balanced PRD is sufficient
+- **Revise sections** - Provide feedback on specific sections to change
+
+**Options (if auto-previewed):**
 - **Expand with technical depth** - Add the technical sections listed above
 - **Done** - The balanced PRD is sufficient
 - **Revise sections** - Provide feedback on specific sections to change

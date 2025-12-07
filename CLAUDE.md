@@ -472,6 +472,7 @@ review_topics_path: docs/agents/review-topics.md
 | `workflow` | Feature development workflow | `worktrees` \| `branches` | `branches` |
 | `branch_naming` | Branch naming convention | `feature/desc` \| `issue-desc` \| `type/issue-desc` \| `user/desc` | `feature/desc` |
 | `review_topics_path` | Path to review topics file | file path | (none) |
+| `preview_created_files` | Auto-open created markdown files (plans, PRDs, briefs) | `true` \| `false` | `false` |
 
 ### Rails-Specific Fields
 
@@ -604,6 +605,36 @@ if grep -q "app_status: production" "${AGENTS_CONFIG:-.agents.yml}" 2>/dev/null;
   echo "Production mode - backward compatibility required"
 fi
 ```
+
+### File Preview Pattern
+
+When commands create markdown files (plans, PRDs, briefs, handoffs), they should follow this pattern:
+
+1. **Check config**: Read `.agents.local.yml` then `.agents.yml` for `preview_created_files: true`
+2. **If true**: Run `open <filepath>` immediately after writing, then continue with options
+3. **If false**: Include "Preview in editor" as first option in post-creation menu
+
+**Implementation in commands:**
+
+```markdown
+## Post-Generation
+
+After writing the file:
+
+1. Check if `preview_created_files: true` in config
+2. If true: Run `open <filepath>` to preview
+3. Present options via AskUserQuestion:
+   - Preview in editor (if not auto-previewed)
+   - Start building / Continue with next step
+   - Get review
+   - Revise
+```
+
+**Commands using this pattern:**
+- `/majestic:plan` → `docs/plans/<title>.md`
+- `/majestic:prd` → `docs/prd/prd-<name>.md`
+- `/majestic:design-plan` → `docs/design/<name>-brief.md`
+- `/majestic:handoff` → `.claude/handoffs/<timestamp>-<slug>.md`
 
 ## Key Learnings
 

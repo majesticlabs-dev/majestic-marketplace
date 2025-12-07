@@ -353,26 +353,51 @@ Write the plan to `docs/plans/<issue_title>.md`
 
 ## Post-Generation Options
 
-After writing the plan file, use the **AskUserQuestion tool** to present these options:
+After writing the plan file:
+
+### 1. Check Preview Config
+
+Check `.agents.local.yml` then `.agents.yml` for `preview_created_files: true`:
+
+```bash
+# Check if preview is enabled
+grep -q "preview_created_files: true" .agents.local.yml 2>/dev/null || \
+grep -q "preview_created_files: true" .agents.yml 2>/dev/null
+```
+
+**If preview_created_files is true:**
+- Run `open docs/plans/<issue_title>.md` to open in default editor
+- Inform user: "Opened plan in your editor for preview."
+
+**If missing or false:** Skip auto-preview, offer "Preview in editor" option below.
+
+### 2. Present Options
+
+Use **AskUserQuestion tool** to present options:
 
 **Question:** "Plan ready at `docs/plans/<issue_title>.md`. What would you like to do next?"
 
-**Options:**
+**Options (if NOT auto-previewed):**
+1. **Preview in editor** - Open the plan file (`open <path>`)
+2. **Start building** - Begin implementing this plan
+3. **Get review** - Get feedback from reviewers
+4. **Create backlog item** - Add to your configured task system
+
+**Options (if auto-previewed):**
 1. **Start building** - Begin implementing this plan
 2. **Get review** - Get feedback from reviewers
 3. **Create backlog item** - Add to your configured task system
-4. **Simplify** - Reduce detail level
-5. **Rework** - Change approach or request specific changes
+4. **Revise** - Change approach or request specific changes
 
 Based on selection:
+- **Preview in editor** → Run `open docs/plans/<issue_title>.md`, then re-present options
 - **Start building** → Begin implementation using the plan
 - **Get review** → Run plan-review agent on the plan file
 - **Create backlog item** → Invoke `backlog-manager` skill (see Backlog Integration below)
-- **Simplify** → Ask "What should I simplify?" then regenerate simpler version
-- **Rework** → Ask "What would you like changed?" then regenerate with changes
+- **Revise** → Ask "What would you like changed?" then regenerate with changes
 - **Other** (automatically provided) → Accept free text, act on it
 
-Loop back to options after Simplify/Rework until user selects to build or review.
+Loop back to options after Revise until user selects to build or review.
 
 ## Backlog Integration
 

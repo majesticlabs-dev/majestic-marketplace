@@ -197,21 +197,38 @@ After gathering sufficient information, synthesize into a **Design Brief**:
 
 ## Phase 5: Confirmation & Next Steps
 
-Present the design brief and ask:
+After generating the design brief:
 
-```
-**Design brief ready. What would you like to do next?**
-- Start building with this direction
-- Refine specific sections
-- Research more references
-- Save brief and start later
-```
+1. **Save the file** to `docs/design/[component-name]-brief.md`
+
+2. **Check Preview Config**
+
+   Check `.agents.local.yml` then `.agents.yml` for `preview_created_files: true`:
+
+   **If preview_created_files is true:**
+   - Run `open docs/design/[component-name]-brief.md` to open in default editor
+   - Inform user: "Opened design brief in your editor for preview."
+
+   **If missing or false:** Skip auto-preview, offer "Preview in editor" option below.
+
+3. **Present options** via AskUserQuestion:
+
+**Options (if NOT auto-previewed):**
+- **Preview in editor** - Open the brief file (`open <path>`)
+- **Start building** - Invoke `skill frontend-design` then begin implementation
+- **Refine sections** - Ask what to change, update brief
+- **Research more** - Ask for additional reference sites
+
+**Options (if auto-previewed):**
+- **Start building** - Invoke `skill frontend-design` then begin implementation
+- **Refine sections** - Ask what to change, update brief
+- **Research more** - Ask for additional reference sites
 
 Based on selection:
+- **Preview in editor** → Run `open <path>`, then re-present options
 - **Start building** → Invoke `skill frontend-design` then begin implementation
 - **Refine** → Ask what to change, update brief
 - **Research more** → Ask for additional reference sites
-- **Save** → Write to `docs/design/[component-name]-brief.md`
 
 ## Output Location
 

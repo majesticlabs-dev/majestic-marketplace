@@ -101,6 +101,18 @@ Here's an example of how your output should be structured:
 
 ## Final Step
 
-After providing your analysis and summary, write the handoff summary to a markdown file at `.claude/handoffs/[timestamp]-[slug].md` where [timestamp] is the current date in format YYYY-MM-DD and the slug is what we defined before.
+After providing your analysis and summary:
 
-Then tell the user about this file and that they can use `/pickup FILENAME` to continue.
+1. **Write the handoff summary** to `.claude/handoffs/[timestamp]-[slug].md` where [timestamp] is the current date in format YYYY-MM-DD and the slug is what we defined before.
+
+2. **Check Preview Config**
+
+   Check `.agents.local.yml` then `.agents.yml` for `preview_created_files: true`:
+
+   **If preview_created_files is true:**
+   - Run `open .claude/handoffs/[timestamp]-[slug].md` to open in default editor
+   - Inform user: "Opened handoff in your editor for preview."
+
+   **If missing or false:** Skip auto-preview (user can open manually).
+
+3. **Tell the user** about the file and that they can use `/pickup FILENAME` to continue.
