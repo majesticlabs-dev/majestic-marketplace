@@ -2,6 +2,21 @@
 
 All notable changes to majestic-engineer will be documented in this file.
 
+## [1.38.0] - 2025-12-08
+
+### Enhanced
+
+- **`mermaid-builder` skill** - Added comprehensive data lineage visualization patterns
+  - Simple Data Pipeline pattern (ETL processes)
+  - Multi-Layer Data Architecture (data lake/warehouse layers)
+  - Cross-System Data Flow (with timing and sequence diagrams)
+  - Database Schema Lineage (table relationships and provenance)
+  - Data Transformation Flow with Metadata (quality checks, record counts)
+  - Streaming Data Lineage (Kafka/Kinesis patterns)
+  - Column-Level Lineage (field-level data provenance)
+  - Best practices for data lineage diagrams (metadata, transformations, styling)
+  - Common anti-patterns to avoid (too much detail, bidirectional flows, missing transformations)
+
 ## [1.37.0] - 2025-12-07
 
 ### Added
