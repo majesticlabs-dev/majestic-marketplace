@@ -13,5 +13,6 @@
     "hooks",
     "commands",
     "meta-tools"
-  ]
+  ],
+  "hooks": "./hooks/hooks.json"
 }
