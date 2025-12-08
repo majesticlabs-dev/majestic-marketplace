@@ -376,7 +376,26 @@ Be confident (where appropriate):
 - Instead of "It seems like..." state what is.
 - Instead of "Might possibly..." use "may" or commit.
 
-### 4.3 Technical vs. Plain Language
+### 4.3 AI Writing Tells
+
+AI-generated text has recognizable patterns. Avoid them to sound human.
+
+#### Quick Rules
+
+- **No vocabulary clusters**: Words like "delve", "landscape", "pivotal", "robust" signal AI when clustered
+- **No formulaic phrases**: "In today's landscape...", "In conclusion...", "It's important to note..."
+- **No vague attributions**: "Some experts believe...", "Widely regarded as..." without specific sources
+- **No essay structure**: Broad thematic openings + mechanical transitions + summative conclusions
+
+#### Full Reference
+
+See `AI_WRITING_TELLS.md` in this directory for:
+- 50+ AI vocabulary words with human alternatives
+- Phrase patterns to avoid
+- Structural tells
+- Detection checklist with severity levels
+
+### 4.4 Technical vs. Plain Language
 
 #### When to Simplify
 

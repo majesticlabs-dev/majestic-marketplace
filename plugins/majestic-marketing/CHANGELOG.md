@@ -2,6 +2,19 @@
 
 All notable changes to majestic-marketing will be documented in this file.
 
+## [2.27.0] - 2025-12-08
+
+### Added
+
+**Resources (1)**
+- `AI_WRITING_TELLS.md` - Comprehensive reference for detecting and eliminating AI-generated prose patterns. Based on Wikipedia's "Signs of AI writing" page. Includes 50+ AI vocabulary words with replacements, phrase patterns, structural tells, attribution red flags, detection checklist with severity levels, and before/after examples.
+
+### Enhanced
+
+- `copy-editor` - Added AI Writing Tells detection to Phase 3 review, report template, and compliance checklist
+- `content-writer` - Simplified "Words to Avoid" to "Avoiding AI Slop" with reference to new resource
+- `DEFAULT_STYLE_GUIDE.md` - Added section 4.3 "AI Writing Tells" with quick rules
+
 ## [2.26.0] - 2025-12-03
 
 ### Changed

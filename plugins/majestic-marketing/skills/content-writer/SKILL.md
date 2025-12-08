@@ -133,34 +133,32 @@ Vary sentence length to create rhythm. Follow Gary Provost's lesson:
 
 ---
 
-## Words to Avoid
+## Avoiding AI Slop
 
-Avoid overused or overly formal words:
+AI-generated text has telltale patterns. Avoid them to sound human.
 
-| Avoid | Use Instead |
-|-------|-------------|
-| Delve | Explore, look at |
-| Tapestry | Mix, combination |
-| Landscape | Field, area, space |
-| Realm | Area, field |
-| Embark | Start, begin |
-| Comprehensive | Complete, full |
-| Pivotal | Key, important |
-| Moreover | Also, and |
-| Leverage | Use |
-| Utilize | Use |
-| Facilitate | Help, enable |
-| Robust | Strong |
+**Quick rules:**
+- No "In today's landscape..." openings
+- No "In conclusion..." closings
+- No "delve", "tapestry", "realm", "pivotal" clusters
+- No vague experts ("some believe...", "many argue...")
 
-### Phrases to Avoid
+**Common replacements:**
 
-Never use:
-- "Dive into..."
-- "It's important to note..."
-- "In today's [landscape/world]..."
-- "Let's explore..."
-- "In conclusion..."
-- "In summary..."
+| AI Word | Human Word |
+|---------|------------|
+| delve | explore, look at |
+| landscape | field, area |
+| leverage | use |
+| pivotal | key, important |
+| robust | strong, solid |
+| comprehensive | complete, full |
+
+**Full reference:** See `references/AI_WRITING_TELLS.md` in `copy-editor` skill for:
+- 50+ AI vocabulary words with replacements
+- Phrase patterns to avoid
+- Structural tells (formulaic sections)
+- Detection checklist
 
 ---
 

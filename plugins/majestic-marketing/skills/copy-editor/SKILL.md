@@ -78,6 +78,13 @@ Systematically review the copy for:
 - Effective calls-to-action
 - Accurate claims and statements
 
+**AI Writing Tells** (see `references/AI_WRITING_TELLS.md`)
+- Vocabulary clusters (delve, landscape, pivotal, robust, etc.)
+- Formulaic phrases ("In today's...", "In conclusion...")
+- Vague attributions ("some experts", "widely regarded")
+- Structural patterns (mechanical balance, essay format)
+- Sycophantic phrases ("I hope this helps")
+
 ### Phase 4: Structured Report
 
 Present findings in this format:
@@ -109,6 +116,11 @@ Present findings in this format:
 |----------|----------|---------------|---------------|
 | Line X | "exact quote" | [rule reference] | "corrected text" |
 
+#### AI Writing Tells ([count])
+| Location | Original | Pattern Type | Suggested Fix |
+|----------|----------|--------------|---------------|
+| Line X | "exact quote" | [vocabulary/phrase/structure/attribution] | "corrected text" |
+
 ### Recurring Patterns
 - [Pattern 1]: Appears X times - [recommendation]
 - [Pattern 2]: Appears X times - [recommendation]
@@ -123,6 +135,12 @@ Present findings in this format:
 - [ ] Number formatting (issues found)
 - [x] Capitalization rules
 - [ ] [Other applicable rules...]
+
+### AI Writing Check
+- [ ] No AI vocabulary clusters
+- [ ] No formulaic phrases
+- [ ] Specific attributions (not "some experts")
+- [ ] Natural structure (not essay format)
 ```
 
 ## Guiding Principles
