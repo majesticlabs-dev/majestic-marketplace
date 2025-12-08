@@ -48,18 +48,77 @@ Ask more questions until you have enough context to give an accurate & confident
 - Verification procedures
 ```
 
-## Step 1: Generate AGENTS.md
+## Step 1: Generate Hierarchical AGENTS.md Structure
 
-Invoke the hierarchical-agents skill to analyze the codebase:
+**CRITICAL:** This step generates the entire hierarchical AGENTS.md structure. Do NOT proceed to Step 2 until this is complete.
+
+### 1.0 Check Existing State (For Existing Codebases)
+
+First, check what already exists:
+
+```bash
+# Check for existing AGENTS.md files
+find . -name "AGENTS.md" -type f -not -path '*/node_modules/*' -not -path '*/.git/*' 2>/dev/null
+
+# Check for existing CLAUDE.md
+ls -la CLAUDE.md 2>/dev/null
+
+# Count lines if root exists
+[ -f AGENTS.md ] && wc -l AGENTS.md
+```
+
+**If AGENTS.md already exists**, use `AskUserQuestion`:
+- **Regenerate** - Create fresh hierarchical structure (backs up existing)
+- **Enhance** - Keep existing root, add sub-folder AGENTS.md files
+- **Skip** - Keep existing, move to .agents.yml configuration only
+
+If user chooses **Regenerate**, backup first:
+```bash
+mv AGENTS.md AGENTS.md.backup
+```
+
+If user chooses **Enhance** or **Regenerate**, continue with 1.1. If **Skip**, jump to Step 2.
+
+### 1.1 Invoke the Hierarchical Agents Skill
 
 ```
 skill hierarchical-agents
 ```
 
-Follow the skill's process, then verify line count:
+### 1.2 Complete ALL Skill Phases
+
+The skill has 4 phases that MUST all be completed:
+
+1. **Phase 1: Repository Analysis** - Analyze codebase structure, identify major directories
+2. **Phase 2: Generate Root AGENTS.md** - Create lightweight root file (under 200 lines)
+3. **Phase 3: Generate Sub-Folder AGENTS.md files** - Create detailed files for each major package/directory
+4. **Phase 4: Apply Special Considerations** - Adapt for specific package types
+
+**Do NOT skip any phase.** The skill provides templates and guidelines - you must actually write the files.
+
+### 1.3 Verify Hierarchical Structure Created
+
+After completing the skill, verify files were created:
+
 ```bash
+# Find all AGENTS.md files
+find . -name "AGENTS.md" -type f -not -path '*/node_modules/*' -not -path '*/.git/*'
+
+# Verify root AGENTS.md exists and is under 200 lines
 wc -l AGENTS.md
+
+# List sub-folder AGENTS.md files
+find . -mindepth 2 -name "AGENTS.md" -type f -not -path '*/node_modules/*'
 ```
+
+### 1.4 Checkpoint: Confirm Before Proceeding
+
+Before moving to Step 2, confirm:
+- [ ] Root AGENTS.md exists (under 200 lines)
+- [ ] Sub-folder AGENTS.md files exist for major directories
+- [ ] Root contains JIT Index linking to sub-files
+
+**If no sub-folder AGENTS.md files were created**, go back and complete Phase 3 of the skill. Simple projects may only need root AGENTS.md, but most projects benefit from at least one sub-folder file.
 
 ## Step 2: Gather Configuration
 
@@ -557,23 +616,34 @@ ln -s AGENTS.md CLAUDE.md
 ## Step 8: Final Verification
 
 ```bash
-# Check AGENTS.md line count
-wc -l AGENTS.md
+# Check hierarchical AGENTS.md structure
+echo "=== AGENTS.md Files ===" && find . -name "AGENTS.md" -type f -not -path '*/node_modules/*' -not -path '*/.git/*'
+
+# Check root AGENTS.md line count (should be under 200)
+echo "=== Root Line Count ===" && wc -l AGENTS.md
 
 # Verify .agents.yml
-cat .agents.yml
+echo "=== Config ===" && cat .agents.yml
 
 # Verify symlink
-ls -la CLAUDE.md
+echo "=== Symlink ===" && ls -la CLAUDE.md
 ```
+
+**Verify hierarchical structure is complete:**
+- [ ] Root AGENTS.md exists and is under 200 lines
+- [ ] Sub-folder AGENTS.md files exist for major directories (unless simple project)
+- [ ] Root contains JIT Index with links to sub-files
+- [ ] `.agents.yml` contains correct configuration
 
 ## Output Summary
 
 ### Rails Project Example
 
 ```
-✅ AGENTS.md initialized
-   - Line count: X lines
+✅ Hierarchical AGENTS.md structure created
+   - Root AGENTS.md: X lines (under 200 ✓)
+   - Sub-folder files: app/AGENTS.md, lib/AGENTS.md
+   - JIT Index with links to sub-files
    - Config reference added
 
 ✅ .agents.yml created
@@ -609,8 +679,10 @@ ls -la CLAUDE.md
 ### Python Project Example
 
 ```
-✅ AGENTS.md initialized
-   - Line count: X lines
+✅ Hierarchical AGENTS.md structure created
+   - Root AGENTS.md: X lines (under 200 ✓)
+   - Sub-folder files: src/AGENTS.md
+   - JIT Index with links to sub-files
    - Config reference added
 
 ✅ .agents.yml created
@@ -637,8 +709,10 @@ ls -la CLAUDE.md
 ### Node Project Example
 
 ```
-✅ AGENTS.md initialized
-   - Line count: X lines
+✅ Hierarchical AGENTS.md structure created
+   - Root AGENTS.md: X lines (under 200 ✓)
+   - Sub-folder files: src/AGENTS.md, apps/web/AGENTS.md
+   - JIT Index with links to sub-files
    - Config reference added
 
 ✅ .agents.yml created

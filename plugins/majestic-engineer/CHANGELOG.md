@@ -2,6 +2,16 @@
 
 All notable changes to majestic-engineer will be documented in this file.
 
+## [1.36.0] - 2025-12-07
+
+### Fixed
+
+- **`/majestic:init-agents-md`** - Now properly creates hierarchical AGENTS.md structure
+  - Added Step 1.0: Check existing state for existing codebases (Regenerate/Enhance/Skip options)
+  - Added Step 1.2-1.4: Explicit phases with verification checkpoints
+  - Added final verification to confirm sub-folder AGENTS.md files were created
+  - Updated output summaries to show hierarchical structure expectations
+
 ## [1.35.0] - 2025-12-06
 
 ### Added
