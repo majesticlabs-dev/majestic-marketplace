@@ -105,14 +105,15 @@ After providing your analysis and summary:
 
 1. **Write the handoff summary** to `.claude/handoffs/[timestamp]-[slug].md` where [timestamp] is the current date in format YYYY-MM-DD and the slug is what we defined before.
 
-2. **Check Preview Config**
+2. **Auto-Preview Check (REQUIRED)**
 
-   Check `.agents.local.yml` then `.agents.yml` for `preview_created_files: true`:
+   **BEFORE telling the user about the file, you MUST:**
 
-   **If preview_created_files is true:**
-   - Run `open .claude/handoffs/[timestamp]-[slug].md` to open in default editor
-   - Inform user: "Opened handoff in your editor for preview."
-
-   **If missing or false:** Skip auto-preview (user can open manually).
+   1. Invoke `config-reader` agent to get merged config (base + local overrides)
+   2. Check the returned config for `auto_preview: true`
+   3. **If auto_preview is true:**
+      - Execute: `open .claude/handoffs/[timestamp]-[slug].md`
+      - Tell user: "Opened handoff in your editor."
+   4. **If false or not found:** Skip auto-preview
 
 3. **Tell the user** about the file and that they can use `/pickup FILENAME` to continue.

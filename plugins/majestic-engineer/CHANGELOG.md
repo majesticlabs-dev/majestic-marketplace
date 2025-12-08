@@ -2,6 +2,27 @@
 
 All notable changes to majestic-engineer will be documented in this file.
 
+## [1.37.0] - 2025-12-07
+
+### Added
+
+- **`config-reader` agent** - Centralized config reading with proper layering
+  - Reads `.agents.yml` (base config) then `.agents.local.yml` (local overrides)
+  - Returns merged config with local values taking precedence
+  - Uses haiku model for fast execution
+  - Gray color for utility/infrastructure agent
+
+### Changed
+
+- **Renamed `preview_created_files` to `auto_preview`** - Shorter, clearer setting name
+- **Updated auto-preview pattern** - Commands now use `config-reader` agent instead of inline Read calls
+  - `/majestic:plan`
+  - `/majestic:prd`
+  - `/majestic:design-plan`
+  - `/majestic:handoff`
+- **Imperative instructions** - Auto-preview check now uses "MUST" language to ensure execution
+- **Fixed agent count** - Updated description from 20 to 25 agents (was out of sync)
+
 ## [1.36.0] - 2025-12-07
 
 ### Fixed

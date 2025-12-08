@@ -355,21 +355,17 @@ Write the plan to `docs/plans/<issue_title>.md`
 
 After writing the plan file:
 
-### 1. Check Preview Config
+### 1. Auto-Preview Check (REQUIRED)
 
-Check `.agents.local.yml` then `.agents.yml` for `preview_created_files: true`:
+**BEFORE presenting options, you MUST:**
 
-```bash
-# Check if preview is enabled
-grep -q "preview_created_files: true" .agents.local.yml 2>/dev/null || \
-grep -q "preview_created_files: true" .agents.yml 2>/dev/null
-```
-
-**If preview_created_files is true:**
-- Run `open docs/plans/<issue_title>.md` to open in default editor
-- Inform user: "Opened plan in your editor for preview."
-
-**If missing or false:** Skip auto-preview, offer "Preview in editor" option below.
+1. Invoke `config-reader` agent to get merged config (base + local overrides)
+2. Check the returned config for `auto_preview: true`
+3. **If auto_preview is true:**
+   - Execute: `open docs/plans/<issue_title>.md`
+   - Tell user: "Opened plan in your editor."
+   - Use the "auto-previewed" options below
+4. **If false or not found:** Use the "not auto-previewed" options below
 
 ### 2. Present Options
 

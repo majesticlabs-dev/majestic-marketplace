@@ -201,15 +201,17 @@ After generating the design brief:
 
 1. **Save the file** to `docs/design/[component-name]-brief.md`
 
-2. **Check Preview Config**
+2. **Auto-Preview Check (REQUIRED)**
 
-   Check `.agents.local.yml` then `.agents.yml` for `preview_created_files: true`:
+   **BEFORE presenting options, you MUST:**
 
-   **If preview_created_files is true:**
-   - Run `open docs/design/[component-name]-brief.md` to open in default editor
-   - Inform user: "Opened design brief in your editor for preview."
-
-   **If missing or false:** Skip auto-preview, offer "Preview in editor" option below.
+   1. Invoke `config-reader` agent to get merged config (base + local overrides)
+   2. Check the returned config for `auto_preview: true`
+   3. **If auto_preview is true:**
+      - Execute: `open docs/design/[component-name]-brief.md`
+      - Tell user: "Opened design brief in your editor."
+      - Use the "auto-previewed" options below
+   4. **If false or not found:** Use the "not auto-previewed" options below
 
 3. **Present options** via AskUserQuestion:
 

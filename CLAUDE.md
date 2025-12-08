@@ -483,7 +483,7 @@ review_topics_path: docs/agents/review-topics.md
 | `workflow` | Feature development workflow | `worktrees` \| `branches` | `branches` |
 | `branch_naming` | Branch naming convention | `feature/desc` \| `issue-desc` \| `type/issue-desc` \| `user/desc` | `feature/desc` |
 | `review_topics_path` | Path to review topics file | file path | (none) |
-| `preview_created_files` | Auto-open created markdown files (plans, PRDs, briefs) | `true` \| `false` | `false` |
+| `auto_preview` | Auto-open created markdown files (plans, PRDs, briefs) in editor | `true` \| `false` | `false` |
 
 ### Rails-Specific Fields
 
@@ -617,28 +617,31 @@ if grep -q "app_status: production" "${AGENTS_CONFIG:-.agents.yml}" 2>/dev/null;
 fi
 ```
 
-### File Preview Pattern
+### Auto-Preview Pattern
 
-When commands create markdown files (plans, PRDs, briefs, handoffs), they should follow this pattern:
+When commands create markdown files (plans, PRDs, briefs, handoffs), they MUST follow this pattern:
 
-1. **Check config**: Read `.agents.local.yml` then `.agents.yml` for `preview_created_files: true`
-2. **If true**: Run `open <filepath>` immediately after writing, then continue with options
-3. **If false**: Include "Preview in editor" as first option in post-creation menu
+**REQUIRED steps after writing the file:**
 
-**Implementation in commands:**
+1. **Get merged config**: Invoke `config-reader` agent to get final merged config
+2. **Check auto_preview**: Look for `auto_preview: true` in the returned config
+3. **If true**: Execute `open <filepath>` immediately, then present "auto-previewed" options
+4. **If false/missing**: Present "not auto-previewed" options (include "Preview in editor" first)
+
+**Standard implementation block for commands:**
 
 ```markdown
-## Post-Generation
+### Auto-Preview Check (REQUIRED)
 
-After writing the file:
+**BEFORE presenting options, you MUST:**
 
-1. Check if `preview_created_files: true` in config
-2. If true: Run `open <filepath>` to preview
-3. Present options via AskUserQuestion:
-   - Preview in editor (if not auto-previewed)
-   - Start building / Continue with next step
-   - Get review
-   - Revise
+1. Invoke `config-reader` agent to get merged config (base + local overrides)
+2. Check the returned config for `auto_preview: true`
+3. **If auto_preview is true:**
+   - Execute: `open <filepath>`
+   - Tell user: "Opened [filename] in your editor."
+   - Use the "auto-previewed" options below
+4. **If false or not found:** Use the "not auto-previewed" options below
 ```
 
 **Commands using this pattern:**
