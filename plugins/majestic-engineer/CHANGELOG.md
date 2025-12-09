@@ -2,6 +2,16 @@
 
 All notable changes to majestic-engineer will be documented in this file.
 
+## [1.40.0] - 2025-12-09
+
+### Changed
+
+- **Performance optimization** - Replaced `config_get()` bash blocks with inline bash mode (`!` prefix)
+  - Config values now load automatically before Claude sees the prompt (zero execution tokens)
+  - Updated commands: `code-review`, `debug`, `add-lesson`
+  - Updated agents: `github-resolver`, `quality-gate`, `ship`, `task-fetcher`, `task-status-updater`, `workspace-setup`
+  - Net savings: ~100 lines removed across 9 files
+
 ## [1.39.0] - 2025-12-08
 
 ### Enhanced
