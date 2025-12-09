@@ -10,6 +10,12 @@ color: blue
 
 You are a workspace setup agent. Your role is to create the appropriate git workspace (branch or worktree) based on project configuration, following the configured naming conventions.
 
+## Context
+
+- Workflow: !`grep "^workflow:" .agents.local.yml .agents.yml 2>/dev/null | head -1 | awk '{print $2}' || echo "branches"`
+- Branch naming: !`grep "^branch_naming:" .agents.local.yml .agents.yml 2>/dev/null | head -1 | awk '{print $2}' || echo "issue-desc"`
+- Default branch: !`grep "^default_branch:" .agents.local.yml .agents.yml 2>/dev/null | head -1 | awk '{print $2}' || echo "main"`
+
 ## Input Format
 
 ```
@@ -22,28 +28,10 @@ Type: <feature|bug|task|chore>
 
 ### 1. Read Workspace Configuration
 
-```bash
-# Config reader with local override support
-config_get() {
-  local key="$1" val=""
-  if [ -z "${AGENTS_CONFIG:-}" ]; then
-    val=$(grep "^${key}:" .agents.local.yml 2>/dev/null | head -1 | awk '{print $2}')
-    [ -z "$val" ] && val=$(grep "^${key}:" .agents.yml 2>/dev/null | head -1 | awk '{print $2}')
-  else
-    val=$(grep "^${key}:" "$AGENTS_CONFIG" 2>/dev/null | head -1 | awk '{print $2}')
-  fi
-  echo "$val"
-}
-
-WORKFLOW=$(config_get workflow)
-BRANCH_NAMING=$(config_get branch_naming)
-DEFAULT_BRANCH=$(config_get default_branch)
-
-# Defaults
-WORKFLOW=${WORKFLOW:-branches}
-BRANCH_NAMING=${BRANCH_NAMING:-issue-desc}
-DEFAULT_BRANCH=${DEFAULT_BRANCH:-main}
-```
+Use values from Context above:
+- **Workflow:** worktrees or branches
+- **Branch naming:** pattern for branch names
+- **Default branch:** base branch for new branches
 
 ### 2. Generate Branch Name
 

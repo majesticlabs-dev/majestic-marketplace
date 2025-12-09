@@ -8,25 +8,15 @@ allowed-tools: Bash, Read, Write, Edit, AskUserQuestion
 
 Add a custom lesson or convention to your project's review topics file for automated checking during code reviews.
 
+## Context
+
+- Review topics path: !`grep "^review_topics_path:" .agents.local.yml .agents.yml 2>/dev/null | head -1 | awk '{print $2}'`
+
 ## Step 1: Find Topics File
 
-```bash
-# Config reader with local override support
-config_get() {
-  local key="$1" val=""
-  if [ -z "${AGENTS_CONFIG:-}" ]; then
-    val=$(grep "^${key}:" .agents.local.yml 2>/dev/null | head -1 | awk '{print $2}')
-    [ -z "$val" ] && val=$(grep "^${key}:" .agents.yml 2>/dev/null | head -1 | awk '{print $2}')
-  else
-    val=$(grep "^${key}:" "$AGENTS_CONFIG" 2>/dev/null | head -1 | awk '{print $2}')
-  fi
-  echo "$val"
-}
+Use "Review topics path" from Context above.
 
-TOPICS_PATH=$(config_get review_topics_path)
-```
-
-If `TOPICS_PATH` is empty:
+If empty:
 - Default to `docs/agents/review-topics.md`
 - Create the file and add config entry if it doesn't exist
 

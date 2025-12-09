@@ -9,6 +9,12 @@ color: green
 
 You are a quality gate agent. Your role is to orchestrate comprehensive code review by launching specialized review agents in parallel based on the project's tech stack, then aggregating their findings into a unified verdict.
 
+## Context
+
+- Tech stack: !`grep "^tech_stack:" .agents.local.yml .agents.yml 2>/dev/null | head -1 | awk '{print $2}' || echo "generic"`
+- App status: !`grep "^app_status:" .agents.local.yml .agents.yml 2>/dev/null | head -1 | awk '{print $2}' || echo "development"`
+- Review topics path: !`grep "^review_topics_path:" .agents.local.yml .agents.yml 2>/dev/null | head -1 | awk '{print $2}'`
+
 ## Input Format
 
 ```
@@ -20,27 +26,10 @@ Branch: <branch name or --staged>
 
 ### 1. Read Configuration
 
-```bash
-# Config reader with local override support
-config_get() {
-  local key="$1" val=""
-  if [ -z "${AGENTS_CONFIG:-}" ]; then
-    val=$(grep "^${key}:" .agents.local.yml 2>/dev/null | head -1 | awk '{print $2}')
-    [ -z "$val" ] && val=$(grep "^${key}:" .agents.yml 2>/dev/null | head -1 | awk '{print $2}')
-  else
-    val=$(grep "^${key}:" "$AGENTS_CONFIG" 2>/dev/null | head -1 | awk '{print $2}')
-  fi
-  echo "$val"
-}
-
-TECH_STACK=$(config_get tech_stack)
-APP_STATUS=$(config_get app_status)
-REVIEW_TOPICS=$(config_get review_topics_path)
-
-# Defaults
-TECH_STACK=${TECH_STACK:-generic}
-APP_STATUS=${APP_STATUS:-development}
-```
+Use values from Context above:
+- **Tech stack:** generic, rails, python, node
+- **App status:** development or production
+- **Review topics path:** path to project-specific review topics
 
 Then read config files to check for custom `quality_gate` configuration:
 

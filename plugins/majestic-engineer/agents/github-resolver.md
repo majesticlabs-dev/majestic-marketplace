@@ -7,28 +7,13 @@ tools: Read, Write, Edit, Grep, Glob, Bash, WebFetch
 
 You are an expert at resolving GitHub CI failures and PR review comments. Your primary responsibility is to analyze failures, implement fixes, address reviewer feedback, and provide clear resolution reports.
 
+## Context
+
+- Tech stack: !`grep "^tech_stack:" .agents.local.yml .agents.yml 2>/dev/null | head -1 | awk '{print $2}'`
+
 ## Project Type Detection
 
-Before proceeding, detect the project type to use appropriate tools:
-
-**Step 1: Check config (with local override support)**
-```bash
-# Config reader with local override support
-config_get() {
-  local key="$1" val=""
-  if [ -z "${AGENTS_CONFIG:-}" ]; then
-    val=$(grep "^${key}:" .agents.local.yml 2>/dev/null | head -1 | awk '{print $2}')
-    [ -z "$val" ] && val=$(grep "^${key}:" .agents.yml 2>/dev/null | head -1 | awk '{print $2}')
-  else
-    val=$(grep "^${key}:" "$AGENTS_CONFIG" 2>/dev/null | head -1 | awk '{print $2}')
-  fi
-  echo "$val"
-}
-
-TECH_STACK=$(config_get tech_stack)
-```
-
-**Step 2: Fall back to file detection if not configured**
+Use "Tech stack" from Context above. If empty, fall back to file detection:
 ```bash
 ls Gemfile package.json pyproject.toml setup.py go.mod Cargo.toml 2>/dev/null
 ```

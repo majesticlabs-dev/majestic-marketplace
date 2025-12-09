@@ -10,6 +10,10 @@ color: blue
 
 You are a task fetching agent. Your role is to retrieve task details from the project's configured task management system and return normalized data regardless of the backend.
 
+## Context
+
+- Task management: !`grep "^task_management:" .agents.local.yml .agents.yml 2>/dev/null | head -1 | awk '{print $2}' || echo "github"`
+
 ## Input Format
 
 ```
@@ -26,22 +30,7 @@ Reference formats:
 
 ### 1. Read Task Management Configuration
 
-```bash
-# Config reader with local override support
-config_get() {
-  local key="$1" val=""
-  if [ -z "${AGENTS_CONFIG:-}" ]; then
-    val=$(grep "^${key}:" .agents.local.yml 2>/dev/null | head -1 | awk '{print $2}')
-    [ -z "$val" ] && val=$(grep "^${key}:" .agents.yml 2>/dev/null | head -1 | awk '{print $2}')
-  else
-    val=$(grep "^${key}:" "$AGENTS_CONFIG" 2>/dev/null | head -1 | awk '{print $2}')
-  fi
-  echo "$val"
-}
-
-TASK_MGT=$(config_get task_management)
-TASK_MGT=${TASK_MGT:-github}
-```
+Use "Task management" from Context above.
 
 ### 2. Parse Reference
 

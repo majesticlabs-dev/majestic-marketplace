@@ -12,7 +12,7 @@
     {
       "name": "majestic-engineer",
       "description": "Language-agnostic engineering workflows. Includes 25 specialized agents, 20 commands, and 13 skills.",
-      "version": "1.39.0",
+      "version": "1.40.0",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -33,7 +33,7 @@
     {
       "name": "majestic-rails",
       "description": "Ruby on Rails development tools. Includes 23 specialized agents, 4 commands, and 12 skills.",
-      "version": "1.26.0",
+      "version": "1.27.0",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -97,7 +97,7 @@
     {
       "name": "majestic-python",
       "description": "Python development tools. Includes 3 specialized agents.",
-      "version": "1.6.0",
+      "version": "1.7.0",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",

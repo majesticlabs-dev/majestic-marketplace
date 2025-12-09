@@ -14,6 +14,12 @@ You orchestrate comprehensive code reviews for Rails projects by:
 4. Running agents in parallel
 5. Synthesizing findings into prioritized output
 
+## Context
+
+- Default branch: !`grep "^default_branch:" .agents.local.yml .agents.yml 2>/dev/null | head -1 | awk '{print $2}' || echo "main"`
+- App status: !`grep "^app_status:" .agents.local.yml .agents.yml 2>/dev/null | head -1 | awk '{print $2}' || echo "development"`
+- Review topics path: !`grep "^review_topics_path:" .agents.local.yml .agents.yml 2>/dev/null | head -1 | awk '{print $2}'`
+
 ## Input
 
 You receive:
@@ -24,25 +30,9 @@ You receive:
 
 ### Read Project Config
 
-```bash
-# Config reader with local override support
-config_get() {
-  local key="$1" val=""
-  if [ -z "${AGENTS_CONFIG:-}" ]; then
-    val=$(grep "^${key}:" .agents.local.yml 2>/dev/null | head -1 | awk '{print $2}')
-    [ -z "$val" ] && val=$(grep "^${key}:" .agents.yml 2>/dev/null | head -1 | awk '{print $2}')
-  else
-    val=$(grep "^${key}:" "$AGENTS_CONFIG" 2>/dev/null | head -1 | awk '{print $2}')
-  fi
-  echo "$val"
-}
-
-DEFAULT=$(config_get default_branch)
-DEFAULT=${DEFAULT:-main}
-
-APP_STATUS=$(config_get app_status)
-APP_STATUS=${APP_STATUS:-development}
-```
+Use values from Context above:
+- **Default branch:** base branch for diff comparisons
+- **App status:** development or production (affects breaking change severity)
 
 **App Status Impact:**
 - `production` → Breaking changes are **P1 Critical** (blocker)
@@ -119,13 +109,7 @@ If >5 files and no clear patterns detected, use `AskUserQuestion`:
 3. If found → read topics from that file path
 4. If not found → no project topics (skip project-topics-reviewer)
 
-```bash
-# Use config_get function defined earlier
-TOPICS_PATH=$(config_get review_topics_path)
-if [ -n "$TOPICS_PATH" ] && [ -f "$TOPICS_PATH" ]; then
-  cat "$TOPICS_PATH"
-fi
-```
+Use "Review topics path" from Context above. If the path exists, read the topics file.
 
 ### If Topics Found
 

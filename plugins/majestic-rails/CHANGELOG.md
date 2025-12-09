@@ -2,6 +2,16 @@
 
 All notable changes to majestic-rails will be documented in this file.
 
+## [1.27.0] - 2025-12-09
+
+### Changed
+
+- **Performance optimization** - Replaced `config_get()` bash blocks with inline bash mode (`!` prefix)
+  - Config values now load automatically before Claude sees the prompt (zero execution tokens)
+  - Updated commands: `build`, `code-review`
+  - Updated agents: `code-review-orchestrator`
+  - Net savings: ~50 lines removed across 3 files
+
 ## [1.26.0] - 2025-12-08
 
 ### Enhanced

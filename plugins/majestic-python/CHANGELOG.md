@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.7.0] - 2025-12-09
+
+### Changed
+
+- **Performance optimization** - Replaced `config_get()` bash blocks with inline bash mode (`!` prefix)
+  - Config values now load automatically before Claude sees the prompt (zero execution tokens)
+  - Updated agents: `code-review-orchestrator`
+  - Net savings: ~20 lines removed
+
 ## [1.6.0] - 2025-12-04
 
 ### Enhanced
