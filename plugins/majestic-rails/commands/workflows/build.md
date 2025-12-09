@@ -9,6 +9,10 @@ allowed-tools: Read, Write, Edit, Bash, Grep, Glob, TodoWrite
 
 Execute a work plan efficiently while maintaining quality and finishing features.
 
+## Context
+
+- Default branch: !`grep "^default_branch:" .agents.local.yml .agents.yml 2>/dev/null | head -1 | awk '{print $2}' || echo "main"`
+
 ## Introduction
 
 This command takes a work document (plan, specification, or todo file) and executes it systematically. The focus is on **shipping complete features** by understanding requirements quickly, following existing patterns, and maintaining quality throughout.
@@ -20,27 +24,6 @@ Parse the arguments to extract:
 - **Branch name**: Optional branch name for the feature (if not provided, derive from plan title)
 
 <input_arguments> $ARGUMENTS </input_arguments>
-
-## Project Config
-
-Read project configuration (with local override support):
-
-```bash
-# Config reader with local override support
-config_get() {
-  local key="$1" val=""
-  if [ -z "${AGENTS_CONFIG:-}" ]; then
-    val=$(grep "^${key}:" .agents.local.yml 2>/dev/null | head -1 | awk '{print $2}')
-    [ -z "$val" ] && val=$(grep "^${key}:" .agents.yml 2>/dev/null | head -1 | awk '{print $2}')
-  else
-    val=$(grep "^${key}:" "$AGENTS_CONFIG" 2>/dev/null | head -1 | awk '{print $2}')
-  fi
-  echo "$val"
-}
-
-DEFAULT_BRANCH=$(config_get default_branch)
-DEFAULT_BRANCH=${DEFAULT_BRANCH:-main}
-```
 
 ## Execution Workflow
 
@@ -66,9 +49,9 @@ DEFAULT_BRANCH=${DEFAULT_BRANCH:-main}
    - **Live work on current branch** - Standard checkout workflow
    - **Parallel work with worktree (Recommended)** - Recommended for parallel development
 
-   **If live work:**
+   **If live work:** (use "Default branch" from Context)
    ```bash
-   git checkout $DEFAULT_BRANCH && git pull origin $DEFAULT_BRANCH
+   git checkout <default_branch> && git pull origin <default_branch>
    git checkout -b <branch-name>
    ```
 

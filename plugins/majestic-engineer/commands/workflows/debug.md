@@ -6,6 +6,10 @@ argument-hint: "[error message or description]"
 
 # Debug Command
 
+## Context
+
+- Tech stack: !`grep "^tech_stack:" .agents.local.yml .agents.yml 2>/dev/null | head -1 | awk '{print $2}'`
+
 ## Bug Description
 
 <bug_description>$ARGUMENTS</bug_description>
@@ -18,23 +22,7 @@ Do not proceed until you have a clear bug description.
 
 **Step 1: Check config**
 
-```bash
-# Config reader with local override support
-config_get() {
-  local key="$1" val=""
-  if [ -z "${AGENTS_CONFIG:-}" ]; then
-    val=$(grep "^${key}:" .agents.local.yml 2>/dev/null | head -1 | awk '{print $2}')
-    [ -z "$val" ] && val=$(grep "^${key}:" .agents.yml 2>/dev/null | head -1 | awk '{print $2}')
-  else
-    val=$(grep "^${key}:" "$AGENTS_CONFIG" 2>/dev/null | head -1 | awk '{print $2}')
-  fi
-  echo "$val"
-}
-
-TECH_STACK=$(config_get tech_stack)
-```
-
-If `tech_stack` is configured, use it to determine project type.
+Use "Tech stack" from Context above. If configured, use it to determine project type.
 
 **Step 2: Check AGENTS.md for debugging guidance**
 

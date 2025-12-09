@@ -9,6 +9,11 @@ allowed-tools: Bash, Read, Grep, Glob
 
 Generic code review command that detects your project's tech stack and delegates to the appropriate framework-specific review orchestrator.
 
+## Context
+
+- Tech stack: !`grep "^tech_stack:" .agents.local.yml .agents.yml 2>/dev/null | head -1 | awk '{print $2}'`
+- Default branch: !`grep "^default_branch:" .agents.local.yml .agents.yml 2>/dev/null | head -1 | awk '{print $2}' || echo "main"`
+
 ## Arguments
 
 <input_arguments> $ARGUMENTS </input_arguments>
@@ -22,25 +27,7 @@ Generic code review command that detects your project's tech stack and delegates
 
 ## Step 1: Detect Tech Stack
 
-### Check Configuration
-
-```bash
-# Config reader with local override support
-config_get() {
-  local key="$1" val=""
-  if [ -z "${AGENTS_CONFIG:-}" ]; then
-    val=$(grep "^${key}:" .agents.local.yml 2>/dev/null | head -1 | awk '{print $2}')
-    [ -z "$val" ] && val=$(grep "^${key}:" .agents.yml 2>/dev/null | head -1 | awk '{print $2}')
-  else
-    val=$(grep "^${key}:" "$AGENTS_CONFIG" 2>/dev/null | head -1 | awk '{print $2}')
-  fi
-  echo "$val"
-}
-
-config_get tech_stack
-```
-
-If `tech_stack` is found in config, use that value.
+Use "Tech stack" from Context above. If empty, auto-detect from project files:
 
 ### Auto-Detection Fallback
 
@@ -71,10 +58,8 @@ git diff --name-only --diff-filter=d
 # Staged mode
 git diff --cached --name-only --diff-filter=d
 
-# Branch mode (read from config, fallback to main)
-DEFAULT=$(config_get default_branch)
-DEFAULT=${DEFAULT:-main}
-git diff ${DEFAULT}...HEAD --name-only --diff-filter=d
+# Branch mode (use "Default branch" from Context)
+git diff <default_branch>...HEAD --name-only --diff-filter=d
 
 # PR mode
 gh pr diff <PR_NUMBER> --name-only
