@@ -2,6 +2,15 @@
 
 All notable changes to majestic-tools will be documented in this file.
 
+## [1.11.2] - 2025-12-08
+
+### Changed
+
+- **Hooks** - Removed confetti Stop hook from shipped hooks
+  - Moved confetti.sh to examples/hooks/ for optional user installation
+  - Confetti is fun but opinionated - better as an opt-in example
+  - Plugin now ships with only the file-size-checker PostToolUse hook
+
 ## [1.11.1] - 2025-12-08
 
 ### Fixed

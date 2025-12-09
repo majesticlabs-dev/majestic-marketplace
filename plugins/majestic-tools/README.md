@@ -1,6 +1,6 @@
 # Majestic Tools
 
-Claude Code customization tools. Includes 1 agent, 11 commands, 4 skills, and 2 hooks.
+Claude Code customization tools. Includes 6 agents, 14 commands, and 5 skills.
 
 ## Installation
 
@@ -78,7 +78,7 @@ Invoke with: `skill majestic-tools:<name>`
 
 ## Hooks
 
-### check-file-size
+### check-file-size (Included)
 
 Warns when code files exceed a configurable line limit after Write/Edit/MultiEdit operations.
 
@@ -89,13 +89,39 @@ Warns when code files exceed a configurable line limit after Write/Edit/MultiEdi
 
 **Requires:** `jq`
 
-### confetti
+### Optional Hooks
+
+These hooks are available in `examples/hooks/` but not installed by default. Copy them to your hooks configuration manually if desired.
+
+#### confetti (Optional)
 
 Triggers Raycast confetti celebration when Claude completes a task.
 
+**Location:** `examples/hooks/confetti.sh`
+
 **Requires:** macOS + [Raycast](https://raycast.com)
 
-Fails silently if Raycast is not installed.
+**To enable:**
+1. Copy `examples/hooks/confetti.sh` to your hooks directory
+2. Add to your hooks.json:
+```json
+{
+  "hooks": {
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "path/to/confetti.sh",
+            "timeout": 2000
+          }
+        ]
+      }
+    ]
+  }
+}
+```
 
 ## Configuration
 
