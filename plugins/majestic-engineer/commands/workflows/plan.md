@@ -375,12 +375,12 @@ Use **AskUserQuestion tool** to present options:
 
 **Options (if NOT auto-previewed):**
 1. **Preview in editor** - Open the plan file (`open <path>`)
-2. **Start building** - Begin implementing this plan
+2. **Start building (Recommended)** - Begin implementing this plan
 3. **Get review** - Get feedback from reviewers
 4. **Create backlog item** - Add to your configured task system
 
 **Options (if auto-previewed):**
-1. **Start building** - Begin implementing this plan
+1. **Start building (Recommended)** - Begin implementing this plan
 2. **Get review** - Get feedback from reviewers
 3. **Create backlog item** - Add to your configured task system
 4. **Revise** - Change approach or request specific changes

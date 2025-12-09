@@ -64,7 +64,7 @@ DEFAULT_BRANCH=${DEFAULT_BRANCH:-main}
 
    **Options:**
    - **Live work on current branch** - Standard checkout workflow
-   - **Parallel work with worktree** - Recommended for parallel development
+   - **Parallel work with worktree (Recommended)** - Recommended for parallel development
 
    **If live work:**
    ```bash

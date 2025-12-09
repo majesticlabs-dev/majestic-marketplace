@@ -2,6 +2,15 @@
 
 All notable changes to majestic-rails will be documented in this file.
 
+## [1.26.0] - 2025-12-08
+
+### Enhanced
+
+- **Commands** - Adopted Claude Code v2.0.62 UX improvements
+  - Added "(Recommended)" indicators to `AskUserQuestion` options where there's a clear best choice
+  - Updated `/rails:build` - "Parallel work with worktree" marked as recommended for better workflow isolation
+  - Updated `/gemfile:upgrade` - "Upgrade to latest minor" marked as recommended and placed first (safer than major upgrades)
+
 ## [1.23.0] - 2025-12-05
 
 ### Added

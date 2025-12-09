@@ -292,13 +292,13 @@ After generating the balanced PRD:
 
 **Options (if NOT auto-previewed):**
 - **Preview in editor** - Open the PRD file (`open <path>`)
+- **Done (Recommended)** - The balanced PRD is sufficient
 - **Expand with technical depth** - Add the technical sections listed above
-- **Done** - The balanced PRD is sufficient
 - **Revise sections** - Provide feedback on specific sections to change
 
 **Options (if auto-previewed):**
+- **Done (Recommended)** - The balanced PRD is sufficient
 - **Expand with technical depth** - Add the technical sections listed above
-- **Done** - The balanced PRD is sufficient
 - **Revise sections** - Provide feedback on specific sections to change
 
 ---

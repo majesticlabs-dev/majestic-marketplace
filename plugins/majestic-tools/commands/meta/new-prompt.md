@@ -1,6 +1,7 @@
 ---
 allowed-tools: WebFetch, WebSearch, AskUserQuestion
 description: Build or optimize prompts following Anthropic's best practices
+argument-hint: "[prompt description or 'optimize: <prompt>']"
 ---
 
 # Prompt Engineer

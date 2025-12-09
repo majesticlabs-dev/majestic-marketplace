@@ -2,6 +2,18 @@
 
 All notable changes to majestic-engineer will be documented in this file.
 
+## [1.39.0] - 2025-12-08
+
+### Enhanced
+
+- **Commands** - Adopted Claude Code v2.0.62 UX improvements
+  - Added "(Recommended)" indicators to `AskUserQuestion` options where there's a clear best choice
+  - Updated `/majestic:plan` - "Start building" marked as recommended
+  - Updated `/majestic:prd` - "Done" marked as recommended (balanced PRD is sufficient by default)
+  - Updated `/majestic:design-plan` - "Start building" marked as recommended
+  - Updated `/changelog` - "Display only" marked as recommended
+  - Added `argument-hint:` frontmatter to `/pr-review` and `/pickup` commands for better discoverability
+
 ## [1.38.0] - 2025-12-08
 
 ### Enhanced

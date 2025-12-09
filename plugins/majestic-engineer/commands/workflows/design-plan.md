@@ -217,12 +217,12 @@ After generating the design brief:
 
 **Options (if NOT auto-previewed):**
 - **Preview in editor** - Open the brief file (`open <path>`)
-- **Start building** - Invoke `skill frontend-design` then begin implementation
+- **Start building (Recommended)** - Invoke `skill frontend-design` then begin implementation
 - **Refine sections** - Ask what to change, update brief
 - **Research more** - Ask for additional reference sites
 
 **Options (if auto-previewed):**
-- **Start building** - Invoke `skill frontend-design` then begin implementation
+- **Start building (Recommended)** - Invoke `skill frontend-design` then begin implementation
 - **Refine sections** - Ask what to change, update brief
 - **Research more** - Ask for additional reference sites
 

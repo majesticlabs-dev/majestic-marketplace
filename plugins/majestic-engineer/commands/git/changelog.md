@@ -89,7 +89,7 @@ Order your changelog by impact:
 Once the changelog is complete, ask the user where they want to save it:
 
 Use `AskUserQuestion` with these options:
-- **Display only**: Just show in console (default)
+- **Display only (Recommended)**: Just show in console
 - **Copy to clipboard**: Copy using `pbcopy` (macOS) or `xclip` (Linux)
 - **Save to file**: Write to CHANGELOG.md or append to existing
 

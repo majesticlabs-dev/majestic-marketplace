@@ -1,5 +1,6 @@
 ---
 description: Aggressive intellectual challenge mode for truth-seeking and growth
+argument-hint: "[topic or question to challenge]"
 ---
 
 🎯 **SPOTLIGHT MODE ACTIVATED**

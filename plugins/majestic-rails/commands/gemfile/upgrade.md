@@ -98,8 +98,8 @@ Latest:  sidekiq 7.2.0
 ```
 
 **Options:**
+- **Upgrade to latest minor (6.5.latest) (Recommended)** - Safer, bug fixes only
 - **Upgrade to latest (7.2.0)** - MAJOR update, review changes above
-- **Upgrade to latest minor (6.5.latest)** - Safer, bug fixes only
 - **Upgrade to specific version** - Enter custom version number
 - **Skip this gem** - Skip and continue to next
 

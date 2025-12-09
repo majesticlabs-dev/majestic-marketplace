@@ -2,6 +2,18 @@
 
 All notable changes to majestic-tools will be documented in this file.
 
+## [1.11.0] - 2025-12-08
+
+### Enhanced
+
+- **Commands** - Adopted Claude Code v2.0.62 UX improvements
+  - Added `argument-hint:` frontmatter to 5 meta commands for better discoverability
+  - `/spotlight` - "[topic or question to challenge]"
+  - `/new-prompt` - "[prompt description or 'optimize: <prompt>']"
+  - `/new-agent` - "[agent-description]"
+  - `/new-hook` - "[hook-description]"
+  - `/list-tools` - "[optional: context or category]"
+
 ## [1.10.1] - 2025-12-07
 
 ### Changed

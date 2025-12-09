@@ -1,6 +1,7 @@
 ---
 description: List all available tools with detailed information
 model: claude-haiku-4-5-20251001
+argument-hint: "[optional: context or category]"
 ---
 
 # How to list all available tools
