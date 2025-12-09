@@ -1,26 +1,28 @@
 {
-  "PostToolUse": [
-    {
-      "matcher": "Write|Edit|MultiEdit",
-      "hooks": [
-        {
-          "type": "command",
-          "command": "${CLAUDE_PLUGIN_ROOT}/hooks/check-file-size.sh",
-          "timeout": 3000
-        }
-      ]
-    }
-  ],
-  "Stop": [
-    {
-      "matcher": "",
-      "hooks": [
-        {
-          "type": "command",
-          "command": "${CLAUDE_PLUGIN_ROOT}/hooks/confetti.sh",
-          "timeout": 2000
-        }
-      ]
-    }
-  ]
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/hooks/check-file-size.sh",
+            "timeout": 3000
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/hooks/confetti.sh",
+            "timeout": 2000
+          }
+        ]
+      }
+    ]
+  }
 }

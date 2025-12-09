@@ -2,6 +2,14 @@
 
 All notable changes to majestic-tools will be documented in this file.
 
+## [1.11.1] - 2025-12-08
+
+### Fixed
+
+- **hooks.json** - Updated schema to match Claude Code requirements
+  - Wrapped hook definitions in top-level "hooks" object
+  - Fixes "invalid_type" error when loading plugin
+
 ## [1.11.0] - 2025-12-08
 
 ### Enhanced
