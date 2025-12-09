@@ -2,6 +2,15 @@
 
 All notable changes to majestic-tools will be documented in this file.
 
+## [1.11.3] - 2025-12-08
+
+### Fixed
+
+- **plugin.json** - Removed redundant hooks field
+  - Claude Code automatically loads hooks/hooks.json
+  - Manifest should only reference additional hook files
+  - Fixes "Duplicate hooks file detected" error
+
 ## [1.11.2] - 2025-12-08
 
 ### Changed
