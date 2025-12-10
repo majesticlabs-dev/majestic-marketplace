@@ -9,6 +9,56 @@ description: Create and manage Claude Code skills following Anthropic best pract
 
 Comprehensive guide for creating and managing skills in Claude Code with auto-activation system, following Anthropic's official best practices including the 500-line rule and progressive disclosure pattern.
 
+## What Makes Skills Valuable
+
+Skills must contain **NEW information** Claude doesn't already know. The model is trained on the entire internet - generic advice adds nothing.
+
+### ✅ DO Include
+
+- **Project-specific patterns** - Your actual code conventions, file paths, workflows
+- **Synthesized experience** - Lessons from YOUR experiments, failures, discoveries
+- **Concrete examples** - Real code, actual commands, specific values
+- **Measurable rules** - "Max 5 lines per method" not "keep methods short"
+- **Anti-patterns with specifics** - "Avoid purple gradients" not "don't be generic"
+- **Reference files** - Deep dives the model can fetch when needed
+- **Domain knowledge not on internet** - Internal APIs, proprietary workflows, team conventions
+
+### ❌ DO NOT Include
+
+- **Personas** - "You are a professional engineer" (model knows this)
+- **Generic advice** - "Think step by step", "run tests after changes" (model knows this)
+- **Philosophy without action** - "Trust your instincts", "be strategic" (not actionable)
+- **Vague best practices** - "Write clean code", "follow best practices" (too broad)
+- **Common frameworks verbatim** - Standard TDD/Agile/SOLID (already trained on these)
+- **Motivational content** - "You can do it!", "Stay focused" (adds nothing)
+
+### The Litmus Test
+
+Ask: **"Would this help a human contractor on day one?"**
+
+| ❌ Useless | ✅ Valuable |
+|-----------|-------------|
+| "Run tests after changes" | "Run `bin/rails test test/models/` after touching models" |
+| "Be a strategic thinker" | "Here's our quarterly planning template: [actual template]" |
+| "Write clean code" | "Max 100 lines per class, 5 lines per method (Sandi Metz rules)" |
+| "Think step by step" | "Check these 3 files first: config/routes.rb, then app/controllers/, then app/models/" |
+| "You are an expert Rails developer" | "We use Current.user pattern, Solid Queue for jobs, and this naming convention..." |
+
+### Hooks vs Skills for Process Enforcement
+
+**Critical distinction:**
+
+| Use | For |
+|-----|-----|
+| **Hooks** | Process enforcement (deterministic - FORCES behavior) |
+| **Skills** | Knowledge/context (probabilistic - Claude MAY follow) |
+
+If you want Claude to ALWAYS do something (run tests, check types, validate schemas):
+- ❌ Don't make it a skill instruction
+- ✅ Make it a hook that executes automatically
+
+Skills are for **knowledge Claude needs**, not **processes you want enforced**.
+
 ## When to Use This Skill
 
 Automatically activates when you mention:

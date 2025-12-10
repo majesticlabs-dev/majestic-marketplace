@@ -25,6 +25,55 @@ Generate a complete, ready-to-use Claude Code sub-agent configuration file from 
 /new-agent "writes unit tests for Ruby/Rails applications"
 ```
 
+## What Makes Agents Valuable
+
+Agents should do **autonomous work**, not just provide advice. If it only gives guidance, make it a skill instead.
+
+### ✅ Good Agent Examples
+
+| Agent | Why It Works |
+|-------|--------------|
+| `security-review` | Autonomously scans code, runs checks, returns structured report |
+| `gem-research` | Fetches docs, evaluates alternatives, provides verdict with evidence |
+| `github-resolver` | Fetches CI logs, analyzes failures, implements fixes |
+| `docs-researcher` | Searches web, reads documentation, synthesizes findings |
+
+**Pattern:** These agents READ, ANALYZE, and PRODUCE artifacts.
+
+### ❌ Bad Agent Examples
+
+| Agent | Why It Fails |
+|-------|--------------|
+| "Strategic advisor" | Just gives generic advice - no autonomous work |
+| "Best practices checker" | Could be a skill instead - no tool usage needed |
+| "Code mentor" | Persona without action - explains but doesn't do |
+| "Debugging helper" | Vague scope - what does it actually produce? |
+
+**Pattern:** These agents ADVISE but don't DO.
+
+### The Autonomy Test
+
+Ask: **"Does this agent DO something or just ADVISE?"**
+
+| DO (Agent) | ADVISE (Skill) |
+|------------|----------------|
+| Read files, search code | Explain concepts |
+| Run commands, analyze output | Suggest approaches |
+| Fetch web content, synthesize | Provide guidance |
+| Produce reports, artifacts | Answer questions |
+| Implement fixes | Review philosophically |
+
+**Rule:** If the agent doesn't need tools beyond Read, it's probably a skill.
+
+### Agent Value Checklist
+
+Before creating an agent, verify:
+- [ ] It performs autonomous work (not just advice)
+- [ ] It needs multiple tools to accomplish its task
+- [ ] It produces a concrete artifact or report
+- [ ] It can work without user interaction during execution
+- [ ] A skill wouldn't accomplish the same thing
+
 ## Instructions
 
 **0. Get up to date documentation:** Scrape the Claude Code sub-agent feature to get the latest documentation:
