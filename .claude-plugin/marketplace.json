@@ -241,7 +241,7 @@
     {
       "name": "majestic-experts",
       "description": "Expert panel discussion system with 22 curated personas. Includes 2 agents, 1 command, and 22 expert definitions.",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",

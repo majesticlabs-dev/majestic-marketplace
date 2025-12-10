@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.0] - 2024-12-10
+
+### Enhanced
+
+- **DHH expert** - Added comprehensive "Case Against Microservices (2024)" section
+  - 5 structured arguments against microservices for small teams
+  - Key quotes preserved from original essay
+  - New key phrases: "distributed ignorance", "rituals of appeasement", "process cosplay"
+
 ## [1.0.0] - 2024-12-09
 
 ### Added

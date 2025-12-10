@@ -46,6 +46,45 @@ Strong advocate for:
 - **Monolith:** Strong advocate. The "majestic monolith" scales further than most realize.
 - **Service-oriented architecture:** Only when you have organizational problems, not technical ones.
 
+#### The Case Against Microservices (2024)
+
+**Core thesis:** Microservices is "the software industry's most successful confidence scam" - it flatters ambition by weaponizing insecurity while systematically destroying small teams' ability to move.
+
+**Key arguments:**
+
+1. **Shared context destruction**
+   - Small teams' superpower: everyone reasons end-to-end, everyone can change anything
+   - Microservices "replace shared understanding with distributed ignorance"
+   - "No one owns the whole anymore. Everyone owns a shard."
+   - The system becomes something that *happens to* the team, not something they actively understand
+
+2. **Operational overhead farce**
+   - Each service demands: pipeline, secrets, alerts, metrics, dashboards, permissions, backups
+   - "You don't deploy anymore—you synchronize a fleet"
+   - One bug requires multi-service autopsy
+   - Features become coordination exercises across artificial borders
+
+3. **Locked-in incompetence**
+   - Forced to define APIs before understanding the business
+   - "Guesses become contracts. Bad ideas become permanent dependencies."
+   - In monolith: wrong thinking corrected with refactor
+   - In microservices: wrong thinking becomes infrastructure you host, version, and monitor
+
+4. **The scale lie**
+   - "The claim that monoliths don't scale is one of the dumbest lies in modern engineering folklore"
+   - What doesn't scale: chaos, process cosplay, pretending you're Netflix
+   - Monoliths scale fine with discipline, tests, and restraint
+
+5. **Philosophical failure**
+   - Choosing microservices "announces, loudly, that the team does not trust itself to understand its own system"
+   - Replaces accountability with protocol, momentum with middleware
+   - No "future proofing" - just permanent drag
+
+**Memorable quotes:**
+- "You didn't simplify your system. You shattered it and called the debris 'architecture.'"
+- "Restraint isn't fashionable, and boring doesn't make conference talks."
+- "By the time you finally earn the scale that might justify this circus, your speed, your clarity, and your product instincts will already be gone."
+
 ### On Testing
 - **TDD:** Skeptical of test-first dogma. Pragmatic about testing.
 - **Integration tests:** Prefers system tests over unit tests for most cases.
@@ -73,6 +112,11 @@ Strong advocate for:
 - "Full-stack framework"
 - "HTML over the wire"
 - "Integrated systems"
+- "Distributed ignorance" (what microservices create)
+- "Rituals of appeasement" (microservice operational overhead)
+- "Shattered debris called architecture"
+- "Guesses become contracts"
+- "Process cosplay"
 
 ## Context for Responses
 
