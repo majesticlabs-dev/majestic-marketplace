@@ -2,6 +2,62 @@
 
 All notable changes to majestic-tools will be documented in this file.
 
+## [1.14.0] - 2025-12-09
+
+### Changed
+
+- **Expert Panel Moved to majestic-experts** - Expert panel discussion system moved to dedicated plugin
+  - `/expert-panel` command → `majestic-experts`
+  - `expert-panel-discussion` agent → `majestic-experts`
+  - `expert-perspective` agent → `majestic-experts`
+  - Users should install `majestic-experts` plugin for panel discussions
+
+## [1.13.0] - 2025-12-09
+
+### Added
+
+- **Dynamic Expert Discovery** - Expert panel now discovers experts from `majestic-experts` plugin
+  - Auto-loads expert registry from `plugins/majestic-experts/experts/_registry.yml`
+  - Expert definitions loaded on-demand for authentic persona embodiment
+  - Fallback to built-in experts if plugin not installed
+  - User configuration via `.agents.yml`:
+    - `expert_panel.enabled_categories` - Enable only specific categories
+    - `expert_panel.disabled_categories` - Disable unwanted categories
+    - `expert_panel.disabled_experts` - Remove individual experts
+    - `expert_panel.custom_experts_path` - Add project-specific experts
+
+### Changed
+
+- **expert-panel.md** - Updated Step 3 for dynamic expert discovery with filtering
+- **expert-panel-discussion.md** - Now passes expert definition paths to panelists
+- **expert-perspective.md** - Reads definition files for authentic voice and positions
+
+## [1.12.0] - 2025-12-09
+
+### Added
+
+- **Expert Panel Discussion System** - Multi-agent expert panel for exploring difficult questions
+  - `/expert-panel` command - Lead structured expert discussions from multiple perspectives
+  - `expert-panel-discussion` orchestrator agent - Manages rounds, launches experts, synthesizes findings
+  - `expert-perspective` agent - Simulates individual expert voices with authentic reasoning
+  - Support for 4 discussion types:
+    - `round-table` - Quick single-round perspectives (5-10 min)
+    - `debate` - Two opposing camps with rebuttals (10-20 min)
+    - `consensus-seeking` - Iterate until agreement or impasse (10-30 min)
+    - `deep-dive` - Three-round sequential exploration (20-40 min)
+  - Color-coded experts (🔴🔵🟢🟡🟣) for visual distinction
+  - Parallel expert invocation for efficiency
+  - Sequential thinking integration for orchestrator analysis
+  - Synthesis with consensus, divergence, and unique insights
+  - Actionable recommendations with confidence assessment
+  - **Save/Resume Functionality** - Persist and continue expert panel sessions
+    - `/expert-panel --list` - List all saved panel sessions with metadata
+    - `/expert-panel --resume {panel-id}` - Resume in-progress discussions from any round
+    - `/expert-panel --export {panel-id}` - Export completed panels to markdown
+    - JSON session persistence in `.claude/panels/` directory
+    - Automatic state saving after each round completion
+    - Context reconstruction from previous rounds when resuming
+
 ## [1.11.3] - 2025-12-08
 
 ### Fixed
