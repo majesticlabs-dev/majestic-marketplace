@@ -77,7 +77,7 @@
     {
       "name": "majestic-tools",
       "description": "Claude Code customization tools. Includes 6 agents, 14 commands, and 5 skills.",
-      "version": "1.14.0",
+      "version": "1.15.0",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -147,7 +147,7 @@
     {
       "name": "majestic-company",
       "description": "Business operations tools. Includes 3 specialized agents and 22 skills.",
-      "version": "1.26.0",
+      "version": "1.27.0",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
