@@ -1,0 +1,204 @@
+# Expert Registry v1.0
+# Fast lookup index for expert personas
+# Used by /expert-panel command for discovery and filtering
+
+version: "1.0"
+
+categories:
+  - id: engineering
+    name: "Engineering"
+    description: "Software architecture, testing, and development practices"
+  - id: business
+    name: "Business Strategy"
+    description: "Startups, marketing, and business growth"
+  - id: product
+    name: "Product"
+    description: "Product management and development"
+  - id: pricing
+    name: "Pricing & Monetization"
+    description: "Pricing strategy, SaaS economics, and metrics"
+  - id: security
+    name: "Security"
+    description: "Application security and infrastructure"
+
+experts:
+  # Engineering (6)
+  dhh:
+    display_name: "DHH"
+    full_name: "David Heinemeier Hansson"
+    category: engineering
+    subcategories: [rails, architecture, testing, frontend]
+    credentials: "Rails creator, 37signals founder"
+    file: engineering/dhh.md
+
+  martin-fowler:
+    display_name: "Martin Fowler"
+    full_name: "Martin Fowler"
+    category: engineering
+    subcategories: [architecture, refactoring, patterns, design]
+    credentials: "Software architecture expert, author"
+    file: engineering/martin-fowler.md
+
+  kent-beck:
+    display_name: "Kent Beck"
+    full_name: "Kent Beck"
+    category: engineering
+    subcategories: [testing, tdd, xp, agile]
+    credentials: "TDD and XP pioneer"
+    file: engineering/kent-beck.md
+
+  uncle-bob:
+    display_name: "Uncle Bob"
+    full_name: "Robert C. Martin"
+    category: engineering
+    subcategories: [clean-code, solid, architecture, principles]
+    credentials: "Clean code advocate, SOLID author"
+    file: engineering/uncle-bob.md
+
+  sandi-metz:
+    display_name: "Sandi Metz"
+    full_name: "Sandi Metz"
+    category: engineering
+    subcategories: [ruby, oo-design, refactoring, rails]
+    credentials: "OO design expert, POODR author"
+    file: engineering/sandi-metz.md
+
+  rich-hickey:
+    display_name: "Rich Hickey"
+    full_name: "Rich Hickey"
+    category: engineering
+    subcategories: [functional, simplicity, clojure, architecture]
+    credentials: "Clojure creator, simplicity advocate"
+    file: engineering/rich-hickey.md
+
+  # Business (5)
+  seth-godin:
+    display_name: "Seth Godin"
+    full_name: "Seth Godin"
+    category: business
+    subcategories: [marketing, branding, content, storytelling]
+    credentials: "Marketing expert, Purple Cow author"
+    file: business/seth-godin.md
+
+  peter-thiel:
+    display_name: "Peter Thiel"
+    full_name: "Peter Thiel"
+    category: business
+    subcategories: [startups, strategy, contrarian, monopoly]
+    credentials: "PayPal co-founder, Zero to One author"
+    file: business/peter-thiel.md
+
+  naval-ravikant:
+    display_name: "Naval Ravikant"
+    full_name: "Naval Ravikant"
+    category: business
+    subcategories: [startups, leverage, philosophy, investing]
+    credentials: "AngelList founder, startup philosopher"
+    file: business/naval-ravikant.md
+
+  jason-fried:
+    display_name: "Jason Fried"
+    full_name: "Jason Fried"
+    category: business
+    subcategories: [bootstrapping, calm, remote, simplicity]
+    credentials: "37signals/Basecamp founder, REWORK author"
+    file: business/jason-fried.md
+
+  paul-graham:
+    display_name: "Paul Graham"
+    full_name: "Paul Graham"
+    category: business
+    subcategories: [startups, essays, yc, funding]
+    credentials: "Y Combinator founder, essayist"
+    file: business/paul-graham.md
+
+  april-dunford:
+    display_name: "April Dunford"
+    full_name: "April Dunford"
+    category: business
+    subcategories: [positioning, marketing, b2b]
+    credentials: "Obviously Awesome author, positioning expert"
+    file: business/april-dunford.md
+
+  rand-fishkin:
+    display_name: "Rand Fishkin"
+    full_name: "Rand Fishkin"
+    category: business
+    subcategories: [seo, marketing, content]
+    credentials: "SparkToro founder, Moz co-founder"
+    file: business/rand-fishkin.md
+
+  # Product (4)
+  ryan-singer:
+    display_name: "Ryan Singer"
+    full_name: "Ryan Singer"
+    category: product
+    subcategories: [shape-up, product, design, basecamp]
+    credentials: "Shape Up author, ex-Basecamp"
+    file: product/ryan-singer.md
+
+  julie-zhuo:
+    display_name: "Julie Zhuo"
+    full_name: "Julie Zhuo"
+    category: product
+    subcategories: [design, management, product, facebook]
+    credentials: "Ex-Facebook VP Design, Making of a Manager author"
+    file: product/julie-zhuo.md
+
+  marty-cagan:
+    display_name: "Marty Cagan"
+    full_name: "Marty Cagan"
+    category: product
+    subcategories: [product-management, discovery, teams, silicon-valley]
+    credentials: "SVPG founder, Inspired author"
+    file: product/marty-cagan.md
+
+  alan-cooper:
+    display_name: "Alan Cooper"
+    full_name: "Alan Cooper"
+    category: product
+    subcategories: [interaction-design, ux, personas]
+    credentials: "Father of Visual Basic, About Face author"
+    file: product/alan-cooper.md
+
+  # Pricing & Monetization (3)
+  patrick-campbell:
+    display_name: "Patrick Campbell"
+    full_name: "Patrick Campbell"
+    category: pricing
+    subcategories: [pricing, saas, monetization]
+    credentials: "ProfitWell founder, pricing strategist"
+    file: pricing/patrick-campbell.md
+
+  rob-walling:
+    display_name: "Rob Walling"
+    full_name: "Rob Walling"
+    category: pricing
+    subcategories: [saas, bootstrapping, startups]
+    credentials: "TinySeed founder, Startups for the Rest of Us"
+    file: pricing/rob-walling.md
+
+  josh-pigford:
+    display_name: "Josh Pigford"
+    full_name: "Josh Pigford"
+    category: pricing
+    subcategories: [metrics, bootstrapping, transparency]
+    credentials: "Baremetrics founder, open startup pioneer"
+    file: pricing/josh-pigford.md
+
+  # Security (2)
+  troy-hunt:
+    display_name: "Troy Hunt"
+    full_name: "Troy Hunt"
+    category: security
+    subcategories: [web-security, breaches, authentication, passwords]
+    credentials: "Have I Been Pwned creator, security researcher"
+    file: security/troy-hunt.md
+
+  tanya-janca:
+    display_name: "Tanya Janca"
+    full_name: "Tanya Janca"
+    category: security
+    subcategories: [appsec, devsecops, secure-coding, training]
+    credentials: "AppSec advocate, We Hack Purple founder"
+    file: security/tanya-janca.md

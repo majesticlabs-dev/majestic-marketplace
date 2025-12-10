@@ -1,6 +1,6 @@
 # Majestic Tools
 
-Claude Code customization tools. Includes 6 agents, 14 commands, and 5 skills.
+Claude Code customization tools. Includes 8 agents, 15 commands, and 5 skills.
 
 ## Installation
 
@@ -13,6 +13,10 @@ claude /plugin install majestic-tools
 | I want to... | Use this |
 |--------------|----------|
 | Find the right tool for my task | `/majestic-guide "what I want to do"` |
+| Get expert perspectives on a difficult question | `/expert-panel "topic"` |
+| Resume a saved expert panel discussion | `/expert-panel --resume {panel-id}` |
+| List all saved panel sessions | `/expert-panel --list` |
+| Export panel discussion to markdown | `/expert-panel --export {panel-id}` |
 | Create a new agent | `/majestic-tools:meta:new-agent` |
 | Create a new command | `/majestic-tools:meta:new-command` |
 | Create a new hook | `/majestic-tools:meta:new-hook` |
@@ -27,6 +31,8 @@ Invoke with: `agent <name>`
 | Agent | Description |
 |-------|-------------|
 | `reasoning-verifier` | Verify LLM reasoning using RCoT - detect overlooked conditions and hallucinations |
+| `expert-perspective` | Simulate an expert's perspective with authentic voice and reasoning |
+| `expert-panel-discussion` | Orchestrate multi-round expert panel discussions with synthesis |
 
 ## Commands
 
@@ -35,6 +41,7 @@ Invoke with: `agent <name>`
 | Command | Description |
 |---------|-------------|
 | `/majestic-guide` | Guide to the right skill, command, or agent for any task |
+| `/expert-panel` | Lead a panel of experts to address difficult questions from multiple perspectives |
 
 ### Categorized Commands
 
@@ -153,6 +160,13 @@ The `workflows:ultrathink-task` and `workflows:ultra-options` commands require t
 /majestic-guide "write tests for my Rails model"
 /majestic-guide "optimize database queries"
 /majestic-guide "create a landing page"
+
+# Expert panel discussions
+/expert-panel "Should we migrate from monolith to microservices?"
+/expert-panel "What's the best authentication strategy for our SaaS app?"
+/expert-panel --list                                    # List saved sessions
+/expert-panel --resume 20251209-150000-microservices    # Resume discussion
+/expert-panel --export 20251209-150000-microservices    # Export to markdown
 
 # Create a new agent
 /majestic-tools:meta:new-agent "Create an agent for database migrations"

@@ -77,7 +77,7 @@
     {
       "name": "majestic-tools",
       "description": "Claude Code customization tools. Includes 6 agents, 14 commands, and 5 skills.",
-      "version": "1.11.3",
+      "version": "1.14.0",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -237,6 +237,27 @@
         "workflow-automation"
       ],
       "source": "./plugins/majestic-react"
+    },
+    {
+      "name": "majestic-experts",
+      "description": "Expert panel discussion system with 22 curated personas. Includes 2 agents, 1 command, and 22 expert definitions.",
+      "version": "1.0.0",
+      "author": {
+        "name": "David Paluy",
+        "url": "https://github.com/dpaluy",
+        "email": "marketplace@it.majesticlabs.dev"
+      },
+      "homepage": "https://github.com/majesticlabs-dev/majestic-marketplace/tree/master/plugins/majestic-experts",
+      "tags": [
+        "experts",
+        "personas",
+        "panel-discussion",
+        "engineering",
+        "business",
+        "product",
+        "security"
+      ],
+      "source": "./plugins/majestic-experts"
     }
   ]
 }
