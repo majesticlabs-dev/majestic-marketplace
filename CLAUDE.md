@@ -665,3 +665,11 @@ _This section captures important learnings as we work on this repository._
 **Learning:** The `model:` field in command/agent frontmatter requires full model IDs (e.g., `claude-haiku-4-5-20251001`), not short names like `haiku`, `sonnet`, or `opus`. Prefer omitting the field entirely to inherit from user's session, except for explicitly cheap/fast operations where haiku is appropriate.
 
 **Learning:** The `name:` field in command frontmatter overrides path-based naming. Without it, Claude Code derives names from file paths (e.g., `plugins/majestic-rails/commands/gemfile/upgrade.md` → `/majestic-rails:gemfile:upgrade`). Adding `name: foo` creates `/foo` instead - simpler but loses plugin namespacing. Use `name:` intentionally for short aliases; omit it when namespacing matters.
+
+**Learning:** Skills must contain NEW information Claude doesn't already know. Avoid generic advice like "think step by step", "run tests after changes", or personas like "you are a professional engineer" - the model is trained on the entire internet and knows these. Instead, include: project-specific patterns, synthesized experience, concrete code examples, measurable rules ("max 5 lines per method"), and anti-patterns with specifics.
+
+**Learning:** Skills are for knowledge/context (probabilistic - Claude MAY follow), hooks are for process enforcement (deterministic - FORCES behavior). If you want Claude to ALWAYS do something (run tests, check types), use a hook, not a skill instruction.
+
+**Learning:** Agents should do autonomous work, not just provide advice. If an agent only gives guidance without using tools meaningfully, it should be a skill instead. Good agents: read files, run commands, fetch web content, produce artifacts. Bad agents: "strategic advisor" (just advice), "code mentor" (persona without action).
+
+**Learning:** Thinking frameworks (like first-principles prompts) work better as skills than agents because they need to integrate into the user's ongoing conversation as LENSES for thinking, not produce a separate one-shot report. Structured workflows with distinct intake→analysis→output phases work better as agents.
