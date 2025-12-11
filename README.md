@@ -2,7 +2,7 @@
 
 The Majestic marketplace where we share our workflows.
 
-**New here?** Check out the [Marketplace Tutorial](https://tutorial.majesticmarketplace.com) for an interactive walkthrough.
+**New here?** Check out the [Marketplace Tutorial](https://tutorial.majesticmarketplace.com){:target="_blank"} for an interactive walkthrough.
 
 ## Quick Start
 
