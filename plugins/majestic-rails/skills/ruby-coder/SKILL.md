@@ -91,28 +91,7 @@ These rules enforce strict limits to maintain code quality. Breaking them requir
 **Check**: When a class exceeds this limit, extract secondary concerns to new classes
 
 ```ruby
-# Good - focused, under 100 lines
-class UserProfile
-  def initialize(user)
-    @user = user
-  end
-
-  def display_name
-    "#{@user.first_name} #{@user.last_name}"
-  end
-
-  def avatar_url
-    @user.avatar_url || default_avatar
-  end
-
-  private
-
-  def default_avatar
-    "/images/default-avatar.png"
-  end
-end
-
-# When exceeding 100 lines, extract:
+# When exceeding 100 lines, extract secondary concerns:
 class UserProfilePresenter  # Presentation logic
 class UserProfileValidator  # Validation logic
 class UserProfileNotifier   # Notification logic
@@ -204,39 +183,19 @@ end
 **Pattern**: Use facade pattern to aggregate data and hide collaborator access
 
 ```ruby
-# Good - single object instantiation
+# ✅ GOOD - single object via facade
 class DashboardController < ApplicationController
   def show
     @dashboard = DashboardFacade.new(current_user)
   end
 end
 
-# The facade aggregates all needed data
-class DashboardFacade
-  def initialize(user)
-    @user = user
-  end
-
-  def recent_posts
-    @user.posts.recent.limit(5)
-  end
-
-  def notifications
-    @user.notifications.unread
-  end
-
-  def statistics
-    UserStatistics.new(@user)
-  end
-end
-
-# Avoid - multiple instance variables
+# ❌ AVOID - multiple instance variables
 class DashboardController < ApplicationController
   def show
     @user = current_user
     @posts = @user.posts.recent
     @notifications = @user.notifications.unread
-    @stats = UserStatistics.new(@user)
   end
 end
 ```

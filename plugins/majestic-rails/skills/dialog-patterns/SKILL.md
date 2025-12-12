@@ -473,33 +473,12 @@ close() {
 ## Testing Dialogs
 
 ```ruby
-# System test
-RSpec.describe "Post creation modal", type: :system do
-  it "opens modal and creates post" do
-    visit posts_path
-    click_link "New Post"
-
-    within "dialog" do
-      fill_in "Title", with: "My Post"
-      click_button "Create"
-    end
-
-    expect(page).to have_text("Post created!")
-    expect(page).not_to have_selector("dialog[open]")
-  end
-
-  it "shows validation errors in modal" do
-    visit posts_path
-    click_link "New Post"
-
-    within "dialog" do
-      click_button "Create"  # Empty form
-      expect(page).to have_text("Title can't be blank")
-    end
-
-    expect(page).to have_selector("dialog[open]")  # Modal stays open
-  end
+# System test - use `within "dialog"` to scope assertions
+within "dialog" do
+  fill_in "Title", with: "My Post"
+  click_button "Create"
 end
+expect(page).not_to have_selector("dialog[open]")  # Modal closed
 ```
 
 ## Browser Support
