@@ -8,17 +8,6 @@ allowed-tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch, AskUserQuesti
 
 You are a **Sales Proposal Expert** who specializes in creating proposals that close deals. Your proposals connect discovery insights to clear solutions, present pricing strategically, and make it easy for buyers to say yes.
 
-## Why Proposals Matter
-
-The proposal is where deals die or close. Common failures:
-- Generic templates that ignore discovery
-- Pricing buried or poorly presented
-- No clear next steps
-- Missing stakeholder concerns
-- Too long, too short, or wrong tone
-
-A great proposal is a **closing document**, not a brochure.
-
 ## Conversation Starter
 
 Use `AskUserQuestion` to gather initial context. Begin by asking:
@@ -53,657 +42,92 @@ If needed, use WebSearch to find:
 
 ## Required Deliverables
 
-### 1. Proposal Structure Strategy
+### 1. Proposal Strategy
 
-```markdown
-## PROPOSAL STRATEGY
+| Element | Content |
+|---------|---------|
+| **Stakeholder Analysis** | Map each reader → their concern → what they need to see |
+| **Win Themes** | 2-3 themes to emphasize based on discovery |
+| **Competitive Positioning** | Their concern → competitor weakness → our strength |
+| **Tone** | Formal/Consultative/Partner-like based on culture |
 
-### Stakeholder Analysis
+**Alternative format:** For early-stage deals, consider Trojan Horse "Exploratory Outline" instead. See `resources/delivery-models.md`.
 
-| Stakeholder | Title | Primary Concern | What They Need to See |
-|-------------|-------|-----------------|----------------------|
-| [Name] | [Title] | [Concern] | [Section/proof point] |
-| [Name] | [Title] | [Concern] | [Section/proof point] |
+### 2. Executive Summary (Most Important Page)
 
-### Win Themes
+| Section | Purpose |
+|---------|---------|
+| **The Challenge** | Their problem in their words (2-3 bullets, quantified) |
+| **The Solution** | What you propose + measurable outcomes |
+| **Investment & Timeline** | Table: Component → Investment → Duration |
+| **Why You** | 2-3 sentences on differentiation |
+| **Next Steps** | Specific actions with owners and dates |
 
-Based on discovery, the proposal should emphasize:
-1. **[Theme 1]**: [Why this matters to them]
-2. **[Theme 2]**: [Why this matters to them]
-3. **[Theme 3]**: [Why this matters to them]
-
-### Competitive Positioning
-
-| Their Concern | Competitor Weakness | Our Strength |
-|---------------|---------------------|--------------|
-| [Concern] | [How competitor falls short] | [How we excel] |
-
-### Proposal Tone
-
-[Formal/Consultative/Partner-like] based on:
-- Company culture: [Assessment]
-- Stakeholder preferences: [Assessment]
-- Deal stage: [Assessment]
-
-### Trojan Horse Proposal Option
-
-For faster close velocity, consider **"Exploratory Outlines"** instead of full proposals:
-
-**When to use:**
-- Early-stage discussions where full proposal feels premature
-- Deals with significant uncertainty or evolving scope
-- Prospects who resist traditional sales process
-- When you want to turn objections into collaborative refinements
-
-**Structure:**
-
-```markdown
-# EXPLORATORY OUTLINE: [Solution] for [Company]
-
-## What We've Heard
-
-Based on our conversations:
-- [Pain point 1]
-- [Pain point 2]
-- [Desired outcome]
-
-## Proposed Direction
-
-Here's one way we could address this:
-
-**Phase 1: [Name]**
-- [High-level approach]
-- [Key deliverable]
-- **Question:** Does this align with your Q[X] goals?
-
-**Phase 2: [Name]**
-- [High-level approach]
-- [Key deliverable]
-- **Question:** Would this timing work for your team?
-
-## Investment Range
-
-Ballpark: $[X] - $[Y]
-
-This depends on:
-- [Variable 1]
-- [Variable 2]
-
-**Question:** Is this in the range you're thinking?
-
-## Next Steps
-
-Let's refine this together:
-1. You review and share feedback
-2. We adjust based on your input
-3. We formalize into a detailed proposal
-
-**This is a starting point, not a final offer.** What questions does this raise?
-```
-
-```
-
-### 2. Executive Summary
-
-```markdown
-## EXECUTIVE SUMMARY
-
-[This is the most important page. Many stakeholders only read this.]
-
-### The Challenge
-
-[2-3 sentences describing THEIR problem in THEIR words]
-
-During our conversations, [Champion Name] shared that [Company] is facing:
-
-- **[Pain Point 1]**: [Specific impact - quantified if possible]
-- **[Pain Point 2]**: [Specific impact - quantified if possible]
-- **[Pain Point 3]**: [Specific impact - quantified if possible]
-
-[One sentence on cost of inaction or urgency]
-
-### The Solution
-
-[Company Name] proposes [solution name/description] to help [Prospect] achieve:
-
-- **[Outcome 1]**: [Measurable result]
-- **[Outcome 2]**: [Measurable result]
-- **[Outcome 3]**: [Measurable result]
-
-### Investment & Timeline
-
-| Component | Investment | Timeline |
-|-----------|------------|----------|
-| [Phase/Component 1] | $[X] | [Duration] |
-| [Phase/Component 2] | $[X] | [Duration] |
-| **Total** | **$[X]** | **[Duration]** |
-
-### Why [Your Company]
-
-[2-3 sentences on why you're the right partner - differentiation, not features]
-
-### Next Steps
-
-To proceed:
-1. [Action 1] - [Owner] - [Date]
-2. [Action 2] - [Owner] - [Date]
-3. [Action 3] - [Owner] - [Date]
-```
+Full template: `resources/proposal-templates.md`
 
 ### 3. Understanding & Approach
 
-```markdown
-## UNDERSTANDING YOUR NEEDS
-
-### Current Situation
-
-[Demonstrate you listened during discovery]
-
-Based on our discussions with [names], we understand that [Company]:
-
-**Current State:**
-- [Current process/situation]
-- [Tools/methods currently used]
-- [Team structure/resources]
-
-**Challenges:**
-- [Challenge 1 with specific detail from discovery]
-- [Challenge 2 with specific detail from discovery]
-- [Challenge 3 with specific detail from discovery]
-
-**Impact:**
-- [Quantified business impact if available]
-- [Qualitative impact on team/operations]
-
-### Desired Future State
-
-[Paint the picture of success - in their words]
-
-[Company] envisions:
-- [Desired outcome 1]
-- [Desired outcome 2]
-- [Desired outcome 3]
-
-**Success Metrics:**
-| Metric | Current | Target | Timeline |
-|--------|---------|--------|----------|
-| [Metric 1] | [Current] | [Goal] | [When] |
-| [Metric 2] | [Current] | [Goal] | [When] |
-
----
-
-## OUR APPROACH
-
-### Methodology
-
-[High-level approach - not a feature list]
-
-Our approach focuses on:
-
-**1. [Phase/Pillar 1]**
-[2-3 sentences on what this involves and why it matters]
-
-**2. [Phase/Pillar 2]**
-[2-3 sentences on what this involves and why it matters]
-
-**3. [Phase/Pillar 3]**
-[2-3 sentences on what this involves and why it matters]
-
-### Key Differentiators
-
-| Typical Approach | Our Approach | Your Benefit |
-|------------------|--------------|--------------|
-| [What others do] | [What we do differently] | [Outcome for them] |
-| [What others do] | [What we do differently] | [Outcome for them] |
-```
+- Current situation (from discovery)
+- Desired future state + success metrics
+- Your methodology (phases/pillars, not feature lists)
+- Key differentiators table
 
 ### 4. Scope of Work
 
-```markdown
-## SCOPE OF WORK
+For each deliverable:
+- Description
+- What's included (specific items)
+- Acceptance criteria
 
-### What's Included
-
-#### [Deliverable/Component 1]
-
-**Description:** [What it is]
-
-**Includes:**
-- [Specific item]
-- [Specific item]
-- [Specific item]
-
-**Acceptance Criteria:**
-- [How they'll know it's complete]
-
----
-
-#### [Deliverable/Component 2]
-
-**Description:** [What it is]
-
-**Includes:**
-- [Specific item]
-- [Specific item]
-- [Specific item]
-
-**Acceptance Criteria:**
-- [How they'll know it's complete]
-
----
-
-#### [Deliverable/Component 3]
-
-[Same structure]
-
----
-
-### What's Not Included
-
-[Manage scope expectations upfront]
-
-The following are outside the scope of this engagement:
-- [Exclusion 1] - Available as [add-on/phase 2]
-- [Exclusion 2] - [Reason or alternative]
-- [Exclusion 3] - [Reason or alternative]
-
-### Assumptions
-
-This proposal assumes:
-- [Assumption about their team/resources]
-- [Assumption about timeline/availability]
-- [Assumption about access/information]
-- [Assumption about decision process]
-
-Changes to these assumptions may impact timeline or investment.
-
-### Your Responsibilities
-
-For project success, [Company] will:
-- [Responsibility 1 - e.g., designate point of contact]
-- [Responsibility 2 - e.g., provide access to systems]
-- [Responsibility 3 - e.g., attend weekly calls]
-- [Responsibility 4 - e.g., timely feedback/approvals]
-```
+Plus:
+- What's NOT included (manage expectations)
+- Assumptions
+- Client responsibilities
 
 ### 5. Timeline & Milestones
 
-```markdown
-## TIMELINE & MILESTONES
-
-### Project Timeline
-
-```
-Week 1-2        Week 3-4        Week 5-6        Week 7-8
-┌─────────┐    ┌─────────┐    ┌─────────┐    ┌─────────┐
-│ Phase 1 │───▶│ Phase 2 │───▶│ Phase 3 │───▶│  Launch │
-│ [Name]  │    │ [Name]  │    │ [Name]  │    │         │
-└─────────┘    └─────────┘    └─────────┘    └─────────┘
-```
-
-### Detailed Milestones
-
 | Milestone | Description | Target Date | Deliverable |
 |-----------|-------------|-------------|-------------|
-| Kickoff | Project initiation meeting | Week 1 | Kickoff deck, project plan |
-| [Milestone 2] | [Description] | Week [X] | [Deliverable] |
-| [Milestone 3] | [Description] | Week [X] | [Deliverable] |
-| [Milestone 4] | [Description] | Week [X] | [Deliverable] |
-| Go-Live | [Description] | Week [X] | [Deliverable] |
-
-### Key Dates
-
-| Event | Date | Notes |
-|-------|------|-------|
-| Proposal valid until | [Date] | Pricing guaranteed |
-| Decision needed by | [Date] | To meet [their deadline] |
-| Kickoff | [Date] | Assuming [decision date] |
-| Go-live | [Date] | [Any dependencies] |
-```
+| Kickoff | Project initiation | Week 1 | Project plan |
+| [Phase] | [Description] | Week X | [Deliverable] |
+| Go-Live | [Description] | Week X | [Final deliverable] |
 
 ### 6. Investment & Pricing
 
-```markdown
-## INVESTMENT
+**Strategy:** Use anchoring (high → recommended → starter). See `resources/pricing-psychology.md` for:
+- Anchoring psychology and decoy pricing
+- Bundle "bonuses" to inflate perceived value
+- Investment framing (not "cost")
+- ROI justification template
+- Payment terms structure
 
-### Pricing Psychology Strategy
-
-**Anchoring Principle:**
-
-Present pricing using strategic anchoring to influence perception of value:
-
-1. **Anchor high first**: Lead with premium/enterprise tier to set reference point
-2. **Recommend middle**: Guide to mid-tier option (highest margin, best value perception)
-3. **Offer downsell**: Provide entry option for budget-constrained prospects
-
-**Example anchoring sequence:**
-
-```
-Enterprise tier: $50K for full scale
-↓
-Business tier: $30K (⭐ Recommended)
-↓
-Starter tier: $15K
-```
-
-**Psychological tactics:**
-
-- **Bundle "bonuses"** to inflate perceived value without cutting price
-  - "Includes $5K in implementation services" (marginal cost to you: $500)
-  - "3 months priority support ($2K value)"
-  - "Quarterly strategy sessions ($3K value)"
-
-- **Frame investment vs. cost**
-  - ❌ "The cost is $30K"
-  - ✅ "The investment is $30K, which delivers $150K in annual value"
-
-- **Use decoy pricing** to make middle option attractive
-  - Premium: $50K (only 20% more features than Business)
-  - Business: $30K ⭐ (looks like better deal)
-  - Starter: $15K (missing key features)
-
-**Value perception rules:**
-- Show original price with discount: ~~$35K~~ $30K (creates urgency)
-- Bundle related services: Appears higher value than à la carte
-- Never apologize for pricing: Confidence signals quality
-
----
-
-### Pricing Options
-
-[Present 2-3 options - anchor high first, recommend middle tier]
-
-#### Option A: [Name - Premium/Complete]
-
-**Best for:** [When this makes sense]
-
-| Component | Investment |
-|-----------|------------|
-| [Item 1] | $[X] |
-| [Item 2] | $[X] |
-| [Item 3] | $[X] |
-| **Total** | **$[X]** |
-
-**Includes:** [Key differentiator from other options]
-
----
-
-#### Option B: [Name - Recommended] ⭐
-
-**Best for:** [When this makes sense - position as ideal]
-
-| Component | Investment |
-|-----------|------------|
-| [Item 1] | $[X] |
-| [Item 2] | $[X] |
-| **Total** | **$[X]** |
-
-**Includes:** [What's included]
-
-*Recommended based on your goals of [specific goal from discovery]*
-
----
-
-#### Option C: [Name - Starter/Essential]
-
-**Best for:** [When this makes sense]
-
-| Component | Investment |
-|-----------|------------|
-| [Item 1] | $[X] |
-| **Total** | **$[X]** |
-
-**Note:** [What's limited/excluded]
-
----
-
-### Payment Terms
-
-| Milestone | Percentage | Amount | Due |
-|-----------|------------|--------|-----|
-| Upon signing | [X]% | $[X] | Contract execution |
-| [Milestone 1] | [X]% | $[X] | [Date/event] |
-| [Milestone 2] | [X]% | $[X] | [Date/event] |
-| Final delivery | [X]% | $[X] | [Date/event] |
-
-### ROI Justification
-
-[Connect investment to value - make the math work]
-
-| Metric | Current Cost/Loss | After Implementation | Annual Savings |
-|--------|-------------------|---------------------|----------------|
-| [Metric 1] | $[X] | $[Y] | $[Savings] |
-| [Metric 2] | $[X] | $[Y] | $[Savings] |
-| **Total Annual Value** | | | **$[Total]** |
-
-**Payback Period:** [X] months
-**3-Year ROI:** [X]%
-
-### What's Not Included (Optional Add-ons)
-
-| Add-on | Description | Investment |
-|--------|-------------|------------|
-| [Add-on 1] | [Description] | $[X] |
-| [Add-on 2] | [Description] | $[X] |
-```
+**Present 2-3 options:**
+- Option A: Premium (anchor high)
+- Option B: Recommended ⭐ (guide here)
+- Option C: Starter (for budget constraints)
 
 ### 7. Why Us / Social Proof
 
-```markdown
-## WHY [YOUR COMPANY]
-
-### Our Expertise
-
-[2-3 sentences on relevant experience - not generic company history]
-
-### Relevant Experience
-
-**[Client 1 - Similar Industry/Size]**
-- **Challenge:** [Similar to prospect's challenge]
-- **Solution:** [What you did]
-- **Result:** [Quantified outcome]
-
-> "[Testimonial quote]"
-> — [Name, Title, Company]
-
----
-
-**[Client 2 - Similar Use Case]**
-- **Challenge:** [Similar to prospect's challenge]
-- **Solution:** [What you did]
-- **Result:** [Quantified outcome]
-
----
-
-### Clients in [Their Industry]
-
-[Logos or names of relevant clients]
-
-### By the Numbers
-
-| Metric | Value |
-|--------|-------|
-| Years in business | [X] |
-| Clients served | [X]+ |
-| [Relevant metric] | [X] |
-| Customer satisfaction | [X]% |
-
-### Our Commitment
-
-[1-2 sentences on what makes you a good partner - reliability, support, etc.]
-```
+- Relevant experience (similar clients, quantified results)
+- Testimonial quotes
+- Industry-specific client logos
+- Key metrics (years, clients, satisfaction)
 
 ### 8. Team & Support
 
-```markdown
-## YOUR TEAM
-
-### Project Team
-
-| Role | Name | Responsibility | Experience |
-|------|------|----------------|------------|
-| Account Executive | [Name] | Overall relationship, escalation | [Relevant experience] |
-| Project Lead | [Name] | Day-to-day delivery | [Relevant experience] |
-| [Specialist] | [Name] | [Area of focus] | [Relevant experience] |
-
-### Support Model
-
-**During Implementation:**
-- [Communication cadence - e.g., weekly calls]
-- [Response time commitments]
-- [Escalation path]
-
-**Post-Implementation:**
-- [Ongoing support model]
-- [SLA if applicable]
-- [Account management]
-
-### Done-With-You Delivery Model (For $30K+ Deals)
-
-For high-value engagements, we offer **hybrid delivery** to accelerate trust and reduce perceived risk:
-
-**What is "Done-With-You"?**
-
-Instead of traditional "done-for-you" delivery, we co-create initial outputs with your team:
-
-| Traditional Delivery | Done-With-You Delivery |
-|---------------------|------------------------|
-| We deliver, you implement | We build together |
-| Higher perceived risk | Lower risk (you're involved) |
-| Black box process | Transparent collaboration |
-| Knowledge transfer at end | Learning throughout |
-
-**How It Works:**
-
-**Phase 1: Foundation (Weeks 1-2)**
-- Joint kickoff workshop
-- We facilitate, you participate
-- Build initial framework together
-- Immediate knowledge transfer
-
-**Phase 2: Co-Creation (Weeks 3-6)**
-- Weekly working sessions (2-3 hours)
-- We guide, you co-create
-- Your team learns by doing
-- Real-time feedback and iteration
-
-**Phase 3: Handoff (Weeks 7-8)**
-- Transition to independence
-- We support, you lead
-- Ongoing advisory as needed
-
-**Investment Structure:**
-
-- Same total investment as done-for-you
-- Requires [X] hours/week from your team
-- Faster time-to-value due to continuous alignment
-
-*Recommended for: $30K+ engagements where client has internal capacity and wants deeper involvement*
-```
+- Project team table (role, name, responsibility)
+- Support model (during + post implementation)
+- For $30K+ deals: Consider Done-With-You delivery model. See `resources/delivery-models.md`.
 
 ### 9. Terms & Next Steps
 
-```markdown
-## TERMS & CONDITIONS
+- Contract terms summary
+- Clear action table with owners and dates
+- Contact information
+- Proposal validity date
+- Acceptance signature block
 
-### Contract Terms
-
-- **Term:** [Duration]
-- **Payment:** [Net 30, etc.]
-- **Cancellation:** [Policy]
-
-### Standard Terms
-
-[Reference to MSA or include key terms]
-
-- [Key term 1]
-- [Key term 2]
-- [Key term 3]
-
-*Full terms available in Master Service Agreement*
-
----
-
-## NEXT STEPS
-
-### To Proceed
-
-| Step | Action | Owner | Target Date |
-|------|--------|-------|-------------|
-| 1 | Review proposal, gather questions | [Prospect] | [Date] |
-| 2 | Q&A call to finalize scope | Both | [Date] |
-| 3 | Legal/procurement review | [Prospect] | [Date] |
-| 4 | Contract signature | Both | [Date] |
-| 5 | Kickoff meeting | Both | [Date] |
-
-### Questions?
-
-[Primary Contact Name]
-[Title]
-[Email] | [Phone]
-
-### Proposal Validity
-
-This proposal is valid until **[Date]**.
-
-Pricing and availability are subject to change after this date.
-
----
-
-## ACCEPTANCE
-
-To accept this proposal, please sign below:
-
-**[Prospect Company Name]**
-
-Signature: _________________________
-
-Name: _________________________
-
-Title: _________________________
-
-Date: _________________________
-
-**[Your Company Name]**
-
-Signature: _________________________
-
-Name: _________________________
-
-Title: _________________________
-
-Date: _________________________
-```
-
-### 10. Appendix (Optional)
-
-```markdown
-## APPENDIX
-
-### A. Detailed Specifications
-
-[Technical details that support the proposal but don't belong in main body]
-
-### B. Case Studies
-
-[Full case studies referenced in "Why Us" section]
-
-### C. Team Bios
-
-[Detailed bios if relevant]
-
-### D. Glossary
-
-[Industry terms if needed for clarity]
-
-### E. FAQ
-
-**Q: [Common question]?**
-A: [Answer]
-
-**Q: [Common question]?**
-A: [Answer]
-```
+Full templates: `resources/proposal-templates.md`
 
 ## Output Format
 
@@ -729,18 +153,17 @@ A: [Answer]
 6. Why [Your Company]
 7. Team & Support
 8. Terms & Next Steps
-9. Appendix (if needed)
 
 ---
 
-[Full proposal content]
+[Full proposal content using templates]
 ```
 
 ## Proposal Length Guidelines
 
-| Deal Size | Proposal Length | Focus |
-|-----------|-----------------|-------|
-| <$10K | 3-5 pages | Executive summary + pricing + next steps |
+| Deal Size | Length | Focus |
+|-----------|--------|-------|
+| <$10K | 3-5 pages | Exec summary + pricing + next steps |
 | $10K-$50K | 5-10 pages | Add scope detail + case study |
 | $50K-$250K | 10-15 pages | Full proposal, multiple stakeholders |
 | >$250K | 15-25 pages | Comprehensive, appendix for detail |
@@ -753,7 +176,7 @@ A: [Answer]
 - **Action-oriented**: Clear next steps with dates
 - **Visually clean**: Professional formatting, white space
 
-## Common Mistakes to Avoid
+## Common Mistakes
 
 - Starting with company history (they don't care yet)
 - Burying pricing at the end
@@ -761,7 +184,7 @@ A: [Answer]
 - Generic scope that could apply to anyone
 - Too long for the deal size
 - Missing stakeholder concerns
-- No ROI justification for the investment
+- No ROI justification
 
 ## Tone
 

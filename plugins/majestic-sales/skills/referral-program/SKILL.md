@@ -31,7 +31,6 @@ Use WebSearch extensively to find:
 - Referral program case studies (Dropbox, Airbnb, PayPal, Uber)
 - Industry-specific referral benchmarks
 - Viral coefficient calculations and optimization
-- Referral program software options
 - Incentive effectiveness research
 - Legal considerations for referral rewards
 
@@ -39,62 +38,24 @@ Use WebSearch extensively to find:
 
 ### 1. Program Structure Design
 
-```markdown
-## REFERRAL PROGRAM ARCHITECTURE
+| Type | Best For |
+|------|----------|
+| **Double-sided** | Most businesses (both parties motivated) |
+| **Single-sided (referrer)** | High-margin businesses |
+| **Single-sided (referee)** | Competitive markets |
+| **Tiered** | Gamification focus |
 
-### Program Type Selection
+**Reward Options:**
 
-| Type | Best For | Pros | Cons |
-|------|----------|------|------|
-| **Double-sided** | Most businesses | Both parties motivated | Higher cost |
-| **Single-sided (referrer)** | High-margin businesses | Simpler, loyal advocates | Less immediate appeal to new |
-| **Single-sided (referee)** | Competitive markets | Easier conversion | Less motivation to share |
-| **Tiered** | Gamification focus | Drives repeated referrals | More complex |
-
-**Recommended for [Business]:** [Type] because [reasoning]
-
-### Incentive Structure
-
-| Recipient | Reward | Value | Timing |
-|-----------|--------|-------|--------|
-| Referrer | [Reward type] | $[X] or [X]% | [When earned] |
-| Referee | [Reward type] | $[X] or [X]% | [When earned] |
-
-### Reward Options Analysis
-
-| Reward Type | Pros | Cons | Best For |
-|-------------|------|------|----------|
-| Cash/credit | Universal appeal, clear value | Lower emotional connection | E-commerce, marketplaces |
-| Product discount | Encourages usage | Only works if they want more | Subscription, SaaS |
-| Free months | Low marginal cost | Delays revenue | SaaS with high retention |
-| Premium features | Creates lock-in | Only if features are valuable | Freemium models |
-| Exclusive access | Status appeal | Requires exclusive inventory | Premium brands |
-| Charity donation | Feel-good, brand alignment | Lower direct motivation | Values-driven brands |
-```
+| Reward Type | Best For |
+|-------------|----------|
+| Cash/credit | E-commerce, marketplaces |
+| Product discount | Subscription, SaaS |
+| Free months | SaaS with high retention |
+| Premium features | Freemium models |
+| Exclusive access | Premium brands |
 
 ### 2. Incentive Economics
-
-```markdown
-## INCENTIVE ECONOMICS CALCULATOR
-
-### Current Acquisition Metrics
-
-| Metric | Current Value | Source |
-|--------|--------------|--------|
-| Customer Acquisition Cost (CAC) | $[X] | [Paid/organic/blended] |
-| Customer Lifetime Value (CLV) | $[X] | [Calculation method] |
-| CLV:CAC Ratio | [X]:1 | Target: 3:1+ |
-
-### Referral Economics Model
-
-| Metric | Calculation | Target |
-|--------|-------------|--------|
-| Referral reward cost | Referrer + Referee | $[X] total |
-| Target referral CAC | < Current CAC | $[X] or less |
-| Expected conversion rate | % of referrals who convert | [X]% |
-| Cost per converted referral | Reward ÷ Conversion rate | $[X] |
-
-### Break-Even Analysis
 
 ```
 Current CAC: $[X]
@@ -105,149 +66,49 @@ Break-even conversion rate: [Y ÷ X]%
 Target conversion rate: [Above break-even]%
 ```
 
-### ROI Projection
+**ROI Projection Table:**
 
 | Scenario | Referrals/Month | Conversions | Cost | LTV Generated | ROI |
 |----------|----------------|-------------|------|---------------|-----|
 | Conservative | [X] | [Y] | $[Z] | $[A] | [B]% |
 | Expected | [X] | [Y] | $[Z] | $[A] | [B]% |
 | Optimistic | [X] | [Y] | $[Z] | $[A] | [B]% |
-```
 
 ### 3. Sharing Mechanics
 
-```markdown
-## SHARING SYSTEM DESIGN
-
-### Referral Link Strategy
-
 **Link Format:** `yoursite.com/r/[UNIQUE_CODE]`
 
-**Code Options:**
-| Type | Example | Pros | Cons |
-|------|---------|------|------|
-| Random alphanumeric | `abc123` | Simple, scalable | Not memorable |
-| Custom/vanity | `johndoe` | Personal, shareable | Requires management |
-| Name-based | `john-smith-15` | Balance | Possible duplicates |
+**Sharing Channels:**
 
-**Recommended:** [Type] with [fallback option]
+| Channel | Friction Level | Expected Volume |
+|---------|----------------|-----------------|
+| Direct link copy | Very low | High |
+| Email invite | Low | Medium |
+| Social share | Low | Medium |
+| Messenger/WhatsApp | Low | High (mobile) |
+| QR code | Medium | Low but high-intent |
 
-### Sharing Channels
+**Share Prompt Placement:**
 
-| Channel | Implementation | Friction Level | Expected Volume |
-|---------|---------------|----------------|-----------------|
-| **Direct link copy** | One-click copy button | Very low | High |
-| **Email invite** | Pre-written email template | Low | Medium |
-| **Social share** | Twitter, Facebook, LinkedIn buttons | Low | Medium |
-| **Messenger/WhatsApp** | Deep link sharing | Low | High (mobile) |
-| **In-person** | QR code generation | Medium | Low but high-intent |
+| Location | Trigger |
+|----------|---------|
+| Post-purchase | Order confirmation |
+| Dashboard | Every login (subtle) |
+| Post-success | After achieving goal |
+| Email footer | Every transactional email |
+| In-app prompt | After [X] days as customer |
 
-### Share Prompt Placement
+### 4. Messaging Templates
 
-| Location | Trigger | Message |
-|----------|---------|---------|
-| Post-purchase | Order confirmation | "Share the love, get $[X]" |
-| Dashboard | Every login (subtle) | Referral widget |
-| Post-success | After achieving goal | "Know someone who'd benefit?" |
-| Account page | Manual access | Full referral dashboard |
-| Email footer | Every transactional email | "Refer a friend" link |
-| In-app prompt | After [X] days as customer | Modal with value prop |
-```
+Full templates for:
+- Email invite (referrer to friend)
+- Landing page (referee arrives)
+- Social share copy (Twitter, LinkedIn, Facebook)
+- Thank you messages (referrer and referee)
 
-### 4. Referral Messaging Templates
-
-```markdown
-## REFERRAL MESSAGING LIBRARY
-
-### Email Invite Template (Referrer to Friend)
-
-**Subject:** "[First Name], I thought of you"
-
-```
-Hey [Friend Name],
-
-I've been using [Product] for [time period] and thought you'd love it too.
-
-[One sentence on the core benefit you've experienced]
-
-I have a special link that gets you [referee reward]. Here it is:
-[REFERRAL_LINK]
-
-[Optional: personal note about why you think they'd benefit]
-
-[Your name]
-
-P.S. [Secondary benefit or urgency if applicable]
-```
-
-### Landing Page Copy (Referee Arrives)
-
-**Headline:** "[Referrer Name] wants to give you [reward]"
-
-**Subhead:** "Join [X] people who [key benefit] with [Product]"
-
-**Body:**
-- [Benefit 1 with proof point]
-- [Benefit 2 with proof point]
-- [Benefit 3 with proof point]
-
-**CTA:** "Claim Your [Reward] → "
-
-**Trust elements:**
-- "[X] customers referred by friends"
-- Testimonial from referred customer
-- Security/guarantee badges
-
-### Social Share Templates
-
-**Twitter:**
-"I've been using @[Product] for [outcome achieved]. If you want to try it, here's a link for [reward]: [LINK]"
-
-**LinkedIn:**
-"Been getting a lot of questions about how I [achieved outcome]. I use [Product]—and I have a referral link if you want to try it: [LINK]"
-
-**Facebook:**
-"Found a tool that [solves problem]. If anyone wants to try it, I have a link that gets you [reward]: [LINK]"
-
-### Thank You Messages
-
-**To Referrer (on successful referral):**
-```
-Subject: You earned $[X]! 🎉
-
-Hey [Name],
-
-[Friend Name] just signed up using your link. Your reward of [reward] has been [credited/sent/applied].
-
-You've referred [total number] friends so far. Keep sharing:
-[REFERRAL_LINK]
-
-Thanks for spreading the word!
-```
-
-**To Referee (welcome):**
-```
-Subject: Welcome! [Referrer Name] sent you
-
-Hey [Name],
-
-Welcome to [Product]! You're here because [Referrer Name] thought you'd benefit.
-
-Your [reward] has been applied to your account.
-
-Here's how to get started:
-[Onboarding CTA]
-
-Questions? Just reply to this email.
-```
-```
+See `resources/messaging-templates.md`
 
 ### 5. Viral Coefficient Framework
-
-```markdown
-## VIRAL COEFFICIENT OPTIMIZATION
-
-### K-Factor Calculation
 
 **K = i × c**
 
@@ -255,155 +116,43 @@ Where:
 - i = invitations sent per customer
 - c = conversion rate of invitations
 
-| Component | Current | Target | Lever |
-|-----------|---------|--------|-------|
-| Invitations per customer (i) | [X] | [Y] | Increase prompts, simplify sharing |
-| Conversion rate (c) | [X]% | [Y]% | Better incentive, landing page, trust |
-| **K-Factor** | [X×X] | [Y×Y] | Combined improvements |
+| K-Factor | Meaning |
+|----------|---------|
+| < 0.5 | Weak referrals, needs other channels |
+| 0.5-1.0 | Healthy referrals, amplifies growth |
+| > 1.0 | Viral growth, self-sustaining |
 
-### What K-Factor Means
+**To improve:**
+- Increase invitations (i): More prompts, easier sharing, gamification
+- Increase conversion (c): Better landing page, higher incentive, trust signals
 
-| K-Factor | Meaning | Growth Pattern |
-|----------|---------|----------------|
-| < 0.5 | Weak referrals | Needs other channels |
-| 0.5-1.0 | Healthy referrals | Amplifies other growth |
-| > 1.0 | Viral growth | Self-sustaining growth |
+### 6. Tracking & Attribution
 
-### Improving Each Component
+- Attribution requirements
+- Implementation options (URL params, unique links, hybrid)
+- Fraud prevention measures
+- Attribution window recommendations
 
-**To increase invitations (i):**
-- Add more sharing prompts
-- Make sharing easier (one-click)
-- Remind customers to share
-- Gamify with milestones
-- Show referral progress
+See `resources/tracking-launch.md`
 
-**To increase conversion (c):**
-- Improve referee landing page
-- Increase referee incentive
-- Add trust signals
-- Reduce signup friction
-- Personalize the experience
-```
+### 7. Launch Plan
 
-### 6. Tracking & Attribution System
+**Phase 1: Soft Launch (Week 1-2)**
+- Top 10% customers (NPS promoters)
+- Personal outreach
+- Monitor for issues
 
-```markdown
-## TRACKING SYSTEM
+**Phase 2: Expansion (Week 3-4)**
+- All customers
+- In-app prompts
+- Email announcement
 
-### Attribution Requirements
-
-| Data Point | Purpose | How to Track |
-|------------|---------|--------------|
-| Referrer ID | Credit rewards | Unique code in URL |
-| Referee ID | Match relationships | Account creation |
-| Referral timestamp | Attribution window | Event logging |
-| Conversion event | Trigger rewards | Purchase/signup event |
-| Reward status | Fulfillment | Database flag |
-
-### Tracking Implementation
-
-**URL Parameter Method:**
-`yoursite.com/?ref=USER123`
-- Simple to implement
-- Works across sessions with cookies
-- Vulnerable to cookie deletion
-
-**Unique Link Method:**
-`yoursite.com/r/USER123`
-- Cleaner URLs
-- Better for sharing
-- Requires redirect handling
-
-**Hybrid Approach:**
-- Unique links for active sharing
-- Cookies for attribution persistence
-- Email/account matching as backup
-
-### Fraud Prevention
-
-| Fraud Type | Prevention Method |
-|------------|-------------------|
-| Self-referral | Email domain matching, IP tracking |
-| Fake accounts | Email verification, phone verification |
-| Abuse at scale | Rate limiting, manual review thresholds |
-| Reward exploitation | Delayed reward release, clawback terms |
-
-### Attribution Window
-
-| Model | Window | Best For |
-|-------|--------|----------|
-| First-touch | 30-90 days | Longer sales cycles |
-| Last-touch | 7-14 days | Impulse purchases |
-| Multi-touch | Weighted | Complex journeys |
-
-**Recommended:** [X]-day attribution window with [conditions]
-```
-
-### 7. Program Launch Plan
-
-```markdown
-## LAUNCH ROADMAP
-
-### Phase 1: Soft Launch (Week 1-2)
-
-**Goals:**
-- Test mechanics with small group
-- Identify friction points
-- Baseline metrics
-
-**Actions:**
-- [ ] Launch to top 10% of customers (NPS promoters)
-- [ ] Personal outreach explaining program
-- [ ] Monitor closely for issues
-- [ ] Gather qualitative feedback
-
-**Success Criteria:**
-- [ ] [X]% participation rate
-- [ ] No technical issues
-- [ ] Positive feedback
-
-### Phase 2: Expansion (Week 3-4)
-
-**Goals:**
-- Increase visibility
-- Optimize based on learnings
-- Build momentum
-
-**Actions:**
-- [ ] Launch to all existing customers
-- [ ] Add in-app prompts
-- [ ] Email announcement
-- [ ] Optimize landing page based on data
-
-**Success Criteria:**
-- [ ] [X] referrals generated
-- [ ] [X]% conversion rate
-- [ ] K-factor > [X]
-
-### Phase 3: Optimization (Week 5+)
-
-**Goals:**
-- Maximize viral coefficient
+**Phase 3: Optimization (Week 5+)**
+- A/B test incentives
+- Add gamification
 - Scale sustainably
-- Automate operations
 
-**Actions:**
-- [ ] A/B test incentive levels
-- [ ] A/B test messaging
-- [ ] Add gamification elements
-- [ ] Implement advanced fraud detection
-
-### A/B Testing Priorities
-
-| Test | Hypothesis | Metric |
-|------|------------|--------|
-| Incentive amount | Higher reward → more shares | Shares per customer |
-| Incentive type | Credit vs. cash | Conversion rate |
-| CTA placement | Earlier prompt → more action | Click rate |
-| Email timing | Day 7 vs. Day 14 | Response rate |
-| Landing page | Video vs. text | Signup rate |
-```
+Full roadmap: `resources/tracking-launch.md`
 
 ## Output Format
 
@@ -411,46 +160,30 @@ Where:
 # REFERRAL PROGRAM BLUEPRINT: [Business Name]
 
 ## Executive Summary
-[2-3 sentences on program strategy and expected impact]
+[Strategy and expected impact]
 
----
-
-## SECTION 1: Program Structure
+## Program Structure
 [Incentive design and mechanics]
 
----
-
-## SECTION 2: Economics Model
+## Economics Model
 [CAC comparison, ROI projection]
 
----
-
-## SECTION 3: Sharing System
+## Sharing System
 [Links, channels, placements]
 
----
-
-## SECTION 4: Messaging Library
+## Messaging Library
 [All templates and copy]
 
----
-
-## SECTION 5: Viral Coefficient
+## Viral Coefficient
 [K-factor analysis and optimization]
 
----
-
-## SECTION 6: Tracking System
+## Tracking System
 [Attribution and fraud prevention]
 
----
-
-## SECTION 7: Launch Plan
+## Launch Plan
 [Phased rollout with milestones]
 
----
-
-## QUICK START CHECKLIST
+## Quick Start Checklist
 [ ] Finalize incentive structure
 [ ] Set up tracking/attribution
 [ ] Create referral landing page
