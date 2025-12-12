@@ -2,7 +2,7 @@
 
 The Majestic marketplace where we share our workflows.
 
-**New here?** Check out the [Marketplace Tutorial](https://tutorial.majesticmarketplace.com){:target="_blank"} for an interactive walkthrough.
+**New here?** Check out the <a href="https://tutorial.majesticmarketplace.com" target="_blank">Marketplace Tutorial</a> for an interactive walkthrough.
 
 ## Quick Start
 
@@ -197,7 +197,7 @@ Available modules:
 
 | Resource | Description |
 |----------|-------------|
-| [Marketplace Tutorial](https://marketplace-tutorial.majesticlabs.dev/) | Interactive slide deck for getting started |
+| <a href="https://tutorial.majesticmarketplace.com" target="_blank">Marketplace Tutorial</a> | Interactive slide deck for getting started |
 | [Output Styles](output-styles/README.md) | Pre-built formatting guides for consistent responses |
 | [Instructions](instructions/) | CLAUDE.md instruction modules |
 
