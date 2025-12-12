@@ -1,7 +1,7 @@
 {
   "name": "majestic-python",
-  "version": "1.8.0",
-  "description": "Python development tools. Includes 5 specialized agents.",
+  "version": "1.9.0",
+  "description": "Python development tools. Includes 8 specialized agents.",
   "author": {
     "name": "David Paluy",
     "url": "https://github.com/dpaluy",

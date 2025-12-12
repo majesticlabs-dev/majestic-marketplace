@@ -96,8 +96,8 @@
     },
     {
       "name": "majestic-python",
-      "description": "Python development tools. Includes 5 specialized agents.",
-      "version": "1.8.0",
+      "description": "Python development tools. Includes 8 specialized agents.",
+      "version": "1.9.0",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -192,8 +192,8 @@
     },
     {
       "name": "majestic-sales",
-      "description": "Sales acceleration and revenue tools. Includes 2 agents, 1 command, and 7 skills.",
-      "version": "1.2.0",
+      "description": "Sales acceleration and revenue tools. Includes 4 agents, 1 command, and 7 skills.",
+      "version": "1.3.0",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
