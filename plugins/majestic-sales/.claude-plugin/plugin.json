@@ -1,7 +1,7 @@
 {
   "name": "majestic-sales",
-  "version": "1.1.0",
-  "description": "Sales acceleration and revenue tools. Includes 1 command and 7 skills.",
+  "version": "1.2.0",
+  "description": "Sales acceleration and revenue tools. Includes 2 agents, 1 command, and 7 skills.",
   "author": {
     "name": "David Paluy",
     "url": "https://github.com/dpaluy",
