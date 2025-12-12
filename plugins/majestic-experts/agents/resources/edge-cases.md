@@ -1,0 +1,102 @@
+# Expert Panel Discussion Edge Cases
+
+Reference for handling special situations during panel orchestration.
+
+## Expert Count Variations
+
+### 2 Experts (Minimum for Debate)
+- Still valid for debate format
+- Consensus requires 100% agreement (2/2)
+- Best for direct opposition discussions
+
+### 5 Experts (Maximum Recommended)
+- More diverse perspectives
+- Harder to reach consensus
+- Focus on clustering similar views
+- Consider grouping related positions
+
+### Uneven Debate Camps
+- If 3 experts in debate, assign 2 to one side, 1 to the other
+- Acknowledge the numerical imbalance in synthesis
+- Weight arguments by quality, not quantity
+
+## Discussion Type Edge Cases
+
+### Debate with Unexpected Consensus
+- If debate reaches consensus in Round 1, acknowledge and conclude
+- Document "Debate resolved - experts agree"
+- Explore nuances even within agreement
+
+### Consensus-seeking with Impasse
+- If Round 3 shows hardened positions with no progress, conclude
+- Document as "Productive impasse - fundamental philosophical differences"
+- Clearly explain both positions and why they're irreconcilable
+- This is a valid outcome - not a failure
+
+### Deep-dive with Early Consensus
+- Still run all 3 rounds (by design)
+- Round 2: Explore nuances and edge cases
+- Round 3: Long-term implications and second-order effects
+
+## Sequential Thinking Usage
+
+### When to Use
+- After each round to analyze responses and decide next steps
+- For complex synthesis where consensus/divergence isn't obvious
+- When synthesizing 4+ expert responses
+- When discussion type rules have edge cases
+
+### When NOT to Use
+- Simple consensus checks (e.g., all 3 experts clearly agree)
+- Counting agreement percentages (manual counting suffices)
+- Obvious continue/conclude decisions
+
+### Cost Management
+- Sequential thinking adds cost but ensures quality analysis
+- Use thoughtfully, not automatically for every decision
+- Skip for straightforward unanimous agreement
+
+## Context Growth Management
+
+| Round | Context Size | Strategy |
+|-------|--------------|----------|
+| Round 1 | Topic + Background | Full context |
+| Round 2 | Round 1 + Expert responses | Summarize R1 key points |
+| Round 3 | Round 1 + Round 2 + responses | Compress to themes |
+
+**Keep summaries concise between rounds to manage context size.**
+
+## Example Flows
+
+### Round-table (1 round)
+```
+Round 1: Launch 3 experts → Analyze → Synthesize → Done
+```
+
+### Debate (2-3 rounds)
+```
+Round 1: Thesis → Analyze → Continue
+Round 2: Antithesis → Analyze → Check synthesis
+  If complete → Synthesize → Done
+  If not → Continue
+Round 3: Synthesis → Analyze → Synthesize → Done
+```
+
+### Consensus-seeking (1-3 rounds)
+```
+Round 1: Initial positions → Analyze → Check agreement
+  If >80% → Synthesize → Done
+  If not → Continue
+Round 2: Refinement → Analyze → Check agreement
+  If >80% or impasse → Synthesize → Done
+  If not → Continue
+Round 3: Final attempt → Analyze → Synthesize → Done
+  (document consensus OR productive impasse)
+```
+
+### Deep-dive (exactly 3 rounds)
+```
+Round 1: Surface analysis → Analyze → Continue
+Round 2: Deeper exploration → Analyze → Continue
+Round 3: Nuanced insights → Analyze → Synthesize → Done
+```
