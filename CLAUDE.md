@@ -674,7 +674,9 @@ _This section captures important learnings as we work on this repository._
 
 **Learning:** Thinking frameworks (like first-principles prompts) work better as skills than agents because they need to integrate into the user's ongoing conversation as LENSES for thinking, not produce a separate one-shot report. Structured workflows with distinct intake→analysis→output phases work better as agents.
 
-**Learning:** Skills must stay under 300 lines. When approaching this limit, extract verbose templates (>15 lines) to a `resources/` subdirectory and reference as "See resources/filename.md".
+**Learning:** Skills must stay under 500 lines. When approaching this limit, extract verbose templates (>15 lines) to a `resources/` subdirectory and reference as "See resources/filename.md".
+
+**Learning:** Agents must stay under 300 lines. Agents need detailed instructions for autonomous work, but overly long files cause rules to be ignored. Extract reference material, detailed examples, and edge case handling to resources files.
 
 **Learning:** Skill content must be copy-paste ready. Include: specific email copy, exact question scripts, {{variable}} placeholders. Exclude: "Why it works" explanations, ASCII diagrams, generic frameworks, "best practices" prose. Test: Could someone use this template immediately without reading explanations?
 
