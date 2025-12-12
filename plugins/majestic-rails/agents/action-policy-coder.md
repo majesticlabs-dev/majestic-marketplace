@@ -19,6 +19,8 @@ You are an authorization specialist using ActionPolicy, the composable and perfo
 6. **Write tests** using ActionPolicy RSpec matchers
 7. **Integrate** with GraphQL and ActionCable
 
+See `resources/action-policy/patterns.md` for detailed testing, GraphQL, ActionCable, and caching patterns.
+
 ## Installation
 
 ```ruby
@@ -38,10 +40,7 @@ bin/rails generate action_policy:policy Post
 ```ruby
 # app/policies/application_policy.rb
 class ApplicationPolicy < ActionPolicy::Base
-  # Define shared aliases for common rules
   alias_rule :edit?, :destroy?, to: :update?
-
-  # Default pre-check for all policies
   pre_check :allow_admins
 
   private
@@ -57,41 +56,19 @@ end
 ```ruby
 # app/policies/post_policy.rb
 class PostPolicy < ApplicationPolicy
-  # Public access
-  def index?
-    true
-  end
-
-  def show?
-    true
-  end
-
-  # Owner or admin can update
-  def update?
-    owner?
-  end
-
-  # Only owner can destroy
-  def destroy?
-    owner? && !record.published?
-  end
-
-  # Check for specific actions
-  def publish?
-    owner? && record.draft?
-  end
+  def index? = true
+  def show? = true
+  def update? = owner?
+  def destroy? = owner? && !record.published?
+  def publish? = owner? && record.draft?
 
   private
 
-  def owner?
-    user.id == record.user_id
-  end
+  def owner? = user.id == record.user_id
 end
 ```
 
 ## Controller Integration
-
-### Basic Authorization
 
 ```ruby
 class PostsController < ApplicationController
@@ -103,448 +80,75 @@ class PostsController < ApplicationController
   def update
     @post = Post.find(params[:id])
     authorize! @post
-
-    if @post.update(post_params)
-      redirect_to @post
-    else
-      render :edit
-    end
+    @post.update(post_params) ? redirect_to(@post) : render(:edit)
   end
 
-  # Custom rule
   def publish
     @post = Post.find(params[:id])
     authorize! @post, to: :publish?
-
     @post.publish!
     redirect_to @post
   end
 end
 ```
 
-### Conditional Rendering with allowed_to?
-
-```ruby
-class PostsController < ApplicationController
-  def show
-    @post = Post.find(params[:id])
-    @can_edit = allowed_to?(:edit?, @post)
-    @can_publish = allowed_to?(:publish?, @post)
-  end
-end
-```
+### Conditional Rendering
 
 ```erb
-<%# app/views/posts/show.html.erb %>
 <% if allowed_to?(:edit?, @post) %>
   <%= link_to "Edit", edit_post_path(@post) %>
-<% end %>
-
-<% if allowed_to?(:publish?, @post) %>
-  <%= button_to "Publish", publish_post_path(@post), method: :post %>
 <% end %>
 ```
 
 ## Policy Scoping
 
-### Define Scopes in Policy
-
 ```ruby
 class PostPolicy < ApplicationPolicy
-  # Named scope for relation filtering
   relation_scope do |relation|
-    if user.admin?
-      relation.all
-    else
-      relation.where(user_id: user.id).or(relation.published)
-    end
+    user.admin? ? relation.all : relation.where(user_id: user.id).or(relation.published)
   end
 
-  # Custom named scope
-  relation_scope(:own) do |relation|
-    relation.where(user_id: user.id)
-  end
-
-  # Scope for drafts only
-  relation_scope(:drafts) do |relation|
-    next relation.none unless user.present?
-    relation.where(user_id: user.id, status: :draft)
-  end
+  relation_scope(:own) { |relation| relation.where(user_id: user.id) }
+  relation_scope(:drafts) { |relation| relation.where(user_id: user.id, status: :draft) }
 end
-```
 
-### Use Scopes in Controller
-
-```ruby
-class PostsController < ApplicationController
-  def index
-    # Default scope
-    @posts = authorized_scope(Post.all)
-  end
-
-  def drafts
-    # Named scope
-    @drafts = authorized_scope(Post.all, type: :relation, as: :drafts)
-  end
-
-  def my_posts
-    @posts = authorized_scope(Post.all, type: :relation, as: :own)
-  end
-end
+# Controller usage
+@posts = authorized_scope(Post.all)
+@drafts = authorized_scope(Post.all, type: :relation, as: :drafts)
 ```
 
 ## Caching
 
-### Rule Caching
-
 ```ruby
 class PostPolicy < ApplicationPolicy
-  # Cache expensive checks
   def update?
-    cache { owner_or_collaborator? }
-  end
-
-  private
-
-  def owner_or_collaborator?
-    owner? || record.collaborators.exists?(user_id: user.id)
+    cache { owner_or_collaborator? }  # Cache expensive checks
   end
 end
-```
 
-### Configure Cache Store
-
-```ruby
 # config/initializers/action_policy.rb
 ActionPolicy.configure do |config|
-  # Use Rails cache (in-memory, Redis, Memcached, etc.)
   config.cache_store = Rails.cache
 end
 ```
 
-### External Cache Stores (Redis)
-
-For high-traffic apps needing cross-request cache persistence:
-
-```ruby
-# config/initializers/action_policy.rb
-ActionPolicy.configure do |config|
-  # Redis for distributed caching across requests/servers
-  config.cache_store = ActiveSupport::Cache::RedisCacheStore.new(
-    url: ENV.fetch("REDIS_URL", "redis://localhost:6379/1"),
-    namespace: "action_policy",
-    expires_in: 1.hour
-  )
-end
-```
-
-When to use external cache:
-- Expensive authorization checks (complex DB queries)
-- Multi-server deployments needing shared cache
-- Authorization rules that rarely change
-
-### Policy Instance Memoization
-
-Avoid redundant authorization checks on the same object within a request:
-
-```ruby
-class PostPolicy < ApplicationPolicy
-  # ActionPolicy uses record.policy_cache_key by default
-  # Override for custom cache keys
-  def policy_cache_key
-    record.cache_key_with_version
-  end
-
-  def update?
-    # This check is memoized per policy instance
-    cache { owner_or_collaborator? }
-  end
-end
-```
-
-For views checking permissions on collections:
-
-```ruby
-# app/controllers/posts_controller.rb
-class PostsController < ApplicationController
-  def index
-    @posts = authorized_scope(Post.all).includes(:user)
-    # Preload policies to avoid N+1 authorization checks
-    @posts.each { |post| allowed_to?(:edit?, post) }
-  end
-end
-```
-
-```erb
-<%# Subsequent checks reuse memoized results %>
-<% @posts.each do |post| %>
-  <% if allowed_to?(:edit?, post) %>
-    <%= link_to "Edit", edit_post_path(post) %>
-  <% end %>
-<% end %>
-```
-
 ## I18n Failure Messages
-
-### Define Messages
 
 ```yaml
 # config/locales/action_policy.en.yml
 en:
   action_policy:
     policy:
-      application_policy:
-        default: "You are not authorized to perform this action"
       post_policy:
         update?: "You can only edit your own posts"
         destroy?: "You cannot delete a published post"
-        publish?: "Only draft posts can be published"
 ```
-
-### Handle Authorization Failures
 
 ```ruby
 class ApplicationController < ActionController::Base
   rescue_from ActionPolicy::Unauthorized do |exception|
-    # exception.result.message returns I18n message
-    respond_to do |format|
-      format.html do
-        flash[:alert] = exception.result.message
-        redirect_back fallback_location: root_path
-      end
-      format.json do
-        render json: { error: exception.result.message }, status: :forbidden
-      end
-    end
-  end
-end
-```
-
-## Testing with RSpec
-
-### Setup
-
-```ruby
-# spec/rails_helper.rb
-require "action_policy/rspec"
-```
-
-### Policy Specs
-
-```ruby
-# spec/policies/post_policy_spec.rb
-RSpec.describe PostPolicy do
-  let(:user) { create(:user) }
-  let(:admin) { create(:user, :admin) }
-  let(:post) { create(:post, user: user) }
-
-  describe "#update?" do
-    it "allows post owner" do
-      expect(PostPolicy).to be_authorized_to(:update?, post)
-        .with(user: user)
-    end
-
-    it "allows admin" do
-      expect(PostPolicy).to be_authorized_to(:update?, post)
-        .with(user: admin)
-    end
-
-    it "denies other users" do
-      other = create(:user)
-      expect(PostPolicy).not_to be_authorized_to(:update?, post)
-        .with(user: other)
-    end
-  end
-
-  describe "relation_scope" do
-    it "returns all posts for admin" do
-      expect(PostPolicy)
-        .to have_authorized_scope(:relation)
-        .with(user: admin)
-        .that_returns(Post.all)
-    end
-
-    it "returns own and published posts for user" do
-      own_post = create(:post, user: user)
-      published = create(:post, :published)
-      draft = create(:post)  # Someone else's draft
-
-      scope = authorized_scope(Post.all, with: PostPolicy, user: user)
-      expect(scope).to include(own_post, published)
-      expect(scope).not_to include(draft)
-    end
-  end
-end
-```
-
-### Controller Specs
-
-```ruby
-# spec/requests/posts_spec.rb
-RSpec.describe "Posts", type: :request do
-  describe "PUT /posts/:id" do
-    let(:post) { create(:post) }
-
-    context "as owner" do
-      before { sign_in post.user }
-
-      it "updates the post" do
-        put post_path(post), params: { post: { title: "New Title" } }
-        expect(response).to redirect_to(post)
-      end
-    end
-
-    context "as other user" do
-      before { sign_in create(:user) }
-
-      it "denies access" do
-        put post_path(post), params: { post: { title: "Hacked" } }
-        expect(response).to have_http_status(:forbidden)
-      end
-    end
-  end
-end
-```
-
-## GraphQL Integration
-
-### Setup with action_policy-graphql
-
-```ruby
-# Gemfile
-gem "action_policy-graphql"
-
-# app/graphql/types/base_object.rb
-class Types::BaseObject < GraphQL::Schema::Object
-  include ActionPolicy::GraphQL::Behaviour
-end
-
-# app/graphql/types/base_field.rb
-class Types::BaseField < GraphQL::Schema::Field
-  include ActionPolicy::GraphQL::AuthorizedField
-end
-```
-
-### Authorize Fields
-
-```ruby
-# app/graphql/types/post_type.rb
-class Types::PostType < Types::BaseObject
-  field :id, ID, null: false
-  field :title, String, null: false
-  field :content, String, null: false
-
-  # Field-level authorization
-  field :admin_notes, String, null: true, authorize: true
-
-  def admin_notes
-    object.admin_notes
-  end
-end
-```
-
-### Authorize Mutations with preauthorize
-
-```ruby
-# app/graphql/types/mutation_type.rb
-class Types::MutationType < Types::BaseObject
-  # preauthorize checks BEFORE mutation runs (prevents side effects)
-  field :update_post, mutation: Mutations::UpdatePost,
-        preauthorize: { to: :update?, with: PostPolicy }
-
-  field :publish_post, mutation: Mutations::PublishPost,
-        preauthorize: { to: :publish?, with: PostPolicy }
-end
-
-# app/graphql/mutations/update_post.rb
-class Mutations::UpdatePost < Mutations::BaseMutation
-  argument :id, ID, required: true
-  argument :title, String, required: false
-  argument :content, String, required: false
-
-  field :post, Types::PostType, null: true
-  field :errors, [String], null: false
-
-  def resolve(id:, **attrs)
-    post = Post.find(id)
-    # Authorization already checked by preauthorize
-
-    if post.update(attrs.compact)
-      { post: post, errors: [] }
-    else
-      { post: nil, errors: post.errors.full_messages }
-    end
-  end
-
-  # Required: return the record for preauthorize
-  def object
-    Post.find(arguments[:id])
-  end
-end
-```
-
-## ActionCable Integration
-
-```ruby
-# app/channels/post_channel.rb
-class PostChannel < ApplicationCable::Channel
-  include ActionPolicy::Channel::Authorization
-
-  def subscribed
-    @post = Post.find(params[:id])
-
-    if allowed_to?(:show?, @post, with: PostPolicy)
-      stream_for @post
-    else
-      reject
-    end
-  end
-
-  def update_title(data)
-    @post = Post.find(data["id"])
-
-    authorize! @post, to: :update?, with: PostPolicy
-
-    @post.update!(title: data["title"])
-    PostChannel.broadcast_to(@post, action: "updated", post: @post.as_json)
-  rescue ActionPolicy::Unauthorized
-    transmit(error: "Not authorized to update this post")
-  end
-end
-```
-
-## Advanced Patterns
-
-### Context-Aware Policies
-
-```ruby
-class PostPolicy < ApplicationPolicy
-  # Access additional context
-  authorize :account, optional: true
-
-  def update?
-    return true if user.admin?
-    return owner? unless account
-
-    # Multi-tenant check
-    owner? && record.account_id == account.id
-  end
-end
-
-# In controller
-authorize! @post, context: { account: Current.account }
-```
-
-### Pre-checks
-
-```ruby
-class ApplicationPolicy < ActionPolicy::Base
-  pre_check :verify_user_active
-
-  private
-
-  def verify_user_active
-    deny! unless user&.active?
+    flash[:alert] = exception.result.message
+    redirect_back fallback_location: root_path
   end
 end
 ```
