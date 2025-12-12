@@ -128,10 +128,13 @@ Marks task as "in progress" in the configured backend.
 
 ## Step 3: Set Terminal Title
 
+Run this Bash command to set the terminal title:
+
+```bash
+printf '\033]0;🔨 #<TASK_ID>: <title-truncated-to-40-chars>\007'
 ```
-Skill: majestic-tools:set-title
-Title: "🔨 #<TASK_ID>: <title-truncated-to-40-chars>"
-```
+
+Replace `<TASK_ID>` and `<title-truncated-to-40-chars>` with actual values from Step 1.
 
 ---
 

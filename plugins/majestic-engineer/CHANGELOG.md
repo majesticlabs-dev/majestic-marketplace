@@ -2,6 +2,14 @@
 
 All notable changes to majestic-engineer will be documented in this file.
 
+## [1.40.1] - 2025-12-11
+
+### Fixed
+
+- **`/majestic:build-task`** - Fixed terminal title setting (Step 3)
+  - Replaced ambiguous `Skill: majestic-tools:set-title` pseudo-syntax with direct Bash escape sequence
+  - Now uses `printf '\033]0;...\007'` which works reliably in Claude Code's terminal
+
 ## [1.40.0] - 2025-12-09
 
 ### Changed
