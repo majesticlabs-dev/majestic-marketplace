@@ -2,6 +2,20 @@
 
 All notable changes to majestic-sales will be documented in this file.
 
+## [3.0.0] - 2025-12-12
+
+### Added
+
+**Agents (4 new)**
+- `sales-strategist` - Foundation sales strategy agent, integrates with ICP discovery and playbook skills
+- `proposal-generator` - Deal-specific proposal creation with stakeholder mapping
+- `outbound-optimizer` - Email/call/LinkedIn sequence optimization for higher response rates
+- `pipeline-analyzer` - Pipeline health analysis, forecasting, deal scoring, conversion metrics
+
+### Changed
+
+- **Version unified** - All majestic plugins now at v3.0.0
+
 ## [1.1.0] - 2024-12-11
 
 ### Added

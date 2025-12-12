@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.0.0] - 2025-12-12
+
+### Changed
+
+- **Refactored** - `financial-model` skill trimmed to ≤500 lines, templates extracted to `resources/`
+- **Refactored** - `tam-calculator` skill trimmed to ≤500 lines, templates extracted to `resources/`
+- **Refactored** - `idea-validator` agent trimmed to ≤300 lines, output template extracted to `resources/`
+- **Version unified** - All majestic plugins now at v3.0.0
+
 ## [1.26.0] - 2025-12-03
 
 ### Changed

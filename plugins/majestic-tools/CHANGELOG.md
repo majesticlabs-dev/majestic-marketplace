@@ -2,6 +2,12 @@
 
 All notable changes to majestic-tools will be documented in this file.
 
+## [3.0.0] - 2025-12-12
+
+### Changed
+
+- **Version unified** - All majestic plugins now at v3.0.0
+
 ## [1.14.0] - 2025-12-09
 
 ### Changed

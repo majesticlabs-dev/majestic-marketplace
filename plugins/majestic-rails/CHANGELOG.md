@@ -2,6 +2,14 @@
 
 All notable changes to majestic-rails will be documented in this file.
 
+## [3.0.0] - 2025-12-12
+
+### Changed
+
+- **Refactored** - All agents trimmed to ≤300 lines, templates extracted to `resources/`
+- **Refactored** - All skills trimmed to ≤500 lines, verbose examples extracted to `resources/`
+- **Version unified** - All majestic plugins now at v3.0.0
+
 ## [1.27.0] - 2025-12-09
 
 ### Changed

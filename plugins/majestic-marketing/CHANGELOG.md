@@ -2,6 +2,15 @@
 
 All notable changes to majestic-marketing will be documented in this file.
 
+## [3.0.0] - 2025-12-12
+
+### Changed
+
+- **Refactored** - `google-ads-strategy` skill trimmed to ≤500 lines
+- **Refactored** - `linkedin-content` skill trimmed to ≤500 lines
+- **Refactored** - `retention-system` skill trimmed to ≤500 lines
+- **Version unified** - All majestic plugins now at v3.0.0
+
 ## [2.27.0] - 2025-12-08
 
 ### Added

@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.0.0] - 2025-12-12
+
+### Changed
+
+- **Refactored** - `expert-panel-discussion` agent trimmed to ≤300 lines, synthesis template and edge cases extracted to `resources/`
+- **Version unified** - All majestic plugins now at v3.0.0
+
 ## [1.1.0] - 2024-12-10
 
 ### Enhanced

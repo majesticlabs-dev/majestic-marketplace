@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.0.0] - 2025-12-12
+
+### Added
+
+**Agents (5 new, 8 total)**
+- `fastapi-coder` - Modern async FastAPI development with Pydantic, dependency injection, background tasks
+- `pytest-coder` - Comprehensive pytest patterns with fixtures, parametrization, async testing
+- `django-coder` - Django models, views, DRF, admin, services pattern
+- `python-debugger` - Error diagnosis, pdb, traceback analysis, debugging strategies
+- `python-db` - SQLAlchemy 2.0, async patterns, Alembic migrations, query optimization
+
+### Changed
+
+- **Version unified** - All majestic plugins now at v3.0.0
+
 ## [1.7.0] - 2025-12-09
 
 ### Changed

@@ -2,6 +2,13 @@
 
 All notable changes to majestic-engineer will be documented in this file.
 
+## [3.0.0] - 2025-12-12
+
+### Changed
+
+- **Refactored** - All skills trimmed to ≤500 lines, verbose examples extracted to `resources/`
+- **Version unified** - All majestic plugins now at v3.0.0
+
 ## [1.40.1] - 2025-12-11
 
 ### Fixed
