@@ -1,1 +1,1 @@
-Refactoring majestic-react plugin
+Refactoring majestic-company plugin
