@@ -177,6 +177,14 @@ For each email, provide:
 - "Quick idea"
 - "Noticed something about {{company}}"
 
+### Hyper-Specific Pain Hooks
+
+**Subject + opener combos (under 100 words total):**
+
+- "Saw your Q3 report—churn up 15%? We've cut that in half for [similar firm]"
+- "Noticed {{company}} hiring 3 SDRs—most teams that size waste 40% on bad data"
+- "Your G2 reviews mention [specific complaint]—we solved that for [competitor] in 30 days"
+
 ### AVOID (Spam Triggers)
 - "Quick call?" - Overused
 - "Touching base" - Corporate speak

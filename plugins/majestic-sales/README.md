@@ -1,6 +1,6 @@
 # Majestic Sales
 
-Sales acceleration and revenue tools. Includes 1 command and 6 skills.
+Sales acceleration and revenue tools. Includes 1 command and 7 skills.
 
 ## Installation
 
@@ -19,6 +19,7 @@ Sales acceleration and revenue tools. Includes 1 command and 6 skills.
 | Define ideal customer | `skill majestic-sales:icp-discovery` |
 | Design referral program | `skill majestic-sales:referral-program` |
 | Create win-back campaign | `skill majestic-sales:win-back` |
+| Plan customer expansion | `skill majestic-sales:customer-expansion` |
 
 ## Commands
 
@@ -52,6 +53,7 @@ Invoke with: `/majestic-sales:workflows:<command>`
 |-------|-------------|
 | `referral-program` | Design viral referral programs with incentive structures and sharing mechanics to turn customers into advocates |
 | `win-back` | Design win-back campaigns to re-engage dormant customers and recover churned users |
+| `customer-expansion` | Create expansion roadmaps, QBR templates, and upsell playbooks to grow existing customer revenue |
 
 ## Usage Examples
 

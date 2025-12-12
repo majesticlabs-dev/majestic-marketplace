@@ -336,6 +336,7 @@ If a prospect asks these, be cautious:
 | **Timeline** | [X]% | [Criteria] | [Criteria] | [Criteria] | [Criteria] |
 | **Champion present** | [X]% | [Criteria] | [Criteria] | [Criteria] | [Criteria] |
 | **Tech fit** | [X]% | [Criteria] | [Criteria] | [Criteria] | [Criteria] |
+| **Commitment velocity** | 10-15% | 3+ micro-yes/week | 1-2 micro-yes/week | <1 micro-yes/week | Ghosting/no response |
 
 **Total Weight: 100%**
 

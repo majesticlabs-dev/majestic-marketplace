@@ -313,6 +313,10 @@ Wishing you all the best,
 - [ ] Yes, keep me updated
 - [ ] No, please don't contact me
 
+**Question 5: Know anyone who might benefit?**
+"While we weren't the right fit for you, do you know anyone facing [problem we solve] who might benefit?"
+[Open text field or skip]
+
 ### Churned Customer Interview Script
 
 **For high-value churned customers:**
@@ -328,9 +332,35 @@ Questions:
 4. "Is there anything specific that would have kept you as a customer?"
 5. "What are you using now instead? How is it working?"
 6. "If we fixed [issue they mentioned], would you consider coming back?"
+7. "What one thing would make this a yes next time?"
 
 Closing:
 "Thank you so much for your honesty. This is exactly the feedback we need. If anything changes, we'd love to have you back."
+
+Referral ask (if conversation went well):
+"One last thing—while we weren't the right fit for you, do you know anyone else facing [problem]? I'd be happy to reach out and see if we can help them."
+```
+
+### Post-Loss Referral Email
+
+Send 7-14 days after churn, only to customers who left on good terms:
+
+```
+Subject: Quick favor, {{first_name}}?
+
+Hi {{first_name}},
+
+I hope [new solution] is working out for you.
+
+I know we weren't the right fit, but I wanted to ask: do you know anyone else struggling with [problem we solve]?
+
+If anyone comes to mind, I'd appreciate an intro. No pressure either way.
+
+Thanks for your time with us.
+
+[Your name]
+
+P.S. If your situation ever changes, the door's always open.
 ```
 
 ### Feedback Analysis Template

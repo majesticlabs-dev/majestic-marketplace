@@ -673,3 +673,9 @@ _This section captures important learnings as we work on this repository._
 **Learning:** Agents should do autonomous work, not just provide advice. If an agent only gives guidance without using tools meaningfully, it should be a skill instead. Good agents: read files, run commands, fetch web content, produce artifacts. Bad agents: "strategic advisor" (just advice), "code mentor" (persona without action).
 
 **Learning:** Thinking frameworks (like first-principles prompts) work better as skills than agents because they need to integrate into the user's ongoing conversation as LENSES for thinking, not produce a separate one-shot report. Structured workflows with distinct intake→analysis→output phases work better as agents.
+
+**Learning:** Skills must stay under 300 lines. When approaching this limit, extract verbose templates (>15 lines) to a `resources/` subdirectory and reference as "See resources/filename.md".
+
+**Learning:** Skill content must be copy-paste ready. Include: specific email copy, exact question scripts, {{variable}} placeholders. Exclude: "Why it works" explanations, ASCII diagrams, generic frameworks, "best practices" prose. Test: Could someone use this template immediately without reading explanations?
+
+**Learning:** When adding to existing skills, prefer lean additions. Add 3 concrete examples instead of 30 lines of framework. If the addition requires explanation to be useful, it's probably generic advice Claude already knows.

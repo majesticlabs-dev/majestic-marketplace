@@ -2,6 +2,45 @@
 
 All notable changes to majestic-sales will be documented in this file.
 
+## [1.1.0] - 2024-12-11
+
+### Added
+
+**Skills (1)**
+- `customer-expansion` - Create expansion roadmaps, QBR templates, and upsell playbooks to grow existing customer revenue through strategic account development.
+
+### Enhanced
+
+**sales-playbook**
+- Micro-commitment technique for discovery call closing
+- Commitment velocity metric for BANT+ qualification scoring
+- Investment framing language for price objection handling
+- Competitor gap analysis framework
+- Shadow selling technique for coaching internal champions
+- Stakeholder mapping table
+- Refactored: Extracted detailed frameworks to `resources/` directory:
+  - `discovery-framework.md` - Complete discovery call structure
+  - `demo-framework.md` - Demo flow and objection handling
+  - `objection-handling.md` - Full objection library by category
+  - `battle-cards.md` - Competitive positioning templates
+  - `closing-techniques.md` - All closing techniques
+  - `follow-up-templates.md` - Email templates
+
+**proposal-writer**
+- Trojan Horse "exploratory outline" format for faster deal velocity
+- Pricing psychology strategy with anchoring and bundling tactics
+- Done-With-You delivery model for $30K+ engagements
+
+**outbound-sequences**
+- Hyper-specific pain hook examples for cold outreach
+
+**icp-discovery**
+- Commitment velocity as ICP scoring criterion
+
+**win-back**
+- Post-loss referral request in exit survey
+- Referral email template for churned customers
+
 ## [1.0.0] - 2024-11-30
 
 ### Added
