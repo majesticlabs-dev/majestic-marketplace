@@ -2,6 +2,14 @@
 
 All notable changes to majestic-rails will be documented in this file.
 
+## [3.0.1] - 2025-12-13
+
+### Removed
+
+- **`/rails:code-review` command** - Redundant with `/majestic:code-review` which auto-detects Rails projects
+  - Use `/majestic:code-review` instead (delegates to same orchestrator for Rails projects)
+  - Follows DRY/YAGNI principles
+
 ## [3.0.0] - 2025-12-12
 
 ### Changed

@@ -142,16 +142,6 @@ To explicitly set your tech stack (recommended for multi-language projects), add
 tech_stack: rails  # rails | python | javascript | generic
 ```
 
-## Framework-Specific Commands
-
-For direct access to framework-specific reviews (skipping detection):
-
-| Framework | Command |
-|-----------|---------|
-| Rails | `/majestic-rails:code-review` |
-| Python | (use this command with `tech_stack: python`) |
-| Generic | (use this command with `tech_stack: generic`) |
-
 ## Examples
 
 ```bash

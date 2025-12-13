@@ -31,12 +31,9 @@ The command auto-detects your tech stack (Rails, Python, Node, etc.) and configu
 
 ```mermaid
 graph LR
-    subgraph "Choose One"
-        A1[Clear idea] --> P(/prd)
-        A2[Fuzzy idea] --> G(/guided-prd) --> P
-    end
-
     subgraph "/prd"
+        A1[Clear idea] --> P(/prd)
+        A2[Fuzzy idea] --> G(/prd --guided) --> P
         P --> AR{{architect}}
         AR --> PR{{plan-review}}
     end
@@ -47,8 +44,8 @@ graph LR
 
 | When | Use | Purpose |
 |------|-----|---------|
-| **Clear idea** | `/majestic:prd` | Generate PRD → architect designs → plan-review validates |
-| **Fuzzy idea** | `/majestic:guided-prd` | Discover through conversation → then runs `/prd` |
+| **Clear idea** | `/majestic:prd` | Batch questions → generate PRD → architect designs → plan-review validates |
+| **Fuzzy idea** | `/majestic:prd --guided` | Interactive one-at-a-time discovery → then generates PRD |
 
 ---
 
@@ -220,10 +217,9 @@ Invoke with: `/majestic-engineer:<category>:<name>`
 |---------|-------------|
 | `workflows:build-task` | Autonomous task implementation from any task management system (GitHub, Beads, Linear, file) |
 | `workflows:debug` | Debug errors, test failures, or unexpected behavior (auto-detects project type) |
-| `workflows:guided-prd` | Discover and refine a product idea through guided questioning, then generate a PRD |
 | `workflows:init-agents-md` | Initialize AGENTS.md with hierarchical structure and create CLAUDE.md symlink |
 | `workflows:plan` | Transform feature descriptions into well-structured project plans |
-| `workflows:prd` | Create a Product Requirements Document (PRD) for a new product or feature |
+| `workflows:prd` | Create a PRD for a product/feature. Use `--guided` flag for interactive discovery |
 | `workflows:question` | Answer questions about project structure without coding |
 | `workflows:ship-it` | Complete checkout workflow - runs linting, creates commit, and opens PR |
 

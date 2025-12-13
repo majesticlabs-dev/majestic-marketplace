@@ -1,7 +1,7 @@
 ---
 name: majestic:prd
 description: Create a Product Requirements Document (PRD) for a new product or feature
-argument-hint: "[product or feature description]"
+argument-hint: "[--guided] [product or feature description]"
 allowed-tools: Read, Write, Edit, WebSearch, WebFetch, AskUserQuestion
 ---
 
@@ -9,15 +9,39 @@ allowed-tools: Read, Write, Edit, WebSearch, WebFetch, AskUserQuestion
 
 Generate a comprehensive PRD that defines WHAT to build and WHY, with clear user stories, acceptance criteria, and success metrics.
 
-## Product/Feature Description
+## Arguments
 
-<product_description>
+<raw_arguments>
 $ARGUMENTS
-</product_description>
+</raw_arguments>
+
+**Parse arguments:**
+- If arguments start with `--guided`: Enable guided discovery mode (interactive one-question-at-a-time)
+- Otherwise: Use default mode (batch 3-5 questions upfront)
+
+Extract the product description by removing the `--guided` flag if present.
+
+---
+
+## Phase 0: Context Gathering (Guided Mode Only)
+
+**Skip this phase if NOT using `--guided` mode.**
+
+Before asking questions in guided mode, understand the project context:
+
+1. Check for README.md, CLAUDE.md, or docs/ directory
+2. Look at recent commits or changes
+3. Identify the tech stack and domain
+
+Use this context to tailor questions and skip obvious ones.
+
+---
 
 ## Phase 1: Clarifying Questions
 
-Before generating the PRD, use `AskUserQuestion` to ask 3-5 essential clarifying questions.
+### Default Mode (No --guided flag)
+
+Before generating the PRD, use `AskUserQuestion` to ask 3-5 essential clarifying questions **in a single batch**.
 
 <thinking>
 Analyze the product description to identify gaps in understanding. Focus on questions that would significantly impact the PRD's clarity. Only ask questions when the answer isn't reasonably inferable from the description.
@@ -48,6 +72,74 @@ Analyze the product description to identify gaps in understanding. Focus on ques
 Use `AskUserQuestion` with multiple questions (up to 4) and provide clear options for each. The tool automatically includes an "Other" option for custom responses.
 
 **IMPORTANT:** Wait for user responses before proceeding to Phase 2.
+
+### Guided Mode (--guided flag)
+
+**Use this mode when `--guided` flag is provided.**
+
+Ask questions **ONE AT A TIME**, not batched. This allows deeper exploration of each topic.
+
+**Question areas to cover (skip any answered by context):**
+
+1. **Problem/Opportunity**
+   - What problem are you solving?
+   - Who experiences this problem?
+   - How painful is it currently?
+
+2. **Solution Concept**
+   - How does your product/feature solve this?
+   - What's the core insight or approach?
+
+3. **Target Users**
+   - Who specifically will use this? (roles, personas)
+   - What's their technical level?
+   - How do they currently solve this problem?
+
+4. **Core Capabilities**
+   - What are the 3-5 must-have features?
+   - What explicitly is NOT included in v1?
+
+5. **Success Criteria**
+   - How will you know it's working?
+   - What metrics matter?
+   - What does "done" look like?
+
+6. **Constraints**
+   - Technical constraints (stack, integrations)?
+   - Time or resource constraints?
+   - Dependencies on other work?
+
+**Guided mode guidelines:**
+
+- **ONE question per turn** - never batch questions
+- **Multiple choice preferred** - when options are bounded, offer 3-4 choices
+- **Skip obvious questions** - if context already answered, move on
+- **Summarize every 2-3 questions** - confirm understanding before continuing
+- **Adapt based on answers** - follow interesting threads, skip irrelevant areas
+
+**Example guided question format:**
+
+```
+**What type of product is this?**
+- New standalone application
+- Feature for existing product
+- Internal tool
+- API/service
+```
+
+**After sufficient information gathered:**
+
+1. **Synthesize** what you've learned:
+   - Problem statement (1-2 sentences)
+   - Target users (who, technical level)
+   - Core solution (what it does)
+   - Must-have features (3-5 bullets)
+   - Success criteria (measurable)
+   - Key constraints
+
+2. **Present** a refined product description (2-3 paragraphs)
+
+3. **Confirm** with user before proceeding to PRD generation
 
 ---
 

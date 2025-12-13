@@ -1,6 +1,6 @@
 # Majestic Rails
 
-Ruby on Rails development tools. Includes 23 specialized agents, 4 commands, and 11 skills.
+Ruby on Rails development tools. Includes 23 specialized agents, 3 commands, and 12 skills.
 
 ## Installation
 
@@ -13,7 +13,7 @@ claude /plugin install majestic-rails
 ```mermaid
 graph LR
     A(/majestic:plan) --> B(/rails:build)
-    B --> C(/rails:code-review)
+    B --> C(/majestic:code-review)
     C --> D{{ship}}
 ```
 
@@ -22,7 +22,7 @@ graph LR
 | 1 | `/majestic:plan` | Research and create plan (from majestic-engineer) |
 | 2 | Choose next step | Build, review, backlog, or refine |
 | 3 | `/rails:build` | Implement the plan |
-| 4 | `/rails:code-review` | Smart multi-agent code review |
+| 4 | `/majestic:code-review` | Smart multi-agent code review (auto-detects Rails) |
 
 ## Quick Reference
 
@@ -30,7 +30,7 @@ graph LR
 |--------------|----------|
 | Plan a new feature | `/majestic:plan "feature"` |
 | Build from a plan | `/rails:build docs/plans/feature.md` |
-| Review code changes | `/rails:code-review` |
+| Review code changes | `/majestic:code-review` |
 | Debug Rails issues | `agent rails-debugger` |
 | Fix Rubocop violations | `agent rubocop-fixer` |
 | Optimize database queries | `agent database-optimizer` |
@@ -105,7 +105,8 @@ Invoke with: `/majestic-rails:<category>:<name>`
 | Command | Description |
 |---------|-------------|
 | `/rails:build` | Execute work plans efficiently - build features following Rails conventions |
-| `/rails:code-review` | Comprehensive code review using smart agent selection based on changed files |
+
+> **Note:** For code review, use `/majestic:code-review` from majestic-engineer (auto-detects Rails).
 
 ## Skills
 
@@ -134,11 +135,11 @@ Invoke with: `skill majestic-rails:<name>`
 # Build from a plan
 /rails:build docs/plans/add-user-authentication.md
 
-# Comprehensive code review (smart agent selection)
-/rails:code-review              # Review current branch vs main
-/rails:code-review #123         # Review PR #123
-/rails:code-review --staged     # Review staged changes
-/rails:code-review app/models/  # Review specific files
+# Code review (auto-detects Rails)
+/majestic:code-review              # Review current branch vs main
+/majestic:code-review #123         # Review PR #123
+/majestic:code-review --staged     # Review staged changes
+/majestic:code-review app/models/  # Review specific files
 
 # Gemfile management
 /majestic-rails:gemfile:organize              # Organize Gemfile with categories

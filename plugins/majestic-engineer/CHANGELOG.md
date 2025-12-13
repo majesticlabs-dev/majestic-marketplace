@@ -2,6 +2,20 @@
 
 All notable changes to majestic-engineer will be documented in this file.
 
+## [3.0.1] - 2025-12-13
+
+### Changed
+
+- **`/majestic:prd`** - Added `--guided` flag for interactive discovery mode
+  - Default: Batch 3-5 clarifying questions upfront
+  - `--guided`: One question at a time with context gathering and synthesis
+
+### Removed
+
+- **`/majestic:guided-prd`** - Merged into `/majestic:prd --guided`
+  - Use `/majestic:prd --guided` for the same interactive discovery flow
+  - Follows DRY principle: one command with a flag vs two separate commands
+
 ## [3.0.0] - 2025-12-12
 
 ### Changed

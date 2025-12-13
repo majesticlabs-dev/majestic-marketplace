@@ -133,7 +133,7 @@ Commands use a strategic three-tier naming system based on scope and purpose:
 
 **2. Framework-Specific Commands** - Use framework prefix for workflows tied to specific technologies:
 - **Pattern**: `name: framework:command-name`
-- **Examples**: `/rails:build`, `/rails:code-review`
+- **Examples**: `/rails:build`
 - **When to use**: Workflows specific to Rails, Python, etc.
 - **Location**: `plugins/majestic-{framework}/commands/workflows/`
 
