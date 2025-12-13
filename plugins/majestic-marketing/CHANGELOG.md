@@ -2,6 +2,41 @@
 
 All notable changes to majestic-marketing will be documented in this file.
 
+## [3.1.0] - 2025-12-13
+
+### Added
+
+**Skills (1)**
+- `aeo-scorecard` - AEO measurement framework with the four key metrics: AI Visibility, AI Share of Voice, AI Citations, and Referral Demand. Includes scorecard template, tool recommendations, and monthly review cadence.
+
+### Enhanced
+
+**AEO (Answer Engine Optimization) Enhancements**
+
+Based on actionable AEO presentation recommendations:
+
+- **`llm-optimizer`** - Added 7-step AEO on-page checklist:
+  1. Put the Answer First - Direct answer in first sentence
+  2. Go One Click Deeper - Context/definitions for credibility
+  3. Reference Original Data - Proprietary stats and case studies
+  4. Include FAQ Section - 3+ fan-out sub-questions answered
+  5. Add Structure - Bullets, tables, explicit headers
+  6. "Taco Bell Test" (Chunking) - Each section stands alone
+  7. Tie Back to Product - Connect educational content to brand
+  - Also added query fan-out tools (Kuforia) and examples
+
+- **`entity-builder`** - Added AI citation source strategy:
+  - "Mentions > Backlinks" principle for AEO
+  - How to identify currently-cited sources (XFunnel)
+  - Outreach for contextual mentions (not just links)
+  - Human-first channel seeding (YouTube, newsletters, LinkedIn)
+  - Feature-specific review guidance for UGC
+
+- **`content-planner`** - Added buyer persona × journey grid:
+  - 3×4 Content Grid template (Personas × Journey Stages)
+  - Three-pronged query sourcing (keyword data, social listening, internal data)
+  - Funnel-stage query tagging system
+
 ## [3.0.0] - 2025-12-12
 
 ### Changed

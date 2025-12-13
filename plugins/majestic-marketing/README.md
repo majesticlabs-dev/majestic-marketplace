@@ -1,6 +1,6 @@
 # Majestic Marketing
 
-Marketing and SEO tools for Claude Code. Includes 14 specialized agents, 2 commands, and 25 skills.
+Marketing and SEO tools for Claude Code. Includes 14 specialized agents, 2 commands, and 26 skills.
 
 ## Installation
 
@@ -116,18 +116,37 @@ Invoke with: `skill majestic-marketing:<name>`
 | `email-nurture` | Automated email sequences with segmentation and triggers |
 | `retention-system` | Customer retention with health scoring and churn prediction |
 
-## SEO vs GEO
+### GEO/AEO (AI Visibility)
 
-This plugin covers both traditional SEO and modern GEO (Generative Engine Optimization):
+| Skill | Description |
+|-------|-------------|
+| `aeo-scorecard` | AEO measurement framework with AI visibility, share of voice, and citation metrics |
 
-| Aspect | Traditional SEO | GEO Focus |
-|--------|-----------------|-----------|
+## SEO vs GEO vs AEO
+
+This plugin covers traditional SEO, GEO (Generative Engine Optimization), and AEO (Answer Engine Optimization):
+
+| Aspect | Traditional SEO | GEO/AEO Focus |
+|--------|-----------------|---------------|
 | Goal | Rank in search results | Get cited in AI responses |
 | Focus | Keywords + backlinks | Semantic depth + fact-density |
 | Structure | Readable by humans | Extractable by AI |
 | Authority | Domain authority | Citation quality + source reputation |
+| Measurement | Rankings, traffic | AI visibility, share of voice, citations |
 
-The GEO-focused agents (`llm-optimizer`, `entity-builder`, `schema-architect`) help ensure your content appears in AI-generated answers from ChatGPT, Perplexity, Gemini, and other LLMs.
+### AEO-Enhanced Agents
+
+- **`llm-optimizer`** - Now includes 7-step AEO on-page checklist, query fan-out analysis, and the "Taco Bell Test" for content chunking
+- **`entity-builder`** - Enhanced with AI citation source strategy (mentions > backlinks) and feature-specific review guidance
+- **`content-planner`** - Now includes buyer persona × journey grid and three-pronged query sourcing
+
+### AEO Measurement
+
+Use `skill aeo-scorecard` to learn the four key AEO metrics:
+1. **AI Visibility** - Are you recommended for priority queries?
+2. **AI Share of Voice** - Your mentions vs. competitors
+3. **AI Citations** - Is YOUR site the source?
+4. **Referral Demand** - Traffic from AI that doesn't click through
 
 ## Usage Examples
 

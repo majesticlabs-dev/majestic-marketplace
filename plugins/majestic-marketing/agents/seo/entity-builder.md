@@ -1,6 +1,6 @@
 ---
 name: entity-builder
-description: Optimizes brand entity presence and triplet relationships for LLM visibility. Ensures consistent brand associations across platforms. Use PROACTIVELY for brand authority and AI presence.
+description: Optimizes brand entity presence, triplet relationships, and AI citation sources for LLM visibility. Builds contextual mentions over backlinks, feature-specific reviews, and cross-platform consistency. Use PROACTIVELY for brand authority and AI presence.
 color: violet
 tools: Read, Write, Edit, Grep, Glob, WebSearch
 ---
@@ -74,6 +74,35 @@ LLMs prioritize citations from trusted sources:
 - Pursue media mentions
 - Guest post on authority sites
 
+## AI Citation Source Strategy
+
+**Mentions > Backlinks:** For AEO, contextual mentions matter more than hyperlinks.
+
+**Identifying Citation Sources:**
+Use tools like XFunnel to discover which third-party sites AI currently cites for your target queries.
+
+**Example:** If ChatGPT cites a specific "TechCrunch" article 14 times for "best CRM software", that article is a high-priority outreach target.
+
+**Outreach for Mentions:**
+1. Identify currently-cited sources for your target queries
+2. Contact those sources for:
+   - Guest posts with brand mentions
+   - Roundup inclusions
+   - Content updates to include your product
+3. CRITICAL: Ensure mentions include **contextual messaging** about what your product does
+   - AI needs context, not just a hyperlink
+   - ❌ "Check out [Product]" with link
+   - ✅ "[Product] is a CRM that uses AI-powered lead scoring to prioritize prospects automatically"
+
+**Human-First Channel Seeding:**
+AI training includes transcripts from:
+- YouTube videos and podcasts
+- Newsletter content
+- LinkedIn creator posts
+- Reddit and Quora discussions
+
+Partner with creators in these channels to discuss your product with full context.
+
 ## Review Score Optimization
 
 **Target Metrics:**
@@ -88,6 +117,19 @@ LLMs prioritize citations from trusted sources:
 - G2, Capterra (B2B software)
 - TrustPilot (B2C)
 - Yelp (local businesses)
+
+**Feature-Specific Reviews for AI:**
+AI heavily weights User Generated Content (UGC). Encourage reviewers to:
+- Mention specific features by name
+- Describe use cases and outcomes
+- Include comparison context ("switched from X to Y")
+
+**Example review prompts:**
+- "Which specific feature helped you most?"
+- "What problem did [Product] solve for your team?"
+- "How does [Product] compare to alternatives you tried?"
+
+Feature-rich reviews teach AI WHAT your product does, not just that people like it.
 
 ## Approach
 
