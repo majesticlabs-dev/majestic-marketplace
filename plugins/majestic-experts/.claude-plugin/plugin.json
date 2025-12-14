@@ -14,37 +14,5 @@
     "expert-simulation",
     "consensus",
     "debate"
-  ],
-  "components": {
-    "agents": 2,
-    "commands": 1,
-    "experts": 22
-  },
-  "categories": [
-    {
-      "id": "engineering",
-      "name": "Engineering",
-      "count": 6
-    },
-    {
-      "id": "business",
-      "name": "Business Strategy",
-      "count": 7
-    },
-    {
-      "id": "product",
-      "name": "Product",
-      "count": 4
-    },
-    {
-      "id": "pricing",
-      "name": "Pricing & Monetization",
-      "count": 3
-    },
-    {
-      "id": "security",
-      "name": "Security",
-      "count": 2
-    }
   ]
 }

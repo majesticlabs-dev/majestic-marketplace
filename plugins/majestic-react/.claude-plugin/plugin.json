@@ -8,11 +8,7 @@
     "url": "https://github.com/majesticlabs-dev"
   },
   "homepage": "https://github.com/majesticlabs-dev/majestic-marketplace/tree/master/plugins/majestic-react",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/majesticlabs-dev/majestic-marketplace.git",
-    "directory": "plugins/majestic-react"
-  },
+  "repository": "https://github.com/majesticlabs-dev/majestic-marketplace.git",
   "keywords": [
     "react",
     "typescript",
@@ -24,68 +20,5 @@
     "vite",
     "ai-powered",
     "workflow-automation"
-  ],
-  "components": {
-    "agents": 3,
-    "skills": 3
-  },
-  "agents": {
-    "code": [
-      {
-        "name": "react-coder",
-        "description": "Write modern React components with TypeScript, hooks, and best practices",
-        "use_cases": [
-          "Generate functional components with proper typing",
-          "Create custom hooks with cleanup logic",
-          "Implement compound components and composition patterns",
-          "Build forms with validation and error handling"
-        ]
-      }
-    ],
-    "review": [
-      {
-        "name": "react-reviewer",
-        "description": "Review React components for best practices, performance, accessibility, and testing coverage",
-        "use_cases": [
-          "Code review for React components",
-          "Performance optimization suggestions",
-          "Accessibility compliance checking",
-          "Hook dependency validation",
-          "TypeScript type safety review"
-        ]
-      }
-    ],
-    "plan": [
-      {
-        "name": "react-architect",
-        "description": "Design React application architecture and component hierarchies",
-        "use_cases": [
-          "Plan component structure and state management",
-          "Design scalable folder organization",
-          "Recommend performance optimization strategies",
-          "Create testing strategy and coverage plan"
-        ]
-      }
-    ]
-  },
-  "skills": {
-    "patterns": [
-      {
-        "name": "react-patterns",
-        "description": "Modern React patterns including hooks, composition, state management, and concurrent features"
-      }
-    ],
-    "testing": [
-      {
-        "name": "react-testing",
-        "description": "React Testing Library and Vitest patterns for component and integration testing"
-      }
-    ],
-    "styling": [
-      {
-        "name": "tailwind-styling",
-        "description": "Responsive, performant Tailwind CSS styling for React components"
-      }
-    ]
-  }
+  ]
 }
