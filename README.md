@@ -4,6 +4,21 @@ The Majestic marketplace where we share our workflows.
 
 **New here?** Check out the [Marketplace Tutorial](https://tutorial.majesticmarketplace.com) for an interactive walkthrough.
 
+## The Shift: Engineers Orchestrate Agents
+
+Coding is no longer the bottleneck. Planning, review, and learning loops matter more than syntax. Each feature makes the next one easier to build.
+
+### Plan → Work → Assess → Reflect
+
+| Step | What Happens | Key Tools |
+|------|--------------|-----------|
+| **Plan** | Agents research codebase + best practices, produce detailed implementation plans | `/majestic:plan`, `architect` agent |
+| **Work** | Agents write code, tests, and iterate using real app feedback | `/majestic:build-task`, coder skills |
+| **Assess** | Multi-angle review: security, performance, simplicity, conventions | `/majestic:code-review`, `quality-gate` |
+| **Reflect** | Analyze session patterns, capture lessons so future agents improve | `/majestic-tools:insight:reflect`, `/majestic:add-lesson` |
+
+See the [Workflow Guide](https://github.com/majesticlabs-dev/majestic-marketplace/wiki/Workflow-Guide) for detailed documentation.
+
 ## Quick Start
 
 Run the installer:
