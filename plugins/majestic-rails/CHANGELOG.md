@@ -2,6 +2,29 @@
 
 All notable changes to majestic-rails will be documented in this file.
 
+## [3.1.0] - 2025-12-14
+
+### Added
+
+- **`references/stimulus-catalog.md`** - 11 copy-paste-ready Stimulus controllers
+  - clipboard, toggle, autoresize, hotkey, local-time, fetch-on-visible, dialog, form, local-save, element-removal, auto-click
+  - Design principles: static values, dispatch for communication, private methods
+- **`references/css-architecture.md`** - Native CSS patterns (no Sass/Tailwind)
+  - CSS @layer system for cascade control
+  - OKLCH color system with programmatic manipulation
+  - Native CSS nesting patterns
+  - Dark mode (system preference + manual toggle)
+- **Multi-tenancy via URL structure** in `references/config-tips.md`
+  - AccountSlug middleware pattern
+  - SCRIPT_NAME-based URL generation
+  - Testing helpers for account-scoped tests
+
+### Enhanced
+
+- **`dhh-code-reviewer` agent** - Added comprehensive "What 37signals Deliberately Avoids" section
+  - 10 categories: Auth, Authorization, Jobs, Caching, WebSockets, Testing, Architecture, JavaScript, CSS, Infrastructure
+  - Each with: what to avoid, why, and the vanilla Rails alternative
+
 ## [3.0.1] - 2025-12-13
 
 ### Removed

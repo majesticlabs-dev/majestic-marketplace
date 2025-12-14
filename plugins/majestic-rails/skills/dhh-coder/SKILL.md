@@ -201,10 +201,14 @@ For comprehensive patterns and examples, see:
 - `references/hotwire-tips.md` - Turbo Frames, Turbo Streams, Stimulus, ViewComponents
 - `references/turbo-morphing.md` - Turbo 8 page refresh with morphing patterns
 - `references/activestorage-tips.md` - File uploads, attachments, blob handling
+- `references/stimulus-catalog.md` - Copy-paste-ready Stimulus controllers (clipboard, dialog, hotkey, etc.)
+
+### Frontend
+- `references/css-architecture.md` - Native CSS patterns (layers, OKLCH, nesting, dark mode)
 
 ### Performance & Infrastructure
 - `references/caching-strategies.md` - Russian Doll caching, Solid Cache, cache analysis
-- `references/config-tips.md` - Configuration, logging, deployment, PostgreSQL patterns
+- `references/config-tips.md` - Configuration, logging, deployment, multi-tenancy patterns
 - `references/resources.md` - Links to source material and further reading
 
 ## Philosophy Summary

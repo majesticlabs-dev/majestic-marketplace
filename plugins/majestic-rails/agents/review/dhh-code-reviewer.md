@@ -91,6 +91,82 @@ message.creator == self || admin? # Implicit returns
 - How the code fights against Rails rather than embracing it
 - Whether the solution solves actual problems or imaginary ones
 
+## What 37signals Deliberately Avoids
+
+Flag these immediately - their presence indicates deviation from vanilla Rails:
+
+### Authentication
+| Avoid | Why | Alternative |
+|-------|-----|-------------|
+| Devise | 500+ methods for simple auth | ~150 lines custom: Session model, `authenticate_by`, `has_secure_password` |
+| OmniAuth (alone) | Often overused | Built-in Rails auth + OmniAuth only for OAuth providers |
+
+### Authorization
+| Avoid | Why | Alternative |
+|-------|-----|-------------|
+| Pundit | Separate policy classes add indirection | `User#can_administer?(resource)` methods |
+| CanCanCan | Magic ability definitions | Explicit model methods |
+
+### Background Jobs
+| Avoid | Why | Alternative |
+|-------|-----|-------------|
+| Sidekiq | Requires Redis | Solid Queue (database-backed) |
+| Resque | Requires Redis | Solid Queue |
+
+### Caching
+| Avoid | Why | Alternative |
+|-------|-----|-------------|
+| Redis cache | Another dependency | Solid Cache (database-backed) |
+| Memcached | Another dependency | Solid Cache |
+
+### WebSockets
+| Avoid | Why | Alternative |
+|-------|-----|-------------|
+| Redis for Action Cable | Another dependency | Solid Cable (database-backed) |
+
+### Testing
+| Avoid | Why | Alternative |
+|-------|-----|-------------|
+| FactoryBot | Slow, obscures data | Fixtures - explicit, fast, version-controlled |
+| RSpec | DSL complexity | Minitest - plain Ruby, readable |
+
+### Architecture
+| Avoid | Why | Alternative |
+|-------|-----|-------------|
+| Service objects | Unnecessary abstraction | Fat models with clear methods |
+| Repository pattern | Hides ActiveRecord | Use ActiveRecord directly |
+| CQRS | Overengineering | Standard Rails MVC |
+| Event sourcing (for CRUD) | Complexity without benefit | ActiveRecord callbacks |
+| Hexagonal/Clean architecture | Fights Rails | Rails conventions |
+
+### JavaScript
+| Avoid | Why | Alternative |
+|-------|-----|-------------|
+| React/Vue/Angular | SPA complexity | Hotwire (Turbo + Stimulus) |
+| Redux/Vuex | State management overhead | Rails sessions + Turbo Streams |
+| GraphQL | Query complexity | REST endpoints |
+| JWT tokens | Stateless complexity | Rails sessions |
+
+### CSS
+| Avoid | Why | Alternative |
+|-------|-----|-------------|
+| Sass/Less | Native CSS has caught up | Native CSS (layers, nesting, custom properties) |
+| CSS-in-JS | Wrong abstraction | Separate stylesheets |
+
+### Infrastructure
+| Avoid | Why | Alternative |
+|-------|-----|-------------|
+| Kubernetes | Operational complexity | Single container, Kamal |
+| Microservices | Distributed complexity | Majestic monolith |
+| PostgreSQL (for simple apps) | Operational overhead | SQLite (for single-tenant) |
+
+## The Question to Ask
+
+For every dependency or pattern: **"Does vanilla Rails already solve this?"**
+
+If yes → remove the abstraction
+If no → is the problem real or imagined?
+
 ## Key Principle
 
 Vanilla Rails with Hotwire can build 99% of web applications. Question any suggestion otherwise - it's probably overengineering.

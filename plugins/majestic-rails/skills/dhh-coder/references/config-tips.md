@@ -1,6 +1,145 @@
 # Configuration & Operations Tips Reference
 
-Practical patterns for Rails configuration, logging, and deployment.
+Practical patterns for Rails configuration, logging, deployment, and multi-tenancy.
+
+## Multi-Tenancy via URL Structure
+
+37signals pattern: tenant identification through URL path, not subdomains. Simpler SSL, easier local development.
+
+### Middleware Approach
+
+```ruby
+# config/application.rb
+config.middleware.use "AccountSlug"
+
+# app/middleware/account_slug.rb
+class AccountSlug
+  def initialize(app)
+    @app = app
+  end
+
+  def call(env)
+    request = ActionDispatch::Request.new(env)
+
+    if (match = request.path.match(%r{^/a/([^/]+)}))
+      env["SCRIPT_NAME"] = "/a/#{match[1]}"
+      env["PATH_INFO"] = request.path.sub(%r{^/a/[^/]+}, "")
+      env["PATH_INFO"] = "/" if env["PATH_INFO"].empty?
+      env["account_slug"] = match[1]
+    end
+
+    @app.call(env)
+  end
+end
+```
+
+### Controller Integration
+
+```ruby
+# app/controllers/application_controller.rb
+class ApplicationController < ActionController::Base
+  before_action :set_current_account
+
+  private
+
+  def set_current_account
+    if (slug = request.env["account_slug"])
+      Current.account = Account.find_by!(slug: slug)
+    end
+  end
+
+  def default_url_options
+    if Current.account
+      { script_name: "/a/#{Current.account.slug}" }
+    else
+      {}
+    end
+  end
+end
+```
+
+### Routes
+
+```ruby
+# config/routes.rb
+Rails.application.routes.draw do
+  # Public routes (no account context)
+  root "marketing#index"
+  get "login", to: "sessions#new"
+  post "login", to: "sessions#create"
+
+  # Account-scoped routes (accessed via /a/:slug/*)
+  scope "a/:account_slug" do
+    resources :projects
+    resources :messages
+    root "dashboards#show"
+  end
+end
+```
+
+### URL Generation
+
+```ruby
+# With SCRIPT_NAME set, all URL helpers automatically include account prefix
+
+# In controller (Current.account = acme)
+projects_url
+# => "https://app.com/a/acme/projects"
+
+link_to "Projects", projects_path
+# => <a href="/a/acme/projects">Projects</a>
+
+# Cross-account links require explicit script_name
+link_to "Other", projects_url(script_name: "/a/other-account")
+```
+
+### Current Attributes for Account
+
+```ruby
+# app/models/current.rb
+class Current < ActiveSupport::CurrentAttributes
+  attribute :user, :account, :session
+
+  def account=(account)
+    super
+    # Set account-specific time zone if needed
+  end
+end
+
+# Usage anywhere
+Current.account.projects.find(params[:id])
+```
+
+### Testing
+
+```ruby
+# test/test_helper.rb
+class ActionDispatch::IntegrationTest
+  def with_account(account)
+    host! "app.test"
+    # Set the script name for URL generation
+    @script_name = "/a/#{account.slug}"
+  end
+
+  def process(method, path, **options)
+    if @script_name && !path.start_with?(@script_name)
+      path = "#{@script_name}#{path}"
+    end
+    super
+  end
+end
+
+# test/integration/projects_test.rb
+class ProjectsTest < ActionDispatch::IntegrationTest
+  test "lists projects for account" do
+    with_account(accounts(:acme))
+    sign_in(users(:alice))
+
+    get projects_path
+    assert_response :success
+  end
+end
+```
 
 ## Custom Configuration with config_for
 
