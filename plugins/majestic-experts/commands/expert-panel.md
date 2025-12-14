@@ -24,20 +24,20 @@ Assemble a panel of thought leaders to explore difficult questions. Get consensu
 
 #### Flag: --list
 
-1. Glob `plugins/majestic-experts/.claude/panels/*.json`
+1. Glob `~/.claude/plugins/majestic-experts/.claude/panels/*.json`
 2. For each file, Read and display: `id`, `topic`, `status`, `rounds.length`, `created_at`
 3. Exit after listing
 
 #### Flag: --resume {panel-id}
 
 1. Extract panel ID from arguments
-2. Read `plugins/majestic-experts/.claude/panels/{panel-id}.json`
+2. Read `~/.claude/plugins/majestic-experts/.claude/panels/{panel-id}.json`
 3. If not found: error and exit
 4. Display resume info, then skip to Step 6 with `RESUME_DATA`
 
 #### Flag: --export {panel-id}
 
-1. Read `plugins/majestic-experts/.claude/panels/{panel-id}.json`
+1. Read `~/.claude/plugins/majestic-experts/.claude/panels/{panel-id}.json`
 2. If not found: error and exit
 3. Generate markdown export (see Export section)
 4. Write to `expert-panel-{panel-id}.md` in current directory
@@ -60,7 +60,7 @@ multiSelect: false
 
 ### Step 2: Load Experts & Apply Filters
 
-1. Read `plugins/majestic-experts/experts/registry.yml`
+1. Read `~/.claude/plugins/majestic-experts/experts/registry.yml`
 2. Check `.agents.yml` for `expert_panel` config:
 
 ```yaml
@@ -132,10 +132,10 @@ Topic: [topic]
 Experts:
   - name: [Expert]
     credentials: [from registry]
-    definition: plugins/majestic-experts/experts/{category}/{name}.md
+    definition: ~/.claude/plugins/majestic-experts/experts/{category}/{name}.md
 Discussion Type: [confirmed type]
 Audience: [from .agents.yml tech_stack or "technical team"]
-Save Path: plugins/majestic-experts/.claude/panels/[panel-id].json
+Save Path: ~/.claude/plugins/majestic-experts/.claude/panels/[panel-id].json
 ```
 
 #### Resume Discussion:
@@ -147,7 +147,7 @@ Prompt:
 Mode: resume
 Resume Data: [JSON from file]
 Panel ID: [from file]
-Save Path: plugins/majestic-experts/.claude/panels/[panel-id].json
+Save Path: ~/.claude/plugins/majestic-experts/.claude/panels/[panel-id].json
 ```
 
 ### Step 7: Present Results
