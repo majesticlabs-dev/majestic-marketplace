@@ -2,6 +2,24 @@
 
 All notable changes to majestic-marketing will be documented in this file.
 
+## [3.2.0] - 2025-12-13
+
+### Added
+
+**Commands (1)**
+- `/aeo-workflow` - Complete AEO (Answer Engine Optimization) workflow command. Guides through all 7 phases:
+  1. Strategy - Build buyer persona × journey grid
+  2. Research - Three-pronged query sourcing
+  3. Gaps - Identify AI visibility gaps
+  4. Fan-out - Analyze query sub-questions
+  5. Content - Apply 7-step AEO checklist
+  6. Authority - Off-site mentions strategy
+  7. Measure - Track 4 AEO metrics
+
+### Documentation
+
+- Added comprehensive [AEO Strategy Guide](https://github.com/majesticlabs-dev/majestic-marketplace/wiki/AEO-Strategy-Guide) to wiki
+
 ## [3.1.0] - 2025-12-13
 
 ### Added

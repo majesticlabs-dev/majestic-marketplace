@@ -1,6 +1,6 @@
 # Majestic Marketing
 
-Marketing and SEO tools for Claude Code. Includes 14 specialized agents, 2 commands, and 26 skills.
+Marketing and SEO tools for Claude Code. Includes 14 specialized agents, 3 commands, and 26 skills.
 
 ## Installation
 
@@ -12,6 +12,7 @@ claude /plugin install majestic-marketing
 
 | I want to... | Use this |
 |--------------|----------|
+| **Complete AEO workflow** | `/majestic-marketing:workflows:aeo-workflow` |
 | Quick SEO audit | `/majestic-marketing:workflows:seo-audit` |
 | Comprehensive content check | `/majestic-marketing:workflows:content-check` |
 | Optimize for AI citation | `agent llm-optimizer` |
