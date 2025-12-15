@@ -38,15 +38,34 @@
 | Keyword | Match Type | Est. CPC | Search Vol | Intent |
 |---------|------------|----------|------------|--------|
 | [product category] software | Exact | $[X] | [X]/mo | Transactional |
-| best [product category] | Phrase | $[X] | [X]/mo | Commercial |
+| best [product category] | Exact | $[X] | [X]/mo | Commercial |
 | [product category] for [use case] | Exact | $[X] | [X]/mo | Transactional |
 | [competitor] alternative | Exact | $[X] | [X]/mo | Commercial |
+
+### Keyword Discovery Process (2026)
+
+**Using Google Keyword Planner:**
+1. Tools > Keyword Planner > Discover new keywords
+2. Input seed term + website URL for context
+3. Filter: average monthly searches > 30 (avoid low-volume noise)
+4. Prioritize head terms over long-tail—match types capture variants anyway
+5. Use "Refine Keywords" to identify themes (running, hiking, gender-specific, etc.)
+
+**Validation checklist:**
+- [ ] Competition level checked (how many advertisers bid)
+- [ ] Top-of-page bid estimates reviewed for expected CPCs
+- [ ] Forecast Tool run for scaling potential and budget expectations
+
+**Head term vs. long-tail (2026 guidance):**
+- Prefer: "compression knee sleeves" (9,900 searches)
+- Skip: "best compression knee sleeve for arthritis" (140 searches)
+- Why: Exact and broad match now capture long-tail variants automatically
 
 ### Standard Negative Keywords
 ```
 -free -cheap -diy -job -jobs -career -careers
 -salary -course -courses -training -certification
--template -reddit -quora
+-template -reddit -quora -repair -rental -used
 ```
 
 ## RSA Headlines Library (30 char max)

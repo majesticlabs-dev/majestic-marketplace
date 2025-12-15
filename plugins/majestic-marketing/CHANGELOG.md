@@ -2,6 +2,24 @@
 
 All notable changes to majestic-marketing will be documented in this file.
 
+## [3.3.0] - 2025-12-14
+
+### Enhanced
+
+**`google-ads-strategy` - 2026 Match Type Updates**
+
+Updated with current Google Ads best practices based on 2026 match type evolution:
+
+- **Match type guidance**: Skip phrase match in new campaigns—now redundant due to AI-driven overlaps with exact and broad
+- **Recommended mix**: 70% exact match (control) + 30% broad match (discovery)
+- **Ad group structure**: One theme per ad group, max 20 keywords
+- **Keyword discovery process**: Google Keyword Planner workflow with validation checklist
+- **Head term priority**: Prefer high-volume head terms—match types capture long-tail variants automatically
+- **Optimization roadmap**: Week-by-week cadence (Weeks 1-2, 3-4, Month 2, Month 3+)
+- **Expanded negatives**: Added "repair", "rental", "used" to standard negative keyword list
+
+Based on [Jackson Blackledge's Google Ads Keyword Research Playbook](https://x.com/blvckledge) for DTC brands.
+
 ## [3.2.0] - 2025-12-13
 
 ### Added

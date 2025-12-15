@@ -52,10 +52,22 @@ See `resources/templates.md` for detailed architecture diagram.
 - **Competitor**: [competitor name], [competitor] pricing
 - **Research/TOFU**: what is [category], how to [solve problem]
 
-**Match type progression:**
-1. Launch: Exact + Phrase (control, learn)
-2. Scale: Add Broad (discover new terms)
-3. Optimize: Shift to winners
+**Match type strategy (2026):**
+
+Google has broadened match behaviors—exact match now triggers close variants and related terms, phrase match overlaps heavily with broad.
+
+| Match Type | When to Use | Keywords per Ad Group |
+|------------|-------------|----------------------|
+| **Exact** | High-intent precision, control | 5-10 keywords |
+| **Phrase** | Skip in new campaigns—redundant in 2025 | N/A |
+| **Broad** | Discovery, conversational queries | 1-2 phrases (3-5 words each) |
+
+**Recommended mix:** ~70% exact match (control) + ~30% broad match (discovery)
+
+**Ad group structure:**
+- One theme per ad group (e.g., all "knee sleeves for running")
+- Maximum 20 keywords per ad group
+- Build negative keywords aggressively (block: "DIY", "repair", "free", "job")
 
 See `resources/templates.md` for keyword tables and negative keyword list.
 
@@ -129,6 +141,17 @@ See `resources/templates.md` for complete ad copy library.
 - [ ] GTM conversion tags firing
 
 ### 8. Optimization Cadence
+
+**Ongoing roadmap (keyword research is never "done"):**
+
+| Phase | Timeline | Focus | Actions |
+|-------|----------|-------|---------|
+| Launch | Weeks 1-2 | Data gathering | Launch campaigns, gather data, add obvious negatives |
+| Refine | Weeks 3-4 | Search term mining | Review search term reports, add top performers as exact match |
+| Optimize | Month 2 | Match type tuning | Refine negatives, adjust match types based on data |
+| Scale | Month 3+ | Expansion | Build new themed ad groups from emerging patterns |
+
+**Daily/Weekly/Monthly actions:**
 
 | Frequency | Actions |
 |-----------|---------|
