@@ -2,6 +2,12 @@
 
 All notable changes to majestic-engineer will be documented in this file.
 
+## [3.1.1] - 2025-12-15
+
+### Changed
+
+- **Renamed `/majestic:design-plan` → `/majestic:ux-brief`** - Clearer name that signals UI/UX focus
+
 ## [3.0.1] - 2025-12-13
 
 ### Changed
@@ -49,7 +55,7 @@ All notable changes to majestic-engineer will be documented in this file.
   - Added "(Recommended)" indicators to `AskUserQuestion` options where there's a clear best choice
   - Updated `/majestic:plan` - "Start building" marked as recommended
   - Updated `/majestic:prd` - "Done" marked as recommended (balanced PRD is sufficient by default)
-  - Updated `/majestic:design-plan` - "Start building" marked as recommended
+  - Updated `/majestic:ux-brief` - "Start building" marked as recommended
   - Updated `/changelog` - "Display only" marked as recommended
   - Added `argument-hint:` frontmatter to `/pr-review` and `/pickup` commands for better discoverability
 
@@ -84,7 +90,7 @@ All notable changes to majestic-engineer will be documented in this file.
 - **Updated auto-preview pattern** - Commands now use `config-reader` agent instead of inline Read calls
   - `/majestic:plan`
   - `/majestic:prd`
-  - `/majestic:design-plan`
+  - `/majestic:ux-brief`
   - `/majestic:handoff`
 - **Imperative instructions** - Auto-preview check now uses "MUST" language to ensure execution
 - **Fixed agent count** - Updated description from 20 to 25 agents (was out of sync)
@@ -176,7 +182,7 @@ All notable changes to majestic-engineer will be documented in this file.
 
 ### Added
 
-- `/majestic:design-plan` command - Plan UI/UX design direction through guided discovery before implementation. Covers aesthetic direction, typography, color, motion, and integrates with `frontend-design` skill and `ui-ux-designer` agent.
+- `/majestic:ux-brief` command - Plan UI/UX design direction through guided discovery before implementation. Covers aesthetic direction, typography, color, motion, and integrates with `frontend-design` skill and `ui-ux-designer` agent.
 
 ## [1.24.1] - 2025-12-04
 

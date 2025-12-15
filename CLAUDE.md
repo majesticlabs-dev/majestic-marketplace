@@ -770,7 +770,7 @@ When commands create markdown files (plans, PRDs, briefs, handoffs), they MUST f
 **Commands using this pattern:**
 - `/majestic:plan` → `docs/plans/<title>.md`
 - `/majestic:prd` → `docs/prd/prd-<name>.md`
-- `/majestic:design-plan` → `docs/design/<name>-brief.md`
+- `/majestic:ux-brief` → `docs/design/<name>-brief.md`
 - `/majestic:handoff` → `.claude/handoffs/<timestamp>-<slug>.md`
 
 ## Key Learnings
