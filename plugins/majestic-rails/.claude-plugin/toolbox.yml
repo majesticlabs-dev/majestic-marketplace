@@ -8,8 +8,8 @@ priority: 100
 
 build_task:
   executor:
-    build_agent: majestic-rails:rails-coder
-    fix_agent: majestic-rails:rails-coder
+    build_agent: general-purpose
+    fix_agent: general-purpose
 
   research_hooks:
     - id: gem_research

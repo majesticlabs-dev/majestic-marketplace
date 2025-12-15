@@ -1,6 +1,6 @@
 # Majestic Rails
 
-Ruby on Rails development tools. Includes 24 specialized agents, 3 commands, and 12 skills.
+Ruby on Rails development tools. Includes 23 specialized agents, 3 commands, and 12 skills.
 
 ## Installation
 
@@ -52,7 +52,6 @@ Invoke with: `agent <name>`
 
 | Agent | Description |
 |-------|-------------|
-| `rails-coder` | Default Rails implementation agent - implements features directly, delegates to specialists by domain |
 | `action-mailer-coder` | Create emails with parameterized mailers, previews, and background delivery |
 | `action-policy-coder` | Authorization with ActionPolicy - policies, scopes, caching, GraphQL integration |
 | `active-job-coder` | Create background jobs with Rails 8 conventions, Solid Queue patterns, and retry strategies |
