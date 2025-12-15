@@ -1,6 +1,6 @@
 # Majestic Engineer
 
-Language-agnostic engineering workflows. Includes 20 specialized agents, 19 commands, and 13 skills.
+Language-agnostic engineering workflows. Includes 26 specialized agents, 19 commands, and 13 skills.
 
 ## Installation
 
@@ -183,6 +183,7 @@ Invoke with: `agent <name>`
 | `task-fetcher` | Fetch task from configured backend (GitHub, Beads, Linear, file) |
 | `task-status-updater` | Update task status (claim/ship) across backends |
 | `workspace-setup` | Create branch or worktree based on project configuration |
+| `toolbox-resolver` | Discover and resolve tech-stack toolbox manifests from installed plugins |
 
 ## Commands
 

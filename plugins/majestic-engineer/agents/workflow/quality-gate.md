@@ -83,11 +83,33 @@ Map shorthand names to full agent paths:
 
 If a name already contains `:`, use it as-is. Unknown names should be logged as warnings and skipped.
 
+### 2.5 Check Toolbox Reviewers
+
+If `quality_gate.reviewers` is NOT configured in `.agents.yml`, check for toolbox-provided reviewers:
+
+```
+Task (majestic-engineer:workflow:toolbox-resolver):
+  prompt: |
+    Stage: quality-gate
+    Tech Stack: <tech_stack>
+```
+
+If the toolbox returns `quality_gate.reviewers`, use those as the reviewer set.
+
+**Reviewer Precedence:**
+1. `.agents.yml quality_gate.reviewers` → Complete override (existing behavior)
+2. Toolbox `quality_gate.reviewers` → Stack-specific default (from manifest)
+3. Hardcoded tech_stack defaults → Fallback (Step 3 below)
+
+This allows stack plugins to declare their default reviewers without modifying this agent.
+
 ### 3. Determine Review Agents
 
-**If `quality_gate.reviewers` is configured:** Use the configured list directly. Resolve shorthand names using the lookup table above. Launch all configured reviewers in parallel.
+**If `quality_gate.reviewers` is configured in `.agents.yml`:** Use the configured list directly. Resolve shorthand names using the lookup table above. Launch all configured reviewers in parallel.
 
-**If `quality_gate` is NOT configured:** Use the tech_stack-based defaults below:
+**If toolbox provides `quality_gate.reviewers`:** Use the toolbox reviewers. These are already full agent paths.
+
+**If neither is configured:** Use the tech_stack-based defaults below:
 
 #### Rails (`tech_stack: rails`)
 

@@ -2,7 +2,7 @@
 name: majestic:build-task
 description: Autonomous task implementation from any task management system - research, plan, build, review, fix, ship
 argument-hint: "<task-reference>"
-allowed-tools: Bash, Read, Grep, Glob, WebFetch, TodoWrite
+allowed-tools: Bash, Read, Grep, Glob, WebFetch, TodoWrite, Task
 ---
 
 # Build Task
@@ -39,61 +39,76 @@ flowchart TD
         W{{workspace-setup}}
     end
 
-    subgraph "4. Research"
-        C{{web-research}}
+    subgraph "4. Toolbox"
+        TB{{toolbox-resolver}}
     end
 
-    subgraph "5. Plan"
+    subgraph "5. Auto Research"
+        AR{{research-hook}}
+    end
+
+    subgraph "6. Plan"
         D{{architect}}
     end
 
-    subgraph "6. Build"
-        E{{general-purpose}}
+    subgraph "7. Build"
+        E{{stack-builder}}
     end
 
-    subgraph "7. Verify"
+    subgraph "8. Slop Removal"
+        SR{{slop-remover}}
+    end
+
+    subgraph "9. Verify"
         V{{always-works-verifier}}
     end
 
-    subgraph "8. Quality Gate"
+    subgraph "10. Quality Gate"
         F{{quality-gate}}
     end
 
-    subgraph "9. Fix Loop"
-        G{{general-purpose}}
+    subgraph "11. Fix Loop"
+        G{{stack-builder}}
         H{Attempt < 3?}
     end
 
-    subgraph "10. Ship"
+    subgraph "12. Pre-Ship"
+        PS{{pre-ship-hooks}}
+    end
+
+    subgraph "13. Ship"
         I(/ship-it)
     end
 
-    subgraph "11. Complete"
+    subgraph "14. Complete"
         CI{{task-status-updater}}
     end
 
     A --> B
     B --> CL
     CL --> W
-    W --> K{Research needed?}
-    K -->|Yes| C --> D
+    W --> TB
+    TB --> K{Auto triggers match?}
+    K -->|Yes| AR --> D
     K -->|No| D
     D --> E
-    E --> V
+    E --> SR
+    SR --> V
     V --> VR{Works?}
     VR -->|Yes| F
     VR -->|No| G
     F --> L{Approved?}
-    L -->|Yes| I
+    L -->|Yes| PS
     L -->|No| G
     G --> H
     H -->|Yes| V
     H -->|No| M[Pause & Report]
+    PS --> I
     I --> CI
     CI --> N[Done - Awaiting PR Review]
 ```
 
-**Legend:** `{{ }}` = Agents | `( )` = Commands | `{ }` = Decisions
+**Legend:** `{{ }}` = Agents | `( )` = Commands | `{ }` = Decisions | `stack-builder` = Toolbox executor (rails-coder, python-coder, etc.)
 
 ---
 
@@ -154,34 +169,58 @@ The agent reads `workflow` and `branch_naming` from `.agents.yml` and creates th
 
 ---
 
-## Step 5: Research (Conditional)
-
-**Trigger if task description contains:**
-- "research", "investigate", "best practice", "how to"
-- Links to external documentation
-- Questions about approach
-- New library/framework mentions
+## Step 5: Resolve Toolbox Configuration
 
 ```
-Task (majestic-engineer:research:web-research):
+Task (majestic-engineer:workflow:toolbox-resolver):
   prompt: |
-    Research for implementation:
-
-    Task: <title>
-    Context: <relevant description excerpts>
-
-    Find:
-    - Best practices
-    - Common pitfalls
-    - Example implementations
-    - Relevant documentation
-
-    Return concise, actionable findings.
+    Stage: build-task
+    Tech Stack: <tech_stack from .agents.yml>
+    Task Title: <title>
+    Task Description: <description>
 ```
+
+The agent discovers stack-specific toolbox manifests and returns merged configuration:
+- `build_task.executor.build_agent` - Agent for build step
+- `build_task.executor.fix_agent` - Agent for fix loop
+- `build_task.research_hooks[]` - Available research hooks (auto + manual)
+- `build_task.pre_ship_hooks[]` - Pre-ship pipeline steps
+
+**Store the `<TOOLBOX>` config** for use in subsequent steps.
+
+**If no manifest found:** Returns empty config, use `general-purpose` as fallback.
 
 ---
 
-## Step 6: Plan Implementation
+## Step 6: Auto Research (Toolbox-Triggered)
+
+**Run BEFORE planning.** Check if any `mode: auto` research hooks match the task.
+
+For each hook in `<TOOLBOX>.build_task.research_hooks` where `mode: auto`:
+
+1. Check if task title or description matches any `triggers`:
+   - `any_substring`: Match if ANY substring found
+   - `all_substring`: Match if ALL substrings found
+   - `regex`: Match if regex pattern matches
+
+2. If triggers match, invoke the research agent:
+
+```
+Task (<hook.agent>):
+  prompt: |
+    Research for: <task title>
+    Context: <relevant description excerpts>
+
+    Task type: <type from task-fetcher>
+```
+
+**Store research output** for use in architect step.
+
+**Note:** This is automatic based on triggers, not conditional on description keywords.
+
+---
+
+## Step 7: Plan Implementation
 
 ```
 Task (majestic-engineer:plan:architect):
@@ -192,14 +231,23 @@ Task (majestic-engineer:plan:architect):
     Title: <title>
     Description: <description>
 
-    ## Research Findings (if any)
-    <research output>
+    ## Toolbox Configuration
+    Tech Stack: <tech_stack>
+    Build Agent: <TOOLBOX.build_task.executor.build_agent or "general-purpose">
+
+    ## Research Output (if auto hooks ran)
+    <research findings from Step 6, or "No auto research triggered">
+
+    ## Manual Research Hooks Available
+    <list mode:manual hooks from TOOLBOX with descriptions>
 
     ## Requirements
     - Step-by-step implementation plan
     - Files to create/modify
     - Dependencies/prerequisites
     - Test strategy
+
+    If you need additional research (e.g., gem evaluation), invoke the appropriate manual hook.
 
     Return structured, executable plan.
 ```
@@ -208,10 +256,12 @@ Task (majestic-engineer:plan:architect):
 
 ---
 
-## Step 7: Build Implementation
+## Step 8: Build Implementation
+
+Use the executor from toolbox configuration, falling back to `general-purpose` if not set.
 
 ```
-Task (general-purpose):
+Task (<TOOLBOX.build_task.executor.build_agent or "general-purpose">):
   prompt: |
     Implement this task:
 
@@ -222,6 +272,10 @@ Task (general-purpose):
     ## Plan
     <architect output>
 
+    ## Toolbox Context
+    Tech Stack: <tech_stack>
+    Research Findings: <from Step 6>
+
     ## Instructions
     1. Follow the plan step-by-step
     2. Write tests alongside implementation
@@ -231,9 +285,11 @@ Task (general-purpose):
     Work autonomously until complete.
 ```
 
+**Note:** For Rails projects, this invokes `majestic-rails:rails-coder`. For Python, `majestic-python:python-coder`.
+
 ---
 
-## Step 8: Remove AI Slop
+## Step 9: Remove AI Slop
 
 ```
 Task (majestic-engineer:qa:slop-remover):
@@ -245,7 +301,7 @@ Removes over-commenting, defensive overkill, type escape hatches, and style inco
 
 ---
 
-## Step 9: Verify Implementation
+## Step 10: Verify Implementation
 
 ```
 Task (majestic-engineer:workflow:always-works-verifier):
@@ -262,12 +318,12 @@ The agent:
 
 **Returns:** Verification report with confidence level.
 
-**If verification fails:** → Fix Loop (Step 11)
-**If verification passes:** → Quality Gate (Step 10)
+**If verification fails:** → Fix Loop (Step 12)
+**If verification passes:** → Quality Gate (Step 11)
 
 ---
 
-## Step 10: Quality Gate
+## Step 11: Quality Gate
 
 ```
 Task (majestic-engineer:workflow:quality-gate):
@@ -276,32 +332,35 @@ Task (majestic-engineer:workflow:quality-gate):
     Branch: <branch-name>
 ```
 
-The agent reads `tech_stack` from `.agents.yml` and launches appropriate reviewers **in parallel**:
+The agent reads toolbox configuration and uses `quality_gate.reviewers` if available, otherwise falls back to tech_stack-based defaults.
 
-| Tech Stack | Reviewers |
-|------------|-----------|
-| `rails` | pragmatic-rails-reviewer, security-review, performance-reviewer, project-topics |
-| `python` | python-reviewer, security-review, project-topics |
-| `node` | simplicity-reviewer, security-review, project-topics |
-| `generic` | simplicity-reviewer, security-review |
+**Reviewer precedence:**
+1. `.agents.yml quality_gate.reviewers` → Complete override
+2. Toolbox `quality_gate.reviewers` → Stack-specific default
+3. Hardcoded tech_stack defaults → Fallback
 
 **Returns:** `APPROVED`, `NEEDS CHANGES` (with findings), or `BLOCKED`
 
 ---
 
-## Step 11: Fix Loop
+## Step 12: Fix Loop
 
 **Triggered when:**
-- Verification fails (Step 9)
-- Quality gate returns NEEDS CHANGES (Step 10)
+- Verification fails (Step 10)
+- Quality gate returns NEEDS CHANGES (Step 11)
+
+Use the fix_agent from toolbox configuration:
 
 ```
-Task (general-purpose):
+Task (<TOOLBOX.build_task.executor.fix_agent or "general-purpose">):
   prompt: |
     Fix these issues:
 
     ## Findings
     <verification failures OR quality-gate findings>
+
+    ## Toolbox Context
+    Tech Stack: <tech_stack>
 
     ## Instructions
     1. Address each finding by severity (CRITICAL → HIGH → MEDIUM)
@@ -310,15 +369,33 @@ Task (general-purpose):
     4. Report what you fixed
 ```
 
-**Re-run Step 9 (Verify)** → then Step 10 (Quality Gate) if verification passes.
+**Re-run Step 10 (Verify)** → then Step 11 (Quality Gate) if verification passes.
 
 **Limits:** Max 3 iterations. After 3 failures → pause and report to user.
 
 ---
 
-## Step 12: Ship
+## Step 13: Pre-Ship Hooks
 
-**Once quality-gate returns APPROVED:**
+**Run after quality-gate APPROVED, before shipping.**
+
+For each hook in `<TOOLBOX>.build_task.pre_ship_hooks`:
+
+```
+Task (<hook.agent>):
+  prompt: |
+    Run pre-ship checks on current branch.
+    Branch: <branch-name>
+```
+
+**If `required: true` hook fails:** Pause and report to user.
+**If `required: false` hook fails:** Log warning but continue.
+
+---
+
+## Step 14: Ship
+
+**Once pre-ship hooks pass:**
 
 ```
 SlashCommand: /majestic-engineer:workflows:ship-it
@@ -326,7 +403,7 @@ SlashCommand: /majestic-engineer:workflows:ship-it
 
 ---
 
-## Step 13: Mark Ready for Review
+## Step 15: Mark Ready for Review
 
 ```
 Task (majestic-engineer:workflow:task-status-updater):
@@ -354,11 +431,17 @@ The agent:
 **Backend:** <github|beads|linear|file>
 **Status:** Ready for Review
 
+### Toolbox Configuration
+- Tech Stack: <rails|python|node|generic>
+- Build Agent: <toolbox executor or general-purpose>
+- Auto Research: [Triggered | Skipped]
+
 ### Workflow Summary
 - Workspace: `<branch>` [worktree | branch]
-- Research: [Skipped | Completed]
+- Research: [Auto-triggered | Manual | Skipped]
 - Plan: [X steps]
 - Build: [X files, X tests]
+- Pre-Ship Hooks: [Passed | Warnings]
 - Quality: [Passed on attempt X]
 - Ship: PR #<NUMBER>, CI passed
 
@@ -381,8 +464,11 @@ The agent:
 |----------|--------|
 | Task not found | Report error, exit |
 | Backend not configured | Default to `github` |
-| Research fails | Continue without, note in summary |
-| Build fails | Attempt fix, max 2 retries, pause |
+| No toolbox manifest | Use `general-purpose`, continue |
+| Auto research fails | Continue without, note in summary |
+| Build fails | Attempt fix with fix_agent, max 3 retries, pause |
+| Pre-ship hook fails (required) | Pause, report to user |
+| Pre-ship hook fails (optional) | Log warning, continue |
 | Quality blocked 3× | Pause, report to user |
 | Ship/CI fails | Use github-resolver to fix |
 

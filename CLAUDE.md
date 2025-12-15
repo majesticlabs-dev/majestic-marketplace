@@ -557,6 +557,129 @@ quality_gate:
     - project-topics-reviewer
 ```
 
+### Stack Toolbox Registry
+
+The toolbox registry enables **automatic stack-specific tool selection** for generic orchestrators like `/majestic:build-task` and `quality-gate`. When `tech_stack: rails` is configured, the workflow automatically uses Rails-specific agents without manual intervention.
+
+#### How It Works
+
+```
+┌─────────────────────────────────────────────────────┐
+│  Generic Orchestrator (/build-task, quality-gate)   │
+│    1. Read .agents.yml → tech_stack                 │
+│    2. Invoke toolbox-resolver                       │
+│    3. Use returned config for decisions             │
+└─────────────────────────────────────────────────────┘
+                         ↓
+┌─────────────────────────────────────────────────────┐
+│  Toolbox Resolver Agent                             │
+│    1. Discover toolbox.yml from plugin paths        │
+│    2. Filter by tech_stack match                    │
+│    3. Merge by priority (deterministic)             │
+│    4. Apply user overrides from .agents.yml         │
+│    5. Return canonical config                       │
+└─────────────────────────────────────────────────────┘
+                         ↓
+┌─────────────────────────────────────────────────────┐
+│  Stack Plugin Manifests                             │
+│    majestic-rails/.claude-plugin/toolbox.yml        │
+│    majestic-python/.claude-plugin/toolbox.yml       │
+└─────────────────────────────────────────────────────┘
+```
+
+#### Toolbox Manifest Location
+
+Stack plugins declare capabilities in `.claude-plugin/toolbox.yml`:
+
+```yaml
+# Example: plugins/majestic-rails/.claude-plugin/toolbox.yml
+schema_version: 1
+plugin: majestic-rails
+tech_stack: rails
+priority: 100
+
+build_task:
+  executor:
+    build_agent: majestic-rails:rails-coder
+    fix_agent: majestic-rails:rails-coder
+  research_hooks:
+    - id: gem_research
+      mode: auto
+      agent: majestic-rails:research:gem-research
+      triggers:
+        any_substring: ["Gemfile", "gem ", "bundle", "dependency"]
+  pre_ship_hooks:
+    - id: rails_lint
+      agent: majestic-rails:lint
+      required: false
+
+quality_gate:
+  reviewers:
+    - majestic-rails:review:pragmatic-rails-reviewer
+    - majestic-engineer:qa:security-review
+    - majestic-rails:review:performance-reviewer
+    - majestic-engineer:review:project-topics-reviewer
+```
+
+#### Key Concepts
+
+| Concept | Description |
+|---------|-------------|
+| **Auto research hooks** | Run automatically BEFORE planning when triggers match task text |
+| **Manual research hooks** | Available for architect/builder to invoke when needed |
+| **Pre-ship hooks** | Pipeline steps before shipping (NOT reviewers) |
+| **Quality gate reviewers** | Agents that produce structured review findings |
+| **Priority-based merge** | Higher priority wins in collisions (deterministic) |
+
+#### Research Hook Modes
+
+| Mode | Behavior | Use Case |
+|------|----------|----------|
+| `auto` | Orchestrator runs when `triggers` match task text | Gem research when "Gemfile" mentioned |
+| `manual` | Builder/architect invokes when needed | Deep research during implementation |
+
+#### Trigger Types (for `mode: auto`)
+
+```yaml
+triggers:
+  any_substring: ["Gemfile", "gem ", "bundle"]  # Match if ANY substring found
+  all_substring: ["migration", "database"]       # Match if ALL substrings found
+  regex: "add.*gem|install.*package"             # Regex pattern match
+```
+
+#### Precedence Rules
+
+**For quality_gate.reviewers:**
+1. `.agents.yml quality_gate.reviewers` → Complete override
+2. Toolbox `quality_gate.reviewers` → Stack-specific default
+3. Hardcoded tech_stack defaults → Fallback
+
+**For build_task executor:**
+1. `.agents.yml toolbox.build_task.executor` → User override
+2. Toolbox manifest `build_task.executor` → Stack-specific
+3. `general-purpose` → Fallback
+
+#### User Overrides
+
+Override toolbox settings in `.agents.yml`:
+
+```yaml
+# Override executor (use general-purpose instead of rails-coder)
+toolbox:
+  build_task:
+    executor:
+      build_agent: general-purpose
+      fix_agent: general-purpose
+
+# Add custom research hook (extends manifest)
+toolbox:
+  build_task:
+    research_hooks:
+      - id: api_docs
+        mode: manual
+        agent: majestic-engineer:research:docs-researcher
+```
+
 ### Why .agents.yml?
 
 - **Machine-readable** - YAML for commands, AGENTS.md for human guidance

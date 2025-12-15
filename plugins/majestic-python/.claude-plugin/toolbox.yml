@@ -1,0 +1,40 @@
+# Python Stack Toolbox Manifest v1.0
+# Declares Python-specific capabilities for generic orchestrators
+
+schema_version: 1
+plugin: majestic-python
+tech_stack: python
+priority: 100
+
+build_task:
+  executor:
+    build_agent: majestic-python:python-coder
+    fix_agent: majestic-python:python-coder
+
+  research_hooks:
+    # Note: pip-research agent doesn't exist yet - using web-research as fallback
+    # TODO: Create majestic-python:research:pip-research agent
+    - id: package_research
+      mode: auto
+      agent: majestic-engineer:research:web-research
+      triggers:
+        any_substring:
+          - "requirements.txt"
+          - "pyproject.toml"
+          - "pip install"
+          - "uv add"
+          - "poetry add"
+          - "package"
+          - "dependency"
+          - "PyPI"
+
+  pre_ship_hooks:
+    # Note: No dedicated lint agent - python-coder includes ruff knowledge
+    # Lint step handled by python-coder during implementation
+    []
+
+quality_gate:
+  reviewers:
+    - majestic-python:python-reviewer
+    - majestic-engineer:qa:security-review
+    - majestic-engineer:review:project-topics-reviewer
