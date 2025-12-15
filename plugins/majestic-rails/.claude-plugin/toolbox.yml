@@ -1,0 +1,41 @@
+# Rails Stack Toolbox Manifest v1.0
+# Declares Rails-specific capabilities for generic orchestrators
+
+schema_version: 1
+plugin: majestic-rails
+tech_stack: rails
+priority: 100
+
+build_task:
+  executor:
+    build_agent: majestic-rails:rails-coder
+    fix_agent: majestic-rails:rails-coder
+
+  research_hooks:
+    - id: gem_research
+      mode: auto
+      agent: majestic-rails:research:gem-research
+      triggers:
+        any_substring:
+          - "Gemfile"
+          - "gem "
+          - "gem'"
+          - "bundle"
+          - "rubygems"
+          - "dependency"
+          - "add gem"
+          - "install gem"
+          - "upgrade gem"
+          - "update gem"
+
+  pre_ship_hooks:
+    - id: rails_lint
+      agent: majestic-rails:lint
+      required: false
+
+quality_gate:
+  reviewers:
+    - majestic-rails:review:pragmatic-rails-reviewer
+    - majestic-engineer:qa:security-review
+    - majestic-rails:review:performance-reviewer
+    - majestic-engineer:review:project-topics-reviewer
