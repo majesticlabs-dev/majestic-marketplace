@@ -484,6 +484,7 @@ review_topics_path: docs/agents/review-topics.md
 | `branch_naming` | Branch naming convention | `feature/desc` \| `issue-desc` \| `type/issue-desc` \| `user/desc` | `feature/desc` |
 | `review_topics_path` | Path to review topics file | file path | (none) |
 | `auto_preview` | Auto-open created markdown files (plans, PRDs, briefs) in editor | `true` \| `false` | `false` |
+| `auto_create_task` | Auto-create task in task_management when `/majestic:plan` completes | `true` \| `false` | `false` |
 
 ### Rails-Specific Fields
 

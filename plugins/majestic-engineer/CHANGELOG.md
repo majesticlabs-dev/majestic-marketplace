@@ -11,6 +11,13 @@ All notable changes to majestic-engineer will be documented in this file.
   - Auto-detect most recent plan if no argument given
   - Skips task-fetcher, claim, and completion steps for plan files
   - Uses plan content directly for build step (skips architect planning)
+  - Slimmed from 589 → 164 lines (lean orchestration for Opus 4.5)
+
+- **`/majestic:plan`** - Auto-create task support
+  - New `auto_create_task` config option in `.agents.yml`
+  - If enabled, automatically creates GitHub issue / Beads task / Linear issue
+  - Reports task link/reference after creation
+  - Updated options flow to handle task creation state
 
 ### Changed
 

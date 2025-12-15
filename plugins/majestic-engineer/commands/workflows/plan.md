@@ -355,60 +355,93 @@ Write the plan to `docs/plans/<issue_title>.md`
 
 After writing the plan file:
 
-### 1. Auto-Preview Check (REQUIRED)
+### 1. Read Config (REQUIRED)
 
-**BEFORE presenting options, you MUST:**
+Invoke `config-reader` agent to get merged config. Check for:
+- `auto_preview: true` → Open file automatically
+- `auto_create_task: true` → Create task automatically
+- `task_management` → Backend for task creation
 
-1. Invoke `config-reader` agent to get merged config (base + local overrides)
-2. Check the returned config for `auto_preview: true`
-3. **If auto_preview is true:**
-   - Execute: `open docs/plans/<issue_title>.md`
-   - Tell user: "Opened plan in your editor."
-   - Use the "auto-previewed" options below
-4. **If false or not found:** Use the "not auto-previewed" options below
+### 2. Auto-Create Task (if enabled)
 
-### 2. Present Options
+**If `auto_create_task: true` AND `task_management` is configured:**
+
+1. Create the task using the appropriate method:
+
+   **GitHub (`task_management: github`):**
+   ```bash
+   gh issue create --title "<plan title>" --body-file "docs/plans/<issue_title>.md"
+   ```
+
+   **Beads (`task_management: beads`):**
+   ```bash
+   bd create "<plan title>" --description "See docs/plans/<issue_title>.md"
+   ```
+
+   **Linear (`task_management: linear`):**
+   ```bash
+   linear issue create --title "<plan title>" --description "$(cat docs/plans/<issue_title>.md)"
+   ```
+
+2. Report the created task:
+   ```
+   ✓ Task created: <link or reference>
+   ```
+
+3. Skip to presenting options (without "Create task" option)
+
+### 3. Auto-Preview (if enabled)
+
+**If `auto_preview: true`:**
+- Execute: `open docs/plans/<issue_title>.md`
+- Tell user: "Opened plan in your editor."
+
+### 4. Present Options
 
 Use **AskUserQuestion tool** to present options:
 
 **Question:** "Plan ready at `docs/plans/<issue_title>.md`. What would you like to do next?"
 
-**Options (if NOT auto-previewed):**
-1. **Preview in editor** - Open the plan file (`open <path>`)
-2. **Start building (Recommended)** - Begin implementing this plan
-3. **Get review** - Get feedback from reviewers
-4. **Create backlog item** - Add to your configured task system
+**Options (if task auto-created):**
+1. **Start building (Recommended)** - Run `/majestic:build-task <task-reference>`
+2. **Get review** - Get feedback from plan-review agent
+3. **Revise** - Change approach or request specific changes
 
-**Options (if auto-previewed):**
-1. **Start building (Recommended)** - Begin implementing this plan
-2. **Get review** - Get feedback from reviewers
-3. **Create backlog item** - Add to your configured task system
+**Options (if task NOT auto-created, previewed):**
+1. **Start building (Recommended)** - Run `/majestic:build-task` (uses plan file)
+2. **Create task** - Add to your task system, then build from task
+3. **Get review** - Get feedback from plan-review agent
 4. **Revise** - Change approach or request specific changes
 
+**Options (if task NOT auto-created, NOT previewed):**
+1. **Preview in editor** - Open the plan file
+2. **Start building (Recommended)** - Run `/majestic:build-task` (uses plan file)
+3. **Create task** - Add to your task system, then build from task
+4. **Get review** - Get feedback from plan-review agent
+
 Based on selection:
-- **Preview in editor** → Run `open docs/plans/<issue_title>.md`, then re-present options
-- **Start building** → Begin implementation using the plan
+- **Preview** → `open docs/plans/<issue_title>.md`, re-present options
+- **Start building** → `/majestic:build-task docs/plans/<issue_title>.md` or `/majestic:build-task <task-ref>` if created
+- **Create task** → Create task (see below), report link, then re-present options with task reference
 - **Get review** → Run plan-review agent on the plan file
-- **Create backlog item** → Invoke `backlog-manager` skill (see Backlog Integration below)
-- **Revise** → Ask "What would you like changed?" then regenerate with changes
-- **Other** (automatically provided) → Accept free text, act on it
+- **Revise** → Ask "What would you like changed?" then regenerate
 
-Loop back to options after Revise until user selects to build or review.
+## Task Creation
 
-## Backlog Integration
+When creating a task (manual or auto):
 
-When user selects "Create backlog item":
+| Backend | Command | Returns |
+|---------|---------|---------|
+| `github` | `gh issue create --title "..." --body-file "..."` | `#123` + URL |
+| `beads` | `bd create "..." --description "..."` | `PROJ-123` |
+| `linear` | `linear issue create --title "..." --description "..."` | `LIN-123` + URL |
+| `file` | Write to `docs/tasks/<slug>.md` | File path |
 
-1. **Check for configuration** in project's CLAUDE.md for `backend:` setting
-2. **If configured** → Invoke `skill backlog-manager` to create the item using their preferred backend
-3. **If not configured** → Ask user which system they use and recommend adding to CLAUDE.md:
-
-   ```markdown
-   ## Task Management
-   backend: github  # Options: files, github, linear, beads
-   ```
-
-   Then proceed with their selection.
+**If `task_management` not configured:** Ask user which system, recommend adding to `.agents.yml`:
+```yaml
+task_management: github  # Options: github, beads, linear, file
+auto_create_task: true   # Optional: auto-create tasks from plans
+```
 
 ## Reasoning Approaches
 
