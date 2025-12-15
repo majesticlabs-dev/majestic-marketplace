@@ -2,7 +2,15 @@
 
 All notable changes to majestic-engineer will be documented in this file.
 
-## [3.1.1] - 2025-12-15
+## [3.2.0] - 2025-12-15
+
+### Enhanced
+
+- **`/majestic:build-task`** - Now supports plan files and auto-detection
+  - Accept `docs/plans/*.md` files directly (from `/majestic:plan`)
+  - Auto-detect most recent plan if no argument given
+  - Skips task-fetcher, claim, and completion steps for plan files
+  - Uses plan content directly for build step (skips architect planning)
 
 ### Changed
 

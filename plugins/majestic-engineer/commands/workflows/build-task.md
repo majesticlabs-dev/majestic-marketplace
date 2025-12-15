@@ -1,7 +1,7 @@
 ---
 name: majestic:build-task
 description: Autonomous task implementation from any task management system - research, plan, build, review, fix, ship
-argument-hint: "<task-reference>"
+argument-hint: "<task-reference or plan-file>"
 allowed-tools: Bash, Read, Grep, Glob, WebFetch, TodoWrite, Task
 ---
 
@@ -13,11 +13,49 @@ Autonomously implement a task through the full development lifecycle.
 
 <task_reference> $ARGUMENTS </task_reference>
 
-**Accepted formats (based on `task_management` in `.agents.yml`):**
-- `#123` or `123` - Issue/task number
+**Accepted formats:**
+- `#123` or `123` - Issue/task number (GitHub, Linear)
 - `https://github.com/owner/repo/issues/123` - GitHub URL
 - `PROJ-123` - Beads or Linear ID
-- `path/to/task.md` - File path
+- `docs/plans/*.md` - Plan file from `/majestic:plan`
+- *(empty)* - Auto-detect most recent plan in `docs/plans/`
+
+## Step 0: Detect Input Type
+
+**Before proceeding, determine the input type:**
+
+### Case A: Empty Input (Auto-detect Plan)
+
+If `<task_reference>` is empty:
+
+```bash
+# Find most recent plan file
+ls -t docs/plans/*.md 2>/dev/null | head -1
+```
+
+- **If found:** Use that file path, proceed as Plan File (Case B)
+- **If not found:** Ask user: "No recent plan found. Please provide a task reference (#123, PROJ-123, or plan file path)."
+
+### Case B: Plan File (`docs/plans/*.md` or `*.md` path)
+
+If input matches `docs/plans/*.md` or ends with `.md`:
+
+1. Read the plan file
+2. Extract title from first `# ` heading or filename
+3. **Skip Steps 1-2** (no task to fetch/claim)
+4. **Proceed to Step 3** (Workspace) with:
+   - `TASK_ID`: filename slug (e.g., `add-user-auth`)
+   - `TITLE`: extracted title
+   - `DESCRIPTION`: full plan content
+   - `TYPE`: `feature` (default for plans)
+   - `SOURCE`: `plan`
+
+### Case C: Task Reference (`#123`, `PROJ-123`, URL)
+
+If input looks like a task reference:
+- **Proceed to Step 1** (Fetch Task) normally
+
+---
 
 ## Workflow Overview
 
@@ -25,6 +63,10 @@ Autonomously implement a task through the full development lifecycle.
 flowchart TD
     subgraph Input
         A[Task Reference]
+    end
+
+    subgraph "0. Detect"
+        DET{Input type?}
     end
 
     subgraph "1. Fetch"
@@ -84,7 +126,12 @@ flowchart TD
         CI{{task-status-updater}}
     end
 
-    A --> B
+    A --> DET
+    DET -->|Plan file| W
+    DET -->|Task ref| B
+    DET -->|Empty| AUTO[Find recent plan]
+    AUTO -->|Found| W
+    AUTO -->|Not found| ASK[Ask user]
     B --> CL
     CL --> W
     W --> TB
@@ -104,7 +151,9 @@ flowchart TD
     H -->|Yes| V
     H -->|No| M[Pause & Report]
     PS --> I
-    I --> CI
+    I --> PlanCheck{Source?}
+    PlanCheck -->|Plan| N2[Done - PR Created]
+    PlanCheck -->|Task| CI
     CI --> N[Done - Awaiting PR Review]
 ```
 
@@ -113,6 +162,8 @@ flowchart TD
 ---
 
 ## Step 1: Fetch Task
+
+**Skip this step if source is `plan`.**
 
 ```
 Task (majestic-engineer:workflow:task-fetcher):
@@ -129,6 +180,8 @@ The agent reads `task_management` from `.agents.yml` and fetches from the approp
 ---
 
 ## Step 2: Claim Task
+
+**Skip this step if source is `plan`.**
 
 ```
 Task (majestic-engineer:workflow:task-status-updater):
@@ -222,6 +275,10 @@ Task (<hook.agent>):
 
 ## Step 7: Plan Implementation
 
+**If source is `plan`:** Skip this step - the plan file IS the implementation plan. Use its content directly for Step 8.
+
+**If source is task reference:**
+
 ```
 Task (majestic-engineer:plan:architect):
   prompt: |
@@ -270,11 +327,11 @@ Task (<TOOLBOX.build_task.executor.build_agent or "general-purpose">):
     Description: <description>
 
     ## Plan
-    <architect output>
+    <architect output OR plan file content if source is "plan">
 
     ## Toolbox Context
     Tech Stack: <tech_stack>
-    Research Findings: <from Step 6>
+    Research Findings: <from Step 6, if any>
 
     ## Instructions
     1. Follow the plan step-by-step
@@ -405,6 +462,8 @@ SlashCommand: /majestic-engineer:workflows:ship-it
 
 ## Step 15: Mark Ready for Review
 
+**Skip this step if source is `plan`.**
+
 ```
 Task (majestic-engineer:workflow:task-status-updater):
   prompt: |
@@ -423,6 +482,8 @@ The agent:
 ---
 
 ## Output Summary
+
+### For Task References
 
 ```
 ## Build Task Complete
@@ -456,6 +517,37 @@ The agent:
 - Task closes when PR merges
 ```
 
+### For Plan Files
+
+```
+## Build from Plan Complete
+
+**Plan:** <plan-file-path>
+**Title:** <title from plan>
+**Source:** Local plan file
+
+### Toolbox Configuration
+- Tech Stack: <rails|python|node|generic>
+- Build Agent: <toolbox executor or general-purpose>
+- Auto Research: [Triggered | Skipped]
+
+### Workflow Summary
+- Workspace: `<branch>` [worktree | branch]
+- Build: [X files, X tests]
+- Pre-Ship Hooks: [Passed | Warnings]
+- Quality: [Passed on attempt X]
+- Ship: PR #<NUMBER>, CI passed
+
+### Files Changed
+- `path/to/file` - [description]
+
+### PR Link
+<PR URL>
+
+### Next Steps
+- PR awaits human review
+```
+
 ---
 
 ## Error Handling
@@ -477,6 +569,12 @@ The agent:
 ## Example Usage
 
 ```bash
+# Auto-detect most recent plan (after running /majestic:plan)
+/majestic:build-task
+
+# Explicit plan file
+/majestic:build-task docs/plans/add-user-auth.md
+
 # GitHub issue
 /majestic:build-task #42
 
@@ -486,6 +584,6 @@ The agent:
 # Linear issue
 /majestic:build-task LIN-456
 
-# File task
+# File task (legacy format)
 /majestic:build-task docs/tasks/feature-x.md
 ```
