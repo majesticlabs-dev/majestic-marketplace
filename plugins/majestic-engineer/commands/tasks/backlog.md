@@ -1,4 +1,5 @@
 ---
+name: tasks:backlog
 description: Manage backlog items across files, GitHub Issues, Linear, or Beads
 argument-hint: "[action] [details] - Actions: add, list, update, complete"
 ---

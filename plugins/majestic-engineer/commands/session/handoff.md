@@ -1,4 +1,5 @@
 ---
+name: session:handoff
 description: Create a detailed handoff plan for continuing work in a new session
 allowed-tools: Read, Write, AskUserQuestion
 model: claude-haiku-4-5-20251001
