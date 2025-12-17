@@ -1,6 +1,6 @@
 ---
 name: git-researcher
-description: Use proactively to understand historical context and evolution of code changes, trace origins of specific code patterns, identify key contributors and expertise areas, or analyze patterns in commit history.
+description: Analyze git history to trace code evolution, identify contributors, and understand patterns in commits.
 tools: Read, Grep, Glob, Bash
 model: claude-haiku-4-5-20251001
 color: green

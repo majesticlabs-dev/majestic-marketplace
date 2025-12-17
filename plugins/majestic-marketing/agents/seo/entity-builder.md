@@ -1,6 +1,6 @@
 ---
 name: entity-builder
-description: Optimizes brand entity presence, triplet relationships, and AI citation sources for LLM visibility. Builds contextual mentions over backlinks, feature-specific reviews, and cross-platform consistency. Use PROACTIVELY for brand authority and AI presence.
+description: Optimize brand entity presence and AI citation sources for LLM visibility. Builds contextual mentions and cross-platform consistency.
 color: violet
 tools: Read, Write, Edit, Grep, Glob, WebSearch
 ---

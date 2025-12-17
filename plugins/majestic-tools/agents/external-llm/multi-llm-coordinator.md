@@ -1,6 +1,6 @@
 ---
 name: multi-llm-coordinator
-description: Orchestrate parallel queries to multiple external LLMs (Codex, Gemini) and synthesize their responses. Use when you want diverse AI perspectives on a single question, highlighting consensus and divergence.
+description: Query multiple LLMs (Codex, Gemini) in parallel and synthesize responses highlighting consensus and divergence.
 tools: Bash, Read, Grep, Glob, Task
 color: cyan
 ---

@@ -1,6 +1,6 @@
 ---
 name: python-reviewer
-description: Use proactively after implementing Python features, modifying existing code, or creating new modules. Applies strict Python conventions with an extremely high quality bar for type hints, Pythonic patterns, and maintainability.
+description: Review Python code with high quality bar for type hints, Pythonic patterns, and maintainability.
 color: green
 tools: Read, Grep, Glob, Bash
 ---

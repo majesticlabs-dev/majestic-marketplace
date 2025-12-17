@@ -1,6 +1,6 @@
 ---
 name: codex-consult
-description: Get alternative perspectives on architectural decisions and feature planning from OpenAI Codex. Use when you want a second opinion from a different LLM on design approaches, trade-offs, or implementation strategies.
+description: Get alternative perspectives on architecture and design from OpenAI Codex for a second LLM opinion.
 tools: Bash, Read, Grep, Glob
 color: purple
 ---

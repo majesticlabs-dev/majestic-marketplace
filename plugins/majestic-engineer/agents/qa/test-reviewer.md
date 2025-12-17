@@ -1,6 +1,6 @@
 ---
 name: test-reviewer
-description: Use PROACTIVELY after code changes to review test quality, coverage, and completeness. Analyzes tests for missing edge cases, assertion quality, test patterns, and coverage gaps. Invoke when reviewing PRs, after test creation, or when validating test suites.
+description: Review test quality, coverage, and completeness. Analyzes for missing edge cases, assertion quality, and coverage gaps.
 tools: Read, Grep, Glob, Bash
 color: green
 ---

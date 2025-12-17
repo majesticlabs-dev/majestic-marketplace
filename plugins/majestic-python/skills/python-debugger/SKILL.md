@@ -1,8 +1,7 @@
 ---
 name: python-debugger
 description: Debug Python errors, exceptions, and unexpected behavior. Analyzes tracebacks, reproduces issues, identifies root causes, and provides fixes.
-color: red
-tools: Read, Write, Edit, Grep, Glob, Bash, WebSearch
+allowed-tools: Read, Write, Edit, Grep, Glob, Bash, WebSearch
 ---
 
 # Python Debugger

@@ -1,6 +1,6 @@
 ---
 name: database-admin
-description: Use this agent for database operations, backups, monitoring, connection pooling, and maintenance tasks. Covers PostgreSQL and SQLite administration in Rails production environments. Use PROACTIVELY for database setup, backup strategies, performance monitoring, or maintenance procedures.
+description: Database operations, backups, monitoring, connection pooling, and maintenance for PostgreSQL/SQLite in Rails production.
 color: blue
 tools: Read, Grep, Glob, Bash
 ---

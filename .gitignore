@@ -4,3 +4,5 @@
 .beads/
 .osgrep/
 docs/
+.claude/current_task.txt
+

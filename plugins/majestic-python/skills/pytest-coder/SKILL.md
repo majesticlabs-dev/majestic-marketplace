@@ -1,8 +1,7 @@
 ---
 name: pytest-coder
-description: Write comprehensive pytest tests for Python applications. Covers fixtures, parametrization, mocking, async testing, and modern pytest patterns with high coverage standards.
-color: yellow
-tools: Read, Write, Edit, Grep, Glob, Bash, WebSearch
+description: Write comprehensive pytest tests with fixtures, parametrization, mocking, async testing, and modern patterns.
+allowed-tools: Read, Write, Edit, Grep, Glob, Bash, WebSearch
 ---
 
 # Pytest Coder
@@ -209,28 +208,6 @@ def test_exception_attributes():
     assert "failed" in str(exc_info.value)
 ```
 
-### Testing Classes with Setup/Teardown
-
-```python
-class TestOrderProcessor:
-    @pytest.fixture(autouse=True)
-    def setup(self, db):
-        """Run before each test in this class."""
-        self.processor = OrderProcessor(db)
-        self.db = db
-
-    def test_process_valid_order(self, sample_order):
-        result = self.processor.process(sample_order)
-        assert result.status == "completed"
-
-    def test_process_invalid_order_rolls_back(self, invalid_order):
-        with pytest.raises(ValidationError):
-            self.processor.process(invalid_order)
-
-        # Verify no changes persisted
-        assert self.db.query(Order).count() == 0
-```
-
 ## Fixture Scopes
 
 | Scope | Lifecycle | Use Case |
@@ -287,27 +264,6 @@ def test_database_connection():
 # pytest -m "unit"
 ```
 
-## Coverage Standards
-
-### What to Test
-
-| Type | Test For |
-|------|----------|
-| **Models** | Validation, methods, properties |
-| **Services** | Business logic, error handling, edge cases |
-| **API** | Status codes, response format, auth |
-| **Utils** | Pure functions, transformations |
-
-### Coverage Targets
-
-```bash
-# Run with coverage
-pytest --cov=myapp --cov-report=term-missing
-
-# Minimum coverage
-pytest --cov=myapp --cov-fail-under=90
-```
-
 ## Quality Checklist
 
 - [ ] AAA pattern (Arrange-Act-Assert) in every test
@@ -331,45 +287,3 @@ pytest --cov=myapp --cov-fail-under=90
 | Too many assertions | Hard to identify failure | One assertion per test |
 | No error case tests | Missing coverage | Test exceptions explicitly |
 | Slow unit tests | Slow feedback | Mock I/O, use in-memory DB |
-| Magic values | Unclear intent | Use constants or fixtures |
-| Global state | Test pollution | Use fixtures with proper scope |
-
-## conftest.py Template
-
-```python
-"""Shared pytest configuration and fixtures."""
-import pytest
-from unittest.mock import Mock
-
-# Auto-use fixtures
-@pytest.fixture(autouse=True)
-def reset_singletons():
-    """Reset any singletons between tests."""
-    yield
-    # Cleanup code here
-
-# Database fixtures
-@pytest.fixture
-def db():
-    """Provide test database session."""
-    from myapp.database import TestSession
-    session = TestSession()
-    yield session
-    session.rollback()
-    session.close()
-
-# Mock fixtures
-@pytest.fixture
-def mock_email_client():
-    """Mock email client."""
-    return Mock()
-
-# Factory fixtures
-@pytest.fixture
-def user_factory(db):
-    """Factory for creating test users."""
-    def create(**kwargs):
-        defaults = {"email": "test@example.com", "name": "Test"}
-        return User(**{**defaults, **kwargs})
-    return create
-```

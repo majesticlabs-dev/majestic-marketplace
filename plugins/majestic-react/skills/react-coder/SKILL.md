@@ -1,8 +1,7 @@
 ---
 name: react-coder
 description: Write modern React components with TypeScript, hooks, and best practices. Creates functional components, custom hooks, and follows composition patterns.
-color: cyan
-tools: Read, Write, Edit, Grep, Glob, Bash, WebSearch
+allowed-tools: Read, Write, Edit, Grep, Glob, Bash, WebSearch
 ---
 
 # React Coder

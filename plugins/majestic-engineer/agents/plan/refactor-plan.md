@@ -1,6 +1,6 @@
 ---
 name: refactor-plan
-description: Use PROACTIVELY for analyzing code structure and creating comprehensive refactoring plans. Specialist for refactoring requests, code restructuring, modernizing legacy code, or optimizing existing implementations. Analyzes current state, identifies improvement opportunities, and produces detailed step-by-step plans with risk assessment.
+description: Analyze code structure and create refactoring plans with risk assessment. Identifies improvement opportunities and produces step-by-step implementation plans.
 tools: Read, Edit, Write, Grep, Glob, Bash, WebSearch, NotebookRead, Task
 color: purple
 ---

@@ -1,8 +1,7 @@
 ---
 name: fastapi-coder
-description: Build production-ready FastAPI applications with async patterns, Pydantic validation, dependency injection, background tasks, and modern Python API best practices.
-color: green
-tools: Read, Write, Edit, Grep, Glob, Bash, WebSearch
+description: Build FastAPI applications with async patterns, Pydantic validation, dependency injection, and modern Python API practices.
+allowed-tools: Read, Write, Edit, Grep, Glob, Bash, WebSearch
 ---
 
 # FastAPI Coder
@@ -213,24 +212,6 @@ async def verify_token(token: str) -> dict | None:
         return None
 ```
 
-### OAuth2 with Scopes
-
-```python
-from fastapi.security import OAuth2PasswordBearer, SecurityScopes
-
-oauth2_scheme = OAuth2PasswordBearer(
-    tokenUrl="token",
-    scopes={"users:read": "Read users", "users:write": "Write users"},
-)
-
-async def get_current_user(
-    security_scopes: SecurityScopes,
-    token: str = Depends(oauth2_scheme),
-) -> User:
-    # Verify token and scopes
-    ...
-```
-
 ## Testing Patterns
 
 ```python
@@ -257,21 +238,6 @@ async def test_create_user(client: AsyncClient):
     assert response.json()["email"] == "test@example.com"
 ```
 
-## Configuration
-
-```python
-from pydantic_settings import BaseSettings
-
-class Settings(BaseSettings):
-    DATABASE_URL: str
-    SECRET_KEY: str
-    DEBUG: bool = False
-
-    model_config = {"env_file": ".env"}
-
-settings = Settings()
-```
-
 ## Quality Checklist
 
 - [ ] All routes have response_model and status_code
@@ -284,15 +250,3 @@ settings = Settings()
 - [ ] Background tasks for non-blocking operations
 - [ ] Comprehensive tests with httpx AsyncClient
 - [ ] Type hints throughout
-- [ ] OpenAPI documentation is clean and accurate
-
-## Common Mistakes
-
-| Mistake | Fix |
-|---------|-----|
-| Sync database calls in async routes | Use asyncpg/aiosqlite with SQLAlchemy async |
-| Business logic in route handlers | Extract to service layer |
-| Global state for dependencies | Use `Depends()` and dependency injection |
-| Missing response_model | Always specify for automatic serialization |
-| HTTPException everywhere | Create domain exceptions, handle centrally |
-| No validation on inputs | Use Pydantic models with Field constraints |
