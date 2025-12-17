@@ -1,6 +1,6 @@
 ---
 name: content-auditor
-description: Analyzes provided content for quality, E-E-A-T signals, and SEO best practices. Scores content and provides improvement recommendations based on established guidelines. Use PROACTIVELY for content review.
+description: Audit content for quality, E-E-A-T signals, and SEO best practices. Scores and provides improvement recommendations.
 color: yellow
 tools: Read, Write, Edit, Grep, Glob
 ---

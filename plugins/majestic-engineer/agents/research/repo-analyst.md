@@ -1,6 +1,6 @@
 ---
 name: repo-analyst
-description: Use proactively for repository onboarding, understanding project conventions, or analyzing codebase structure before contributing. Examines architecture docs, issue templates, contribution guidelines, and implementation patterns.
+description: Analyze repository structure, conventions, and architecture docs for onboarding before contributing.
 color: blue
 tools: Read, Grep, Glob, Bash
 ---

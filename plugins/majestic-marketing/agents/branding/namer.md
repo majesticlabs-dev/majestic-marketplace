@@ -1,6 +1,6 @@
 ---
 name: namer
-description: Generate and evaluate brand, company, and product names using Igor naming methodology. Creates evocative names that differentiate and dominate categories. Use when naming companies, products, features, or apps.
+description: Generate brand, company, and product names using Igor methodology. Creates evocative, category-defining names.
 color: violet
 tools: Read, Write, Edit, Grep, Glob, WebSearch
 ---

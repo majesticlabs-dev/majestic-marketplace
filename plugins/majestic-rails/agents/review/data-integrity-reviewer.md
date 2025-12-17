@@ -1,6 +1,6 @@
 ---
 name: data-integrity-reviewer
-description: Use this agent to review database migrations, data models, or code that manipulates persistent data. Checks migration safety, data constraints, transaction boundaries, referential integrity, and privacy compliance.
+description: Review migrations, data models, and data manipulation code for safety, constraints, and integrity.
 color: yellow
 tools: Read, Grep, Glob, Bash
 ---

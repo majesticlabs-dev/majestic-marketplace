@@ -1,8 +1,7 @@
 ---
 name: active-job-coder
 description: Use when creating or refactoring Active Job background jobs. Applies Rails 8 conventions, Solid Queue patterns, error handling, retry strategies, and job design best practices.
-color: cyan
-tools: Read, Write, Edit, Grep, Glob, Bash
+allowed-tools: Read, Write, Edit, Grep, Glob, Bash
 ---
 
 # Active Job Coder

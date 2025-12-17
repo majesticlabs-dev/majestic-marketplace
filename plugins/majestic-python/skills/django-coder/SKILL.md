@@ -1,8 +1,7 @@
 ---
 name: django-coder
-description: Build production-ready Django applications with models, views, forms, templates, REST APIs, async views, and modern Django 5.x patterns.
-color: green
-tools: Read, Write, Edit, Grep, Glob, Bash, WebSearch
+description: Build Django applications with models, views, forms, templates, REST APIs, and modern Django 5.x patterns.
+allowed-tools: Read, Write, Edit, Grep, Glob, Bash, WebSearch
 ---
 
 # Django Coder
@@ -44,8 +43,6 @@ project/
 │       ├── services.py     # Business logic
 │       ├── selectors.py    # Query logic
 │       └── tests/
-│           ├── test_models.py
-│           └── test_views.py
 ├── templates/
 │   ├── base.html
 │   └── users/
@@ -91,9 +88,6 @@ class Post(models.Model):
             models.Index(fields=["slug"]),
             models.Index(fields=["status", "-created_at"]),
         ]
-
-    def __str__(self):
-        return self.title
 ```
 
 ### Custom Managers
@@ -140,27 +134,6 @@ class PostCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
-```
-
-### Function-Based Views
-
-```python
-from django.shortcuts import render, get_object_or_404, redirect
-from django.contrib.auth.decorators import login_required
-from django.http import JsonResponse
-
-@login_required
-def post_create(request):
-    if request.method == "POST":
-        form = PostForm(request.POST)
-        if form.is_valid():
-            post = form.save(commit=False)
-            post.author = request.user
-            post.save()
-            return redirect("posts:detail", slug=post.slug)
-    else:
-        form = PostForm()
-    return render(request, "posts/form.html", {"form": form})
 ```
 
 ### Async Views (Django 4.1+)
@@ -231,69 +204,6 @@ class PostViewSet(viewsets.ModelViewSet):
         return Response({"status": "published"})
 ```
 
-## Forms
-
-```python
-from django import forms
-from django.core.exceptions import ValidationError
-
-class PostForm(forms.ModelForm):
-    class Meta:
-        model = Post
-        fields = ["title", "content", "status"]
-        widgets = {
-            "content": forms.Textarea(attrs={"rows": 10}),
-        }
-
-    def clean_title(self):
-        title = self.cleaned_data["title"]
-        if len(title) < 5:
-            raise ValidationError("Title must be at least 5 characters.")
-        return title
-```
-
-## URL Routing
-
-```python
-# config/urls.py
-from django.contrib import admin
-from django.urls import path, include
-
-urlpatterns = [
-    path("admin/", admin.site.urls),
-    path("api/", include("apps.api.urls")),
-    path("", include("apps.posts.urls", namespace="posts")),
-]
-
-# apps/posts/urls.py
-from django.urls import path
-from . import views
-
-app_name = "posts"
-
-urlpatterns = [
-    path("", views.PostListView.as_view(), name="list"),
-    path("create/", views.PostCreateView.as_view(), name="create"),
-    path("<slug:slug>/", views.PostDetailView.as_view(), name="detail"),
-]
-```
-
-## Admin
-
-```python
-from django.contrib import admin
-
-@admin.register(Post)
-class PostAdmin(admin.ModelAdmin):
-    list_display = ["title", "author", "status", "created_at"]
-    list_filter = ["status", "created_at", "author"]
-    search_fields = ["title", "content"]
-    prepopulated_fields = {"slug": ("title",)}
-    raw_id_fields = ["author"]
-    date_hierarchy = "created_at"
-    ordering = ["-created_at"]
-```
-
 ## Services Pattern
 
 ```python
@@ -311,7 +221,6 @@ class PostService:
             content=content,
             status=Post.Status.DRAFT,
         )
-        # Additional logic: notifications, indexing, etc.
         return post
 
     @staticmethod
@@ -342,4 +251,3 @@ class PostService:
 | N+1 queries | Use select_related/prefetch_related |
 | No indexes | Add indexes for filtered/ordered fields |
 | Hardcoded URLs | Use reverse() and {% url %} |
-| No pagination | Always paginate list views |

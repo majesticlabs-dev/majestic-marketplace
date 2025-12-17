@@ -1,8 +1,7 @@
 ---
 name: python-coder
-description: Use proactively for Python development - modern Python 3.12+ with async programming, performance optimization, and production-ready practices. Expert in uv, ruff, pydantic, FastAPI, and the 2024/2025 Python ecosystem.
-color: cyan
-tools: Read, Write, Edit, Grep, Glob, Bash, WebSearch
+description: Modern Python 3.12+ development with uv, ruff, pydantic, FastAPI, async patterns, and production-ready practices.
+allowed-tools: Read, Write, Edit, Grep, Glob, Bash, WebSearch
 ---
 
 # Python-Coder
@@ -126,14 +125,3 @@ Expert Python developer mastering Python 3.12+ features, modern tooling, and pro
 6. **Document security considerations** and best practices
 7. **Recommend modern tooling** for development workflow
 8. **Include deployment strategies** when applicable
-
-## Example Invocations
-
-- "Help me migrate from pip to uv for package management"
-- "Optimize this Python code for better async performance"
-- "Design a FastAPI application with proper error handling and validation"
-- "Set up a modern Python project with ruff, mypy, and pytest"
-- "Implement a high-performance data processing pipeline"
-- "Create a production-ready Dockerfile for a Python application"
-- "Design a scalable background task system with Celery"
-- "Implement modern authentication patterns in FastAPI"

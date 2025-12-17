@@ -12,7 +12,7 @@
     {
       "name": "majestic-engineer",
       "description": "Language-agnostic engineering workflows. Includes 26 specialized agents, 20 commands, and 13 skills.",
-      "version": "3.3.0",
+      "version": "3.4.0",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -32,8 +32,8 @@
     },
     {
       "name": "majestic-rails",
-      "description": "Ruby on Rails development tools. Includes 23 specialized agents, 3 commands, and 12 skills.",
-      "version": "3.2.0",
+      "description": "Ruby on Rails development tools. Includes 11 specialized agents, 3 commands, and 24 skills.",
+      "version": "3.3.0",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -96,8 +96,8 @@
     },
     {
       "name": "majestic-python",
-      "description": "Python development tools. Includes 8 specialized agents.",
-      "version": "3.0.0",
+      "description": "Python development tools. Includes 3 specialized agents and 5 skills.",
+      "version": "3.1.0",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -217,8 +217,8 @@
     },
     {
       "name": "majestic-react",
-      "description": "Modern React development toolkit for TypeScript/React stacks. Includes 3 specialized agents and 3 skills.",
-      "version": "3.0.0",
+      "description": "Modern React development toolkit for TypeScript/React stacks. Includes 5 specialized agents and 4 skills.",
+      "version": "3.1.0",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
