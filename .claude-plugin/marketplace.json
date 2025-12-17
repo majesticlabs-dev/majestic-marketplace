@@ -12,7 +12,7 @@
     {
       "name": "majestic-engineer",
       "description": "Language-agnostic engineering workflows. Includes 26 specialized agents, 20 commands, and 13 skills.",
-      "version": "3.4.0",
+      "version": "3.4.1",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -33,7 +33,7 @@
     {
       "name": "majestic-rails",
       "description": "Ruby on Rails development tools. Includes 11 specialized agents, 3 commands, and 24 skills.",
-      "version": "3.3.0",
+      "version": "3.3.1",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -77,7 +77,7 @@
     {
       "name": "majestic-tools",
       "description": "Claude Code customization tools. Includes 6 agents, 14 commands, and 5 skills.",
-      "version": "3.0.0",
+      "version": "3.0.1",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -120,7 +120,7 @@
     {
       "name": "majestic-marketing",
       "description": "Marketing and SEO tools for Claude Code. Includes 14 specialized agents, 3 commands, and 26 skills.",
-      "version": "3.3.0",
+      "version": "3.3.1",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -148,7 +148,7 @@
     {
       "name": "majestic-company",
       "description": "Business operations tools. Includes 3 specialized agents and 22 skills.",
-      "version": "3.0.0",
+      "version": "3.0.1",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -242,7 +242,7 @@
     {
       "name": "majestic-experts",
       "description": "Expert panel discussion system with 22 curated personas. Includes 2 agents, 1 command, and 22 expert definitions.",
-      "version": "3.0.1",
+      "version": "3.0.2",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
