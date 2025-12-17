@@ -70,6 +70,12 @@ agent task-fetcher "Task: <reference>"
 agent task-status-updater "Action: claim | Task: <ID>"
 ```
 
+### Step 3: Set Terminal Title
+Run this bash command to set the terminal window title:
+```
+printf '\033]0;🔨 <ID>: <title>\007'
+```
+
 ### Step 4: Setup Workspace
 ```
 agent workspace-setup "Task ID: <ID> | Title: <title> | Type: <type>"
