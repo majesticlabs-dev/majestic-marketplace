@@ -1,6 +1,6 @@
 ---
 name: codex-consult
-description: Get alternative perspectives on architecture and design from OpenAI Codex for a second LLM opinion.
+description: Get architecture and design perspectives from OpenAI Codex as second opinion.
 tools: Bash, Read, Grep, Glob
 color: purple
 ---

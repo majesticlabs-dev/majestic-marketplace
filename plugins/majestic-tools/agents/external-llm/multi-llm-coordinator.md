@@ -1,6 +1,6 @@
 ---
 name: multi-llm-coordinator
-description: Query multiple LLMs (Codex, Gemini) in parallel and synthesize responses highlighting consensus and divergence.
+description: Query Codex and Gemini in parallel, synthesize responses highlighting consensus and divergence.
 tools: Bash, Read, Grep, Glob, Task
 color: cyan
 ---

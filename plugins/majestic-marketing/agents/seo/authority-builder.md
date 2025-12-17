@@ -1,6 +1,6 @@
 ---
 name: authority-builder
-description: Analyzes content for E-E-A-T signals and suggests improvements to build authority and trust. Identifies missing credibility elements. Use PROACTIVELY for YMYL topics.
+description: Analyze E-E-A-T signals and suggest improvements to build content authority and trust.
 color: orange
 tools: Read, Write, Edit, Grep, Glob, WebSearch
 ---

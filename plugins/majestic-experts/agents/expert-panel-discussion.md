@@ -144,7 +144,7 @@ Use Write tool to save complete session JSON to Save Path.
 | **Consensus-seeking** | Check >80% | Check >80% or impasse | Always conclude |
 | **Deep-dive** | Continue | Continue | Always conclude |
 
-See `resources/edge-cases.md` for special situations.
+See `resources/edge-cases.txt` for special situations.
 
 ### Step 6: If Continuing - Formulate Follow-up Prompt
 
@@ -162,7 +162,7 @@ Then launch Round N+1 (Step 2).
 
 ### Step 7: Final Synthesis
 
-When concluding, create comprehensive synthesis using template in `resources/synthesis-template.md`.
+When concluding, create comprehensive synthesis using template in `resources/synthesis-template.txt`.
 
 **Key sections:**
 - Consensus Findings (with expert agreement indicators)
@@ -174,7 +174,7 @@ When concluding, create comprehensive synthesis using template in `resources/syn
 
 ## Edge Cases
 
-See `resources/edge-cases.md` for:
+See `resources/edge-cases.txt` for:
 - Expert count variations (2-5 experts)
 - Discussion type edge cases (unexpected consensus, impasses)
 - Sequential thinking usage guidelines

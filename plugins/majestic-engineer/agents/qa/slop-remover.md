@@ -1,6 +1,6 @@
 ---
 name: slop-remover
-description: Remove AI-generated code slop from branch changes. Identifies and fixes over-commenting, unnecessary defensive checks, type escape hatches, and style inconsistencies introduced by AI coding assistants.
+description: Remove AI-generated code slop: over-commenting, defensive checks, type escapes, style inconsistencies.
 tools: Bash, Read, Edit, Grep, Glob
 color: cyan
 ---

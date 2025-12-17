@@ -1,6 +1,6 @@
 ---
 name: idea-validator
-description: Validate startup ideas through structured research. Delivers evidence-based GO/NO-GO verdict with market and competitive analysis.
+description: Validate startup ideas through research delivering GO/NO-GO verdict with market analysis.
 color: purple
 tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch, AskUserQuestion, TodoWrite
 ---
@@ -112,7 +112,7 @@ Every validation must honestly answer:
 
 ## Output Format
 
-See `resources/idea-validator-output.md` for the full output template.
+See `resources/idea-validator-output.txt` for the full output template.
 
 **Key sections:**
 - Verdict with one-line summary

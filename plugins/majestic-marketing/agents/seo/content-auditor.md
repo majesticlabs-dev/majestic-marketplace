@@ -1,6 +1,6 @@
 ---
 name: content-auditor
-description: Audit content for quality, E-E-A-T signals, and SEO best practices. Scores and provides improvement recommendations.
+description: Audit content for quality, E-E-A-T signals, and SEO best practices with scoring.
 color: yellow
 tools: Read, Write, Edit, Grep, Glob
 ---

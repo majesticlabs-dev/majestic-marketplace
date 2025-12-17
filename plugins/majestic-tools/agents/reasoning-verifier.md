@@ -1,6 +1,6 @@
 ---
 name: reasoning-verifier
-description: Verify LLM reasoning using Reverse Chain-of-Thought (RCoT). Detects overlooked conditions and hallucinated assumptions.
+description: Verify LLM reasoning using Reverse Chain-of-Thought (RCoT) to detect overlooked conditions.
 tools: Read, Grep, Glob
 color: yellow
 ---

@@ -1,6 +1,6 @@
 ---
 name: keyword-strategist
-description: Analyzes keyword usage in provided content, calculates density, suggests semantic variations and LSI keywords based on the topic. Prevents over-optimization. Use PROACTIVELY for content optimization.
+description: Analyze keyword density, suggest LSI keywords and semantic variations for content optimization.
 color: yellow
 tools: Read, Write, Edit, Grep, Glob, WebSearch
 ---

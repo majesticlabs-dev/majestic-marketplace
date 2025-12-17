@@ -1,6 +1,6 @@
 ---
 name: llm-optimizer
-description: Optimize content for AI citation in ChatGPT, Perplexity, Gemini. Applies AEO checklist for fact-density and extractability.
+description: Optimize content for AI citation in ChatGPT, Perplexity, Gemini using AEO checklist.
 color: violet
 tools: Read, Write, Edit, Grep, Glob, WebSearch
 ---

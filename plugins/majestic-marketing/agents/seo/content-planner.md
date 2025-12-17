@@ -1,6 +1,6 @@
 ---
 name: content-planner
-description: Creates content outlines, topic clusters, and buyer persona × journey grids for SEO/AEO. Plans content calendars using three-pronged query sourcing. Use PROACTIVELY for content strategy and planning.
+description: Create content outlines, topic clusters, and buyer journey grids for SEO/AEO planning.
 color: orange
 tools: Read, Write, Edit, Grep, Glob, WebSearch
 ---

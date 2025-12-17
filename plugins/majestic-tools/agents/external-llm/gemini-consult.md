@@ -1,6 +1,6 @@
 ---
 name: gemini-consult
-description: Get alternative perspectives on architecture and design from Google Gemini for a second LLM opinion.
+description: Get architecture and design perspectives from Google Gemini as second opinion.
 tools: Bash, Read, Grep, Glob
 color: violet
 ---

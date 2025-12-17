@@ -1,6 +1,6 @@
 ---
 name: simplicity-reviewer
-description: Use this agent for a final review pass to ensure code is simple and minimal. Identifies simplification opportunities, anti-patterns, code smells, duplication, and enforces YAGNI principles.
+description: Final review for code simplicity. Identifies anti-patterns, code smells, and YAGNI violations.
 color: green
 tools: Read, Grep, Glob, Bash
 ---

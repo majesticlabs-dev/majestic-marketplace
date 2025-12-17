@@ -1,6 +1,6 @@
 ---
 name: entity-builder
-description: Optimize brand entity presence and AI citation sources for LLM visibility. Builds contextual mentions and cross-platform consistency.
+description: Optimize brand entity presence for LLM visibility and AI citation sources.
 color: violet
 tools: Read, Write, Edit, Grep, Glob, WebSearch
 ---
