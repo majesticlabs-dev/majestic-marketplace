@@ -2,6 +2,23 @@
 
 All notable changes to majestic-engineer will be documented in this file.
 
+## [3.4.4] - 2025-12-17
+
+### Fixed
+
+- **Bash permission errors** - Replaced `!` interpolations with `config-reader` agent invocation
+  - Root cause: `|| echo "default"` in bash commands created compound commands that failed permission checks
+  - Solution: Commands/agents now invoke `config-reader` agent to get config values with proper defaults
+  - `config-reader` agent enhanced with single field lookup mode: `field: <key>, default: <value>`
+  - Benefits: No bash permission issues, proper config merge (`.agents.yml` + `.agents.local.yml`)
+
+### Changed
+
+- **Commands updated** (5 files):
+  - `/git:create-pr`, `/git:changelog`, `/git:code-story`, `/majestic:code-review`
+- **Agents updated** (7 files):
+  - `quality-gate`, `workspace-setup`, `task-fetcher`, `task-status-updater`, `slop-remover`
+
 ## [3.4.2] - 2025-12-17
 
 ### Fixed

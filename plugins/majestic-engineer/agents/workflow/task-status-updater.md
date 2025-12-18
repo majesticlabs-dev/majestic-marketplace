@@ -1,7 +1,7 @@
 ---
 name: task-status-updater
 description: Update task status in configured task management system. Handles claim (in_progress) and ship (ready-for-review with CI check) actions across GitHub, Beads, Linear, and file backends.
-tools: Bash, Read, Grep, Glob, Skill
+tools: Bash, Read, Grep, Glob, Skill, Task
 model: claude-haiku-4-5-20251001
 color: blue
 ---
@@ -12,7 +12,7 @@ You are a task status management agent. Your role is to update task status in th
 
 ## Context
 
-- Task management: !`grep "^task_management:" .agents.local.yml .agents.yml 2>/dev/null | head -1 | awk '{print $2}' || echo "none"`
+**Get project config:** Invoke `config-reader` agent with `field: task_management, default: none`
 
 ## Input Format
 

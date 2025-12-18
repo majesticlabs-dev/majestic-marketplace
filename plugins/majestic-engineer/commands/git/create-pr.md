@@ -1,12 +1,14 @@
 ---
 name: create-pr
-allowed-tools: Bash(git *), Bash(gh *), Bash(grep *), Bash(awk *), Bash(head *), Bash(echo *)
+allowed-tools: Bash(git *), Bash(gh *), Task
 description: Create a pull request for the current feature branch
 model: claude-haiku-4-5-20251001
 ---
 
 ## Context
-- Default branch: !`grep "^default_branch:" .agents.yml 2>/dev/null | head -1 | awk '{print $2}' || echo "main"`
+
+**Get project config:** Invoke `config-reader` agent with `field: default_branch, default: main`
+
 - Current git status: !`git status`
 - Current branch: !`git branch --show-current`
 - Pending changes: !`git diff --stat`

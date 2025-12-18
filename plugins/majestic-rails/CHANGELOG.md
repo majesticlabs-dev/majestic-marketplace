@@ -2,6 +2,14 @@
 
 All notable changes to majestic-rails will be documented in this file.
 
+## [3.3.2] - 2025-12-17
+
+### Fixed
+
+- **Bash permission errors** - Replaced `!` interpolations with `config-reader` agent invocation
+  - `rails-code-review-orchestrator` and `/rails:build` command now use `config-reader` agent
+  - Eliminates compound bash commands that failed Claude Code permission checks
+
 ## [3.1.0] - 2025-12-14
 
 ### Added

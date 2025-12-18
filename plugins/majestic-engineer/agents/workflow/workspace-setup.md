@@ -1,7 +1,7 @@
 ---
 name: workspace-setup
 description: Create development workspace (branch or worktree) based on project configuration. Handles branch naming patterns and git workflow preferences.
-tools: Bash, Read, Grep, Glob, Skill
+tools: Bash, Read, Grep, Glob, Skill, Task
 model: claude-haiku-4-5-20251001
 color: blue
 ---
@@ -12,9 +12,12 @@ You are a workspace setup agent. Your role is to create the appropriate git work
 
 ## Context
 
-- Workflow: !`grep "^workflow:" .agents.local.yml .agents.yml 2>/dev/null | head -1 | awk '{print $2}' || echo "branches"`
-- Branch naming: !`grep "^branch_naming:" .agents.local.yml .agents.yml 2>/dev/null | head -1 | awk '{print $2}' || echo "issue-desc"`
-- Default branch: !`grep "^default_branch:" .agents.local.yml .agents.yml 2>/dev/null | head -1 | awk '{print $2}' || echo "main"`
+**Get project config:** Invoke `config-reader` agent to get merged configuration.
+
+Config values needed:
+- `workflow` (default: branches)
+- `branch_naming` (default: issue-desc)
+- `default_branch` (default: main)
 
 ## Input Format
 

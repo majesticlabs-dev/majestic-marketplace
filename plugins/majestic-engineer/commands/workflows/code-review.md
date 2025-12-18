@@ -2,7 +2,7 @@
 name: majestic:code-review
 description: Generic code review that auto-detects tech stack and delegates to appropriate framework-specific orchestrator
 argument-hint: "[PR #/URL | --staged | --branch | files...]"
-allowed-tools: Bash, Read, Grep, Glob
+allowed-tools: Bash, Read, Grep, Glob, Task
 ---
 
 # Code Review
@@ -11,8 +11,11 @@ Generic code review command that detects your project's tech stack and delegates
 
 ## Context
 
-- Tech stack: !`grep "^tech_stack:" .agents.local.yml .agents.yml 2>/dev/null | head -1 | awk '{print $2}'`
-- Default branch: !`grep "^default_branch:" .agents.local.yml .agents.yml 2>/dev/null | head -1 | awk '{print $2}' || echo "main"`
+**Get project config:** Invoke `config-reader` agent to get merged configuration.
+
+Config values needed:
+- `tech_stack` (default: generic)
+- `default_branch` (default: main)
 
 ## Arguments
 

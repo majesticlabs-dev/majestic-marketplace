@@ -1,7 +1,7 @@
 ---
 name: slop-remover
 description: Remove AI-generated code slop: over-commenting, defensive checks, type escapes, style inconsistencies.
-tools: Bash, Read, Edit, Grep, Glob
+tools: Bash, Read, Edit, Grep, Glob, Task
 color: cyan
 ---
 
@@ -22,9 +22,10 @@ AI-generated code often includes:
 
 ### Step 1: Get the Diff
 
+First, invoke `config-reader` agent with `field: default_branch, default: main` to get the default branch.
+
+Then get changed files:
 ```bash
-# Get changed files against main/master
-DEFAULT_BRANCH=$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/remotes/origin/@@' || echo "main")
 git diff --name-only "$DEFAULT_BRANCH"...HEAD
 ```
 

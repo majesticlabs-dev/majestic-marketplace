@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.1.1] - 2025-12-17
+
+### Fixed
+
+- **Bash permission errors** - Replaced `!` interpolations with `config-reader` agent invocation
+  - `python-code-review-orchestrator` now uses `config-reader` agent
+  - Eliminates compound bash commands that failed Claude Code permission checks
+
 ## [3.0.0] - 2025-12-12
 
 ### Added

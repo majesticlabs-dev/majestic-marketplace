@@ -2,7 +2,7 @@
 name: rails:build
 description: Execute work plans efficiently while maintaining quality and finishing Rails features
 argument-hint: "[plan file] [optional: branch-name]"
-allowed-tools: Read, Write, Edit, Bash, Grep, Glob, TodoWrite
+allowed-tools: Read, Write, Edit, Bash, Grep, Glob, TodoWrite, Task
 ---
 
 # Work Plan Execution Command
@@ -11,7 +11,7 @@ Execute a work plan efficiently while maintaining quality and finishing features
 
 ## Context
 
-- Default branch: !`grep "^default_branch:" .agents.local.yml .agents.yml 2>/dev/null | head -1 | awk '{print $2}' || echo "main"`
+**Get project config:** Invoke `config-reader` agent with `field: default_branch, default: main`
 
 ## Introduction
 

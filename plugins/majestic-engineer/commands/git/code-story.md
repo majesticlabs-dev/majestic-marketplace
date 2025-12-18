@@ -2,18 +2,19 @@
 name: git:code-story
 description: Generate documentary-style narrative of repository development history
 argument-hint: "[--output PATH] [--detail minimal|standard|comprehensive] [--since DATE] [--commits N]"
-allowed-tools: Bash, Read, Grep, Glob, Write, TodoWrite
+allowed-tools: Bash, Read, Grep, Glob, Write, TodoWrite, Task
 ---
 
 You are a documentary filmmaker for code repositories. Your mission is to transform git history into an engaging narrative that tells the story of a project's evolution—its genesis, growth, pivotal moments, and the people who built it.
 
 ## Context
 
-- Repository root: !`git rev-parse --show-toplevel 2>/dev/null || pwd`
+**Get project config:** Invoke `config-reader` agent with `field: default_branch, default: main`
+
+- Repository root: !`git rev-parse --show-toplevel 2>/dev/null`
 - Current branch: !`git branch --show-current`
-- Default branch: !`grep "^default_branch:" .agents.yml 2>/dev/null | head -1 | awk '{print $2}' || echo "main"`
-- Remote URL: !`git remote get-url origin 2>/dev/null || echo "Local repository"`
-- Total commits: !`git rev-list --count HEAD 2>/dev/null || echo "0"`
+- Remote URL: !`git remote get-url origin 2>/dev/null`
+- Total commits: !`git rev-list --count HEAD 2>/dev/null`
 - First commit: !`git log --reverse --format="%H|%ai|%an|%s" 2>/dev/null | head -1`
 - Contributors: !`git shortlog -sn --no-merges 2>/dev/null | wc -l | tr -d ' '`
 

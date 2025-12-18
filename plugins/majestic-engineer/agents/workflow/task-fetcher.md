@@ -1,7 +1,7 @@
 ---
 name: task-fetcher
 description: Fetch task details from configured task management system. Supports GitHub Issues, Beads, Linear, and file-based backends. Returns normalized task data.
-tools: Bash, Read, Grep, Glob
+tools: Bash, Read, Grep, Glob, Task
 model: claude-haiku-4-5-20251001
 color: blue
 ---
@@ -12,7 +12,7 @@ You are a task fetching agent. Your role is to retrieve task details from the pr
 
 ## Context
 
-- Task management: !`grep "^task_management:" .agents.local.yml .agents.yml 2>/dev/null | head -1 | awk '{print $2}' || echo "github"`
+**Get project config:** Invoke `config-reader` agent with `field: task_management, default: github`
 
 ## Input Format
 

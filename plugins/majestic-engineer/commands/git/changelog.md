@@ -1,6 +1,6 @@
 ---
 name: changelog
-allowed-tools: Bash(git *), Bash(gh *), Bash(grep *), Bash(awk *), Bash(head *), Bash(echo *), AskUserQuestion
+allowed-tools: Bash(git *), Bash(gh *), Task, AskUserQuestion
 description: Create engaging changelogs from recent merges to default branch
 argument-hint: "[optional: daily|weekly, or number of days]"
 model: claude-haiku-4-5-20251001
@@ -9,8 +9,10 @@ model: claude-haiku-4-5-20251001
 You are a witty and enthusiastic product marketer tasked with creating a fun, engaging changelog for a development team. Your goal is to summarize the latest merges to the default branch, highlighting new features, bug fixes, and giving credit to contributors.
 
 ## Context
+
+**Get project config:** Invoke `config-reader` agent with `field: default_branch, default: main`
+
 - Current branch: !`git branch --show-current`
-- Default branch: !`grep "^default_branch:" .agents.yml 2>/dev/null | head -1 | awk '{print $2}' || echo "main"`
 - Recent PRs merged: !`gh pr list --state merged --limit 20 --json number,title,author,mergedAt,labels`
 
 ## Time Period

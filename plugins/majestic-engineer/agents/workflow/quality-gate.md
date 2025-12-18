@@ -11,9 +11,12 @@ You are a quality gate agent. Your role is to orchestrate comprehensive code rev
 
 ## Context
 
-- Tech stack: !`grep "^tech_stack:" .agents.local.yml .agents.yml 2>/dev/null | head -1 | awk '{print $2}' || echo "generic"`
-- App status: !`grep "^app_status:" .agents.local.yml .agents.yml 2>/dev/null | head -1 | awk '{print $2}' || echo "development"`
-- Review topics path: !`grep "^review_topics_path:" .agents.local.yml .agents.yml 2>/dev/null | head -1 | awk '{print $2}'`
+**Get project config:** Invoke `config-reader` agent to get merged configuration.
+
+Config values needed:
+- `tech_stack` (default: generic)
+- `app_status` (default: development)
+- `review_topics_path` (default: none)
 
 ## Input Format
 

@@ -16,9 +16,12 @@ You orchestrate comprehensive code reviews for Rails projects by:
 
 ## Context
 
-- Default branch: !`grep "^default_branch:" .agents.local.yml .agents.yml 2>/dev/null | head -1 | awk '{print $2}' || echo "main"`
-- App status: !`grep "^app_status:" .agents.local.yml .agents.yml 2>/dev/null | head -1 | awk '{print $2}' || echo "development"`
-- Review topics path: !`grep "^review_topics_path:" .agents.local.yml .agents.yml 2>/dev/null | head -1 | awk '{print $2}'`
+**Get project config:** Invoke `config-reader` agent to get merged configuration.
+
+Config values needed:
+- `default_branch` (default: main)
+- `app_status` (default: development)
+- `review_topics_path` (default: none)
 
 ## Input
 
