@@ -10,6 +10,12 @@ The latest open-source reference from 37signals, demonstrating modern Rails 8 pa
 - **Repository**: https://github.com/basecamp/fizzy-saas
 - **Fizzy (base app)**: https://github.com/basecamp/fizzy
 
+### Unofficial 37signals Coding Style Guide
+Community-compiled patterns from analyzing 265 Fizzy pull requests.
+
+- **Repository**: https://github.com/marckohlbrugge/unofficial-37signals-coding-style-guide
+- **Note**: LLM-assisted analysis - verify patterns against source code
+
 ### Campfire (Once)
 The main codebase this style guide is derived from.
 

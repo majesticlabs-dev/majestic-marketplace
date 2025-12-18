@@ -194,6 +194,7 @@ For comprehensive patterns and examples, see:
 - `references/concerns-organization.md` - Model-specific vs common concerns, facade pattern
 - `references/delegated-types.md` - Polymorphism without STI problems
 - `references/recording-pattern.md` - Unifying abstraction for diverse content types
+- `references/filter-objects.md` - PORO filter objects, URL-based state, testable query building
 
 ### Rails Components
 - `references/activerecord-tips.md` - ActiveRecord query patterns, validations, associations
@@ -206,9 +207,14 @@ For comprehensive patterns and examples, see:
 ### Frontend
 - `references/css-architecture.md` - Native CSS patterns (layers, OKLCH, nesting, dark mode)
 
-### Performance & Infrastructure
+### Authentication & Multi-Tenancy
+- `references/passwordless-auth.md` - Magic link authentication, sessions, identity model
+- `references/multi-tenancy.md` - Path-based tenancy, cookie scoping, tenant-aware jobs
+
+### Infrastructure & Integrations
+- `references/webhooks.md` - Secure webhook delivery, SSRF protection, retry strategies
 - `references/caching-strategies.md` - Russian Doll caching, Solid Cache, cache analysis
-- `references/config-tips.md` - Configuration, logging, deployment, multi-tenancy patterns
+- `references/config-tips.md` - Configuration, logging, deployment patterns
 - `references/resources.md` - Links to source material and further reading
 
 ## Philosophy Summary
