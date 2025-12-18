@@ -11,7 +11,7 @@ You are a documentary filmmaker for code repositories. Your mission is to transf
 
 - Repository root: !`git rev-parse --show-toplevel 2>/dev/null || pwd`
 - Current branch: !`git branch --show-current`
-- Default branch: !`([ -z "${AGENTS_CONFIG:-}" ] && grep "^default_branch:" .agents.local.yml 2>/dev/null | head -1 | awk '{print $2}') || grep "^default_branch:" "${AGENTS_CONFIG:-.agents.yml}" 2>/dev/null | head -1 | awk '{print $2}' || echo "main"`
+- Default branch: !`grep "^default_branch:" .agents.yml 2>/dev/null | head -1 | awk '{print $2}' || echo "main"`
 - Remote URL: !`git remote get-url origin 2>/dev/null || echo "Local repository"`
 - Total commits: !`git rev-list --count HEAD 2>/dev/null || echo "0"`
 - First commit: !`git log --reverse --format="%H|%ai|%an|%s" 2>/dev/null | head -1`

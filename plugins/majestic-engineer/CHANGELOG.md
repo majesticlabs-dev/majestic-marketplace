@@ -2,6 +2,15 @@
 
 All notable changes to majestic-engineer will be documented in this file.
 
+## [3.4.2] - 2025-12-17
+
+### Fixed
+
+- **Git commands** - Remove `${}` parameter substitution from context expansions
+  - `/git:create-pr`, `/git:changelog`, `/git:code-story` now work correctly
+  - Claude Code's permission check was blocking shell parameter substitution syntax
+  - Simplified default_branch config reading to avoid the issue
+
 ## [3.2.0] - 2025-12-15
 
 ### Enhanced
