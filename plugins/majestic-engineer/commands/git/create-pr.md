@@ -6,7 +6,7 @@ model: claude-haiku-4-5-20251001
 ---
 
 ## Context
-- Default branch: !`([ -z "${AGENTS_CONFIG:-}" ] && grep "^default_branch:" .agents.local.yml 2>/dev/null | head -1 | awk '{print $2}') || grep "^default_branch:" "${AGENTS_CONFIG:-.agents.yml}" 2>/dev/null | head -1 | awk '{print $2}' || echo "main"`
+- Default branch: !`grep "^default_branch:" .agents.yml 2>/dev/null | head -1 | awk '{print $2}' || echo "main"`
 - Current git status: !`git status`
 - Current branch: !`git branch --show-current`
 - Pending changes: !`git diff --stat`
