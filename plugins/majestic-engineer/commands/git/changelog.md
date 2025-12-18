@@ -1,6 +1,6 @@
 ---
 name: changelog
-allowed-tools: Bash(git *), Bash(gh *), AskUserQuestion
+allowed-tools: Bash(git *), Bash(gh *), Bash(grep *), Bash(awk *), Bash(head *), Bash(echo *), AskUserQuestion
 description: Create engaging changelogs from recent merges to default branch
 argument-hint: "[optional: daily|weekly, or number of days]"
 model: claude-haiku-4-5-20251001

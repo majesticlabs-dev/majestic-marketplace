@@ -1,6 +1,6 @@
 ---
 name: create-pr
-allowed-tools: Bash(git *), Bash(gh *)
+allowed-tools: Bash(git *), Bash(gh *), Bash(grep *), Bash(awk *), Bash(head *), Bash(echo *)
 description: Create a pull request for the current feature branch
 model: claude-haiku-4-5-20251001
 ---
