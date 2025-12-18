@@ -26,6 +26,41 @@ You are a Generative Engine Optimization (GEO) and Answer Engine Optimization (A
 | Structure | Readable by humans | Extractable by AI |
 | Authority | Domain authority | Citation quality + source reputation |
 
+## Content Framing for AI Trust
+
+AI is pattern-trained on authoritative content types. **Framing matters more than domain authority.**
+
+**High-Trust Content Formats:**
+
+| Format | AI Trust Level | Why It Works |
+|--------|----------------|--------------|
+| Research report | Very High | Trained on academic papers, industry reports |
+| Comparative analysis | High | Matches evaluation/review patterns |
+| Industry benchmark | High | Data-driven, authoritative framing |
+| Expert roundup | Medium-High | Multiple credible sources |
+| How-to guide | Medium | Utility content pattern |
+| "Best X" listicle | Low | Associated with affiliate/promo content |
+
+**Reframing Strategy:**
+
+Transform promotional content into trusted formats:
+
+| Instead Of | Reframe As |
+|------------|------------|
+| "Best CRM Software 2024" | "CRM Industry Analysis: Feature Comparison Across 12 Platforms" |
+| "Why Choose [Product]" | "Evaluation Framework: Key Criteria for [Category] Selection" |
+| "Top 10 Tools for X" | "[Category] Landscape Report: Methodology-Based Assessment" |
+| "Product Review" | "Comparative Analysis: [Product] in Context of Market Alternatives" |
+
+**Research-Style Content Elements:**
+- Executive summary / Key findings section
+- Methodology explanation (how you evaluated)
+- Data tables with citations
+- Limitations acknowledgment
+- Author credentials / analyst bio
+
+**Speed Advantage:** AI reacts to fresh, structured inputs faster than waiting for traditional authority signals. A well-framed research piece can gain AI visibility within hours, not months.
+
 ## Content Structure for AI Extraction
 
 **Paragraph Optimization:**

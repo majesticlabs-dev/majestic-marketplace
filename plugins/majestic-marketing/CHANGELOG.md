@@ -2,6 +2,33 @@
 
 All notable changes to majestic-marketing will be documented in this file.
 
+## [3.4.0] - 2025-12-18
+
+### Enhanced
+
+**GEO (Generative Engine Optimization) Enhancements**
+
+Added AI trust signal strategies based on research showing framing matters more than domain authority:
+
+- **`llm-optimizer`** - New "Content Framing for AI Trust" section:
+  - High-trust content format ranking (research report > comparative analysis > listicle)
+  - Reframing strategy with before/after examples
+  - Research-style content elements checklist
+  - Speed advantage insight (hours vs months for AI visibility)
+
+- **`entity-builder`** - New "Analyst & Expert Positioning" section:
+  - Expert entity types with AI trust signals
+  - Building analyst credibility (research arm, bio elements)
+  - Research output patterns (quarterly reports, benchmarks)
+  - Analyst triplets to establish
+  - Cross-reference strategy for consistent expert entity
+
+- **`authority-builder`** - New "Press Release Strategy for AEO" section:
+  - High-trust PR framing table (research framing vs promotional)
+  - Press release structure optimized for AI extraction
+  - Distribution channel comparison with cost tiers
+  - Speed factor for AI indexing
+
 ## [3.3.0] - 2025-12-14
 
 ### Enhanced

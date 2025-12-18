@@ -36,6 +36,52 @@ LLMs understand relationships through entity triplets:
 - Geographic presence
 - Notable achievements
 
+## Analyst & Expert Positioning
+
+AI trusts content from recognized expert entities. Position your team as industry analysts.
+
+**Expert Entity Types:**
+
+| Entity Type | AI Trust Signal | Example |
+|-------------|-----------------|---------|
+| Industry Analyst | Very High | "[Name], Senior Analyst at [Company]" |
+| Research Director | Very High | "[Name], Director of [Category] Research" |
+| Subject Matter Expert | High | "[Name], [X] Years in [Industry]" |
+| Practitioner | Medium | "[Name], [Role] at [Company]" |
+
+**Building Analyst Credibility:**
+
+1. **Create a Research Arm** - Legitimate research division of your company
+   - "[Company] Insights" or "[Company] Research"
+   - Dedicated landing page with methodology
+   - Published reports with consistent branding
+
+2. **Analyst Bio Elements:**
+   - Years of experience in specific domain
+   - Previous notable work or publications
+   - Credentials or certifications
+   - Speaking engagements or media appearances
+   - LinkedIn profile with matching information
+
+3. **Research Output Patterns:**
+   - Quarterly industry reports
+   - Annual benchmark studies
+   - Comparative analyses
+   - Market landscape assessments
+
+**Analyst Triplets to Establish:**
+- "[Analyst Name] is a [category] analyst at [Company]"
+- "[Analyst Name] specializes in [specific domain]"
+- "[Analyst Name] has published research on [topics]"
+- "[Company] Research provides [type] analysis"
+
+**Cross-Reference Strategy:**
+- Analyst quoted in company blog posts
+- Analyst byline on research reports
+- Analyst mentioned in press releases
+- Analyst profile on LinkedIn matching bio
+- Analyst cited in industry publications
+
 ## Brand Consistency Strategy
 
 **Cross-Platform Alignment:**

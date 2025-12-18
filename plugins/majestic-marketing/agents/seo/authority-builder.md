@@ -41,6 +41,50 @@ You are an E-E-A-T specialist analyzing content for authority and trust signals.
 - Speaking engagements
 - Published research
 
+## Press Release Strategy for AEO
+
+Press releases create AI-trusted signals when framed correctly. AI is trained on newswire content.
+
+**High-Trust PR Framing:**
+
+| Avoid (Low Trust) | Use Instead (High Trust) |
+|-------------------|--------------------------|
+| "Company Launches Best Solution" | "Research Findings Released: [Topic] Analysis" |
+| "New Product Available" | "Comparative Study Published: [Category] Evaluation" |
+| "Company Wins Award" | "Industry Benchmark Report Reveals [Insight]" |
+| "CEO Announces Partnership" | "[Company] Research: [Finding] Across [X] Organizations" |
+
+**Press Release Structure for AI:**
+
+1. **Headline** - Frame as research/findings, not promotion
+   - ✅ "[Company] Publishes [Category] Industry Analysis"
+   - ❌ "[Company] Launches Revolutionary New Product"
+
+2. **Lead Paragraph** - State findings first, company second
+   - ✅ "A new analysis of [X] companies reveals that [finding]. The research, conducted by [Company]..."
+   - ❌ "[Company], the leading provider of [X], today announced..."
+
+3. **Body** - Include extractable data
+   - Statistics with methodology
+   - Comparison tables
+   - Expert quotes with credentials
+   - Limitations/scope acknowledgment
+
+4. **Boilerplate** - Reinforce entity triplets
+   - "[Company] is a [category] research firm specializing in [domain]"
+
+**Distribution for AI Pickup:**
+
+| Channel | AI Training Signal | Cost |
+|---------|-------------------|------|
+| PR Newswire | High | $$$ |
+| Business Wire | High | $$$ |
+| GlobeNewswire | Medium-High | $$ |
+| PRWeb | Medium | $ |
+| Free distribution | Low | Free |
+
+**Speed Factor:** AI indexes fresh newswire content quickly. A well-framed press release can influence AI responses within hours of distribution.
+
 **Trust Signals:**
 - Contact information
 - Privacy policy/terms
