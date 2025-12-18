@@ -2,6 +2,15 @@
 
 All notable changes to majestic-tools will be documented in this file.
 
+## [3.1.0] - 2025-12-17
+
+### Added
+
+- **Commands HUD** - `/majestic:commands-hud` displays all marketplace commands in a formatted table
+  - Groups by plugin (default) or category
+  - Filter by specific plugin with `--plugin`
+  - Helper script at `helpers/hud-commands.sh`
+
 ## [3.0.0] - 2025-12-12
 
 ### Changed
