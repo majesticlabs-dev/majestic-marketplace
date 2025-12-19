@@ -14,6 +14,19 @@ Set up AI agent documentation and machine-readable config for this project.
 - **.agents.yml** - Machine-readable config for commands
 - **CLAUDE.md** - Symlink to AGENTS.md
 
+## Helper Scripts
+
+This command uses helper scripts in `init-agents-md/` directory:
+
+| Script | Purpose |
+|--------|---------|
+| `detect-versions.sh` | Auto-detect Ruby, Rails, Python, Node versions |
+| `detect-branch.sh` | Detect default git branch |
+| `detect-tech-stack.sh` | Detect tech stack from project files |
+| `gitignore-add.sh` | Add entries to .gitignore idempotently |
+| `check-existing.sh` | Check for existing AGENTS.md/CLAUDE.md |
+| `verify-setup.sh` | Verify setup completion |
+
 ## AGENTS.md Best Practices
 
 ### Constraints
@@ -57,14 +70,7 @@ Ask more questions until you have enough context to give an accurate & confident
 First, check what already exists:
 
 ```bash
-# Check for existing AGENTS.md files
-find . -name "AGENTS.md" -type f -not -path '*/node_modules/*' -not -path '*/.git/*' 2>/dev/null
-
-# Check for existing CLAUDE.md
-ls -la CLAUDE.md 2>/dev/null
-
-# Count lines if root exists
-[ -f AGENTS.md ] && wc -l AGENTS.md
+./init-agents-md/check-existing.sh
 ```
 
 **If AGENTS.md already exists**, use `AskUserQuestion`:
@@ -101,14 +107,7 @@ The skill has 4 phases that MUST all be completed:
 After completing the skill, verify files were created:
 
 ```bash
-# Find all AGENTS.md files
-find . -name "AGENTS.md" -type f -not -path '*/node_modules/*' -not -path '*/.git/*'
-
-# Verify root AGENTS.md exists and is under 200 lines
-wc -l AGENTS.md
-
-# List sub-folder AGENTS.md files
-find . -mindepth 2 -name "AGENTS.md" -type f -not -path '*/node_modules/*'
+./init-agents-md/check-existing.sh agents
 ```
 
 ### 1.4 Checkpoint: Confirm Before Proceeding
@@ -171,11 +170,8 @@ Use a single `AskUserQuestion` call with these 4 questions:
 Auto-detect versions first, then ask remaining questions in two `AskUserQuestion` calls (max 4 questions each):
 
 ```bash
-# Auto-detect Ruby version
-grep -E "^ruby" Gemfile 2>/dev/null | sed 's/ruby "\([^"]*\)".*/\1/'
-
-# Auto-detect Rails version
-grep -E "gem ['\"]rails['\"]" Gemfile 2>/dev/null | sed "s/.*['\"]~> \([0-9.]*\)['\"].*/\1/"
+./init-agents-md/detect-versions.sh ruby
+./init-agents-md/detect-versions.sh rails
 ```
 
 **First AskUserQuestion call (4 questions):**
@@ -230,9 +226,8 @@ grep -E "gem ['\"]rails['\"]" Gemfile 2>/dev/null | sed "s/.*['\"]~> \([0-9.]*\)
 Auto-detect framework first, then ask all 3 questions in a single `AskUserQuestion` call:
 
 ```bash
-# Check for common frameworks
-[ -f pyproject.toml ] && grep -E "fastapi|django|flask" pyproject.toml 2>/dev/null
-[ -f requirements.txt ] && grep -E "fastapi|django|flask" requirements.txt 2>/dev/null
+./init-agents-md/detect-versions.sh python
+./init-agents-md/detect-tech-stack.sh python-fw
 ```
 
 **Single AskUserQuestion call (3 questions):**
@@ -264,14 +259,9 @@ Auto-detect framework first, then ask all 3 questions in a single `AskUserQuesti
 Auto-detect first:
 
 ```bash
-# Auto-detect Node version
-node -v 2>/dev/null | sed 's/v//'
-
-# Check for TypeScript
-[ -f tsconfig.json ] && echo "typescript"
-
-# Check for common frameworks
-[ -f package.json ] && grep -E "next|react|vue|nuxt|svelte|express|fastify" package.json 2>/dev/null
+./init-agents-md/detect-versions.sh node
+./init-agents-md/detect-tech-stack.sh typescript
+./init-agents-md/detect-tech-stack.sh node-fw
 ```
 
 **First AskUserQuestion call (4 questions):**
@@ -360,23 +350,13 @@ Use a single `AskUserQuestion` call with these 3 questions:
 ### Default Branch
 
 ```bash
-# Try remote HEAD first
-git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/remotes/origin/@@'
-
-# Fallback: check for main
-git show-ref --verify refs/heads/main 2>/dev/null && echo "main"
-
-# Fallback: check for master
-git show-ref --verify refs/heads/master 2>/dev/null && echo "master"
+./init-agents-md/detect-branch.sh
 ```
-
-Use first successful result, default to `main`.
 
 ### Tech Stack (if Generic selected)
 
 ```bash
-[ -f Gemfile ] && echo "rails"
-[ -f pyproject.toml ] || [ -f requirements.txt ] && echo "python"
+./init-agents-md/detect-tech-stack.sh stack
 ```
 
 ## Step 4: Write .agents.yml
@@ -535,18 +515,17 @@ quality_gate:
 - Only include `extras` list if user selected any Solid gems
 - Auto-detect versions where possible, omit if not found
 
-If user selected "No" for git tracking:
-```bash
-echo ".agents.yml" >> .gitignore
-```
-
-If user selected "Yes" for F4 (local overrides), create `.agents.local.yml`:
+### Gitignore Entries
 
 ```bash
-# Auto-add to .gitignore if not already there
-if [ ! -f .gitignore ] || ! grep -q "^\.agents\.local\.yml$" .gitignore; then
-  echo ".agents.local.yml" >> .gitignore
-fi
+# Always add runtime artifact
+./init-agents-md/gitignore-add.sh .claude/current_task.txt
+
+# If user selected "No" for git tracking (F3)
+./init-agents-md/gitignore-add.sh .agents.yml
+
+# If user selected "Yes" for local overrides (F4)
+./init-agents-md/gitignore-add.sh .agents.local.yml
 ```
 
 Write `.agents.local.yml`:
@@ -616,24 +595,15 @@ ln -s AGENTS.md CLAUDE.md
 ## Step 8: Final Verification
 
 ```bash
-# Check hierarchical AGENTS.md structure
-echo "=== AGENTS.md Files ===" && find . -name "AGENTS.md" -type f -not -path '*/node_modules/*' -not -path '*/.git/*'
-
-# Check root AGENTS.md line count (should be under 200)
-echo "=== Root Line Count ===" && wc -l AGENTS.md
-
-# Verify .agents.yml
-echo "=== Config ===" && cat .agents.yml
-
-# Verify symlink
-echo "=== Symlink ===" && ls -la CLAUDE.md
+./init-agents-md/verify-setup.sh
 ```
 
-**Verify hierarchical structure is complete:**
-- [ ] Root AGENTS.md exists and is under 200 lines
-- [ ] Sub-folder AGENTS.md files exist for major directories (unless simple project)
-- [ ] Root contains JIT Index with links to sub-files
-- [ ] `.agents.yml` contains correct configuration
+The script checks:
+- Root AGENTS.md exists and is under 200 lines
+- Sub-folder AGENTS.md files (if any)
+- `.agents.yml` exists
+- CLAUDE.md symlink points to AGENTS.md
+- `.claude/current_task.txt` is in .gitignore
 
 ## Output Summary
 
