@@ -125,20 +125,6 @@ toolbox:
 - `build_task.pre_ship_hooks`: User **extends** manifest (additive by id)
 - `quality_gate.reviewers`: User **replaces** manifest (complete override)
 
-**Backwards Compatibility:** Also check for deprecated top-level `quality_gate.reviewers`:
-```yaml
-# DEPRECATED - still supported but migration recommended
-quality_gate:
-  reviewers: [...]
-
-# PREFERRED - use toolbox namespace
-toolbox:
-  quality_gate:
-    reviewers: [...]
-```
-
-If top-level `quality_gate` exists but `toolbox.quality_gate` doesn't, use top-level. Add warning if both exist (toolbox wins).
-
 ### 6. Return Canonical Configuration
 
 ## Output Format
@@ -158,7 +144,7 @@ build_task:
     build_agent: general-purpose
     fix_agent: general-purpose
 
-  coding_styles:
+  coding_styles:                 # Skills (not agents) - invoke via Skill tool
     - majestic-rails:dhh-coder
 
   research_hooks:

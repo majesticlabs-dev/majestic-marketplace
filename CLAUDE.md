@@ -637,8 +637,6 @@ All toolbox fields follow the same precedence:
 - `toolbox.build_task.coding_styles` → User overrides manifest, falls back to empty list
 - `toolbox.quality_gate.reviewers` → User overrides manifest, falls back to tech-stack defaults
 
-**Backwards Compatibility:** Top-level `quality_gate.reviewers` is deprecated but still supported. Move to `toolbox.quality_gate.reviewers`.
-
 #### User Overrides
 
 Override toolbox settings in `.agents.yml`:
@@ -671,15 +669,19 @@ toolbox:
 - `quality_gate.reviewers` → Replaces manifest list entirely
 - `research_hooks` → Extends manifest hooks (additive)
 
-#### Available Coding Styles
+#### Available Coding Styles (Skills)
 
-| Style | Plugin | Description |
+Coding styles are **skills** (not agents). They are invoked via the `Skill` tool before the build phase to provide knowledge/context that influences code generation.
+
+| Skill | Plugin | Description |
 |-------|--------|-------------|
 | `dhh-coder` | majestic-rails | DHH's 37signals Ruby/Rails philosophy |
 | `tdd-workflow` | majestic-engineer | Test-driven development patterns |
 | `frontend-design` | majestic-engineer | Frontend component design |
 
-#### Available Reviewers
+**Invocation:** `Skill(skill: "majestic-rails:dhh-coder")`
+
+#### Available Reviewers (Agents)
 
 | Reviewer | Plugin | Description |
 |----------|--------|-------------|
@@ -695,6 +697,8 @@ toolbox:
 | `react-reviewer` | majestic-react | React best practices, hooks, a11y |
 | `codex-reviewer` | majestic-tools | External LLM (OpenAI Codex) |
 | `gemini-reviewer` | majestic-tools | External LLM (Google Gemini) |
+
+**Invocation:** Reviewers are agents launched via the `Task` tool: `Task(subagent_type: "majestic-engineer:qa:security-review")`
 
 ### Why .agents.yml?
 

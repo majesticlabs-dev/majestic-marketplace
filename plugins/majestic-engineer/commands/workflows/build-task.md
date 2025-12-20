@@ -100,17 +100,20 @@ agent architect "Task: <title> | Description: <description> | Research: <finding
 
 ### Step 8: Build
 
-**If `coding_styles` is non-empty:** Include skill names in prompt so build agent activates them:
+**Before invoking build agent:** If `coding_styles` is non-empty, activate each skill using the `Skill` tool:
 ```
-agent <build_agent or general-purpose> "Implement: <title> | Plan: <plan content> | Apply coding styles: <coding_styles list>"
+Skill(skill: "majestic-rails:dhh-coder")
+Skill(skill: "majestic-engineer:tdd-workflow")
 ```
 
-**If `coding_styles` is empty:** Standard prompt:
+**Note:** `coding_styles` contains **skill names** (not agents). Skills provide knowledge/context that influences how the build agent writes code. They are invoked via the `Skill` tool, not the `Task` tool.
+
+**Then invoke build agent:**
 ```
 agent <build_agent or general-purpose> "Implement: <title> | Plan: <plan content>"
 ```
 
-The build agent should invoke the specified skills (e.g., `skill dhh-coder`) to influence code style during implementation.
+The activated skills remain in context and guide the build agent's implementation approach.
 
 ### Step 9-11: Verify & Review
 ```
