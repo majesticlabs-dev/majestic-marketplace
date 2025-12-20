@@ -210,7 +210,7 @@ Invoke with: `/majestic-engineer:<category>:<name>`
 
 | Command | Description |
 |---------|-------------|
-| `tasks:backlog` | Manage backlog items across files, GitHub Issues, Linear, or Beads |
+| `tasks:new` | Manage backlog items across files, GitHub Issues, Linear, or Beads |
 
 ### workflows
 

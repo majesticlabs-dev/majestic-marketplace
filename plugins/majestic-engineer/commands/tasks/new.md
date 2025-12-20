@@ -1,5 +1,5 @@
 ---
-name: tasks:backlog
+name: tasks:new
 description: Manage backlog items across files, GitHub Issues, Linear, or Beads
 argument-hint: "[action] [details] - Actions: add, list, update, complete"
 ---
@@ -39,16 +39,16 @@ The skill will:
 
 ```bash
 # Add a new backlog item
-/backlog add Refactor authentication to use JWT tokens
+/new add Refactor authentication to use JWT tokens
 
 # List all pending items
-/backlog list
+/new list
 
 # Update an item's priority
-/backlog update ITEM-123 priority:p1
+/new update ITEM-123 priority:p1
 
 # Mark an item complete
-/backlog complete ITEM-123
+/new complete ITEM-123
 ```
 
 ## Configuration
