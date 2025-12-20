@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.2.0] - 2025-12-20
+
+### Changed
+
+- **Toolbox manifest structure** - Added `coding_styles` field to `toolbox.yml`
+  - Currently empty (`[]`) - no default Python coding styles defined yet
+  - Follows new consolidated schema from majestic-engineer 3.5.0
+  - Users can configure custom styles in `.agents.yml`
+
 ## [3.1.1] - 2025-12-17
 
 ### Fixed

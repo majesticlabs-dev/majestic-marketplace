@@ -11,6 +11,8 @@ build_task:
     build_agent: majestic-python:python-coder
     fix_agent: majestic-python:python-coder
 
+  coding_styles: []  # No default Python coding styles yet
+
   research_hooks:
     # Note: pip-research agent doesn't exist yet - using web-research as fallback
     # TODO: Create majestic-python:research:pip-research agent

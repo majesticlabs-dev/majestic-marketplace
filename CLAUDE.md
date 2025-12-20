@@ -139,7 +139,7 @@ Commands use a strategic three-tier naming system based on scope and purpose:
 
 **3. Utility Commands** - Omit `name:` field to use automatic path-based naming:
 - **Pattern**: No `name:` field → auto-named as `/category:command-name`
-- **Examples**: `/git:commit`, `/gemfile:organize`, `/tasks:backlog`
+- **Examples**: `/git:commit`, `/gemfile:organize`, `/tasks:new`
 - **When to use**: Category-specific utilities (git operations, gemfile management, etc.)
 - **Location**: `plugins/*/commands/{category}/{command-name}.md`
 - **Result**: Invoked as `/{category}:{command-name}`
@@ -425,6 +425,16 @@ task_management: github
 workflow: worktrees
 branch_naming: type/issue-desc
 review_topics_path: docs/agents/review-topics.md
+
+# Toolbox customization (optional - overrides plugin defaults)
+toolbox:
+  build_task:
+    coding_styles:
+      - majestic-rails:dhh-coder
+  quality_gate:
+    reviewers:
+      - majestic-rails:review:pragmatic-rails-reviewer
+      - majestic-engineer:qa:security-review
 ```
 
 #### Python Project Example
@@ -521,43 +531,6 @@ review_topics_path: docs/agents/review-topics.md
 | `testing` | Testing framework | `vitest` \| `jest` \| `playwright` \| `cypress` \| `none` | (none) |
 | `deployment` | Deployment platform | `vercel` \| `cloudflare` \| `netlify` \| `railway` \| `none` | (none) |
 
-### Quality Gate Fields
-
-| Field | Description | Values | Default |
-|-------|-------------|--------|---------|
-| `quality_gate.reviewers` | List of reviewers to run | list of agent names | (tech-stack defaults) |
-
-**Behavior:** When `quality_gate.reviewers` is configured, it **completely overrides** the default reviewers. Omit the section to use tech-stack defaults.
-
-#### Available Reviewers
-
-| Reviewer | Plugin | Description |
-|----------|--------|-------------|
-| `security-review` | majestic-engineer | OWASP Top 10, secrets, vulnerabilities |
-| `test-reviewer` | majestic-engineer | Test coverage, quality, edge cases |
-| `project-topics-reviewer` | majestic-engineer | Custom rules from review_topics_path |
-| `simplicity-reviewer` | majestic-engineer | Complexity and overengineering |
-| `pragmatic-rails-reviewer` | majestic-rails | Rails conventions, thin controllers |
-| `performance-reviewer` | majestic-rails | N+1 queries, slow operations |
-| `data-integrity-reviewer` | majestic-rails | Migration safety, constraints |
-| `dhh-code-reviewer` | majestic-rails | DHH's strict Rails philosophy |
-| `python-reviewer` | majestic-python | Python conventions and idioms |
-| `react-reviewer` | majestic-react | React best practices, hooks, a11y |
-| `codex-reviewer` | majestic-tools | External LLM (OpenAI Codex) |
-| `gemini-reviewer` | majestic-tools | External LLM (Google Gemini) |
-
-#### Example Configuration
-
-```yaml
-quality_gate:
-  reviewers:
-    - security-review
-    - pragmatic-rails-reviewer
-    - performance-reviewer
-    - test-reviewer
-    - project-topics-reviewer
-```
-
 ### Stack Toolbox Registry
 
 The toolbox registry enables **automatic stack-specific tool selection** for generic orchestrators like `/majestic:build-task` and `quality-gate`. When `tech_stack: rails` is configured, the workflow automatically uses Rails-specific agents without manual intervention.
@@ -601,8 +574,10 @@ priority: 100
 
 build_task:
   executor:
-    build_agent: majestic-rails:rails-coder
-    fix_agent: majestic-rails:rails-coder
+    build_agent: general-purpose
+    fix_agent: general-purpose
+  coding_styles:                    # Skills to activate during coding
+    - majestic-rails:dhh-coder
   research_hooks:
     - id: gem_research
       mode: auto
@@ -626,6 +601,7 @@ quality_gate:
 
 | Concept | Description |
 |---------|-------------|
+| **Coding styles** | Skills activated during build phase to influence code style |
 | **Auto research hooks** | Run automatically BEFORE planning when triggers match task text |
 | **Manual research hooks** | Available for architect/builder to invoke when needed |
 | **Pre-ship hooks** | Pipeline steps before shipping (NOT reviewers) |
@@ -650,36 +626,75 @@ triggers:
 
 #### Precedence Rules
 
-**For quality_gate.reviewers:**
-1. `.agents.yml quality_gate.reviewers` → Complete override
-2. Toolbox `quality_gate.reviewers` → Stack-specific default
-3. Hardcoded tech_stack defaults → Fallback
+All toolbox fields follow the same precedence:
 
-**For build_task executor:**
-1. `.agents.yml toolbox.build_task.executor` → User override
-2. Toolbox manifest `build_task.executor` → Stack-specific
-3. `general-purpose` → Fallback
+1. `.agents.yml toolbox.<section>.<field>` → User override (highest priority)
+2. Plugin `toolbox.yml` manifest → Stack-specific default
+3. Hardcoded fallback → Last resort
+
+**Examples:**
+- `toolbox.build_task.executor.build_agent` → User overrides manifest, falls back to `general-purpose`
+- `toolbox.build_task.coding_styles` → User overrides manifest, falls back to empty list
+- `toolbox.quality_gate.reviewers` → User overrides manifest, falls back to tech-stack defaults
+
+**Backwards Compatibility:** Top-level `quality_gate.reviewers` is deprecated but still supported. Move to `toolbox.quality_gate.reviewers`.
 
 #### User Overrides
 
 Override toolbox settings in `.agents.yml`:
 
 ```yaml
-# Override executor (use general-purpose instead of rails-coder)
+# Complete toolbox override example
 toolbox:
   build_task:
     executor:
       build_agent: general-purpose
       fix_agent: general-purpose
-
-# Add custom research hook (extends manifest)
-toolbox:
-  build_task:
+    coding_styles:                    # Skills to apply during coding
+      - majestic-rails:dhh-coder      # DHH's Rails philosophy
+      - majestic-engineer:tdd-workflow # Test-driven development
     research_hooks:
       - id: api_docs
         mode: manual
         agent: majestic-engineer:research:docs-researcher
+
+  quality_gate:
+    reviewers:
+      - majestic-engineer:qa:security-review
+      - majestic-rails:review:pragmatic-rails-reviewer
+      - majestic-rails:review:performance-reviewer
+      - majestic-engineer:review:project-topics-reviewer
 ```
+
+**Override behavior:**
+- `coding_styles` → Replaces manifest list entirely
+- `quality_gate.reviewers` → Replaces manifest list entirely
+- `research_hooks` → Extends manifest hooks (additive)
+
+#### Available Coding Styles
+
+| Style | Plugin | Description |
+|-------|--------|-------------|
+| `dhh-coder` | majestic-rails | DHH's 37signals Ruby/Rails philosophy |
+| `tdd-workflow` | majestic-engineer | Test-driven development patterns |
+| `frontend-design` | majestic-engineer | Frontend component design |
+
+#### Available Reviewers
+
+| Reviewer | Plugin | Description |
+|----------|--------|-------------|
+| `security-review` | majestic-engineer | OWASP Top 10, secrets, vulnerabilities |
+| `test-reviewer` | majestic-engineer | Test coverage, quality, edge cases |
+| `project-topics-reviewer` | majestic-engineer | Custom rules from review_topics_path |
+| `simplicity-reviewer` | majestic-engineer | Complexity and overengineering |
+| `pragmatic-rails-reviewer` | majestic-rails | Rails conventions, thin controllers |
+| `performance-reviewer` | majestic-rails | N+1 queries, slow operations |
+| `data-integrity-reviewer` | majestic-rails | Migration safety, constraints |
+| `dhh-code-reviewer` | majestic-rails | DHH's strict Rails philosophy |
+| `python-reviewer` | majestic-python | Python conventions and idioms |
+| `react-reviewer` | majestic-react | React best practices, hooks, a11y |
+| `codex-reviewer` | majestic-tools | External LLM (OpenAI Codex) |
+| `gemini-reviewer` | majestic-tools | External LLM (Google Gemini) |
 
 ### Why .agents.yml?
 
@@ -712,7 +727,7 @@ branch_naming: user/desc     # Personal branch naming preference
 **Merge behavior:**
 - Local values override team values key-by-key (deep merge)
 - If both files have same key, local wins
-- For nested sections (quality_gate), local replaces entire section
+- For nested sections (`toolbox.build_task`, `toolbox.quality_gate`), local replaces entire section
 - If `AGENTS_CONFIG` is set, local file is ignored
 
 **Auto-created:** Running `/majestic:init-agents-md` prompts to create local overrides when `.agents.yml` is tracked.

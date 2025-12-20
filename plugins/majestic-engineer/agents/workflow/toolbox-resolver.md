@@ -80,8 +80,8 @@ If multiple manifests match the same `tech_stack`:
 - Highest `priority` wins
 - If equal priority, first alphabetically by `plugin` name
 
-**List fields** (`research_hooks`, `pre_ship_hooks`, `quality_gate.reviewers`):
-- Union by `id` (for hooks) or by full agent path (for reviewers)
+**List fields** (`coding_styles`, `research_hooks`, `pre_ship_hooks`, `quality_gate.reviewers`):
+- Union by `id` (for hooks) or by full agent/skill path (for others)
 - Sort by `(priority desc, plugin asc, id asc)`
 - Duplicates: keep highest priority entry
 
@@ -104,17 +104,40 @@ toolbox:
   build_task:
     executor:
       build_agent: general-purpose  # Replaces manifest
+    coding_styles:                  # Replaces manifest
+      - majestic-rails:dhh-coder
+      - majestic-engineer:tdd-workflow
     research_hooks:
       - id: custom_hook             # ADDS to manifest
         mode: manual
         agent: custom-agent
+
+  quality_gate:
+    reviewers:                      # Replaces manifest
+      - majestic-engineer:qa:security-review
+      - majestic-rails:review:pragmatic-rails-reviewer
 ```
 
 **Merge behavior:**
-- `executor`: User **replaces** manifest
-- `research_hooks`: User **extends** manifest (additive by id)
-- `pre_ship_hooks`: User **extends** manifest (additive by id)
+- `build_task.executor`: User **replaces** manifest
+- `build_task.coding_styles`: User **replaces** manifest (complete override)
+- `build_task.research_hooks`: User **extends** manifest (additive by id)
+- `build_task.pre_ship_hooks`: User **extends** manifest (additive by id)
 - `quality_gate.reviewers`: User **replaces** manifest (complete override)
+
+**Backwards Compatibility:** Also check for deprecated top-level `quality_gate.reviewers`:
+```yaml
+# DEPRECATED - still supported but migration recommended
+quality_gate:
+  reviewers: [...]
+
+# PREFERRED - use toolbox namespace
+toolbox:
+  quality_gate:
+    reviewers: [...]
+```
+
+If top-level `quality_gate` exists but `toolbox.quality_gate` doesn't, use top-level. Add warning if both exist (toolbox wins).
 
 ### 6. Return Canonical Configuration
 
@@ -132,8 +155,11 @@ warnings: []
 
 build_task:
   executor:
-    build_agent: majestic-rails:rails-coder
-    fix_agent: majestic-rails:rails-coder
+    build_agent: general-purpose
+    fix_agent: general-purpose
+
+  coding_styles:
+    - majestic-rails:dhh-coder
 
   research_hooks:
     - id: gem_research
@@ -182,6 +208,7 @@ build_task:
   executor:
     build_agent: null
     fix_agent: null
+  coding_styles: []
   research_hooks: []
   pre_ship_hooks: []
 

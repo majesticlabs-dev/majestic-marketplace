@@ -11,6 +11,9 @@ build_task:
     build_agent: general-purpose
     fix_agent: general-purpose
 
+  coding_styles:
+    - majestic-rails:dhh-coder
+
   research_hooks:
     - id: gem_research
       mode: auto

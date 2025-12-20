@@ -54,16 +54,32 @@ Read: $CONFIG_TO_READ
 
 ### 2. Check for Custom Reviewers
 
-If the config contains a `quality_gate:` section with `reviewers:`, use those reviewers (**override behavior**). Otherwise, fall back to tech_stack-based defaults in Step 3.
+Check config for reviewers in this order (first found wins):
 
-**Example custom config:**
+1. **New format (preferred):** `toolbox.quality_gate.reviewers`
+2. **Deprecated format (still supported):** Top-level `quality_gate.reviewers`
+
+If either is configured, use those reviewers (**override behavior**). Otherwise, fall back to toolbox-resolver (Step 2.5) or tech_stack-based defaults (Step 3).
+
+**New format (preferred):**
+```yaml
+toolbox:
+  quality_gate:
+    reviewers:
+      - security-review
+      - pragmatic-rails-reviewer
+      - performance-reviewer
+```
+
+**Deprecated format (still works):**
 ```yaml
 quality_gate:
   reviewers:
     - security-review
     - pragmatic-rails-reviewer
-    - performance-reviewer
 ```
+
+If both formats exist, `toolbox.quality_gate.reviewers` wins and a deprecation warning is logged.
 
 ### 2.1 Resolve Reviewer Names
 
@@ -100,9 +116,10 @@ Task (majestic-engineer:workflow:toolbox-resolver):
 If the toolbox returns `quality_gate.reviewers`, use those as the reviewer set.
 
 **Reviewer Precedence:**
-1. `.agents.yml quality_gate.reviewers` → Complete override (existing behavior)
-2. Toolbox `quality_gate.reviewers` → Stack-specific default (from manifest)
-3. Hardcoded tech_stack defaults → Fallback (Step 3 below)
+1. `.agents.yml toolbox.quality_gate.reviewers` → Complete override (new format)
+2. `.agents.yml quality_gate.reviewers` → Complete override (deprecated format, still works)
+3. Toolbox manifest `quality_gate.reviewers` → Stack-specific default
+4. Hardcoded tech_stack defaults → Fallback (Step 3 below)
 
 This allows stack plugins to declare their default reviewers without modifying this agent.
 

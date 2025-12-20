@@ -2,6 +2,26 @@
 
 All notable changes to majestic-engineer will be documented in this file.
 
+## [3.5.0] - 2025-12-20
+
+### Added
+
+- **`coding_styles` field in toolbox schema** - New field allows specifying skills to apply during build phase
+  - Skills like `dhh-coder`, `tdd-workflow` can now be activated automatically during `/majestic:build-task`
+  - Configurable in `.agents.yml` under `toolbox.build_task.coding_styles`
+
+### Changed
+
+- **Consolidated toolbox schema** - All workflow config now lives under `toolbox` section
+  - `quality_gate.reviewers` moved to `toolbox.quality_gate.reviewers` (backwards compatible)
+  - Consistent precedence: user override → plugin manifest → hardcoded fallback
+  - Top-level `quality_gate` is deprecated but still supported
+
+- **Updated agents:**
+  - `toolbox-resolver` - Now returns `coding_styles` and supports new schema structure
+  - `quality-gate` - Checks `toolbox.quality_gate.reviewers` first, with fallback to deprecated format
+  - `build-task` - Passes `coding_styles` to build agent for style-aware implementation
+
 ## [3.4.4] - 2025-12-17
 
 ### Fixed

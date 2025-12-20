@@ -2,6 +2,20 @@
 
 All notable changes to majestic-rails will be documented in this file.
 
+## [3.5.0] - 2025-12-20
+
+### Added
+
+- **`coding_styles` in toolbox manifest** - Rails toolbox now declares `dhh-coder` as default coding style
+  - Automatically activates DHH's 37signals style during `/majestic:build-task` for Rails projects
+  - Configurable: users can override or add styles in `.agents.yml`
+
+### Changed
+
+- **Toolbox manifest structure** - Added `coding_styles` field to `toolbox.yml`
+  - Default: `[majestic-rails:dhh-coder]`
+  - Follows new consolidated schema from majestic-engineer 3.5.0
+
 ## [3.3.4] - 2025-12-20
 
 ### Enhanced

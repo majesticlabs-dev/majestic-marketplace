@@ -47,7 +47,7 @@ ls -t docs/plans/*.md 2>/dev/null | head -1
 | 5. Toolbox | `toolbox-resolver` | — |
 | 6. Research | Auto hooks from toolbox | If triggers match |
 | 7. Plan | `architect` | Skip if `plan` (use file content) |
-| 8. Build | Toolbox executor or `general-purpose` | — |
+| 8. Build | Toolbox executor + coding_styles | — |
 | 9. Slop | `slop-remover` | — |
 | 10. Verify | `always-works-verifier` | — |
 | 11. Quality | `quality-gate` | — |
@@ -85,7 +85,7 @@ agent workspace-setup "Task ID: <ID> | Title: <title> | Type: <type>"
 ```
 agent toolbox-resolver "Stage: build-task | Task: <title> <description>"
 ```
-Stores: `build_agent`, `fix_agent`, `research_hooks`, `pre_ship_hooks`, `quality_gate.reviewers`
+Stores: `build_agent`, `fix_agent`, `coding_styles`, `research_hooks`, `pre_ship_hooks`, `quality_gate.reviewers`
 
 ### Step 6: Auto Research
 For each `mode: auto` hook where triggers match task text:
@@ -99,9 +99,18 @@ agent architect "Task: <title> | Description: <description> | Research: <finding
 ```
 
 ### Step 8: Build
+
+**If `coding_styles` is non-empty:** Include skill names in prompt so build agent activates them:
+```
+agent <build_agent or general-purpose> "Implement: <title> | Plan: <plan content> | Apply coding styles: <coding_styles list>"
+```
+
+**If `coding_styles` is empty:** Standard prompt:
 ```
 agent <build_agent or general-purpose> "Implement: <title> | Plan: <plan content>"
 ```
+
+The build agent should invoke the specified skills (e.g., `skill dhh-coder`) to influence code style during implementation.
 
 ### Step 9-11: Verify & Review
 ```
