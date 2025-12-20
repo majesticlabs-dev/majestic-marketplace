@@ -134,6 +134,111 @@ else
 end
 ```
 
+### Query Optimization
+
+```ruby
+# WRONG: Load all records then extract attribute
+users.map(&:name)
+
+# CORRECT: Pluck directly from database
+users.pluck(:name)
+
+# WRONG: Count via Ruby
+messages.to_a.count
+
+# CORRECT: Count via SQL
+messages.count
+```
+
+### StringInquirer for Predicates
+
+Use `.inquiry` on string enums for readable conditionals:
+
+```ruby
+class Event < ApplicationRecord
+  def action
+    super.inquiry
+  end
+end
+
+# Clean predicate methods
+event.action.completed?
+event.action.pending?
+event.action.failed?
+```
+
+### Controller Response Patterns
+
+```ruby
+# Return 204 No Content for successful updates without body
+def update
+  @message.update!(message_params)
+  head :no_content
+end
+
+# Return 201 Created for successful creates
+def create
+  @message = Message.create!(message_params)
+  head :created
+end
+```
+
+### My:: Namespace for Current User Resources
+
+Use `My::` namespace for resources scoped to `Current.user`:
+
+```ruby
+# routes.rb
+namespace :my do
+  resource :profile, only: %i[ show edit update ]
+  resources :notifications, only: %i[ index destroy ]
+end
+
+# app/controllers/my/profiles_controller.rb
+class My::ProfilesController < ApplicationController
+  def show
+    @profile = Current.user
+  end
+end
+```
+
+No `index` or `show` with ID needed—resource is implicit from `Current.user`.
+
+### Compute at Write Time
+
+Perform data manipulation during saves, not during presentation:
+
+```ruby
+# WRONG: Compute on read
+def display_name
+  "#{first_name} #{last_name}".titleize
+end
+
+# CORRECT: Compute on write
+before_save :set_display_name
+
+private
+  def set_display_name
+    self.display_name = "#{first_name} #{last_name}".titleize
+  end
+```
+
+Benefits: enables pagination, caching, and reduces view complexity.
+
+### Delegate for Lazy Loading
+
+Use `delegate` to enable lazy loading through associations:
+
+```ruby
+class Message < ApplicationRecord
+  belongs_to :session
+  delegate :user, to: :session
+end
+
+# Lazy loads user through session
+message.user
+```
+
 ### Naming Conventions
 
 | Element | Convention | Example |
@@ -143,6 +248,7 @@ end
 | Association names | Semantic, not generic | `creator` not `user` |
 | Scopes | Chainable, descriptive | `with_creator`, `page_before` |
 | Predicates | End with `?` | `direct?`, `can_administer?` |
+| Current user resources | `My::` namespace | `My::ProfilesController` |
 
 ### Hotwire/Turbo Patterns
 Broadcasting is model responsibility:
@@ -304,3 +410,6 @@ Code aligns with DHH style when:
 - [ ] Authorization lives on User model (`can_*?` methods)
 - [ ] Current attributes provide request context
 - [ ] Scopes follow naming conventions (`chronologically`, `with_*`, etc.)
+- [ ] Uses `pluck` over `map` for attribute extraction
+- [ ] Current user resources use `My::` namespace
+- [ ] Data computed at write time, not presentation
