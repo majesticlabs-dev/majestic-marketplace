@@ -520,3 +520,301 @@ test "sending message" do
   assert Message.exists?(body: "Hello")
 end
 ```
+
+## DHH Code Review Patterns
+
+Patterns extracted from DHH's actual code review comments on 37signals PRs.
+
+### Earn Your Abstractions
+
+Only create abstractions when supporting 3+ variations. Ask: *"Is this abstraction earning its keep?"*
+
+```ruby
+# WRONG: Premature abstraction for 2 cases
+class NotificationStrategy
+  def self.for(type)
+    case type
+    when :email then EmailStrategy.new
+    when :push then PushStrategy.new
+    end
+  end
+end
+
+# CORRECT: Simple conditional until 3+ variations exist
+def notify(user)
+  if user.prefers_email?
+    send_email(user)
+  else
+    send_push(user)
+  end
+end
+```
+
+### Inline Anemic Code
+
+Methods without additional logic or explanation should be inlined. *"Don't think this method is carrying its weight."*
+
+```ruby
+# WRONG: Anemic wrapper
+def user_name
+  user.name
+end
+
+# CORRECT: Just use it directly
+user.name
+
+# EXCEPTION: When method adds semantic meaning
+def author_name
+  creator.display_name  # Semantic alias is valuable
+end
+```
+
+### Prefer Database Constraints
+
+Use DB constraints over ActiveRecord validations for data integrity. Reserve validations for user-facing error messages.
+
+```ruby
+# WRONG: Validation-only uniqueness
+validates :email, uniqueness: true
+
+# CORRECT: Database constraint + validation for messages
+validates :email, uniqueness: true
+# + migration: add_index :users, :email, unique: true
+
+# WRONG: Application-level null check only
+validates :account_id, presence: true
+
+# CORRECT: Database enforces, validation provides message
+validates :account_id, presence: true
+# + migration: null: false on column
+```
+
+### Positive Naming
+
+Use affirmative terms rather than negations.
+
+```ruby
+# WRONG: Negative naming
+scope :not_deleted, -> { where(deleted_at: nil) }
+scope :not_popped, -> { where(popped: false) }
+
+# CORRECT: Positive naming
+scope :active, -> { where(deleted_at: nil) }
+scope :visible, -> { where(popped: false) }
+```
+
+### Method Names Reflect Return Values
+
+Method names should indicate what they return.
+
+```ruby
+# WRONG: collect implies returning array, but ignores result
+mentions.collect { |m| m.notify }
+
+# CORRECT: Use each when ignoring return, or name appropriately
+mentions.each { |m| m.notify }
+
+# CORRECT: When you need the result
+notified_users = mentions.map(&:notify_and_return_user)
+```
+
+### Consistent Domain Language
+
+Maintain terminology throughout codebase. Don't mix synonyms.
+
+```ruby
+# WRONG: Inconsistent terminology
+class Card
+  belongs_to :container  # Sometimes "container"
+  belongs_to :source     # Sometimes "source"
+  belongs_to :resource   # Sometimes "resource"
+end
+
+# CORRECT: Pick one term and use it everywhere
+class Card
+  belongs_to :bucket  # Always "bucket"
+end
+```
+
+### Touch Chains for Cache Busting
+
+Use `touch: true` on associations instead of complex cache key dependencies.
+
+```ruby
+# WRONG: Complex cache dependencies
+cache [@card, @card.comments.maximum(:updated_at), @card.attachments.count]
+
+# CORRECT: Touch chains
+class Comment < ApplicationRecord
+  belongs_to :card, touch: true
+end
+
+class Attachment < ApplicationRecord
+  belongs_to :card, touch: true
+end
+
+# Simple cache key
+cache @card
+```
+
+### Logic in Helpers, Not Partials
+
+Partials with minimal HTML should become helper methods.
+
+```ruby
+# WRONG: Partial with mostly logic
+# _status_badge.html.erb
+<% if card.closed? %>
+  <span class="badge-closed">Closed</span>
+<% elsif card.urgent? %>
+  <span class="badge-urgent">Urgent</span>
+<% else %>
+  <span class="badge-open">Open</span>
+<% end %>
+
+# CORRECT: Helper method
+def status_badge(card)
+  case
+  when card.closed? then tag.span("Closed", class: "badge-closed")
+  when card.urgent? then tag.span("Urgent", class: "badge-urgent")
+  else tag.span("Open", class: "badge-open")
+  end
+end
+```
+
+### Explicit Helper Parameters
+
+Avoid magical instance variables in helpers. Pass dependencies explicitly.
+
+```ruby
+# WRONG: Relies on instance variable
+def card_actions
+  if @current_user.can_edit?(@card)
+    # ...
+  end
+end
+
+# CORRECT: Explicit parameters
+def card_actions(card, user)
+  if user.can_edit?(card)
+    # ...
+  end
+end
+```
+
+### Avoid Test-Induced Design Damage
+
+Never modify production code solely for testability.
+
+```ruby
+# WRONG: Exposing internals for tests
+class Order
+  attr_accessor :payment_processor  # Added just for testing
+
+  def process_payment
+    @payment_processor ||= StripeProcessor.new
+    @payment_processor.charge(total)
+  end
+end
+
+# CORRECT: Use fixtures/mocks without changing production code
+test "processes payment" do
+  order = orders(:pending)
+
+  Stripe::Charge.stub(:create, successful_charge) do
+    order.process_payment
+  end
+
+  assert order.paid?
+end
+```
+
+### Migrations Can Reference Models
+
+Direct model interaction in migrations is acceptable for data transformations.
+
+```ruby
+# CORRECT: Using models in migrations
+class BackfillDisplayNames < ActiveRecord::Migration[7.1]
+  def up
+    User.find_each do |user|
+      user.update_column(:display_name, "#{user.first_name} #{user.last_name}")
+    end
+  end
+end
+
+# Avoid raw SQL only when model behavior is needed
+```
+
+### Use update_all for Bulk Updates
+
+Perform mass updates with `update_all` when no callbacks are needed.
+
+```ruby
+# WRONG: Loading all records for simple update
+Card.where(board: old_board).each { |c| c.update!(board: new_board) }
+
+# CORRECT: Direct SQL update
+Card.where(board: old_board).update_all(board_id: new_board.id)
+```
+
+### Avoid Introspection Magic
+
+For 2-3 cases, use explicit conditionals instead of metaprogramming.
+
+```ruby
+# WRONG: Clever metaprogramming for 3 states
+STATES = %i[pending active completed]
+STATES.each do |state|
+  define_method("#{state}?") { status == state.to_s }
+end
+
+# CORRECT: Explicit methods
+def pending?
+  status == "pending"
+end
+
+def active?
+  status == "active"
+end
+
+def completed?
+  status == "completed"
+end
+```
+
+### Use created_at for Initial Timestamps
+
+Don't add extra timestamp columns when `created_at` suffices.
+
+```ruby
+# WRONG: Redundant timestamp
+class Card < ApplicationRecord
+  # started_at, created_at columns
+end
+
+# CORRECT: Use created_at for initial timestamp
+class Card < ApplicationRecord
+  alias_attribute :started_at, :created_at
+end
+```
+
+### Implicit Format Responding
+
+Template files automatically imply format support. Explicit `respond_to` is often unnecessary.
+
+```ruby
+# WRONG: Unnecessary respond_to
+def show
+  @card = Card.find(params[:id])
+  respond_to do |format|
+    format.html
+    format.json
+  end
+end
+
+# CORRECT: Templates handle it
+def show
+  @card = Card.find(params[:id])
+end
+# show.html.erb and show.json.jbuilder exist
