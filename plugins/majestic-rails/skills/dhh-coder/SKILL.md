@@ -258,6 +258,7 @@ For comprehensive patterns and examples, see:
 - `references/delegated-types.md` - Polymorphism without STI problems
 - `references/recording-pattern.md` - Unifying abstraction for diverse content types
 - `references/filter-objects.md` - PORO filter objects, URL-based state, testable query building
+- `references/database-patterns.md` - UUIDv7, hard deletes, state as records, counter caches, indexing
 
 ### Rails Components
 - `references/activerecord-tips.md` - ActiveRecord query patterns, validations, associations
