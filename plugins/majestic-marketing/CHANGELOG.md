@@ -2,6 +2,86 @@
 
 All notable changes to majestic-marketing will be documented in this file.
 
+## [3.5.0] - 2025-12-20
+
+### Added
+
+**`content-atomizer` skill** - Transform long-form content into platform-ready assets
+
+One article becomes 5-10 distribution-ready pieces:
+- **Twitter/X Thread** - 7-10 tweet threads with scroll-stopping hooks
+- **LinkedIn Carousel** - 8-12 slide educational carousels
+- **Email Excerpt** - Subject lines, preview text, and excerpts to drive clicks
+- **Video Script (60s)** - Short-form scripts with hooks, beats, and production notes
+- **Instagram Carousel** - Visual-first 10-slide carousels
+- **Short-Form Post** - Universal format for quick cross-platform posts
+
+Features:
+- Quick mode (default) for fast atomization
+- Deep mode with platform trend research
+- Core element extraction (thesis, insights, stories, data, contrarian angles)
+- Platform-specific formatting rules
+- Distribution checklist and repurposing calendar
+
+**`brand-voice` skill** - Codify your brand's writing style into a reusable guide
+
+Creates comprehensive voice documentation:
+- **Voice DNA** - Brand personality traits with examples
+- **Tone Spectrum** - Context-based tone adjustments (homepage vs error message vs social)
+- **Vocabulary Guide** - Words to use, words to avoid, jargon rules
+- **Sentence Style** - Length, structure, punctuation, contractions
+- **Formatting Conventions** - Headlines, CTAs, lists, numbers
+- **Do/Don't Examples** - Before/after for common content types
+- **Voice Checklist** - Pre-publish validation
+
+Integrates with: content-writer, content-atomizer, email-nurture, linkedin-content, landing-page-builder, sales-page.
+
+**`newsletter` skill** - Create engaging newsletter editions
+
+Three newsletter archetypes with complete structures:
+- **Curator** - Curate best links/resources (Morning Brew style)
+- **Educator** - Teach one thing deeply (James Clear style)
+- **Thought Leader** - Share opinions/insights (Lenny's Newsletter style)
+- **Hybrid** - Mix of above
+
+Includes:
+- Subject line formulas by archetype
+- Section templates (hooks, sign-offs, CTAs)
+- Content sourcing strategies
+- A/B test suggestions
+- Quality checklist
+
+**`lead-magnet` skill** - Create high-converting opt-in content
+
+Six lead magnet types with complete structures:
+- **Checklist** - Step-by-step verification lists
+- **Template** - Fill-in-the-blank documents with examples
+- **Swipe File** - Collections of examples to model
+- **Mini-Guide** - Short how-to documents (5-10 pages)
+- **Cheat Sheet** - Quick reference one-pagers
+- **Toolkit** - Bundled resources for comprehensive value
+
+Each includes:
+- Complete content structure
+- Title formulas
+- Landing page copy (headline, bullets, CTA)
+- Delivery email template
+- Follow-up sequence preview
+- Promotion ideas
+
+**`marketing-playbook` skill** - Your guide to the marketing toolkit
+
+The orchestrator that helps you navigate 31 skills:
+- **Stage diagnosis** - Starting from scratch, need customers, need conversions, need retention, need distribution
+- **Stage-based paths** - Recommended skill sequences for each situation
+- **Quick lookup table** - What skill for what task
+- **Full marketing stack diagram** - Foundation → Acquisition → Conversion → Retention → Amplification
+- **Common workflows** - Product launch, traffic, leads, sales, AI visibility
+
+Your "where do I start?" answer for the marketing toolkit.
+
+Inspired by @boringmarketer's "10 skills to turn Claude Code into a marketing team" thread.
+
 ## [3.4.0] - 2025-12-18
 
 ### Enhanced

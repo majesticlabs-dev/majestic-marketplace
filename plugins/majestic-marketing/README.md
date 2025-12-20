@@ -1,6 +1,6 @@
 # Majestic Marketing
 
-Marketing and SEO tools for Claude Code. Includes 14 specialized agents, 3 commands, and 26 skills.
+Marketing and SEO tools for Claude Code. Includes 14 specialized agents, 3 commands, and 31 skills.
 
 ## Installation
 
@@ -12,12 +12,17 @@ claude /plugin install majestic-marketing
 
 | I want to... | Use this |
 |--------------|----------|
+| **Where do I start?** | `skill marketing-playbook` |
 | **Complete AEO workflow** | `/majestic-marketing:workflows:aeo-workflow` |
 | Quick SEO audit | `/majestic-marketing:workflows:seo-audit` |
 | Comprehensive content check | `/majestic-marketing:workflows:content-check` |
 | Optimize for AI citation | `agent llm-optimizer` |
 | Build brand authority | `agent authority-builder` |
 | Generate brand names | `agent namer` |
+| **Codify brand voice** | `skill brand-voice` |
+| **Repurpose content multi-platform** | `skill content-atomizer` |
+| **Write newsletter editions** | `skill newsletter` |
+| **Create lead magnets** | `skill lead-magnet` |
 | Create sales page | `skill sales-page` |
 | Design email nurture | `skill email-nurture` |
 | Build content calendar | `skill content-calendar` |
@@ -76,6 +81,8 @@ Invoke with: `skill majestic-marketing:<name>`
 
 | Skill | Description |
 |-------|-------------|
+| `brand-voice` | Codify your brand's writing style into a reusable voice guide for consistent messaging |
+| `content-atomizer` | Transform long-form content into Twitter threads, LinkedIn carousels, email excerpts, video scripts, and Instagram posts |
 | `content-calendar` | 30-day content calendar with viral ideas, formats, hooks, and CTAs |
 | `content-optimizer` | Content optimization workflow for search and AI |
 | `content-writer` | Articles with outline-first workflow and readability guidelines |
@@ -93,6 +100,7 @@ Invoke with: `skill majestic-marketing:<name>`
 |-------|-------------|
 | `bofu-keywords` | Bottom-of-funnel keywords with high purchase intent |
 | `competitive-positioning` | Analyze competitors, craft differentiators, taglines, and pitches |
+| `lead-magnet` | Create checklists, templates, swipe files, guides, and toolkits that convert |
 | `customer-discovery` | Find where customers discuss problems, extract language |
 | `free-tool-arsenal` | Complete business tech stack with 100% free tools |
 | `irresistible-offer` | Craft offers using direct response marketing principles |
@@ -115,6 +123,7 @@ Invoke with: `skill majestic-marketing:<name>`
 | Skill | Description |
 |-------|-------------|
 | `email-nurture` | Automated email sequences with segmentation and triggers |
+| `newsletter` | Create engaging newsletter editions with curator, educator, and thought leader archetypes |
 | `retention-system` | Customer retention with health scoring and churn prediction |
 
 ### GEO/AEO (AI Visibility)
@@ -122,6 +131,12 @@ Invoke with: `skill majestic-marketing:<name>`
 | Skill | Description |
 |-------|-------------|
 | `aeo-scorecard` | AEO measurement framework with AI visibility, share of voice, and citation metrics |
+
+### Meta / Getting Started
+
+| Skill | Description |
+|-------|-------------|
+| `marketing-playbook` | Your guide to the toolkit - diagnoses your stage and recommends what to use next |
 
 ## SEO vs GEO vs AEO
 
@@ -197,6 +212,12 @@ agent majestic-marketing:branding:namer
 ### Content & Copy Skills
 
 ```bash
+# Create brand voice guide from existing content
+skill majestic-marketing:brand-voice
+
+# Repurpose article into multi-platform assets
+skill majestic-marketing:content-atomizer
+
 # Full SEO audit methodology
 skill majestic-marketing:seo-audit
 
@@ -216,6 +237,9 @@ skill majestic-marketing:power-words
 ### Marketing & Strategy Skills
 
 ```bash
+# Create lead magnets (checklists, templates, guides)
+skill majestic-marketing:lead-magnet
+
 # Market research
 skill majestic-marketing:market-research
 
@@ -247,6 +271,9 @@ skill majestic-marketing:case-study-writer
 ```bash
 # Email nurture sequences
 skill majestic-marketing:email-nurture
+
+# Newsletter editions (curator, educator, thought leader)
+skill majestic-marketing:newsletter
 
 # Customer retention system
 skill majestic-marketing:retention-system
