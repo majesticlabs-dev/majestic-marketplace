@@ -167,9 +167,16 @@ end
 
 ```ruby
 class Message < ApplicationRecord
-  # Eager loading scopes
+  # Eager loading scopes (preloaded_*)
   scope :with_creator, -> { includes(:creator) }
   scope :with_attachments, -> { includes(attachment_attachment: :blob) }
+  scope :preloaded, -> { includes(:creator, :mentions, attachment_attachment: :blob) }
+
+  # Ordering scopes
+  scope :chronologically, -> { order(created_at: :asc) }
+  scope :reverse_chronologically, -> { order(created_at: :desc) }
+  scope :latest, -> { order(created_at: :desc).limit(1) }
+  scope :recently_updated, -> { order(updated_at: :desc) }
 
   # Cursor-based pagination scopes
   scope :page_before, ->(cursor) {
@@ -179,8 +186,25 @@ class Message < ApplicationRecord
     where("id > ?", cursor.id).order(id: :asc).limit(50)
   }
   scope :last_page, -> { order(id: :desc).limit(50) }
+
+  # Indexed lookups (indexed_by_*)
+  scope :indexed_by_room, -> { group(:room_id).index_by(&:room_id) }
+  scope :indexed_by_creator, -> { group(:creator_id).index_by(&:creator_id) }
 end
 ```
+
+#### Scope Naming Conventions
+
+| Pattern | Purpose | Example |
+|---------|---------|---------|
+| `with_*` | Eager load associations | `with_creator`, `with_attachments` |
+| `preloaded` | Full eager load for views | `preloaded` (all associations) |
+| `chronologically` | Oldest first ordering | `chronologically` |
+| `reverse_chronologically` | Newest first ordering | `reverse_chronologically` |
+| `latest` | Single most recent | `latest` |
+| `page_*` | Cursor pagination | `page_before`, `page_after` |
+| `indexed_by_*` | Hash lookup by key | `indexed_by_room` |
+| `excluding` | Filter out records | `excluding(user)` |
 
 ### Authorization on Models
 

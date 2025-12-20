@@ -172,6 +172,68 @@ rescue ActiveRecord::RecordNotFound
 end
 ```
 
+### State as Records (Not Booleans)
+
+Track state via database records rather than boolean columns:
+
+```ruby
+# WRONG: Boolean columns for state
+class Card < ApplicationRecord
+  # closed: boolean, gilded: boolean columns
+end
+card.update!(closed: true)
+card.closed?  # Loses who/when/why
+
+# CORRECT: State as separate records
+class Card < ApplicationRecord
+  has_one :closure
+  has_one :gilding
+
+  def close(by:)
+    create_closure!(closed_by: by)
+  end
+
+  def closed?
+    closure.present?
+  end
+end
+card.close(by: Current.user)
+card.closure.closed_by  # Full audit trail
+```
+
+### REST URL Transformations
+
+Map custom actions to nested resource controllers:
+
+| Custom Action | REST Resource |
+|---------------|---------------|
+| `POST /cards/:id/close` | `POST /cards/:id/closure` |
+| `DELETE /cards/:id/close` | `DELETE /cards/:id/closure` |
+| `POST /cards/:id/gild` | `POST /cards/:id/gilding` |
+| `POST /posts/:id/publish` | `POST /posts/:id/publication` |
+| `DELETE /posts/:id/publish` | `DELETE /posts/:id/publication` |
+
+```ruby
+# routes.rb
+resources :cards do
+  resource :closure, only: %i[ create destroy ]
+  resource :gilding, only: %i[ create destroy ]
+end
+
+# app/controllers/cards/closures_controller.rb
+class Cards::ClosuresController < ApplicationController
+  def create
+    @card = Card.find(params[:card_id])
+    @card.close(by: Current.user)
+  end
+
+  def destroy
+    @card = Card.find(params[:card_id])
+    @card.closure.destroy!
+  end
+end
+```
+
 ### Architecture Preferences
 
 | Traditional | DHH Way |
@@ -183,6 +245,7 @@ end
 | Service objects | Fat models |
 | Policy objects (Pundit) | Authorization on User model |
 | FactoryBot | Fixtures |
+| Boolean state columns | State as records |
 
 ## Detailed References
 
@@ -227,3 +290,17 @@ For comprehensive patterns and examples, see:
 6. **Current attributes**: Thread-local request context everywhere
 7. **Hotwire-first**: Model-level broadcasting, Turbo Streams, Stimulus
 8. **Readable code**: Semantic naming, small methods, no comments needed
+
+## Success Indicators
+
+Code aligns with DHH style when:
+
+- [ ] Controllers map CRUD verbs to resources (no custom actions)
+- [ ] Models use concerns for horizontal behavior sharing
+- [ ] State uses records instead of boolean columns
+- [ ] Abstractions remain minimal (no unnecessary service objects)
+- [ ] Database backs solutions (Solid Queue/Cache, not Redis)
+- [ ] Turbo/Stimulus handle all interactivity
+- [ ] Authorization lives on User model (`can_*?` methods)
+- [ ] Current attributes provide request context
+- [ ] Scopes follow naming conventions (`chronologically`, `with_*`, etc.)

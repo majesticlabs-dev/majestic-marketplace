@@ -2,6 +2,20 @@
 
 All notable changes to majestic-rails will be documented in this file.
 
+## [3.3.4] - 2025-12-20
+
+### Enhanced
+
+- **`dhh-coder` skill** - Added patterns from compound-engineering plugin:
+  - **State as Records** - Explicit guidance on using database records instead of boolean columns for state tracking
+  - **REST URL Transformations** - Table mapping custom actions to nested resource controllers (e.g., `POST /cards/:id/close` → `POST /cards/:id/closure`)
+  - **Success Indicators** - 9-item checklist for validating DHH style compliance
+- **`references/patterns.md`** - Enhanced scope naming catalog:
+  - Added ordering scopes: `chronologically`, `reverse_chronologically`, `latest`, `recently_updated`
+  - Added indexed lookups: `indexed_by_room`, `indexed_by_creator`
+  - Added `preloaded` scope for full eager loading
+  - New Scope Naming Conventions table with 8 patterns
+
 ## [3.3.2] - 2025-12-17
 
 ### Fixed
