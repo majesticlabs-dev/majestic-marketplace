@@ -338,3 +338,221 @@ class ApplicationController < ActionController::Base
   end
 end
 ```
+
+## Resource Scoping Concerns
+
+37signals uses composable concerns to establish nested resource context.
+
+### CardScoped
+
+Establishes `@card` and `@board` context for card sub-resource controllers:
+
+```ruby
+# app/controllers/concerns/card_scoped.rb
+module CardScoped
+  extend ActiveSupport::Concern
+
+  included do
+    before_action :set_card
+    before_action :set_board
+  end
+
+  private
+    def set_card
+      @card = Current.account.cards.find(params[:card_id])
+    end
+
+    def set_board
+      @board = @card.board
+    end
+
+    def render_card_replacement
+      render turbo_stream: turbo_stream.replace(@card)
+    end
+end
+
+# Usage in sub-resource controller
+class Cards::ClosuresController < ApplicationController
+  include CardScoped
+
+  def create
+    @card.close(by: Current.user)
+    render_card_replacement
+  end
+end
+```
+
+### BoardScoped
+
+Sets up `@board` context and authorization:
+
+```ruby
+# app/controllers/concerns/board_scoped.rb
+module BoardScoped
+  extend ActiveSupport::Concern
+
+  included do
+    before_action :set_board
+    before_action :ensure_board_access
+  end
+
+  private
+    def set_board
+      @board = Current.account.boards.find(params[:board_id])
+    end
+
+    def ensure_board_access
+      head :forbidden unless Current.user.can_access?(@board)
+    end
+end
+```
+
+## Request Context Concerns
+
+### CurrentRequest
+
+Populates `Current` with HTTP metadata for use in models and jobs:
+
+```ruby
+# app/controllers/concerns/current_request.rb
+module CurrentRequest
+  extend ActiveSupport::Concern
+
+  included do
+    before_action :set_current_request_details
+  end
+
+  private
+    def set_current_request_details
+      Current.request_id = request.request_id
+      Current.user_agent = request.user_agent
+      Current.ip_address = request.remote_ip
+      Current.request_method = request.method
+      Current.referrer = request.referrer
+    end
+end
+
+# app/models/current.rb
+class Current < ActiveSupport::CurrentAttributes
+  attribute :user, :session, :account
+  attribute :request_id, :user_agent, :ip_address, :request_method, :referrer
+end
+```
+
+### CurrentTimezone
+
+Wraps requests in user's timezone and includes in ETags:
+
+```ruby
+# app/controllers/concerns/current_timezone.rb
+module CurrentTimezone
+  extend ActiveSupport::Concern
+
+  included do
+    around_action :set_time_zone
+    etag { cookies[:time_zone] }
+  end
+
+  private
+    def set_time_zone
+      Time.use_zone(cookies[:time_zone] || "UTC") { yield }
+    end
+end
+```
+
+## Security Concerns
+
+### Sec-Fetch-Site CSRF Protection (Rails 8+)
+
+Modern CSRF protection using browser headers instead of tokens:
+
+```ruby
+# app/controllers/concerns/request_forgery_protection.rb
+module RequestForgeryProtection
+  extend ActiveSupport::Concern
+
+  included do
+    before_action :verify_request_origin, unless: :safe_request?
+  end
+
+  private
+    def verify_request_origin
+      return if request.headers["Sec-Fetch-Site"].in?(%w[same-origin same-site none])
+
+      head :unprocessable_entity
+    end
+
+    def safe_request?
+      request.get? || request.head?
+    end
+end
+```
+
+### BlockSearchEngineIndexing
+
+Prevents crawlers from indexing private app content:
+
+```ruby
+# app/controllers/concerns/block_search_engine_indexing.rb
+module BlockSearchEngineIndexing
+  extend ActiveSupport::Concern
+
+  included do
+    after_action :set_robots_header
+  end
+
+  private
+    def set_robots_header
+      response.headers["X-Robots-Tag"] = "noindex, nofollow"
+    end
+end
+```
+
+## FilterScoped Pattern
+
+Composable concern for complex query filtering with saved filters:
+
+```ruby
+# app/controllers/concerns/filter_scoped.rb
+module FilterScoped
+  extend ActiveSupport::Concern
+
+  private
+    def apply_filters(scope)
+      scope = apply_status_filter(scope)
+      scope = apply_assignee_filter(scope)
+      scope = apply_label_filter(scope)
+      scope
+    end
+
+    def apply_status_filter(scope)
+      return scope unless params[:status].present?
+      scope.where(status: params[:status])
+    end
+
+    def apply_assignee_filter(scope)
+      return scope unless params[:assignee_id].present?
+      scope.where(assignee_id: params[:assignee_id])
+    end
+
+    def apply_label_filter(scope)
+      return scope unless params[:label_ids].present?
+      scope.joins(:labels).where(labels: { id: params[:label_ids] })
+    end
+
+    def current_filter
+      @current_filter ||= if params[:filter_id]
+        Current.user.saved_filters.find(params[:filter_id])
+      end
+    end
+end
+
+# Usage
+class CardsController < ApplicationController
+  include FilterScoped
+
+  def index
+    @cards = apply_filters(@board.cards)
+  end
+end
+```
