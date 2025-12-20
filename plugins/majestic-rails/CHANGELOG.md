@@ -2,6 +2,22 @@
 
 All notable changes to majestic-rails will be documented in this file.
 
+## [3.6.0] - 2025-12-20
+
+### Enhanced
+
+- **`references/recording-pattern.md`** - Comprehensive update with 37signals video insights:
+  - **Immutable Recordables** - Content never updated in place; new versions created for edits
+  - **Version History via Events** - Events snapshot recordable_id for precise time-travel
+  - **Zero-Cost Copying** - New Recording points to existing Recordable (no data duplication)
+  - **Capability Pattern** - Recordables define `subscribable?`, `commentable?`, `exportable?` etc.
+  - **Buckets as Security Boundaries** - Access control at container level, recordables are "dumb"
+  - **Tree Structure** - Hierarchical parent/child queries through recordings table
+  - **Global Timeline** - Efficient cross-type pagination with single-table queries
+  - **Russian Doll Caching** - Recording-level cache keys for all content types
+  - **Resilient API** - Mobile clients handle unknown types gracefully
+  - **Pros/Cons Analysis** - Comprehensive trade-offs for pattern adoption
+
 ## [3.5.0] - 2025-12-20
 
 ### Added
