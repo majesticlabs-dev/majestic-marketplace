@@ -30,6 +30,9 @@ Immediately spot React/JavaScript patterns creeping in:
 | Microservices | Majestic monolith |
 | GraphQL | REST |
 | Dependency injection | Rails' elegant simplicity |
+| `.map(&:name)` | `.pluck(:name)` - query directly |
+| Logic-heavy partials | Helper methods |
+| CSRF tokens | `Sec-Fetch-Site` headers (Rails 8+) |
 
 ### 3. Complexity Analysis
 
@@ -159,6 +162,20 @@ Flag these immediately - their presence indicates deviation from vanilla Rails:
 | Kubernetes | Operational complexity | Single container, Kamal |
 | Microservices | Distributed complexity | Majestic monolith |
 | PostgreSQL (for simple apps) | Operational overhead | SQLite (for single-tenant) |
+
+### Database Design
+| Avoid | Why | Alternative |
+|-------|-----|-------------|
+| Soft deletes (`deleted_at`) | Pervasive null checks, bloated tables | Hard deletes + event logs for audit |
+| Auto-increment integer IDs | Enumeration attacks, no client-side generation | UUIDv7 (time-sortable, base36-encoded) |
+| Boolean state columns | Loses who/when/why | State as records (e.g., `Closure`, `Publication`) |
+
+### Views
+| Avoid | Why | Alternative |
+|-------|-----|-------------|
+| Partials with mostly logic | Wrong abstraction level | Helper methods |
+| Instance variables in helpers | Magic dependencies | Explicit parameters |
+| Complex cache key arrays | Fragile invalidation | Touch chains (`touch: true`) |
 
 ## The Question to Ask
 
