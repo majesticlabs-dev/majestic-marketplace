@@ -103,6 +103,8 @@ review_topics_path: docs/agents/review-topics.md
 | `review_topics_path` | Path to review topics file | file path | (none) |
 | `auto_preview` | Auto-open created markdown files | `true` \| `false` | `false` |
 | `auto_create_task` | Auto-create task when `/majestic:plan` completes | `true` \| `false` | `false` |
+| `session.ledger` | Enable session state checkpointing to file | `true` \| `false` | `false` |
+| `session.ledger_path` | Path to session ledger file | file path | `.session_ledger.md` |
 
 ### Rails-Specific Fields
 
@@ -317,6 +319,31 @@ export AGENTS_CONFIG=".my-config.yml"
 ```
 
 All commands and scripts respect this override, falling back to `.agents.yml` if not set.
+
+## Session State Management
+
+Enable file-based session checkpointing for crash recovery and workflow continuity:
+
+```yaml
+# .agents.yml
+session:
+  ledger: true
+  ledger_path: .session_ledger.md  # optional
+```
+
+**Important:** Add the ledger file to `.gitignore`:
+
+```gitignore
+# Session state (not tracked)
+.session_ledger.md
+```
+
+When enabled, workflows can invoke `session-checkpoint` agent to save state:
+- Before risky operations (major refactors)
+- After completing milestones
+- Periodically during long tasks
+
+The ledger survives session crashes but is NOT a replacement for `/session:handoff` (use handoff for intentional cross-session continuity).
 
 ## Local Overrides
 

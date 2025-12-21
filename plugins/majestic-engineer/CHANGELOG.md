@@ -2,6 +2,28 @@
 
 All notable changes to majestic-engineer will be documented in this file.
 
+## [3.7.0] - 2025-12-21
+
+### Added
+
+- **`session-checkpoint` agent** - Autonomous agent for saving session state to file
+  - Triggered by other agents during long-running workflows
+  - Saves goal, decisions, state (done/now/next), and working set
+  - Config-gated: requires `session.ledger: true` in `.agents.yml`
+  - Survives session crashes for recovery
+
+- **`/session:ledger-clear` command** - Clear the session ledger file
+  - Simple reset for starting fresh
+  - Respects `session.ledger_path` config if set
+
+- **`session` config section** - New configuration for session state management
+  - `session.ledger`: Enable/disable checkpointing (default: false)
+  - `session.ledger_path`: Custom ledger file path (default: `.session_ledger.md`)
+
+### Changed
+
+- **CONFIG-SYSTEM.md** - Added session state management documentation
+
 ## [3.6.1] - 2025-12-20
 
 ### Changed
