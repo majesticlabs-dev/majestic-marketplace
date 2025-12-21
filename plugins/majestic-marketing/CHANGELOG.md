@@ -2,6 +2,20 @@
 
 All notable changes to majestic-marketing will be documented in this file.
 
+## [3.8.0] - 2025-12-20
+
+### Enhanced
+
+**`authority-builder` agent** - Added behavioral SEO and topical authority measurement
+
+New capabilities for quantitative authority analysis:
+- **Topical Authority Formula** - Calculate authority score: Coverage % × Age Factor × Behavioral Multiplier
+- **Behavioral SEO Metrics** - Track CTR, dwell time, bounce rate, pages/session, social shares with improvement tactics
+- **Bing-Specific Optimization** - Social signals, IndexNow, behavioral ranking factors unique to Bing
+- **Competitor Topical Comparison** - Framework for gap analysis against competitor content coverage
+
+New deliverables: Behavioral SEO improvement plan, competitor topical gap analysis, Bing optimization recommendations.
+
 ## [3.7.0] - 2025-12-20
 
 ### Added
