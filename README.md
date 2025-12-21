@@ -218,6 +218,15 @@ Available modules:
 | [Output Styles](output-styles/README.md) | Pre-built formatting guides for consistent responses |
 | [Instructions](instructions/) | CLAUDE.md instruction modules |
 
+## License
+
+This project is licensed under the [Polyform NonCommercial License 1.0.0](LICENSE).
+
+- ✅ Personal, non-commercial use allowed
+- ❌ Commercial use prohibited without written permission
+
+For commercial licensing inquiries: marketplace@it.majesticlabs.dev
+
 ## References
 
 - [Antrhopic Marketplace](https://github.com/anthropics/claude-code/tree/main/plugins)
