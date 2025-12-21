@@ -2,6 +2,33 @@
 
 All notable changes to majestic-marketing will be documented in this file.
 
+## [3.6.0] - 2025-12-20
+
+### Added
+
+**`language` skill** - Sales Safari methodology for customer language research
+
+Research how customers actually talk, then use their exact language across Product and Marketing:
+- **Watering Hole Keywords** - Search patterns to find where your audience gathers
+- **Pain Language Extraction** - Capture exact phrases from frustration/anxiety
+- **Desire Language** - "I wish...", "If only..." patterns
+- **Jargon Hunting** - Insider terms that signal belonging
+- **Worldview Resonance** - Polarizing language that attracts right people, repels wrong ones
+- **"OH YEAH!" Test** - Checklist to validate copy resonance
+
+Applies to both Product (UI copy, feature naming, error messages) and Marketing (landing pages, emails, ads).
+
+### Enhanced
+
+**`namer` agent** - Added brainstorming techniques and phonetic principles
+
+New sections:
+- **Brainstorming Techniques** - Mind mapping, word association, imagery lists
+- **Power Words for Naming** - 8 emotional categories with name-inspiring words (Authority, Novelty, Exclusivity, Gravity, Energy, Simplicity, Safety, Wonder)
+- **Phonetic Principles** - Sound type effects (plosives, vowels, consonants), memorability boosters (alliteration, repetition), spelling variations
+
+**`power-words` skill** - Added cross-reference to `language` skill for watering hole keywords and Sales Safari methodology
+
 ## [3.5.0] - 2025-12-20
 
 ### Added

@@ -491,6 +491,8 @@ Trigger: Desire for awe, shareability
 | Improving CTAs | Need full landing page (`landing-page-builder`) |
 | Making email subject lines pop | Need email sequence (`email-nurture`) |
 | Social post hooks | Need content strategy (`content-calendar`) |
+| Need emotional trigger words | Need watering hole / community magnet words (`language`) |
+| Word list reference | Need Sales Safari research methodology (`language`) |
 
 ## What This Skill Does NOT Do
 

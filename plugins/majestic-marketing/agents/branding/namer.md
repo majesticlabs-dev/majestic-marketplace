@@ -24,6 +24,42 @@ Collect before naming:
 6. **Key differentiator**
 7. **Constraints** (words to include/avoid, domain requirements)
 
+## Brainstorming Techniques
+
+### Mind Mapping
+Start with the brand's emotional core and expand outward:
+1. Write central concept in middle (e.g., "speed", "trust", "craft")
+2. Branch to related themes, metaphors, cultural references
+3. Branch again to specific words, images, sounds
+4. Look for unexpected connections between branches
+
+### Word Association
+Free-associate from brand adjectives — write everything without judgment:
+- Mythology, legends, historical figures
+- Nature, animals, elements
+- Emotions, sensations, textures
+- Cultural references, art, literature
+
+### Imagery Lists
+Generate 20+ words in each category relevant to positioning, then blend/transform.
+
+### Power Words for Naming
+
+Draw from these emotional trigger categories when brainstorming:
+
+| Category | Evokes | Name-Inspiring Words |
+|----------|--------|---------------------|
+| **Authority** | Trust, expertise | Sentinel, Guardian, Apex, Citadel, Anchor, Keystone |
+| **Novelty** | Innovation, discovery | Pioneer, Spark, Nova, Genesis, Catalyst, Frontier |
+| **Exclusivity** | Prestige, insider | Elite, Cipher, Vault, Haven, Summit, Pinnacle |
+| **Gravity** | Power, scale | Titan, Colossus, Forge, Atlas, Mammoth, Monolith |
+| **Energy** | Action, momentum | Bolt, Blaze, Surge, Pulse, Ignite, Velocity |
+| **Simplicity** | Ease, clarity | Breeze, Flow, Glide, Swift, Zen, Clear |
+| **Safety** | Protection, stability | Shield, Harbor, Bastion, Refuge, Bedrock, Anchor |
+| **Wonder** | Amazement, magic | Aurora, Cosmos, Ethereal, Luminary, Prism, Radiant |
+
+**Usage:** Pick 2-3 categories that match brand positioning, then riff on those themes.
+
 ## The Four Name Types
 
 ### 1. Functional/Descriptive
@@ -83,6 +119,27 @@ Score: -2 (worst) to +5 (best)
 | **Sound** | Pleasing AND easy to say |
 | **"33" Factor** | Word-of-mouth buzz potential |
 | **Spellable** | No confusion |
+
+## Phonetic Principles
+
+Sound shapes perception. Use these patterns intentionally:
+
+| Sound Type | Effect | Examples |
+|------------|--------|----------|
+| **Short plosives** (K, P, T, B) | Simple, punchy, down-to-earth | Kodak, Pepsi, TikTok |
+| **Long vowels** (ee, oo, ay) | Regal, expansive, magical | Google, YouTube, PayPal |
+| **Soft consonants** (S, L, M) | Smooth, luxurious, gentle | Tesla, Lexus, Calm |
+| **Hard consonants** (X, Z, K) | Edgy, tech, distinctive | Xerox, Zoom, Slack |
+
+### Memorability Boosters
+- **Alliteration:** Coca-Cola, PayPal, Best Buy
+- **Sound repetition:** Snapchat, TikTok, Fitbit
+- **Uncommon starters:** K, X, Z, Q, Y stand out (Kayak, Xero, Zapier)
+
+### Spelling Variations
+Intentional misspellings create distinctiveness:
+- JELL-O, FROOT LOOPS, Lyft, Tumblr, Fiverr
+- **Caution:** Must still be phonetically intuitive
 
 ## A.S.S. Test (Associations + Slogans Score)
 
