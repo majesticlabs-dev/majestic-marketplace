@@ -85,7 +85,7 @@ agent workspace-setup "Task ID: <ID> | Title: <title> | Type: <type>"
 ```
 agent toolbox-resolver "Stage: build-task | Task: <title> <description>"
 ```
-Stores: `build_agent`, `fix_agent`, `coding_styles`, `research_hooks`, `pre_ship_hooks`, `quality_gate.reviewers`
+Stores: `build_agent`, `fix_agent`, `coding_styles`, `design_system_path`, `research_hooks`, `pre_ship_hooks`, `quality_gate.reviewers`
 
 ### Step 6: Auto Research
 For each `mode: auto` hook where triggers match task text:
@@ -100,20 +100,44 @@ agent architect "Task: <title> | Description: <description> | Research: <finding
 
 ### Step 8: Build
 
-**Before invoking build agent:** If `coding_styles` is non-empty, activate each skill using the `Skill` tool:
-```
-Skill(skill: "majestic-rails:dhh-coder")
-Skill(skill: "majestic-engineer:tdd-workflow")
-```
+**Before invoking build agent, set up context:**
+
+1. **Load design system** (if configured):
+   - Check toolbox output for `design_system_path`
+   - If path exists, read the file using Read tool
+   - Store content for inclusion in build prompt
+
+   ```bash
+   # Check for design_system_path in toolbox output
+   # If set and file exists, read it
+   ```
+
+2. **Activate coding_styles skills** (if non-empty):
+   ```
+   Skill(skill: "majestic-rails:dhh-coder")
+   Skill(skill: "majestic-engineer:tdd-workflow")
+   ```
 
 **Note:** `coding_styles` contains **skill names** (not agents). Skills provide knowledge/context that influences how the build agent writes code. They are invoked via the `Skill` tool, not the `Task` tool.
 
-**Then invoke build agent:**
+**Then invoke build agent with design context:**
+
+If design system was loaded:
+```
+agent <build_agent or general-purpose> "Implement: <title> | Plan: <plan content> | Design System: Follow these specifications for all UI work: <design_system_content>"
+```
+
+If no design system:
 ```
 agent <build_agent or general-purpose> "Implement: <title> | Plan: <plan content>"
 ```
 
-The activated skills remain in context and guide the build agent's implementation approach.
+**UI Detection Heuristic:** Load design system if ANY of:
+- Plan file contains UI keywords (form, button, page, component, modal, card, input)
+- Task description contains UI keywords
+- `design_system_path` is explicitly configured and file exists
+
+The activated skills and design system context guide the build agent's implementation approach.
 
 ### Step 9-11: Verify & Review
 ```

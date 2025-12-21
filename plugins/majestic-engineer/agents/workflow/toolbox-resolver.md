@@ -76,7 +76,7 @@ For each discovered manifest:
 
 If multiple manifests match the same `tech_stack`:
 
-**Scalar fields** (`build_task.executor.build_agent`, `build_task.executor.fix_agent`):
+**Scalar fields** (`build_task.executor.build_agent`, `build_task.executor.fix_agent`, `build_task.design_system_path`):
 - Highest `priority` wins
 - If equal priority, first alphabetically by `plugin` name
 
@@ -107,6 +107,7 @@ toolbox:
     coding_styles:                  # Replaces manifest
       - majestic-rails:dhh-coder
       - majestic-engineer:tdd-workflow
+    design_system_path: docs/design/design-system.md  # Replaces manifest (UI specs)
     research_hooks:
       - id: custom_hook             # ADDS to manifest
         mode: manual
@@ -121,6 +122,7 @@ toolbox:
 **Merge behavior:**
 - `build_task.executor`: User **replaces** manifest
 - `build_task.coding_styles`: User **replaces** manifest (complete override)
+- `build_task.design_system_path`: User **replaces** manifest (scalar field)
 - `build_task.research_hooks`: User **extends** manifest (additive by id)
 - `build_task.pre_ship_hooks`: User **extends** manifest (additive by id)
 - `quality_gate.reviewers`: User **replaces** manifest (complete override)
@@ -146,6 +148,8 @@ build_task:
 
   coding_styles:                 # Skills (not agents) - invoke via Skill tool
     - majestic-rails:dhh-coder
+
+  design_system_path: docs/design/design-system.md  # UI specs (load before build)
 
   research_hooks:
     - id: gem_research
@@ -195,6 +199,7 @@ build_task:
     build_agent: null
     fix_agent: null
   coding_styles: []
+  design_system_path: null
   research_hooks: []
   pre_ship_hooks: []
 
@@ -203,6 +208,7 @@ quality_gate:
 ```
 
 Orchestrators receiving `build_agent: null` should fall back to `general-purpose`.
+Orchestrators receiving `design_system_path: null` should skip design system loading.
 
 ## Best Practices
 
