@@ -3,5 +3,6 @@
 .claude/handoffs
 .beads/
 .osgrep/
-docs/
+docs/graveyard/
+docs/plans/
 .claude/current_task.txt
