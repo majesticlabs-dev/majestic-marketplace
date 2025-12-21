@@ -103,7 +103,7 @@ You must generate a single Markdown code block containing the complete agent def
 name: <generated-agent-name>
 description: <generated-action-oriented-description>
 tools: <inferred-tool-1>, <inferred-tool-2>
-model: claude-haiku-4-5-20251001  # OPTIONAL - use full model ID, inherits from user's session if omitted
+model: haiku  # OPTIONAL - use full model ID, inherits from user's session if omitted
 ---
 
 # Purpose

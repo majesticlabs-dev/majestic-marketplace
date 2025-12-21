@@ -2,7 +2,7 @@
 name: toolbox-resolver
 description: Discover and resolve tech-stack toolbox manifests from installed plugins. Returns merged configuration for build-task and quality-gate orchestrators.
 tools: Read, Bash, Glob
-model: claude-haiku-4-5-20251001
+model: haiku
 color: gray
 ---
 

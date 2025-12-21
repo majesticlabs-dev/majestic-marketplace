@@ -2,7 +2,7 @@
 name: git-researcher
 description: Analyze git history to trace code evolution, identify contributors, and understand patterns in commits.
 tools: Read, Grep, Glob, Bash
-model: claude-haiku-4-5-20251001
+model: haiku
 color: green
 ---
 

@@ -2,7 +2,7 @@
 name: docs-researcher
 description: Fetch and summarize API documentation from Rails, Tailwind, and external libraries before implementation.
 tools: WebFetch, WebSearch, Read, Write
-model: claude-haiku-4-5-20251001
+model: haiku
 color: cyan
 ---
 

@@ -290,7 +290,7 @@ Every generated command should start with proper YAML frontmatter:
 ```yaml
 ---
 description: Brief description of what the command does  # REQUIRED
-model: claude-haiku-4-5-20251001  # OPTIONAL - use full model ID, inherits from conversation if omitted
+model: haiku  # OPTIONAL - use full model ID, inherits from conversation if omitted
 allowed-tools: Bash(git *), Read, Edit  # OPTIONAL - restricts available tools
 argument-hint: "[action] [target]"  # OPTIONAL - shows usage hint
 ---
@@ -298,7 +298,7 @@ argument-hint: "[action] [target]"  # OPTIONAL - shows usage hint
 
 **Model Guidelines:**
 - **Omit `model:`** - Command inherits user's current model (most flexible, RECOMMENDED)
-- **Use `claude-haiku-4-5-20251001`** - Fast, cheap operations (git, simple analysis)
+- **Use `haiku`** - Fast, cheap operations (git, simple analysis)
 - **Use `claude-sonnet-4-5-20250929`** - Balanced tasks
 - **Use `claude-opus-4-5-20251101`** - Complex reasoning, architecture decisions
 

@@ -2,7 +2,7 @@
 name: task-fetcher
 description: Fetch task details from configured task management system. Supports GitHub Issues, Beads, Linear, and file-based backends. Returns normalized task data.
 tools: Bash, Read, Grep, Glob, Task
-model: claude-haiku-4-5-20251001
+model: haiku
 color: blue
 ---
 

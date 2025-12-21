@@ -1,7 +1,7 @@
 ---
 name: config-reader
 description: Read and merge .agents.yml and .agents.local.yml, returning final config with local overrides applied
-model: claude-haiku-4-5-20251001
+model: haiku
 color: gray
 allowed-tools: Read
 ---

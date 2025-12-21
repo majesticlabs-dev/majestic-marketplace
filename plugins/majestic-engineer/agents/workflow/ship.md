@@ -2,7 +2,7 @@
 name: ship
 description: Complete checkout workflow - runs linting, creates commit, opens PR. Ships code on "ready to ship" or "finish up".
 tools: Bash, SlashCommand, Read, Grep, Glob
-model: claude-haiku-4-5-20251001
+model: haiku
 color: green
 ---
 
