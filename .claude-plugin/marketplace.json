@@ -6,7 +6,7 @@
   },
   "metadata": {
     "description": "Majestic Labs plugin marketplace for Claude Code extensions",
-    "version": "3.0.0"
+    "version": "3.1.0"
   },
   "plugins": [
     {
@@ -75,9 +75,32 @@
       "source": "./plugins/majestic-rails"
     },
     {
+      "name": "majestic-llm",
+      "description": "External LLM integration tools. Get second opinions from Codex and Gemini on architecture and code review. Includes 5 agents and 2 commands.",
+      "version": "1.0.0",
+      "author": {
+        "name": "David Paluy",
+        "url": "https://github.com/dpaluy",
+        "email": "marketplace@it.majesticlabs.dev"
+      },
+      "homepage": "https://github.com/majesticlabs-dev/majestic-marketplace/tree/master/plugins/majestic-llm",
+      "tags": [
+        "llm",
+        "codex",
+        "gemini",
+        "openai",
+        "google",
+        "code-review",
+        "architecture",
+        "second-opinion",
+        "multi-llm"
+      ],
+      "source": "./plugins/majestic-llm"
+    },
+    {
       "name": "majestic-tools",
-      "description": "Claude Code customization tools. Includes 6 agents, 15 commands, and 5 skills.",
-      "version": "3.1.0",
+      "description": "Claude Code customization tools. Includes 1 agent, 13 commands, and 5 skills.",
+      "version": "3.2.0",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",

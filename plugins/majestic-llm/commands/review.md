@@ -27,10 +27,10 @@ Get code review feedback from external LLMs (Codex, Gemini) on your current chan
 
 **Examples:**
 ```
-/external-llm:review
-/external-llm:review --staged --llm codex
-/external-llm:review --branch --llm all
-/external-llm:review --base main --model gpt-5.1-codex-max
+/majestic-llm:review
+/majestic-llm:review --staged --llm codex
+/majestic-llm:review --branch --llm all
+/majestic-llm:review --base main --model gpt-5.1-codex-max
 ```
 
 ## Available Models
@@ -80,23 +80,23 @@ which gemini >/dev/null 2>&1 && echo "gemini:ok" || echo "gemini:missing"
 
 For Codex (has built-in review command):
 ```
-Task: majestic-tools:external-llm:codex-reviewer
+Task: majestic-llm:codex-reviewer
 Prompt: "Review [scope]. Model: [model]"
 ```
 
 For Gemini:
 ```
-Task: majestic-tools:external-llm:gemini-reviewer
+Task: majestic-llm:gemini-reviewer
 Prompt: "Review [scope]. Model: [model]"
 ```
 
 **Multi-LLM Mode:**
 Launch BOTH agents in parallel:
 ```
-Task 1: majestic-tools:external-llm:codex-reviewer
+Task 1: majestic-llm:codex-reviewer
 Prompt: "Review [scope]. Model: [model]"
 
-Task 2: majestic-tools:external-llm:gemini-reviewer
+Task 2: majestic-llm:gemini-reviewer
 Prompt: "Review [scope]. Model: [model]"
 ```
 
@@ -197,22 +197,22 @@ Issues only Gemini caught:
 
 ### Quick Review of Uncommitted Changes
 ```
-/external-llm:review
+/majestic-llm:review
 ```
 
 ### Review Staged Changes with Codex Only
 ```
-/external-llm:review --staged --llm codex
+/majestic-llm:review --staged --llm codex
 ```
 
 ### Thorough Branch Review
 ```
-/external-llm:review --branch --model gpt-5.1-codex-max
+/majestic-llm:review --branch --model gpt-5.1-codex-max
 ```
 
 ### Review Against Specific Branch
 ```
-/external-llm:review --base develop --llm all
+/majestic-llm:review --base develop --llm all
 ```
 
 ## Error Handling
@@ -251,7 +251,7 @@ Consider:
 This command complements Claude's built-in review capabilities:
 
 1. Run Claude's review first: `/majestic:code-review`
-2. Get external perspectives: `/external-llm:review`
+2. Get external perspectives: `/majestic-llm:review`
 3. Compare findings to identify blind spots
 
 The multi-LLM approach helps catch issues that any single model might miss.

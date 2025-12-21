@@ -2,6 +2,20 @@
 
 All notable changes to majestic-tools will be documented in this file.
 
+## [3.2.0] - 2025-12-20
+
+### Removed
+
+- **External LLM agents and commands extracted to majestic-llm** - All external LLM integration moved to dedicated plugin
+  - `codex-consult` agent → `majestic-llm`
+  - `codex-reviewer` agent → `majestic-llm`
+  - `gemini-consult` agent → `majestic-llm`
+  - `gemini-reviewer` agent → `majestic-llm`
+  - `multi-llm-coordinator` agent → `majestic-llm`
+  - `/external-llm:consult` command → `/majestic-llm:consult`
+  - `/external-llm:review` command → `/majestic-llm:review`
+  - Users should install `majestic-llm` plugin for external LLM features
+
 ## [3.1.0] - 2025-12-17
 
 ### Added

@@ -56,19 +56,19 @@ Use the Task tool to invoke agents in parallel:
 
 **For Consulting:**
 ```
-Task 1: majestic-tools:external-llm:codex-consult
+Task 1: majestic-llm:codex-consult
 Prompt: "[query]. Model: [model or default]"
 
-Task 2: majestic-tools:external-llm:gemini-consult
+Task 2: majestic-llm:gemini-consult
 Prompt: "[query]. Model: [model or default]"
 ```
 
 **For Code Review:**
 ```
-Task 1: majestic-tools:external-llm:codex-reviewer
+Task 1: majestic-llm:codex-reviewer
 Prompt: "Review [scope]. Model: [model or default]"
 
-Task 2: majestic-tools:external-llm:gemini-reviewer
+Task 2: majestic-llm:gemini-reviewer
 Prompt: "Review [scope]. Model: [model or default]"
 ```
 

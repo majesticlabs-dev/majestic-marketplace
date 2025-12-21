@@ -68,8 +68,8 @@ Map shorthand names to full agent paths:
 | `dhh-code-reviewer` | `majestic-rails:review:dhh-code-reviewer` |
 | `python-reviewer` | `majestic-python:python-reviewer` |
 | `react-reviewer` | `majestic-react:review:react-reviewer` |
-| `codex-reviewer` | `majestic-tools:external-llm:codex-reviewer` |
-| `gemini-reviewer` | `majestic-tools:external-llm:gemini-reviewer` |
+| `codex-reviewer` | `majestic-llm:codex-reviewer` |
+| `gemini-reviewer` | `majestic-llm:gemini-reviewer` |
 
 If a name already contains `:`, use it as-is. Unknown names should be logged as warnings and skipped.
 

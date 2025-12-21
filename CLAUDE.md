@@ -15,6 +15,7 @@ majestic-marketplace/
     ├── majestic-marketing/       # Marketing and SEO tools
     ├── majestic-sales/           # Sales acceleration tools
     ├── majestic-company/         # Business operations tools
+    ├── majestic-llm/             # External LLM integration (Codex, Gemini)
     └── majestic-tools/           # Claude Code customization tools
 ```
 
@@ -26,6 +27,7 @@ majestic-marketplace/
 | Marketing | majestic-marketing | SEO, content, GEO (AI visibility), branding |
 | Sales | majestic-sales | Funnels, playbooks, prospecting, proposals |
 | Operations | majestic-company | Strategy, hiring, legal, business planning |
+| LLM Integration | majestic-llm | External LLM consulting (Codex, Gemini) |
 | Meta | majestic-tools | Claude Code customization |
 
 ## Architecture Principles
@@ -50,7 +52,7 @@ This marketplace uses a **hub-and-spoke architecture** where `majestic-engineer`
            ┌───────┼─────────┼──────────┼───────┐
            │       │         │          │       │
            ▼       ▼         ▼          ▼       ▼
-      rails    python     react     tools    (generic)
+      rails    python     react      llm     tools
            │       │                    │
            └───────┴────────────────────┘
                    │
@@ -60,24 +62,27 @@ This marketplace uses a **hub-and-spoke architecture** where `majestic-engineer`
 
 ### Dependency Rules
 
-1. **`majestic-engineer` is the central orchestrator** - It may reference language-specific plugins (rails, python, react) and utility plugins (tools) for quality gates and code review orchestration.
+1. **`majestic-engineer` is the central orchestrator** - It may reference language-specific plugins (rails, python, react), LLM integration (llm), and utility plugins (tools) for quality gates and code review orchestration.
 
 2. **Language-specific plugins depend on `majestic-engineer`** - They inherit shared reviewers (simplicity-reviewer, project-topics-reviewer) and generic workflows.
 
 3. **Business function plugins are isolated** - `majestic-marketing`, `majestic-sales`, and `majestic-company` have NO cross-plugin dependencies.
 
-4. **`majestic-tools` provides utilities** - Referenced by `majestic-engineer` for external LLM reviewers and terminal utilities.
+4. **`majestic-llm` provides external LLM integration** - Referenced by `majestic-engineer` for multi-LLM code review and architecture consulting.
 
-5. **Documentation references are allowed** - `majestic-guide` may reference all plugins for discovery purposes (no runtime dependency).
+5. **`majestic-tools` provides utilities** - Referenced by `majestic-engineer` for reasoning tools and terminal utilities.
+
+6. **Documentation references are allowed** - `majestic-guide` may reference all plugins for discovery purposes (no runtime dependency).
 
 ### Allowed Dependencies
 
 | Plugin | Can Reference |
 |--------|--------------|
-| `majestic-engineer` | rails, python, react, tools |
+| `majestic-engineer` | rails, python, react, llm, tools |
 | `majestic-rails` | engineer |
 | `majestic-python` | engineer |
 | `majestic-react` | engineer |
+| `majestic-llm` | (none) |
 | `majestic-tools` | (none at runtime, all for docs) |
 | `majestic-marketing` | (none) |
 | `majestic-sales` | (none) |
