@@ -1,5 +1,5 @@
 ---
-name: 30-day-launch
+name: thirty-day-launch
 description: Tactical 30-day business launch guide with copy-paste templates, hour-by-hour schedules, and revenue forecasts. For users who already know their business type and want to execute fast.
 allowed-tools: AskUserQuestion
 ---

@@ -487,12 +487,10 @@ Trigger: Desire for awe, shareability
 | Use `power-words` when... | Use other skills when... |
 |---------------------------|--------------------------|
 | Enhancing existing copy | Need full copy written (`content-writer`) |
-| Punching up headlines | Need brand names (`brand-namer`) |
-| Improving CTAs | Need full landing page (`landing-page-builder`) |
+| Punching up headlines/CTAs | Need landing page (`landing-page-builder`) or brand names (`brand-namer`) |
 | Making email subject lines pop | Need email sequence (`email-nurture`) |
 | Social post hooks | Need content strategy (`content-calendar`) |
-| Need emotional trigger words | Need watering hole / community magnet words (`language`) |
-| Word list reference | Need Sales Safari research methodology (`language`) |
+| Need emotional trigger words | Need watering hole words or Sales Safari methodology (`language`) |
 
 ## What This Skill Does NOT Do
 

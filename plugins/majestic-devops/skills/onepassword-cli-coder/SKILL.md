@@ -1,5 +1,5 @@
 ---
-name: 1password-cli-coder
+name: onepassword-cli-coder
 description: This skill guides integrating 1Password CLI (op) for secret management in development workflows. Use when loading secrets for infrastructure, deployments, or local development.
 allowed-tools: Read, Write, Edit, Bash, Grep, Glob
 ---

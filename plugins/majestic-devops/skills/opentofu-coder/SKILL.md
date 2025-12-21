@@ -481,27 +481,6 @@ resource "aws_security_group" "main" {
 }
 ```
 
-### Null Resource for Triggers
-
-```hcl
-resource "null_resource" "provisioner" {
-  triggers = {
-    instance_id = aws_instance.web.id
-    script_hash = filemd5("${path.module}/scripts/setup.sh")
-  }
-
-  provisioner "remote-exec" {
-    inline = ["sudo /opt/setup.sh"]
-
-    connection {
-      host = aws_instance.web.public_ip
-      type = "ssh"
-      user = "ubuntu"
-    }
-  }
-}
-```
-
 ## References
 
 For detailed patterns and examples:

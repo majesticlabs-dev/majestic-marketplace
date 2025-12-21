@@ -288,3 +288,24 @@ provider "aws" {
 # AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY env vars
 # Or instance profile / IRSA for EKS
 ```
+
+### Null Resource for Triggers
+
+```hcl
+resource "null_resource" "provisioner" {
+  triggers = {
+    instance_id = aws_instance.web.id
+    script_hash = filemd5("${path.module}/scripts/setup.sh")
+  }
+
+  provisioner "remote-exec" {
+    inline = ["sudo /opt/setup.sh"]
+
+    connection {
+      host = aws_instance.web.public_ip
+      type = "ssh"
+      user = "ubuntu"
+    }
+  }
+}
+```
