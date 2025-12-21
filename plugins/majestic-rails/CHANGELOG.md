@@ -2,6 +2,19 @@
 
 All notable changes to majestic-rails will be documented in this file.
 
+## [3.7.0] - 2025-12-20
+
+### Added
+
+- **`references/structured-events.md`** - Rails 8.1 `Rails.event` API for structured observability:
+  - Core API: `Rails.event.notify` and `Rails.event.debug` (no traditional log levels)
+  - Tags for nested context with stacking blocks
+  - Request-scoped context via `Rails.event.set_context`
+  - Custom event classes for strongly-typed payloads
+  - Subscriber pattern for multiple destinations (Datadog, Sentry, etc.)
+  - Migration guide from `Rails.logger`
+  - Common patterns: model callbacks, job instrumentation, service tracing
+
 ## [3.6.0] - 2025-12-20
 
 ### Enhanced

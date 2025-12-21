@@ -385,6 +385,7 @@ For comprehensive patterns and examples, see:
 - `references/webhooks.md` - Secure webhook delivery, SSRF protection, retry strategies
 - `references/caching-strategies.md` - Russian Doll caching, Solid Cache, cache analysis
 - `references/config-tips.md` - Configuration, logging, deployment patterns
+- `references/structured-events.md` - Rails 8.1 `Rails.event` API for structured observability
 - `references/resources.md` - Links to source material and further reading
 
 ## Philosophy Summary
