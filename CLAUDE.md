@@ -184,3 +184,5 @@ _Synthesized wisdom from working on this repository._
 **Learning:** Keep instructions concise - Claude knows how to search. Say "search for design-system.md" not "check docs/, docs/design/, and root with ls commands". Over-specified bash snippets waste tokens and add no value.
 
 **Learning:** All `.agents.yml` access in commands/agents should go through `config-reader` agent. Never document grep patterns for config reading - it bypasses local overrides and is inconsistent with the config system.
+
+**Learning:** When creating a new skill, run `skill-linter` to validate it against the agentskills.io specification before committing. Key requirements: names must start with a letter (not a digit), use kebab-case, match the directory name, and stay under 500 lines.
