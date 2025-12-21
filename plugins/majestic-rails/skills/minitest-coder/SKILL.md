@@ -253,6 +253,19 @@ class UserTest < ActiveSupport::TestCase
 end
 ```
 
+## Advanced Patterns
+
+See `resources/advanced-patterns.md` for production-tested patterns from 37signals.
+
+| Pattern | Problem Solved |
+|---------|----------------|
+| Current.account fixtures | Multi-tenant URL isolation |
+| Assertion-validating helpers | Early failure with clear messages |
+| Deterministic UUIDs | Predictable fixture ordering |
+| VCR timestamp filtering | Reusable API cassettes |
+| Thread-based concurrency | Race condition detection |
+| Adapter-aware helpers | SQLite/MySQL compatibility |
+
 ## Anti-Patterns
 
 See `resources/anti-patterns.md` for detailed examples.
