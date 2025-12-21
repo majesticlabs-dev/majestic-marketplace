@@ -194,4 +194,4 @@ agent majestic-rails:review:simplicity-reviewer "Simplify this implementation"
 
 ## Credits
 
-- **dhh-coder skill**: Based on [The Unofficial 37signals/DHH Rails Style Guide](https://github.com/marckohlbrugge/unofficial-37signals-coding-style-guide) by [Marc Köhlbrugge](https://x.com/marckohlbrugge), generated through deep analysis of the Fizzy codebase.
+- **dhh-coder skill**: Based on the Unofficial 37signals Coding Style Guide (see main [README References](../../README.md#references))
