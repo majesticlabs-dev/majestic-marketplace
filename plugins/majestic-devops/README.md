@@ -34,9 +34,13 @@ This plugin provides AI-powered assistance for:
 
 2. **Cloud provider credentials configured**
    ```bash
-   # AWS
+   # AWS (Option A: Environment variables)
    export AWS_ACCESS_KEY_ID="your-key"
    export AWS_SECRET_ACCESS_KEY="your-secret"
+
+   # AWS (Option B: Named profile from ~/.aws/credentials)
+   # Then use: aws s3 sync --profile suppli s3://bucket ./local
+   # Or set: export AWS_PROFILE=suppli
 
    # Backblaze B2
    export B2_APPLICATION_KEY_ID="your-key-id"
@@ -84,6 +88,19 @@ This plugin provides AI-powered assistance for:
    op account list                              # List configured accounts
    op run --account acme.1password.com -- ...  # Use specific account
    export OP_ACCOUNT=acme.1password.com        # Set default for session
+   ```
+
+6. **Hetzner Cloud CLI (for Hetzner infrastructure)**
+   ```bash
+   # macOS
+   brew install hcloud
+
+   # Linux (via package manager)
+   # See https://github.com/hetznercloud/cli
+
+   # Authenticate
+   hcloud context create my-project
+   # Enter your API token when prompted
    ```
 
 ### Quick Start: Create Infrastructure

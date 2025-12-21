@@ -340,6 +340,12 @@ resource "aws_instance" "west" {
 # AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY
 # AWS_PROFILE for named profiles
 
+# Named profile from ~/.aws/credentials (recommended)
+provider "aws" {
+  region  = var.aws_region
+  profile = "suppli"  # Uses [suppli] section from ~/.aws/credentials
+}
+
 # Or explicit (NOT recommended for secrets)
 provider "aws" {
   region     = var.aws_region

@@ -91,6 +91,21 @@ provider "aws" {
 }
 ```
 
+### Named Profile (Standard Credentials)
+
+```hcl
+# Use named profile from ~/.aws/credentials
+provider "aws" {
+  region  = var.aws_region
+  profile = "suppli"  # Uses [suppli] section
+}
+
+# ~/.aws/credentials format:
+# [suppli]
+# aws_access_key_id = AKIA...
+# aws_secret_access_key = ...
+```
+
 ### With SSO / Identity Center
 
 ```hcl
