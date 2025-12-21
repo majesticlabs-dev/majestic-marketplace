@@ -214,6 +214,7 @@ Available modules:
 | Resource | Description |
 |----------|-------------|
 | [Marketplace Tutorial](https://tutorial.majesticmarketplace.com) | Interactive slide deck for getting started |
+| [Dev Browser Guide](docs/wiki/Dev-Browser-Guide.md) | Browser automation setup and usage |
 | [Output Styles](output-styles/README.md) | Pre-built formatting guides for consistent responses |
 | [Instructions](instructions/) | CLAUDE.md instruction modules |
 
