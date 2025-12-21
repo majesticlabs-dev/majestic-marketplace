@@ -230,6 +230,7 @@ For commercial licensing: [Contact Us](https://majesticlabs.dev/contact/)
 ## References
 
 - [AgentSkills.io Specification](https://agentskills.io/specification) - Standard for portable AI agent skills
+- [Unofficial 37signals Coding Style Guide](https://github.com/marckohlbrugge/unofficial-37signals-coding-style-guide) - LLM-assisted analysis of 265 Fizzy PRs
 - [Anthropic Marketplace](https://github.com/anthropics/claude-code/tree/main/plugins)
 - [Every Marketplace](https://github.com/EveryInc/every-marketplace)
 - [Superpowers](https://github.com/obra/superpowers)
