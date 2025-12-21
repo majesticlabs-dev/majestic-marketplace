@@ -6,6 +6,18 @@ All notable changes to majestic-marketing will be documented in this file.
 
 ### Added
 
+**`/majestic:style-guide:new` command** - Interactive style guide generator
+
+Create project-specific style guides through guided discovery:
+- **Foundation choices** - Base style (AP/Chicago/Microsoft), content types
+- **Voice basics** - Formality level, perspective (we/you/they)
+- **Grammar mechanics** - Oxford comma, number formatting, contractions
+- **Vocabulary rules** - Jargon policy, words to use/avoid
+- **Content-specific tones** - Different tones per content type
+- **AI writing policy** - Optional AI usage guidelines
+
+Generates `STYLE_GUIDE.md` that `copy-editor` and other content skills reference automatically.
+
 **`language` skill** - Sales Safari methodology for customer language research
 
 Research how customers actually talk, then use their exact language across Product and Marketing:

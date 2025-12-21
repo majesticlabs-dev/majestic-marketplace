@@ -142,6 +142,7 @@ See [docs/plugin-architecture/CONFIG-SYSTEM.md](docs/plugin-architecture/CONFIG-
 
 ## Resources
 
+- **Wiki**: `../majestic-marketplace.wiki/` - Plugin documentation, usage guides, and examples
 - [Claude Code Plugin Documentation](https://docs.claude.com/en/docs/claude-code/plugins)
 - [Plugin Marketplace Documentation](https://docs.claude.com/en/docs/claude-code/plugin-marketplaces)
 - [Plugin Reference](https://docs.claude.com/en/docs/claude-code/plugins-reference)
