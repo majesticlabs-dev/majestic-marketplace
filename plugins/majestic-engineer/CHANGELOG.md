@@ -2,6 +2,14 @@
 
 All notable changes to majestic-engineer will be documented in this file.
 
+## [3.6.1] - 2025-12-20
+
+### Changed
+
+- **Renamed `/majestic:init-agents-md` to `/majestic:init`** - Simpler, shorter command name
+  - All references updated across documentation
+  - Helper scripts directory renamed from `init-agents-md/` to `init/`
+
 ## [3.5.0] - 2025-12-20
 
 ### Added

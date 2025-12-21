@@ -13,7 +13,7 @@ claude /plugin install majestic-engineer
 After installing, initialize your project:
 
 ```bash
-/majestic:init-agents-md
+/majestic:init
 ```
 
 This creates:
@@ -218,7 +218,7 @@ Invoke with: `/majestic-engineer:<category>:<name>`
 |---------|-------------|
 | `workflows:build-task` | Autonomous task implementation from any task management system (GitHub, Beads, Linear, file) |
 | `workflows:debug` | Debug errors, test failures, or unexpected behavior (auto-detects project type) |
-| `workflows:init-agents-md` | Initialize AGENTS.md with hierarchical structure and create CLAUDE.md symlink |
+| `workflows:init` | Initialize AGENTS.md with hierarchical structure and create CLAUDE.md symlink |
 | `workflows:plan` | Transform feature descriptions into well-structured project plans |
 | `workflows:prd` | Create a PRD for a product/feature. Use `--guided` flag for interactive discovery |
 | `workflows:question` | Answer questions about project structure without coding |

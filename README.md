@@ -164,7 +164,7 @@ See [Output Styles](output-styles/README.md) for full documentation and customiz
 After installing plugins, run this command in your project to set up AI agent configuration:
 
 ```bash
-/majestic:init-agents-md
+/majestic:init
 ```
 
 This creates:

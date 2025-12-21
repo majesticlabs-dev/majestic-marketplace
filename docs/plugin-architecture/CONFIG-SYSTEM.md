@@ -1,6 +1,6 @@
 # Configuration System
 
-Commands and scripts read project configuration from `.agents.yml` in the project root. This file is created by `/majestic:init-agents-md` during project setup.
+Commands and scripts read project configuration from `.agents.yml` in the project root. This file is created by `/majestic:init` during project setup.
 
 **AGENTS.md should reference this file:** `Load config: @.agents.yml`
 
@@ -333,7 +333,7 @@ branch_naming: user/desc
 - For nested sections (`toolbox.build_task`), local replaces entire section
 - If `AGENTS_CONFIG` is set, local file is ignored
 
-**Auto-created:** Running `/majestic:init-agents-md` prompts to create local overrides.
+**Auto-created:** Running `/majestic:init` prompts to create local overrides.
 
 ## Auto-Preview Pattern
 

@@ -1,5 +1,5 @@
 #!/bin/bash
-# Verify init-agents-md setup is complete
+# Verify /majestic:init setup is complete
 # Usage: verify-setup.sh
 # Returns: verification results with pass/fail indicators
 
