@@ -1,6 +1,6 @@
 ---
 name: majestic-guide
-description: Guide to the right skill, command, or agent for any task
+description: HOW TO - Guide to the right skill, command, or agent for any task
 allowed-tools: Read, Glob, Grep
 argument-hint: "[what you want to do]"
 ---
