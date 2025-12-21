@@ -225,7 +225,7 @@ This project is licensed under the [Polyform NonCommercial License 1.0.0](LICENS
 - ✅ Personal, non-commercial use allowed
 - ❌ Commercial use prohibited without written permission
 
-For commercial licensing inquiries: marketplace@it.majesticlabs.dev
+For commercial licensing: [Contact Us](https://majesticlabs.dev/contact/)
 
 ## References
 
