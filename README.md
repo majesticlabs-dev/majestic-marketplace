@@ -229,7 +229,8 @@ For commercial licensing: [Contact Us](https://majesticlabs.dev/contact/)
 
 ## References
 
-- [Antrhopic Marketplace](https://github.com/anthropics/claude-code/tree/main/plugins)
+- [AgentSkills.io Specification](https://agentskills.io/specification) - Standard for portable AI agent skills
+- [Anthropic Marketplace](https://github.com/anthropics/claude-code/tree/main/plugins)
 - [Every Marketplace](https://github.com/EveryInc/every-marketplace)
 - [Superpowers](https://github.com/obra/superpowers)
 - [Rails Development Skills](https://github.com/alec-c4/claude-skills-rails-dev)
