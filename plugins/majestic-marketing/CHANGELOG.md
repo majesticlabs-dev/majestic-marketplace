@@ -2,6 +2,19 @@
 
 All notable changes to majestic-marketing will be documented in this file.
 
+## [3.7.0] - 2025-12-20
+
+### Added
+
+**`fact-checker` agent** - Verify marketing content claims and return accuracy score
+
+Checks statistics, quotes, and factual statements against sources:
+- **Claim extraction** - Statistics, metrics, quotes, comparisons, awards
+- **Verification via WebSearch** - Finds authoritative sources
+- **Scoring system** - ✅ Verified, ⚠️ Unverified, ❌ Contradicted, 🔄 Outdated
+- **Overall accuracy score** - 1-10 scale with actionable recommendations
+- **FTC/compliance notes** - Flags potential advertising compliance issues
+
 ## [3.6.0] - 2025-12-20
 
 ### Added
