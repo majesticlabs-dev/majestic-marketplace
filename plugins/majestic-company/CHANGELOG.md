@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.1.0] - 2025-12-20
+
+### Added
+
+- `pm-discovery` skill for product discovery frameworks
+  - Customer interview question bank and synthesis templates
+  - Assumption mapping with Riskiest Assumption Test (RAT) framework
+  - Jobs-to-be-Done (JTBD) canvas and job statement format
+  - RICE and ICE feature prioritization scoring
+  - Opportunity Solution Tree structure and templates
+  - Product hypothesis format with success criteria
+  - Anti-patterns table for common PM discovery mistakes
+  - Integration guidance with `problem-research`, `customer-discovery`, and `/majestic:prd`
+
 ## [3.0.0] - 2025-12-12
 
 ### Changed
