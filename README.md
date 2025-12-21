@@ -73,10 +73,14 @@ This launches a guided installer that can import agents from Claude Code marketp
 |--------|-------------|
 | [majestic-engineer](plugins/majestic-engineer/README.md) | Language-agnostic engineering workflows (17 agents, 8 commands, 12 skills) |
 | [majestic-rails](plugins/majestic-rails/README.md) | Ruby on Rails development tools (23 agents, 5 commands, 9 skills) |
+| [majestic-react](plugins/majestic-react/README.md) | Modern React development with TypeScript (3 agents, 1 command, 4 skills) |
 | [majestic-python](plugins/majestic-python/README.md) | Python development tools (2 agents) |
+| [majestic-devops](plugins/majestic-devops/README.md) | Infrastructure-as-Code and DevOps workflows (1 agent, 8 skills) |
+| [majestic-llm](plugins/majestic-llm/README.md) | External LLM integration - Codex, Gemini (5 agents, 1 command) |
 | [majestic-marketing](plugins/majestic-marketing/README.md) | Marketing and SEO tools (14 agents, 2 commands, 24 skills) |
 | [majestic-sales](plugins/majestic-sales/README.md) | Sales acceleration tools (1 command, 6 skills) |
 | [majestic-company](plugins/majestic-company/README.md) | Business operations and CEO tools (2 agents, 21 skills) |
+| [majestic-experts](plugins/majestic-experts/README.md) | Expert panel discussion system (2 agents, 1 command) |
 | [majestic-tools](plugins/majestic-tools/README.md) | Claude Code customization tools (10 commands, 3 skills) |
 
 ## Recommended Tools
@@ -85,10 +89,10 @@ Third-party plugins that complement the Majestic suite:
 
 | Plugin | Description | Install |
 |--------|-------------|---------|
-| [osgrep](https://github.com/Ryandonofrio3/osgrep) | Semantic code search with natural language queries - find code by intent, not just keywords | `npm i -g osgrep && osgrep install-claude-code` |
 | [beads](https://github.com/steveyegge/beads) | Dependency-aware issue tracker - issues chained like beads with blocking relationships | `curl -fsSL https://raw.githubusercontent.com/steveyegge/beads/main/install.sh \| bash` |
 | [beads_viewer](https://github.com/Dicklesworthstone/beads_viewer) | Terminal UI for Beads with DAG visualization, graph metrics, and AI agent "robot mode" | `curl -fsSL https://raw.githubusercontent.com/Dicklesworthstone/beads_viewer/main/install.sh \| bash` |
 | [dev-browser](https://github.com/SawyerHood/dev-browser) | Browser automation for Claude Code - control your browser for testing and verification with LLM-optimized DOM snapshots | `/plugin marketplace add sawyerhood/dev-browser` |
+| [osgrep](https://github.com/Ryandonofrio3/osgrep) | Semantic code search with natural language queries - find code by intent, not just keywords | `npm i -g osgrep && osgrep install-claude-code` |
 
 ## Recommended Settings
 
