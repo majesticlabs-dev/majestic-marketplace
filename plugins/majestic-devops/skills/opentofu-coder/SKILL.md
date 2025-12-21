@@ -508,3 +508,4 @@ For detailed patterns and examples:
 - `resources/hcl-patterns.md` - Advanced HCL patterns
 - `resources/state-management.md` - State operations and encryption
 - `resources/provider-examples.md` - Multi-cloud provider configs
+- `resources/makefile-automation.md` - Makefile workflows for plan/apply/destroy
