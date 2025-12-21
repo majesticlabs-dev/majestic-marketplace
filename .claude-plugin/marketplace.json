@@ -283,6 +283,31 @@
         "security"
       ],
       "source": "./plugins/majestic-experts"
+    },
+    {
+      "name": "majestic-devops",
+      "description": "Infrastructure as Code tools for OpenTofu and Terraform. Includes 1 skill.",
+      "version": "1.0.0",
+      "author": {
+        "name": "David Paluy",
+        "url": "https://github.com/dpaluy",
+        "email": "marketplace@it.majesticlabs.dev"
+      },
+      "homepage": "https://github.com/majesticlabs-dev/majestic-marketplace/tree/master/plugins/majestic-devops",
+      "tags": [
+        "devops",
+        "infrastructure",
+        "iac",
+        "opentofu",
+        "terraform",
+        "hcl",
+        "aws",
+        "azure",
+        "gcp",
+        "kubernetes",
+        "cloud"
+      ],
+      "source": "./plugins/majestic-devops"
     }
   ]
 }
