@@ -169,6 +169,15 @@ See `resources/rails-hotwire.md` for:
 - ERB layout patterns with content_for
 - CSS design tokens and import order
 
+### Implementation Constraints
+
+See `resources/ui-implementation-guide.md` for specific numeric rules:
+- Typography: 4-size rule, line heights (1.5× body, 1.0-1.2× headlines)
+- Color: HSB manipulation, WCAG 4.5:1 contrast, dark mode execution
+- Forms: Label placement, input states, selection control usage
+- Buttons: Padding ratios (2:1 horizontal:vertical), 48×48dp touch targets
+- Data tables: Right-align numbers, sticky headers, condensed subtext
+
 ## Anti-Patterns
 
 | Category | Avoid |
