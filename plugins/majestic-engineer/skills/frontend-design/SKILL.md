@@ -178,6 +178,24 @@ See `resources/ui-implementation-guide.md` for specific numeric rules:
 - Buttons: Padding ratios (2:1 horizontal:vertical), 48×48dp touch targets
 - Data tables: Right-align numbers, sticky headers, condensed subtext
 
+### Motion & Animation
+
+See `resources/motion-patterns.md` for:
+- Page load orchestration (staggered reveals, timing guidelines)
+- Scroll-triggered animations (Intersection Observer patterns)
+- Hover interactions (magnetic buttons, underline reveals)
+- Background motion (gradient shifts, floating particles)
+- Performance checklist and `prefers-reduced-motion` support
+
+### Landing Pages
+
+See `resources/landing-page-design.md` for:
+- Section-by-section visual design (hero, proof, CTA)
+- Color palettes by aesthetic (dark tech, light sophisticated)
+- Typography pairings for different moods
+- Single-file HTML implementation patterns
+- Complements `landing-page-builder` skill (copy) with visual guidance
+
 ## Anti-Patterns
 
 | Category | Avoid |

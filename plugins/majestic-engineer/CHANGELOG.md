@@ -2,6 +2,15 @@
 
 All notable changes to majestic-engineer will be documented in this file.
 
+## [3.8.0] - 2025-12-21
+
+### Added
+
+- **`frontend-design` skill enhancements** - Two new resource files for richer design guidance
+  - `resources/motion-patterns.md` - Animation timing, scroll reveals, magnetic buttons, Intersection Observer patterns, performance checklist, `prefers-reduced-motion` support
+  - `resources/landing-page-design.md` - Section-by-section visual design, dark/light color palettes, typography pairings, single-file HTML patterns
+  - Complements `landing-page-builder` skill (copy) with visual implementation guidance
+
 ## [3.7.0] - 2025-12-21
 
 ### Added
