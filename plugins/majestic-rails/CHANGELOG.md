@@ -2,6 +2,19 @@
 
 All notable changes to majestic-rails will be documented in this file.
 
+## [3.8.0] - 2025-12-20
+
+### Added
+
+- **`anycable-coder` skill** - Real-time features with reliability guarantees:
+  - LLM streaming patterns with at-least-once delivery
+  - AnyCable vs Action Cable comparison and migration guide
+  - Server-side channel implementations for streaming
+  - Client-side JavaScript with @anycable/web
+  - Presence tracking API
+  - Deployment configuration (Procfile, Docker)
+  - Based on Evil Martians' "AnyCable, Rails, and the pitfalls of LLM-streaming"
+
 ## [3.7.0] - 2025-12-20
 
 ### Added

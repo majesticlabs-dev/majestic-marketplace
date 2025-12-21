@@ -110,6 +110,8 @@ end
 <div id="comments"><%= render @post.comments %></div>
 ```
 
+> **Note:** For LLM streaming or features requiring message delivery guarantees, see `anycable-coder` skill. Action Cable provides at-most-once delivery which can lose chunks on reconnection.
+
 ## Turbo 8 Morphing
 
 ```erb
