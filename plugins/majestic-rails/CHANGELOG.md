@@ -2,6 +2,22 @@
 
 All notable changes to majestic-rails will be documented in this file.
 
+## [3.10.0] - 2025-12-21
+
+### Added
+
+- **`database-optimizer` aggregate patterns** - New section in `resources/database-optimizer/patterns.md`:
+  - `COUNT(*) FILTER (WHERE ...)` - Cleaner conditional aggregation than CASE WHEN
+  - `LAG()/LEAD()` window functions for period-over-period comparisons
+  - Month-over-month and year-over-year growth rate calculations
+  - Rails scope examples and integration patterns
+
+- **Rails slow query monitoring** - New section in `resources/database-admin/postgresql.md`:
+  - `ActiveSupport::Notifications.subscribe` pattern for catching slow queries
+  - Honeybadger/Sentry integration with context
+  - Structured JSON logging variant for DataDog/CloudWatch
+  - Sampling variant for high-traffic applications
+
 ## [3.9.0] - 2025-12-21
 
 ### Added

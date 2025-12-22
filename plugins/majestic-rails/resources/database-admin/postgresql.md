@@ -107,6 +107,85 @@ SELECT sum(heap_blks_hit) / NULLIF(sum(heap_blks_hit) + sum(heap_blks_read), 0) 
 FROM pg_statio_user_tables;  -- Should be > 99%
 ```
 
+## Rails Slow Query Monitoring
+
+### ActiveSupport Notifications
+
+Subscribe to SQL events and alert on slow queries:
+
+```ruby
+# config/initializers/slow_query_monitor.rb
+class SlowQueryError < StandardError; end
+
+SLOW_QUERY_THRESHOLD = ENV.fetch("SLOW_QUERY_THRESHOLD_SECONDS", 3).to_f
+
+ActiveSupport::Notifications.subscribe("sql.active_record") do |_name, start, finish, _id, payload|
+  duration = finish.to_f - start.to_f
+
+  next if duration < SLOW_QUERY_THRESHOLD
+  next if payload[:name] == "SCHEMA"  # Skip schema queries
+
+  # Send to error tracker
+  Honeybadger.notify(
+    SlowQueryError.new(payload[:sql].to_s.truncate(500)),
+    context: {
+      duration_seconds: duration.round(2),
+      sql: payload[:sql].to_s.truncate(2000),
+      name: payload[:name],
+      binds: payload[:binds]&.map { |b| [b.name, b.value] }
+    }
+  )
+
+  # Also log locally
+  Rails.logger.warn("[SLOW QUERY] #{duration.round(2)}s: #{payload[:sql].truncate(200)}")
+end
+```
+
+### Structured Logging Version
+
+For JSON logging pipelines (DataDog, CloudWatch, etc.):
+
+```ruby
+# config/initializers/query_logger.rb
+ActiveSupport::Notifications.subscribe("sql.active_record") do |_name, start, finish, _id, payload|
+  duration_ms = ((finish - start) * 1000).round(2)
+
+  next if duration_ms < 1000  # Only log queries > 1s
+  next if payload[:name] == "SCHEMA"
+
+  Rails.logger.info({
+    event: "slow_query",
+    duration_ms: duration_ms,
+    query: payload[:sql].to_s.truncate(1000),
+    name: payload[:name],
+    cached: payload[:cached] || false
+  }.to_json)
+end
+```
+
+### With Sampling for High-Traffic Apps
+
+```ruby
+# config/initializers/query_sampler.rb
+SAMPLE_RATE = ENV.fetch("QUERY_SAMPLE_RATE", 0.01).to_f  # 1% of queries
+
+ActiveSupport::Notifications.subscribe("sql.active_record") do |_name, start, finish, _id, payload|
+  duration = finish.to_f - start.to_f
+
+  # Always capture very slow queries, sample normal ones
+  should_log = duration > 5.0 || rand < SAMPLE_RATE
+
+  next unless should_log
+  next if payload[:name] == "SCHEMA"
+
+  QueryMetric.create_async(
+    duration_ms: (duration * 1000).round,
+    query_fingerprint: Digest::MD5.hexdigest(payload[:sql].to_s),
+    query_sample: payload[:sql].to_s.truncate(500)
+  )
+end
+```
+
 ## Maintenance
 
 ### VACUUM and ANALYZE

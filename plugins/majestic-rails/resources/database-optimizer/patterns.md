@@ -1,5 +1,118 @@
 # Database Optimizer Patterns Reference
 
+## Aggregate Functions
+
+### Conditional Aggregation with FILTER
+
+PostgreSQL's `FILTER` clause is cleaner than `CASE WHEN` for conditional counts:
+
+```sql
+-- Instead of verbose CASE WHEN
+SELECT
+  COUNT(*) as "All Users",
+  COUNT(CASE WHEN verified THEN 1 END) AS "Verified",
+  COUNT(CASE WHEN NOT verified THEN 1 END) AS "Unverified"
+FROM users;
+
+-- Use FILTER (PostgreSQL 9.4+)
+SELECT
+  COUNT(*) as "All Users",
+  COUNT(*) FILTER (WHERE verified) AS "Verified Users",
+  COUNT(*) FILTER (WHERE NOT verified) AS "Unverified Users"
+FROM users;
+```
+
+Works with any aggregate function:
+
+```sql
+SELECT
+  department,
+  AVG(salary) AS avg_salary,
+  AVG(salary) FILTER (WHERE tenure_years > 5) AS avg_senior_salary,
+  SUM(bonus) FILTER (WHERE performance = 'A') AS top_performer_bonuses
+FROM employees
+GROUP BY department;
+```
+
+Rails scope example:
+
+```ruby
+scope :with_verification_stats, -> {
+  select(<<~SQL)
+    COUNT(*) as total_count,
+    COUNT(*) FILTER (WHERE verified) as verified_count,
+    COUNT(*) FILTER (WHERE NOT verified) as unverified_count
+  SQL
+}
+```
+
+### Period-Over-Period Comparisons with LAG/LEAD
+
+Use `LAG()` to compare current values with previous periods:
+
+```sql
+WITH monthly_stats AS (
+  SELECT
+    DATE_TRUNC('month', created_at) AS month,
+    COUNT(*) AS signups,
+    SUM(CASE WHEN subscribed THEN 1 ELSE 0 END) AS subscribers
+  FROM users
+  GROUP BY 1
+  ORDER BY 1 DESC
+)
+SELECT
+  month::date,
+  signups,
+  LAG(signups, 1) OVER (ORDER BY month) AS prev_month_signups,
+  LAG(signups, 12) OVER (ORDER BY month) AS prev_year_signups,
+  subscribers,
+  LAG(subscribers, 12) OVER (ORDER BY month) AS prev_year_subscribers
+FROM monthly_stats;
+```
+
+Calculate growth rates:
+
+```sql
+WITH monthly AS (
+  SELECT DATE_TRUNC('month', created_at) AS month, COUNT(*) AS signups
+  FROM users GROUP BY 1
+)
+SELECT
+  month::date,
+  signups,
+  LAG(signups, 1) OVER w AS prev_month,
+  ROUND((signups - LAG(signups, 1) OVER w)::numeric /
+        NULLIF(LAG(signups, 1) OVER w, 0) * 100, 1) AS mom_growth_pct,
+  LAG(signups, 12) OVER w AS prev_year,
+  ROUND((signups - LAG(signups, 12) OVER w)::numeric /
+        NULLIF(LAG(signups, 12) OVER w, 0) * 100, 1) AS yoy_growth_pct
+FROM monthly
+WINDOW w AS (ORDER BY month);
+```
+
+Rails integration:
+
+```ruby
+# app/models/user.rb
+def self.monthly_growth_report
+  sql = <<~SQL
+    WITH monthly AS (
+      SELECT DATE_TRUNC('month', created_at) AS month, COUNT(*) AS signups
+      FROM users GROUP BY 1
+    )
+    SELECT
+      month::date,
+      signups,
+      LAG(signups, 1) OVER (ORDER BY month) AS prev_month,
+      LAG(signups, 12) OVER (ORDER BY month) AS prev_year
+    FROM monthly
+    ORDER BY month DESC
+    LIMIT 24
+  SQL
+  connection.select_all(sql).to_a
+end
+```
+
 ## Mechanical Sympathy
 
 Understanding *why* patterns are slow helps you make better optimization decisions.
