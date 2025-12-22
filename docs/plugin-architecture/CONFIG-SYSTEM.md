@@ -14,6 +14,7 @@ The config file has **core fields** plus **stack-specific fields** based on tech
 
 ```yaml
 # .agents.yml - Project configuration for Claude Code commands
+config_version: 1.0
 default_branch: main
 app_status: development
 
@@ -52,6 +53,7 @@ toolbox:
 ### Python Project
 
 ```yaml
+config_version: 1.0
 default_branch: main
 app_status: development
 
@@ -70,6 +72,7 @@ review_topics_path: docs/agents/review-topics.md
 ### Node Project
 
 ```yaml
+config_version: 1.0
 default_branch: main
 app_status: development
 
@@ -94,6 +97,7 @@ review_topics_path: docs/agents/review-topics.md
 
 | Field | Description | Values | Default |
 |-------|-------------|--------|---------|
+| `config_version` | Schema version for update detection | version number (e.g., 1.0) | (none) |
 | `default_branch` | Main branch for git operations | branch name | `main` |
 | `tech_stack` | Primary tech stack | `rails` \| `python` \| `generic` | `generic` |
 | `app_status` | Application lifecycle stage | `development` \| `production` | `development` |
@@ -105,6 +109,8 @@ review_topics_path: docs/agents/review-topics.md
 | `auto_create_task` | Auto-create task when `/majestic:plan` completes | `true` \| `false` | `false` |
 | `session.ledger` | Enable session state checkpointing to file | `true` \| `false` | `false` |
 | `session.ledger_path` | Path to session ledger file | file path | `.session_ledger.md` |
+| `browser.type` | Browser for web-browser skill | `chrome` \| `brave` \| `edge` | `chrome` |
+| `browser.debug_port` | CDP port for browser control | port number | `9222` |
 
 ### Rails-Specific Fields
 
@@ -353,6 +359,10 @@ For personal preferences that shouldn't be tracked in git, create `.agents.local
 # .agents.local.yml - Personal overrides (not tracked in git)
 workflow: worktrees
 branch_naming: user/desc
+
+# Browser preference (for web-browser skill)
+browser:
+  type: brave
 ```
 
 **Merge behavior:**

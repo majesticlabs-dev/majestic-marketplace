@@ -3,7 +3,7 @@ name: config-reader
 description: Read and merge .agents.yml and .agents.local.yml, returning final config with local overrides applied
 model: haiku
 color: gray
-allowed-tools: Read
+allowed-tools: Read, Glob
 ---
 
 # Config Reader Agent
@@ -13,7 +13,7 @@ Read project configuration from `.agents.yml` and `.agents.local.yml`, merging t
 ## Input Modes
 
 ### Mode 1: Full Config (no arguments)
-Returns the complete merged configuration.
+Returns the complete merged configuration with version check.
 
 ### Mode 2: Single Field Lookup
 When input contains `field:` and optionally `default:`, returns just that field's value.
@@ -36,8 +36,13 @@ When input contains `field:` and optionally `default:`, returns just that field'
 
 3. **Merge configs**: Local values override base values (shallow merge at top level)
 
-4. **Return result**:
-   - **Mode 1**: Full config with sources summary
+4. **Check version** (Mode 1 only):
+   - Find `config-schema-version` file in majestic-engineer plugin directory
+   - Compare `config_version` in project config vs marketplace version
+   - If outdated or missing, add warning to output
+
+5. **Return result**:
+   - **Mode 1**: Full config with sources summary and version status
    - **Mode 2**: Just the field value (or default if not found)
 
 ## Output Format
@@ -53,6 +58,16 @@ When input contains `field:` and optionally `default:`, returns just that field'
 - Base (.agents.yml): [found/not found]
 - Local (.agents.local.yml): [found/not found]
 - Overrides applied: [list of keys from local that overrode base, or "none"]
+
+## Version Status
+- Config version: [version or "not set"]
+- Latest version: [from config-schema-version file]
+- Status: [up to date / outdated / missing]
+```
+
+**If outdated or missing, append:**
+```
+⚠️ Config outdated. Run `/majestic:init` to update (existing values preserved).
 ```
 
 ### Mode 2: Single Field
@@ -62,12 +77,22 @@ Return ONLY the value, nothing else. Examples:
 - `rails`
 - `worktrees`
 
+## Finding the Schema Version
+
+Use Glob to find the `config-schema-version` file:
+```
+Glob: **/majestic-engineer/config-schema-version
+```
+
+Read the file to get the latest version number (e.g., 1.0).
+
 ## Examples
 
 ### Full Config Example
 
 If `.agents.yml` contains:
 ```yaml
+config_version: 1.0
 tech_stack: rails
 auto_preview: false
 workflow: branches
@@ -79,10 +104,13 @@ auto_preview: true
 workflow: worktrees
 ```
 
+And `config-schema-version` contains `1.0`:
+
 Return:
 ```
 ## Final Config
 
+config_version: 1.0
 tech_stack: rails
 auto_preview: true
 workflow: worktrees
@@ -91,6 +119,42 @@ workflow: worktrees
 - Base (.agents.yml): found
 - Local (.agents.local.yml): found
 - Overrides applied: auto_preview, workflow
+
+## Version Status
+- Config version: 1.0
+- Latest version: 1.0
+- Status: up to date
+```
+
+### Outdated Config Example
+
+If `.agents.yml` contains:
+```yaml
+tech_stack: rails
+workflow: branches
+```
+(no `config_version` field)
+
+And `config-schema-version` contains `1.0`:
+
+Return:
+```
+## Final Config
+
+tech_stack: rails
+workflow: branches
+
+## Sources
+- Base (.agents.yml): found
+- Local (.agents.local.yml): not found
+- Overrides applied: none
+
+## Version Status
+- Config version: not set
+- Latest version: 1.0
+- Status: outdated
+
+⚠️ Config outdated. Run `/majestic:init` to update (existing values preserved).
 ```
 
 ### Single Field Example
