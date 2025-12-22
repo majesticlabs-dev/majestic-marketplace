@@ -8,9 +8,10 @@ model: haiku
 ## Context
 
 - Current git status: !`git status`
-- Current git diff: !`git diff HEAD`
+- Staged changes: !`git diff --cached`
+- Unstaged changes: !`git diff`
 - Current branch: !`git branch --show-current`
-- Recent commits: !`git log --oneline -5`
+- Recent commits: !`git log --oneline -5 2>/dev/null || echo "(no commits yet)"`
 
 ## Your task
 
