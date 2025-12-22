@@ -5,158 +5,61 @@ description: "Browser automation using browser-cdp CLI. Control Chrome, Brave, o
 
 # Web Browser Skill
 
-Control real browsers via CDP (Chrome DevTools Protocol) using [browser-cdp](https://github.com/dpaluy/browser-cdp). Unlike test-mode automation, this connects to your actual browser installation - same fingerprint, real cookies, no automation detection.
-
-## Install
-
-```bash
-npm install -g browser-cdp
-```
-
-Or run directly with `bunx browser-cdp`.
+Control real browsers via CDP (Chrome DevTools Protocol) using [browser-cdp](https://github.com/dpaluy/browser-cdp). Connects to your actual browser - same fingerprint, real cookies, no automation detection.
 
 ## Commands
 
-### Start Browser
-
-```bash
-# Chrome (default) with real profile
-bunx browser-cdp start
-
-# Brave with specific profile
-bunx browser-cdp start brave --profile=Work
-
-# Chrome with isolated profile (no cookies/logins)
-bunx browser-cdp start chrome --isolated
-
-# Custom port
-DEBUG_PORT=9333 bunx browser-cdp start
-```
-
-### Navigate
-
-```bash
-bunx browser-cdp nav https://example.com        # Current tab
-bunx browser-cdp nav https://example.com --new  # New tab
-```
-
-### Evaluate JavaScript
-
-```bash
-bunx browser-cdp eval 'document.title'
-bunx browser-cdp eval 'document.querySelectorAll("a").length'
-bunx browser-cdp eval '(() => { document.querySelector("input").value = "hello"; return "done"; })()'
-```
-
-### Capture DOM
-
-```bash
-bunx browser-cdp dom > page.html
-```
-
-### Screenshot
-
-```bash
-bunx browser-cdp screenshot
-# Returns: /tmp/screenshot-2024-01-01T12-00-00.png
-```
+| Command | Description |
+|---------|-------------|
+| `!bunx browser-cdp start` | Start browser with CDP enabled |
+| `!bunx browser-cdp start brave` | Start Brave (also: `chrome`, `edge`) |
+| `!bunx browser-cdp start chrome --isolated` | Fresh profile (no cookies/logins) |
+| `!bunx browser-cdp start brave --profile=Work` | Use specific profile |
+| `!bunx browser-cdp nav URL` | Navigate current tab |
+| `!bunx browser-cdp nav URL --new` | Navigate in new tab |
+| `!bunx browser-cdp nav URL --console` | Navigate and capture console (5s default) |
+| `!bunx browser-cdp nav URL --console --duration=10` | Navigate and capture for N seconds |
+| `!bunx browser-cdp eval 'JS'` | Run JavaScript, return result |
+| `!bunx browser-cdp eval 'JS' --console` | Eval and capture console (3s default) |
+| `!bunx browser-cdp eval 'JS' --console --duration=5` | Eval and capture for N seconds |
+| `!bunx browser-cdp dom` | Capture full DOM HTML |
+| `!bunx browser-cdp screenshot` | Save screenshot, return path |
+| `!bunx browser-cdp pick "prompt"` | Interactive element picker |
+| `!bunx browser-cdp console --reload` | Reload page and capture console output |
+| `!bunx browser-cdp console --reload --duration=10` | Reload, capture for N seconds |
+| `!bunx browser-cdp insights` | Performance metrics (TTFB, FCP, etc.) |
+| `!bunx browser-cdp insights --json` | JSON format |
+| `!bunx browser-cdp lighthouse` | Full Lighthouse audit |
+| `!bunx browser-cdp close` | Close browser |
 
 ### Pick Elements
 
-```bash
-bunx browser-cdp pick "Select the login button"
-```
-
-Interactive element picker:
-- Click to select single element
-- Cmd/Ctrl+Click to multi-select
-- Enter to confirm, ESC to cancel
-
-### Console Output
-
-```bash
-bunx browser-cdp console                # Stream until Ctrl+C
-bunx browser-cdp console --duration=10  # Stream for 10 seconds
-```
-
-Captures network errors, exceptions, and console.log output.
-
-### Performance Insights
-
-```bash
-bunx browser-cdp insights        # Human readable
-bunx browser-cdp insights --json # JSON output
-```
-
-Returns: TTFB, First Paint, FCP, DOM loaded, resources, memory.
-
-### Lighthouse Audit
-
-```bash
-bunx browser-cdp start chrome --isolated
-bunx browser-cdp nav https://example.com
-bunx browser-cdp lighthouse
-```
-
-Returns: Performance, Accessibility, Best Practices, SEO scores.
-
-### Close Browser
-
-```bash
-bunx browser-cdp close
-```
+Interactive picker: click to select, Cmd/Ctrl+Click multi-select, Enter confirm, ESC cancel.
 
 ## Configuration
 
-Set in `.agents.local.yml`:
+Optional settings in `.agents.yml` or `.agents.local.yml`:
 
 ```yaml
-browser: brave
-debug_port: 9222
+browser:
+  type: brave       # chrome, brave, or edge (default: chrome)
+  debug_port: 9222  # CDP port (default: 9222)
 ```
 
-Before running commands, use `config-reader` agent to get settings and pass as env vars:
-
-```bash
-BROWSER=brave DEBUG_PORT=9222 bunx browser-cdp start
-```
-
-## Environment Variables
-
-| Variable | Description | Default |
-|----------|-------------|---------|
-| `BROWSER` | Browser (chrome, brave, edge) | `chrome` |
-| `BROWSER_PATH` | Custom browser executable | (auto-detect) |
-| `DEBUG_PORT` | CDP debugging port | `9222` |
-
-## Supported Browsers
-
-| Browser | Command |
-|---------|---------|
-| Chrome | `chrome` (default) |
-| Brave | `brave` |
-| Edge | `edge` |
+Use `config-reader` agent to check for `browser.type` and `browser.debug_port`. Pass as `BROWSER` and `DEBUG_PORT` env vars if configured.
 
 ## Smart Start
 
-`start` checks if a browser is already running on the configured port:
-
+`start` checks if browser is already running on configured port:
 - **Already running with CDP** → Exits successfully (no restart)
 - **Running without CDP** → Error with instructions
 - **Not running** → Starts browser with CDP enabled
-
-Pre-start your browser with debugging:
-
-```bash
-# Add to ~/.zshrc
-alias brave-debug='/Applications/Brave\ Browser.app/Contents/MacOS/Brave\ Browser --remote-debugging-port=9222'
-```
 
 ## Why Real Browser?
 
 | Aspect | browser-cdp | Playwright Test Mode |
 |--------|-------------|---------------------|
-| Browser | Your installed Chrome/Brave/etc | Bundled Chromium |
-| Profile | Real cookies/logins by default | Fresh test profile |
-| Detection | Not detectable as automation | Automation flags present |
+| Browser | Your installed Chrome/Brave | Bundled Chromium |
+| Profile | Real cookies/logins | Fresh test profile |
+| Detection | Not detectable | Automation flags present |
 | Use case | Real-world testing, scraping | Isolated E2E tests |
