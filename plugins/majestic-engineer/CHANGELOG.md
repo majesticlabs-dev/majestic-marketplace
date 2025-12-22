@@ -2,6 +2,15 @@
 
 All notable changes to majestic-engineer will be documented in this file.
 
+## [3.12.0] - 2025-12-22
+
+### Added
+
+- **Version verification rule in `hierarchical-agents` skill** - AGENTS.md templates now include Implementation Rules section
+  - Mandates WebSearch to verify latest versions before adding external dependencies
+  - Covers gems, npm packages, GitHub Actions, Docker images, APIs, CDN links
+  - Prevents Claude from trusting stale training data for version numbers
+
 ## [3.11.0] - 2025-12-22
 
 ### Added

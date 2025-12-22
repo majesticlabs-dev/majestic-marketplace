@@ -104,16 +104,20 @@ Create lightweight root file with these sections:
    - Branch strategy
    - PR requirements
 
-4. **Security & Secrets** (3-5 lines)
+4. **Implementation Rules** (2-3 lines)
+   - Version verification for external dependencies (see example below)
+   - Never trust training data for version numbers
+
+5. **Security & Secrets** (3-5 lines)
    - Never commit tokens
    - Where secrets go (.env patterns)
    - PII handling
 
-5. **JIT Index - Directory Map** (10-20 lines)
+6. **JIT Index - Directory Map** (10-20 lines)
    - Links to sub-AGENTS.md files
    - Quick find commands
 
-6. **Definition of Done** (3-5 lines)
+7. **Definition of Done** (3-5 lines)
    - Pre-PR checklist
    - What must pass
 
@@ -130,6 +134,15 @@ Create lightweight root file with these sections:
 - Search function: `rg -n "functionName" apps/** packages/**`
 - Find component: `rg -n "export.*ComponentName" apps/web/src`
 - Find API routes: `rg -n "export const (GET|POST)" apps/api`
+```
+
+**Example Implementation Rules**:
+```markdown
+## Implementation Rules
+
+Before adding ANY external dependency (gems, npm packages, GitHub Actions, Docker images, APIs, CDN links):
+- Use WebSearch to verify the latest stable version BEFORE implementation
+- Never trust training data for version numbers
 ```
 
 ### Phase 3: Generate Sub-Folder AGENTS.md Files
