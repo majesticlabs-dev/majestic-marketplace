@@ -436,78 +436,91 @@ Write the plan to `docs/plans/<issue_title>.md`
 
 ## Post-Generation Options
 
-After writing the plan file:
+After writing the plan file, execute these steps IN ORDER:
 
-### 1. Read Config (REQUIRED)
+### Step 1: Read Config and Execute Auto-Actions
 
-Invoke `config-reader` agent to get merged config. Check for:
-- `auto_preview: true` → Open file automatically
-- `auto_create_task: true` → Create task automatically
-- `task_management` → Backend for task creation
+**MUST invoke `config-reader` agent first.** Store the result as CONFIG.
 
-### 2. Auto-Create Task (if enabled)
+Then execute auto-actions based on CONFIG values:
 
-**If `auto_create_task: true` AND `task_management` is configured:**
+#### Auto-Preview Action
 
-1. Create the task using the appropriate method:
+**IF CONFIG contains `auto_preview: true`:**
+1. Execute immediately: `open docs/plans/<issue_title>.md`
+2. Tell user: "✓ Opened plan in your editor."
+3. Set internal state: PREVIEWED = true
 
-   **GitHub (`task_management: github`):**
-   ```bash
-   gh issue create --title "<plan title>" --body-file "docs/plans/<issue_title>.md"
-   ```
+**ELSE:**
+- Set internal state: PREVIEWED = false
 
-   **Beads (`task_management: beads`):**
-   ```bash
-   bd create "<plan title>" --description "See docs/plans/<issue_title>.md"
-   ```
+#### Auto-Create Task Action
 
-   **Linear (`task_management: linear`):**
-   ```bash
-   linear issue create --title "<plan title>" --description "$(cat docs/plans/<issue_title>.md)"
-   ```
+**IF CONFIG contains `auto_create_task: true` AND CONFIG contains `task_management`:**
 
-2. Report the created task:
-   ```
-   ✓ Task created: <link or reference>
-   ```
+1. Create the task using the configured backend:
 
-3. Skip to presenting options (without "Create task" option)
+   | Backend | Command |
+   |---------|---------|
+   | `github` | `gh issue create --title "<plan title>" --body-file "docs/plans/<issue_title>.md"` |
+   | `beads` | `bd create "<plan title>" --description "See docs/plans/<issue_title>.md"` |
+   | `linear` | `linear issue create --title "<plan title>" --description "$(cat docs/plans/<issue_title>.md)"` |
 
-### 3. Auto-Preview (if enabled)
+2. Tell user: "✓ Task created: <link or reference>"
+3. Set internal state: TASK_CREATED = true, TASK_REF = <reference>
 
-**If `auto_preview: true`:**
-- Execute: `open docs/plans/<issue_title>.md`
-- Tell user: "Opened plan in your editor."
+**ELSE:**
+- Set internal state: TASK_CREATED = false
 
-### 4. Present Options
+### Step 2: Present Options Based on State
 
-Use **AskUserQuestion tool** to present options:
+Use **AskUserQuestion tool** with the option set matching your state:
 
 **Question:** "Plan ready at `docs/plans/<issue_title>.md`. What would you like to do next?"
 
-**Options (if task auto-created):**
-1. **Start building (Recommended)** - Run `/majestic:build-task <task-reference>`
-2. **Get review** - Get feedback from plan-review agent
-3. **Revise** - Change approach or request specific changes
+---
 
-**Options (if task NOT auto-created, previewed):**
-1. **Start building (Recommended)** - Run `/majestic:build-task` (uses plan file)
-2. **Create task** - Add to your task system, then build from task
-3. **Get review** - Get feedback from plan-review agent
-4. **Revise** - Change approach or request specific changes
+**IF TASK_CREATED = true:** (task was auto-created)
 
-**Options (if task NOT auto-created, NOT previewed):**
-1. **Preview in editor** - Open the plan file
-2. **Start building (Recommended)** - Run `/majestic:build-task` (uses plan file)
-3. **Create task** - Add to your task system, then build from task
-4. **Get review** - Get feedback from plan-review agent
+| Option | Description |
+|--------|-------------|
+| Start building (Recommended) | Run `/majestic:build-task <TASK_REF>` |
+| Get review | Get feedback from plan-review agent |
+| Revise | Change approach or request specific changes |
 
-Based on selection:
-- **Preview** → `open docs/plans/<issue_title>.md`, re-present options
-- **Start building** → `/majestic:build-task docs/plans/<issue_title>.md` or `/majestic:build-task <task-ref>` if created
-- **Create task** → Create task (see below), report link, then re-present options with task reference
-- **Get review** → Run plan-review agent on the plan file
-- **Revise** → Ask "What would you like changed?" then regenerate
+---
+
+**IF TASK_CREATED = false AND PREVIEWED = true:** (previewed but no task)
+
+| Option | Description |
+|--------|-------------|
+| Start building (Recommended) | Run `/majestic:build-task` (uses plan file) |
+| Create task | Add to your task system, then build from task |
+| Get review | Get feedback from plan-review agent |
+| Revise | Change approach or request specific changes |
+
+---
+
+**IF TASK_CREATED = false AND PREVIEWED = false:** (neither previewed nor task created)
+
+| Option | Description |
+|--------|-------------|
+| Preview in editor | Open the plan file |
+| Start building (Recommended) | Run `/majestic:build-task` (uses plan file) |
+| Create task | Add to your task system, then build from task |
+| Get review | Get feedback from plan-review agent |
+
+---
+
+### Step 3: Handle User Selection
+
+| Selection | Action |
+|-----------|--------|
+| Preview | Execute `open docs/plans/<issue_title>.md`, then re-present options with PREVIEWED = true |
+| Start building | Run `/majestic:build-task docs/plans/<issue_title>.md` or `/majestic:build-task <TASK_REF>` |
+| Create task | Create task (see Task Creation), report link, re-present options with TASK_CREATED = true |
+| Get review | Run plan-review agent on the plan file |
+| Revise | Ask "What would you like changed?" then regenerate |
 
 ## Task Creation
 

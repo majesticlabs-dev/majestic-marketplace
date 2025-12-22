@@ -2,6 +2,20 @@
 
 All notable changes to majestic-engineer will be documented in this file.
 
+## [3.9.0] - 2025-12-22
+
+### Fixed
+
+- **`/majestic:plan` auto_preview not working** - Rewrote Post-Generation Options section with imperative instructions
+  - Changed suggestive "Check for" language to imperative "MUST invoke"
+  - Added explicit state tracking (PREVIEWED, TASK_CREATED) for option gating
+  - Sequential steps now enforce config-reader invocation before presenting options
+  - Options are now state-gated tables instead of disconnected subsections
+
+### Changed
+
+- **`config-reader` agent model** - Changed from `haiku` to `sonnet` for more reliable config parsing
+
 ## [3.8.0] - 2025-12-21
 
 ### Added
