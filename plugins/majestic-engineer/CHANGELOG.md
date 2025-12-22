@@ -2,6 +2,18 @@
 
 All notable changes to majestic-engineer will be documented in this file.
 
+## [3.11.0] - 2025-12-22
+
+### Added
+
+- **DevOps-aware planning in `/majestic:plan`** - Plan command now detects infrastructure features
+  - Keyword detection for IaC tools, cloud providers, resources, provisioning, edge/serverless, secrets
+  - Checks for existing `.tf` and `cloud-init*.yml` files
+  - Runs `infra-security-review` agent during research phase when IaC files exist
+  - Maps detected providers to relevant `majestic-devops` skills (opentofu-coder, hetzner-coder, etc.)
+  - DevOps detection is ADDITIVE - supplements primary tech stack (Rails + DevOps both detected)
+  - New "Infrastructure Context" section in all plan templates (MINIMAL, MORE, A LOT)
+
 ## [3.10.0] - 2025-12-22
 
 ### Changed

@@ -62,6 +62,53 @@ Check if the feature description contains any of these keywords:
 
 ---
 
+### 0b. DevOps/Infrastructure Feature Detection
+
+<thinking>
+DevOps detection is ADDITIVE - it supplements the primary tech stack, not replaces it.
+A Rails app with Terraform infra should run BOTH Rails + DevOps agents.
+</thinking>
+
+**DevOps Detection Keywords:**
+
+Check if the feature description contains any of these keywords:
+- **IaC Tools**: terraform, opentofu, tofu, infrastructure, iac, hcl, .tf
+- **Cloud Providers**: aws, gcp, azure, digitalocean, hetzner, cloudflare, backblaze
+- **Resources**: server, droplet, instance, vpc, firewall, load-balancer, dns, bucket, volume
+- **Provisioning**: cloud-init, user-data, provision, deploy, vm, container, kubernetes, k8s
+- **Edge/Serverless**: workers, pages, wrangler, d1, r2, kv, edge, lambda, function
+- **Secrets**: 1password, op://, vault, secrets, credentials, ssm
+
+**If feature contains DevOps keywords:**
+
+1. **Check for IaC files:**
+   ```bash
+   # Check for Terraform/OpenTofu
+   ls *.tf infra/*.tf terraform/*.tf 2>/dev/null
+
+   # Check for cloud-init
+   ls cloud-init*.yml user-data*.yml 2>/dev/null
+   ```
+
+2. **Set detection flags:**
+   - `IS_DEVOPS_FEATURE: true`
+   - `HAS_IAC_FILES: true/false`
+   - `DEVOPS_PROVIDERS: [list detected providers]`
+
+3. **Load DevOps skills context:**
+   - If Terraform/OpenTofu detected → reference `majestic-devops:opentofu-coder`
+   - If specific provider detected → reference provider-specific skill (e.g., `majestic-devops:hetzner-coder`)
+   - If cloud-init detected → reference `majestic-devops:cloud-init-coder`
+   - If secrets management → reference `majestic-devops:onepassword-cli-coder`
+
+**Store for later:**
+- `IS_DEVOPS_FEATURE: true/false`
+- `HAS_IAC_FILES: true/false`
+- `DEVOPS_PROVIDERS: [list or empty]`
+- `DEVOPS_SKILLS: [list of relevant skills]`
+
+---
+
 ### 1. Repository Research & Context Gathering
 
 <thinking>
@@ -73,6 +120,7 @@ Run these agents in parallel at the same time:
 - `agent git-researcher "[feature_description]"` - analyze repository patterns and history
 - `agent docs-researcher "[feature_description]"` - fetch library/framework documentation
 - `agent best-practices-researcher "[feature_description]"` - research external best practices
+- **IF IS_DEVOPS_FEATURE AND HAS_IAC_FILES:** `agent infra-security-review` - audit existing IaC for security issues
 
 **Reference Collection:**
 
@@ -156,6 +204,12 @@ Select how comprehensive you want the issue to be, simpler is mostly better.
 - **Components to use:** [list relevant components from design system]
 - **Patterns to follow:** [specific patterns relevant to this feature]
 
+## Infrastructure Context (if IS_DEVOPS_FEATURE)
+
+- **IaC Tool:** [OpenTofu/Terraform version]
+- **Providers:** [DEVOPS_PROVIDERS list]
+- **Skills:** [DEVOPS_SKILLS list]
+
 ## References
 
 - Related issue: #[issue_number]
@@ -216,6 +270,14 @@ Select how comprehensive you want the issue to be, simpler is mostly better.
 - **Color tokens:** [relevant semantic colors from design system]
 - **Typography:** [relevant type scale entries]
 - **Patterns to follow:** [specific component patterns and states]
+
+## Infrastructure Context (if IS_DEVOPS_FEATURE)
+
+- **IaC Tool:** [OpenTofu/Terraform version]
+- **Providers:** [DEVOPS_PROVIDERS list]
+- **Skills to apply:** [DEVOPS_SKILLS list]
+- **State backend:** [local/remote - describe current setup]
+- **Security findings:** [summary from infra-security-review if run]
 
 ## References & Research
 
@@ -351,6 +413,30 @@ For each interactive component, implement these states per design system:
 
 ### Do's and Don'ts
 [Copy relevant entries from design system Do's and Don'ts section]
+
+## Infrastructure Context (if IS_DEVOPS_FEATURE)
+
+### IaC Overview
+- **Tool:** [OpenTofu/Terraform version]
+- **Providers:** [DEVOPS_PROVIDERS with versions]
+- **State Backend:** [configuration details]
+- **Modules:** [existing module structure]
+
+### DevOps Skills to Apply
+| Skill | Purpose | When to Use |
+|-------|---------|-------------|
+| `majestic-devops:opentofu-coder` | HCL patterns, state management | All IaC work |
+| `majestic-devops:[provider]-coder` | Provider-specific patterns | Provider resources |
+| `majestic-devops:cloud-init-coder` | VM provisioning | New instances |
+
+### Security Audit Results
+[Summary from infra-security-review agent]
+
+### Pre-Deploy Checklist
+- [ ] Run `infra-security-review` before applying
+- [ ] Verify state backend encryption
+- [ ] Check for hardcoded secrets
+- [ ] Review firewall/security group rules
 
 ## References & Research
 
