@@ -2,6 +2,17 @@
 
 All notable changes to majestic-rails will be documented in this file.
 
+## [3.9.0] - 2025-12-21
+
+### Added
+
+- **`hotwire-coder` lazy loading reference** - Comprehensive patterns for Turbo Frame lazy loading:
+  - Skeleton UI placeholders (tables, cards, lists)
+  - Reusable SkeletonComponent with ViewComponent
+  - Infinite scroll with nested lazy frames
+  - Stimulus loading controllers (spinner, progress bar)
+  - Best practices for CLS prevention
+
 ## [3.8.0] - 2025-12-20
 
 ### Added
