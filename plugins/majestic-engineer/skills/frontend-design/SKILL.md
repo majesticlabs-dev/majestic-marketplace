@@ -187,6 +187,15 @@ See `resources/motion-patterns.md` for:
 - Background motion (gradient shifts, floating particles)
 - Performance checklist and `prefers-reduced-motion` support
 
+### CSS Polish & Debugging
+
+See `resources/css-polish-tips.md` for:
+- Accessibility debugging selectors (highlight missing alt, labels)
+- Scroll behavior (padding, overscroll, smooth)
+- Focus & selection styling
+- Performance hints (will-change, contain)
+- Defensive CSS patterns
+
 ### Landing Pages
 
 See `resources/landing-page-design.md` for:
