@@ -432,7 +432,9 @@ Error details here...
 
 ## Output Format
 
-Write the plan to `docs/plans/<issue_title>.md`
+Write the plan to `docs/plans/<plan_filename>.md` where:
+- `<plan_filename>` = `[YYYYMMDDHHMMSS]_<issue_title>`
+- Example: `docs/plans/20250115143022_feat-add-user-authentication.md`
 
 ## Post-Generation Options
 
@@ -447,7 +449,7 @@ Then execute auto-actions based on CONFIG values:
 #### Auto-Preview Action
 
 **IF CONFIG contains `auto_preview: true`:**
-1. Execute immediately: `open docs/plans/<issue_title>.md`
+1. Execute immediately: `open docs/plans/<plan_filename>.md`
 2. Tell user: "✓ Opened plan in your editor."
 3. Set internal state: PREVIEWED = true
 
@@ -462,9 +464,9 @@ Then execute auto-actions based on CONFIG values:
 
    | Backend | Command |
    |---------|---------|
-   | `github` | `gh issue create --title "<plan title>" --body-file "docs/plans/<issue_title>.md"` |
-   | `beads` | `bd create "<plan title>" --description "See docs/plans/<issue_title>.md"` |
-   | `linear` | `linear issue create --title "<plan title>" --description "$(cat docs/plans/<issue_title>.md)"` |
+   | `github` | `gh issue create --title "<plan title>" --body-file "docs/plans/<plan_filename>.md"` |
+   | `beads` | `bd create "<plan title>" --description "See docs/plans/<plan_filename>.md"` |
+   | `linear` | `linear issue create --title "<plan title>" --description "$(cat docs/plans/<plan_filename>.md)"` |
 
 2. Tell user: "✓ Task created: <link or reference>"
 3. Set internal state: TASK_CREATED = true, TASK_REF = <reference>
@@ -476,7 +478,7 @@ Then execute auto-actions based on CONFIG values:
 
 Use **AskUserQuestion tool** with the option set matching your state:
 
-**Question:** "Plan ready at `docs/plans/<issue_title>.md`. What would you like to do next?"
+**Question:** "Plan ready at `docs/plans/<plan_filename>.md`. What would you like to do next?"
 
 ---
 
@@ -516,8 +518,8 @@ Use **AskUserQuestion tool** with the option set matching your state:
 
 | Selection | Action |
 |-----------|--------|
-| Preview | Execute `open docs/plans/<issue_title>.md`, then re-present options with PREVIEWED = true |
-| Start building | Run `/majestic:build-task docs/plans/<issue_title>.md` or `/majestic:build-task <TASK_REF>` |
+| Preview | Execute `open docs/plans/<plan_filename>.md`, then re-present options with PREVIEWED = true |
+| Start building | Run `/majestic:build-task docs/plans/<plan_filename>.md` or `/majestic:build-task <TASK_REF>` |
 | Create task | Create task (see Task Creation), report link, re-present options with TASK_CREATED = true |
 | Get review | Run plan-review agent on the plan file |
 | Revise | Ask "What would you like changed?" then regenerate |

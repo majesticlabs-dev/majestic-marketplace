@@ -2,6 +2,14 @@
 
 All notable changes to majestic-engineer will be documented in this file.
 
+## [3.10.0] - 2025-12-22
+
+### Changed
+
+- **`/majestic:plan` timestamped filenames** - Plan files now include timestamp prefix for better organization
+  - New format: `docs/plans/[YYYYMMDDHHMMSS]_<issue_title>.md`
+  - Example: `docs/plans/20250115143022_feat-add-user-authentication.md`
+
 ## [3.9.0] - 2025-12-22
 
 ### Fixed
