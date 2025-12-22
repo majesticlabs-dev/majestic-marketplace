@@ -53,6 +53,8 @@ end
 </turbo-frame>
 ```
 
+See `references/lazy-loading.md` for skeleton UI patterns, infinite scroll, and Stimulus loading controllers.
+
 ### Breaking Out of Frames
 
 ```erb
