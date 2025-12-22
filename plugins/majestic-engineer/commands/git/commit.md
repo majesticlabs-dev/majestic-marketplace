@@ -2,7 +2,7 @@
 name: commit
 allowed-tools: Bash(git add:*), Bash(git status:*), Bash(git commit:*), Bash(git diff:*), Bash(git show:*)
 description: Create a git commit with conventional commit format
-model: haiku
+model: sonnet
 ---
 
 ## Context

@@ -322,7 +322,7 @@ main() {
     choice="$1"
   else
     print_menu
-    read -p "Enter choice [0-7]: " choice
+    read -p "Enter choice [0-8]: " choice
   fi
 
   echo ""

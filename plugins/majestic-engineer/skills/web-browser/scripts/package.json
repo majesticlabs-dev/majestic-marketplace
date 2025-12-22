@@ -1,7 +1,0 @@
-{
-  "type": "module",
-  "dependecies": {
-    "peppeteer-core": "24.27.0"
-  }
-}
-

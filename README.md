@@ -91,7 +91,7 @@ Third-party plugins that complement the Majestic suite:
 |--------|-------------|---------|
 | [beads](https://github.com/steveyegge/beads) | Dependency-aware issue tracker - issues chained like beads with blocking relationships | `curl -fsSL https://raw.githubusercontent.com/steveyegge/beads/main/install.sh \| bash` |
 | [beads_viewer](https://github.com/Dicklesworthstone/beads_viewer) | Terminal UI for Beads with DAG visualization, graph metrics, and AI agent "robot mode" | `curl -fsSL https://raw.githubusercontent.com/Dicklesworthstone/beads_viewer/main/install.sh \| bash` |
-| [dev-browser](https://github.com/SawyerHood/dev-browser) | Browser automation for Claude Code - control your browser for testing and verification with LLM-optimized DOM snapshots | `/plugin marketplace add sawyerhood/dev-browser` |
+| [browser-cdp](https://github.com/dpaluy/browser-cdp) | Browser automation via Chrome DevTools Protocol - control Chrome, Brave, Edge with real profiles | `npm install -g browser-cdp` or `bunx browser-cdp` |
 | [osgrep](https://github.com/Ryandonofrio3/osgrep) | Semantic code search with natural language queries - find code by intent, not just keywords | `npm i -g osgrep && osgrep install-claude-code` |
 
 ## Recommended Settings
@@ -218,7 +218,6 @@ Available modules:
 | Resource | Description |
 |----------|-------------|
 | [Marketplace Tutorial](https://tutorial.majesticmarketplace.com) | Interactive slide deck for getting started |
-| [Dev Browser Guide](docs/wiki/Dev-Browser-Guide.md) | Browser automation setup and usage |
 | [Output Styles](output-styles/README.md) | Pre-built formatting guides for consistent responses |
 | [Instructions](instructions/) | CLAUDE.md instruction modules |
 
