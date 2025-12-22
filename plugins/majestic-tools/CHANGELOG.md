@@ -2,6 +2,15 @@
 
 All notable changes to majestic-tools will be documented in this file.
 
+## [3.2.1] - 2025-12-22
+
+### Fixed
+
+- **reflect command routing** - Moved `commands/insight/reflect.md` → `commands/reflect.md`
+  - Three-part paths (`plugin:subdir:name`) were being misrouted to Task agent system
+  - New invocation: `/majestic-tools:reflect` (was `/majestic-tools:insight:reflect`)
+  - Workaround for Claude Code routing bug with nested command directories
+
 ## [3.2.0] - 2025-12-20
 
 ### Removed
