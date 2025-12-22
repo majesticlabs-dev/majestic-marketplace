@@ -2,6 +2,25 @@
 
 All notable changes to majestic-rails will be documented in this file.
 
+## [3.11.0] - 2025-12-22
+
+### Added
+
+- **`dialog-patterns` zero-JavaScript patterns** - Modern Invoker Commands API for dialogs without JavaScript:
+  - `commandfor`/`command` attributes for declarative dialog control
+  - `closedby="any"` for backdrop click and ESC dismissal
+  - CSS `@starting-style` animations (no JS required)
+  - `Turbo.config.forms.confirm` integration for styled confirmations
+  - Browser support table (Chrome 135+, Firefox 144+, Safari 26.2+)
+  - Decision guide: when to use zero-JS vs Stimulus patterns
+
+### Changed
+
+- **`dialog-patterns` refactored** - Extracted verbose patterns to resources:
+  - `resources/zero-js-patterns.md` - Complete Invoker Commands examples
+  - `resources/toast-slideover-patterns.md` - Full Toast/Slideover implementations
+  - Main skill reduced from 487 to 433 lines while adding new content
+
 ## [3.10.0] - 2025-12-21
 
 ### Added

@@ -25,6 +25,46 @@ Build accessible, modern dialog UIs using the native HTML `<dialog>` element wit
 | Top layer | Automatic (above all content) | z-index battles |
 | Scroll lock | Automatic | Manual `overflow: hidden` |
 
+## Zero-JavaScript Confirmation Dialogs (Recommended)
+
+Modern browsers support the **Invoker Commands API** for declarative dialog control—no JavaScript required. See `resources/zero-js-patterns.md` for complete examples.
+
+### Quick Reference
+
+```erb
+<%= button_tag "Delete", commandfor: "delete-#{post.id}", command: "show-modal" %>
+
+<dialog id="delete-<%= post.id %>" closedby="any" role="alertdialog">
+  <h3>Delete "<%= post.title %>"?</h3>
+  <button commandfor="delete-<%= post.id %>" command="close">Cancel</button>
+  <%= button_to "Delete", post, method: :delete %>
+</dialog>
+```
+
+### Key Attributes
+
+| Attribute | Purpose |
+|-----------|---------|
+| `commandfor="id"` | References the dialog to control |
+| `command="show-modal"` | Opens as modal (backdrop, focus trap) |
+| `command="close"` | Closes the dialog |
+| `closedby="any"` | Enables backdrop click and ESC to close |
+
+### When to Use Zero-JS vs Stimulus
+
+| Scenario | Approach |
+|----------|----------|
+| Simple confirmations | Zero-JS (Invoker Commands) |
+| Modals with async content | Stimulus + Turbo Frames |
+| Complex multi-step dialogs | Stimulus controller |
+| Animations | CSS `@starting-style` |
+
+### Additional Patterns (see resources/)
+
+- **CSS animations** with `@starting-style` for enter/exit transitions
+- **Turbo.config.forms.confirm** to replace ugly browser dialogs
+- **Progressive enhancement** for cross-browser compatibility
+
 ## Core Pattern: Async Modal with Turbo Frames
 
 The recommended pattern for Rails modals combines three technologies:
@@ -289,126 +329,27 @@ end
 
 ## Alert/Toast Pattern
 
-For flash messages and notifications:
-
-### Stimulus Controller
-
-```javascript
-// app/javascript/controllers/toast_controller.js
-import { Controller } from "@hotwired/stimulus"
-
-export default class extends Controller {
-  static values = {
-    duration: { type: Number, default: 5000 },
-    dismissible: { type: Boolean, default: true }
-  }
-
-  connect() {
-    this.element.showModal()
-
-    if (this.durationValue > 0) {
-      this.timeout = setTimeout(() => this.dismiss(), this.durationValue)
-    }
-  }
-
-  disconnect() {
-    clearTimeout(this.timeout)
-  }
-
-  dismiss() {
-    this.element.close()
-    this.element.remove()
-  }
-}
-```
-
-### Toast Component
+For flash messages and notifications. Use `show()` instead of `showModal()` for non-modal presentation. See `resources/toast-slideover-patterns.md` for complete implementation.
 
 ```erb
-<%# app/views/shared/_toast.html.erb %>
-<dialog class="toast toast-<%= type %>"
-        data-controller="toast"
-        data-toast-duration-value="<%= duration || 5000 %>"
-        data-toast-dismissible-value="true"
-        data-action="click->toast#dismiss">
+<dialog class="toast" data-controller="toast" data-toast-duration-value="5000">
   <p><%= message %></p>
 </dialog>
 ```
 
-### Styling (Non-Modal Toast)
-
-```css
-/* Position as fixed notification, not centered modal */
-dialog.toast {
-  position: fixed;
-  bottom: 1rem;
-  right: 1rem;
-  margin: 0;
-  padding: 1rem;
-  border-radius: 0.5rem;
-}
-
-dialog.toast::backdrop {
-  display: none;  /* No backdrop for toasts */
-}
-
-dialog.toast-success { background: #10b981; color: white; }
-dialog.toast-error { background: #ef4444; color: white; }
-dialog.toast-warning { background: #f59e0b; color: white; }
-dialog.toast-info { background: #3b82f6; color: white; }
-```
-
-### Using `show()` vs `showModal()`
-
-- `showModal()` - Centers dialog, adds backdrop, traps focus (use for modals)
-- `show()` - Opens without backdrop or focus trap (use for toasts/alerts)
-
-```javascript
-// For toasts, use show() not showModal()
-connect() {
-  this.element.show()  // Non-modal, no backdrop
-}
-```
+Key difference: `show()` opens without backdrop or focus trap (toasts), `showModal()` centers with backdrop (modals).
 
 ## Slideover Panel Pattern
 
-For side panels (settings, filters, details):
+For side panels (settings, filters, details). See `resources/toast-slideover-patterns.md` for styling and animations.
 
 ```erb
-<dialog class="slideover"
-        data-controller="dialog"
-        data-action="click->dialog#clickOutside">
+<dialog class="slideover" data-controller="dialog" data-action="click->dialog#clickOutside">
   <aside>
-    <header>
-      <h2>Filters</h2>
-      <button data-action="dialog#close">&times;</button>
-    </header>
-    <div class="slideover-content">
-      <%= render "filters" %>
-    </div>
+    <header><h2>Filters</h2></header>
+    <%= render "filters" %>
   </aside>
 </dialog>
-```
-
-```css
-dialog.slideover {
-  margin: 0;
-  margin-left: auto;
-  height: 100vh;
-  max-height: 100vh;
-  width: 24rem;
-  max-width: 90vw;
-  border-radius: 0;
-}
-
-dialog.slideover[open] {
-  animation: slide-in 0.2s ease-out;
-}
-
-@keyframes slide-in {
-  from { transform: translateX(100%); }
-  to { transform: translateX(0); }
-}
 ```
 
 ## Accessibility Checklist
@@ -483,4 +424,10 @@ expect(page).not_to have_selector("dialog[open]")  # Modal closed
 
 ## Browser Support
 
-Native `<dialog>` is supported in all modern browsers (Chrome 37+, Firefox 98+, Safari 15.4+, Edge 79+). For older browsers, include the [dialog polyfill](https://github.com/GoogleChrome/dialog-polyfill).
+| Pattern | Chrome | Firefox | Safari |
+|---------|--------|---------|--------|
+| Native `<dialog>` | 37+ | 98+ | 15.4+ |
+| Invoker Commands | 135+ | 144+ | 26.2+ |
+| `@starting-style` | 117+ | 129+ | 17.5+ |
+
+For older browsers: [dialog polyfill](https://github.com/GoogleChrome/dialog-polyfill), [invokers polyfill](https://github.com/nickshanks/invokers). See `resources/zero-js-patterns.md` for progressive enhancement strategies.
