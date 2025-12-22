@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.2.0] - 2025-12-21
+
+### Added
+
+- `ceo:omtm-growth` skill for YC growth framework
+  - One Metric That Matters (OMTM) identification by stage and business type
+  - 7% weekly growth math and tracking templates
+  - Public accountability mechanisms with update templates
+  - Red flags and pushback responses for growth conversations
+  - Integration guidance with `growth-audit`, `first-principles`, `founder-mode`
+
 ## [3.1.0] - 2025-12-20
 
 ### Added
