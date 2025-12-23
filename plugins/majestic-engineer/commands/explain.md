@@ -1,5 +1,5 @@
 ---
-description: Explain a programming concept using examples from the current codebase
+description: Explain a concept using real examples from YOUR project, not abstract theory
 allowed-tools: Read, Grep, Glob, Bash
 ---
 
