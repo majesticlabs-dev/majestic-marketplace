@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.0] - 2025-12-22
+
+### Added
+
+- **`hetzner-coder` Object Storage resource** - Hetzner S3-compatible storage with AWS provider:
+  - Required skip flags for S3 compatibility (`skip_credentials_validation`, etc.)
+  - Known limitation: Lifecycle configuration NOT supported
+  - Complete provider + bucket examples with 1Password integration
+- **`opentofu-coder` project scaffolding resource** - Production-ready patterns:
+  - Complete `infra/.gitignore` for OpenTofu/Terraform
+  - `output "next_steps"` pattern for actionable post-provisioning guidance
+  - Security-first variables (`admin_ip` with NO default)
+- **`opentofu-coder` post-provisioning resource** - `bin/setup-server` script patterns:
+  - SSH connection test before remote execution
+  - Quoted heredoc for remote scripts
+  - Idempotent commands with existence checks
+  - Colored output for visibility
+
+### Enhanced
+
+- **`hetzner-coder` skill** - Added ICMP firewall rule for ping debugging, security-first `admin_ip` pattern
+- **`cloud-init-coder` skill** - Added `ssh_pwauth: false` declarative pattern, server tuning (`vm.swappiness=10`), timezone configuration
+
 ## [1.1.1] - 2025-12-22
 
 ### Enhanced

@@ -237,13 +237,13 @@ resource "hcloud_server" "db" {
 resource "hcloud_firewall" "web" {
   name = "${var.project}-web-firewall"
 
-  # SSH from specific IPs only
+  # SSH from specific IPs only (NEVER use 0.0.0.0/0!)
   rule {
     description = "SSH"
     direction   = "in"
     protocol    = "tcp"
     port        = "22"
-    source_ips  = var.ssh_allowed_ips
+    source_ips  = [var.admin_ip]  # Use variable, no default
   }
 
   # HTTP/HTTPS from anywhere
@@ -263,11 +263,32 @@ resource "hcloud_firewall" "web" {
     source_ips  = ["0.0.0.0/0", "::/0"]
   }
 
+  # ICMP for debugging (ping)
+  rule {
+    description = "ICMP"
+    direction   = "in"
+    protocol    = "icmp"
+    source_ips  = ["0.0.0.0/0", "::/0"]
+  }
+
   # Apply to servers with label
   apply_to {
     label_selector = "role=web"
   }
 }
+
+# IMPORTANT: admin_ip variable has NO default for security
+variable "admin_ip" {
+  description = "Admin IP for SSH access (CIDR) - REQUIRED, no default"
+  type        = string
+  # NO DEFAULT - forces explicit value
+}
+```
+
+**Security pattern:** Never default SSH access to `0.0.0.0/0`. Force explicit IP:
+
+```bash
+tofu apply -var="admin_ip=$(curl -s ifconfig.me)/32"
 ```
 
 ### Database Firewall (Private Only)
@@ -446,4 +467,5 @@ resource "hcloud_ssh_key" "deploy" {
 ## Additional Resources
 
 - [resources/best-practices.md](resources/best-practices.md) - Labels, cost optimization, placement groups, snapshots
+- [resources/object-storage.md](resources/object-storage.md) - S3-compatible Object Storage with AWS provider configuration
 - [resources/production-stack.md](resources/production-stack.md) - Complete production setup with app servers, database, load balancer, firewalls, volumes, and networking

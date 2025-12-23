@@ -92,16 +92,32 @@ packages:
 
 ## SSH Hardening
 
-### Secure SSH Configuration
+### Declarative SSH Lockdown
+
+Prefer declarative `ssh_pwauth: false` over runcmd sed commands:
 
 ```yaml
 #cloud-config
+ssh_pwauth: false  # Disable password auth at cloud-init level
+
 runcmd:
-  # Disable root login
+  # Additional hardening via sshd_config
+  - sed -i 's/^#\?PermitRootLogin.*/PermitRootLogin prohibit-password/' /etc/ssh/sshd_config
+  - systemctl restart sshd
+```
+
+### Full SSH Hardening
+
+```yaml
+#cloud-config
+ssh_pwauth: false  # Declarative - cleaner than sed
+
+runcmd:
+  # Disable root login (or use prohibit-password for key-only root)
   - sed -i 's/^#\?PermitRootLogin.*/PermitRootLogin no/' /etc/ssh/sshd_config
   - sed -i 's/^PermitRootLogin yes/PermitRootLogin no/' /etc/ssh/sshd_config
 
-  # Disable password authentication
+  # Disable password authentication (backup for ssh_pwauth)
   - sed -i 's/^#\?PasswordAuthentication.*/PasswordAuthentication no/' /etc/ssh/sshd_config
 
   # Increase keepalive for stable connections
@@ -379,6 +395,37 @@ runcmd:
 
 final_message: "Cloud-init completed after $UPTIME seconds"
 ```
+
+## Server Tuning
+
+### Performance and Cleanup
+
+```yaml
+#cloud-config
+runcmd:
+  # Reduce swap usage (better for databases/apps with their own memory management)
+  - |
+    if ! grep -q "vm.swappiness=10" /etc/sysctl.conf; then
+      echo "vm.swappiness=10" >> /etc/sysctl.conf
+      sysctl -p
+    fi
+
+  # Set timezone
+  - timedatectl set-timezone UTC  # Or: Europe/Berlin, America/New_York
+
+  # Cleanup
+  - apt-get autoremove -y
+  - apt-get clean
+```
+
+### Swappiness Values
+
+| Value | Behavior |
+|-------|----------|
+| `0` | Only swap to avoid OOM |
+| `10` | Minimal swapping (recommended for apps) |
+| `60` | Default Ubuntu |
+| `100` | Aggressive swapping |
 
 ## Debugging
 

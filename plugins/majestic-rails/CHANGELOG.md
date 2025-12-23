@@ -2,6 +2,17 @@
 
 All notable changes to majestic-rails will be documented in this file.
 
+## [3.12.0] - 2025-12-22
+
+### Added
+
+- **`litestream-coder` skill** - Continuous SQLite backup for Rails 8+ production apps:
+  - Retention strategies by database type (main: 7d, cache: 1d, queue: 3d, cable: 1d)
+  - Kamal 2 accessory configuration with read-only volume mount
+  - Disaster recovery and point-in-time restore procedures
+  - S3-compatible storage configuration (Hetzner, Backblaze, DigitalOcean)
+  - Best practices for monitoring and testing restores
+
 ## [3.11.0] - 2025-12-22
 
 ### Added

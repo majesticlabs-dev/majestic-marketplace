@@ -491,6 +491,8 @@ resource "aws_security_group" "main" {
 
 For detailed patterns and examples:
 - `resources/hcl-patterns.md` - Advanced HCL patterns
+- `resources/project-scaffolding.md` - Directory structure, .gitignore, next_steps output, security-first variables
+- `resources/post-provisioning.md` - bin/setup-server scripts for post-infra, pre-deployment setup
 - `resources/state-management.md` - State operations and encryption
 - `resources/provider-examples.md` - Multi-cloud provider configs
 - `resources/makefile-automation.md` - Makefile workflows for plan/apply/destroy
