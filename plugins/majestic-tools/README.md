@@ -80,7 +80,6 @@ Invoke with: `skill majestic-tools:<name>`
 |-------|-------------|
 | `brainstorming` | Refine rough ideas into fully-formed designs through collaborative questioning |
 | `new-skill` | Create and manage Claude Code skills following Anthropic best practices |
-| `set-title` | Set terminal window title to identify what the current session is working on |
 | `skill-first` | Check for relevant skills before starting any task |
 
 ## Hooks

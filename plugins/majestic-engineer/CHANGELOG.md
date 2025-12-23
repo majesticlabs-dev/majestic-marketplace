@@ -2,6 +2,15 @@
 
 All notable changes to majestic-engineer will be documented in this file.
 
+## [3.13.1] - 2025-12-22
+
+### Fixed
+
+- **`/majestic:build-task` terminal title reliability** - Reverted to inline `printf` ANSI escape
+  - Removed `majestic-tools:set-title` skill invocation (skill was deleted as redundant)
+  - Direct bash command is simpler and more reliable than skill indirection
+  - `Skill` remains in allowed-tools for Step 8 coding_styles
+
 ## [3.13.0] - 2025-12-22
 
 ### Fixed

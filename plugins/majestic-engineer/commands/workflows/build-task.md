@@ -42,7 +42,7 @@ ls -t docs/plans/*.md 2>/dev/null | head -1
 |------|-------|-----------|
 | 1. Fetch | `task-fetcher` | Skip if `plan` |
 | 2. Claim | `task-status-updater` (claim) | Skip if `plan` |
-| 3. Terminal | `majestic-tools:set-title` | — |
+| 3. Terminal | `printf` (ANSI escape) | — |
 | 4. Workspace | `workspace-setup` | — |
 | 5. Toolbox | `toolbox-resolver` | — |
 | 6. Research | Auto hooks from toolbox | If triggers match |
@@ -71,8 +71,8 @@ agent task-status-updater "Action: claim | Task: <ID>"
 ```
 
 ### Step 3: Set Terminal Title
-```
-Skill(skill: "majestic-tools:set-title", args: "🔨 <ID>: <title>")
+```bash
+printf '\033]0;🔨 <ID>: <title>\007'
 ```
 
 ### Step 4: Setup Workspace

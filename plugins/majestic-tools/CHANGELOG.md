@@ -2,6 +2,14 @@
 
 All notable changes to majestic-tools will be documented in this file.
 
+## [3.2.2] - 2025-12-22
+
+### Removed
+
+- **`set-title` skill deleted** - Was just a wrapper around a single bash command
+  - Skills should provide knowledge/context, not wrap trivial actions
+  - `build-task` now uses inline `printf` ANSI escape sequence directly
+
 ## [3.2.1] - 2025-12-22
 
 ### Fixed
