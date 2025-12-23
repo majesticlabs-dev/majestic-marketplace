@@ -42,6 +42,7 @@ When invoked, you must follow these steps in sequence:
 
 3. **Create Pull Request**
    - Execute the `/create-pr` slash command using SlashCommand tool
+   - **If task reference provided** (e.g., `closes #123`): Pass it to `/create-pr` so it's included in PR body
    - Capture the PR URL from the command output
    - Verify the PR was created successfully
    - Return the complete PR URL to the user

@@ -2,7 +2,7 @@
 name: majestic:build-task
 description: Autonomous task implementation - research, plan, build, review, fix, ship
 argument-hint: "<task-reference or plan-file>"
-allowed-tools: Bash, Read, Grep, Glob, WebFetch, TodoWrite, Task
+allowed-tools: Bash, Read, Grep, Glob, WebFetch, TodoWrite, Task, Skill
 ---
 
 # Build Task
@@ -42,7 +42,7 @@ ls -t docs/plans/*.md 2>/dev/null | head -1
 |------|-------|-----------|
 | 1. Fetch | `task-fetcher` | Skip if `plan` |
 | 2. Claim | `task-status-updater` (claim) | Skip if `plan` |
-| 3. Terminal | `printf '\033]0;🔨 <ID>: <title>\007'` | — |
+| 3. Terminal | `majestic-tools:set-title` | — |
 | 4. Workspace | `workspace-setup` | — |
 | 5. Toolbox | `toolbox-resolver` | — |
 | 6. Research | Auto hooks from toolbox | If triggers match |
@@ -71,9 +71,8 @@ agent task-status-updater "Action: claim | Task: <ID>"
 ```
 
 ### Step 3: Set Terminal Title
-Run this bash command to set the terminal window title:
 ```
-printf '\033]0;🔨 <ID>: <title>\007'
+Skill(skill: "majestic-tools:set-title", args: "🔨 <ID>: <title>")
 ```
 
 ### Step 4: Setup Workspace
@@ -161,6 +160,12 @@ agent <hook.agent> "Pre-ship check on branch: <branch>"
 Required hooks block on failure. Optional hooks log warnings.
 
 ### Step 14: Ship
+For task source (with task ID):
+```
+/majestic-engineer:workflows:ship-it closes #<ID>
+```
+
+For plan source (no task):
 ```
 /majestic-engineer:workflows:ship-it
 ```

@@ -2,6 +2,20 @@
 
 All notable changes to majestic-engineer will be documented in this file.
 
+## [3.13.0] - 2025-12-22
+
+### Fixed
+
+- **`/majestic:build-task` terminal title not working** - Step 3 now uses `majestic-tools:set-title` skill
+  - Added `Skill` to allowed-tools (also fixes Step 8 coding_styles invocations)
+  - Replaced raw `printf` escape sequence with proper skill invocation
+
+- **Missing task reference in PR creation** - PRs now include `Closes #<ID>` for auto-closing
+  - `build-task` Step 14 passes task ID to ship-it
+  - `ship-it` accepts and forwards `closes #123` argument
+  - `ship` agent passes task reference to `/create-pr`
+  - `create-pr` includes `Closes #XXX` in PR body when provided
+
 ## [3.12.0] - 2025-12-22
 
 ### Added

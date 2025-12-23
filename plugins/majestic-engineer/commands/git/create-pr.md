@@ -38,13 +38,19 @@ Create a pull request for the current feature branch. Follow these steps:
    - [ ] Unit tests pass (`rails test`)
    - [ ] Manual testing completed
    - [ ] [Add specific test scenarios for this PR]
+
+   Closes #XXX
    EOF
    )"
    ```
 
+   **Task linking:** If `closes #123` or similar is provided in arguments, include `Closes #123` at the end of the PR body. This auto-closes the issue when merged. Omit if no task reference provided.
+
 ## Arguments
 - Use `$ARGUMENTS` for additional context or PR title/description
-- Example: `/pr Fix R2 storage issue` will customize the PR title
+- Examples:
+  - `/create-pr Fix R2 storage issue` - customizes PR title
+  - `/create-pr closes #42` - adds "Closes #42" to PR body
 
 ## Expected Output
 - Confirmation that branch was pushed (if needed)
