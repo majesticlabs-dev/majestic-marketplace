@@ -32,8 +32,8 @@
     },
     {
       "name": "majestic-rails",
-      "description": "Ruby on Rails development tools. Includes 11 specialized agents, 3 commands, and 24 skills.",
-      "version": "3.7.0",
+      "description": "Ruby on Rails development tools. Includes 11 specialized agents, 3 commands, and 26 skills.",
+      "version": "3.9.0",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -70,7 +70,10 @@
         "event-sourcing",
         "anyway-config",
         "dialog",
-        "modal"
+        "modal",
+        "kamal",
+        "docker",
+        "deployment"
       ],
       "source": "./plugins/majestic-rails"
     },
@@ -286,8 +289,8 @@
     },
     {
       "name": "majestic-devops",
-      "description": "Infrastructure as Code and DevOps tools. Includes 1 agent and 5 skills for OpenTofu, DigitalOcean, Hetzner Cloud, 1Password CLI, and cloud-init.",
-      "version": "1.1.0",
+      "description": "Infrastructure as Code and DevOps tools. Includes 1 agent and 10 skills for OpenTofu, Ansible, Hetzner, DigitalOcean, Cloudflare, 1Password CLI, and cloud-init.",
+      "version": "1.2.0",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -310,7 +313,10 @@
         "1password",
         "secrets",
         "security",
-        "cloud"
+        "cloud",
+        "ansible",
+        "playbook",
+        "server-hardening"
       ],
       "source": "./plugins/majestic-devops"
     }

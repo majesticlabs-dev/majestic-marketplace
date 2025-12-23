@@ -1,0 +1,35 @@
+{
+  "name": "majestic-devops",
+  "version": "1.2.0",
+  "description": "Infrastructure as Code and DevOps tools. Includes 1 agent and 10 skills for OpenTofu, Ansible, Hetzner, DigitalOcean, Cloudflare, 1Password CLI, and cloud-init.",
+  "author": {
+    "name": "David Paluy",
+    "url": "https://github.com/dpaluy",
+    "email": "marketplace@it.majesticlabs.dev"
+  },
+  "keywords": [
+    "devops",
+    "infrastructure",
+    "iac",
+    "opentofu",
+    "terraform",
+    "hcl",
+    "ansible",
+    "playbook",
+    "server-hardening",
+    "aws",
+    "azure",
+    "gcp",
+    "digitalocean",
+    "hetzner",
+    "cloudflare",
+    "backblaze",
+    "cloud-init",
+    "1password",
+    "secrets",
+    "security",
+    "cloud",
+    "wrangler",
+    "workers"
+  ]
+}
