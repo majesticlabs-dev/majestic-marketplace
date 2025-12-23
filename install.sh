@@ -30,8 +30,7 @@ print_menu() {
   echo "  3) Add MCP servers (Sequential Thinking)"
   echo "  4) Configure shell settings (env vars + alias)"
   echo "  5) Install Beads (AI agent memory)"
-  echo "  6) Install osgrep (semantic code search)"
-  echo "  7) Install all"
+  echo "  6) Install all"
   echo "  0) Exit"
   echo ""
 }
@@ -66,43 +65,6 @@ install_marketplace() {
   echo "  - majestic-sales: Sales acceleration tools"
   echo "  - majestic-company: Business operations tools"
   echo "  - majestic-tools: Claude Code customization tools"
-}
-
-install_osgrep() {
-  echo -e "${CYAN}Installing osgrep (semantic code search)...${NC}"
-
-  # Check for npm
-  if ! command -v npm &> /dev/null; then
-    echo -e "${RED}✗ Error: npm is required to install osgrep${NC}"
-    echo "Install Node.js: https://nodejs.org"
-    return 1
-  fi
-
-  echo -e "${GREEN}✓ npm detected${NC}"
-
-  # Install globally
-  echo "  Installing osgrep globally..."
-  npm install -g osgrep
-
-  echo "  Running setup (downloads ~150MB embedding models)..."
-  osgrep setup
-
-  echo -e "${GREEN}✓ osgrep installed${NC}"
-  echo ""
-  echo -e "${BOLD}To add osgrep to Claude Code:${NC}"
-  echo ""
-  echo "  Run:"
-  echo -e "     ${CYAN}osgrep install-claude-code${NC}"
-  echo ""
-  echo "  This adds the osgrep marketplace and installs the plugin."
-  echo ""
-  echo "  Then index your repository:"
-  echo -e "     ${CYAN}cd your-project && osgrep index${NC}"
-  echo ""
-  echo "osgrep provides:"
-  echo "  - Semantic code search (find by intent, not just strings)"
-  echo "  - ~20% token savings"
-  echo "  - ~30% speedup"
 }
 
 install_beads() {
@@ -344,9 +306,6 @@ main() {
       install_beads
       ;;
     6)
-      install_osgrep
-      ;;
-    7)
       install_marketplace
       echo ""
       install_output_styles
@@ -356,8 +315,6 @@ main() {
       install_shell_settings
       echo ""
       install_beads
-      echo ""
-      install_osgrep
       ;;
     0)
       echo "Goodbye!"

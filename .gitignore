@@ -2,7 +2,6 @@
 .claude/settings.local.json
 .claude/handoffs
 .beads/
-.osgrep/
 docs/graveyard/
 docs/plans/
 .claude/current_task.txt
