@@ -38,7 +38,7 @@ dbs:
 **Primary database (production.sqlite3):**
 - `sync-interval: 5s` - Frequent syncing for data durability
 - `snapshot-interval: 1h` - Hourly snapshots
-- `retention: 168h` - 7 days for recovery
+- `retention: 720h` - 30 days for recovery
 
 **Cache database (production_cache.sqlite3):**
 - `sync-interval: 10s` - Less critical, reduce load
@@ -71,7 +71,7 @@ dbs:
         force-path-style: true
         sync-interval: 5s
         snapshot-interval: 1h
-        retention: 168h
+        retention: 720h
         retention-check-interval: 1h
         validation-interval: 12h
 
