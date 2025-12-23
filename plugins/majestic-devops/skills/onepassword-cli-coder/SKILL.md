@@ -25,6 +25,42 @@ op://Production/Database/password
 op://Shared/Stripe/secret_key
 ```
 
+### Item Naming Conventions
+
+Use `{environment}-{service}` format for item names:
+
+| Pattern | Example | Notes |
+|---------|---------|-------|
+| `{env}-{service}` | `production-rails` | Primary app secrets |
+| `{env}-{provider}` | `production-dockerhub` | External service credentials |
+| `{env}-{provider}-{resource}` | `production-hetzner-s3` | Provider with multiple resources |
+
+**DO:**
+- Use kebab-case (no spaces, no underscores)
+- Prefix with environment (`production-`, `staging-`, `development-`)
+- Keep names descriptive but concise
+
+**DON'T:**
+- Use spaces in item names (`Production Rails` → `production-rails`)
+- Use generic names (`API Key` → `production-stripe`)
+- Mix environments in one item (create separate items per environment)
+
+### Field Naming
+
+Use semantic field names that describe the credential type:
+
+| Good | Bad | Why |
+|------|-----|-----|
+| `access_token` | `value` | Self-documenting |
+| `master_key` | `secret` | Specific purpose clear |
+| `secret_access_key` | `key` | Matches AWS naming |
+| `api_token` | `token` | Distinguishes from other tokens |
+
+Field naming rules:
+- Match the provider's terminology when possible (AWS uses `access_key_id`, `secret_access_key`)
+- Use snake_case for consistency
+- Be specific: `database_password` not just `password` when item has multiple credentials
+
 ### Environment File (.op.env)
 
 Create `.op.env` in project root:
@@ -217,9 +253,76 @@ EOF
 op run --env-file=.op.env -- env | grep -E '^(AWS|DATABASE|REDIS)'
 ```
 
+### Placeholder Workflow
+
+Create items with placeholder values upfront, populate with real credentials later:
+
+```bash
+# 1. Create item with placeholder values
+op item create \
+  --vault myproject \
+  --category login \
+  --title "production-rails" \
+  --field master_key="PLACEHOLDER_UPDATE_BEFORE_DEPLOY"
+
+# 2. Create .kamal/secrets referencing the item
+cat > .kamal/secrets << 'EOF'
+RAILS_MASTER_KEY=$(op read "op://myproject/production-rails/master_key")
+EOF
+
+# 3. Update deployment docs to match
+# docs/DEPLOYMENT.md should reference same paths
+
+# 4. Later: Update with real value
+op item edit "production-rails" \
+  --vault myproject \
+  master_key="actual_secret_value_here"
+```
+
+**Benefits:**
+- Infrastructure code can be written before credentials exist
+- All secret paths documented in code/docs from the start
+- Reduces "forgot to update the docs" friction during deployment
+- Team members can see what secrets are needed without having access to values
+
+**Documentation Sync:**
+Keep `.kamal/secrets` (or equivalent) and deployment docs in sync:
+
+```markdown
+<!-- docs/DEPLOYMENT.md -->
+## Required Secrets
+
+| Secret | 1Password Path | Purpose |
+|--------|----------------|---------|
+| `RAILS_MASTER_KEY` | `op://myproject/production-rails/master_key` | Decrypt credentials |
+| `DOCKERHUB_TOKEN` | `op://myproject/production-dockerhub/access_token` | Pull images |
+```
+
 ### Vault Organization
 
-Recommended vault structure:
+**Single-Vault Approach (Simpler)**
+
+Use one vault with naming conventions for environment separation:
+
+```
+Vault: myproject
+Items:
+  - production-rails
+  - production-dockerhub
+  - production-hetzner-s3
+  - staging-rails
+  - staging-dockerhub
+  - development-rails
+```
+
+Benefits:
+- Simpler permission management (one vault to configure)
+- Item names are self-documenting with environment prefix
+- Easier to see all project secrets at a glance
+
+**Multi-Vault Approach (Team Scale)**
+
+Separate vaults when you need different access controls:
 
 | Vault | Purpose | Access |
 |-------|---------|--------|
@@ -228,6 +331,10 @@ Recommended vault structure:
 | `Staging` | Staging environment | Dev team |
 | `Development` | Local dev secrets | Individual devs |
 | `Shared` | Cross-team API keys | All teams |
+
+**When to Use Which:**
+- **Single vault**: Solo developer, small team, single project
+- **Multi-vault**: Multiple teams, strict access control requirements, compliance needs
 
 ## Security Best Practices
 
@@ -293,125 +400,22 @@ op vault get Infrastructure
 
 ## Multiple Accounts
 
-Many users have separate personal and work 1Password accounts. The CLI supports switching between them.
-
-### List Configured Accounts
+For managing multiple 1Password accounts (personal + work), use `--account` flag or `OP_ACCOUNT` env var:
 
 ```bash
-op account list
-```
+# Specify account per command
+op vault list --account acme.1password.com
 
-Output:
-```
-USER ID                          URL
------------------------------    --------------------------
-A3BCDEFGHIJKLMNOPQRSTUVWX       my.1password.com
-B4CDEFGHIJKLMNOPQRSTUVWXY       acme.1password.com
-```
-
-### Specify Account per Command
-
-Use `--account` with either the sign-in address or account ID:
-
-```bash
-# Using sign-in address
-op vault list --account my.1password.com
-op item get "AWS" --account acme.1password.com
-
-# Using account ID
-op vault list --account A3BCDEFGHIJKLMNOPQRSTUVWX
-```
-
-### Set Default Account (Environment Variable)
-
-Set `OP_ACCOUNT` to choose default for all commands in that shell:
-
-```bash
+# Set default for shell session
 export OP_ACCOUNT=acme.1password.com
-op vault list            # Uses acme.1password.com
-op item get "API Key"    # Uses acme.1password.com
+
+# With op run
+op run --account acme.1password.com --env-file=.op.env -- ./deploy.sh
 ```
 
-`--account` flag **overrides** `OP_ACCOUNT` for a single command.
+**Key rule:** Always specify account in automation scripts - never rely on "last signed in".
 
-### Multiple Accounts with op run
-
-```bash
-# Specify account explicitly
-op run --account acme.1password.com --env-file=.op.env.work -- ./deploy.sh
-
-# Or set environment variable first
-export OP_ACCOUNT=my.1password.com
-op run --env-file=.op.env.personal -- ./start-local-dev.sh
-```
-
-### Cross-Account Workflows
-
-When scripts need secrets from different accounts:
-
-```bash
-# Script using work account
-export OP_ACCOUNT=acme.1password.com
-WORK_DB=$(op read "op://Production/Database/url")
-
-# Switch to personal for specific command
-PERSONAL_KEY=$(op read "op://Personal/GitHub/token" --account my.1password.com)
-```
-
-### Makefile with Account Selection
-
-```makefile
-# Default to work account
-OP_ACCOUNT ?= acme.1password.com
-OP ?= op
-OP_ENV_FILE ?= .op.env
-
-CMD = OP_ACCOUNT=$(OP_ACCOUNT) $(OP) run --env-file=$(OP_ENV_FILE) --
-
-deploy:
-	$(CMD) kamal deploy
-
-# Personal account for local dev
-dev:
-	OP_ACCOUNT=my.1password.com $(OP) run --env-file=.op.env.personal -- rails server
-
-# Usage:
-# make deploy                           # Uses work account
-# make deploy OP_ACCOUNT=my.1password.com  # Override account
-# make dev                              # Uses personal account
-```
-
-### Best Practices for Multiple Accounts
-
-**DO:**
-- Always use `--account` or `OP_ACCOUNT` in scripts (don't rely on "last signed in")
-- Use work accounts for CI/CD, personal for local dev
-- Create separate `.op.env` files per account context
-
-**DON'T:**
-- Rely on "last signed in" account in automation (brittle)
-- Mix account contexts in single env file
-
-### Account-Specific Env Files
-
-```bash
-# .op.env.work (uses work account vaults)
-AWS_ACCESS_KEY_ID=op://Work-Infrastructure/AWS/access_key_id
-DATABASE_URL=op://Work-Production/Database/url
-
-# .op.env.personal (uses personal account vaults)
-GITHUB_TOKEN=op://Personal/GitHub/token
-OPENAI_API_KEY=op://Personal/OpenAI/api_key
-```
-
-```makefile
-# Makefile with account + env file pairing
-work-deploy:
-	op run --account acme.1password.com --env-file=.op.env.work -- ./deploy.sh
-
-personal-dev:
-	op run --account my.1password.com --env-file=.op.env.personal -- ./dev.sh
-```
+See `resources/multiple-accounts.md` for detailed patterns including cross-account workflows and Makefile integration.
 
 ## Multi-Environment Pattern
 

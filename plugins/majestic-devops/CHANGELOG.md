@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.1] - 2025-12-22
+
+### Enhanced
+
+- `onepassword-cli-coder` skill with new patterns:
+  - Item naming conventions (`{environment}-{service}` format)
+  - Semantic field naming guidance (`access_token` not `value`)
+  - Single-vault vs multi-vault approach comparison
+  - Placeholder workflow for creating items before credentials exist
+  - Extracted verbose multi-account patterns to `resources/multiple-accounts.md`
+
 ## [1.1.0] - 2025-12-21
 
 ### Added
