@@ -409,6 +409,10 @@ workflow: worktrees
 branch_naming: type/issue-desc
 review_topics_path: docs/agents/review-topics.md
 
+# Auto-actions - Automatic behaviors after command completion
+auto_preview: true              # Auto-open plans, PRDs, briefs in editor
+auto_create_task: true          # Auto-create task when /majestic:plan completes
+
 # Browser - Configuration for web-browser skill (browser-cdp)
 # Uncomment and set if not using Chrome (default)
 # browser:
@@ -459,6 +463,10 @@ task_management: github
 workflow: worktrees
 branch_naming: type/issue-desc
 review_topics_path: docs/agents/review-topics.md
+
+# Auto-actions - Automatic behaviors after command completion
+auto_preview: true              # Auto-open plans, PRDs, briefs in editor
+auto_create_task: true          # Auto-create task when /majestic:plan completes
 
 # Browser - Configuration for web-browser skill (browser-cdp)
 # Uncomment and set if not using Chrome (default)
@@ -511,6 +519,10 @@ workflow: worktrees
 branch_naming: type/issue-desc
 review_topics_path: docs/agents/review-topics.md
 
+# Auto-actions - Automatic behaviors after command completion
+auto_preview: true              # Auto-open plans, PRDs, briefs in editor
+auto_create_task: true          # Auto-create task when /majestic:plan completes
+
 # Browser - Configuration for web-browser skill (browser-cdp)
 # Uncomment and set if not using Chrome (default)
 # browser:
@@ -550,6 +562,10 @@ task_management: github
 workflow: worktrees
 branch_naming: type/issue-desc
 review_topics_path: docs/agents/review-topics.md
+
+# Auto-actions - Automatic behaviors after command completion
+auto_preview: true              # Auto-open plans, PRDs, briefs in editor
+auto_create_task: true          # Auto-create task when /majestic:plan completes
 
 # Browser - Configuration for web-browser skill (browser-cdp)
 # Uncomment and set if not using Chrome (default)
@@ -606,6 +622,10 @@ Write `.agents.local.yml`:
 
 # workflow: worktrees        # worktrees | branches
 # branch_naming: user/desc   # Override team naming convention
+
+# Auto-actions - Personal preferences for automatic behaviors
+# auto_preview: true         # Auto-open plans, PRDs, briefs in editor
+# auto_create_task: false    # Disable auto-task creation locally
 
 # Browser - Personal browser preference (for web-browser skill)
 # browser:

@@ -39,6 +39,10 @@ workflow: worktrees
 branch_naming: type/issue-desc
 review_topics_path: docs/agents/review-topics.md
 
+# Auto-actions
+auto_preview: true
+auto_create_task: true
+
 # Toolbox customization (optional - overrides plugin defaults)
 toolbox:
   build_task:
@@ -67,6 +71,8 @@ task_management: github
 workflow: worktrees
 branch_naming: type/issue-desc
 review_topics_path: docs/agents/review-topics.md
+auto_preview: true
+auto_create_task: true
 ```
 
 ### Node Project
@@ -89,6 +95,8 @@ task_management: github
 workflow: worktrees
 branch_naming: type/issue-desc
 review_topics_path: docs/agents/review-topics.md
+auto_preview: true
+auto_create_task: true
 ```
 
 ## Field Reference
@@ -359,6 +367,8 @@ For personal preferences that shouldn't be tracked in git, create `.agents.local
 # .agents.local.yml - Personal overrides (not tracked in git)
 workflow: worktrees
 branch_naming: user/desc
+auto_preview: true
+auto_create_task: false
 
 # Browser preference (for web-browser skill)
 browser:

@@ -2,6 +2,15 @@
 
 All notable changes to majestic-engineer will be documented in this file.
 
+## [3.13.3] - 2025-12-24
+
+### Added
+
+- **Auto-actions in config templates** - `/majestic:init` now enables auto-preview and auto-create-task by default
+  - All templates (Rails, Python, Node, Generic) include `auto_preview: true` and `auto_create_task: true`
+  - `.agents.local.yml` template includes commented override examples
+  - CONFIG-SYSTEM.md examples updated to show these fields
+
 ## [3.13.2] - 2025-12-24
 
 ### Fixed
