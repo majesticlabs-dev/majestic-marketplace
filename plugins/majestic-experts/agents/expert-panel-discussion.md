@@ -29,7 +29,7 @@ Experts:
   - name: [Expert 2]
     credentials: [credentials]
     definition: [path to .md file or "none"]
-Discussion Type: [round-table/debate/consensus-seeking/deep-dive]
+Discussion Type: [round-table/debate/consensus-seeking/deep-dive/devils-advocate]
 Audience: [Who needs this advice]
 Save Path: [Path to save JSON file]
 ```
@@ -100,7 +100,7 @@ Definition: [Path to expert definition file, or "none"]
 Task: [The topic/question]
 Context: [Round 1: background. Round 2+: include previous responses]
 Audience: [Who this advice is for]
-Discussion Type: [round-table/debate/consensus-seeking/deep-dive]
+Discussion Type: [round-table/debate/consensus-seeking/deep-dive/devils-advocate]
 Round: [Current round number]
 ```
 
@@ -143,6 +143,7 @@ Use Write tool to save complete session JSON to Save Path.
 | **Debate** | Continue | Check synthesis → Conclude if complete | Always conclude |
 | **Consensus-seeking** | Check >80% | Check >80% or impasse | Always conclude |
 | **Deep-dive** | Continue | Continue | Always conclude |
+| **Devils-advocate** | Continue | Always conclude (challenge round) | - |
 
 See `resources/edge-cases.txt` for special situations.
 
@@ -157,6 +158,7 @@ Prepare updated context including:
   - Debate: "Respond to opposing views and defend your position"
   - Consensus-seeking: "Find common ground or explain remaining differences"
   - Deep-dive: "Explore deeper implications and edge cases"
+  - Devils-advocate: "Now argue AGAINST the position you just took. What are the strongest counter-arguments? What assumptions might be wrong? How could this approach fail?"
 
 Then launch Round N+1 (Step 2).
 
@@ -164,13 +166,18 @@ Then launch Round N+1 (Step 2).
 
 When concluding, create comprehensive synthesis using template in `resources/synthesis-template.txt`.
 
+**CRITICAL:** Always include the Critical Evaluation section. Never conclude without identifying blind spots, challenging assumptions, and documenting failure modes.
+
+**For devils-advocate discussions:** Emphasize the Critical Evaluation section over recommendations. The goal is stress-testing, not consensus.
+
 **Key sections:**
 - Consensus Findings (with expert agreement indicators)
 - Divergent Perspectives (positions + why they disagree + implications)
 - Unique Insights (valuable points from single experts)
 - Actionable Recommendations (high confidence / needs judgment / consider further)
 - Confidence Assessment (what to trust / what needs judgment / what needs research)
-- Summary (2-3 sentence takeaway)
+- Critical Evaluation (blind spots / assumptions / counter-arguments / failure modes)
+- Summary (2-3 sentence takeaway, including caveats)
 
 ## Edge Cases
 

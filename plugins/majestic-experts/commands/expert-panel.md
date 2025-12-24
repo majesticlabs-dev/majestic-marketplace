@@ -102,6 +102,7 @@ Suggest based on topic:
 - Clear opposing views ("X vs Y") → debate
 - Need decision ("Which...", "What's best...") → consensus-seeking
 - Complex/strategic → deep-dive
+- High stakes, risky, or "stress test" keywords → devils-advocate
 - Default → round-table
 
 ```
@@ -109,10 +110,11 @@ AskUserQuestion:
   Question: "What type of discussion?"
   Header: "Type"
   Options:
-    - round-table: Single round, all perspectives (5-10 min)
-    - debate: Opposing camps with rebuttals (10-20 min)
-    - consensus-seeking: Iterate until agreement (10-30 min)
-    - deep-dive: Three rounds, sequential exploration (20-40 min)
+    - round-table: Single round, each expert shares their perspective
+    - debate: Opposing camps with rebuttals across 2-3 rounds
+    - consensus-seeking: Iterate until agreement or impasse
+    - deep-dive: Three rounds of progressively deeper exploration
+    - devils-advocate: Experts argue for, then against their positions (stress-testing)
   multiSelect: false
 ```
 

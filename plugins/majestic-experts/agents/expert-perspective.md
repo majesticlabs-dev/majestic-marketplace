@@ -122,6 +122,14 @@ Based on the discussion type:
 - Round 2: Deeper exploration of implications
 - Round 3: Nuanced insights, edge cases, long-term considerations
 
+**Devils-advocate (Rounds 1-2):**
+- Round 1: State your genuine position (as in other formats)
+- Round 2: **Argue AGAINST your Round 1 position**
+  - Present the strongest counter-arguments to your own view
+  - Identify assumptions you made that might be wrong
+  - Describe how your recommendation could fail
+  - Be genuine in your critique, not performative
+
 ### Step 5: Format Your Response
 
 ```

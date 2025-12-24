@@ -39,10 +39,11 @@ claude /plugin install majestic-experts
 
 ### Discussion Types
 
-- **round-table** - Single round, each expert shares perspective (5-10 min)
-- **debate** - Two opposing camps with rebuttals (10-20 min)
-- **consensus-seeking** - Iterate until agreement or impasse (10-30 min)
-- **deep-dive** - Three rounds of sequential exploration (20-40 min)
+- **round-table** - Single round, each expert shares perspective
+- **debate** - Two opposing camps with rebuttals across 2-3 rounds
+- **consensus-seeking** - Iterate until agreement or impasse
+- **deep-dive** - Three rounds of progressively deeper exploration
+- **devils-advocate** - Experts argue for, then against their positions (stress-testing)
 
 ### Configuration (.agents.yml)
 

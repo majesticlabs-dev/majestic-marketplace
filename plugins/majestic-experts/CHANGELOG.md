@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.1.0] - 2025-12-23
+
+### Added
+
+- **Devils-advocate discussion type** - New two-round format where experts argue for, then against their positions
+  - Round 1: Genuine position
+  - Round 2: Challenge own position with strongest counter-arguments
+  - Emphasizes stress-testing over consensus
+
+### Enhanced
+
+- **Critical Evaluation section** - All synthesis now includes mandatory critical analysis:
+  - Blind spots: What the panel didn't consider
+  - Assumptions under challenge: Validity of underlying assumptions
+  - Counter-arguments: Strongest arguments against consensus
+  - Failure modes: How recommendations could go wrong
+  - Confidence calibration: Adjusted recommendations based on scrutiny
+
+### Changed
+
+- **Removed time estimates** - Discussion type descriptions no longer include estimated durations
+
 ## [3.0.0] - 2025-12-12
 
 ### Changed

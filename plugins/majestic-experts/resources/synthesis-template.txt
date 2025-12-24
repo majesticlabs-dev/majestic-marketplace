@@ -102,9 +102,56 @@ Based on the panel discussion, here are concrete actions:
 
 ---
 
+## Critical Evaluation
+
+**IMPORTANT:** Never conclude without this section. Challenge the panel's own conclusions.
+
+### Blind Spots
+
+What did the panel NOT consider?
+
+- [Perspective or stakeholder not represented]
+- [Technology, approach, or constraint not discussed]
+- [Edge case or scenario the experts overlooked]
+
+### Assumptions Under Challenge
+
+What assumptions underlie the recommendations? Are they valid?
+
+| Assumption | Experts Assuming | Challenge |
+|------------|------------------|-----------|
+| [Assumption 1] | 🔴🔵🟢 | [Why this might not hold] |
+| [Assumption 2] | 🔴🔵 | [Alternative possibility] |
+
+### Counter-Arguments
+
+What would someone who disagrees with the consensus say?
+
+- **Against [Consensus Point 1]:** [Strongest counter-argument]
+- **Against [Recommendation X]:** [Why it might fail]
+
+### Failure Modes
+
+How could these recommendations go wrong?
+
+| Recommendation | Failure Mode | Mitigation |
+|----------------|--------------|------------|
+| [Rec 1] | [What could fail] | [How to detect/prevent] |
+| [Rec 2] | [What could fail] | [How to detect/prevent] |
+
+### Confidence Calibration
+
+After critical review, adjust confidence levels:
+
+- **Still High Confidence:** [Recommendations that survive scrutiny]
+- **Downgraded to Medium:** [Recommendations with valid counter-arguments]
+- **Needs More Analysis:** [Areas where blind spots were significant]
+
+---
+
 ## Summary
 
-[2-3 sentence executive summary of the key takeaway]
+[2-3 sentence executive summary of the key takeaway, including caveats from critical evaluation]
 ```
 
 ## Compact Synthesis (For Shorter Discussions)
@@ -125,8 +172,13 @@ For simpler discussions or when brevity is preferred:
 - [Topic]: 🔴 says X, 🔵 says Y
 - Tradeoff: [What to consider when choosing]
 
+## Critical Check
+- **Blind spot:** [What wasn't considered]
+- **Challenge:** [Counter-argument to consensus]
+- **Failure mode:** [How this could go wrong]
+
 ## Recommendations
-1. **Do this** (high confidence)
+1. **Do this** (high confidence, survives scrutiny)
 2. **Consider this** (depends on context)
-3. **Research this** (uncertainty remains)
+3. **Research this** (uncertainty or blind spot identified)
 ```

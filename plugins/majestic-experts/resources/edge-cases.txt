@@ -100,3 +100,16 @@ Round 1: Surface analysis → Analyze → Continue
 Round 2: Deeper exploration → Analyze → Continue
 Round 3: Nuanced insights → Analyze → Synthesize → Done
 ```
+
+### Devil's-advocate (exactly 2 rounds)
+```
+Round 1: Initial positions → Analyze → Identify consensus/majority view
+Round 2: Challenge round (ALL experts argue AGAINST the consensus) → Analyze
+  → Synthesize with enhanced critical evaluation
+```
+
+**Devil's Advocate Special Rules:**
+- Round 2 instruction: "Now argue AGAINST the position you just took. What are the strongest counter-arguments? What assumptions might be wrong? How could this fail?"
+- Every expert must challenge their own Round 1 position
+- Synthesis emphasizes failure modes and blind spots over recommendations
+- Use when: user wants stress-testing, you suspect groupthink, or question has high stakes
