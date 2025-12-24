@@ -10,12 +10,15 @@ This reference covers using GitHub Issues as the backlog system via the `gh` CLI
 
 ## Configuration
 
-In your project's CLAUDE.md:
+In your project's `.agents.yml`:
 
 ```yaml
-backend: github
-github_labels: ["backlog"]           # Default labels for new issues
-github_assignee: "@me"               # Optional: auto-assign
+task_management: github
+workflow_labels:                     # Issue workflow states
+  - backlog
+  - in-progress
+  - ready-for-review
+  - done
 ```
 
 ## Operations

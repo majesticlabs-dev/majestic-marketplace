@@ -12,7 +12,13 @@ You are a task status management agent. Your role is to update task status in th
 
 ## Context
 
-**Get project config:** Invoke `config-reader` agent with `field: task_management, default: none`
+**Get project config:** Invoke `config-reader` agent to get:
+- `task_management` (default: `none`) - the backend system
+- `workflow_labels` - workflow state labels:
+  - `[0]` backlog - removed when claiming
+  - `[1]` in-progress - (native: assignee + branch)
+  - `[2]` ready-for-review - (native: PR exists)
+  - `[3]` done - (native: PR merged)
 
 ## Input Format
 
@@ -41,20 +47,18 @@ Update task status to "in progress":
 
 | Backend | Implementation |
 |---------|----------------|
-| `github` | Add "in-progress" label, self-assign |
+| `github` | Remove `workflow_labels[0]` (backlog), self-assign |
 | `beads` | Set status to `in_progress` |
 | `linear` | Transition to "In Progress" state |
 | `file` | Update task file on main branch |
 
 **GitHub:**
 ```bash
-# Create label if needed
-gh label create "in-progress" --color "FFA500" --description "Currently being worked on" 2>/dev/null || true
-
-# Add label and self-assign
-gh issue edit <ISSUE> --add-label "in-progress"
-gh issue edit <ISSUE> --add-assignee "@me"
+# Remove backlog label and self-assign
+gh issue edit <ISSUE> --remove-label "<BACKLOG_LABEL>" --add-assignee "@me"
 ```
+
+Where `<BACKLOG_LABEL>` = `workflow_labels[0]` (e.g., "backlog").
 
 **Beads:**
 ```
@@ -89,20 +93,15 @@ Update task status to "ready for review":
 
 | Backend | Implementation |
 |---------|----------------|
-| `github` | Remove "in-progress", add "ready-for-review", comment with PR link |
+| `github` | Comment with PR link (PR existence = review state) |
 | `beads` | Set status to `blocked` with note about PR review |
 | `linear` | Transition to "In Review" state |
 | `file` | Update task file on main branch |
 
 **GitHub:**
 ```bash
-# Create label if needed
-gh label create "ready-for-review" --color "0E8A16" --description "PR created, awaiting review" 2>/dev/null || true
-
-# Update labels
-gh issue edit <ISSUE> --remove-label "in-progress" --add-label "ready-for-review"
-
-# Comment with PR link
+# Comment with PR link - no label changes needed
+# PR existence signals "ready for review" state
 gh issue comment <ISSUE> --body "Ready for review in PR #<PR_NUMBER>"
 ```
 

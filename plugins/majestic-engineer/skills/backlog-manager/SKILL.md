@@ -1,6 +1,6 @@
 ---
 name: backlog-manager
-description: Manage backlog items across multiple backends (files, GitHub Issues, Linear). Configure your preferred task system in project CLAUDE.md.
+description: Manage backlog items across multiple backends (files, GitHub Issues, Linear, Beads). Configure task_management in .agents.yml.
 ---
 
 # Backlog Manager Skill
@@ -20,22 +20,19 @@ The backlog manager provides a unified interface for tracking work items across 
 
 ## Configuration
 
-Configure your preferred backend in your project's CLAUDE.md:
+Configure your preferred backend in your project's `.agents.yml`:
 
 ```yaml
-## Task Management
+task_management: github  # Options: file, github, linear, beads
 
-backend: files  # Options: files, github, linear, beads
+# Workflow labels (for github/linear backends)
+workflow_labels:
+  - backlog
+  - in-progress
+  - ready-for-review
+  - done
 
-# GitHub configuration (when backend: github)
-# github_labels: ["backlog"]
-# github_assignee: "@me"
-
-# Linear configuration (when backend: linear)
-# linear_team_id: TEAM-123
-# linear_project_id: PROJECT-456
-
-# Beads configuration (when backend: beads)
+# Beads configuration (when task_management: beads)
 # beads_prefix: myapp               # Optional: custom issue prefix
 ```
 
