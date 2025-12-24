@@ -2,6 +2,20 @@
 
 Visual design principles for high-converting, award-worthy landing pages. Complements `landing-page-builder` skill (copy) with implementation guidance.
 
+## Pre-Code Checklist
+
+Before writing any code, explicitly decide:
+
+1. **Aesthetic direction** — Pick one from `frontend-design` skill (brutalist, luxury, retro-futuristic, etc.)
+2. **Font pairing** — One display font, one body font (see Typography Pairings below)
+3. **Color palette** — Maximum 5 hex values (bg, text, muted, accent, accent-muted)
+4. **Hero hook** — One interactive element that makes the page memorable
+5. **Company context** — Generate realistic placeholder content, never lorem ipsum
+
+State these decisions explicitly before implementation. This prevents generic output.
+
+---
+
 ## Section-by-Section Design
 
 ### 1. Hero Section
