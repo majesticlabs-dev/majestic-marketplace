@@ -122,34 +122,38 @@ AskUserQuestion:
 
 Generate panel ID: `YYYYMMDD-HHMMSS-topic-slug`
 
+**IMPORTANT:** Use the **Task tool** with `subagent_type` parameter. Do NOT use Skill tool.
+
 #### New Discussion:
 
 ```
-Task: majestic-experts:expert-panel-discussion
-
-Prompt:
-Mode: new
-Panel ID: [generated]
-Topic: [topic]
-Experts:
-  - name: [Expert]
-    credentials: [from registry]
-    definition: ~/.claude/plugins/majestic-experts/experts/{category}/{name}.md
-Discussion Type: [confirmed type]
-Audience: [from .agents.yml tech_stack or "technical team"]
-Save Path: ~/.claude/plugins/majestic-experts/.claude/panels/[panel-id].json
+Tool: Task
+subagent_type: majestic-experts:expert-panel-discussion
+description: "Expert panel on [topic]"
+prompt: |
+  Mode: new
+  Panel ID: [generated]
+  Topic: [topic]
+  Experts:
+    - name: [Expert]
+      credentials: [from registry]
+      definition: ~/.claude/plugins/majestic-experts/experts/{category}/{name}.md
+  Discussion Type: [confirmed type]
+  Audience: [from .agents.yml tech_stack or "technical team"]
+  Save Path: ~/.claude/plugins/majestic-experts/.claude/panels/[panel-id].json
 ```
 
 #### Resume Discussion:
 
 ```
-Task: majestic-experts:expert-panel-discussion
-
-Prompt:
-Mode: resume
-Resume Data: [JSON from file]
-Panel ID: [from file]
-Save Path: ~/.claude/plugins/majestic-experts/.claude/panels/[panel-id].json
+Tool: Task
+subagent_type: majestic-experts:expert-panel-discussion
+description: "Resume expert panel [panel-id]"
+prompt: |
+  Mode: resume
+  Resume Data: [JSON from file]
+  Panel ID: [from file]
+  Save Path: ~/.claude/plugins/majestic-experts/.claude/panels/[panel-id].json
 ```
 
 ### Step 7: Present Results

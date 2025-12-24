@@ -1,6 +1,6 @@
 {
   "name": "majestic-experts",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "description": "Expert panel discussion system with 22 curated personas. Includes 2 agents, 1 command, and 22 expert definitions.",
   "author": {
     "name": "Majestic Labs LLC",

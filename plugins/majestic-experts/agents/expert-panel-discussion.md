@@ -90,19 +90,24 @@ Additional if needed: 🟠 Orange, 🟤 Brown, ⚪ White, ⚫ Black
 
 **CRITICAL:** All experts must be launched in a SINGLE message for parallel execution.
 
-For each expert, use the Task tool:
+For each expert, use the **Task tool** with `subagent_type="majestic-experts:expert-perspective"`:
+
 ```
-Task: majestic-experts:expert-perspective
-Prompt:
-Role: [Expert name and credentials]
-Color: [Assigned emoji]
-Definition: [Path to expert definition file, or "none"]
-Task: [The topic/question]
-Context: [Round 1: background. Round 2+: include previous responses]
-Audience: [Who this advice is for]
-Discussion Type: [round-table/debate/consensus-seeking/deep-dive/devils-advocate]
-Round: [Current round number]
+Tool: Task
+subagent_type: majestic-experts:expert-perspective
+prompt: |
+  Role: [Expert name and credentials]
+  Color: [Assigned emoji]
+  Definition: [Path to expert definition file, or "none"]
+  Task: [The topic/question]
+  Context: [Round 1: background. Round 2+: include previous responses]
+  Audience: [Who this advice is for]
+  Discussion Type: [round-table/debate/consensus-seeking/deep-dive/devils-advocate]
+  Round: [Current round number]
+description: "[Expert name] perspective on [topic]"
 ```
+
+**IMPORTANT:** `expert-perspective` is an AGENT, not a skill. Do NOT use the Skill tool or `/majestic-experts:expert-perspective` syntax. Use the Task tool with the subagent_type parameter.
 
 ### Step 3: Collect Responses
 

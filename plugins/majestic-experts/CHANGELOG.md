@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.1.1] - 2025-12-23
+
+### Fixed
+
+- **Task tool invocation** - Fixed agent instructions that were incorrectly interpreted as skill invocations
+  - `expert-panel-discussion.md`: Clarified Task tool usage with explicit `subagent_type` parameter
+  - `expert-panel.md`: Updated orchestrator launch instructions
+  - Added explicit warnings: "Do NOT use Skill tool or `/` syntax for agents"
+
 ## [3.1.0] - 2025-12-23
 
 ### Added
