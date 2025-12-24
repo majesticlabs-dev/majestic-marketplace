@@ -2,6 +2,16 @@
 
 All notable changes to majestic-engineer will be documented in this file.
 
+## [3.13.2] - 2025-12-24
+
+### Fixed
+
+- **GitHub backend label validation** - backlog-manager now validates labels exist before use
+  - Added "BEFORE Any Label Operations" section with `gh label list` validation
+  - Prevents `gh issue create` failures from non-existent labels
+  - Added safe idempotent label creation commands with error suppression
+  - Clear guidance: skip missing labels OR create them first
+
 ## [3.13.1] - 2025-12-22
 
 ### Fixed

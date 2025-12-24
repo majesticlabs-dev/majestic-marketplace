@@ -20,9 +20,26 @@ github_assignee: "@me"               # Optional: auto-assign
 
 ## Operations
 
+### BEFORE Any Label Operations
+
+**Always validate labels exist before using them:**
+```bash
+# Get list of existing labels in repository
+gh label list --json name --jq '.[].name'
+
+# Check if specific label exists
+gh label list --json name --jq '.[].name' | grep -q "^backlog$" && echo "exists" || echo "missing"
+```
+
+**Only use labels that exist.** If a configured label doesn't exist:
+1. Skip that label (create issue without it), OR
+2. Create the label first (see "Setup labels" section below)
+
+**Never attempt to use non-existent labels** - the `gh issue create` command will fail.
+
 ### CREATE - New Issue
 
-**Basic:**
+**Basic (after validating label exists):**
 ```bash
 gh issue create \
   --title "Brief description" \
@@ -152,15 +169,32 @@ Recommended label scheme matching file-based priorities:
 | `pending` | Needs triage | pending |
 | `ready` | Approved/ready | ready |
 
-**Setup labels:**
+### Setup Labels (One-Time)
+
+**Before first use, check and create any missing labels:**
 ```bash
-gh label create p1 --color FF0000 --description "Critical priority"
-gh label create p2 --color FFA500 --description "Important priority"
-gh label create p3 --color 00FF00 --description "Nice-to-have"
-gh label create backlog --color 0000FF --description "Backlog item"
-gh label create pending --color FFFF00 --description "Needs triage"
-gh label create ready --color 00FFFF --description "Ready for work"
+# List existing labels
+gh label list --json name --jq '.[].name'
+
+# Create only if missing (safe to run - errors if exists, no harm)
+gh label create backlog --color 0000FF --description "Backlog item" 2>/dev/null || true
+gh label create p1 --color FF0000 --description "Critical priority" 2>/dev/null || true
+gh label create p2 --color FFA500 --description "Important priority" 2>/dev/null || true
+gh label create p3 --color 00FF00 --description "Nice-to-have" 2>/dev/null || true
+gh label create pending --color FFFF00 --description "Needs triage" 2>/dev/null || true
+gh label create ready --color 00FFFF --description "Ready for work" 2>/dev/null || true
 ```
+
+### Validate Before Use
+
+**IMPORTANT:** Always verify labels exist before using `--label` flag:
+```bash
+# Get available labels as comma-separated (for scripting)
+LABELS=$(gh label list --json name --jq '.[].name' | tr '\n' ',' | sed 's/,$//')
+echo "Available: $LABELS"
+```
+
+If a label doesn't exist and you don't want to create it, simply omit the `--label` flag from your command.
 
 ## GitHub-Specific Features
 
