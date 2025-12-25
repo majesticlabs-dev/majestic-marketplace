@@ -76,8 +76,17 @@ printf '\033]0;🔨 <ID>: <title>\007'
 ```
 
 ### Step 4: Setup Workspace
+
+**First, read config** (required - haiku agents can't reliably invoke config-reader):
 ```
-agent workspace-setup "Task ID: <ID> | Title: <title> | Type: <type>"
+agent config-reader "field: workflow, default: branches"
+agent config-reader "field: branch_naming, default: issue-desc"
+agent config-reader "field: default_branch, default: main"
+```
+
+**Then pass values to workspace-setup:**
+```
+agent workspace-setup "Task ID: <ID> | Title: <title> | Type: <type> | Workflow: <workflow> | Branch Naming: <branch_naming> | Default Branch: <default_branch>"
 ```
 
 ### Step 5: Resolve Toolbox
