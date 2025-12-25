@@ -18,6 +18,18 @@ Implement a task autonomously through the full development lifecycle.
 - `docs/plans/*.md` → Plan file from `/majestic:plan`
 - `#123`, `PROJ-123`, URL → Task reference (GitHub, Beads, Linear)
 
+## Config Version Check
+
+**FIRST:** Invoke `config-reader` agent without arguments (Mode 1) to check version and auto-migrate if needed:
+
+```
+agent config-reader
+```
+
+This ensures `.agents.yml` is up-to-date before workflow begins. Migration happens automatically if `config_version` is outdated.
+
+---
+
 ## Step 0: Detect Input Type
 
 ```bash
@@ -40,6 +52,7 @@ ls -t docs/plans/*.md 2>/dev/null | head -1
 
 | Step | Agent | Condition |
 |------|-------|-----------|
+| 0. Config | `config-reader` (Mode 1) | Always (auto-migrates) |
 | 1. Fetch | `task-fetcher` | Skip if `plan` |
 | 2. Claim | `task-status-updater` (claim) | Skip if `plan` |
 | 3. Terminal | `printf` (ANSI escape) | — |

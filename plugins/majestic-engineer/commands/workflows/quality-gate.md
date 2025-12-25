@@ -9,11 +9,17 @@ allowed-tools: Bash, Read, Grep, Glob, Task
 
 Run comprehensive code review through the quality gate agent, which orchestrates multiple specialized reviewers based on your project's tech stack.
 
-## Context
+## Config Version Check
 
-**Get project config:** Invoke `config-reader` agent to get merged configuration.
+**FIRST:** Invoke `config-reader` agent without arguments (Mode 1) to check version and auto-migrate if needed:
 
-Config values needed:
+```
+agent config-reader
+```
+
+This ensures `.agents.yml` is up-to-date before workflow begins. Migration happens automatically if `config_version` is outdated.
+
+The Mode 1 response also provides all config values needed:
 - `tech_stack` (default: generic)
 - `default_branch` (default: main)
 - `app_status` (default: development)

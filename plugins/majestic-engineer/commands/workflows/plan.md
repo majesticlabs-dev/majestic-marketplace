@@ -18,6 +18,18 @@ Transform feature descriptions, bug reports, or improvement ideas into well-stru
 
 Do not proceed until you have a clear feature description from the user.
 
+## Config Version Check
+
+**FIRST:** Invoke `config-reader` agent without arguments (Mode 1) to check version and auto-migrate if needed:
+
+```
+agent config-reader
+```
+
+This ensures `.agents.yml` is up-to-date before workflow begins. Migration happens automatically if `config_version` is outdated.
+
+---
+
 ## Main Tasks
 
 ### 0. Feature Classification & Design System Check

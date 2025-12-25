@@ -2,6 +2,16 @@
 
 All notable changes to majestic-engineer will be documented in this file.
 
+## [3.13.4] - 2025-12-24
+
+### Fixed
+
+- **Config migration not triggering** - Major workflows now invoke `config-reader` in Mode 1 (full config) first
+  - Mode 2 (field lookup) was skipping version check and auto-migration entirely
+  - Added "Config Version Check" section to `/majestic:build-task`, `/majestic:plan`, `/majestic:code-review`, `/majestic:quality-gate`
+  - Migration to version 1.1 (adding `workflow_labels`) now happens on first workflow use
+  - Prevents stale `.agents.yml` files from missing new config fields
+
 ## [3.13.3] - 2025-12-24
 
 ### Added
