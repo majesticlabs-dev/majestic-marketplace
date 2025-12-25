@@ -50,12 +50,12 @@ ls -t docs/plans/*.md 2>/dev/null | head -1
 
 ## Workflow
 
-| Step | Agent | Condition |
-|------|-------|-----------|
-| 0. Config | `config-reader` (Mode 1) | Always (auto-migrates) |
-| 1. Fetch | `task-fetcher` | Skip if `plan` |
-| 2. Claim | `task-status-updater` (claim) | Skip if `plan` |
-| 3. Terminal | `printf` (ANSI escape) | — |
+| Step | Action | Condition |
+|------|--------|-----------|
+| 0. Config | `config-reader` agent (Mode 1) | Always (auto-migrates) |
+| 1. Fetch | `task-fetcher` agent | Skip if `plan` |
+| 2. Claim | `task-status-updater` agent (claim) | Skip if `plan` |
+| 3. Terminal | `! printf` (direct) | — |
 | 4. Workspace | `workspace-setup` | — |
 | 5. Toolbox | `toolbox-resolver` | — |
 | 6. Research | Auto hooks from toolbox | If triggers match |
@@ -71,6 +71,12 @@ ls -t docs/plans/*.md 2>/dev/null | head -1
 
 ---
 
+## Step 3: Set Terminal Title
+
+! printf '\033]0;🔨 <ID>: <title>\007'
+
+---
+
 ## Agent Invocations
 
 ### Step 1: Fetch Task
@@ -81,11 +87,6 @@ agent task-fetcher "Task: <reference>"
 ### Step 2: Claim Task
 ```
 agent task-status-updater "Action: claim | Task: <ID>"
-```
-
-### Step 3: Set Terminal Title
-```bash
-printf '\033]0;🔨 <ID>: <title>\007'
 ```
 
 ### Step 4: Setup Workspace

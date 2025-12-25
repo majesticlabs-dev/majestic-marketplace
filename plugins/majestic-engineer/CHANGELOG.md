@@ -2,6 +2,14 @@
 
 All notable changes to majestic-engineer will be documented in this file.
 
+## [3.15.1] - 2025-12-24
+
+### Fixed
+
+- **Terminal title not working in build-task** - Changed from Bash tool to `!` prefix for direct terminal execution
+  - Bash tool runs in subprocess without TTY access, escape sequences were captured not displayed
+  - `! printf` runs directly in terminal session with TTY access
+
 ## [3.13.5] - 2025-12-24
 
 ### Fixed
