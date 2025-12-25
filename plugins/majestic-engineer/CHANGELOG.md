@@ -2,6 +2,14 @@
 
 All notable changes to majestic-engineer will be documented in this file.
 
+## [3.13.5] - 2025-12-24
+
+### Fixed
+
+- **Worktree workflow not working in build-task** - Upgraded `workspace-setup` agent from haiku to sonnet
+  - Haiku was not reliably following skill invocation instructions for git-worktree
+  - Projects with `workflow: worktrees` now correctly create worktrees instead of branches
+
 ## [3.13.4] - 2025-12-24
 
 ### Fixed
