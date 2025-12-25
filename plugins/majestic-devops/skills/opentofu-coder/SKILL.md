@@ -6,6 +6,47 @@ allowed-tools: Read, Write, Edit, MultiEdit, Grep, Glob, Bash, WebSearch
 
 # OpenTofu Coder
 
+## ⚠️ SIMPLICITY FIRST - Default to Flat Files
+
+**ALWAYS start with the simplest approach. Only add complexity when explicitly requested.**
+
+### Simple (DEFAULT) vs Overengineered
+
+| Aspect | ✅ Simple (Default) | ❌ Overengineered |
+|--------|---------------------|-------------------|
+| Structure | Flat .tf files in one directory | Nested modules/ + environments/ directories |
+| Modules | None or only remote registry modules | Custom local modules for simple resources |
+| Environments | Workspaces OR single tfvars | Duplicate directory per environment |
+| Variables | Inline defaults, minimal tfvars | Complex variable hierarchies |
+| File count | 3-5 .tf files total | 15+ files across nested directories |
+
+### When to Use Simple Approach (90% of cases)
+
+- Managing 1-5 resources of each type
+- Single provider, single region
+- Small team or solo developer
+- Standard infrastructure patterns
+
+### When Complexity is Justified (10% of cases)
+
+- Enterprise multi-region, multi-account
+- Reusable modules shared across teams
+- Complex dependency chains
+- User explicitly requests modular structure
+
+**Rule: If you can define everything in 5 flat .tf files, DO IT.**
+
+### Simple Project Structure (DEFAULT)
+
+```
+infra/
+├── main.tf           # All resources
+├── variables.tf      # Input variables
+├── outputs.tf        # Outputs
+├── versions.tf       # Provider versions
+└── terraform.tfvars  # Variable values (gitignored)
+```
+
 ## Overview
 
 OpenTofu is a community-driven, open-source fork of Terraform under MPL-2.0 license, maintained by the Linux Foundation. It uses HashiCorp Configuration Language (HCL) for declarative infrastructure management across cloud providers.

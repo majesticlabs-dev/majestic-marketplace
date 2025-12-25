@@ -186,3 +186,5 @@ _Synthesized wisdom from working on this repository._
 **Learning:** All `.agents.yml` access in commands/agents should go through `config-reader` agent. Never document grep patterns for config reading - it bypasses local overrides and is inconsistent with the config system.
 
 **Learning:** When creating a new skill, run `skill-linter` to validate it against the agentskills.io specification before committing. Key requirements: names must start with a letter (not a digit), use kebab-case, match the directory name, and stay under 500 lines.
+
+**Learning:** DevOps/infrastructure code should default to SIMPLE, flat structures. For Ansible: single playbook with inline tasks (~200 lines), use Galaxy roles (geerlingguy.*) instead of custom roles. For Terraform/OpenTofu: flat .tf files in one directory, no custom modules for <5 resources. Only add complexity (multiple playbooks, custom roles, nested modules, environment directories) when explicitly requested or truly justified by scale.

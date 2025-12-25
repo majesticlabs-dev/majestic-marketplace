@@ -6,6 +6,36 @@ allowed-tools: Read, Write, Edit, Grep, Glob, Bash
 
 # Ansible Coder
 
+## ⚠️ SIMPLICITY FIRST - Default to Flat Structure
+
+**ALWAYS start with the simplest approach. Only add complexity when explicitly requested.**
+
+### Simple (DEFAULT) vs Overengineered
+
+| Aspect | ✅ Simple (Default) | ❌ Overengineered |
+|--------|---------------------|-------------------|
+| Playbooks | 1 playbook with inline tasks | Multiple playbooks + custom roles |
+| Roles | Use Galaxy roles (geerlingguy.*) | Write custom roles for simple tasks |
+| Inventory | Single `hosts.ini` | Multiple inventories + group_vars hierarchy |
+| Variables | Inline in playbook or single vars file | Scattered across group_vars/host_vars |
+| File count | ~3-5 files total | 20+ files in nested directories |
+
+### When to Use Simple Approach (90% of cases)
+
+- Setting up 1-5 servers
+- Standard stack (Docker, nginx, fail2ban, ufw)
+- Single environment or identical servers
+- No complex conditional logic per host
+
+### When Complexity is Justified (10% of cases)
+
+- Large fleet with divergent configurations
+- Multi-team requiring role isolation
+- Complex orchestration with dependencies
+- User explicitly requests modular structure
+
+**Rule: If you can fit everything in one 200-line playbook, DO IT.**
+
 ## When to Use Ansible vs Cloud-Init
 
 | Use Cloud-Init When | Use Ansible When |
@@ -18,6 +48,18 @@ allowed-tools: Read, Write, Edit, Grep, Glob, Bash
 **Rule of thumb:** Cloud-init for initial provisioning, Ansible for ongoing management.
 
 ## Directory Structure
+
+### Simple Structure (DEFAULT)
+
+```
+infra/ansible/
+├── playbook.yml          # Single playbook with all tasks inline
+├── requirements.yml      # Galaxy dependencies (geerlingguy.*, etc.)
+├── hosts.ini             # Inventory (git-ignored)
+└── hosts.ini.example     # Inventory template
+```
+
+### Complex Structure (only when justified)
 
 ```
 infra/ansible/

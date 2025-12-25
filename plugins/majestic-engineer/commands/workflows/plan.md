@@ -77,6 +77,7 @@ Check if the feature description contains any of these keywords:
 - **Resources**: server, droplet, instance, vpc, firewall, load-balancer, dns, bucket, volume
 - **Provisioning**: cloud-init, user-data, provision, deploy, vm, container, kubernetes, k8s
 - **Edge/Serverless**: workers, pages, wrangler, d1, r2, kv, edge, lambda, function
+- **Config Management**: ansible, playbook, inventory, role, task, handler, play
 - **Secrets**: 1password, op://, vault, secrets, credentials, ssm
 
 **If feature contains DevOps keywords:**
@@ -88,22 +89,41 @@ Check if the feature description contains any of these keywords:
 
    # Check for cloud-init
    ls cloud-init*.yml user-data*.yml 2>/dev/null
+
+   # Check for Ansible
+   ls ansible/*.yml playbooks/*.yml roles/ inventory/ ansible.cfg 2>/dev/null
    ```
 
 2. **Set detection flags:**
    - `IS_DEVOPS_FEATURE: true`
    - `HAS_IAC_FILES: true/false`
+   - `HAS_ANSIBLE_FILES: true/false`
    - `DEVOPS_PROVIDERS: [list detected providers]`
 
 3. **Load DevOps skills context:**
    - If Terraform/OpenTofu detected → reference `majestic-devops:opentofu-coder`
    - If specific provider detected → reference provider-specific skill (e.g., `majestic-devops:hetzner-coder`)
    - If cloud-init detected → reference `majestic-devops:cloud-init-coder`
-   - If secrets management → reference `majestic-devops:onepassword-cli-coder`
+   - If Ansible detected → reference `majestic-devops:ansible-coder`
+   - If secrets management keywords detected → reference `majestic-devops:onepassword-cli-coder`
+
+4. **Ask about secrets management (if not already detected):**
+
+   If `IS_DEVOPS_FEATURE: true` but NO secrets keywords were found in the feature description, use `AskUserQuestion` to ask:
+
+   > "Will this infrastructure work involve secrets or credentials (API keys, database passwords, tokens)?"
+
+   | Option | Description |
+   |--------|-------------|
+   | Yes, use 1Password CLI | Reference `majestic-devops:onepassword-cli-coder` for secrets management |
+   | Yes, other method | Note the secrets requirement without 1Password skill |
+   | No secrets needed | Skip secrets management context |
 
 **Store for later:**
 - `IS_DEVOPS_FEATURE: true/false`
 - `HAS_IAC_FILES: true/false`
+- `HAS_ANSIBLE_FILES: true/false`
+- `USES_SECRETS_MANAGEMENT: true/false`
 - `DEVOPS_PROVIDERS: [list or empty]`
 - `DEVOPS_SKILLS: [list of relevant skills]`
 
