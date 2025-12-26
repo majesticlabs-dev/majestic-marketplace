@@ -2,6 +2,15 @@
 
 All notable changes to majestic-engineer will be documented in this file.
 
+## [3.15.2] - 2025-12-26
+
+### Fixed
+
+- **Agent references using short names** - Session commands now use fully-qualified agent names
+  - `config-reader` → `majestic-engineer:config-reader`
+  - `session-checkpoint` → `majestic-engineer:session-checkpoint`
+  - Fixes "Agent type not found" errors in `session-checkpoint` agent and `/session:ledger-clear` command
+
 ## [3.15.1] - 2025-12-24
 
 ### Fixed
