@@ -13,7 +13,7 @@ Autonomous agent that snapshots current session state to a ledger file. Designed
 ## Invocation
 
 ```
-Task(subagent_type="session-checkpoint", prompt="<optional context about current work>")
+Task(subagent_type="majestic-engineer:session-checkpoint", prompt="<optional context about current work>")
 ```
 
 ## Config Dependency
@@ -33,7 +33,7 @@ session:
 Invoke `config-reader` agent to get merged config:
 
 ```
-Task(subagent_type="config-reader", prompt="field: session, default: {}")
+Task(subagent_type="majestic-engineer:config-reader", prompt="field: session, default: {}")
 ```
 
 **If `session.ledger` is false or missing:**
@@ -134,7 +134,7 @@ If working for more than 10 minutes on a complex task, invoke `session-checkpoin
 ### From build-task
 ```
 Task(
-  subagent_type="session-checkpoint",
+  subagent_type="majestic-engineer:session-checkpoint",
   prompt="Working on: Add user authentication. Done: Created User model, Added bcrypt gem. Now: Writing login controller. Next: Add session management."
 )
 ```
@@ -142,7 +142,7 @@ Task(
 ### From debug workflow
 ```
 Task(
-  subagent_type="session-checkpoint",
+  subagent_type="majestic-engineer:session-checkpoint",
   prompt="Debugging N+1 in OrdersController. Found root cause: missing includes on line_items. About to apply fix."
 )
 ```
@@ -150,7 +150,7 @@ Task(
 ### Minimal checkpoint
 ```
 Task(
-  subagent_type="session-checkpoint",
+  subagent_type="majestic-engineer:session-checkpoint",
   prompt="Implementing feature X, halfway done"
 )
 ```

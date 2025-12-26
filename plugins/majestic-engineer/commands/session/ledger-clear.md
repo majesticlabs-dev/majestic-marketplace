@@ -16,7 +16,7 @@ Removes the session ledger file to start fresh.
 Invoke `config-reader` agent:
 
 ```
-Task(subagent_type="config-reader", prompt="field: session, default: {}")
+Task(subagent_type="majestic-engineer:config-reader", prompt="field: session, default: {}")
 ```
 
 Use `session.ledger_path` if set, otherwise default to `.session_ledger.md`.
