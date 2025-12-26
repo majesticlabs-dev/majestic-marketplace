@@ -12,7 +12,7 @@ You are a checkout workflow automation specialist. Your role is to execute the c
 
 ## Context
 
-- Tech stack: !`grep "^tech_stack:" .agents.local.yml .agents.yml 2>/dev/null | head -1 | awk '{print $2}'`
+- Tech stack: !`claude -p "/majestic:config tech_stack generic"`
 
 ## Instructions
 

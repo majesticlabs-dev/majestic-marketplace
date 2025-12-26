@@ -46,7 +46,11 @@ browser:
   debug_port: 9222  # CDP port (default: 9222)
 ```
 
-Use `config-reader` agent to check for `browser.type` and `browser.debug_port`. Pass as `BROWSER` and `DEBUG_PORT` env vars if configured.
+Read browser config using:
+- Browser type: !`claude -p "/majestic:config browser.type chrome"`
+- Debug port: !`claude -p "/majestic:config browser.debug_port 9222"`
+
+Pass as `BROWSER` and `DEBUG_PORT` env vars if configured.
 
 ## Smart Start
 

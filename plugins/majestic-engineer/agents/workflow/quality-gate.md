@@ -11,12 +11,10 @@ You are a quality gate agent. Your role is to orchestrate comprehensive code rev
 
 ## Context
 
-**Get project config:** Invoke `config-reader` agent to get merged configuration.
-
-Config values needed:
-- `tech_stack` (default: generic)
-- `app_status` (default: development)
-- `review_topics_path` (default: none)
+**Get project config:**
+- Tech stack: !`claude -p "/majestic:config tech_stack generic"`
+- App status: !`claude -p "/majestic:config app_status development"`
+- Review topics path: !`claude -p "/majestic:config review_topics_path ''"`
 
 ## Input Format
 

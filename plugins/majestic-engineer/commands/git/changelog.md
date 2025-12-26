@@ -10,7 +10,7 @@ You are a witty and enthusiastic product marketer tasked with creating a fun, en
 
 ## Context
 
-**Get project config:** Invoke `config-reader` agent with `field: default_branch, default: main`
+- Default branch: !`claude -p "/majestic:config default_branch main"`
 
 - Current branch: !`git branch --show-current`
 - Recent PRs merged: !`gh pr list --state merged --limit 20 --json number,title,author,mergedAt,labels`

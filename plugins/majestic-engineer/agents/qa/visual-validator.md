@@ -23,9 +23,8 @@ You are a rigorous visual validation expert specializing in verifying UI modific
 
 Before starting validation:
 
-1. Invoke `config-reader` agent to get merged config
-2. Check for `toolbox.build_task.design_system_path` in the returned config
-3. If path exists, read the design system file
+1. Read design system path: !`claude -p "/majestic:config toolbox.build_task.design_system_path ''"`
+2. If path exists, read the design system file
 
 **If design system found:** Use its specifications for compliance verification.
 **If not found:** Use generic design principles only.

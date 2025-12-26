@@ -667,13 +667,12 @@ Use the Edit tool to add this configuration. If `toolbox:` section exists, add u
 
 **BEFORE presenting options, you MUST:**
 
-1. Invoke `config-reader` agent to get merged config (base + local overrides)
-2. Check the returned config for `auto_preview: true`
-3. **If auto_preview is true:**
+1. Read auto_preview: !`claude -p "/majestic:config auto_preview false"`
+2. **If auto_preview is "true":**
    - Execute: `open <design-system-path>`
    - Tell user: "Opened design system in your editor."
    - Use the "auto-previewed" options below
-4. **If false or not found:** Use the "not auto-previewed" options below
+3. **If "false":** Use the "not auto-previewed" options below
 
 ### Step 5: Present Options
 

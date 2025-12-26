@@ -9,19 +9,11 @@ allowed-tools: Bash, Read, Grep, Glob, Task
 
 Generic code review command that detects your project's tech stack and delegates to the appropriate framework-specific review orchestrator.
 
-## Config Version Check
+## Config
 
-**FIRST:** Invoke `config-reader` agent without arguments (Mode 1) to check version and auto-migrate if needed:
-
-```
-agent config-reader
-```
-
-This ensures `.agents.yml` is up-to-date before workflow begins. Migration happens automatically if `config_version` is outdated.
-
-The Mode 1 response also provides all config values needed:
-- `tech_stack` (default: generic)
-- `default_branch` (default: main)
+Read config values:
+- Tech stack: !`claude -p "/majestic:config tech_stack generic"`
+- Default branch: !`claude -p "/majestic:config default_branch main"`
 
 ## Arguments
 

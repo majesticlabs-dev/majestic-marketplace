@@ -18,18 +18,6 @@ Transform feature descriptions, bug reports, or improvement ideas into well-stru
 
 Do not proceed until you have a clear feature description from the user.
 
-## Config Version Check
-
-**FIRST:** Invoke `config-reader` agent without arguments (Mode 1) to check version and auto-migrate if needed:
-
-```
-agent config-reader
-```
-
-This ensures `.agents.yml` is up-to-date before workflow begins. Migration happens automatically if `config_version` is outdated.
-
----
-
 ## Main Tasks
 
 ### 0. Feature Classification & Design System Check
@@ -560,25 +548,25 @@ After writing the plan file, execute these steps IN ORDER:
 
 ### Step 1: Read Config and Execute Auto-Actions
 
-**MUST invoke `config-reader` agent first.** Store the result as CONFIG.
-
-Then execute auto-actions based on CONFIG values:
+Read config values:
+- Auto preview: !`claude -p "/majestic:config auto_preview false"`
+- Auto create task: !`claude -p "/majestic:config auto_create_task false"`
+- Task management: !`claude -p "/majestic:config task_management none"`
 
 #### Auto-Preview Action
 
-**IF CONFIG contains `auto_preview: true`:**
-1. Execute immediately: `open docs/plans/<plan_filename>.md`
+**IF auto_preview = "true":**
+1. Execute: `open docs/plans/<plan_filename>.md`
 2. Tell user: "✓ Opened plan in your editor."
-3. Set internal state: PREVIEWED = true
+3. Set: PREVIEWED = true
 
-**ELSE:**
-- Set internal state: PREVIEWED = false
+**ELSE:** Set PREVIEWED = false
 
 #### Auto-Create Task Action
 
-**IF CONFIG contains `auto_create_task: true` AND CONFIG contains `task_management`:**
+**IF auto_create_task = "true" AND task_management != "none":**
 
-1. Create the task using the configured backend:
+1. Create task:
 
    | Backend | Command |
    |---------|---------|
@@ -587,10 +575,9 @@ Then execute auto-actions based on CONFIG values:
    | `linear` | `linear issue create --title "<plan title>" --description "$(cat docs/plans/<plan_filename>.md)"` |
 
 2. Tell user: "✓ Task created: <link or reference>"
-3. Set internal state: TASK_CREATED = true, TASK_REF = <reference>
+3. Set: TASK_CREATED = true, TASK_REF = <reference>
 
-**ELSE:**
-- Set internal state: TASK_CREATED = false
+**ELSE:** Set TASK_CREATED = false
 
 ### Step 2: Present Options Based on State
 

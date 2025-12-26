@@ -18,18 +18,6 @@ Implement a task autonomously through the full development lifecycle.
 - `docs/plans/*.md` → Plan file from `/majestic:plan`
 - `#123`, `PROJ-123`, URL → Task reference (GitHub, Beads, Linear)
 
-## Config Version Check
-
-**FIRST:** Invoke `config-reader` agent without arguments (Mode 1) to check version and auto-migrate if needed:
-
-```
-agent config-reader
-```
-
-This ensures `.agents.yml` is up-to-date before workflow begins. Migration happens automatically if `config_version` is outdated.
-
----
-
 ## Step 0: Detect Input Type
 
 ```bash
@@ -52,7 +40,7 @@ ls -t docs/plans/*.md 2>/dev/null | head -1
 
 | Step | Action | Condition |
 |------|--------|-----------|
-| 0. Config | `config-reader` agent (Mode 1) | Always (auto-migrates) |
+| 0. Config | `/majestic:config` command | As needed |
 | 1. Fetch | `task-fetcher` agent | Skip if `plan` |
 | 2. Claim | `task-status-updater` agent (claim) | Skip if `plan` |
 | 3. Terminal | `! printf` (direct) | — |
@@ -91,12 +79,10 @@ agent task-status-updater "Action: claim | Task: <ID>"
 
 ### Step 4: Setup Workspace
 
-**First, read config** (required - haiku agents can't reliably invoke config-reader):
-```
-agent config-reader "field: workflow, default: branches"
-agent config-reader "field: branch_naming, default: issue-desc"
-agent config-reader "field: default_branch, default: main"
-```
+**Read config values:**
+- Workflow: !`claude -p "/majestic:config workflow branches"`
+- Branch naming: !`claude -p "/majestic:config branch_naming issue-desc"`
+- Default branch: !`claude -p "/majestic:config default_branch main"`
 
 **Then pass values to workspace-setup:**
 ```

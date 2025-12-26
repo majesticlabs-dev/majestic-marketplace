@@ -12,13 +12,14 @@ You are a task status management agent. Your role is to update task status in th
 
 ## Context
 
-**Get project config:** Invoke `config-reader` agent to get:
-- `task_management` (default: `none`) - the backend system
-- `workflow_labels` - workflow state labels:
-  - `[0]` backlog - removed when claiming
-  - `[1]` in-progress - (native: assignee + branch)
-  - `[2]` ready-for-review - (native: PR exists)
-  - `[3]` done - (native: PR merged)
+**Get project config:**
+- Task management: !`claude -p "/majestic:config task_management none"`
+
+For `workflow_labels`, read full config and extract the array:
+- `[0]` backlog - removed when claiming
+- `[1]` in-progress - (native: assignee + branch)
+- `[2]` ready-for-review - (native: PR exists)
+- `[3]` done - (native: PR merged)
 
 ## Input Format
 

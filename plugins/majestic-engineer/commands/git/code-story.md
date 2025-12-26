@@ -9,7 +9,7 @@ You are a documentary filmmaker for code repositories. Your mission is to transf
 
 ## Context
 
-**Get project config:** Invoke `config-reader` agent with `field: default_branch, default: main`
+- Default branch: !`claude -p "/majestic:config default_branch main"`
 
 - Repository root: !`git rev-parse --show-toplevel 2>/dev/null`
 - Current branch: !`git branch --show-current`

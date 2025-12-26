@@ -138,7 +138,8 @@ See [docs/plugin-architecture/CONFIG-SYSTEM.md](docs/plugin-architecture/CONFIG-
 | `workflow` | Development workflow (`worktrees`, `branches`) | `branches` |
 | `review_topics_path` | Path to review topics file | (none) |
 
-**Config access:** Always use `config-reader` agent - never grep `.agents.yml` directly.
+**Config access:** Use the `/majestic:config` command pattern: `!`claude -p "/majestic:config field default"``
+This merges `.agents.yml` with `.agents.local.yml` (local overrides base) and returns the value or default.
 
 ## Resources
 
@@ -179,12 +180,20 @@ _Synthesized wisdom from working on this repository._
 
 **Learning:** When adding to existing skills, prefer lean additions. Add 3 concrete examples instead of 30 lines of framework. If the addition requires explanation to be useful, it's probably generic advice Claude already knows.
 
-**Learning:** Use existing specialized tools instead of bash workarounds. For config access, use `config-reader` agent - never grep `.agents.yml`. For file searches, use Glob tool - don't write multi-line ls/find commands.
+**Learning:** Use existing specialized tools instead of bash workarounds. For config access, use `/majestic:config` command - never grep `.agents.yml`. For file searches, use Glob tool - don't write multi-line ls/find commands.
 
 **Learning:** Keep instructions concise - Claude knows how to search. Say "search for design-system.md" not "check docs/, docs/design/, and root with ls commands". Over-specified bash snippets waste tokens and add no value.
 
-**Learning:** All `.agents.yml` access in commands/agents should go through `config-reader` agent. Never document grep patterns for config reading - it bypasses local overrides and is inconsistent with the config system.
+**Learning:** All `.agents.yml` access in commands/agents should use the `/majestic:config` command pattern. Never document grep patterns for config reading - it bypasses local overrides and is inconsistent with the config system.
 
 **Learning:** When creating a new skill, run `skill-linter` to validate it against the agentskills.io specification before committing. Key requirements: names must start with a letter (not a digit), use kebab-case, match the directory name, and stay under 500 lines.
 
 **Learning:** DevOps/infrastructure code should default to SIMPLE, flat structures. For Ansible: single playbook with inline tasks (~200 lines), use Galaxy roles (geerlingguy.*) instead of custom roles. For Terraform/OpenTofu: flat .tf files in one directory, no custom modules for <5 resources. Only add complexity (multiple playbooks, custom roles, nested modules, environment directories) when explicitly requested or truly justified by scale.
+
+**Learning:** Claude Code commands use backtick notation (`!`...``) for inline bash execution, not bash variable substitution like `$(...)`. Correct pattern: `!`command`` executes the command and interpolates output. For config access in commands: `!`claude -p "/majestic:config field default"``
+
+**Learning:** Skills can receive arguments through the Skill tool's `args` parameter. Example: `Skill(skill="config-reader", args="auto_preview false")`. Skills declared with `argument-hint:` in frontmatter can be stateless and composable with commands that wrap them.
+
+**Learning:** For stateless, reusable logic use the Script → Skill → Command pattern: 1) Write standalone bash script at `skills/*/scripts/` with no LLM dependency, 2) Create skill in `skills/*/SKILL.md` that documents the script usage, 3) Create command in `commands/` that provides CLI interface. This separates concerns: scripts are deterministic, skills are knowledge/context, commands are user-facing interfaces.
+
+**Learning:** When refactoring patterns across the codebase (e.g., updating config reading pattern), explicitly verify ALL files were updated. Use grep to find all instances: `grep -r "old_pattern" --include="*.md" | wc -l`. Compare before/after counts. One missed file breaks consistency and creates subtle bugs in downstream workflows.

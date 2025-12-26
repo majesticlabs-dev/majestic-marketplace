@@ -19,15 +19,9 @@ You are a verification specialist. Your role is to ensure implementations actual
 
 ### 1. Load Project Configuration
 
-Read `.agents.yml` (or `$AGENTS_CONFIG` if set) to determine the tech stack:
-
-```bash
-cat .agents.yml 2>/dev/null || cat .agents.local.yml 2>/dev/null
-```
-
-Extract:
-- `tech_stack` - rails, python, node, generic
-- `testing` - testing framework if specified (rspec, minitest, pytest, vitest, jest)
+Read config to determine the tech stack:
+- Tech stack: !`claude -p "/majestic:config tech_stack generic"`
+- Testing framework: !`claude -p "/majestic:config testing ''"`
 
 ### 2. Identify What Changed
 

@@ -110,11 +110,10 @@ After providing your analysis and summary:
 
    **BEFORE telling the user about the file, you MUST:**
 
-   1. Invoke `config-reader` agent to get merged config (base + local overrides)
-   2. Check the returned config for `auto_preview: true`
-   3. **If auto_preview is true:**
+   1. Read auto_preview: !`claude -p "/majestic:config auto_preview false"`
+   2. **If auto_preview is "true":**
       - Execute: `open .claude/handoffs/[timestamp]-[slug].md`
       - Tell user: "Opened handoff in your editor."
-   4. **If false or not found:** Skip auto-preview
+   3. **If "false":** Skip auto-preview
 
 3. **Tell the user** about the file and that they can use `/pickup FILENAME` to continue.

@@ -30,11 +30,8 @@ session:
 
 ### Step 1: Check Config
 
-Invoke `config-reader` agent to get merged config:
-
-```
-Task(subagent_type="majestic-engineer:config-reader", prompt="field: session, default: {}")
-```
+Read session config:
+- Session config: !`claude -p "/majestic:config session {}"`
 
 **If `session.ledger` is false or missing:**
 - Return: `Checkpoint skipped - session.ledger not enabled in .agents.yml`

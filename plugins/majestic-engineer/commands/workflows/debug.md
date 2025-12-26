@@ -8,7 +8,7 @@ argument-hint: "[error message or description]"
 
 ## Context
 
-- Tech stack: !`grep "^tech_stack:" .agents.local.yml .agents.yml 2>/dev/null | head -1 | awk '{print $2}'`
+- Tech stack: !`claude -p "/majestic:config tech_stack generic"`
 
 ## Bug Description
 

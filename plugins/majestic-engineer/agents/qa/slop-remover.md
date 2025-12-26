@@ -22,7 +22,8 @@ AI-generated code often includes:
 
 ### Step 1: Get the Diff
 
-First, invoke `config-reader` agent with `field: default_branch, default: main` to get the default branch.
+First, get the default branch:
+- Default branch: !`claude -p "/majestic:config default_branch main"`
 
 Then get changed files:
 ```bash

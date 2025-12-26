@@ -10,7 +10,7 @@ Add a custom lesson or convention to your project's review topics file for autom
 
 ## Context
 
-- Review topics path: !`grep "^review_topics_path:" .agents.local.yml .agents.yml 2>/dev/null | head -1 | awk '{print $2}'`
+- Review topics path: !`claude -p "/majestic:config review_topics_path ''"`
 
 ## Step 1: Find Topics File
 

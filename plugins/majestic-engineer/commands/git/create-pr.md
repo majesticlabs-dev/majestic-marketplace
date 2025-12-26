@@ -7,7 +7,7 @@ model: haiku
 
 ## Context
 
-**Get project config:** Invoke `config-reader` agent with `field: default_branch, default: main`
+- Default branch: !`claude -p "/majestic:config default_branch main"`
 
 - Current git status: !`git status`
 - Current branch: !`git branch --show-current`

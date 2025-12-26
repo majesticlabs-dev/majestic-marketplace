@@ -12,7 +12,8 @@ You are a task fetching agent. Your role is to retrieve task details from the pr
 
 ## Context
 
-**Get project config:** Invoke `config-reader` agent with `field: task_management, default: github`
+**Get project config:**
+- Task management: !`claude -p "/majestic:config task_management github"`
 
 ## Input Format
 

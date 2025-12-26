@@ -19,31 +19,30 @@ get_repo_root() {
     }
 }
 
-# Get main branch name (reads from config with local override support)
+# Get main branch name
+# Priority: DEFAULT_BRANCH env var > config files > git detection
 get_main_branch() {
+    # 1. Check environment variable (set by caller via /majestic:config)
+    if [ -n "${DEFAULT_BRANCH:-}" ]; then
+        echo "$DEFAULT_BRANCH"
+        return
+    fi
+
     local repo_root
     repo_root=$(git rev-parse --show-toplevel 2>/dev/null)
     local main_branch=""
 
-    # Check config with local override support
+    # 2. Check config files (fallback for direct CLI usage)
     if [ -n "$repo_root" ]; then
-        if [ -z "${AGENTS_CONFIG:-}" ]; then
-            # Normal mode: local overrides main
-            if [ -f "$repo_root/.agents.local.yml" ]; then
-                main_branch=$(grep "^default_branch:" "$repo_root/.agents.local.yml" 2>/dev/null | head -1 | awk '{print $2}')
-            fi
-            if [ -z "$main_branch" ] && [ -f "$repo_root/.agents.yml" ]; then
-                main_branch=$(grep "^default_branch:" "$repo_root/.agents.yml" 2>/dev/null | head -1 | awk '{print $2}')
-            fi
-        else
-            # Custom config: use only specified file
-            if [ -f "$repo_root/$AGENTS_CONFIG" ]; then
-                main_branch=$(grep "^default_branch:" "$repo_root/$AGENTS_CONFIG" 2>/dev/null | head -1 | awk '{print $2}')
-            fi
+        if [ -f "$repo_root/.agents.local.yml" ]; then
+            main_branch=$(grep "^default_branch:" "$repo_root/.agents.local.yml" 2>/dev/null | head -1 | awk '{print $2}')
+        fi
+        if [ -z "$main_branch" ] && [ -f "$repo_root/.agents.yml" ]; then
+            main_branch=$(grep "^default_branch:" "$repo_root/.agents.yml" 2>/dev/null | head -1 | awk '{print $2}')
         fi
     fi
 
-    # Fallback to git detection if not configured
+    # 3. Fallback to git detection
     if [ -z "$main_branch" ]; then
         main_branch=$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/remotes/origin/@@')
     fi

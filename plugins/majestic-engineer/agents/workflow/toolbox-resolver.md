@@ -29,15 +29,8 @@ Task Description: <optional, for context>
 
 ### 1. Read Project Tech Stack
 
-Read `tech_stack` from project config (check local override first):
-
-```bash
-# Check .agents.local.yml first, then .agents.yml
-TECH_STACK=$(grep "^tech_stack:" .agents.local.yml 2>/dev/null | head -1 | awk '{print $2}')
-[ -z "$TECH_STACK" ] && TECH_STACK=$(grep "^tech_stack:" .agents.yml 2>/dev/null | head -1 | awk '{print $2}')
-[ -z "$TECH_STACK" ] && TECH_STACK="generic"
-echo "$TECH_STACK"
-```
+Read `tech_stack` from project config:
+- Tech stack: !`claude -p "/majestic:config tech_stack generic"`
 
 ### 2. Discover Toolbox Manifests
 
