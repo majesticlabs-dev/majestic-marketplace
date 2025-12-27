@@ -68,12 +68,15 @@ When invoked, you must follow these steps:
    - **Security**: Input sanitization, authorization bypasses
    - **Performance**: Large data sets, timeout scenarios
 
-7. **Run Existing Tests**
-   - Execute the test suite to verify tests pass: `bundle exec rspec` or `bin/rails test`
-   - Note any failures, flaky tests, or slow tests
-   - Check for skipped/pending tests without justification
+7. **Check for Test Anti-Patterns**
+   - Skipped/pending tests without justification
+   - Tests with `sleep` or hardcoded delays (flaky test smell)
+   - Tests with non-deterministic data (random values without seeds)
+   - Over-reliance on `allow_any_instance_of` or similar broad mocks
 
 8. **Generate Review Report**: Provide findings in the structured format below.
+
+**Note:** This agent performs static analysis only. Test execution is handled by `always-works-verifier` to avoid redundant test runs.
 
 **Red Flags to Watch For:**
 - Tests that always pass (no real assertions)

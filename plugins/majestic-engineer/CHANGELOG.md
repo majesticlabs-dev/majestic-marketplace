@@ -2,6 +2,15 @@
 
 All notable changes to majestic-engineer will be documented in this file.
 
+## [3.16.4] - 2025-12-26
+
+### Fixed
+
+- **Removed redundant test execution from `test-reviewer`** - Now performs static analysis only
+  - `always-works-verifier` handles test execution
+  - `test-reviewer` focuses on test quality review (coverage gaps, assertion quality, anti-patterns)
+  - Prevents duplicate test runs when both agents are used in quality gate
+
 ## [3.16.3] - 2025-12-26
 
 ### Fixed
