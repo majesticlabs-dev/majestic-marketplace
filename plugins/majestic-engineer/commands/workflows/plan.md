@@ -131,7 +131,7 @@ Check if the feature description contains any of these keywords:
 
 ### 1. Repository Research & Context Gathering
 
-**Set terminal title:** !`echo -ne "\033]0;<short_feature_summary>\007"`
+**Set terminal title:** `Skill(skill: "majestic-engineer:terminal-title", args: "<short_feature_summary>")`
 
 <thinking>
 First, I need to understand the project's conventions and existing patterns, leveraging all available resources and use parallel subagents to do this.

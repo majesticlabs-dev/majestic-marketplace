@@ -2,22 +2,26 @@
 
 All notable changes to majestic-engineer will be documented in this file.
 
+## [3.16.3] - 2025-12-26
+
+### Fixed
+
+- **Terminal title skill not being invoked** - Commands now use explicit `Skill()` call
+  - Updated build-task and plan to call `Skill(skill: "majestic-engineer:terminal-title", args: "...")`
+  - Updated skill with `allowed-tools: Bash` and clear execution instructions
+
 ## [3.16.2] - 2025-12-26
 
 ### Added
 
 - **Terminal title support for build-task and plan commands**
-  - Uses `!` backtick notation for inline execution with TTY access
-  - Pattern: `!`echo -ne "\033]0;Title\007"``
-  - Works in Ghostty, iTerm2, Terminal.app, Alacritty, xterm
   - Build-task: Shows `#<ID>: <short_title>` after fetching task
   - Plan: Shows `<short_feature_summary>` when starting research
-  - New `terminal-title` skill documents the pattern
+  - New `terminal-title` skill with execution instructions
 
 ### Fixed
 
 - **Removed incorrect CLAUDE.md learning** about Bash tool not having TTY access
-  - The `!` backtick notation executes directly in terminal with TTY access
 
 ## [3.16.1] - 2025-12-26
 

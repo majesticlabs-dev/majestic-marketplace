@@ -1,29 +1,22 @@
 ---
 name: terminal-title
-description: Set terminal window title using inline execution. Pattern for commands.
+description: Set terminal window title. Invoke with args containing the title text.
+argument-hint: "<title>"
+allowed-tools: Bash
 ---
 
 # Terminal Title
 
 Set terminal window title to show what you're working on.
 
-## Pattern
+## Arguments
 
-Use `!` backtick notation in commands:
+`$ARGUMENTS` = the title text to display
 
-```markdown
-**Set terminal title:** !`echo -ne "\033]0;<title>\007"`
+## Execution
+
+Run this command via Bash tool:
+
+```bash
+echo -ne "\033]0;$ARGUMENTS\007"
 ```
-
-The `!` prefix executes directly in terminal with TTY access.
-
-## Usage
-
-| Command | When | Title |
-|---------|------|-------|
-| build-task | After fetch | `#42: Add auth` |
-| plan | Start research | `Add user auth` |
-
-## Script (Optional)
-
-`scripts/set_title.sh` for shell hook integration.
