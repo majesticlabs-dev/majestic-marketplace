@@ -38,23 +38,23 @@ ls -t docs/plans/*.md 2>/dev/null | head -1
 
 ## Workflow
 
-| Step | Action | Condition |
-|------|--------|-----------|
-| 0. Config | `/majestic:config` command | As needed |
-| 1. Fetch | `task-fetcher` agent | Skip if `plan` |
-| 2. Claim | `task-status-updater` agent (claim) | Skip if `plan` |
-| 3. Workspace | `workspace-setup` | — |
-| 4. Toolbox | `toolbox-resolver` | — |
-| 5. Research | Auto hooks from toolbox | If triggers match |
-| 6. Plan | `architect` | Skip if `plan` (use file content) |
-| 7. Build | Toolbox executor + coding_styles | — |
-| 8. Slop | `slop-remover` | — |
-| 9. Verify | `always-works-verifier` | — |
-| 10. Quality | `quality-gate` | — |
-| 11. Fix | Toolbox executor (max 3×) | If verify/quality fails |
-| 12. Pre-ship | Hooks from toolbox | — |
-| 13. Ship | `/majestic-engineer:workflows:ship-it` | — |
-| 14. Complete | `task-status-updater` (ship) | Skip if `plan` |
+| Step | Action | Condition | Enforce |
+|------|--------|-----------|---------|
+| 0. Config | `/majestic:config` command | As needed | — |
+| 1. Fetch | `task-fetcher` agent | Skip if `plan` | — |
+| 2. Claim | `task-status-updater` agent (claim) | Skip if `plan` | — |
+| 3. Workspace | `workspace-setup` | — | — |
+| 4. Toolbox | `toolbox-resolver` | — | — |
+| 5. Research | Auto hooks from toolbox | If triggers match | — |
+| 6. Plan | `architect` | Skip if `plan` (use file content) | — |
+| 7. Build | Toolbox executor + coding_styles | — | — |
+| 8. Slop | `slop-remover` | — | ⛔ MANDATORY |
+| 9. Verify | `always-works-verifier` | — | ⛔ MANDATORY |
+| 10. Quality | `quality-gate` | — | ⛔ MANDATORY |
+| 11. Fix | Toolbox executor (max 3×) | If verify/quality fails | — |
+| 12. Pre-ship | Hooks from toolbox | — | — |
+| 13. Ship | `/majestic-engineer:workflows:ship-it` | — | — |
+| 14. Complete | `task-status-updater` (ship) | Skip if `plan` | — |
 
 ---
 
@@ -153,6 +153,40 @@ If verify or quality fails (max 3 attempts):
 agent <fix_agent or general-purpose> "Fix: <findings>"
 ```
 Then re-run verify → quality.
+
+---
+
+## ⛔ QUALITY GATE CHECKPOINT (HARD GATE)
+
+**Before ANY shipping actions, confirm all mandatory checks passed:**
+
+| Check | Requirement |
+|-------|-------------|
+| slop-remover | Ran and cleaned code |
+| always-works-verifier | Returned PASS |
+| quality-gate | All reviewers approved |
+
+**If ANY step was skipped or failed:**
+1. **STOP** - do not proceed to Ship
+2. Return to the skipped/failed step
+3. Complete it before continuing
+
+This gate is **NOT optional**. Even "simple" or "obvious" fixes must pass quality checks.
+
+### Recovery: If You Got Sidetracked
+
+If you already committed but skipped quality steps:
+
+1. **STOP** before creating PR
+2. Run `slop-remover` on committed code
+3. Run `always-works-verifier`
+4. Run `quality-gate`
+5. Amend commit if fixes are needed
+6. Then proceed with PR creation
+
+**Never ship without quality verification.**
+
+---
 
 ### Step 12: Pre-ship Hooks
 For each hook in `pre_ship_hooks`:
