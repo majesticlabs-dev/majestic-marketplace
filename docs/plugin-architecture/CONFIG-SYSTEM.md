@@ -39,6 +39,10 @@ workflow: worktrees
 branch_naming: type/issue-desc
 review_topics_path: docs/agents/review-topics.md
 
+# Workspace setup hooks
+# workspace_setup:
+#   post_create: bin/setup-worktree
+
 # Auto-actions
 auto_preview: true
 auto_create_task: true
@@ -119,6 +123,7 @@ auto_create_task: true
 | `session.ledger_path` | Path to session ledger file | file path | `.session_ledger.md` |
 | `browser.type` | Browser for web-browser skill | `chrome` \| `brave` \| `edge` | `chrome` |
 | `browser.debug_port` | CDP port for browser control | port number | `9222` |
+| `workspace_setup.post_create` | Script to run after creating workspace | script path | (none) |
 
 ### Rails-Specific Fields
 

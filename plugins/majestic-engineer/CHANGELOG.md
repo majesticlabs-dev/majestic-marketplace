@@ -2,6 +2,16 @@
 
 All notable changes to majestic-engineer will be documented in this file.
 
+## [3.17.0] - 2025-12-27
+
+### Added
+
+- **Post-create hooks for workspace-setup** - Run project-specific scripts after creating worktree/branch
+  - New config: `workspace_setup.post_create` in `.agents.yml`
+  - Non-blocking execution: logs warning on failure, continues with setup
+  - Report shows hook status: executed, failed, or none configured
+  - Example: `bin/setup-worktree` for database isolation, env setup
+
 ## [3.16.4] - 2025-12-26
 
 ### Fixed

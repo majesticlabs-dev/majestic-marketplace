@@ -19,6 +19,7 @@ Type: <feature|bug|task|chore>
 Workflow: <worktrees|branches>
 Branch Naming: <pattern>
 Default Branch: <branch>
+Post-Create Hook: <script path or empty>
 ```
 
 **All config values are passed by the caller.** Do NOT invoke config-reader - use the values provided in the input.
@@ -107,6 +108,24 @@ git pull origin <DEFAULT_BRANCH>
 git checkout -b <branch-name>
 ```
 
+### 4.5 Run Post-Create Hook (if configured)
+
+If `Post-Create Hook` is provided and not empty:
+
+```bash
+# Change to workspace directory
+cd <worktree-path or current directory>
+
+# Execute the hook
+echo "Running post-create hook: <hook-command>"
+<hook-command>
+```
+
+**Error handling:** Non-blocking. If hook fails:
+- Log the error output
+- Continue with workspace verification
+- Include warning in success report
+
 ### 5. Verify Workspace
 
 Confirm the workspace is ready:
@@ -136,6 +155,13 @@ git status --short
 - Title: <title>
 - Type: <type>
 - Pattern: <branch_naming pattern used>
+
+### Post-Create Hook
+- ✓ Executed: <hook-command>
+(or)
+- ⚠ Hook failed: <error summary>
+(or)
+- (none configured)
 
 ### Next Steps
 - Workspace is ready for development
@@ -181,3 +207,4 @@ Status: FAILED
 | Worktree path conflict | Report, suggest cleanup |
 | Git not initialized | Report FAILED |
 | No default branch | Try `main`, then `master` |
+| Post-create hook fails | Log warning, continue (non-blocking) |

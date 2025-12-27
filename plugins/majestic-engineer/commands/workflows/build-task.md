@@ -80,10 +80,11 @@ agent task-status-updater "Action: claim | Task: <ID>"
 - Workflow: !`claude -p "/majestic:config workflow branches"`
 - Branch naming: !`claude -p "/majestic:config branch_naming issue-desc"`
 - Default branch: !`claude -p "/majestic:config default_branch main"`
+- Post-create hook: !`claude -p "/majestic:config workspace_setup.post_create ''"`
 
 **Then pass values to workspace-setup:**
 ```
-agent workspace-setup "Task ID: <ID> | Title: <title> | Type: <type> | Workflow: <workflow> | Branch Naming: <branch_naming> | Default Branch: <default_branch>"
+agent workspace-setup "Task ID: <ID> | Title: <title> | Type: <type> | Workflow: <workflow> | Branch Naming: <branch_naming> | Default Branch: <default_branch> | Post-Create Hook: <post_create>"
 ```
 
 ### Step 4: Resolve Toolbox
