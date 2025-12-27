@@ -43,25 +43,18 @@ ls -t docs/plans/*.md 2>/dev/null | head -1
 | 0. Config | `/majestic:config` command | As needed |
 | 1. Fetch | `task-fetcher` agent | Skip if `plan` |
 | 2. Claim | `task-status-updater` agent (claim) | Skip if `plan` |
-| 3. Terminal | `! printf` (direct) | — |
-| 4. Workspace | `workspace-setup` | — |
-| 5. Toolbox | `toolbox-resolver` | — |
-| 6. Research | Auto hooks from toolbox | If triggers match |
-| 7. Plan | `architect` | Skip if `plan` (use file content) |
-| 8. Build | Toolbox executor + coding_styles | — |
-| 9. Slop | `slop-remover` | — |
-| 10. Verify | `always-works-verifier` | — |
-| 11. Quality | `quality-gate` | — |
-| 12. Fix | Toolbox executor (max 3×) | If verify/quality fails |
-| 13. Pre-ship | Hooks from toolbox | — |
-| 14. Ship | `/majestic-engineer:workflows:ship-it` | — |
-| 15. Complete | `task-status-updater` (ship) | Skip if `plan` |
-
----
-
-## Step 3: Set Terminal Title
-
-! printf '\033]0;🔨 <ID>: <title>\007'
+| 3. Workspace | `workspace-setup` | — |
+| 4. Toolbox | `toolbox-resolver` | — |
+| 5. Research | Auto hooks from toolbox | If triggers match |
+| 6. Plan | `architect` | Skip if `plan` (use file content) |
+| 7. Build | Toolbox executor + coding_styles | — |
+| 8. Slop | `slop-remover` | — |
+| 9. Verify | `always-works-verifier` | — |
+| 10. Quality | `quality-gate` | — |
+| 11. Fix | Toolbox executor (max 3×) | If verify/quality fails |
+| 12. Pre-ship | Hooks from toolbox | — |
+| 13. Ship | `/majestic-engineer:workflows:ship-it` | — |
+| 14. Complete | `task-status-updater` (ship) | Skip if `plan` |
 
 ---
 
@@ -77,7 +70,7 @@ agent task-fetcher "Task: <reference>"
 agent task-status-updater "Action: claim | Task: <ID>"
 ```
 
-### Step 4: Setup Workspace
+### Step 3: Setup Workspace
 
 **Read config values:**
 - Workflow: !`claude -p "/majestic:config workflow branches"`
@@ -89,24 +82,24 @@ agent task-status-updater "Action: claim | Task: <ID>"
 agent workspace-setup "Task ID: <ID> | Title: <title> | Type: <type> | Workflow: <workflow> | Branch Naming: <branch_naming> | Default Branch: <default_branch>"
 ```
 
-### Step 5: Resolve Toolbox
+### Step 4: Resolve Toolbox
 ```
 agent toolbox-resolver "Stage: build-task | Task: <title> <description>"
 ```
 Stores: `build_agent`, `fix_agent`, `coding_styles`, `design_system_path`, `research_hooks`, `pre_ship_hooks`, `quality_gate.reviewers`
 
-### Step 6: Auto Research
+### Step 5: Auto Research
 For each `mode: auto` hook where triggers match task text:
 ```
 agent <hook.agent> "Research for: <title> | Context: <description>"
 ```
 
-### Step 7: Plan (task source only)
+### Step 6: Plan (task source only)
 ```
 agent architect "Task: <title> | Description: <description> | Research: <findings>"
 ```
 
-### Step 8: Build
+### Step 7: Build
 
 **Before invoking build agent, set up context:**
 
@@ -147,28 +140,28 @@ agent <build_agent or general-purpose> "Implement: <title> | Plan: <plan content
 
 The activated skills and design system context guide the build agent's implementation approach.
 
-### Step 9-11: Verify & Review
+### Step 8-10: Verify & Review
 ```
 agent slop-remover "Clean branch changes"
 agent always-works-verifier "Verify branch: <branch>"
 agent quality-gate "Context: <title> | Branch: <branch>"
 ```
 
-### Step 12: Fix Loop
+### Step 11: Fix Loop
 If verify or quality fails (max 3 attempts):
 ```
 agent <fix_agent or general-purpose> "Fix: <findings>"
 ```
 Then re-run verify → quality.
 
-### Step 13: Pre-ship Hooks
+### Step 12: Pre-ship Hooks
 For each hook in `pre_ship_hooks`:
 ```
 agent <hook.agent> "Pre-ship check on branch: <branch>"
 ```
 Required hooks block on failure. Optional hooks log warnings.
 
-### Step 14: Ship
+### Step 13: Ship
 For task source (with task ID):
 ```
 /majestic-engineer:workflows:ship-it closes #<ID>
@@ -179,7 +172,7 @@ For plan source (no task):
 /majestic-engineer:workflows:ship-it
 ```
 
-### Step 15: Complete (task source only)
+### Step 14: Complete (task source only)
 ```
 agent task-status-updater "Action: ship | Task: <ID> | PR: <number>"
 ```

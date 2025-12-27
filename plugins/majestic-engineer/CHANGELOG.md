@@ -2,6 +2,15 @@
 
 All notable changes to majestic-engineer will be documented in this file.
 
+## [3.15.3] - 2025-12-26
+
+### Removed
+
+- **Terminal title step from build-task** - Claude Code's Bash tool has no TTY access
+  - ANSI escape sequences are captured as text, not interpreted by terminal
+  - Neither inline `printf` nor skill invocation can set terminal title
+  - Removed non-functional step and renumbered workflow (15 steps → 14 steps)
+
 ## [3.15.2] - 2025-12-26
 
 ### Fixed
