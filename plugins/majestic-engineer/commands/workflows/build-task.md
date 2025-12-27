@@ -34,6 +34,8 @@ ls -t docs/plans/*.md 2>/dev/null | head -1
 
 **For plans:** Extract `TASK_ID` from filename slug, `TITLE` from first `# ` heading.
 
+**Set terminal title:** !`echo -ne "\033]0;<short_title>\007"` (use task title from plan heading)
+
 ---
 
 ## Workflow
@@ -64,6 +66,8 @@ ls -t docs/plans/*.md 2>/dev/null | head -1
 ```
 agent task-fetcher "Task: <reference>"
 ```
+
+**Set terminal title:** !`echo -ne "\033]0;#<ID>: <short_title>\007"`
 
 ### Step 2: Claim Task
 ```
@@ -141,6 +145,7 @@ agent <build_agent or general-purpose> "Implement: <title> | Plan: <plan content
 The activated skills and design system context guide the build agent's implementation approach.
 
 ### Step 8-10: Verify & Review
+
 ```
 agent slop-remover "Clean branch changes"
 agent always-works-verifier "Verify branch: <branch>"
@@ -196,6 +201,7 @@ agent <hook.agent> "Pre-ship check on branch: <branch>"
 Required hooks block on failure. Optional hooks log warnings.
 
 ### Step 13: Ship
+
 For task source (with task ID):
 ```
 /majestic-engineer:workflows:ship-it closes #<ID>
