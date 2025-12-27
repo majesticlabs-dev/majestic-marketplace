@@ -2,6 +2,28 @@
 
 All notable changes to majestic-engineer will be documented in this file.
 
+## [3.16.1] - 2025-12-26
+
+### Fixed
+
+- **GitHub labels not applied in build-task workflow** - `task-status-updater` agent now properly manages workflow labels
+  - Claim action: Adds `workflow_labels[1]` (in-progress) in addition to removing backlog
+  - Ship action: Removes in-progress label, adds `workflow_labels[2]` (ready-for-review)
+  - Added explicit instructions for reading `workflow_labels` array from `.agents.yml`
+  - Falls back to default labels (`backlog`, `in-progress`, `ready-for-review`, `done`) if not configured
+
+## [3.16.0] - 2025-12-26
+
+### Added
+
+- **Terminal title support for build-task and plan commands**
+  - Uses `!` backtick notation for inline execution with TTY access
+  - Pattern: `!`echo -ne "\033]0;Title\007"``
+  - Works in Ghostty, iTerm2, Terminal.app, Alacritty, xterm
+  - Build-task: Shows `#<ID>: <short_title>` after fetching task
+  - Plan: Shows `<short_feature_summary>` when starting research
+  - New `terminal-title` skill documents the pattern
+
 ## [3.15.3] - 2025-12-26
 
 ### Removed

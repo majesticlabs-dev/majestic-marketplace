@@ -15,11 +15,25 @@ You are a task status management agent. Your role is to update task status in th
 **Get project config:**
 - Task management: !`claude -p "/majestic:config task_management none"`
 
-For `workflow_labels`, read full config and extract the array:
-- `[0]` backlog - removed when claiming
-- `[1]` in-progress - (native: assignee + branch)
-- `[2]` ready-for-review - (native: PR exists)
-- `[3]` done - (native: PR merged)
+**Read `workflow_labels` array:**
+```bash
+# Extract workflow_labels with defaults
+labels=$(yq -r '.workflow_labels | if . and length > 0 then .[] else empty end' .agents.yml 2>/dev/null | tr '\n' ' ')
+if [[ -z "$labels" ]]; then
+  labels="backlog in-progress ready-for-review done"
+fi
+echo "$labels"
+```
+
+Or if yq unavailable, use Read tool on `.agents.yml` and parse the YAML.
+
+**Label indices:**
+- `[0]` = first label - removed when claiming
+- `[1]` = second label - added when claiming
+- `[2]` = third label - added when shipping
+- `[3]` = fourth label - added on merge (not handled by this agent)
+
+**Defaults:** `backlog`, `in-progress`, `ready-for-review`, `done`
 
 ## Input Format
 
@@ -48,18 +62,16 @@ Update task status to "in progress":
 
 | Backend | Implementation |
 |---------|----------------|
-| `github` | Remove `workflow_labels[0]` (backlog), self-assign |
+| `github` | Remove `workflow_labels[0]`, add `workflow_labels[1]`, self-assign |
 | `beads` | Set status to `in_progress` |
 | `linear` | Transition to "In Progress" state |
 | `file` | Update task file on main branch |
 
 **GitHub:**
 ```bash
-# Remove backlog label and self-assign
-gh issue edit <ISSUE> --remove-label "<BACKLOG_LABEL>" --add-assignee "@me"
+# Remove workflow_labels[0], add workflow_labels[1], and self-assign
+gh issue edit <ISSUE> --remove-label "<workflow_labels[0]>" --add-label "<workflow_labels[1]>" --add-assignee "@me"
 ```
-
-Where `<BACKLOG_LABEL>` = `workflow_labels[0]` (e.g., "backlog").
 
 **Beads:**
 ```
@@ -94,15 +106,15 @@ Update task status to "ready for review":
 
 | Backend | Implementation |
 |---------|----------------|
-| `github` | Comment with PR link (PR existence = review state) |
+| `github` | Remove `workflow_labels[1]`, add `workflow_labels[2]`, comment with PR link |
 | `beads` | Set status to `blocked` with note about PR review |
 | `linear` | Transition to "In Review" state |
 | `file` | Update task file on main branch |
 
 **GitHub:**
 ```bash
-# Comment with PR link - no label changes needed
-# PR existence signals "ready for review" state
+# Remove workflow_labels[1], add workflow_labels[2], and comment with PR link
+gh issue edit <ISSUE> --remove-label "<workflow_labels[1]>" --add-label "<workflow_labels[2]>"
 gh issue comment <ISSUE> --body "Ready for review in PR #<PR_NUMBER>"
 ```
 
