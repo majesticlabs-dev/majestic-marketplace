@@ -67,22 +67,15 @@ The architect agent:
 
 ### 5. Write Plan
 
-**Choose template based on complexity:**
+**Load plan-builder skill for template guidance:**
 
-| Complexity | Template |
-|------------|----------|
-| Simple bug, small fix | `resources/plan-template-minimal.md` |
-| Most features (default) | `resources/plan-template-standard.md` |
-| Major architectural change | `resources/plan-template-comprehensive.md` |
+```
+Skill(skill: "plan-builder")
+```
+
+The skill provides template selection criteria and templates in its resources.
 
 **Output:** Write to `docs/plans/[YYYYMMDDHHMMSS]_<title>.md`
-
-Include:
-- Research findings with file paths (e.g., `src/models/user.rb:42`)
-- External documentation URLs
-- Related issues/PRs
-- Design system reference (if UI feature)
-- Infrastructure context from `devops-plan` (if DevOps feature)
 
 ### 6. Review Plan
 
@@ -92,7 +85,7 @@ agent plan-review "docs/plans/<filename>.md"
 
 Incorporate feedback and update the plan file before presenting to user.
 
-### 7. Post-Generation Options
+### 7. Post-Generation Options - IMPORTANT!
 
 **Check auto_preview config:** `Skill(skill: "config-reader", args: "auto_preview false")`
 
@@ -102,13 +95,13 @@ If `auto_preview` is `true`: Execute `open docs/plans/<filename>.md`
 
 **Question:** "Plan ready at `docs/plans/<filename>.md`. What next?"
 
-| Option | Condition | Action |
-|--------|-----------|--------|
-| Break into small tasks | Always | Run `agent task-breakdown` on the plan |
-| Create as single epic | Always | `Skill(skill: "backlog-manager")` - one task for entire plan |
-| Preview in editor | If `auto_preview` is `false` | `open docs/plans/<filename>.md` |
-| Revise | Always | Ask what to change, regenerate |
-| Start building | Always | `/majestic:build-task docs/plans/<filename>.md` |
+| Option | Action |
+|--------|--------|
+| Break into small tasks | Run `agent task-breakdown` on the plan |
+| Create as single epic  | `Skill(skill: "backlog-manager")` - one task for entire plan |
+| Preview in editor | `open docs/plans/<filename>.md` |
+| Revise | Ask what to change, regenerate |
+| Start building | `/majestic:build-task docs/plans/<filename>.md` |
 
 ### 8. Handle Task Breakdown
 

@@ -176,6 +176,8 @@ _Synthesized wisdom from working on this repository._
 
 **Learning:** Agents must stay under 300 lines. Agents need detailed instructions for autonomous work, but overly long files cause rules to be ignored. Extract reference material, detailed examples, and edge case handling to resources files.
 
+**Learning:** Resource files (templates, examples) for commands must be placed in a skill's `resources/` subdirectory, NOT directly under `commands/`. Claude Code exposes any `.md` file in `commands/` as executable commands. Pattern: create a dedicated skill (e.g., `skills/plan-builder/`) with `SKILL.md` + `resources/` subdirectory, then have commands invoke that skill. Skills and agents CAN have `resources/` subdirectories - only the main `SKILL.md` or agent `.md` is exposed.
+
 **Learning:** Skill content must be copy-paste ready. Include: specific email copy, exact question scripts, {{variable}} placeholders. Exclude: "Why it works" explanations, ASCII diagrams, generic frameworks, "best practices" prose. Test: Could someone use this template immediately without reading explanations?
 
 **Learning:** When adding to existing skills, prefer lean additions. Add 3 concrete examples instead of 30 lines of framework. If the addition requires explanation to be useful, it's probably generic advice Claude already knows.
