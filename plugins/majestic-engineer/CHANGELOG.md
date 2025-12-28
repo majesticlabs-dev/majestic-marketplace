@@ -2,6 +2,17 @@
 
 All notable changes to majestic-engineer will be documented in this file.
 
+## [3.20.0] - 2025-12-28
+
+### Added
+
+- **Commit hooks** - Custom pre/post commit prompts for LLM-based validation
+  - New config fields: `commit.pre_prompt`, `commit.post_prompt` in `.agents.yml`
+  - Pre-commit: validate staged changes (debug statements, TODOs, secrets)
+  - Post-commit: trigger follow-up actions (changelog updates, notifications)
+  - Non-blocking execution: reports issues but continues
+  - Added Read, Grep, Edit tools to `/commit` command for hook execution
+
 ## [3.17.0] - 2025-12-27
 
 ### Added
