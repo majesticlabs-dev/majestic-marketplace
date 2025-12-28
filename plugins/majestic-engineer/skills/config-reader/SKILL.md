@@ -1,6 +1,6 @@
 ---
 name: config-reader
-description: Read project config from .agents.yml and .agents.local.yml with local overrides. Use when checking config values like auto_preview, tech_stack, task_management. Invoke with args "<field> <default>".
+description: Read project config from .agents.yml and .agents.local.yml with local overrides. Supports dot notation for nested fields. Invoke with args "<field> <default>".
 argument-hint: "<field> [default]"
 ---
 
@@ -8,28 +8,25 @@ argument-hint: "<field> [default]"
 
 Read and merge `.agents.yml` and `.agents.local.yml` configuration files. Local config overrides base config.
 
+**Requires:** yq (`brew install yq` or `snap install yq`)
+
 ## Arguments
 
 `$ARGUMENTS` format: `<field> [default]`
 
 Examples:
-- `auto_preview false` - get auto_preview, default to "false"
-- `tech_stack generic` - get tech_stack, default to "generic"
-- `task_management` - get task_management, no default (empty if not found)
+- `auto_preview false` - get top-level field, default to "false"
+- `plan.auto_create_task false` - get nested field, default to "false"
+- `tech_stack generic` - get top-level field, default to "generic"
+- `browser.type chrome` - get nested browser type
+- `toolbox.build_task.design_system_path` - get deeply nested field
 
 ## Execution
 
-Parse the arguments and run:
+Run the config reader script with parsed arguments:
 
 ```bash
-bash -c '
-FIELD="$1"
-DEFAULT="${2:-}"
-value=""
-[[ -f .agents.local.yml ]] && value=$(grep -m1 "^${FIELD}:" .agents.local.yml 2>/dev/null | cut -d: -f2- | sed "s/^ *//")
-[[ -z "$value" && -f .agents.yml ]] && value=$(grep -m1 "^${FIELD}:" .agents.yml 2>/dev/null | cut -d: -f2- | sed "s/^ *//")
-echo "${value:-$DEFAULT}"
-' -- FIELD DEFAULT
+./plugins/majestic-engineer/skills/config-reader/scripts/config_reader.sh FIELD DEFAULT
 ```
 
 Replace `FIELD` and `DEFAULT` with the parsed arguments.
@@ -51,9 +48,11 @@ Return ONLY the config value (single line):
 
 | Field | Description | Typical Default |
 |-------|-------------|-----------------|
-| `auto_preview` | Auto-open generated files | `false` |
-| `auto_create_task` | Auto-create tasks from plans | `false` |
+| `auto_preview` | Auto-open markdown files | `false` |
+| `plan.auto_create_task` | Auto-create tasks from plans | `false` |
 | `tech_stack` | Primary tech stack | `generic` |
 | `task_management` | Task tracking backend | `none` |
 | `workflow` | Git workflow style | `branches` |
 | `default_branch` | Main branch name | `main` |
+| `browser.type` | Browser for web-browser skill | `chrome` |
+| `toolbox.build_task.design_system_path` | Design system location | (none) |

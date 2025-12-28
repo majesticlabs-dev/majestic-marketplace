@@ -8,13 +8,40 @@ Commands and scripts read project configuration from `.agents.yml` in the projec
 
 The config file has **core fields** plus **stack-specific fields** based on tech stack.
 
+## Version History
+
+| Version | Changes |
+|---------|---------|
+| 1.2 | Moved `auto_create_task` under `plan:` namespace |
+| 1.1 | Added `workflow_labels`, `workspace_setup.post_create` |
+| 1.0 | Initial release |
+
+### Migration from 1.1 to 1.2
+
+**Backwards compatible:** The config reader automatically falls back to old field locations.
+
+Old format (1.1):
+```yaml
+auto_preview: true
+auto_create_task: true
+```
+
+New format (1.2):
+```yaml
+auto_preview: true  # Stays at top level (used by multiple commands)
+plan:
+  auto_create_task: true  # Moved under plan: (plan-specific)
+```
+
+**No action required** - existing configs continue to work. Update when convenient.
+
 ## Example Configurations
 
 ### Rails Project
 
 ```yaml
 # .agents.yml - Project configuration for Claude Code commands
-config_version: 1.0
+config_version: 1.2
 default_branch: main
 app_status: development
 
@@ -43,9 +70,12 @@ review_topics_path: docs/agents/review-topics.md
 # workspace_setup:
 #   post_create: bin/setup-worktree
 
-# Auto-actions
+# Auto-preview markdown files (plans, PRDs, briefs, handoffs)
 auto_preview: true
-auto_create_task: true
+
+# Planning
+plan:
+  auto_create_task: true # Auto-create task when /majestic:plan completes
 
 # Toolbox customization (optional - overrides plugin defaults)
 toolbox:
@@ -61,7 +91,7 @@ toolbox:
 ### Python Project
 
 ```yaml
-config_version: 1.0
+config_version: 1.2
 default_branch: main
 app_status: development
 
@@ -75,14 +105,16 @@ task_management: github
 workflow: worktrees
 branch_naming: type/issue-desc
 review_topics_path: docs/agents/review-topics.md
+
 auto_preview: true
-auto_create_task: true
+plan:
+  auto_create_task: true
 ```
 
 ### Node Project
 
 ```yaml
-config_version: 1.0
+config_version: 1.2
 default_branch: main
 app_status: development
 
@@ -99,8 +131,10 @@ task_management: github
 workflow: worktrees
 branch_naming: type/issue-desc
 review_topics_path: docs/agents/review-topics.md
+
 auto_preview: true
-auto_create_task: true
+plan:
+  auto_create_task: true
 ```
 
 ## Field Reference
@@ -117,8 +151,8 @@ auto_create_task: true
 | `workflow` | Feature development workflow | `worktrees` \| `branches` | `branches` |
 | `branch_naming` | Branch naming convention | `feature/desc` \| `issue-desc` \| `type/issue-desc` \| `user/desc` | `feature/desc` |
 | `review_topics_path` | Path to review topics file | file path | (none) |
-| `auto_preview` | Auto-open created markdown files | `true` \| `false` | `false` |
-| `auto_create_task` | Auto-create task when `/majestic:plan` completes | `true` \| `false` | `false` |
+| `auto_preview` | Auto-open markdown files (plans, PRDs, briefs, handoffs) | `true` \| `false` | `false` |
+| `plan.auto_create_task` | Auto-create task when `/majestic:plan` completes | `true` \| `false` | `false` |
 | `session.ledger` | Enable session state checkpointing to file | `true` \| `false` | `false` |
 | `session.ledger_path` | Path to session ledger file | file path | `.session_ledger.md` |
 | `browser.type` | Browser for web-browser skill | `chrome` \| `brave` \| `edge` | `chrome` |
@@ -372,8 +406,13 @@ For personal preferences that shouldn't be tracked in git, create `.agents.local
 # .agents.local.yml - Personal overrides (not tracked in git)
 workflow: worktrees
 branch_naming: user/desc
+
+# Auto-preview markdown files
 auto_preview: true
-auto_create_task: false
+
+# Planning preferences
+plan:
+  auto_create_task: false
 
 # Browser preference (for web-browser skill)
 browser:
@@ -393,10 +432,9 @@ When commands create markdown files (plans, PRDs, briefs, handoffs), they follow
 
 **REQUIRED steps after writing the file:**
 
-1. **Get merged config**: Invoke `config-reader` agent to get final merged config
-2. **Check auto_preview**: Look for `auto_preview: true` in the returned config
-3. **If true**: Execute `open <filepath>` immediately
-4. **If false/missing**: Present options including "Preview in editor" first
+1. **Check auto_preview**: `Skill(skill: "config-reader", args: "auto_preview false")`
+2. **If true**: Execute `open <filepath>` immediately
+3. **If false/missing**: Present options including "Preview in editor" first
 
 **Commands using this pattern:**
 - `/majestic:plan` → `docs/plans/<title>.md`

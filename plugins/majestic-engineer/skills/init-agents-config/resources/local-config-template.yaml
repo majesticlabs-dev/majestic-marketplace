@@ -1,0 +1,23 @@
+# .agents.local.yml - Personal overrides (not tracked in git)
+# Uncomment and modify values you want to override from .agents.yml
+
+# workflow: worktrees        # worktrees | branches
+# branch_naming: user/desc   # Override team naming convention
+
+# Auto-preview markdown files (plans, PRDs, briefs, handoffs)
+# auto_preview: true
+
+# Planning - Personal preferences
+# plan:
+#   auto_create_task: false  # Disable auto-task creation locally
+
+# Browser - Personal browser preference (for web-browser skill)
+# browser:
+#   type: brave              # chrome | brave | edge
+#   debug_port: 9222         # CDP port (default: 9222)
+
+# Override quality gate reviewers (replaces team list entirely):
+# quality_gate:
+#   reviewers:
+#     - security-review
+#     - simplicity-reviewer
