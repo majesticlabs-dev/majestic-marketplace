@@ -116,7 +116,11 @@ The agent appends `## Implementation Tasks` section with:
 - Tasks with story points (1-3 each)
 - Dependencies between tasks
 
-**After breakdown, use AskUserQuestion:**
+**Check plan.auto_create_task config:** `Skill(skill: "config-reader", args: "plan.auto_create_task false")`
+
+**If `plan.auto_create_task` is `true`:** Skip to step 9 (auto-create tasks).
+
+**If `false`, use AskUserQuestion:**
 
 **Question:** "Tasks added to plan. Create these in your task manager?"
 
@@ -128,7 +132,7 @@ The agent appends `## Implementation Tasks` section with:
 
 ### 9. Create Tasks and Update Plan
 
-When user chooses to create tasks:
+When user chooses to create tasks (or if auto_create_task is true):
 
 1. **Create tasks:** `Skill(skill: "backlog-manager")` for each task in Implementation Tasks section
 2. **Collect task IDs:** Store the returned task ID/number for each created task
