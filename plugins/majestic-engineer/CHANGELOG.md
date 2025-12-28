@@ -6,6 +6,22 @@ All notable changes to majestic-engineer will be documented in this file.
 
 ### Added
 
+- **Task breakdown agent** - Break implementation plans into small, actionable tasks
+  - New `task-breakdown` agent in `agents/plan/`
+  - Uses Fibonacci story points based on Complexity + Effort + Uncertainty
+  - Target: 1-3 points per task; tasks above 3 trigger `architect` agent for decomposition
+  - Assigns task priorities (p1, p2, p3)
+  - Creates parallelization matrix showing concurrent execution groups
+  - Identifies dependencies between tasks
+  - Appends `## Implementation Tasks` section to plan file
+  - If > 10 tasks, stops and suggests splitting into epics
+
+- **Task breakdown integration in `/majestic:plan`** - New post-generation option
+  - "Break into small tasks" option after plan creation
+  - Agent stores tasks in plan document only (no external creation)
+  - User reviews tasks, then optionally creates in task manager
+  - Task creation handled by main `/majestic:plan` command when approved
+
 - **Post-create hooks for workspace-setup** - Run project-specific scripts after creating worktree/branch
   - New config: `workspace_setup.post_create` in `.agents.yml`
   - Non-blocking execution: logs warning on failure, continues with setup
