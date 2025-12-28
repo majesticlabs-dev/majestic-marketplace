@@ -2,6 +2,16 @@
 
 All notable changes to majestic-tools will be documented in this file.
 
+## [3.2.3] - 2025-12-28
+
+### Fixed
+
+- **commands-hud path resolution** - Fixed "No such file or directory" error when running HUD command
+  - Root cause: External bash script couldn't be located when plugin installed via marketplace
+  - Solution: Command now uses Claude's built-in tools (Glob, Read) instead of external script
+  - Checks `~/.claude/managed-plugins/majestic-marketplace/` first, then git root
+  - Removed `helpers/hud-commands.sh` (no longer needed)
+
 ## [3.2.2] - 2025-12-22
 
 ### Removed
@@ -40,7 +50,6 @@ All notable changes to majestic-tools will be documented in this file.
 - **Commands HUD** - `/majestic:commands-hud` displays all marketplace commands in a formatted table
   - Groups by plugin (default) or category
   - Filter by specific plugin with `--plugin`
-  - Helper script at `helpers/hud-commands.sh`
 
 ## [3.0.0] - 2025-12-12
 

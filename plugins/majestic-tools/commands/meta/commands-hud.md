@@ -3,7 +3,7 @@ name: majestic:commands-hud
 description: Display all available commands in a formatted HUD grouped by plugin or category
 argument-hint: "[--plugin PLUGIN] [--group plugin|category|flat]"
 model: haiku
-allowed-tools: Bash
+allowed-tools: Glob, Read, Bash
 ---
 
 # Commands HUD
@@ -18,35 +18,43 @@ Display all majestic-marketplace commands in a beautiful formatted HUD.
   - `category` - Group by command category (Workflows, Git, Session, etc.)
   - `flat` - Single alphabetical list
 
-## Examples
-
-```bash
-# Show all commands grouped by plugin
-/majestic-tools:meta:commands-hud
-
-# Show only engineering commands
-/majestic-tools:meta:commands-hud --plugin majestic-engineer
-
-# Show commands grouped by category
-/majestic-tools:meta:commands-hud --group category
-```
-
 ## Task
 
-Run the HUD script with the provided arguments:
+1. **Find marketplace root** - Check these locations in order:
+   - `~/.claude/managed-plugins/majestic-marketplace/` (installed plugin)
+   - Git root via `git rev-parse --show-toplevel` if in majestic-marketplace repo
+   - Skip with message if neither found
+2. Use Glob to find command files: `{marketplace_root}/plugins/*/commands/**/*.md`
+3. Read each command file to extract frontmatter (`name:` and `description:`)
+4. Group commands based on `$ARGUMENTS`:
+   - Parse `--plugin PLUGIN` to filter by plugin name
+   - Parse `--group STYLE` to determine grouping (default: `plugin`)
+5. Render as a formatted table
 
-```bash
-bash "$(dirname "$(dirname "$(dirname "$0")")")/helpers/hud-commands.sh" $ARGUMENTS
+## Plugin Name Mapping
+
+| Plugin | Display Name |
+|--------|-------------|
+| majestic-engineer | Engineering Workflows |
+| majestic-rails | Rails Development |
+| majestic-python | Python Development |
+| majestic-tools | Claude Code Tools |
+| majestic-marketing | Marketing & SEO |
+| majestic-sales | Sales Acceleration |
+| majestic-company | Business Operations |
+| majestic-experts | Expert Panels |
+
+## Output Format
+
+```
+╔═══════════════════════════════════════════════════════════════╗
+║          Majestic Marketplace - Available Commands            ║
+╚═══════════════════════════════════════════════════════════════╝
+
+┌─────────────────── Engineering Workflows ────────────────────┐
+│ /command-name          │ Description of the command          │
+│ /another-command       │ Another description                 │
+└──────────────────────────────────────────────────────────────┘
 ```
 
-Parse `$ARGUMENTS` and run:
-
-```bash
-# Get the script location (relative to marketplace root)
-MARKETPLACE_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
-bash "$MARKETPLACE_ROOT/plugins/majestic-tools/helpers/hud-commands.sh" $ARGUMENTS
-```
-
-If `$ARGUMENTS` is empty, run without arguments (uses default plugin grouping).
-
-Present the output to the user. The script outputs a formatted table showing all available commands grouped appropriately.
+Render the HUD with all discovered commands, properly grouped and sorted alphabetically within each group.
