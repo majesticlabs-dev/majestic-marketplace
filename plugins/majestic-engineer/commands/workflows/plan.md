@@ -122,9 +122,41 @@ The agent appends `## Implementation Tasks` section with:
 
 | Option | Action |
 |--------|--------|
-| Yes, create all tasks | `Skill(skill: "backlog-manager")` for each task |
+| Yes, create all tasks | Create tasks and update plan (see step 9) |
 | Revise | Ask what to change, regenerate |
 | Start building | `/majestic:build-task docs/plans/<filename>.md` |
+
+### 9. Create Tasks and Update Plan
+
+When user chooses to create tasks:
+
+1. **Create tasks:** `Skill(skill: "backlog-manager")` for each task in Implementation Tasks section
+2. **Collect task IDs:** Store the returned task ID/number for each created task
+3. **Update plan document:** Edit the plan file to add task references
+
+**Update format for Implementation Tasks section:**
+
+```markdown
+## Implementation Tasks
+
+| Task | Points | Dependencies | Tracker |
+|------|--------|--------------|---------|
+| Set up database schema | 2 | - | #123 |
+| Create API endpoints | 3 | #123 | #124 |
+| Build UI components | 2 | #124 | #125 |
+```
+
+Or inline format:
+```markdown
+- [ ] Set up database schema (2 pts) → #123
+- [ ] Create API endpoints (3 pts, depends: #123) → #124
+```
+
+**Task ID formats by system:**
+- GitHub Issues: `#123`
+- Linear: `PROJ-123`
+- Beads: `BEADS-123`
+- File-based: `TODO-123`
 
 ## Notes
 
