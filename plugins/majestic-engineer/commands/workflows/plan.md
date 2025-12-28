@@ -18,19 +18,23 @@ Transform feature descriptions into well-structured markdown plans.
 
 ### 1. Feature Classification
 
-Detect feature type from keywords:
+Detect feature type and delegate to specialists:
 
-| Type | Keywords |
-|------|----------|
-| **UI** | page, component, form, button, modal, view, design, responsive |
-| **DevOps** | terraform, ansible, infrastructure, deploy, cloud, docker, k8s |
+| Type | Detection | Action |
+|------|-----------|--------|
+| **UI** | page, component, form, button, modal, design | Check design system |
+| **DevOps** | terraform, ansible, infrastructure, cloud, docker | Delegate to `devops-plan` |
 
 **If UI feature:**
 1. Check config: `Skill(skill: "config-reader", args: "design_system_path")`
 2. If empty, check default: `docs/design/design-system.md`
 3. If no design system found, suggest `/majestic:ux-brief` first
 
-**If DevOps feature:** Note relevant skills (opentofu-coder, ansible-coder, cloud-init-coder).
+**If DevOps feature:**
+```
+Skill(skill: "majestic-devops:devops-plan")
+```
+This skill detects IaC tools, providers, runs security review, and returns context for the plan.
 
 ### 2. Research (Parallel Agents)
 
@@ -40,7 +44,6 @@ Run in parallel:
 - `agent git-researcher "[feature]"` - repository patterns
 - `agent docs-researcher "[feature]"` - library documentation
 - `agent best-practices-researcher "[feature]"` - external best practices
-- **If DevOps:** `agent infra-security-review` - audit existing IaC
 
 ### 3. Spec Review
 
@@ -78,8 +81,8 @@ Include:
 - Research findings with file paths (e.g., `src/models/user.rb:42`)
 - External documentation URLs
 - Related issues/PRs
-- Design system reference (if UI)
-- DevOps skills to apply (if infrastructure)
+- Design system reference (if UI feature)
+- Infrastructure context from `devops-plan` (if DevOps feature)
 
 ### 6. Review Plan
 
