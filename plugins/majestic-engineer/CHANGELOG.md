@@ -2,6 +2,23 @@
 
 All notable changes to majestic-engineer will be documented in this file.
 
+## [3.21.0] - 2025-12-28
+
+### Added
+
+- **`/majestic:build-plan` command** - Execute all tasks in a plan using build-task workflow
+  - Parses `## Implementation Tasks` section from plan file
+  - Orders tasks by dependencies
+  - Runs `/majestic:build-task` for each task reference
+  - Updates plan checkboxes as tasks complete
+  - Integrates with ralph-wiggum for autonomous execution
+  - Outputs `BUILD_PLAN_COMPLETE` promise for ralph loop detection
+
+- **Ralph-wiggum integration in `/majestic:plan`** - New step 10 after task creation
+  - "Build all tasks now" option using build-plan
+  - "Build with ralph (autonomous)" shows ralph-loop command
+  - Enables overnight/walkaway task execution
+
 ## [3.20.0] - 2025-12-28
 
 ### Added

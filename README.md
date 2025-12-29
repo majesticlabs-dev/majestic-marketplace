@@ -89,6 +89,7 @@ Third-party plugins that complement the Majestic suite:
 
 | Plugin | Description | Install |
 |--------|-------------|---------|
+| [ralph-wiggum](https://github.com/anthropics/claude-plugins-official/tree/main/plugins/ralph-wiggum) | Continuous AI agent loop - iterates until task completion using stop hooks | `/plugin marketplace add anthropics/claude-plugins-official` then `/plugin install ralph-wiggum` |
 | [beads](https://github.com/steveyegge/beads) | Dependency-aware issue tracker - issues chained like beads with blocking relationships | `curl -fsSL https://raw.githubusercontent.com/steveyegge/beads/main/install.sh \| bash` |
 | [beads_viewer](https://github.com/Dicklesworthstone/beads_viewer) | Terminal UI for Beads with DAG visualization, graph metrics, and AI agent "robot mode" | `curl -fsSL https://raw.githubusercontent.com/Dicklesworthstone/beads_viewer/main/install.sh \| bash` |
 | [browser-cdp](https://github.com/dpaluy/browser-cdp) | Browser automation via Chrome DevTools Protocol - control Chrome, Brave, Edge with real profiles | `npm install -g browser-cdp` or `bunx browser-cdp` |

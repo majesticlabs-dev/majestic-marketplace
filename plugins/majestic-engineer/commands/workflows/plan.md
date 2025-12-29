@@ -101,7 +101,7 @@ If `auto_preview` is `true`: Execute `open docs/plans/<filename>.md`
 | Create as single epic  | `Skill(skill: "backlog-manager")` - one task for entire plan |
 | Preview in editor | `open docs/plans/<filename>.md` |
 | Revise | Ask what to change, regenerate |
-| Start building | `/majestic:build-task docs/plans/<filename>.md` |
+| Build as single task | `/majestic:build-task docs/plans/<filename>.md` |
 
 ### 8. Handle Task Breakdown
 
@@ -128,7 +128,7 @@ The agent appends `## Implementation Tasks` section with:
 |--------|--------|
 | Yes, create all tasks | Create tasks and update plan (see step 9) |
 | Revise | Ask what to change, regenerate |
-| Start building | `/majestic:build-task docs/plans/<filename>.md` |
+| Build all tasks | `/majestic:build-plan docs/plans/<filename>.md` |
 
 ### 9. Create Tasks and Update Plan
 
@@ -161,6 +161,24 @@ Or inline format:
 - Linear: `PROJ-123`
 - Beads: `BEADS-123`
 - File-based: `TODO-123`
+
+### 10. Offer to Build All Tasks
+
+After tasks are created, use AskUserQuestion:
+
+**Question:** "Tasks created in task manager. Start building?"
+
+| Option | Action |
+|--------|--------|
+| Build all tasks now | `/majestic:build-plan docs/plans/<filename>.md` |
+| Build with ralph (autonomous) | Show ralph-loop command to run |
+| Done for now | Exit planning |
+
+**If "Build with ralph":** Display:
+```
+Run this command for autonomous execution:
+/ralph-loop "/majestic:build-plan docs/plans/<filename>.md" --max-iterations 50 --completion-promise "BUILD_PLAN_COMPLETE"
+```
 
 ## Notes
 

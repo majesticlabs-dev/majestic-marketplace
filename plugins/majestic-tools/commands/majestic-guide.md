@@ -34,6 +34,8 @@ Guide users to the most appropriate skill, command, or agent for their task.
    **Engineering (majestic-engineer)**
    - Git workflows → `/majestic-engineer:git:*` commands
    - Planning/architecture → `plan:architect` agent, `/majestic:plan` command
+   - Build single task → `/majestic:build-task` command
+   - Build entire plan → `/majestic:build-plan` command (with ralph-wiggum for autonomy)
    - Testing/TDD → `tdd-workflow` skill, `test-create` agent
    - Security review → `security-review` agent
    - CI/CD issues → `github-resolver` agent, `check-ci` skill
@@ -130,6 +132,9 @@ Guide users to the most appropriate skill, command, or agent for their task.
 
 **Input:** "plan a new feature"
 **Output:** Recommend `/majestic-engineer:workflows:plan` command or `plan:architect` agent
+
+**Input:** "implement all tasks in my plan"
+**Output:** Recommend `/majestic:build-plan` command, mention ralph-wiggum for autonomous execution
 
 ---
 
