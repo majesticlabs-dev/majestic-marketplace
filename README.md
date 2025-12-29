@@ -112,7 +112,15 @@ source ~/.zshrc
 | `ENABLE_BACKGROUND_TASKS` | Enables background task execution |
 | `FORCE_AUTO_BACKGROUND_TASKS` | Automatically runs eligible tasks in background |
 | `CLAUDE_BASH_MAINTAIN_PROJECT_WORKING_DIR` | Keeps bash commands in project directory |
-| `cly` alias | Launches Claude Code with auto-approve for trusted projects |
+| `cly` alias | `alias cly="claude --dangerously-skip-permissions"` - auto-approve for trusted projects |
+
+### MCP Servers
+
+Add the Sequential Thinking MCP server for enhanced reasoning:
+
+```bash
+claude mcp add sequential-thinking -s local -- npx -y @modelcontextprotocol/server-sequential-thinking
+```
 
 ## Updating Marketplace & Plugins
 
