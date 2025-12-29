@@ -34,8 +34,6 @@ ls -t docs/plans/*.md 2>/dev/null | head -1
 
 **For plans:** Extract `TASK_ID` from filename slug, `TITLE` from first `# ` heading.
 
-**Set terminal title:** `Skill(skill: "majestic-engineer:terminal-title", args: "<short_title>")`
-
 ---
 
 ## Workflow
@@ -67,8 +65,6 @@ ls -t docs/plans/*.md 2>/dev/null | head -1
 ```
 agent task-fetcher "Task: <reference>"
 ```
-
-**Set terminal title:** `Skill(skill: "majestic-engineer:terminal-title", args: "#<ID>: <short_title>")`
 
 ### Step 2: Claim Task
 ```
