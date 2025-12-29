@@ -30,7 +30,7 @@ Get code review feedback from external LLMs (Codex, Gemini) on your current chan
 /majestic-llm:review
 /majestic-llm:review --staged --llm codex
 /majestic-llm:review --branch --llm all
-/majestic-llm:review --base main --model gpt-5.1-codex-max
+/majestic-llm:review --base main --model gpt-5.2-codex
 ```
 
 ## Available Models
@@ -38,9 +38,10 @@ Get code review feedback from external LLMs (Codex, Gemini) on your current chan
 ### Codex (OpenAI)
 | Model | Use Case |
 |-------|----------|
-| `gpt-5.1-codex-mini` | Fast reviews |
+| `gpt-5.2-codex` | Latest, high reasoning (default) |
+| `gpt-5.1-codex-max` | Maximum thoroughness |
 | `gpt-5.1-codex` | Balanced |
-| `gpt-5.1-codex-max` | Maximum thoroughness (default) |
+| `gpt-5.1-codex-mini` | Fast reviews |
 
 ### Gemini (Google)
 | Model | Use Case |
@@ -207,7 +208,7 @@ Issues only Gemini caught:
 
 ### Thorough Branch Review
 ```
-/majestic-llm:review --branch --model gpt-5.1-codex-max
+/majestic-llm:review --branch --model gpt-5.2-codex
 ```
 
 ### Review Against Specific Branch
@@ -255,3 +256,13 @@ This command complements Claude's built-in review capabilities:
 3. Compare findings to identify blind spots
 
 The multi-LLM approach helps catch issues that any single model might miss.
+
+## How It Works
+
+Unlike generic LLM reviews, this command uses `codex exec` with custom prompts that include:
+
+- **Project context** from CLAUDE.md
+- **Review topics** from your configured review topics file
+- **Explicit focus areas** for targeted review
+
+This gives you control over what gets reviewed, rather than relying on opinionated built-in review commands.

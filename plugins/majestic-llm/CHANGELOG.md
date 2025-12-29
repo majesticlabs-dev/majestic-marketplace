@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.1.0] - 2025-12-28
+
+### Changed
+
+- **codex-reviewer**: Replaced `codex review` with `codex exec` for full control over review prompts
+  - Now includes project context (CLAUDE.md, review topics)
+  - Default model updated to `gpt-5.2-codex` with `model_reasoning_effort="xhigh"`
+  - Custom prompts instead of Codex's opinionated built-in review
+- **/majestic-llm:review**: Updated default model and added "How It Works" section
+
 ## [1.0.0] - 2024-12-20
 
 ### Added
