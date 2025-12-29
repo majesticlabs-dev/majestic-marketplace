@@ -2,6 +2,19 @@
 
 All notable changes to majestic-engineer will be documented in this file.
 
+## [3.22.0] - 2025-12-28
+
+### Enhanced
+
+- **`/session:pickup` command** - State verification before resuming handoffs
+  - Verifies documented files still exist in codebase
+  - Detects changes since handoff date via `git log`
+  - Validates key code patterns are still present
+  - Presents ✅/⚠️/❓ verification summary
+  - Asks user to address drift or proceed
+  - Skip verification with `--skip-verify` flag
+  - Inspired by [Continuous-Claude-v2](https://github.com/parcadei/Continuous-Claude-v2) resume_handoff skill
+
 ## [3.21.0] - 2025-12-28
 
 ### Added

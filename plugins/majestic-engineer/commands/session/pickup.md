@@ -1,7 +1,7 @@
 ---
 name: session:pickup
 description: Resume work from a previous handoff session stored in .claude/handoffs
-allowed-tools: Bash, Read, AskUserQuestion
+allowed-tools: Bash, Read, AskUserQuestion, Glob, Grep
 model: haiku
 argument-hint: "[optional: handoff-file]"
 ---
@@ -65,10 +65,46 @@ If a handoff file was provided in `$ARGUMENTS`:
 
 3. **Read the handoff**: Once the correct file is identified, read it using the Read tool to get the full handoff plan.
 
-4. **Resume work**: After reading the handoff file:
+### 3. Verify State Before Resuming
+
+After reading the handoff, verify the current codebase state matches what was documented:
+
+1. **Check documented files exist**: For each file mentioned in "Files and Code Sections", verify it still exists using Glob
+2. **Check for recent changes**: If handoff includes a date, check if relevant files changed since:
+   ```bash
+   git log --since="<handoff_date>" --oneline -- <file1> <file2> ...
+   ```
+3. **Validate key patterns**: Use Grep to confirm critical code patterns mentioned in the handoff are still present
+
+**Present verification summary:**
+
+```
+## State Verification
+
+✅ **Verified:**
+- <files that exist and match>
+- <patterns confirmed present>
+
+⚠️ **Drift Detected:**
+- <file> was modified on <date> (after handoff)
+- <pattern> no longer found in <file>
+
+❓ **Unable to Verify:**
+- <items requiring manual confirmation>
+```
+
+**Skip verification if:**
+- Handoff was created today
+- Handoff contains no file references
+- User explicitly requests to skip (`/pickup --skip-verify <file>`)
+
+### 4. Resume Work
+
+After verification:
    - Acknowledge what handoff you're resuming
    - Summarize the key context from the handoff (primary request, current state)
-   - Proceed with the "Next Step" outlined in the handoff plan
+   - If drift was detected, ask: "Some files changed since this handoff. Address drift first or proceed with the documented next step?"
+   - Otherwise, proceed with the "Next Step" outlined in the handoff plan
    - Ask the user for confirmation or additional direction if needed
 
 ## Example Workflow
@@ -92,4 +128,30 @@ Assistant: Found multiple matches:
 - 2025-11-04-implement-auth.md
 - 2025-11-03-fix-auth-bug.md
 Which handoff would you like to continue?
+```
+
+### With state verification:
+```
+User: /pickup implement-auth
+Assistant: Resuming handoff: Implement Authentication (2025-11-04)
+
+## State Verification
+
+✅ Verified:
+- app/models/user.rb exists
+- app/controllers/sessions_controller.rb exists
+- bcrypt gem in Gemfile
+
+⚠️ Drift Detected:
+- app/models/user.rb modified 2 days after handoff
+- config/routes.rb has new routes not in handoff
+
+The handoff's "Next Step" is: Add session management.
+Some files changed since this handoff. Address drift first or proceed?
+```
+
+### Skip verification:
+```
+User: /pickup --skip-verify implement-auth
+Assistant: [Skips verification, immediately resumes from "Next Step"]
 ```
