@@ -1,6 +1,6 @@
 ---
 name: ship
-description: Complete checkout workflow - runs linting, creates commit, opens PR. Ships code on "ready to ship" or "finish up".
+description: Complete checkout workflow - runs linting, creates commit, opens PR, creates handoff. Ships code on "ready to ship" or "finish up".
 tools: Bash, SlashCommand, Read, Grep, Glob
 model: haiku
 color: green
@@ -45,7 +45,12 @@ When invoked, you must follow these steps in sequence:
    - **If task reference provided** (e.g., `closes #123`): Pass it to `/create-pr` so it's included in PR body
    - Capture the PR URL from the command output
    - Verify the PR was created successfully
-   - Return the complete PR URL to the user
+
+4. **Create Session Handoff**
+   - Execute the `/session:handoff` slash command using SlashCommand tool
+   - Pass the PR URL and branch name as context: `"Shipped PR #<number>: <title>"`
+   - This captures learnings for future `/learn` analysis
+   - Handoff is saved to main worktree's `.claude/handoffs/` for centralized access
 
 **Best Practices:**
 - Always run steps sequentially - do not skip ahead if a step fails
@@ -62,6 +67,7 @@ Provide your final response with:
 - ✅ Summary of linting actions taken and issues fixed
 - ✅ Confirmation of commit creation with the actual commit message
 - ✅ Pull request URL and confirmation of successful creation
+- ✅ Handoff created for future learning
 - ⚠️ Any warnings or issues encountered during the workflow
 - 📝 Next steps or recommendations if applicable
 

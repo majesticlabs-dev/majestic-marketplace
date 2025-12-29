@@ -1,61 +1,101 @@
 ---
-allowed-tools: Bash(git *), Read, Edit, AskUserQuestion
-description: Reflect on conversation history and suggest improvements to AGENTS.md based on patterns, feedback, and lessons learned.
+allowed-tools: Bash, Read, Edit, AskUserQuestion
+description: Reflect on current session and suggest AGENTS.md improvements based on patterns and feedback.
 model: haiku
 ---
 
-# Reflect on Conversation
+# Reflect
 
-Analyze our conversation history and suggest improvements to AGENTS.md based on patterns, feedback, and lessons learned.
+Analyze the current session and suggest improvements to AGENTS.md based on patterns, feedback, and lessons learned.
+
+**For cross-session learning from git history and handoffs, use `/learn` instead.**
+
+## Data Sources
+
+| Source | What to Extract |
+|--------|-----------------|
+| Conversation history | User corrections, repeated feedback, preferences |
+| `.claude/session_ledger.md` | Key Decisions, patterns from current work (if exists) |
 
 ## Process
 
-1. **Review Conversation History**
-   - Analyze all user feedback and corrections
-   - Identify moments where instructions weren't followed
-   - Note any repeated issues or preferences
+### Step 1: Review Conversation History
 
-2. **Identify Improvement Opportunities**
-   - Look for patterns that could be addressed with better instructions
-   - Find gaps in current AGENTS.md that led to misunderstandings
-   - Consider user preferences that emerged during interaction
+Analyze all messages in this conversation:
+- User feedback and corrections
+- Moments where instructions weren't followed
+- Repeated issues or preferences
+- Patterns that emerged during interaction
 
-3. **Generate Specific Improvements**
-   - Create actionable, specific edits for AGENTS.md
-   - Focus on preventing similar issues in future interactions
-   - Prioritize changes that address user feedback directly
+### Step 2: Check Session Ledger (if exists)
 
-4. **Present Suggestions**
-   - Show proposed changes using diff-style format
-   - Explain the reasoning behind each suggestion
-   - Group related improvements together
+```bash
+[ -f ".claude/session_ledger.md" ] && cat ".claude/session_ledger.md"
+```
 
-5. **Apply Changes (if approved)**
-   - Use `AskUserQuestion` to ask: "Would you like me to apply these improvements to AGENTS.md?"
-   - If yes, use Edit tool to update AGENTS.md
-   - Confirm changes were applied successfully
+Extract any Key Decisions or patterns documented there.
+
+### Step 3: Identify Improvement Opportunities
+
+Look for:
+- Gaps in current AGENTS.md that led to misunderstandings
+- User preferences that should be encoded
+- Patterns that could prevent future issues
+- Corrections that apply broadly (not one-off incidents)
+
+### Step 4: Generate Specific Improvements
+
+Create actionable, specific edits. Each suggestion should:
+- Be concrete (not vague principles)
+- Prevent similar issues in future
+- Address patterns, not one-off incidents
+
+### Step 5: Present Suggestions
+
+Use this format:
+
+```markdown
+## Session Reflection
+
+### 1. [Pattern Name]
+**Gap**: What's missing or unclear in AGENTS.md
+**Proposed**: Specific text to add
+**Reasoning**: Evidence from this session (e.g., "You corrected this 3 times")
+
+### 2. [Pattern Name]
+...
+```
+
+### Step 6: Apply Changes (if approved)
+
+Use `AskUserQuestion`:
+- "Would you like me to apply these improvements to AGENTS.md?"
+
+If yes:
+- Use Edit tool to update AGENTS.md
+- Confirm changes were applied
 
 ## Guidelines
 
-- Only suggest improvements that genuinely enhance LLM's behavior
-- Keep suggestions specific and actionable, not vague principles
-- Don't suggest redundant rules that duplicate existing instructions
+- Only suggest improvements that genuinely enhance behavior
+- Keep suggestions specific and actionable
+- Don't suggest redundant rules
 - Focus on patterns, not one-off incidents
-- Maintain the existing structure and style of AGENTS.md
+- Maintain existing AGENTS.md structure and style
 
-## Example Output Format
+## Example Output
 
 ```
-ℹ️ I've identified these improvement opportunities:
+## Session Reflection
 
 ### 1. Error Handling Preference
-**Current gap**: No guidance on error handling style
-**Proposed addition**: "Always use try-catch blocks with specific error types rather than generic catches"
+**Gap**: No guidance on error handling style
+**Proposed**: "Always use try-catch blocks with specific error types rather than generic catches"
 **Reasoning**: You corrected this pattern 3 times during our session
 
 ### 2. Import Organization
-**Current gap**: No import organization rules
-**Proposed addition**: "Group imports by: 1) External packages, 2) Internal modules, 3) Types"
+**Gap**: No import organization rules
+**Proposed**: "Group imports by: 1) External packages, 2) Internal modules, 3) Types"
 **Reasoning**: You consistently reorganized imports this way
 
 Would you like me to apply these improvements to AGENTS.md?

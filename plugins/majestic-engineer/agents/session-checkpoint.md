@@ -25,8 +25,10 @@ Requires `session.ledger: true` in `.agents.yml`:
 ```yaml
 session:
   ledger: true
-  ledger_path: .session_ledger.md  # optional, defaults to .session_ledger.md
+  ledger_path: .claude/session_ledger.md  # optional, defaults to .claude/session_ledger.md
 ```
+
+**Note:** The ledger is per-worktree (ephemeral session state). Handoffs go to main worktree (permanent, for `/learn`).
 
 ## Process
 
@@ -41,7 +43,12 @@ Read session config:
 
 ### Step 2: Determine Ledger Path
 
-Use `session.ledger_path` from config, or default to `.session_ledger.md`.
+Use `session.ledger_path` from config, or default to `.claude/session_ledger.md`.
+
+Ensure the directory exists:
+```bash
+mkdir -p .claude
+```
 
 ### Step 3: Gather State
 
@@ -104,7 +111,7 @@ _Last updated: <timestamp>_
 Return a brief confirmation:
 
 ```
-Checkpoint saved to .session_ledger.md
+Checkpoint saved to .claude/session_ledger.md
 - Goal: <brief goal>
 - State: <done count> done, now: <current>, next: <next>
 ```
@@ -204,8 +211,8 @@ Mark assumptions as `UNCONFIRMED` when:
 
 | Tool | Purpose | Persistence | Trigger |
 |------|---------|-------------|---------|
-| `session-checkpoint` | Crash recovery, quick state save | File (`.session_ledger.md`) | Agent-triggered |
-| `/session:handoff` | Cross-session continuity | File (`.claude/handoffs/`) | User-triggered |
+| `session-checkpoint` | Crash recovery, quick state save | File (`.claude/session_ledger.md`) | Agent-triggered |
+| `/session:handoff` | Cross-session continuity | File (main worktree `.claude/handoffs/`) | User/ship-triggered |
 | `TodoWrite` | In-session task tracking | In-context only | Agent-triggered |
 
 Use `session-checkpoint` for:

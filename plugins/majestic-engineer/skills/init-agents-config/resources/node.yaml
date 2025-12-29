@@ -33,6 +33,11 @@ auto_preview: true
 plan:
   auto_create_task: true              # Auto-create task when /majestic:plan completes
 
+# Session - Continuity and crash recovery
+# session:
+#   ledger: true                        # Enable session checkpointing
+#   ledger_path: .claude/session_ledger.md  # Per-worktree session state
+
 # Browser - Configuration for web-browser skill (browser-cdp)
 # Uncomment and set if not using Chrome (default)
 # browser:

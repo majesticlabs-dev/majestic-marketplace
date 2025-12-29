@@ -1,7 +1,7 @@
 ---
 name: session:handoff
 description: Create a detailed handoff plan for continuing work in a new session
-allowed-tools: Read, Write, AskUserQuestion
+allowed-tools: Bash, Read, Write, AskUserQuestion
 model: haiku
 ---
 
@@ -11,7 +11,7 @@ The user specified purpose:
 
 <purpose>$ARGUMENTS</purpose>
 
-You are creating a summary specifically so that it can be continued by another agent.  For this to work you MUST have a purpose.  If no specified purpose was provided in the `<purpose>...</purpose>` tag you must STOP IMMEDIATELY and use `AskUserQuestion` to ask the user what the purpose is.
+You are creating a summary specifically so that it can be continued by another agent. For this to work you MUST have a purpose. If no specified purpose was provided in the `<purpose>...</purpose>` tag you must STOP IMMEDIATELY and use `AskUserQuestion` to ask the user what the purpose is.
 
 Do not continue before asking for the purpose as you will otherwise not understand the instructions and do not assume a purpose!
 
@@ -41,13 +41,13 @@ Your plan should include the following sections:
 6. **Current Work**: Describe in detail precisely what was being worked on immediately before this handoff request, paying special attention to the most recent messages from both user and assistant. Include file names and code snippets where applicable.
 7. **Optional Next Step**: List the next step that you will take that is related to the most recent work you were doing. IMPORTANT: ensure that this step is DIRECTLY in line with the user's explicit requests, and the task you were working on immediately before this handoff request. If your last task was concluded, then only list next steps if they are explicitly in line with the users request. Do not start on tangential requests without confirming with the user first.
 
-Additionally create a "slug" for this handoff.  The "slug" is how we will refer to it later in a few places.  Examples:
+Additionally create a "slug" for this handoff. The "slug" is how we will refer to it later in a few places. Examples:
 
 * current-user-api-handler
 * implement-auth
 * fix-issue-42
 
-Together with the slug create a "Readable Summary".  Examples:
+Together with the slug create a "Readable Summary". Examples:
 
 * Implement Currnet User API Handler
 * Implement Authentication
@@ -104,16 +104,43 @@ Here's an example of how your output should be structured:
 
 After providing your analysis and summary:
 
-1. **Write the handoff summary** to `.claude/handoffs/[timestamp]-[slug].md` where [timestamp] is the current date in format YYYY-MM-DD and the slug is what we defined before.
+### 1. Determine Handoff Location
 
-2. **Auto-Preview Check (REQUIRED)**
+**Always write to main worktree** (centralizes handoffs for `/learn`):
 
-   **BEFORE telling the user about the file, you MUST:**
+```bash
+MAIN_WORKTREE=$(git worktree list --porcelain | grep "^worktree" | head -1 | cut -d' ' -f2)
+HANDOFF_DIR="$MAIN_WORKTREE/.claude/handoffs"
+mkdir -p "$HANDOFF_DIR"
+```
 
-   1. Read auto_preview: !`claude -p "/majestic:config auto_preview false"`
-   2. **If auto_preview is "true":**
-      - Execute: `open .claude/handoffs/[timestamp]-[slug].md`
-      - Tell user: "Opened handoff in your editor."
-   3. **If "false":** Skip auto-preview
+### 2. Create Filename
 
-3. **Tell the user** about the file and that they can use `/pickup FILENAME` to continue.
+Include branch name for context:
+
+```bash
+BRANCH=$(git branch --show-current)
+FILENAME="$(date +%Y-%m-%d)-${BRANCH}-[slug].md"
+```
+
+Example: `2024-12-28-feature-oauth-implement-auth.md`
+
+### 3. Write the Handoff
+
+Write the handoff summary to `$HANDOFF_DIR/$FILENAME`.
+
+### 4. Auto-Preview Check (REQUIRED)
+
+**BEFORE telling the user about the file, you MUST:**
+
+1. Read auto_preview: !`claude -p "/majestic:config auto_preview false"`
+2. **If auto_preview is "true":**
+   - Execute: `open "$HANDOFF_DIR/$FILENAME"`
+   - Tell user: "Opened handoff in your editor."
+3. **If "false":** Skip auto-preview
+
+### 5. Tell the User
+
+Inform user about the file and that they can use `/session:pickup FILENAME` to continue.
+
+**If in a worktree**, also mention: "Handoff saved to main worktree for centralized access."
