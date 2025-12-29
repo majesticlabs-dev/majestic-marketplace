@@ -152,50 +152,53 @@ This merges `.agents.yml` with `.agents.local.yml` (local overrides base) and re
 
 _Synthesized wisdom from working on this repository._
 
-**Learning:** Stick to the official spec. Custom fields may confuse users or break compatibility with future versions.
+### General
 
-**Learning:** When updating files to add new patterns or tools, always preserve existing content. Don't simplify or remove example formats, question templates, or detailed instructions. Add the new pattern alongside existing content, not as a replacement.
+- Stick to the official spec. Custom fields may confuse users or break compatibility with future versions.
+- When updating files to add new patterns or tools, always preserve existing content. Don't simplify or remove example formats, question templates, or detailed instructions. Add the new pattern alongside existing content, not as a replacement.
+- Mermaid diagrams use different node shapes: `()` for commands (stadium/rounded), `{{}}` for agents (hexagons), `[]` for manual actions (rectangles).
+- The `model:` field in frontmatter requires full model IDs (e.g., `haiku`). Prefer omitting to inherit from user's session, except for cheap/fast operations where haiku is appropriate.
+- When refactoring patterns across the codebase, explicitly verify ALL files were updated. Use grep to find all instances and compare before/after counts.
 
-**Learning:** Interactive skills (those with "Conversation Starter" or "Begin by asking:" patterns) should include `AskUserQuestion` in their `allowed-tools:` frontmatter and use the format: "Use `AskUserQuestion` to gather initial context. Begin by asking:"
+### Skills
 
-**Learning:** Mermaid diagrams use different node shapes to distinguish component types: `()` creates stadium/rounded nodes for commands, `{{}}` creates hexagons for agents, and `[]` creates rectangles for manual actions or external steps.
+- Skills must contain NEW information Claude doesn't already know. Avoid generic advice like "think step by step" or personas like "you are a professional engineer". Include: project-specific patterns, synthesized experience, concrete code examples, measurable rules ("max 5 lines per method").
+- Skills are for knowledge/context (probabilistic - Claude MAY follow), hooks are for process enforcement (deterministic - FORCES behavior).
+- Thinking frameworks work better as skills than agents - they integrate into conversation as LENSES for thinking. Structured workflows with distinct intake→analysis→output phases work better as agents.
+- Skills must stay under 500 lines. Extract verbose templates (>15 lines) to a `resources/` subdirectory.
+- Skill content must be copy-paste ready. Include: specific templates, exact scripts, `{{variable}}` placeholders. Exclude: "Why it works" explanations, generic frameworks, "best practices" prose.
+- When adding to existing skills, prefer lean additions. Add 3 concrete examples instead of 30 lines of framework.
+- Skills can receive arguments through the Skill tool's `args` parameter. Example: `Skill(skill="config-reader", args="auto_preview false")`.
+- Interactive skills should include `AskUserQuestion` in `allowed-tools:` and use the format: "Use `AskUserQuestion` to gather initial context. Begin by asking:"
+- Run `skill-linter` to validate new skills. Key requirements: names start with a letter, use kebab-case, match directory name, stay under 500 lines.
 
-**Learning:** The `model:` field in command/agent frontmatter requires full model IDs (e.g., `haiku`), not short names like `haiku`, `sonnet`, or `opus`. Prefer omitting the field entirely to inherit from user's session, except for explicitly cheap/fast operations where haiku is appropriate.
+### Agents
 
-**Learning:** The `name:` field in command frontmatter overrides path-based naming. Without it, Claude Code derives names from file paths (e.g., `plugins/majestic-rails/commands/gemfile/upgrade.md` → `/majestic-rails:gemfile:upgrade`). Adding `name: foo` creates `/foo` instead - simpler but loses plugin namespacing. Use `name:` intentionally for short aliases; omit it when namespacing matters.
+- Agents should do autonomous work, not just provide advice. Good agents: read files, run commands, fetch web content, produce artifacts. Bad agents: "strategic advisor" (just advice).
+- Agents must stay under 300 lines. Extract reference material, detailed examples, and edge case handling to resources files.
 
-**Learning:** Skills must contain NEW information Claude doesn't already know. Avoid generic advice like "think step by step", "run tests after changes", or personas like "you are a professional engineer" - the model is trained on the entire internet and knows these. Instead, include: project-specific patterns, synthesized experience, concrete code examples, measurable rules ("max 5 lines per method"), and anti-patterns with specifics.
+### Commands
 
-**Learning:** Skills are for knowledge/context (probabilistic - Claude MAY follow), hooks are for process enforcement (deterministic - FORCES behavior). If you want Claude to ALWAYS do something (run tests, check types), use a hook, not a skill instruction.
+- The `name:` field overrides path-based naming. Without it, Claude Code derives names from file paths (e.g., `plugins/majestic-rails/commands/gemfile/upgrade.md` → `/majestic-rails:gemfile:upgrade`). Use `name:` intentionally for short aliases; omit when namespacing matters.
+- Commands have no official line limit, but should be kept concise. Use `@path/to/file` references and `!`command`` for shell output instead of inlining large blocks.
+- Commands can contain shell scripts (`.sh`, `.bash`) but NOT markdown resource files. Any `.md` file in `commands/` becomes an executable command. For markdown templates, create a skill with `resources/` and invoke it from the command.
+- Command frontmatter: `description` (required for SlashCommand tool), `argument-hint` (shown in autocomplete), `allowed-tools` (whitelist), `model` (optional). Keep descriptions to 1-2 sentences.
+- SlashCommand tool uses 15,000 char budget (configurable via `SLASH_COMMAND_TOOL_CHAR_BUDGET`) for all command names + args + descriptions combined.
+- Command arguments: `$ARGUMENTS` for all input, or `$1`, `$2` for positional. Document in `argument-hint`. Hard-code stable steps; use arguments for run-specific details.
+- Each command should have single responsibility. Separate read-only from mutating commands. For mutating operations, show plan before executing.
+- Claude Code commands use backtick notation (`!`...``) for inline bash, not `$(...)`. Pattern: `!`claude -p "/majestic:config field default"``
 
-**Learning:** Agents should do autonomous work, not just provide advice. If an agent only gives guidance without using tools meaningfully, it should be a skill instead. Good agents: read files, run commands, fetch web content, produce artifacts. Bad agents: "strategic advisor" (just advice), "code mentor" (persona without action).
+### Resources & File Structure
 
-**Learning:** Thinking frameworks (like first-principles prompts) work better as skills than agents because they need to integrate into the user's ongoing conversation as LENSES for thinking, not produce a separate one-shot report. Structured workflows with distinct intake→analysis→output phases work better as agents.
+- Resource files for commands must be in a skill's `resources/` subdirectory, NOT under `commands/`. Pattern: create skill with `SKILL.md` + `resources/`, then invoke from command.
+- For stateless, reusable logic use Script → Skill → Command pattern: 1) bash script at `skills/*/scripts/`, 2) skill documenting usage, 3) command providing CLI interface.
 
-**Learning:** Skills must stay under 500 lines. When approaching this limit, extract verbose templates (>15 lines) to a `resources/` subdirectory and reference as "See resources/filename.md".
+### Config & Tools
 
-**Learning:** Agents must stay under 300 lines. Agents need detailed instructions for autonomous work, but overly long files cause rules to be ignored. Extract reference material, detailed examples, and edge case handling to resources files.
+- Use existing specialized tools instead of bash workarounds. For config: `/majestic:config`. For file searches: Glob tool.
+- Keep instructions concise - Claude knows how to search. Over-specified bash snippets waste tokens.
+- All `.agents.yml` access should use `/majestic:config` command pattern. Never grep config files directly.
 
-**Learning:** Resource files (templates, examples) for commands must be placed in a skill's `resources/` subdirectory, NOT directly under `commands/`. Claude Code exposes any `.md` file in `commands/` as executable commands. Pattern: create a dedicated skill (e.g., `skills/plan-builder/`) with `SKILL.md` + `resources/` subdirectory, then have commands invoke that skill. Skills and agents CAN have `resources/` subdirectories - only the main `SKILL.md` or agent `.md` is exposed.
+### Infrastructure
 
-**Learning:** Skill content must be copy-paste ready. Include: specific email copy, exact question scripts, {{variable}} placeholders. Exclude: "Why it works" explanations, ASCII diagrams, generic frameworks, "best practices" prose. Test: Could someone use this template immediately without reading explanations?
-
-**Learning:** When adding to existing skills, prefer lean additions. Add 3 concrete examples instead of 30 lines of framework. If the addition requires explanation to be useful, it's probably generic advice Claude already knows.
-
-**Learning:** Use existing specialized tools instead of bash workarounds. For config access, use `/majestic:config` command - never grep `.agents.yml`. For file searches, use Glob tool - don't write multi-line ls/find commands.
-
-**Learning:** Keep instructions concise - Claude knows how to search. Say "search for design-system.md" not "check docs/, docs/design/, and root with ls commands". Over-specified bash snippets waste tokens and add no value.
-
-**Learning:** All `.agents.yml` access in commands/agents should use the `/majestic:config` command pattern. Never document grep patterns for config reading - it bypasses local overrides and is inconsistent with the config system.
-
-**Learning:** When creating a new skill, run `skill-linter` to validate it against the agentskills.io specification before committing. Key requirements: names must start with a letter (not a digit), use kebab-case, match the directory name, and stay under 500 lines.
-
-**Learning:** DevOps/infrastructure code should default to SIMPLE, flat structures. For Ansible: single playbook with inline tasks (~200 lines), use Galaxy roles (geerlingguy.*) instead of custom roles. For Terraform/OpenTofu: flat .tf files in one directory, no custom modules for <5 resources. Only add complexity (multiple playbooks, custom roles, nested modules, environment directories) when explicitly requested or truly justified by scale.
-
-**Learning:** Claude Code commands use backtick notation (`!`...``) for inline bash execution, not bash variable substitution like `$(...)`. Correct pattern: `!`command`` executes the command and interpolates output. For config access in commands: `!`claude -p "/majestic:config field default"``
-
-**Learning:** Skills can receive arguments through the Skill tool's `args` parameter. Example: `Skill(skill="config-reader", args="auto_preview false")`. Skills declared with `argument-hint:` in frontmatter can be stateless and composable with commands that wrap them.
-
-**Learning:** For stateless, reusable logic use the Script → Skill → Command pattern: 1) Write standalone bash script at `skills/*/scripts/` with no LLM dependency, 2) Create skill in `skills/*/SKILL.md` that documents the script usage, 3) Create command in `commands/` that provides CLI interface. This separates concerns: scripts are deterministic, skills are knowledge/context, commands are user-facing interfaces.
-
-**Learning:** When refactoring patterns across the codebase (e.g., updating config reading pattern), explicitly verify ALL files were updated. Use grep to find all instances: `grep -r "old_pattern" --include="*.md" | wc -l`. Compare before/after counts. One missed file breaks consistency and creates subtle bugs in downstream workflows.
+- DevOps code should default to SIMPLE, flat structures. For Ansible: single playbook with inline tasks (~200 lines), use Galaxy roles. For Terraform/OpenTofu: flat .tf files, no custom modules for <5 resources.
