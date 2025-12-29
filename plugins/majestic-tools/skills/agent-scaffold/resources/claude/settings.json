@@ -1,0 +1,11 @@
+{
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "type": "command",
+        "command": "echo 'Processing prompt...'",
+        "description": "Example hook that runs before processing"
+      }
+    ]
+  }
+}

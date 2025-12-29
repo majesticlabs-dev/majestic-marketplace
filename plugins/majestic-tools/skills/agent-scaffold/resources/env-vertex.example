@@ -1,0 +1,4 @@
+CLAUDE_CODE_USE_VERTEX=1
+GOOGLE_APPLICATION_CREDENTIALS=/path/to/credentials.json
+VERTEX_REGION=us-central1
+VERTEX_PROJECT_ID=your-project-id
