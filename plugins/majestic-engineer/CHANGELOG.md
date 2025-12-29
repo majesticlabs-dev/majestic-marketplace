@@ -2,6 +2,16 @@
 
 All notable changes to majestic-engineer will be documented in this file.
 
+## [3.24.1] - 2025-12-29
+
+### Fixed
+
+- **Workflow commands** - Clarity and noise reduction
+  - `/majestic:build-task`: Corrected plan-mode skip steps (1, 2, 6, 14 not 1, 2, 7, 15)
+  - `/majestic:build-task`: Fixed recovery instructions to use correct command name
+  - `/majestic:build-task`: Aligned toolbox-resolver prompt format with documented multiline structure
+  - Removed terminal-title from `build-task`, `build-plan`, and `plan` commands (ANSI escape noise)
+
 ## [3.24.0] - 2025-12-29
 
 ### Fixed

@@ -32,8 +32,6 @@ ls -t docs/plans/*.md 2>/dev/null | head -1
 
 Read the plan file and verify it has an Implementation Tasks section.
 
-**Set terminal title:** `Skill(skill: "majestic-engineer:terminal-title", args: "Build: <plan-title>")`
-
 ---
 
 ## Step 1: Parse Tasks
