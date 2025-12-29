@@ -27,14 +27,12 @@ ls -t docs/plans/*.md 2>/dev/null | head -1
 
 | Input | Source | Skip Steps |
 |-------|--------|------------|
-| Empty + plan found | `plan` | 1, 2, 7, 15 |
-| `*.md` file path | `plan` | 1, 2, 7, 15 |
+| Empty + plan found | `plan` | 1, 2, 6, 14 |
+| `*.md` file path | `plan` | 1, 2, 6, 14 |
 | Task reference | `task` | (none) |
 | Empty + no plan | Ask user | — |
 
 **For plans:** Extract `TASK_ID` from filename slug, `TITLE` from first `# ` heading.
-
-**Set terminal title:** `Skill(skill: "majestic-engineer:terminal-title", args: "<short_title>")`
 
 ---
 
@@ -67,8 +65,6 @@ ls -t docs/plans/*.md 2>/dev/null | head -1
 ```
 agent task-fetcher "Task: <reference>"
 ```
-
-**Set terminal title:** `Skill(skill: "majestic-engineer:terminal-title", args: "#<ID>: <short_title>")`
 
 ### Step 2: Claim Task
 ```
@@ -118,13 +114,15 @@ CURRENT_BRANCH=$(git branch --show-current)
    To fix:
    - Check workspace-setup output for errors
    - Manually create branch: git checkout -b <branch-name>
-   - Re-run /build-task
+   - Re-run /majestic:build-task
    ```
 3. **Do not continue** - this is a hard gate
 
 ### Step 4: Resolve Toolbox
 ```
-agent toolbox-resolver "Stage: build-task | Task: <title> <description>"
+agent toolbox-resolver "Stage: build-task
+Task Title: <title>
+Task Description: <description>"
 ```
 Stores: `build_agent`, `fix_agent`, `coding_styles`, `design_system_path`, `research_hooks`, `pre_ship_hooks`, `quality_gate.reviewers`
 

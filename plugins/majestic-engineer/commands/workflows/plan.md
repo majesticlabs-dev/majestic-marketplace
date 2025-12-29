@@ -38,8 +38,6 @@ This skill detects IaC tools, providers, runs security review, and returns conte
 
 ### 2. Research (Parallel Agents)
 
-**Set terminal title:** `Skill(skill: "majestic-engineer:terminal-title", args: "<feature_summary>")`
-
 Run in parallel:
 - `agent git-researcher "[feature]"` - repository patterns
 - `agent docs-researcher "[feature]"` - library documentation
