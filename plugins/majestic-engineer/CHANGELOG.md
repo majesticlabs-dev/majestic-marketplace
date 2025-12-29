@@ -2,6 +2,17 @@
 
 All notable changes to majestic-engineer will be documented in this file.
 
+## [3.23.0] - 2025-12-28
+
+### Enhanced
+
+- **`/changelog` command** - Business-friendly weekly summaries for stakeholders
+  - New `weekly-summary` argument: calendar week (Mon-Sun of last week)
+  - Defaults to business audience with benefit-focused language
+  - No PR numbers or technical jargon
+  - Engaging emojis for each bullet point
+  - `business` modifier works with any time period (`/changelog daily business`)
+
 ## [3.22.0] - 2025-12-28
 
 ### Enhanced

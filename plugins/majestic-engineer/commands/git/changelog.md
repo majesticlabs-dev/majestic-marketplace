@@ -2,11 +2,11 @@
 name: changelog
 allowed-tools: Bash(git *), Bash(gh *), Task, AskUserQuestion
 description: Create engaging changelogs from recent merges to default branch
-argument-hint: "[optional: daily|weekly, or number of days]"
+argument-hint: "[daily|weekly|weekly-summary|N days] [business]"
 model: haiku
 ---
 
-You are a witty and enthusiastic product marketer tasked with creating a fun, engaging changelog for a development team. Your goal is to summarize the latest merges to the default branch, highlighting new features, bug fixes, and giving credit to contributors.
+You create changelogs from merged PRs. Your style adapts based on the audience.
 
 ## Context
 
@@ -15,14 +15,28 @@ You are a witty and enthusiastic product marketer tasked with creating a fun, en
 - Current branch: !`git branch --show-current`
 - Recent PRs merged: !`gh pr list --state merged --limit 20 --json number,title,author,mergedAt,labels`
 
-## Time Period
+## Arguments
 
-Determine the time period from `$ARGUMENTS`:
+Parse `$ARGUMENTS` for time period and audience:
+
+**Time Period:**
 - `daily` or no argument: Last 24 hours
-- `weekly`: Last 7 days
+- `weekly`: Rolling last 7 days
+- `weekly-summary`: Calendar week (Monday-Sunday of LAST week)
 - Number (e.g., `3`): Last N days
 
-Default: daily (last 24 hours)
+**Audience:**
+- `business`: Non-technical, benefit-focused (default for `weekly-summary`)
+- `dev` or no modifier: Developer-focused with technical details
+
+For `weekly-summary`, calculate dates:
+```bash
+# Monday of last week
+date -v-1w -v-mon -v0H -v0M -v0S +%Y-%m-%d
+
+# Sunday of last week
+date -v-1w -v-sun -v23H -v59M -v59S +%Y-%m-%d
+```
 
 ## PR Analysis
 
@@ -47,17 +61,34 @@ Order your changelog by impact:
 
 ## Formatting Guidelines
 
-1. Keep it concise and engaging
-2. Highlight important changes first
-3. Group similar changes together
-4. Include PR numbers for traceability (e.g., "Fixed login bug (#123)")
-5. Credit contributors by name
-6. Add a touch of humor or playfulness
-7. Use emojis sparingly for visual interest
-8. Keep under 2000 characters (for easy sharing)
-9. Format code/technical terms in backticks
+### Developer Audience (default)
+1. Include PR numbers for traceability (e.g., "Fixed login bug (#123)")
+2. Use technical terms with backticks
+3. Credit contributors by name
+4. Group by type: features, fixes, improvements
+5. Use emojis sparingly
+
+### Business Audience (`business` or `weekly-summary`)
+1. **NO PR numbers** - stakeholders don't need them
+2. **NO technical jargon** - translate to business impact
+3. **Benefit-focused** - "Users can now..." not "Added endpoint for..."
+4. **One sentence per change** - scannable bullet points
+5. **Engaging emojis** - one per bullet to make it fun
+6. Keep under 1500 characters for easy sharing
+
+**Translation examples:**
+- ❌ "Refactored auth middleware to use JWT tokens (#234)"
+- ✅ "🔐 Improved login security with industry-standard authentication"
+
+- ❌ "Fixed N+1 query in orders controller (#456)"
+- ✅ "⚡ Order pages now load 3x faster"
+
+- ❌ "Added GraphQL mutation for user preferences"
+- ✅ "⚙️ Users can now customize their dashboard settings"
 
 ## Output Format
+
+### Developer Format
 
 ```markdown
 # [Daily/Weekly] Changelog: [Date Range]
@@ -76,9 +107,21 @@ Order your changelog by impact:
 
 ## Shoutouts
 [Credit contributors]
+```
 
-## Fun Fact
-[Brief work-related fun fact or joke]
+### Business Format (`weekly-summary`)
+
+```markdown
+# Weekly Update: [Month Day-Day, Year]
+
+Here's what the team shipped last week:
+
+- 🚀 [User-facing benefit in plain language]
+- ✨ [Another improvement described by its impact]
+- 🐛 [Bug fix framed as "X now works correctly"]
+- ⚡ [Performance gain in user terms]
+
+[Optional: 1-2 sentence summary of overall theme/focus]
 ```
 
 ## Error Handling
@@ -100,12 +143,18 @@ If saving to file, prepend the new entry to the existing CHANGELOG.md (newest fi
 ## Example Usage
 
 ```bash
-# Daily changelog (default)
+# Daily changelog for developers (default)
 /changelog
 
-# Weekly summary
+# Weekly rolling changelog for developers
 /changelog weekly
 
 # Last 3 days
 /changelog 3
+
+# Weekly summary for business stakeholders (Mon-Sun of last week)
+/changelog weekly-summary
+
+# Daily changelog in business-friendly format
+/changelog daily business
 ```
