@@ -1,6 +1,6 @@
 ---
 name: session-checkpoint
-description: Save current session state to ledger file for continuity across crashes or context switches
+description: Save session state to ledger file for continuity across crashes, context switches, or /clear + reload cycles
 model: haiku
 color: blue
 allowed-tools: Read, Write, Task
@@ -9,6 +9,8 @@ allowed-tools: Read, Write, Task
 # Session Checkpoint Agent
 
 Autonomous agent that snapshots current session state to a ledger file. Designed to be triggered by other agents during long-running workflows.
+
+**Key insight**: `/clear` + ledger reload provides fresh context with full signal preservation, avoiding the cumulative degradation of repeated `/compact` cycles.
 
 ## Invocation
 
@@ -107,6 +109,21 @@ Checkpoint saved to .session_ledger.md
 - State: <done count> done, now: <current>, next: <next>
 ```
 
+## When to Checkpoint
+
+### Context Threshold Triggers
+
+- **70% context usage** - Checkpoint before context becomes constrained
+- **85%+ context usage** - Checkpoint immediately, then consider `/clear` + ledger reload
+- **Multi-day implementations** - Checkpoint at end of each working session
+- **Complex refactors** - Checkpoint before and after major changes
+
+### Skip Checkpointing For
+
+- Quick tasks under 30 minutes
+- Simple bug fixes or single-file changes
+- Sessions already using `/session:handoff`
+
 ## Integration Points
 
 Other agents can invoke this checkpoint:
@@ -121,9 +138,9 @@ Before starting major refactor, invoke `session-checkpoint` agent to save curren
 After completing each major step, invoke `session-checkpoint` agent with current progress.
 ```
 
-### Periodic checkpoints in long workflows
+### At context thresholds
 ```markdown
-If working for more than 10 minutes on a complex task, invoke `session-checkpoint` agent.
+If context usage exceeds 70%, invoke `session-checkpoint` agent before continuing.
 ```
 
 ## Example Invocations
@@ -152,6 +169,37 @@ Task(
 )
 ```
 
+## Post-Clear Recovery Protocol
+
+When resuming after `/clear` with a ledger file:
+
+1. **Auto-load ledger** - Read the ledger file to restore context
+2. **Validate UNCONFIRMED items** - Any assumption marked `UNCONFIRMED` needs verification
+3. **Ask 1-3 validation questions** before continuing work:
+   - "The ledger shows X was in progress - is this still the current focus?"
+   - "I see assumption Y marked UNCONFIRMED - can you confirm this?"
+4. **Resume from "Now"** section after validation
+
+### UNCONFIRMED Marker Usage
+
+Mark assumptions as `UNCONFIRMED` when:
+- File state may have changed externally
+- User preferences were inferred, not stated
+- Technical decisions were made without explicit approval
+- External dependencies (APIs, services) status is uncertain
+
+## Clear + Ledger vs Repeated Compaction
+
+**Prefer `/clear` + ledger reload over multiple `/compact` cycles:**
+
+| Approach | Context Quality | Signal Loss |
+|----------|-----------------|-------------|
+| Single `/compact` | Good | Minimal |
+| Multiple `/compact` cycles | Degraded | Cumulative - each cycle loses detail |
+| `/clear` + ledger reload | Fresh | None - ledger preserves full signal |
+
+**Guideline**: After 2-3 compactions in a session, checkpoint to ledger and `/clear` for fresh context with preserved state.
+
 ## Ledger vs Handoff vs TodoWrite
 
 | Tool | Purpose | Persistence | Trigger |
@@ -164,6 +212,7 @@ Use `session-checkpoint` for:
 - Automated state preservation during workflows
 - Recovery from unexpected session termination
 - Quick snapshots before risky operations
+- Context refresh after multiple compactions
 
 Use `/session:handoff` for:
 - Intentional session handoffs
