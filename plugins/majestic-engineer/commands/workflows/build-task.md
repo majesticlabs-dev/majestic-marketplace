@@ -46,6 +46,7 @@ ls -t docs/plans/*.md 2>/dev/null | head -1
 | 1. Fetch | `task-fetcher` agent | Skip if `plan` | — |
 | 2. Claim | `task-status-updater` agent (claim) | Skip if `plan` | — |
 | 3. Workspace | `workspace-setup` | — | — |
+| 3.5. Branch Check | Verify not on main/master | — | MANDATORY |
 | 4. Toolbox | `toolbox-resolver` | — | — |
 | 5. Research | Auto hooks from toolbox | If triggers match | — |
 | 6. Plan | `architect` | Skip if `plan` (use file content) | — |
@@ -86,6 +87,40 @@ agent task-status-updater "Action: claim | Task: <ID>"
 ```
 agent workspace-setup "Task ID: <ID> | Title: <title> | Type: <type> | Workflow: <workflow> | Branch Naming: <branch_naming> | Default Branch: <default_branch> | Post-Create Hook: <post_create>"
 ```
+
+### Step 3.5: Verify Branch (MANDATORY)
+
+**After workspace setup, verify we are NOT on a protected branch:**
+
+```bash
+CURRENT_BRANCH=$(git branch --show-current)
+```
+
+| Current Branch | Action |
+|----------------|--------|
+| `main` | STOP - workspace setup failed |
+| `master` | STOP - workspace setup failed |
+| `<default_branch>` | STOP - workspace setup failed |
+| Feature branch | Continue to Step 4 |
+
+**If on protected branch:**
+1. **STOP** - Do not proceed to build
+2. Report error:
+   ```
+   ERROR: Branch Safety Check Failed
+
+   Current branch: <branch>
+   Expected: Feature branch (not main/master)
+
+   Workspace setup did not create/switch to a feature branch.
+   This prevents accidental commits to the default branch.
+
+   To fix:
+   - Check workspace-setup output for errors
+   - Manually create branch: git checkout -b <branch-name>
+   - Re-run /build-task
+   ```
+3. **Do not continue** - this is a hard gate
 
 ### Step 4: Resolve Toolbox
 ```

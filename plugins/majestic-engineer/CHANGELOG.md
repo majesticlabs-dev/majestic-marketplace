@@ -2,6 +2,16 @@
 
 All notable changes to majestic-engineer will be documented in this file.
 
+## [3.24.0] - 2025-12-29
+
+### Fixed
+
+- **Protected branch safety guards** - Prevent accidental commits/pushes to main/master
+  - `ship` agent now validates branch before any shipping actions (Step 0: MANDATORY)
+  - `build-task` command adds branch check after workspace-setup (Step 3.5: MANDATORY)
+  - Defense in depth: both command and agent validate independently
+  - Clear error messages with recovery instructions
+
 ## [3.23.0] - 2025-12-28
 
 ### Enhanced

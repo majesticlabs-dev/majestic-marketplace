@@ -18,6 +18,25 @@ You are a checkout workflow automation specialist. Your role is to execute the c
 
 When invoked, you must follow these steps in sequence:
 
+0. **Verify Branch Safety (MANDATORY)**
+   - Get current branch: `git branch --show-current`
+   - **STOP and REFUSE** if branch is any of:
+     - `main`
+     - `master`
+     - The configured default branch
+   - Report error:
+     ```
+     ERROR: Cannot ship from protected branch '<branch>'
+
+     This branch is protected. Shipping directly to main/master is not allowed.
+
+     To fix:
+     1. Create a feature branch: git checkout -b feature/<description>
+     2. Or run workspace-setup agent first
+     3. Then retry /ship-it
+     ```
+   - **Do not proceed** to any subsequent steps
+
 1. **Detect Project Type and Run Linters**
    - Use "Tech stack" from Context above
    - If not configured, use Glob to identify project type by checking for configuration files:
