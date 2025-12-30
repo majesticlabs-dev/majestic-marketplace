@@ -34,7 +34,27 @@ Read the plan file and verify it has an Implementation Tasks section.
 
 ---
 
-## Step 1: Parse Tasks
+## Step 1: Ralph Loop Detection
+
+Check if already running inside ralph-loop:
+
+```bash
+[ -f .claude/ralph-loop.local.md ] && echo "IN_RALPH_LOOP" || echo "NOT_IN_LOOP"
+```
+
+**If NOT in loop:** Invoke ralph-loop with build-plan as the prompt:
+
+```
+Skill(skill: "ralph-wiggum:ralph-loop", args: '"/majestic:build-plan <plan_file>" --max-iterations 50 --completion-promise "BUILD_PLAN_COMPLETE"')
+```
+
+Then **STOP** - ralph-loop will re-invoke this command and handle iterations.
+
+**If IN loop:** Continue with Step 2.
+
+---
+
+## Step 2: Parse Tasks
 
 Extract tasks from `## Implementation Tasks` section.
 
@@ -61,7 +81,7 @@ Checkbox format:
 
 ---
 
-## Step 2: Build Dependency Graph
+## Step 3: Build Dependency Graph
 
 Order tasks respecting dependencies:
 
@@ -74,19 +94,19 @@ Dependent tasks → Run after their dependencies complete
 
 ---
 
-## Step 3: Execute Tasks
+## Step 4: Execute Tasks
 
 For each task in dependency order:
 
-### 3a. Skip if Complete
+### 4a. Skip if Complete
 
 If task already marked complete in plan, skip it.
 
-### 3b. Check Dependencies
+### 4b. Check Dependencies
 
 Verify all dependencies are marked complete before proceeding.
 
-### 3c. Run Build-Task
+### 4c. Run Build-Task
 
 ```
 SlashCommand(command: "majestic:build-task", args: "<task_ref>")
@@ -103,7 +123,7 @@ This invokes the full build-task workflow:
 - Fix loop if needed
 - Ship (creates PR)
 
-### 3d. Update Plan Progress
+### 4d. Update Plan Progress
 
 After successful completion, update the plan file:
 
@@ -114,7 +134,7 @@ After successful completion, update the plan file:
 Edit(file_path: "<plan_file>", old_string: "- [ ] <task_desc> → <ref>", new_string: "- [x] <task_desc> → <ref>")
 ```
 
-### 3e. Continue or Retry
+### 4e. Continue or Retry
 
 - **Success:** Move to next task
 - **Failure after 3 fix attempts:** Log failure, continue to next independent task
@@ -122,7 +142,7 @@ Edit(file_path: "<plan_file>", old_string: "- [ ] <task_desc> → <ref>", new_st
 
 ---
 
-## Step 4: Completion Check
+## Step 5: Completion Check
 
 After processing all tasks:
 
