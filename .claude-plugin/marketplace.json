@@ -101,9 +101,28 @@
       "source": "./plugins/majestic-llm"
     },
     {
+      "name": "majestic-agent-sdk",
+      "description": "Claude Agent SDK tools for building custom AI agents. Includes project scaffolding and SDK documentation.",
+      "version": "1.0.0",
+      "author": {
+        "name": "David Paluy",
+        "url": "https://github.com/dpaluy",
+        "email": "marketplace@it.majesticlabs.dev"
+      },
+      "homepage": "https://github.com/majesticlabs-dev/majestic-marketplace/tree/master/plugins/majestic-agent-sdk",
+      "tags": [
+        "claude-agent-sdk",
+        "ai-agents",
+        "sdk",
+        "scaffolding",
+        "agent-infrastructure"
+      ],
+      "source": "./plugins/majestic-agent-sdk"
+    },
+    {
       "name": "majestic-tools",
-      "description": "Claude Code customization tools. Includes 1 agent, 13 commands, and 5 skills.",
-      "version": "3.2.1",
+      "description": "Claude Code customization tools. Includes 1 agent, 13 commands, and 4 skills.",
+      "version": "3.6.0",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -115,8 +134,7 @@
         "agents",
         "hooks",
         "commands",
-        "meta-tools",
-        "agent-sdk"
+        "meta-tools"
       ],
       "source": "./plugins/majestic-tools"
     },
