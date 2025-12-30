@@ -9,7 +9,7 @@ NEVER modify `~/.claude/`. All plugin work goes in `majestic-marketplace/plugins
 ## Structure
 
 ```
-plugins/{engineer,rails,python,marketing,sales,company,llm,tools}/
+plugins/{engineer,rails,python,react,marketing,sales,company,llm,tools,agent-sdk,devops,experts}/
 ```
 
 ## Dependencies
@@ -18,7 +18,7 @@ plugins/{engineer,rails,python,marketing,sales,company,llm,tools}/
 |--------|--------------|
 | `engineer` | rails, python, react, llm, tools |
 | `rails`, `python`, `react` | engineer |
-| `marketing`, `sales`, `company`, `llm`, `tools` | (none) |
+| `marketing`, `sales`, `company`, `llm`, `tools`, `agent-sdk`, `devops`, `experts` | (none) |
 
 ## Documentation
 
@@ -35,35 +35,30 @@ plugins/{engineer,rails,python,marketing,sales,company,llm,tools}/
 
 ## Key Rules
 
-<limits>
+### Limits
 - Skills: <500 lines
 - Agents: <300 lines
-</limits>
 
-<file-locations>
+### File Locations
 - Skill resources → `skills/*/resources/`
 - No .md files in `commands/` (they become executable)
-</file-locations>
 
-<behaviors>
+### Behaviors
 - Skills = knowledge (Claude MAY follow)
 - Hooks = enforcement (FORCES behavior)
 - Agents do autonomous work, not just advice
 - `name:` in frontmatter overrides path-based naming
-</behaviors>
 
-<validation>
+### Validation
 Run `skill-linter` for new skills.
-</validation>
 
-<content-rules>
+### Content Rules
 - Skills must contain NEW info Claude doesn't know
 - Exclude: generic advice, personas, "best practices" prose
 - Include: concrete limits, project-specific patterns, exact templates
-</content-rules>
 
-<plugin-release>
 ## Plugin Release Checklist
+
 1. Update version in `plugins/*/.claude-plugin/plugin.json`
 2. Add/update entry in `.claude-plugin/marketplace.json`:
    - Version number
@@ -72,4 +67,3 @@ Run `skill-linter` for new skills.
    - Source path
 3. Update internal references to new plugin namespace
 4. Commit registry + plugin files together
-</plugin-release>
