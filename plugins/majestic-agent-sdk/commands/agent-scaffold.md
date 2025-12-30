@@ -1,5 +1,5 @@
 ---
-name: majestic:agent-scaffold
+name: agent-sdk:agent-scaffold
 description: Scaffold a new Claude Agent SDK project with interactive configuration
 allowed-tools: Read, Write, Edit, AskUserQuestion, Bash, Skill
 argument-hint: "[project-name]"
@@ -72,7 +72,7 @@ Invoke the agent-scaffold skill for templates:
 Skill(skill="agent-scaffold")
 ```
 
-Read templates from `@plugins/majestic-tools/skills/agent-scaffold/resources/`:
+Read templates from `@plugins/majestic-agent-sdk/skills/agent-scaffold/resources/`:
 
 ### Directory Structure
 

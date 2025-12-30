@@ -1,6 +1,6 @@
 ---
 name: agent-scaffold
-description: File templates for Claude Agent SDK project scaffolding. Used by /majestic:agent-scaffold command.
+description: File templates for Claude Agent SDK project scaffolding. Used by /agent-sdk:agent-scaffold command.
 ---
 
 # Agent Scaffold Skill
@@ -9,7 +9,7 @@ Provides file templates for generating Claude Agent SDK projects.
 
 ## When to Use
 
-Automatically invoked by `/majestic:agent-scaffold` command.
+Automatically invoked by `/agent-sdk:agent-scaffold` command.
 
 ## Templates
 

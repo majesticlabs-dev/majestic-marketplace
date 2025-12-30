@@ -290,6 +290,6 @@ const agent = new Agent({
 
 ## Related Skills
 
-- Use `/majestic:agent-scaffold` to generate a new Agent SDK project
+- Use `/agent-sdk:agent-scaffold` to generate a new Agent SDK project
 - See `new-skill` for creating skills your agent can use
 - See `new-agent` for creating subagent definitions

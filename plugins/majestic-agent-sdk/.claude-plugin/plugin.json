@@ -1,0 +1,16 @@
+{
+  "name": "majestic-agent-sdk",
+  "version": "1.0.0",
+  "description": "Claude Agent SDK tools for building custom AI agents. Includes project scaffolding and SDK documentation.",
+  "author": {
+    "name": "David Paluy",
+    "url": "https://github.com/dpaluy",
+    "email": "marketplace@it.majesticlabs.dev"
+  },
+  "keywords": [
+    "claude-agent-sdk",
+    "ai-agents",
+    "sdk",
+    "scaffolding"
+  ]
+}
