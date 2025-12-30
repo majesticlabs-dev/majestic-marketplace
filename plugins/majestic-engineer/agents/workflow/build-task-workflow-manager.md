@@ -2,7 +2,7 @@
 name: build-task-workflow-manager
 description: |
   Orchestrates build execution workflow - build, verify, quality, fix loop, and ship.
-  Invoke: agent majestic-engineer:workflow:build-task-workflow-manager "Task ID: ... | Title: ... | Branch: ... | Plan: ... | Build Agent: ... | Fix Agent: ... | Coding Styles: ... | Design System Path: ... | Pre-Ship Hooks: ... | Quality Gate Reviewers: ... | Source: task|plan"
+  Invoke: agent build-task-workflow-manager "Task ID: ... | Title: ... | Branch: ... | Plan: ... | Build Agent: ... | Fix Agent: ... | Coding Styles: ... | Design System Path: ... | Pre-Ship Hooks: ... | Quality Gate Reviewers: ... | Source: task|plan"
 tools: Write, Edit, Read, Bash, Skill, AskUserQuestion, Task, Glob, Grep
 color: green
 ---
@@ -11,9 +11,9 @@ color: green
 
 You are the build task workflow manager agent. Your role is to orchestrate the execution phase of task building after context has been gathered. You MUST execute ALL steps in order - skipping steps is not allowed.
 
-**Invocation:** This agent MUST be called using its full qualified name:
+**Invocation:** Call this agent by name:
 ```
-agent majestic-engineer:workflow:build-task-workflow-manager "<arguments>"
+agent build-task-workflow-manager "<arguments>"
 ```
 
 ## Input Format

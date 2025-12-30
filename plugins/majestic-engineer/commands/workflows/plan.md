@@ -83,7 +83,7 @@ The architect agent:
 Pass all gathered context to the plan-workflow-manager agent:
 
 ```
-agent majestic-engineer:workflow:plan-workflow-manager "Feature: [feature description] | Research: [combined research] | Spec Review: [spec findings] | Architecture: [architect recommendations]"
+agent plan-workflow-manager "Feature: [feature description] | Research: [combined research] | Spec Review: [spec findings] | Architecture: [architect recommendations]"
 ```
 
 The agent handles:

@@ -137,7 +137,7 @@ Task (majestic-engineer:workflow:context-proxy):
 Pass all gathered context to the build-task-workflow-manager agent:
 
 ```
-agent majestic-engineer:workflow:build-task-workflow-manager "Task ID: <ID or 'plan'> | Title: <title> | Branch: <branch> | Plan: <plan content> | Build Agent: <build_agent> | Fix Agent: <fix_agent> | Coding Styles: <styles> | Design System Path: <path> | Pre-Ship Hooks: <hooks> | Quality Gate Reviewers: <reviewers> | Source: <task or plan>"
+agent build-task-workflow-manager "Task ID: <ID or 'plan'> | Title: <title> | Branch: <branch> | Plan: <plan content> | Build Agent: <build_agent> | Fix Agent: <fix_agent> | Coding Styles: <styles> | Design System Path: <path> | Pre-Ship Hooks: <hooks> | Quality Gate Reviewers: <reviewers> | Source: <task or plan>"
 ```
 
 The agent handles:
