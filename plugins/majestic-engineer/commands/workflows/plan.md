@@ -98,6 +98,10 @@ agent plan-review "docs/plans/<filename>.md"
 
 Incorporate feedback and update the plan file before presenting to user.
 
+### 6.5. Rename Plan
+
+Run `/rename <plan-title>` to set the plan name.
+
 ### 7. Post-Generation Options - IMPORTANT!
 
 **Check auto_preview config:** `Skill(skill: "config-reader", args: "auto_preview false")`

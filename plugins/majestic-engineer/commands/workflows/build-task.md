@@ -71,6 +71,10 @@ agent task-fetcher "Task: <reference>"
 agent task-status-updater "Action: claim | Task: <ID>"
 ```
 
+### Step 2.5: Rename Task
+
+Run `/rename <task-title>` to set the task name.
+
 ### Step 3: Setup Workspace
 
 **Read config values:**
