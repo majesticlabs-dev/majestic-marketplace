@@ -27,8 +27,8 @@ ls -t docs/plans/*.md 2>/dev/null | head -1
 
 | Input | Source | Skip Steps |
 |-------|--------|------------|
-| Empty + plan found | `plan` | 1, 2, 6, 14 |
-| `*.md` file path | `plan` | 1, 2, 6, 14 |
+| Empty + plan found | `plan` | 1, 2, 5 |
+| `*.md` file path | `plan` | 1, 2, 5 |
 | Task reference | `task` | (none) |
 | Empty + no plan | Ask user | — |
 
@@ -36,46 +36,27 @@ ls -t docs/plans/*.md 2>/dev/null | head -1
 
 ---
 
-## Workflow
+## Workflow (Context Gathering)
 
-| Step | Action | Condition | Enforce |
-|------|--------|-----------|---------|
-| 0. Config | `/majestic:config` command | As needed | — |
-| 1. Fetch | `task-fetcher` agent | Skip if `plan` | — |
-| 2. Claim | `task-status-updater` agent (claim) | Skip if `plan` | — |
-| 3. Workspace | `workspace-setup` | — | — |
-| 3.5. Branch Check | Verify not on main/master | — | MANDATORY |
-| 4. Toolbox | `toolbox-resolver` | — | — |
-| 5. Research | Auto hooks from toolbox | If triggers match | — |
-| 6. Plan | `architect` | Skip if `plan` (use file content) | — |
-| 7. Build | Toolbox executor + coding_styles | — | — |
-| 8. Slop | `slop-remover` | — | ⛔ MANDATORY |
-| 9. Verify | `always-works-verifier` | — | ⛔ MANDATORY |
-| 10. Quality | `quality-gate` | — | ⛔ MANDATORY |
-| 11. Fix | Toolbox executor (max 3×) | If verify/quality fails | — |
-| 12. Pre-ship | Hooks from toolbox | — | — |
-| 13. Ship | `/majestic-engineer:workflows:ship-it` | — | — |
-| 14. Complete | `task-status-updater` (ship) | Skip if `plan` | — |
+### 1. Fetch Task (task source only)
 
----
-
-## Agent Invocations
-
-### Step 1: Fetch Task
 ```
-agent task-fetcher "Task: <reference>"
+Task (majestic-engineer:workflow:task-fetcher):
+  prompt: Task: <reference>
 ```
 
-### Step 2: Claim Task
+### 2. Claim Task (task source only)
+
 ```
-agent task-status-updater "Action: claim | Task: <ID>"
+Task (majestic-engineer:workflow:task-status-updater):
+  prompt: Action: claim | Task: <ID>
 ```
 
-### Step 2.5: Rename Task
+### 3. Set Terminal Title
 
-Run `/rename <task-title>` to set the task name.
+Run `/rename <task-title>` to set the terminal title for visibility.
 
-### Step 3: Setup Workspace
+### 4. Setup Workspace
 
 **Read config values:**
 - Workflow: !`claude -p "/majestic:config workflow branches"`
@@ -83,12 +64,20 @@ Run `/rename <task-title>` to set the task name.
 - Default branch: !`claude -p "/majestic:config default_branch main"`
 - Post-create hook: !`claude -p "/majestic:config workspace_setup.post_create ''"`
 
-**Then pass values to workspace-setup:**
+**Then setup workspace:**
 ```
-agent workspace-setup "Task ID: <ID> | Title: <title> | Type: <type> | Workflow: <workflow> | Branch Naming: <branch_naming> | Default Branch: <default_branch> | Post-Create Hook: <post_create>"
+Task (majestic-engineer:workflow:workspace-setup):
+  prompt: |
+    Task ID: <ID>
+    Title: <title>
+    Type: <type>
+    Workflow: <workflow>
+    Branch Naming: <branch_naming>
+    Default Branch: <default_branch>
+    Post-Create Hook: <post_create>
 ```
 
-### Step 3.5: Verify Branch (MANDATORY)
+### 5. Verify Branch (MANDATORY)
 
 **After workspace setup, verify we are NOT on a protected branch:**
 
@@ -101,168 +90,69 @@ CURRENT_BRANCH=$(git branch --show-current)
 | `main` | STOP - workspace setup failed |
 | `master` | STOP - workspace setup failed |
 | `<default_branch>` | STOP - workspace setup failed |
-| Feature branch | Continue to Step 4 |
+| Feature branch | Continue |
 
-**If on protected branch:**
-1. **STOP** - Do not proceed to build
-2. Report error:
-   ```
-   ERROR: Branch Safety Check Failed
+**If on protected branch:** STOP and report error. Do not proceed.
 
-   Current branch: <branch>
-   Expected: Feature branch (not main/master)
+### 6. Resolve Toolbox
 
-   Workspace setup did not create/switch to a feature branch.
-   This prevents accidental commits to the default branch.
-
-   To fix:
-   - Check workspace-setup output for errors
-   - Manually create branch: git checkout -b <branch-name>
-   - Re-run /majestic:build-task
-   ```
-3. **Do not continue** - this is a hard gate
-
-### Step 4: Resolve Toolbox
 ```
-agent toolbox-resolver "Stage: build-task
-Task Title: <title>
-Task Description: <description>"
+Task (majestic-engineer:workflow:toolbox-resolver):
+  prompt: |
+    Stage: build-task
+    Task Title: <title>
+    Task Description: <description>
 ```
-Stores: `build_agent`, `fix_agent`, `coding_styles`, `design_system_path`, `research_hooks`, `pre_ship_hooks`, `quality_gate.reviewers`
 
-### Step 5: Auto Research
+**Stores:** `build_agent`, `fix_agent`, `coding_styles`, `design_system_path`, `research_hooks`, `pre_ship_hooks`, `quality_gate.reviewers`
+
+### 7. Auto Research (if triggers match)
+
 For each `mode: auto` hook where triggers match task text:
 ```
-agent context-proxy "agent: <hook.agent> | budget: 2000 | prompt: Research for: <title> | Context: <description>"
+Task (majestic-engineer:workflow:context-proxy):
+  prompt: agent: <hook.agent> | budget: 2000 | prompt: Research for: <title> | Context: <description>
 ```
 
-### Step 5.5: Context Check (Post-Research)
+### 8. Context Check (Post-Research)
 
-If research agents returned outputs, check context budget:
-- If combined research output > 4000 chars: Run `/smart-compact` before planning
-- Focus compaction on SUMMARIZE for research findings
-- Preserve task title, description, and key patterns found
+If research agents returned outputs and combined output > 4000 chars:
+- Run `/smart-compact` before planning
+- Focus on SUMMARIZE for research findings
+- Preserve task title, description, and key patterns
 
-### Step 6: Plan (task source only)
-```
-agent context-proxy "agent: architect | budget: 3000 | prompt: Task: <title> | Description: <description> | Research: <findings>"
-```
-
-**Note:** Architect has larger budget (3000) as it produces the implementation plan.
-
-### Step 7: Build
-
-**Before invoking build agent, set up context:**
-
-1. **Load design system** (if configured):
-   - Check toolbox output for `design_system_path`
-   - If path exists, read the file using Read tool
-   - Store content for inclusion in build prompt
-
-   ```bash
-   # Check for design_system_path in toolbox output
-   # If set and file exists, read it
-   ```
-
-2. **Activate coding_styles skills** (if non-empty):
-   ```
-   Skill(skill: "majestic-rails:dhh-coder")
-   Skill(skill: "majestic-engineer:tdd-workflow")
-   ```
-
-**Note:** `coding_styles` contains **skill names** (not agents). Skills provide knowledge/context that influences how the build agent writes code. They are invoked via the `Skill` tool, not the `Task` tool.
-
-**Then invoke build agent with design context:**
-
-If design system was loaded:
-```
-agent <build_agent or general-purpose> "Implement: <title> | Plan: <plan content> | Design System: Follow these specifications for all UI work: <design_system_content>"
-```
-
-If no design system:
-```
-agent <build_agent or general-purpose> "Implement: <title> | Plan: <plan content>"
-```
-
-**UI Detection Heuristic:** Load design system if ANY of:
-- Plan file contains UI keywords (form, button, page, component, modal, card, input)
-- Task description contains UI keywords
-- `design_system_path` is explicitly configured and file exists
-
-The activated skills and design system context guide the build agent's implementation approach.
-
-### Step 8-10: Verify & Review
+### 9. Plan (task source only)
 
 ```
-agent slop-remover "Clean branch changes"
-agent always-works-verifier "Verify branch: <branch>"
-agent quality-gate "Context: <title> | Branch: <branch>"
+Task (majestic-engineer:workflow:context-proxy):
+  prompt: agent: architect | budget: 3000 | prompt: Task: <title> | Description: <description> | Research: <findings>
 ```
 
-### Step 11: Fix Loop
-If verify or quality fails (max 3 attempts):
-```
-agent <fix_agent or general-purpose> "Fix: <findings>"
-```
-Then re-run verify → quality.
+**Note:** Skip if source is `plan` - use plan file content instead.
 
 ---
 
-## ⛔ QUALITY GATE CHECKPOINT (HARD GATE)
+## Delegate to Build Workflow Manager
 
-**Before ANY shipping actions, confirm all mandatory checks passed:**
+Pass all gathered context to the build-task-workflow-manager agent:
 
-| Check | Requirement |
-|-------|-------------|
-| slop-remover | Ran and cleaned code |
-| always-works-verifier | Returned PASS |
-| quality-gate | All reviewers approved |
-
-**If ANY step was skipped or failed:**
-1. **STOP** - do not proceed to Ship
-2. Return to the skipped/failed step
-3. Complete it before continuing
-
-This gate is **NOT optional**. Even "simple" or "obvious" fixes must pass quality checks.
-
-### Recovery: If You Got Sidetracked
-
-If you already committed but skipped quality steps:
-
-1. **STOP** before creating PR
-2. Run `slop-remover` on committed code
-3. Run `always-works-verifier`
-4. Run `quality-gate`
-5. Amend commit if fixes are needed
-6. Then proceed with PR creation
-
-**Never ship without quality verification.**
-
----
-
-### Step 12: Pre-ship Hooks
-For each hook in `pre_ship_hooks`:
 ```
-agent <hook.agent> "Pre-ship check on branch: <branch>"
-```
-Required hooks block on failure. Optional hooks log warnings.
-
-### Step 13: Ship
-
-For task source (with task ID):
-```
-/majestic-engineer:workflows:ship-it closes #<ID>
+agent majestic-engineer:workflow:build-task-workflow-manager "Task ID: <ID or 'plan'> | Title: <title> | Branch: <branch> | Plan: <plan content> | Build Agent: <build_agent> | Fix Agent: <fix_agent> | Coding Styles: <styles> | Design System Path: <path> | Pre-Ship Hooks: <hooks> | Quality Gate Reviewers: <reviewers> | Source: <task or plan>"
 ```
 
-For plan source (no task):
-```
-/majestic-engineer:workflows:ship-it
-```
+The agent handles:
+1. Loading design system (if configured)
+2. Activating coding style skills
+3. Building the implementation
+4. Slop removal (MANDATORY)
+5. Verification (MANDATORY)
+6. Quality gate (MANDATORY)
+7. Fix loop (if needed, max 3 attempts)
+8. Pre-ship hooks
+9. Shipping (PR creation)
+10. Task completion (if task source)
 
-### Step 14: Complete (task source only)
-```
-agent task-status-updater "Action: ship | Task: <ID> | PR: <number>"
-```
+**IMPORTANT:** The workflow manager agent executes all build/verify/ship steps sequentially. Do not add additional steps after delegation - the agent handles everything through completion.
 
 ---
 
@@ -298,3 +188,12 @@ agent task-status-updater "Action: ship | Task: <ID> | PR: <number>"
 /majestic:build-task #42                       # GitHub issue
 /majestic:build-task PROJ-123                  # Beads/Linear
 ```
+
+---
+
+## Notes
+
+- This command gathers context (steps 1-9), then delegates execution
+- The workflow manager ensures no build/verify/ship steps are skipped
+- Branch safety check prevents accidental commits to main/master
+- Research agents run conditionally based on toolbox triggers
