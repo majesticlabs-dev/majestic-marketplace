@@ -61,3 +61,15 @@ Run `skill-linter` for new skills.
 - Exclude: generic advice, personas, "best practices" prose
 - Include: concrete limits, project-specific patterns, exact templates
 </content-rules>
+
+<plugin-release>
+## Plugin Release Checklist
+1. Update version in `plugins/*/.claude-plugin/plugin.json`
+2. Add/update entry in `.claude-plugin/marketplace.json`:
+   - Version number
+   - Description (reflect skills/commands count)
+   - Tags
+   - Source path
+3. Update internal references to new plugin namespace
+4. Commit registry + plugin files together
+</plugin-release>
