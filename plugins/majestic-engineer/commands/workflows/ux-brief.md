@@ -116,7 +116,7 @@ Use AskUserQuestion:
 
 After completing the design system:
 
-1. **`/majestic:plan`** - Automatically detects UI features and references design system
+1. **`/majestic:blueprint`** - Automatically detects UI features and references design system
 2. **`/majestic:build-task`** - Loads design system as context
 3. **`visual-validator`** - Verifies implementation against specifications
 

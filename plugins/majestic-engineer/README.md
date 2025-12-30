@@ -49,11 +49,11 @@ graph LR
 
 ---
 
-### Plan-First (Features/Bugs/Improvements)
+### Blueprint-First (Features/Bugs/Improvements)
 
 ```mermaid
 graph LR
-    subgraph "/plan"
+    subgraph "/blueprint"
         PL[task] --> PR{{plan-review}}
     end
 
@@ -63,7 +63,7 @@ graph LR
 
 | Command | Purpose |
 |---------|---------|
-| `/majestic:plan` | Create plan → plan-review validates |
+| `/majestic:blueprint` | Create blueprint → plan-review validates |
 | `/majestic:build-task` | Build → test → review → ship (autonomous) |
 
 ---
@@ -119,7 +119,7 @@ graph TD
 
 | I want to... | Use this |
 |--------------|----------|
-| Plan a feature or bug fix | `/majestic:plan` |
+| Plan a feature or bug fix | `/majestic:blueprint` |
 | Analyze a spec for gaps | `agent spec-reviewer` |
 | Define what to build (requirements) | `/majestic:prd` |
 | Design how to build it (architecture) | `agent architect` |
@@ -216,10 +216,11 @@ Invoke with: `/majestic-engineer:<category>:<name>`
 
 | Command | Description |
 |---------|-------------|
+| `workflows:run-blueprint` | Execute all tasks in a blueprint using build-task workflow with ralph-wiggum iteration |
 | `workflows:build-task` | Autonomous task implementation from any task management system (GitHub, Beads, Linear, file) |
 | `workflows:debug` | Debug errors, test failures, or unexpected behavior (auto-detects project type) |
 | `workflows:init` | Initialize AGENTS.md with hierarchical structure and create CLAUDE.md symlink |
-| `workflows:plan` | Transform feature descriptions into well-structured project plans |
+| `workflows:blueprint` | Transform feature descriptions into well-structured project blueprints |
 | `workflows:prd` | Create a PRD for a product/feature. Use `--guided` flag for interactive discovery |
 | `workflows:question` | Answer questions about project structure without coding |
 | `workflows:ship-it` | Complete checkout workflow - runs linting, creates commit, and opens PR |

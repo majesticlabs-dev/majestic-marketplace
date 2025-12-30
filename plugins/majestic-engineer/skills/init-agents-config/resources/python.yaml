@@ -26,9 +26,9 @@ review_topics_path: docs/agents/review-topics.md
 # Auto-preview markdown files (plans, PRDs, briefs, handoffs)
 auto_preview: true
 
-# Planning
-plan:
-  auto_create_task: true              # Auto-create task when /majestic:plan completes
+# Blueprint
+blueprint:
+  auto_create_task: true              # Auto-create task when /majestic:blueprint completes
 
 # Session - Continuity and crash recovery
 # session:

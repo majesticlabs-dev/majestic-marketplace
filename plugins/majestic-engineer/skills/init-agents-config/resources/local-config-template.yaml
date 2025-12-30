@@ -7,8 +7,8 @@
 # Auto-preview markdown files (plans, PRDs, briefs, handoffs)
 # auto_preview: true
 
-# Planning - Personal preferences
-# plan:
+# Blueprint - Personal preferences
+# blueprint:
 #   auto_create_task: false  # Disable auto-task creation locally
 
 # Browser - Personal browser preference (for web-browser skill)

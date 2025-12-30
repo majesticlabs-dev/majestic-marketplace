@@ -15,7 +15,7 @@ Implement a task autonomously through the full development lifecycle.
 
 **Formats:**
 - *(empty)* → Auto-detect most recent `docs/plans/*.md`
-- `docs/plans/*.md` → Plan file from `/majestic:plan`
+- `docs/plans/*.md` → Blueprint file from `/majestic:blueprint`
 - `#123`, `PROJ-123`, URL → Task reference (GitHub, Beads, Linear)
 
 ## Step 0: Detect Input Type

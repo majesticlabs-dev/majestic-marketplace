@@ -104,7 +104,7 @@ The plan breaks down into [N] tasks, suggesting scope is too large for a single 
 | Epic 1: [name] | T1-T4 | [scope] |
 | Epic 2: [name] | T5-T8 | [scope] |
 
-Consider running `/majestic:plan` separately for each epic.
+Consider running `/majestic:blueprint` separately for each epic.
 ```
 
 Do NOT proceed with breakdown if > 10 tasks.

@@ -1,36 +1,36 @@
 ---
-name: majestic:build-plan
-description: Execute all tasks in a plan using build-task workflow with ralph-wiggum iteration
-argument-hint: "<plan-file.md>"
+name: majestic:run-blueprint
+description: Execute all tasks in a blueprint using build-task workflow with ralph-wiggum iteration
+argument-hint: "<blueprint-file.md>"
 allowed-tools: Bash, Read, Edit, Grep, Glob, Task, Skill, SlashCommand
 ---
 
-# Build Plan
+# Run Blueprint
 
-Execute all tasks from a plan file through the full build-task workflow.
+Execute all tasks from a blueprint file through the full build-task workflow.
 
 ## Input
 
-<plan_file> $ARGUMENTS </plan_file>
+<blueprint_file> $ARGUMENTS </blueprint_file>
 
 **Formats:**
 - *(empty)* → Auto-detect most recent `docs/plans/*.md`
-- `docs/plans/*.md` → Explicit plan file path
+- `docs/plans/*.md` → Explicit blueprint file path
 
 ## Prerequisites
 
-**Required:** Plan must have `## Implementation Tasks` section with task references.
+**Required:** Blueprint must have `## Implementation Tasks` section with task references.
 
-Run `/majestic:plan` with "Break into small tasks" option first if tasks don't exist.
+Run `/majestic:blueprint` with "Break into small tasks" option first if tasks don't exist.
 
-## Step 0: Load Plan
+## Step 0: Load Blueprint
 
 ```bash
-# If empty, find most recent plan
+# If empty, find most recent blueprint
 ls -t docs/plans/*.md 2>/dev/null | head -1
 ```
 
-Read the plan file and verify it has an Implementation Tasks section.
+Read the blueprint file and verify it has an Implementation Tasks section.
 
 ---
 
@@ -42,10 +42,10 @@ Check if already running inside ralph-loop:
 [ -f .claude/ralph-loop.local.md ] && echo "IN_RALPH_LOOP" || echo "NOT_IN_LOOP"
 ```
 
-**If NOT in loop:** Invoke ralph-loop with build-plan as the prompt:
+**If NOT in loop:** Invoke ralph-loop with run-blueprint as the prompt:
 
 ```
-Skill(skill: "ralph-wiggum:ralph-loop", args: '"/majestic:build-plan <plan_file>" --max-iterations 50 --completion-promise "BUILD_PLAN_COMPLETE"')
+Skill(skill: "ralph-wiggum:ralph-loop", args: '"/majestic:run-blueprint <blueprint_file>" --max-iterations 50 --completion-promise "RUN_BLUEPRINT_COMPLETE"')
 ```
 
 Then **STOP** - ralph-loop will re-invoke this command and handle iterations.
@@ -100,7 +100,7 @@ For each task in dependency order:
 
 ### 4a. Skip if Complete
 
-If task already marked complete in plan, skip it.
+If task already marked complete in blueprint, skip it.
 
 ### 4b. Check Dependencies
 
@@ -123,15 +123,15 @@ This invokes the full build-task workflow:
 - Fix loop if needed
 - Ship (creates PR)
 
-### 4d. Update Plan Progress
+### 4d. Update Blueprint Progress
 
-After successful completion, update the plan file:
+After successful completion, update the blueprint file:
 
-**Table format:** Add ✓ or strikethrough to completed row
+**Table format:** Add checkmark or strikethrough to completed row
 **Checkbox format:** Change `- [ ]` to `- [x]`
 
 ```
-Edit(file_path: "<plan_file>", old_string: "- [ ] <task_desc> → <ref>", new_string: "- [x] <task_desc> → <ref>")
+Edit(file_path: "<blueprint_file>", old_string: "- [ ] <task_desc> → <ref>", new_string: "- [x] <task_desc> → <ref>")
 ```
 
 ### 4e. Continue or Retry
@@ -160,11 +160,11 @@ This command is designed to work with ralph-wiggum for autonomous iteration.
 
 **Start with ralph:**
 ```bash
-/ralph-loop "/majestic:build-plan docs/plans/xxx.md" --max-iterations 50 --completion-promise "BUILD_PLAN_COMPLETE"
+/ralph-loop "/majestic:run-blueprint docs/plans/xxx.md" --max-iterations 50 --completion-promise "RUN_BLUEPRINT_COMPLETE"
 ```
 
-**Completion signal:** Output `<promise>BUILD_PLAN_COMPLETE</promise>` when:
-- All tasks marked complete in plan file
+**Completion signal:** Output `<promise>RUN_BLUEPRINT_COMPLETE</promise>` when:
+- All tasks marked complete in blueprint file
 - All PRs created successfully
 
 **Ralph handles:**
@@ -177,7 +177,7 @@ This command is designed to work with ralph-wiggum for autonomous iteration.
 ## Output
 
 ```markdown
-## Build Plan Complete: <plan-title>
+## Build Blueprint Complete: <blueprint-title>
 
 ### Tasks Executed
 - [x] #123 - Set up database schema → PR #456
@@ -185,12 +185,12 @@ This command is designed to work with ralph-wiggum for autonomous iteration.
 - [x] #125 - Build UI components → PR #458
 
 ### Summary
-- Plan: docs/plans/xxx.md
+- Blueprint: docs/plans/xxx.md
 - Tasks: 3/3 complete
 - PRs: #456, #457, #458
 - Quality: All passed
 
-<promise>BUILD_PLAN_COMPLETE</promise>
+<promise>RUN_BLUEPRINT_COMPLETE</promise>
 ```
 
 ---
@@ -200,11 +200,11 @@ This command is designed to work with ralph-wiggum for autonomous iteration.
 ### Missing Implementation Tasks Section
 
 ```
-Error: Plan file missing ## Implementation Tasks section.
+Error: Blueprint file missing ## Implementation Tasks section.
 
 Run one of:
-  /majestic:plan "<feature>" → Then select "Break into small tasks"
-  agent task-breakdown "Plan: <plan-file>"
+  /majestic:blueprint "<feature>" → Then select "Break into small tasks"
+  agent task-breakdown "Blueprint: <blueprint-file>"
 ```
 
 ### Task Reference Not Found
@@ -218,7 +218,7 @@ Skipping and continuing with next task.
 
 ```
 Error: Circular dependency detected: #123 → #124 → #123
-Please fix dependencies in plan file before continuing.
+Please fix dependencies in blueprint file before continuing.
 ```
 
 ---
@@ -226,12 +226,12 @@ Please fix dependencies in plan file before continuing.
 ## Examples
 
 ```bash
-# Auto-detect most recent plan
-/majestic:build-plan
+# Auto-detect most recent blueprint
+/majestic:run-blueprint
 
-# Explicit plan file
-/majestic:build-plan docs/plans/20241228_add-auth.md
+# Explicit blueprint file
+/majestic:run-blueprint docs/plans/20241228_add-auth.md
 
 # With ralph-wiggum for autonomous execution
-/ralph-loop "/majestic:build-plan docs/plans/20241228_add-auth.md" --max-iterations 50 --completion-promise "BUILD_PLAN_COMPLETE"
+/ralph-loop "/majestic:run-blueprint docs/plans/20241228_add-auth.md" --max-iterations 50 --completion-promise "RUN_BLUEPRINT_COMPLETE"
 ```
