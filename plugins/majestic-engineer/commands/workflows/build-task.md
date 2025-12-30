@@ -129,13 +129,22 @@ Stores: `build_agent`, `fix_agent`, `coding_styles`, `design_system_path`, `rese
 ### Step 5: Auto Research
 For each `mode: auto` hook where triggers match task text:
 ```
-agent <hook.agent> "Research for: <title> | Context: <description>"
+agent context-proxy "agent: <hook.agent> | budget: 2000 | prompt: Research for: <title> | Context: <description>"
 ```
+
+### Step 5.5: Context Check (Post-Research)
+
+If research agents returned outputs, check context budget:
+- If combined research output > 4000 chars: Run `/smart-compact` before planning
+- Focus compaction on SUMMARIZE for research findings
+- Preserve task title, description, and key patterns found
 
 ### Step 6: Plan (task source only)
 ```
-agent architect "Task: <title> | Description: <description> | Research: <findings>"
+agent context-proxy "agent: architect | budget: 3000 | prompt: Task: <title> | Description: <description> | Research: <findings>"
 ```
+
+**Note:** Architect has larger budget (3000) as it produces the implementation plan.
 
 ### Step 7: Build
 

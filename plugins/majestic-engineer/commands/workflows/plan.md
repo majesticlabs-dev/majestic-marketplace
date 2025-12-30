@@ -38,15 +38,28 @@ This skill detects IaC tools, providers, runs security review, and returns conte
 
 ### 2. Research (Parallel Agents)
 
-Run in parallel:
-- `agent git-researcher "[feature]"` - repository patterns
-- `agent docs-researcher "[feature]"` - library documentation
-- `agent best-practices-researcher "[feature]"` - external best practices
+Run in parallel with budget-enforced outputs via context-proxy:
+- `agent context-proxy "agent: git-researcher | budget: 1500 | prompt: [feature]"` - repository patterns
+- `agent context-proxy "agent: docs-researcher | budget: 2000 | prompt: [feature]"` - library documentation
+- `agent context-proxy "agent: best-practices-researcher | budget: 2000 | prompt: [feature]"` - external best practices
+
+**Budget guidance:**
+| Agent | Budget | Rationale |
+|-------|--------|-----------|
+| git-researcher | 1500 | Historical patterns are concise |
+| docs-researcher | 2000 | May need code examples |
+| best-practices-researcher | 2000 | Citations important |
+
+### 2.5. Context Check (Post-Research)
+
+If combined research output > 5000 chars or context feels heavy:
+- Run `/smart-compact` before proceeding
+- Focus compaction on SUMMARIZE for research findings
 
 ### 3. Spec Review
 
 ```
-agent spec-reviewer "[feature + research findings]"
+agent context-proxy "agent: spec-reviewer | budget: 1500 | prompt: [feature + research findings]"
 ```
 
 Incorporate gaps and edge cases into the plan.
@@ -54,7 +67,7 @@ Incorporate gaps and edge cases into the plan.
 ### 4. Architecture Design
 
 ```
-agent architect "[feature + research + spec review findings]"
+agent context-proxy "agent: architect | budget: 3000 | prompt: [feature + research + spec review findings]"
 ```
 
 The architect agent:
@@ -62,6 +75,8 @@ The architect agent:
 - Designs solution approach
 - Identifies integration points
 - Recommends libraries/packages if needed
+
+**Note:** Architect has larger budget (3000) as it produces the implementation plan.
 
 ### 5. Write Plan
 
