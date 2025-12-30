@@ -2,6 +2,15 @@
 
 All notable changes to majestic-tools will be documented in this file.
 
+## [3.5.0] - 2025-12-29
+
+### Removed
+
+- **`new-skill` skill deleted** - Reduces context token consumption by ~3.6k tokens
+  - Skill was 463 lines + 6 reference files (2,677 lines total)
+  - Content moved to official Claude Code documentation
+  - Use `/majestic-tools:meta:new-command` for creating new commands instead
+
 ## [3.2.3] - 2025-12-28
 
 ### Fixed

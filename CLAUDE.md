@@ -1,204 +1,63 @@
-# Majestic Marketplace - Ultimate Company Management Toolkit
+# Majestic Marketplace
 
-This repository is a Claude Code plugin marketplace that provides an **ultimate company management toolkit** - AI-powered tools covering every business function: Engineering, Marketing, Sales, and Company Operations.
+Claude Code plugin marketplace. **Work in `plugins/*/` only.**
 
-## Repository Structure
+## ⛔ FORBIDDEN
 
-```
-majestic-marketplace/
-├── .claude-plugin/
-│   └── marketplace.json          # Marketplace catalog (lists available plugins)
-└── plugins/
-    ├── majestic-engineer/        # Language-agnostic engineering workflows
-    ├── majestic-rails/           # Ruby/Rails development tools
-    ├── majestic-python/          # Python development tools
-    ├── majestic-marketing/       # Marketing and SEO tools
-    ├── majestic-sales/           # Sales acceleration tools
-    ├── majestic-company/         # Business operations tools
-    ├── majestic-llm/             # External LLM integration (Codex, Gemini)
-    └── majestic-tools/           # Claude Code customization tools
-```
+NEVER modify `~/.claude/`. All plugin work goes in `majestic-marketplace/plugins/`.
 
-## Business Function Coverage
-
-| Function | Plugin | Focus |
-|----------|--------|-------|
-| Engineering | majestic-engineer, majestic-rails, majestic-python | Development workflows, code quality, testing |
-| Marketing | majestic-marketing | SEO, content, GEO (AI visibility), branding |
-| Sales | majestic-sales | Funnels, playbooks, prospecting, proposals |
-| Operations | majestic-company | Strategy, hiring, legal, business planning |
-| LLM Integration | majestic-llm | External LLM consulting (Codex, Gemini) |
-| Meta | majestic-tools | Claude Code customization |
-
-## Architecture Principles
-
-- DRY: don't repeat yourself
-- YAGNI: you aren't gonna need it
-- KISS: keep it simple, stupid
-- Separation of concerns
-
-## Plugin Architecture
-
-### Hub-and-Spoke Dependency Model
-
-This marketplace uses a **hub-and-spoke architecture** where `majestic-engineer` serves as the central orchestration hub:
+## Structure
 
 ```
-              ┌─────────────────────────────────────┐
-              │          majestic-engineer          │
-              │        (Central Orchestrator)       │
-              └─────────────────────────────────────┘
-                    │         │          │
-           ┌───────┼─────────┼──────────┼───────┐
-           │       │         │          │       │
-           ▼       ▼         ▼          ▼       ▼
-      rails    python     react      llm     tools
-           │       │                    │
-           └───────┴────────────────────┘
-                   │
-                   ▼ (back-references for shared reviewers)
-            majestic-engineer
+plugins/{engineer,rails,python,marketing,sales,company,llm,tools}/
 ```
 
-### Dependency Rules
-
-1. **`majestic-engineer` is the central orchestrator** - It may reference language-specific plugins (rails, python, react), LLM integration (llm), and utility plugins (tools) for quality gates and code review orchestration.
-
-2. **Language-specific plugins depend on `majestic-engineer`** - They inherit shared reviewers (simplicity-reviewer, project-topics-reviewer) and generic workflows.
-
-3. **Business function plugins are isolated** - `majestic-marketing`, `majestic-sales`, and `majestic-company` have NO cross-plugin dependencies.
-
-4. **`majestic-llm` provides external LLM integration** - Referenced by `majestic-engineer` for multi-LLM code review and architecture consulting.
-
-5. **`majestic-tools` provides utilities** - Referenced by `majestic-engineer` for reasoning tools and terminal utilities.
-
-6. **Documentation references are allowed** - `majestic-guide` may reference all plugins for discovery purposes (no runtime dependency).
-
-### Allowed Dependencies
+## Dependencies
 
 | Plugin | Can Reference |
 |--------|--------------|
-| `majestic-engineer` | rails, python, react, llm, tools |
-| `majestic-rails` | engineer |
-| `majestic-python` | engineer |
-| `majestic-react` | engineer |
-| `majestic-llm` | (none) |
-| `majestic-tools` | (none at runtime, all for docs) |
-| `majestic-marketing` | (none) |
-| `majestic-sales` | (none) |
-| `majestic-company` | (none) |
+| `engineer` | rails, python, react, llm, tools |
+| `rails`, `python`, `react` | engineer |
+| `marketing`, `sales`, `company`, `llm`, `tools` | (none) |
 
-## Rules for This Repository
+## Documentation
 
-### Naming Conventions
+- [Naming](docs/plugin-architecture/NAMING-CONVENTIONS.md)
+- [Operations](docs/plugin-architecture/PLUGIN-OPERATIONS.md)
+- [Schemas](docs/plugin-architecture/JSON-SCHEMAS.md)
+- [Config](docs/plugin-architecture/CONFIG-SYSTEM.md)
 
-See [docs/plugin-architecture/NAMING-CONVENTIONS.md](docs/plugin-architecture/NAMING-CONVENTIONS.md) for agent, skill, and command naming rules.
+## Config Access
 
-**Quick reference:**
-- **Agents**: Simple kebab-case names, auto-namespaced by Claude Code
-- **Skills**: Simple kebab-case names, invoked as `plugin-name:skill-name`
-- **Commands**: Three-tier system (`majestic:*`, `framework:*`, or path-based)
+```
+!`claude -p "/majestic:config field default"`
+```
 
-### ⛔ FORBIDDEN: Never Modify ~/.claude/
+## Key Rules
 
-**NEVER modify `~/.claude/` when working on this repository.** All plugin files belong in `majestic-marketplace/plugins/`. The user's personal `~/.claude/` directory is separate from this plugin marketplace.
+<limits>
+- Skills: <500 lines
+- Agents: <300 lines
+</limits>
 
-- ❌ `~/.claude/commands/` - DO NOT TOUCH
-- ❌ `~/.claude/skills/` - DO NOT TOUCH
-- ❌ `~/.claude/hooks/` - DO NOT TOUCH
-- ✅ `plugins/*/` - THIS IS WHERE YOU WORK
+<file-locations>
+- Skill resources → `skills/*/resources/`
+- No .md files in `commands/` (they become executable)
+</file-locations>
 
-### Plugin Operations
+<behaviors>
+- Skills = knowledge (Claude MAY follow)
+- Hooks = enforcement (FORCES behavior)
+- Agents do autonomous work, not just advice
+- `name:` in frontmatter overrides path-based naming
+</behaviors>
 
-See [docs/plugin-architecture/PLUGIN-OPERATIONS.md](docs/plugin-architecture/PLUGIN-OPERATIONS.md) for:
-- Adding new plugins
-- Updating plugin components (agents, commands, skills)
-- Testing changes locally
-- Common maintenance tasks
-- Commit conventions
+<validation>
+Run `skill-linter` for new skills.
+</validation>
 
-### JSON Schemas
-
-See [docs/plugin-architecture/JSON-SCHEMAS.md](docs/plugin-architecture/JSON-SCHEMAS.md) for:
-- marketplace.json structure and allowed fields
-- plugin.json structure and component definitions
-- Validation instructions
-
-## Project Configuration: .agents.yml
-
-See [docs/plugin-architecture/CONFIG-SYSTEM.md](docs/plugin-architecture/CONFIG-SYSTEM.md) for complete configuration documentation.
-
-**Quick reference - Core fields:**
-
-| Field | Description | Default |
-|-------|-------------|---------|
-| `default_branch` | Main branch for git operations | `main` |
-| `tech_stack` | Primary tech stack (`rails`, `python`, `generic`) | `generic` |
-| `task_management` | Task tracking system | `none` |
-| `workflow` | Development workflow (`worktrees`, `branches`) | `branches` |
-| `review_topics_path` | Path to review topics file | (none) |
-
-**Config access:** Use the `/majestic:config` command pattern: `!`claude -p "/majestic:config field default"``
-This merges `.agents.yml` with `.agents.local.yml` (local overrides base) and returns the value or default.
-
-## Resources
-
-- **Wiki**: `../majestic-marketplace.wiki/` - Plugin documentation, usage guides, and examples
-- [Claude Code Plugin Documentation](https://docs.claude.com/en/docs/claude-code/plugins)
-- [Plugin Marketplace Documentation](https://docs.claude.com/en/docs/claude-code/plugin-marketplaces)
-- [Plugin Reference](https://docs.claude.com/en/docs/claude-code/plugins-reference)
-
-## Key Learnings
-
-_Synthesized wisdom from working on this repository._
-
-### General
-
-- Stick to the official spec. Custom fields may confuse users or break compatibility with future versions.
-- When updating files to add new patterns or tools, always preserve existing content. Don't simplify or remove example formats, question templates, or detailed instructions. Add the new pattern alongside existing content, not as a replacement.
-- Mermaid diagrams use different node shapes: `()` for commands (stadium/rounded), `{{}}` for agents (hexagons), `[]` for manual actions (rectangles).
-- The `model:` field in frontmatter requires full model IDs (e.g., `haiku`). Prefer omitting to inherit from user's session, except for cheap/fast operations where haiku is appropriate.
-- When refactoring patterns across the codebase, explicitly verify ALL files were updated. Use grep to find all instances and compare before/after counts.
-
-### Skills
-
-- Skills must contain NEW information Claude doesn't already know. Avoid generic advice like "think step by step" or personas like "you are a professional engineer". Include: project-specific patterns, synthesized experience, concrete code examples, measurable rules ("max 5 lines per method").
-- Skills are for knowledge/context (probabilistic - Claude MAY follow), hooks are for process enforcement (deterministic - FORCES behavior).
-- Thinking frameworks work better as skills than agents - they integrate into conversation as LENSES for thinking. Structured workflows with distinct intake→analysis→output phases work better as agents.
-- Skills must stay under 500 lines. Extract verbose templates (>15 lines) to a `resources/` subdirectory.
-- Skill content must be copy-paste ready. Include: specific templates, exact scripts, `{{variable}}` placeholders. Exclude: "Why it works" explanations, generic frameworks, "best practices" prose.
-- When adding to existing skills, prefer lean additions. Add 3 concrete examples instead of 30 lines of framework.
-- Skills can receive arguments through the Skill tool's `args` parameter. Example: `Skill(skill="config-reader", args="auto_preview false")`.
-- Interactive skills should include `AskUserQuestion` in `allowed-tools:` and use the format: "Use `AskUserQuestion` to gather initial context. Begin by asking:"
-- Run `skill-linter` to validate new skills. Key requirements: names start with a letter, use kebab-case, match directory name, stay under 500 lines.
-
-### Agents
-
-- Agents should do autonomous work, not just provide advice. Good agents: read files, run commands, fetch web content, produce artifacts. Bad agents: "strategic advisor" (just advice).
-- Agents must stay under 300 lines. Extract reference material, detailed examples, and edge case handling to resources files.
-
-### Commands
-
-- The `name:` field overrides path-based naming. Without it, Claude Code derives names from file paths (e.g., `plugins/majestic-rails/commands/gemfile/upgrade.md` → `/majestic-rails:gemfile:upgrade`). Use `name:` intentionally for short aliases; omit when namespacing matters.
-- Commands have no official line limit, but should be kept concise. Use `@path/to/file` references and `!`command`` for shell output instead of inlining large blocks.
-- Commands can contain shell scripts (`.sh`, `.bash`) but NOT markdown resource files. Any `.md` file in `commands/` becomes an executable command. For markdown templates, create a skill with `resources/` and invoke it from the command.
-- Command frontmatter: `description` (required for SlashCommand tool), `argument-hint` (shown in autocomplete), `allowed-tools` (whitelist), `model` (optional). Keep descriptions to 1-2 sentences.
-- SlashCommand tool uses 15,000 char budget (configurable via `SLASH_COMMAND_TOOL_CHAR_BUDGET`) for all command names + args + descriptions combined.
-- Command arguments: `$ARGUMENTS` for all input, or `$1`, `$2` for positional. Document in `argument-hint`. Hard-code stable steps; use arguments for run-specific details.
-- Each command should have single responsibility. Separate read-only from mutating commands. For mutating operations, show plan before executing.
-- Claude Code commands use backtick notation (`!`...``) for inline bash, not `$(...)`. Pattern: `!`claude -p "/majestic:config field default"``
-
-### Resources & File Structure
-
-- Resource files for commands must be in a skill's `resources/` subdirectory, NOT under `commands/`. Pattern: create skill with `SKILL.md` + `resources/`, then invoke from command.
-- For stateless, reusable logic use Script → Skill → Command pattern: 1) bash script at `skills/*/scripts/`, 2) skill documenting usage, 3) command providing CLI interface.
-
-### Config & Tools
-
-- Use existing specialized tools instead of bash workarounds. For config: `/majestic:config`. For file searches: Glob tool.
-- Keep instructions concise - Claude knows how to search. Over-specified bash snippets waste tokens.
-- All `.agents.yml` access should use `/majestic:config` command pattern. Never grep config files directly.
-
-### Infrastructure
-
-- DevOps code should default to SIMPLE, flat structures. For Ansible: single playbook with inline tasks (~200 lines), use Galaxy roles. For Terraform/OpenTofu: flat .tf files, no custom modules for <5 resources.
+<content-rules>
+- Skills must contain NEW info Claude doesn't know
+- Exclude: generic advice, personas, "best practices" prose
+- Include: concrete limits, project-specific patterns, exact templates
+</content-rules>
