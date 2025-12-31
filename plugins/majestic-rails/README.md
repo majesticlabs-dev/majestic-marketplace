@@ -1,12 +1,29 @@
 # Majestic Rails
 
-Ruby on Rails development tools. Includes 23 specialized agents, 3 commands, and 12 skills.
+Ruby on Rails development tools. Includes 11 specialized agents, 3 commands, 26 skills, and LSP support for Ruby and Stimulus.
 
 ## Installation
 
 ```bash
 claude /plugin install majestic-rails
 ```
+
+## LSP Setup (Optional)
+
+This plugin includes LSP server configurations for Ruby and Stimulus. Install the language servers to enable code intelligence:
+
+```bash
+# Ruby LSP (by Shopify)
+gem install ruby-lsp
+
+# Stimulus LSP (by Marco Roth)
+npm install -g stimulus-language-server
+```
+
+**Features enabled:**
+- Go to definition, find references, hover documentation
+- Real-time diagnostics and error detection
+- Code navigation for `.rb`, `.rake`, `.erb`, `.html` files
 
 ## Recommended Workflow
 
