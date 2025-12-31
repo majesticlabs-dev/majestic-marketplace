@@ -8,19 +8,27 @@ color: gray
 
 # Toolbox Resolver Agent
 
-Discover stack-specific toolbox manifests from installed plugins and return merged configuration.
+Discover stack-specific toolbox configurations and return merged config for orchestrators.
 
 ## Purpose
 
-Generic orchestrators (`/majestic:build-task`, `quality-gate`) invoke this agent to get stack-specific capabilities without hardcoding stack logic. Plugins declare capabilities in `toolbox.yml` manifests, and this resolver discovers, filters, and merges them.
+Generic orchestrators (`/majestic:blueprint`, `/majestic:build-task`, `quality-gate`) invoke this agent to get stack-specific capabilities without hardcoding stack logic.
+
+## Resolution Order (Layered)
+
+```
+1. Built-in presets (fallback defaults)
+2. Plugin toolbox.yml (enhancements from installed plugins)
+3. User overrides in .agents.yml (highest priority)
+```
 
 ## Input
 
 The invoking orchestrator provides:
 
 ```
-Stage: build-task | quality-gate
-Tech Stack: <tech_stack from .agents.yml>
+Stage: blueprint | build-task | quality-gate
+Tech Stack: <tech_stack from .agents.yml - can be string or array>
 Task Title: <optional, for context>
 Task Description: <optional, for context>
 ```
@@ -30,11 +38,39 @@ Task Description: <optional, for context>
 ### 1. Read Project Tech Stack
 
 Read `tech_stack` from project config:
-- Tech stack: !`claude -p "/majestic:config tech_stack generic"`
+```
+Skill(skill: "config-reader", args: "tech_stack generic")
+```
 
-### 2. Discover Toolbox Manifests
+**Multi-stack support:**
+```yaml
+# .agents.yml - single stack
+tech_stack: rails
 
-Search for manifests in known plugin locations (NOT recursive `**` everywhere):
+# .agents.yml - multiple stacks
+tech_stack:
+  - rails
+  - react
+```
+
+Normalize to array: if string, convert to `[tech_stack]`.
+
+### 2. Load Built-in Presets
+
+For EACH stack in the tech_stack array:
+
+**Read preset from agent resources:**
+```
+See resources/toolbox-resolver/{stack}.yml
+```
+
+Available presets: `rails.yml`, `python.yml`, `react.yml`, `node.yml`, `generic.yml`
+
+If preset not found for a stack, continue (no error).
+
+### 3. Discover Plugin Toolbox Manifests
+
+Search for manifests in known plugin locations:
 
 **Primary paths:**
 - `~/.claude/plugins/*/.claude-plugin/toolbox.yml` (installed plugins)
@@ -50,44 +86,47 @@ Then check user's installed plugins:
 ls ~/.claude/plugins/*/.claude-plugin/toolbox.yml 2>/dev/null
 ```
 
-### 3. Parse and Filter Manifests
+### 4. Filter and Parse Manifests
 
 For each discovered manifest:
 
 1. Read the file content
 2. Parse YAML structure
 3. Extract `tech_stack` field
-4. **Include only if `tech_stack` matches** the project's tech_stack
+4. **Include only if `tech_stack` matches** any stack in the project's tech_stack array
 
 **Required manifest fields:**
 - `schema_version`: Must be `1`
 - `plugin`: Plugin identifier
-- `tech_stack`: Must match project's tech_stack
+- `tech_stack`: Must match one of project's stacks
 - `priority`: Integer for collision resolution (default: 100)
 
-### 4. Merge by Priority (Deterministic)
+### 5. Merge All Sources
 
-If multiple manifests match the same `tech_stack`:
+**Merge order (later overrides earlier):**
+1. Built-in preset for stack 1
+2. Built-in preset for stack 2 (if multi-stack)
+3. Plugin manifest for stack 1
+4. Plugin manifest for stack 2 (if multi-stack)
 
 **Scalar fields** (`build_task.executor.build_agent`, `build_task.executor.fix_agent`, `build_task.design_system_path`):
-- Highest `priority` wins
-- If equal priority, first alphabetically by `plugin` name
+- Last one wins (in merge order)
 
 **List fields** (`coding_styles`, `research_hooks`, `pre_ship_hooks`, `quality_gate.reviewers`):
 - Union by `id` (for hooks) or by full agent/skill path (for others)
-- Sort by `(priority desc, plugin asc, id asc)`
-- Duplicates: keep highest priority entry
+- Deduplicate by id
+- Keep all unique entries from all sources
 
 **Collision warning:**
-If same `id` appears in multiple manifests with different agents:
+If same `id` appears in multiple sources with different agents:
 ```
-⚠️ Collision: research_hooks.gem_research
-  - majestic-rails (priority: 100): majestic-rails:research:gem-research
-  - another-plugin (priority: 50): another-plugin:gem-research
-  Using: majestic-rails:research:gem-research (higher priority)
+⚠️ Collision: research_hooks.auth_patterns
+  - preset (priority: 50): majestic-engineer:research:best-practices-researcher
+  - majestic-rails (priority: 100): majestic-rails:auth-researcher
+  Using: majestic-rails:auth-researcher (higher priority)
 ```
 
-### 5. Apply User Overrides
+### 6. Apply User Overrides
 
 Check if `.agents.yml` contains `toolbox:` section:
 
@@ -96,31 +135,30 @@ Check if `.agents.yml` contains `toolbox:` section:
 toolbox:
   build_task:
     executor:
-      build_agent: general-purpose  # Replaces manifest
-    coding_styles:                  # Replaces manifest
+      build_agent: general-purpose  # Replaces merged config
+    coding_styles:                  # Replaces merged config
       - majestic-rails:dhh-coder
       - majestic-engineer:tdd-workflow
-    design_system_path: docs/design/design-system.md  # Replaces manifest (UI specs)
+    design_system_path: docs/design/design-system.md
     research_hooks:
-      - id: custom_hook             # ADDS to manifest
+      - id: custom_hook             # ADDS to merged config
         mode: manual
         agent: custom-agent
 
   quality_gate:
-    reviewers:                      # Replaces manifest
+    reviewers:                      # Replaces merged config
       - majestic-engineer:qa:security-review
-      - majestic-rails:review:pragmatic-rails-reviewer
 ```
 
 **Merge behavior:**
-- `build_task.executor`: User **replaces** manifest
-- `build_task.coding_styles`: User **replaces** manifest (complete override)
-- `build_task.design_system_path`: User **replaces** manifest (scalar field)
-- `build_task.research_hooks`: User **extends** manifest (additive by id)
-- `build_task.pre_ship_hooks`: User **extends** manifest (additive by id)
-- `quality_gate.reviewers`: User **replaces** manifest (complete override)
+- `build_task.executor`: User **replaces** merged config
+- `build_task.coding_styles`: User **replaces** merged config
+- `build_task.design_system_path`: User **replaces** merged config
+- `build_task.research_hooks`: User **extends** merged config (additive by id)
+- `build_task.pre_ship_hooks`: User **extends** merged config (additive by id)
+- `quality_gate.reviewers`: User **replaces** merged config
 
-### 6. Return Canonical Configuration
+### 7. Return Canonical Configuration
 
 ## Output Format
 
@@ -129,8 +167,11 @@ Return the merged toolbox configuration as YAML:
 ```yaml
 ## Toolbox Configuration
 
-tech_stack: rails
-source: majestic-rails (priority: 100)
+tech_stack: [rails, react]  # Always array in output
+sources:
+  - preset:rails
+  - preset:react
+  - plugin:majestic-rails (priority: 100)
 overrides_applied: []
 warnings: []
 
@@ -139,17 +180,30 @@ build_task:
     build_agent: general-purpose
     fix_agent: general-purpose
 
-  coding_styles:                 # Skills (not agents) - invoke via Skill tool
+  coding_styles:
     - majestic-rails:dhh-coder
+    - majestic-engineer:tdd-workflow
 
-  design_system_path: docs/design/design-system.md  # UI specs (load before build)
+  design_system_path: docs/design/design-system.md
 
   research_hooks:
+    # From rails preset
+    - id: auth_patterns
+      agent: majestic-engineer:research:best-practices-researcher
+      context: "Rails authorization patterns"
+      triggers:
+        any_substring: ["authorization", "policy", "permission"]
+    # From react preset
+    - id: state_patterns
+      agent: majestic-engineer:research:best-practices-researcher
+      context: "React state management"
+      triggers:
+        any_substring: ["state", "redux", "zustand"]
+    # From majestic-rails plugin (enhances preset)
     - id: gem_research
-      mode: auto
       agent: majestic-rails:research:gem-research
       triggers:
-        any_substring: ["Gemfile", "gem ", "bundle", "rubygems", "dependency", "add gem"]
+        any_substring: ["Gemfile", "gem ", "bundle"]
 
   pre_ship_hooks:
     - id: rails_lint
@@ -160,7 +214,6 @@ quality_gate:
   reviewers:
     - majestic-rails:review:pragmatic-rails-reviewer
     - majestic-engineer:qa:security-review
-    - majestic-rails:review:performance-reviewer
     - majestic-engineer:review:project-topics-reviewer
 ```
 
@@ -168,59 +221,71 @@ quality_gate:
 
 | Scenario | Action |
 |----------|--------|
-| No manifest found for stack | Return empty config with `source: none` |
+| No preset for stack | Continue, use plugins/overrides only |
+| No plugin for stack | Continue, use presets/overrides only |
+| No preset AND no plugin | Use generic preset as fallback |
 | Invalid YAML in manifest | Skip manifest, add to `warnings[]`, continue |
 | Missing required fields | Skip manifest, add to `warnings[]`, continue |
-| Multiple manifests match | Merge by priority, add collision warnings |
 | No tech_stack in .agents.yml | Default to `generic` |
 
 ## Empty Config Response
 
-When no manifest matches the tech_stack:
+When no sources found (no preset, no plugin, no overrides):
 
 ```yaml
 ## Toolbox Configuration
 
-tech_stack: generic
-source: none
+tech_stack: [generic]
+sources:
+  - preset:generic
 overrides_applied: []
-warnings:
-  - "No toolbox manifest found for tech_stack: generic"
+warnings: []
 
 build_task:
   executor:
     build_agent: null
     fix_agent: null
-  coding_styles: []
+  coding_styles:
+    - majestic-engineer:tdd-workflow
   design_system_path: null
   research_hooks: []
   pre_ship_hooks: []
 
 quality_gate:
-  reviewers: []
+  reviewers:
+    - majestic-engineer:qa:security-review
+    - majestic-engineer:review:project-topics-reviewer
 ```
 
 Orchestrators receiving `build_agent: null` should fall back to `general-purpose`.
-Orchestrators receiving `design_system_path: null` should skip design system loading.
 
 ## Best Practices
 
-- Always return valid YAML structure, even if empty
+- Always return valid YAML structure, even if minimal
 - Include all warnings for debugging
 - Use full agent paths (e.g., `majestic-rails:research:gem-research`)
-- Don't fail on invalid manifests - skip and warn
-- Respect user overrides even if they conflict with manifest
+- Don't fail on missing sources - gracefully degrade
+- Presets provide baseline, plugins enhance, user overrides customize
+- Multi-stack projects get merged capabilities from all stacks
 
 ## Example Invocations
 
-**From build-task:**
+**From blueprint (single stack):**
 ```
 Task (majestic-engineer:workflow:toolbox-resolver):
   prompt: |
-    Stage: build-task
+    Stage: blueprint
     Tech Stack: rails
     Task Title: Add user authentication
-    Task Description: Implement Devise-based authentication with email/password
+```
+
+**From blueprint (multi-stack):**
+```
+Task (majestic-engineer:workflow:toolbox-resolver):
+  prompt: |
+    Stage: blueprint
+    Tech Stack: [rails, react]
+    Task Title: Add Inertia.js dashboard
 ```
 
 **From quality-gate:**
@@ -228,5 +293,5 @@ Task (majestic-engineer:workflow:toolbox-resolver):
 Task (majestic-engineer:workflow:toolbox-resolver):
   prompt: |
     Stage: quality-gate
-    Tech Stack: rails
+    Tech Stack: python
 ```

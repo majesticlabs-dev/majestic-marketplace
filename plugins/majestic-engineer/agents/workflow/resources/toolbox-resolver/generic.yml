@@ -1,0 +1,53 @@
+# Generic preset - minimal fallback for any tech stack
+schema_version: 1
+tech_stack: generic
+
+research_hooks:
+  - id: architecture_patterns
+    agent: majestic-engineer:research:best-practices-researcher
+    context: "Software architecture patterns and best practices"
+    triggers:
+      any_substring:
+        - "architecture"
+        - "design pattern"
+        - "structure"
+        - "refactor"
+
+  - id: api_patterns
+    agent: majestic-engineer:research:best-practices-researcher
+    context: "API design: REST, GraphQL, error handling, versioning"
+    triggers:
+      any_substring:
+        - "api"
+        - "endpoint"
+        - "rest"
+        - "graphql"
+
+  - id: testing_patterns
+    agent: majestic-engineer:research:best-practices-researcher
+    context: "Testing strategies: unit, integration, e2e, TDD"
+    triggers:
+      any_substring:
+        - "test"
+        - "spec"
+        - "coverage"
+        - "tdd"
+
+  - id: security_patterns
+    agent: majestic-engineer:research:best-practices-researcher
+    context: "Security patterns: authentication, authorization, OWASP"
+    triggers:
+      any_substring:
+        - "security"
+        - "auth"
+        - "token"
+        - "jwt"
+        - "oauth"
+
+coding_styles:
+  - majestic-engineer:tdd-workflow
+
+quality_gate:
+  reviewers:
+    - majestic-engineer:qa:security-review
+    - majestic-engineer:review:project-topics-reviewer

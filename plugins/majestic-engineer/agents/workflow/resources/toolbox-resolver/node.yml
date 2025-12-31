@@ -1,0 +1,72 @@
+# Built-in Node.js preset - uses majestic-engineer agents only
+schema_version: 1
+tech_stack: node
+
+research_hooks:
+  - id: package_patterns
+    agent: majestic-engineer:research:best-practices-researcher
+    context: "Node.js packages: npm, yarn, pnpm, bun, package.json"
+    triggers:
+      any_substring:
+        - "package"
+        - "npm"
+        - "yarn"
+        - "pnpm"
+        - "bun"
+        - "dependency"
+        - "install"
+
+  - id: async_patterns
+    agent: majestic-engineer:research:best-practices-researcher
+    context: "Node.js async: Promises, async/await, event loop, streams"
+    triggers:
+      any_substring:
+        - "async"
+        - "await"
+        - "promise"
+        - "stream"
+        - "event"
+        - "callback"
+
+  - id: api_patterns
+    agent: majestic-engineer:research:best-practices-researcher
+    context: "Node.js API: Express, Fastify, Hono, middleware patterns"
+    triggers:
+      any_substring:
+        - "endpoint"
+        - "api"
+        - "route"
+        - "express"
+        - "fastify"
+        - "middleware"
+
+  - id: db_patterns
+    agent: majestic-engineer:research:best-practices-researcher
+    context: "Node.js database: Prisma, Drizzle, TypeORM, Knex"
+    triggers:
+      any_substring:
+        - "database"
+        - "prisma"
+        - "drizzle"
+        - "orm"
+        - "query"
+        - "migration"
+
+  - id: testing_patterns
+    agent: majestic-engineer:research:best-practices-researcher
+    context: "Node.js testing: Jest, Vitest, Mocha, supertest"
+    triggers:
+      any_substring:
+        - "test"
+        - "jest"
+        - "vitest"
+        - "mocha"
+        - "spec"
+
+coding_styles:
+  - majestic-engineer:tdd-workflow
+
+quality_gate:
+  reviewers:
+    - majestic-engineer:qa:security-review
+    - majestic-engineer:review:project-topics-reviewer

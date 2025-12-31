@@ -1,0 +1,70 @@
+# Built-in Python preset - uses majestic-engineer agents only
+# Stack plugins (majestic-python) can enhance with specialized agents
+schema_version: 1
+tech_stack: python
+
+research_hooks:
+  - id: dependency_patterns
+    agent: majestic-engineer:research:best-practices-researcher
+    context: "Python dependencies: pip, poetry, uv, requirements.txt"
+    triggers:
+      any_substring:
+        - "requirements"
+        - "pyproject"
+        - "pip"
+        - "poetry"
+        - "dependency"
+        - "install"
+
+  - id: async_patterns
+    agent: majestic-engineer:research:best-practices-researcher
+    context: "Python async patterns: asyncio, aiohttp, FastAPI async"
+    triggers:
+      any_substring:
+        - "async"
+        - "await"
+        - "asyncio"
+        - "concurrent"
+        - "parallel"
+
+  - id: api_patterns
+    agent: majestic-engineer:research:best-practices-researcher
+    context: "Python API patterns: FastAPI, Flask, Django REST"
+    triggers:
+      any_substring:
+        - "endpoint"
+        - "api"
+        - "route"
+        - "fastapi"
+        - "flask"
+        - "django"
+
+  - id: db_patterns
+    agent: majestic-engineer:research:best-practices-researcher
+    context: "Python database: SQLAlchemy, Django ORM, Alembic migrations"
+    triggers:
+      any_substring:
+        - "database"
+        - "migration"
+        - "sqlalchemy"
+        - "orm"
+        - "query"
+
+  - id: testing_patterns
+    agent: majestic-engineer:research:best-practices-researcher
+    context: "Python testing: pytest, unittest, fixtures, mocking"
+    triggers:
+      any_substring:
+        - "test"
+        - "pytest"
+        - "unittest"
+        - "fixture"
+        - "mock"
+
+coding_styles:
+  - majestic-engineer:tdd-workflow
+
+quality_gate:
+  reviewers:
+    - majestic-engineer:qa:security-review
+    - majestic-engineer:review:project-topics-reviewer
