@@ -43,6 +43,17 @@ Ask questions **ONE AT A TIME**. Prefer multiple choice when options are bounded
    - `react` → Tailwind or styled-components
    - Default → Plain Tailwind
 
+### Visual Language Questions (if comprehensive design system needed)
+
+10. **Photography style** - "What mood should photos convey?"
+    - Options: Authentic/candid, Editorial/staged, Abstract/artistic, Product-focused, People-focused
+
+11. **Illustration style** - "Do you need illustrations? If so, what style?"
+    - Options: None needed, Geometric/clean, Organic/hand-drawn, Isometric/3D, Flat/minimal
+
+12. **Iconography** - "What icon style fits your brand?"
+    - Options: Outlined (Heroicons), Filled (solid), Duotone (Phosphor), Custom/branded
+
 ### Question Guidelines
 
 - **ONE question per turn**

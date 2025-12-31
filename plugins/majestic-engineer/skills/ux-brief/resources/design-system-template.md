@@ -2,6 +2,107 @@
 
 > [1-2 sentence design philosophy summary]
 
+---
+
+## Brand Foundation
+
+> Strategic context from [brand-positioning.md](../brand-positioning.md)
+
+### Brand Essence
+
+| Element | Value |
+|---------|-------|
+| **Purpose** | [Why we exist] |
+| **Promise** | [What we guarantee] |
+| **Personality** | [3-5 traits: e.g., Bold, Warm, Direct] |
+
+### Design Implications
+
+| Brand Trait | Visual Expression |
+|-------------|-------------------|
+| [Trait 1] | [How it shows in design: e.g., Bold → High contrast, strong type hierarchy] |
+| [Trait 2] | [How it shows in design: e.g., Warm → Soft colors, friendly imagery] |
+| [Trait 3] | [How it shows in design: e.g., Direct → Clean layouts, clear CTAs] |
+
+---
+
+## Logo Usage
+
+### Primary Logo
+
+| Context | Minimum Size | Clear Space | File Format |
+|---------|--------------|-------------|-------------|
+| Digital (web/app) | 24px height | 1x logo width all sides | SVG, PNG |
+| Print | 0.5" height | 1x logo width all sides | SVG, EPS |
+| Favicon | 16x16px | N/A | ICO, PNG |
+| Social avatar | 400x400px | Built into asset | PNG |
+
+### Logo Variants
+
+| Variant | Use When | File |
+|---------|----------|------|
+| Full color | Default on light backgrounds | logo-full.svg |
+| Reversed | Dark backgrounds | logo-reversed.svg |
+| Monochrome | Single-color contexts | logo-mono.svg |
+| Icon only | Small spaces, app icons | logo-icon.svg |
+
+### Logo Don'ts
+
+- Do not stretch or distort proportions
+- Do not place on busy/low-contrast backgrounds
+- Do not add effects (shadows, glows, outlines)
+- Do not rotate or flip
+- Do not change colors outside approved palette
+- Do not place text/elements inside clear space
+
+---
+
+## Visual Language
+
+### Photography Style
+
+| Aspect | Direction |
+|--------|-----------|
+| **Mood** | [Authentic / Staged / Candid / Editorial] |
+| **Subjects** | [People / Products / Abstract / Environments] |
+| **Lighting** | [Natural / Studio / High-key / Moody] |
+| **Treatment** | [Natural / High contrast / Desaturated / Vibrant] |
+| **Color Temp** | [Warm / Cool / Neutral] |
+
+**Photography Do's:**
+- [Specific guidance, e.g., "Show real users in authentic contexts"]
+- [Specific guidance, e.g., "Natural lighting preferred"]
+- [Specific guidance, e.g., "Diverse representation"]
+
+**Photography Don'ts:**
+- Stock photography clichés (handshakes, pointing at screens)
+- Overly staged or artificial setups
+- Inconsistent color treatment across images
+- Low-resolution or pixelated images
+
+### Illustration Style
+
+| Aspect | Direction |
+|--------|-----------|
+| **Line weight** | [Thin (1px) / Medium (2px) / Thick (3px+) / Varied] |
+| **Style** | [Geometric / Organic / Hand-drawn / Isometric / Flat] |
+| **Colors** | [Match palette / Limited subset / Monochrome] |
+| **Fill** | [Solid / Gradient / Textured / None (outline only)] |
+| **Complexity** | [Minimal / Moderate / Detailed] |
+
+### Iconography
+
+| Property | Value |
+|----------|-------|
+| **Style** | [Outlined / Filled / Duotone] |
+| **Stroke width** | [1.5px / 2px] consistent |
+| **Corner style** | [Rounded / Square] matching border-radius scale |
+| **Size grid** | 16px, 20px, 24px, 32px |
+| **Color** | [Current text color / Fixed accent / Semantic] |
+| **Library** | [Heroicons / Lucide / Phosphor / Custom] |
+
+---
+
 ## Quick Reference
 
 Copy-paste ready classes for common elements:
@@ -462,3 +563,48 @@ Respect `prefers-reduced-motion`:
   }
 }
 ```
+
+---
+
+## Voice & Content Integration
+
+> See [brand-voice.md](../brand-voice.md) for complete voice guide.
+
+### UI Copy Tone
+
+| Context | Tone | Example |
+|---------|------|---------|
+| Headlines | [Confident / Inviting / Direct] | "[Example headline]" |
+| CTAs | [Action-oriented / Benefit-focused] | "[Example CTA text]" |
+| Empty states | [Helpful / Encouraging] | "[Example empty state]" |
+| Error messages | [Calm / Solution-focused] | "[Example error]" |
+| Success messages | [Celebratory / Warm] | "[Example success]" |
+
+### Microcopy Guidelines
+
+| Element | Guideline |
+|---------|-----------|
+| Button labels | Action verb + object (e.g., "Save changes", not "Submit") |
+| Form labels | Sentence case, no colons |
+| Placeholders | Example format, not instruction (e.g., "jane@example.com") |
+| Tooltips | One sentence max, no period |
+| Loading states | Active voice (e.g., "Saving...", not "Please wait") |
+
+### Words We Use / Avoid in UI
+
+| Use | Instead Of |
+|-----|------------|
+| [Preferred term] | [Avoided term] |
+| [Preferred term] | [Avoided term] |
+| [Preferred term] | [Avoided term] |
+
+---
+
+## Related Documents
+
+| Document | Purpose | Location |
+|----------|---------|----------|
+| Brand Positioning | Strategy, values, differentiation | `docs/brand-positioning.md` |
+| Brand Voice | Writing style, tone, vocabulary | `docs/brand-voice.md` |
+| Style Guide | Grammar, mechanics, formatting | `STYLE_GUIDE.md` |
+| Component Library | Implementation reference | [Link to Storybook/docs] |

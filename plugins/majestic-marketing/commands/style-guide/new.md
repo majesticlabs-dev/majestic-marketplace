@@ -12,7 +12,55 @@ Create a project-specific style guide through guided discovery.
 
 $ARGUMENTS - Optional path to existing content samples.
 
-## Phase 1: Discovery
+## Phase 1: Brand Foundation Check
+
+Before style preferences, check for brand context:
+
+```bash
+# Check for existing brand positioning
+glob "**/brand-positioning.md" || glob ".claude/brand-positioning.md"
+```
+
+**If brand positioning exists:**
+- Read and extract: personality traits, values, target audience
+- Use these to inform voice defaults
+- Skip to Phase 2
+
+**If no brand positioning:**
+- Gather minimal brand context with questions below
+
+### Brand Context Questions (if no positioning doc)
+
+Use `AskUserQuestion` to establish brand foundation:
+
+1. **Brand personality?** - "Pick 3 traits that describe your brand"
+   - Options: Bold, Friendly, Professional, Playful, Sophisticated, Rebellious, Trustworthy, Innovative
+
+2. **Competitive stance?** - "How do you want to be perceived vs competitors?"
+   - Options: Premium leader, Scrappy challenger, Friendly alternative, Technical expert, Category creator
+
+3. **Primary audience emotional state?** - "What state is your audience in when they find you?"
+   - Options: Frustrated (seeking relief), Ambitious (seeking growth), Confused (seeking clarity), Skeptical (seeking proof), Overwhelmed (seeking simplicity)
+
+4. **Content relationship?** - "What role does your content play for readers?"
+   - Options: Expert guide (teaching), Trusted peer (collaborating), Helpful assistant (supporting), Bold leader (inspiring)
+
+### Store Brand Context
+
+Save responses to include in output:
+
+```markdown
+## Brand Context
+
+**Personality traits:** [selected traits]
+**Competitive stance:** [selected stance]
+**Audience state:** [selected state]
+**Content role:** [selected role]
+
+*This context informs the voice and tone decisions below.*
+```
+
+## Phase 2: Discovery
 
 Check for existing context:
 
@@ -29,7 +77,7 @@ glob "content/**/*.md" || glob "blog/**/*.md"
 
 If style guide exists, offer to update rather than create new.
 
-## Phase 2: Core Preferences
+## Phase 3: Core Preferences
 
 Use `AskUserQuestion` in batches of 2-4 questions.
 
@@ -53,14 +101,14 @@ Use `AskUserQuestion` in batches of 2-4 questions.
 7. **Jargon tolerance?** - Avoid all, Industry OK, Define on first use
 8. **Words to avoid?** - Comma-separated or "none"
 
-## Phase 3: Advanced Options
+## Phase 4: Advanced Options
 
 If "Mixed" content types or detailed control needed:
 
 - **Tone by content type?** - Yes (ask per type) / No (consistent)
 - **AI writing policy?** - AI drafts allowed, AI for outlines only, No AI, No policy
 
-## Phase 4: Generate Style Guide
+## Phase 5: Generate Style Guide
 
 Invoke skill for template:
 
@@ -82,7 +130,7 @@ Read and customize `@plugins/majestic-marketing/skills/style-guide-builder/resou
 2. `.claude/style-guide.md` (Claude-specific)
 3. `docs/style-guide.md` (documentation folder)
 
-## Phase 5: Confirmation
+## Phase 6: Confirmation
 
 ```
 ✓ Style guide created: [path]
@@ -99,6 +147,7 @@ Next steps:
 ```
 
 Offer options:
-- Create brand voice guide
-- Review existing content
+- Create brand positioning document (if none exists) - Invoke `brand-positioning` skill
+- Create brand voice guide - Invoke `brand-voice` skill
+- Review existing content against new guide
 - Add content type templates
