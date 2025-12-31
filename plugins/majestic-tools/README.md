@@ -97,7 +97,41 @@ Warns when code files exceed a configurable line limit after Write/Edit/MultiEdi
 
 ### Optional Hooks
 
-These hooks are available in `examples/hooks/` but not installed by default. Copy them to your hooks configuration manually if desired.
+These hooks are not installed by default. Add them to your settings manually.
+
+#### today (Optional)
+
+Injects current date/time into the session context on startup. **Workaround for subagents/commands not inheriting the parent session's date context.**
+
+**Location:** `hooks/today.sh`
+
+**Why:** While the main Claude session knows today's date, subagents spawned via `Task` tool and commands may not inherit this context, causing them to hallucinate dates (often defaulting to 2024).
+
+**To enable:**
+
+Add to `~/.claude/settings.json`:
+
+```json
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/path/to/majestic-marketplace/plugins/majestic-tools/hooks/today.sh"
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+**Output:** `[CONTEXT] Current date/time: Monday, 2025-12-30 14:32:15 UTC (+0000) | ISO: 2025-12-30T14:32:15+00:00`
+
+**Timezone:** Set `TZ` environment variable to customize (defaults to UTC).
 
 #### confetti (Optional)
 
