@@ -30,7 +30,10 @@ Design System Path: <path or empty>
 Pre-Ship Hooks: <comma-separated hook agents>
 Quality Gate Reviewers: <comma-separated reviewer names>
 Source: <"task" or "plan">
+Skip Ship: <true or false> (optional, defaults to false)
 ```
+
+**Skip Ship Mode:** When `Skip Ship: true`, steps 9-11 (Pre-Ship Hooks, Ship, Complete Task Status) are skipped. Used by run-blueprint for batch shipping at the end.
 
 ## Workflow (MANDATORY - EXECUTE ALL STEPS)
 
@@ -146,7 +149,9 @@ Fix → Slop → Verify → Quality → (Pass? Ship : Fix again)
 
 **This gate is NOT optional.**
 
-### Step 9: Pre-Ship Hooks
+### Step 9: Pre-Ship Hooks (skip if Skip Ship: true)
+
+**If `Skip Ship: true`:** Skip this step entirely.
 
 For each hook in `Pre-Ship Hooks`:
 ```
@@ -157,7 +162,9 @@ Task (<hook.agent>):
 - **Required hooks:** Block on failure
 - **Optional hooks:** Log warnings only
 
-### Step 10: Ship
+### Step 10: Ship (skip if Skip Ship: true)
+
+**If `Skip Ship: true`:** Skip this step. Report "Quality gate passed, shipping deferred."
 
 **For task source (with task ID):**
 ```
@@ -169,7 +176,9 @@ Task (<hook.agent>):
 /majestic-engineer:workflows:ship-it
 ```
 
-### Step 11: Complete Task Status (task source only)
+### Step 11: Complete Task Status (skip if Skip Ship: true or plan source)
+
+**If `Skip Ship: true`:** Skip this step.
 
 If source is "task" (not "plan"):
 ```
@@ -181,7 +190,7 @@ Skip this step if source is "plan".
 
 ## Output Format
 
-**Success:**
+**Success (with ship):**
 ```markdown
 ## Build Complete: <title>
 
@@ -190,6 +199,16 @@ Skip this step if source is "plan".
 - PR: #<number>
 - Quality: Passed (attempt <n> of 3)
 - Next: PR awaits review
+```
+
+**Success (skip ship mode):**
+```markdown
+## Build Complete: <title>
+
+- Source: <task #ID or plan file>
+- Branch: <branch>
+- Quality: Passed (attempt <n> of 3)
+- Status: Shipping deferred (batch mode)
 ```
 
 **Failure:**

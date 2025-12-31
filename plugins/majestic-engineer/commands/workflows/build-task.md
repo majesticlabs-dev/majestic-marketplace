@@ -17,6 +17,7 @@ Implement a task autonomously through the full development lifecycle.
 - *(empty)* → Auto-detect most recent `docs/plans/*.md`
 - `docs/plans/*.md` → Blueprint file from `/majestic:blueprint`
 - `#123`, `PROJ-123`, URL → Task reference (GitHub, Beads, Linear)
+- `--no-ship` → Flag to skip shipping (used by run-blueprint for batch shipping)
 
 ## Step 0: Detect Input Type
 
@@ -24,6 +25,10 @@ Implement a task autonomously through the full development lifecycle.
 # If empty, find most recent plan
 ls -t docs/plans/*.md 2>/dev/null | head -1
 ```
+
+**Parse `--no-ship` flag:**
+- If `$ARGUMENTS` contains `--no-ship`: Set `skip_ship=true`, remove flag from arguments
+- Otherwise: Set `skip_ship=false`
 
 | Input | Source | Skip Steps |
 |-------|--------|------------|
@@ -137,7 +142,7 @@ Task (majestic-engineer:workflow:context-proxy):
 Pass all gathered context to the build-task-workflow-manager agent:
 
 ```
-agent build-task-workflow-manager "Task ID: <ID or 'plan'> | Title: <title> | Branch: <branch> | Plan: <plan content> | Build Agent: <build_agent> | Fix Agent: <fix_agent> | Coding Styles: <styles> | Design System Path: <path> | Pre-Ship Hooks: <hooks> | Quality Gate Reviewers: <reviewers> | Source: <task or plan>"
+agent build-task-workflow-manager "Task ID: <ID or 'plan'> | Title: <title> | Branch: <branch> | Plan: <plan content> | Build Agent: <build_agent> | Fix Agent: <fix_agent> | Coding Styles: <styles> | Design System Path: <path> | Pre-Ship Hooks: <hooks> | Quality Gate Reviewers: <reviewers> | Source: <task or plan> | Skip Ship: <skip_ship>"
 ```
 
 The agent handles:

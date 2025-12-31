@@ -109,10 +109,10 @@ Verify all dependencies are marked complete before proceeding.
 ### 4c. Run Build-Task
 
 ```
-SlashCommand(command: "majestic:build-task", args: "<task_ref>")
+SlashCommand(command: "majestic:build-task", args: "<task_ref> --no-ship")
 ```
 
-This invokes the full build-task workflow:
+This invokes the build-task workflow with deferred shipping:
 - Workspace setup (reuses existing branch or creates new)
 - Toolbox resolution
 - Research hooks
@@ -121,7 +121,7 @@ This invokes the full build-task workflow:
 - Verify (MANDATORY)
 - Quality-gate (MANDATORY)
 - Fix loop if needed
-- Ship (creates PR)
+- **Shipping deferred** (handled in Step 6 after all tasks complete)
 
 ### 4d. Update Blueprint Progress
 
@@ -148,9 +148,23 @@ After processing all tasks:
 
 | Status | Action |
 |--------|--------|
-| All tasks complete | Report success |
-| Some tasks failed | List failures with reasons |
+| All tasks complete | Proceed to Step 6 (Ship) |
+| Some tasks failed | List failures, still proceed to Step 6 if any succeeded |
 | Blocked tasks remain | List blocked tasks and their blockers |
+
+---
+
+## Step 6: Ship (MANDATORY)
+
+After all tasks have been built and passed quality gates, run ship-it to create the PR:
+
+```
+Skill(skill: "majestic-engineer:workflows:ship-it")
+```
+
+This creates a single PR containing all the changes from the completed tasks.
+
+**Note:** This step runs even if some tasks failed. The PR will contain changes from all successfully completed tasks.
 
 ---
 
@@ -180,14 +194,14 @@ This command is designed to work with ralph-wiggum for autonomous iteration.
 ## Build Blueprint Complete: <blueprint-title>
 
 ### Tasks Executed
-- [x] #123 - Set up database schema → PR #456
-- [x] #124 - Create API endpoints → PR #457
-- [x] #125 - Build UI components → PR #458
+- [x] #123 - Set up database schema ✓ Quality passed
+- [x] #124 - Create API endpoints ✓ Quality passed
+- [x] #125 - Build UI components ✓ Quality passed
 
 ### Summary
 - Blueprint: docs/plans/xxx.md
 - Tasks: 3/3 complete
-- PRs: #456, #457, #458
+- PR: #456 (contains all tasks)
 - Quality: All passed
 
 <promise>RUN_BLUEPRINT_COMPLETE</promise>
