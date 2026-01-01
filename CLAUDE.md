@@ -41,6 +41,9 @@ plugins/{engineer,rails,python,react,marketing,sales,company,llm,tools,agent-sdk
 
 ### File Locations
 - Skill resources → `skills/*/resources/`
+- Agent resources → `agents/**/resources/{agent-name}/`
+- Command resources → `commands/**/resources/{command-name}/`
+- Resources referenced via relative paths from the markdown file
 - No .md files in `commands/` (they become executable)
 
 ### Behaviors
@@ -56,6 +59,32 @@ Run `skill-linter` for new skills.
 - Skills must contain NEW info Claude doesn't know
 - Exclude: generic advice, personas, "best practices" prose
 - Include: concrete limits, project-specific patterns, exact templates
+
+### Anti-Patterns
+- ❌ Do NOT hardcode language/framework-specific agents in generic orchestrators
+  - Bad: Putting "majestic-rails:auth-researcher" directly in blueprint.md
+  - Good: Use toolbox-resolver to discover stack-specific capabilities dynamically
+  - Reason: Multi-stack projects need flexible composition, not hard dependencies
+
+### Multi-Stack Projects
+- `tech_stack` in .agents.yml can be string or array
+- Example: `tech_stack: [rails, react]` is valid
+- Toolbox configs must support merging capabilities from multiple stacks
+- toolbox-resolver unions configs, not picks one stack
+
+### Version Bumping (Schema Changes)
+When modifying .agents.yml schema or adding config dependencies:
+- Bump `plugins/majestic-engineer/skills/init-agents-config/CONFIG_VERSION`
+- Update `docs/plugin-architecture/CONFIG-SYSTEM.md` version history
+- Bump plugin version in `.claude-plugin/plugin.json` for affected plugins
+- Update `.claude-plugin/marketplace.json` entries
+- All version bumps committed together with schema changes
+
+### Checkpoint Before Major Refactors
+When discovering incorrect patterns that require moving/restructuring files:
+1. Clarify the correct approach (present options)
+2. Wait for user confirmation before refactoring
+3. Don't assume path patterns - verify with user or docs
 
 ## Plugin Release Checklist
 
