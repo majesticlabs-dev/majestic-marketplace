@@ -48,7 +48,7 @@ Use WebSearch to find:
 | Scenarios | Base, upside, downside cases |
 | Dashboard | Key metrics visualization |
 
-See `resources/templates.md` for detailed templates.
+See [resources/templates.md](resources/templates.md) for detailed templates.
 
 ### Key Assumptions to Capture
 

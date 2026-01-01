@@ -57,7 +57,7 @@ Use WebSearch to find:
 | Data/Results | "[Number] [result] in [time]" | Credibility |
 | Pattern Interrupt | "Stop [action]. Do this instead" | Quick wins |
 
-See `resources/templates.md` for 15+ hook examples.
+See [resources/templates.md](resources/templates.md) for 15+ hook examples.
 
 ### 3. Post Formats
 
@@ -69,7 +69,7 @@ See `resources/templates.md` for 15+ hook examples.
 | Carousel | 8-12 slides | Shares, saves |
 | Poll | 4 options | Easy engagement |
 
-See `resources/templates.md` for complete templates.
+See [resources/templates.md](resources/templates.md) for complete templates.
 
 ### 4. Posting Cadence
 

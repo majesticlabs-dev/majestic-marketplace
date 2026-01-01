@@ -155,14 +155,14 @@ module.exports = {
 
 ### React/Vue
 
-See `resources/react-vue.md` for:
+See [resources/react-vue.md](resources/react-vue.md) for:
 - Framer Motion staggered animations
 - Vue Transition/TransitionGroup patterns
 - Component architecture with design tokens
 
 ### Rails/Hotwire
 
-See `resources/rails-hotwire.md` for:
+See [resources/rails-hotwire.md](resources/rails-hotwire.md) for:
 - ViewComponent with sidecar styles
 - Stimulus reveal/toggle controllers
 - Turbo Frames & Streams with animations
@@ -171,7 +171,7 @@ See `resources/rails-hotwire.md` for:
 
 ### Implementation Constraints
 
-See `resources/ui-implementation-guide.md` for specific numeric rules:
+See [resources/ui-implementation-guide.md](resources/ui-implementation-guide.md) for specific numeric rules:
 - Typography: 4-size rule, line heights (1.5× body, 1.0-1.2× headlines)
 - Color: HSB manipulation, WCAG 4.5:1 contrast, dark mode execution
 - Forms: Label placement, input states, selection control usage
@@ -180,7 +180,7 @@ See `resources/ui-implementation-guide.md` for specific numeric rules:
 
 ### Motion & Animation
 
-See `resources/motion-patterns.md` for:
+See [resources/motion-patterns.md](resources/motion-patterns.md) for:
 - Page load orchestration (staggered reveals, timing guidelines)
 - Scroll-triggered animations (Intersection Observer patterns)
 - Hover interactions (magnetic buttons, underline reveals)
@@ -189,7 +189,7 @@ See `resources/motion-patterns.md` for:
 
 ### CSS Polish & Debugging
 
-See `resources/css-polish-tips.md` for:
+See [resources/css-polish-tips.md](resources/css-polish-tips.md) for:
 - Accessibility debugging selectors (highlight missing alt, labels)
 - Scroll behavior (padding, overscroll, smooth)
 - Focus & selection styling
@@ -198,7 +198,7 @@ See `resources/css-polish-tips.md` for:
 
 ### Landing Pages
 
-See `resources/landing-page-design.md` for:
+See [resources/landing-page-design.md](resources/landing-page-design.md) for:
 - Section-by-section visual design (hero, proof, CTA)
 - Color palettes by aesthetic (dark tech, light sophisticated)
 - Typography pairings for different moods

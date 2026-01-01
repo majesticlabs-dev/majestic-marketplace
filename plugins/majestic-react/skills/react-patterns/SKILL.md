@@ -28,7 +28,7 @@ Expert guidance for implementing modern React patterns using hooks, component co
 | Render Props | Share logic between components | MouseTracker, Scroll position |
 | Higher-Order Components | Wrap components to add functionality | withAuth, withLoading |
 
-See `resources/examples.md` for full code examples.
+See [resources/examples.md](resources/examples.md) for full code examples.
 
 ### Custom Hooks Patterns
 
@@ -40,7 +40,7 @@ See `resources/examples.md` for full code examples.
 | `usePrevious` | Access previous value of state/prop |
 | `useLocalStorage` | Persist state to localStorage |
 
-See `resources/examples.md` for implementations.
+See [resources/examples.md](resources/examples.md) for implementations.
 
 ### State Management Patterns
 
@@ -53,7 +53,7 @@ See `resources/examples.md` for implementations.
 | **Server State** | API data (React Query/SWR) | User profiles, product catalogs |
 | **Global Store** | Cross-feature coordination | Zustand/Redux for complex apps |
 
-**Context + useReducer Pattern**: Best for complex state with multiple actions that need to be shared across components. See `resources/examples.md`.
+**Context + useReducer Pattern**: Best for complex state with multiple actions that need to be shared across components. See [resources/examples.md](resources/examples.md).
 
 ## Performance Optimization
 
@@ -94,7 +94,7 @@ See `resources/examples.md` for implementations.
 | ARIA Labels | Icon buttons, form inputs without visible labels |
 | Semantic HTML | Use `<nav>`, `<main>`, `<button>` appropriately |
 
-See `resources/examples.md` for accessible modal implementation.
+See [resources/examples.md](resources/examples.md) for accessible modal implementation.
 
 ## Best Practices Checklist
 

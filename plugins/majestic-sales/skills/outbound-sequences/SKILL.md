@@ -62,7 +62,7 @@ Not Now → Nurture sequence (30-day follow-up)
 
 For each email provide: Subject lines (3 options), complete copy, personalization variables, A/B test ideas.
 
-Full template: `resources/sequence-templates.md`
+Full template: [resources/sequence-templates.md](resources/sequence-templates.md)
 
 ### 3. LinkedIn Sequence (4-5 touches)
 
@@ -74,7 +74,7 @@ Full template: `resources/sequence-templates.md`
 | 4 | 14 | Direct message (clear ask) |
 | 5 | 17 | Voice note (optional, personal) |
 
-Full template: `resources/sequence-templates.md`
+Full template: [resources/sequence-templates.md](resources/sequence-templates.md)
 
 ### 4. Subject Line Library
 
@@ -85,7 +85,7 @@ Categories to provide:
 - **Curiosity**: Create intrigue
 - **Hyper-specific pain hooks**: Problem + solution in <100 words
 
-Full library with examples: `resources/sequence-templates.md`
+Full library with examples: [resources/sequence-templates.md](resources/sequence-templates.md)
 
 ### 5. Opening Line Library
 
@@ -97,7 +97,7 @@ Categories:
 
 Plus AVOID list: what NOT to write.
 
-Full library: `resources/sequence-templates.md`
+Full library: [resources/sequence-templates.md](resources/sequence-templates.md)
 
 ### 6. CTA Library
 
@@ -106,7 +106,7 @@ Full library: `resources/sequence-templates.md`
 - Binary choice
 - Value-first
 
-Full library: `resources/sequence-templates.md`
+Full library: [resources/sequence-templates.md](resources/sequence-templates.md)
 
 ### 7. Response Handling Playbook
 
@@ -119,7 +119,7 @@ Full library: `resources/sequence-templates.md`
 | "Bad timing" | Confirm timing + nurture |
 | No response | Move to nurture |
 
-Full playbook: `resources/response-playbook.md`
+Full playbook: [resources/response-playbook.md](resources/response-playbook.md)
 
 ### 8. Personalization Framework
 
@@ -129,7 +129,7 @@ Full playbook: `resources/response-playbook.md`
 | Tier 2 (Researched) | 2-3 min | News, LinkedIn content, job postings |
 | Tier 3 (Deep) | 10-15 min | Podcast quotes, custom video |
 
-Research sources and trigger events: `resources/response-playbook.md`
+Research sources and trigger events: [resources/response-playbook.md](resources/response-playbook.md)
 
 ### 9. Timing Optimization
 
@@ -137,7 +137,7 @@ Research sources and trigger events: `resources/response-playbook.md`
 - Sequence spacing
 - Response time targets
 
-Full schedule: `resources/response-playbook.md`
+Full schedule: [resources/response-playbook.md](resources/response-playbook.md)
 
 ### 10. Metrics Dashboard
 
@@ -148,7 +148,7 @@ Full schedule: `resources/response-playbook.md`
 | Positive reply rate | 30-50% | Fix targeting |
 | Meeting book rate | 1-3% | Full funnel review |
 
-Weekly review checklist and health indicators: `resources/response-playbook.md`
+Weekly review checklist and health indicators: [resources/response-playbook.md](resources/response-playbook.md)
 
 ## Output Format
 

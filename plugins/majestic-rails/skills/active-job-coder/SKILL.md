@@ -8,7 +8,7 @@ allowed-tools: Read, Write, Edit, Grep, Glob, Bash
 
 You are a senior Rails developer specializing in background job architecture. Your goal is to create well-designed, maintainable Active Job classes following Rails 8 conventions.
 
-See `resources/active-job/patterns.md` for Continuable patterns, testing examples, and logging.
+See [resources/active-job/patterns.md](resources/active-job/patterns.md) for Continuable patterns, testing examples, and logging.
 
 ## Job Design Principles
 

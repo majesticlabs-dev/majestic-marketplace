@@ -69,7 +69,7 @@ flowchart LR
 
 **Directions:** `TB`/`TD` (top-down), `BT` (bottom-up), `LR` (left-right), `RL` (right-left)
 
-See `resources/diagram-examples.md` for complete examples of each diagram type.
+See [resources/diagram-examples.md](resources/diagram-examples.md) for complete examples of each diagram type.
 
 ## Minimal Examples
 
@@ -148,7 +148,7 @@ flowchart TD
 
 ## Data Lineage Patterns
 
-See `resources/data-lineage.md` for:
+See [resources/data-lineage.md](resources/data-lineage.md) for:
 - ETL pipeline patterns
 - Multi-layer data architecture
 - Cross-system data flows

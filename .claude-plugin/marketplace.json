@@ -12,7 +12,7 @@
     {
       "name": "majestic-engineer",
       "description": "Language-agnostic engineering workflows. Includes 29 specialized agents, 23 commands, 18 skills, and 5 toolbox presets.",
-      "version": "3.32.0",
+      "version": "3.32.1",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -33,7 +33,7 @@
     {
       "name": "majestic-rails",
       "description": "Ruby on Rails development tools. Includes 11 specialized agents, 3 commands, 26 skills, enhanced toolbox with 6 research hooks, and LSP support.",
-      "version": "3.11.0",
+      "version": "3.11.1",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -168,7 +168,7 @@
     {
       "name": "majestic-marketing",
       "description": "Marketing and SEO tools for Claude Code. Includes 15 specialized agents, 5 commands, and 34 skills.",
-      "version": "3.8.1",
+      "version": "3.8.2",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -196,8 +196,8 @@
     },
     {
       "name": "majestic-company",
-      "description": "Business operations tools. Includes 3 specialized agents and 22 skills.",
-      "version": "3.0.1",
+      "description": "Business operations tools. Includes 3 specialized agents and 23 skills.",
+      "version": "3.1.1",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -243,7 +243,7 @@
     {
       "name": "majestic-sales",
       "description": "Sales acceleration and revenue tools. Includes 4 agents, 1 command, and 7 skills.",
-      "version": "3.0.0",
+      "version": "3.0.1",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -267,7 +267,7 @@
     {
       "name": "majestic-react",
       "description": "Modern React development toolkit for TypeScript/React stacks. Includes 5 specialized agents and 4 skills.",
-      "version": "3.1.0",
+      "version": "3.1.1",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -312,7 +312,7 @@
     {
       "name": "majestic-devops",
       "description": "Infrastructure as Code and DevOps tools. Includes 2 agents and 11 skills for OpenTofu, Ansible, Hetzner, DigitalOcean, Cloudflare, 1Password CLI, cloud-init, and devops-plan.",
-      "version": "1.3.0",
+      "version": "1.3.1",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",

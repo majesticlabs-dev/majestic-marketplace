@@ -41,7 +41,7 @@ I'll create expansion roadmaps and playbooks tailored to your model."
 
 ### 2. QBR Template with Expansion Hooks
 
-See `resources/qbr-conversations.md` for complete template.
+See [resources/qbr-conversations.md](resources/qbr-conversations.md) for complete template.
 
 **QBR Agenda (45-60 min):**
 
@@ -54,7 +54,7 @@ See `resources/qbr-conversations.md` for complete template.
 
 ### 3. Expansion Conversation Framework
 
-See `resources/qbr-conversations.md` for email templates and objection handling.
+See [resources/qbr-conversations.md](resources/qbr-conversations.md) for email templates and objection handling.
 
 **Trigger Types:**
 

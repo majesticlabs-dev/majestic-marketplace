@@ -90,7 +90,7 @@ end
 
 ## Subject and Let
 
-See `resources/patterns.md` for detailed examples.
+See [resources/patterns.md](resources/patterns.md) for detailed examples.
 
 | Pattern | Use Case |
 |---------|----------|
@@ -111,7 +111,7 @@ end
 
 ## Fixtures
 
-See `resources/patterns.md` for detailed examples.
+See [resources/patterns.md](resources/patterns.md) for detailed examples.
 
 ```yaml
 # spec/fixtures/users.yml
@@ -133,7 +133,7 @@ end
 
 ## Mocking and Stubbing
 
-See `resources/patterns.md` for detailed examples.
+See [resources/patterns.md](resources/patterns.md) for detailed examples.
 
 | Method | Purpose |
 |--------|---------|
@@ -150,7 +150,7 @@ expect(UserMailer).to receive(:welcome_email).with(user)
 
 ## Matchers Quick Reference
 
-See `resources/matchers.md` for complete reference.
+See [resources/matchers.md](resources/matchers.md) for complete reference.
 
 ### Essential Matchers
 
@@ -255,7 +255,7 @@ end
 
 ## Anti-Patterns
 
-See `resources/anti-patterns.md` for detailed examples.
+See [resources/anti-patterns.md](resources/anti-patterns.md) for detailed examples.
 
 | Anti-Pattern | Why Bad |
 |--------------|---------|

@@ -86,7 +86,7 @@ export const Card: FC<CardProps> = ({ title, children, footer }) => {
 };
 ```
 
-See `resources/patterns.md` for compound components, custom hooks, and advanced patterns.
+See [resources/patterns.md](resources/patterns.md) for compound components, custom hooks, and advanced patterns.
 
 ## TypeScript Patterns
 
@@ -159,7 +159,7 @@ src/
 | `memo` | Pure components that re-render often with same props |
 | `lazy` + `Suspense` | Code splitting routes and heavy components |
 
-See `resources/patterns.md` for memoization and code splitting examples.
+See [resources/patterns.md](resources/patterns.md) for memoization and code splitting examples.
 
 ## Output Format
 

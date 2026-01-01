@@ -42,7 +42,7 @@ Use WebSearch extensively to find:
 | Retargeting | 15-20% | Conversion lift |
 | Awareness | 0-10% | Scale phase only |
 
-See `resources/templates.md` for detailed architecture diagram.
+See [resources/templates.md](resources/templates.md) for detailed architecture diagram.
 
 ### 2. Keyword Strategy
 
@@ -69,7 +69,7 @@ Google has broadened match behaviors—exact match now triggers close variants a
 - Maximum 20 keywords per ad group
 - Build negative keywords aggressively (block: "DIY", "repair", "free", "job")
 
-See `resources/templates.md` for keyword tables and negative keyword list.
+See [resources/templates.md](resources/templates.md) for keyword tables and negative keyword list.
 
 ### 3. Ad Copy Framework
 
@@ -87,7 +87,7 @@ See `resources/templates.md` for keyword tables and negative keyword list.
 - Callouts: Free Trial, No Credit Card, 24/7 Support
 - Structured snippets: Types, Services
 
-See `resources/templates.md` for complete ad copy library.
+See [resources/templates.md](resources/templates.md) for complete ad copy library.
 
 ### 4. Audience Strategy
 

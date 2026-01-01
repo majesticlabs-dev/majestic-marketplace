@@ -51,7 +51,7 @@ If needed, use WebSearch to find:
 | **Competitive Positioning** | Their concern → competitor weakness → our strength |
 | **Tone** | Formal/Consultative/Partner-like based on culture |
 
-**Alternative format:** For early-stage deals, consider Trojan Horse "Exploratory Outline" instead. See `resources/delivery-models.md`.
+**Alternative format:** For early-stage deals, consider Trojan Horse "Exploratory Outline" instead. See [resources/delivery-models.md](resources/delivery-models.md).
 
 ### 2. Executive Summary (Most Important Page)
 
@@ -63,7 +63,7 @@ If needed, use WebSearch to find:
 | **Why You** | 2-3 sentences on differentiation |
 | **Next Steps** | Specific actions with owners and dates |
 
-Full template: `resources/proposal-templates.md`
+Full template: [resources/proposal-templates.md](resources/proposal-templates.md)
 
 ### 3. Understanding & Approach
 
@@ -94,7 +94,7 @@ Plus:
 
 ### 6. Investment & Pricing
 
-**Strategy:** Use anchoring (high → recommended → starter). See `resources/pricing-psychology.md` for:
+**Strategy:** Use anchoring (high → recommended → starter). See [resources/pricing-psychology.md](resources/pricing-psychology.md) for:
 - Anchoring psychology and decoy pricing
 - Bundle "bonuses" to inflate perceived value
 - Investment framing (not "cost")
@@ -117,7 +117,7 @@ Plus:
 
 - Project team table (role, name, responsibility)
 - Support model (during + post implementation)
-- For $30K+ deals: Consider Done-With-You delivery model. See `resources/delivery-models.md`.
+- For $30K+ deals: Consider Done-With-You delivery model. See [resources/delivery-models.md](resources/delivery-models.md).
 
 ### 9. Terms & Next Steps
 
@@ -127,7 +127,7 @@ Plus:
 - Proposal validity date
 - Acceptance signature block
 
-Full templates: `resources/proposal-templates.md`
+Full templates: [resources/proposal-templates.md](resources/proposal-templates.md)
 
 ## Output Format
 

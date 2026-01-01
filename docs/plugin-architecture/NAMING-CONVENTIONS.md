@@ -91,3 +91,83 @@ Omit `name:` field to use automatic path-based naming.
 1. Only add `name:` field for tier 1 (majestic:) and tier 2 (framework:) commands
 2. Omit `name:` field for tier 3 (utility) commands to use automatic naming
 3. Never use full plugin prefix (e.g., `majestic-engineer:git:commit`) - inconsistent with convention
+
+## Resource & Script References
+
+Skills can include supporting files in `resources/` and `scripts/` subdirectories. Use these patterns for referencing them.
+
+### Resources (Documentation, Templates, Examples)
+
+**Always use markdown link format:**
+
+```markdown
+See [resources/patterns.md](resources/patterns.md) for detailed examples.
+Read [resources/template.md](resources/template.md) before implementing.
+```
+
+| Aspect | Pattern |
+|--------|---------|
+| **Format** | `[resources/filename.md](resources/filename.md)` |
+| **Location** | `skills/{skill-name}/resources/` |
+| **Why links?** | Clickable in editors, GitHub preview, enables LSP navigation |
+
+**Avoid backtick references in prose:**
+
+```markdown
+# ❌ WRONG - not clickable, harder to navigate
+See `resources/patterns.md` for details.
+
+# ✅ CORRECT - clickable, navigable
+See [resources/patterns.md](resources/patterns.md) for details.
+```
+
+**Exception: Tables displaying file paths as data are acceptable with backticks:**
+
+```markdown
+# ✅ OK - table data showing file paths, not navigation instruction
+| Template | File |
+|----------|------|
+| Rails    | `resources/rails.yaml` |
+| Python   | `resources/python.yaml` |
+```
+
+### Scripts (Executable Tools)
+
+**Use `{baseDir}` template variable for script paths:**
+
+```markdown
+bash {baseDir}/scripts/script_name.sh [arguments]
+```
+
+| Aspect | Pattern |
+|--------|---------|
+| **Format** | `bash {baseDir}/scripts/script_name.sh [args]` |
+| **Location** | `skills/{skill-name}/scripts/` |
+| **Template variable** | `{baseDir}` is replaced at runtime with skill's actual path |
+| **Script requirements** | Must be executable, include shebang, handle arguments |
+
+**Example skill with scripts:**
+
+```markdown
+## Usage
+
+Run the worktree manager:
+
+\`\`\`bash
+bash {baseDir}/scripts/worktree-manager.sh create feature-branch
+bash {baseDir}/scripts/worktree-manager.sh list
+bash {baseDir}/scripts/worktree-manager.sh cleanup --force
+\`\`\`
+```
+
+### Agent & Command Resources
+
+For agents and commands, resources go in dedicated subdirectories:
+
+| Component | Resource Location |
+|-----------|------------------|
+| Skills | `skills/{skill-name}/resources/` |
+| Agents | `agents/**/resources/{agent-name}/` |
+| Commands | `commands/**/resources/{command-name}/` |
+
+Reference pattern is the same: use relative markdown links from the markdown file

@@ -51,7 +51,7 @@ compatibility_date = "2024-12-01"
 compatibility_flags = ["nodejs_compat"]
 ```
 
-See `resources/setup.md` for full configuration with all bindings.
+See [resources/setup.md](resources/setup.md) for full configuration with all bindings.
 
 ### Basic Hono App
 
@@ -68,7 +68,7 @@ app.notFound((c) => c.json({ error: 'Not Found' }, 404));
 export default app;
 ```
 
-See `resources/hono.md` for route organization and middleware patterns.
+See [resources/hono.md](resources/hono.md) for route organization and middleware patterns.
 
 ## Storage Quick Reference
 
@@ -94,7 +94,7 @@ await env.STORAGE.put('path/file.json', JSON.stringify(data));
 const object = await env.STORAGE.get('path/file.json');
 ```
 
-See `resources/storage.md` for caching patterns, migrations, and queries.
+See [resources/storage.md](resources/storage.md) for caching patterns, migrations, and queries.
 
 ## Durable Objects
 
@@ -107,7 +107,7 @@ const stub = c.env.COUNTER.get(id);
 const response = await stub.fetch(new Request('http://do/increment'));
 ```
 
-See `resources/durable-objects.md` for full patterns including WebSocket Hibernation.
+See [resources/durable-objects.md](resources/durable-objects.md) for full patterns including WebSocket Hibernation.
 
 ## Queues
 
@@ -124,7 +124,7 @@ async queue(batch: MessageBatch, env: Env) {
 }
 ```
 
-See `resources/queues-testing.md` for consumer patterns and testing setup.
+See [resources/queues-testing.md](resources/queues-testing.md) for consumer patterns and testing setup.
 
 ## CLI Commands
 

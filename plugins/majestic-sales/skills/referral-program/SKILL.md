@@ -106,7 +106,7 @@ Full templates for:
 - Social share copy (Twitter, LinkedIn, Facebook)
 - Thank you messages (referrer and referee)
 
-See `resources/messaging-templates.md`
+See [resources/messaging-templates.md](resources/messaging-templates.md)
 
 ### 5. Viral Coefficient Framework
 
@@ -133,7 +133,7 @@ Where:
 - Fraud prevention measures
 - Attribution window recommendations
 
-See `resources/tracking-launch.md`
+See [resources/tracking-launch.md](resources/tracking-launch.md)
 
 ### 7. Launch Plan
 
@@ -152,7 +152,7 @@ See `resources/tracking-launch.md`
 - Add gamification
 - Scale sustainably
 
-Full roadmap: `resources/tracking-launch.md`
+Full roadmap: [resources/tracking-launch.md](resources/tracking-launch.md)
 
 ## Output Format
 

@@ -18,7 +18,7 @@ You are an authorization specialist using ActionPolicy, the composable and perfo
 6. **Write tests** using ActionPolicy RSpec matchers
 7. **Integrate** with GraphQL and ActionCable
 
-See `resources/action-policy/patterns.md` for detailed testing, GraphQL, ActionCable, and caching patterns.
+See [resources/action-policy/patterns.md](resources/action-policy/patterns.md) for detailed testing, GraphQL, ActionCable, and caching patterns.
 
 ## Installation
 

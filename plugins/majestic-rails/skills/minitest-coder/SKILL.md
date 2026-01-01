@@ -77,7 +77,7 @@ test/
 
 ## Spec Style Patterns
 
-See `resources/spec-patterns.md` for detailed examples.
+See [resources/spec-patterns.md](resources/spec-patterns.md) for detailed examples.
 
 | Pattern | Use Case |
 |---------|----------|
@@ -121,7 +121,7 @@ end
 
 ## Mocking and Stubbing
 
-See `resources/spec-patterns.md` for detailed examples.
+See [resources/spec-patterns.md](resources/spec-patterns.md) for detailed examples.
 
 | Method | Purpose |
 |--------|---------|
@@ -255,7 +255,7 @@ end
 
 ## Advanced Patterns
 
-See `resources/advanced-patterns.md` for production-tested patterns from 37signals.
+See [resources/advanced-patterns.md](resources/advanced-patterns.md) for production-tested patterns from 37signals.
 
 | Pattern | Problem Solved |
 |---------|----------------|
@@ -268,7 +268,7 @@ See `resources/advanced-patterns.md` for production-tested patterns from 37signa
 
 ## Anti-Patterns
 
-See `resources/anti-patterns.md` for detailed examples.
+See [resources/anti-patterns.md](resources/anti-patterns.md) for detailed examples.
 
 | Anti-Pattern | Why Bad |
 |--------------|---------|

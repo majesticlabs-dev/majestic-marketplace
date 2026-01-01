@@ -415,7 +415,7 @@ op run --account acme.1password.com --env-file=.op.env -- ./deploy.sh
 
 **Key rule:** Always specify account in automation scripts - never rely on "last signed in".
 
-See `resources/multiple-accounts.md` for detailed patterns including cross-account workflows and Makefile integration.
+See [resources/multiple-accounts.md](resources/multiple-accounts.md) for detailed patterns including cross-account workflows and Makefile integration.
 
 ## Multi-Environment Pattern
 

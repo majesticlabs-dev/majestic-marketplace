@@ -65,7 +65,7 @@ Use WebSearch to find:
 | 40-59 | At-Risk (Orange) | Intervention required |
 | 0-39 | Critical (Red) | Immediate escalation |
 
-See `resources/playbooks.md` for detailed scoring criteria.
+See [resources/playbooks.md](resources/playbooks.md) for detailed scoring criteria.
 
 ### 3. Onboarding System
 
@@ -104,7 +104,7 @@ See `resources/playbooks.md` for detailed scoring criteria.
 
 ### 5. Intervention Playbooks
 
-See `resources/playbooks.md` for detailed playbooks:
+See [resources/playbooks.md](resources/playbooks.md) for detailed playbooks:
 - Usage Decline (14-day sequence)
 - Support Escalation (72-hour response)
 - Competitor Threat (48-hour response)

@@ -114,7 +114,7 @@ Apply constraints:
 | 3 | Growth trajectory | Comparable company data |
 | 5 | Mature state | Category leader benchmarks |
 
-See `resources/templates.md` for detailed calculation templates.
+See [resources/templates.md](resources/templates.md) for detailed calculation templates.
 
 ## Quality Checklist
 

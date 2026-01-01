@@ -69,7 +69,7 @@ Use WebSearch extensively to find:
 | Last Chance | 30 | Final push with urgency |
 | Goodbye | 45 | Close loop, leave door open |
 
-Full email copy: `resources/email-sequence.md`
+Full email copy: [resources/email-sequence.md](resources/email-sequence.md)
 
 ### 3. Win-Back Offer Framework
 
@@ -80,7 +80,7 @@ Full email copy: `resources/email-sequence.md`
 | Non-usage | Free training, onboarding call |
 | Poor experience | Apology + credit, priority support |
 
-Discount tiers by customer value and non-discount alternatives: `resources/offers-feedback.md`
+Discount tiers by customer value and non-discount alternatives: [resources/offers-feedback.md](resources/offers-feedback.md)
 
 ### 4. Exit Survey & Feedback Collection
 
@@ -89,7 +89,7 @@ Discount tiers by customer value and non-discount alternatives: `resources/offer
 - Post-loss referral email template
 - Feedback analysis template
 
-Full templates: `resources/offers-feedback.md`
+Full templates: [resources/offers-feedback.md](resources/offers-feedback.md)
 
 ### 5. Automation Triggers
 
