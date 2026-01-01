@@ -15,8 +15,6 @@
 ```markdown
 # Project Name
 
-Load config: @.agents.yml
-
 Ask more questions until you have enough context to give an accurate & confident answer.
 
 ## WHAT (Architecture)
