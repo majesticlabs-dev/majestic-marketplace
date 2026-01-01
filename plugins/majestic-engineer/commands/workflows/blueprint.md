@@ -77,41 +77,40 @@ Cap at 5 total agents to avoid noise.
 
 Collect results from all agents before proceeding.
 
-### 4. Spec Review
+### 4. Spec Review + Skill Injection (Parallel)
+
+Run these two steps in parallel - they have no dependencies on each other:
 
 ```
+# Run in parallel:
 Task(subagent_type="majestic-engineer:plan:spec-reviewer", prompt="Feature: [feature] | Research findings: [combined research]")
+Skill(skill: "[each skill from toolbox.coding_styles]")
 ```
 
-Incorporate gaps and edge cases into the plan.
+**Wait for BOTH to complete before proceeding to Step 5.**
 
-### 5. Skill Context Injection
+Store outputs:
+- `spec_findings` → gaps, edge cases, questions from spec-reviewer
+- `skill_content` → loaded coding style content
 
-Load skills from toolbox `coding_styles`:
+### 5. Architecture Design
 
-```
-# For each skill in toolbox.coding_styles:
-Skill(skill: "[skill-path]")
-```
+**CRITICAL: Do NOT run in parallel with Step 4. Wait for spec-reviewer to complete.**
 
-**If no toolbox:** Skip this step.
-
-Pass loaded skill content to the architect in Step 6.
-
-### 6. Architecture Design
+The architect MUST receive spec findings to avoid designing for incomplete requirements.
 
 ```
 Task(subagent_type="majestic-engineer:plan:architect",
-     prompt="Feature: [feature] | Research: [research] | Spec: [spec findings] | Skills: [from Step 5]")
+     prompt="Feature: [feature] | Research: [research] | Spec: [spec_findings] | Skills: [skill_content]")
 ```
 
 The architect agent:
 - Studies existing codebase architecture
-- Designs solution approach
+- Designs solution approach informed by spec gaps
 - Identifies integration points
 - Recommends libraries/packages if needed
 
-### 7. Write Plan
+### 6. Write Plan
 
 Load the plan-builder skill for template guidance:
 ```
@@ -125,7 +124,7 @@ Select template based on complexity:
 
 **Output:** Write to `docs/plans/[YYYYMMDDHHMMSS]_<title>.md`
 
-### 8. Review Plan
+### 7. Review Plan
 
 ```
 Task(subagent_type="majestic-engineer:plan:plan-review", prompt="Review plan at docs/plans/<filename>.md")
@@ -133,13 +132,13 @@ Task(subagent_type="majestic-engineer:plan:plan-review", prompt="Review plan at 
 
 Incorporate feedback and update the plan file.
 
-### 9. Set Terminal Title
+### 8. Set Terminal Title
 
 ```
 Skill(skill: "rename", args="<plan-title>")
 ```
 
-### 10. Preview and User Options
+### 9. Preview and User Options
 
 **Check auto_preview config:**
 ```
@@ -154,16 +153,16 @@ Question: "Blueprint ready at `docs/plans/<filename>.md`. What next?"
 
 | Option | Action |
 |--------|--------|
-| Build as single task | Go to Step 11A |
-| Break into small tasks | Go to Step 11B |
-| Create as single epic | Go to Step 11C |
-| Deepen with more research | Go to Step 10D |
-| Preview plan | Read and display plan content, return to Step 10 |
-| Revise | Ask what to change, return to Step 7 |
+| Build as single task | Go to Step 10A |
+| Break into small tasks | Go to Step 10B |
+| Create as single epic | Go to Step 10C |
+| Deepen with more research | Go to Step 9D |
+| Preview plan | Read and display plan content, return to Step 9 |
+| Revise | Ask what to change, return to Step 6 |
 
 **IMPORTANT:** After user selects an option, EXECUTE that action. Do not stop.
 
-### 10D: Deepen Plan
+### 9D: Deepen Plan
 
 **Ask user what aspect needs more research:**
 
@@ -191,9 +190,9 @@ Task(subagent_type="majestic-engineer:research:web-research", prompt="[user's as
 3. Enrich that section with research findings
 4. Write updated plan: `Edit(file_path="docs/plans/<filename>.md", ...)`
 
-**Return to Step 10** to present options again.
+**Return to Step 9** to present options again.
 
-### 11A: Build Single Task
+### 10A: Build Single Task
 
 ```
 Skill(skill: "majestic-engineer:workflows:build-task", args="docs/plans/<filename>.md")
@@ -201,7 +200,7 @@ Skill(skill: "majestic-engineer:workflows:build-task", args="docs/plans/<filenam
 
 **End workflow.**
 
-### 11B: Task Breakdown
+### 10B: Task Breakdown
 
 ```
 Task(subagent_type="majestic-engineer:plan:task-breakdown", prompt="Plan: docs/plans/<filename>.md")
@@ -217,21 +216,21 @@ The agent appends `## Implementation Tasks` section with:
 Skill(skill: "config-reader", args: "blueprint.auto_create_task false")
 ```
 
-- **If `true`:** Skip to Step 12
+- **If `true`:** Skip to Step 11
 - **If `false`:** Ask user "Tasks added to plan. Create these in your task manager?"
-  - If Yes → Go to Step 12
+  - If Yes → Go to Step 11
   - If No → End workflow
 
-### 11C: Single Epic
+### 10C: Single Epic
 
 Create a single task covering the entire plan:
 ```
 Skill(skill: "backlog-manager")
 ```
 
-Update the plan document with the task reference, then go to Step 13.
+Update the plan document with the task reference, then go to Step 12.
 
-### 12: Create Tasks
+### 11: Create Tasks
 
 For each task in the Implementation Tasks section:
 1. Create task: `Skill(skill: "backlog-manager")`
@@ -246,7 +245,7 @@ For each task in the Implementation Tasks section:
 | Beads | `BEADS-123` |
 | File-based | `TODO-123` |
 
-### 13: Offer Build
+### 12: Offer Build
 
 Use AskUserQuestion:
 
@@ -278,6 +277,8 @@ Question: "Tasks created. Start building?"
 
 - This is a blueprint-only command - no implementation code
 - Research agents run in parallel to save time
+- Step 4 (spec-review + skill injection) runs in parallel internally
+- **Step 5 (architect) MUST wait for Step 4** - architect needs spec findings to avoid designing for incomplete requirements
 - Toolbox provides stack-specific capabilities without hardcoding
-- All steps are mandatory except branches (11A/11B/11C)
+- All steps are mandatory except branches (10A/10B/10C)
 - Always execute user's selected option - never stop at presenting choices
