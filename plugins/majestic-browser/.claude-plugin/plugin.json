@@ -1,0 +1,18 @@
+{
+  "name": "majestic-browser",
+  "version": "1.0.0",
+  "description": "Real browser automation via CDP. Control Chrome, Brave, or Edge with your actual profile, cookies, and fingerprint - undetectable by bot detection. Includes 1 skill.",
+  "author": {
+    "name": "David Paluy",
+    "url": "https://github.com/dpaluy",
+    "email": "marketplace@it.majesticlabs.dev"
+  },
+  "keywords": [
+    "browser",
+    "automation",
+    "cdp",
+    "chrome",
+    "scraping",
+    "stealth"
+  ]
+}

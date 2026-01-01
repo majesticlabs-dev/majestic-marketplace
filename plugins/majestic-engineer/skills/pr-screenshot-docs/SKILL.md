@@ -137,4 +137,3 @@ This skill complements the `/majestic-engineer:git:create-pr` command. Before cr
 
 - `visual-validator` agent - For rigorous visual QA after changes
 - `ui-ux-designer` agent - For iterative design refinement
-- `web-browser` skill - For browser automation capabilities

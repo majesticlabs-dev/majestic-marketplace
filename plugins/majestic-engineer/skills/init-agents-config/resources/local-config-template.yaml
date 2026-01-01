@@ -11,11 +11,6 @@
 # blueprint:
 #   auto_create_task: false  # Disable auto-task creation locally
 
-# Browser - Personal browser preference (for web-browser skill)
-# browser:
-#   type: brave              # chrome | brave | edge
-#   debug_port: 9222         # CDP port (default: 9222)
-
 # Override quality gate reviewers (replaces team list entirely):
 # quality_gate:
 #   reviewers:

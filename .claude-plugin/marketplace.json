@@ -11,8 +11,8 @@
   "plugins": [
     {
       "name": "majestic-engineer",
-      "description": "Language-agnostic engineering workflows. Includes 29 specialized agents, 23 commands, 18 skills, and 5 toolbox presets.",
-      "version": "3.28.1",
+      "description": "Language-agnostic engineering workflows. Includes 29 specialized agents, 23 commands, 17 skills, and 5 toolbox presets.",
+      "version": "3.29.0",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -341,6 +341,30 @@
         "server-hardening"
       ],
       "source": "./plugins/majestic-devops"
+    },
+    {
+      "name": "majestic-browser",
+      "description": "Real browser automation via CDP. Control Chrome, Brave, or Edge with your actual profile and cookies - undetectable by bot detection. Includes 1 skill.",
+      "version": "1.0.0",
+      "author": {
+        "name": "David Paluy",
+        "url": "https://github.com/dpaluy",
+        "email": "marketplace@it.majesticlabs.dev"
+      },
+      "homepage": "https://github.com/majesticlabs-dev/majestic-marketplace/tree/master/plugins/majestic-browser",
+      "tags": [
+        "browser",
+        "automation",
+        "cdp",
+        "chrome",
+        "brave",
+        "edge",
+        "scraping",
+        "stealth",
+        "bot-detection",
+        "real-browser"
+      ],
+      "source": "./plugins/majestic-browser"
     }
   ]
 }

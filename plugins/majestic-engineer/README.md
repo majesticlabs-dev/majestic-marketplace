@@ -245,7 +245,6 @@ Invoke with: `skill majestic-engineer:<name>`
 | `ripgrep-search` | Fast, intelligent code and text searching with ripgrep |
 | `subagent-driven-development` | Execute plans with fresh subagent per task and code review between tasks |
 | `tdd-workflow` | Test-driven development using red-green-refactor cycle |
-| `web-browser` | Browser automation via Chrome DevTools Protocol |
 
 ## Configuration
 

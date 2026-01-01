@@ -179,8 +179,6 @@ plan:
 | `plan.auto_create_task` | Auto-create task when `/majestic:plan` completes | `true` \| `false` | `false` |
 | `session.ledger` | Enable session state checkpointing to file | `true` \| `false` | `false` |
 | `session.ledger_path` | Path to session ledger file | file path | `.session_ledger.md` |
-| `browser.type` | Browser for web-browser skill | `chrome` \| `brave` \| `edge` | `chrome` |
-| `browser.debug_port` | CDP port for browser control | port number | `9222` |
 | `workspace_setup.post_create` | Script to run after creating workspace | script path | (none) |
 | `commit.pre_prompt` | LLM prompt to execute before committing | text | (none) |
 | `commit.post_prompt` | LLM prompt to execute after successful commit | text | (none) |
@@ -439,10 +437,6 @@ auto_preview: true
 # Planning preferences
 plan:
   auto_create_task: false
-
-# Browser preference (for web-browser skill)
-browser:
-  type: brave
 ```
 
 **Merge behavior:**

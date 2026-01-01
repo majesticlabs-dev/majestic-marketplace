@@ -54,5 +54,4 @@ Return ONLY the config value (single line):
 | `task_management` | Task tracking backend | `none` |
 | `workflow` | Git workflow style | `branches` |
 | `default_branch` | Main branch name | `main` |
-| `browser.type` | Browser for web-browser skill | `chrome` |
 | `toolbox.build_task.design_system_path` | Design system location | (none) |
