@@ -12,10 +12,28 @@ The config file has **core fields** plus **stack-specific fields** based on tech
 
 | Version | Changes |
 |---------|---------|
+| 1.4 | Multi-stack `tech_stack` (array support), built-in toolbox presets |
 | 1.3 | Added `commit.pre_prompt`, `commit.post_prompt` for LLM-based commit hooks |
 | 1.2 | Moved `auto_create_task` under `plan:` namespace |
 | 1.1 | Added `workflow_labels`, `workspace_setup.post_create` |
 | 1.0 | Initial release |
+
+### Migration from 1.3 to 1.4
+
+**Backwards compatible:** Single-value `tech_stack` continues to work.
+
+New format (1.4) supports multi-framework projects:
+```yaml
+# Single stack (unchanged)
+tech_stack: rails
+
+# Multi-framework (new)
+tech_stack:
+  - rails
+  - react
+```
+
+Built-in toolbox presets now provide sensible defaults. The `toolbox:` section in `.agents.yml` is now optional for overrides only.
 
 ### Migration from 1.1 to 1.2
 

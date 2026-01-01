@@ -1,0 +1,80 @@
+# Built-in React preset - uses majestic-engineer agents only
+# Stack plugins (majestic-react) can enhance with specialized agents
+schema_version: 1
+tech_stack: react
+
+research_hooks:
+  - id: state_patterns
+    agent: majestic-engineer:research:best-practices-researcher
+    context: "React state management: useState, useReducer, Redux, Zustand, Jotai"
+    triggers:
+      any_substring:
+        - "state"
+        - "redux"
+        - "zustand"
+        - "context"
+        - "store"
+        - "useReducer"
+
+  - id: component_patterns
+    agent: majestic-engineer:research:best-practices-researcher
+    context: "React component patterns: composition, render props, HOC, hooks"
+    triggers:
+      any_substring:
+        - "component"
+        - "hook"
+        - "render"
+        - "props"
+        - "composition"
+
+  - id: data_fetching
+    agent: majestic-engineer:research:best-practices-researcher
+    context: "React data fetching: React Query, SWR, useSWR, Suspense"
+    triggers:
+      any_substring:
+        - "fetch"
+        - "query"
+        - "swr"
+        - "tanstack"
+        - "suspense"
+        - "loading"
+
+  - id: styling_patterns
+    agent: majestic-engineer:research:best-practices-researcher
+    context: "React styling: Tailwind, CSS Modules, styled-components, CSS-in-JS"
+    triggers:
+      any_substring:
+        - "style"
+        - "css"
+        - "tailwind"
+        - "styled"
+        - "theme"
+
+  - id: testing_patterns
+    agent: majestic-engineer:research:best-practices-researcher
+    context: "React testing: Jest, React Testing Library, Vitest, component testing"
+    triggers:
+      any_substring:
+        - "test"
+        - "jest"
+        - "vitest"
+        - "testing-library"
+        - "render"
+
+  - id: form_patterns
+    agent: majestic-engineer:research:best-practices-researcher
+    context: "React forms: React Hook Form, Formik, validation, controlled inputs"
+    triggers:
+      any_substring:
+        - "form"
+        - "input"
+        - "validation"
+        - "submit"
+
+coding_styles:
+  - majestic-engineer:tdd-workflow
+
+quality_gate:
+  reviewers:
+    - majestic-engineer:qa:security-review
+    - majestic-engineer:review:project-topics-reviewer

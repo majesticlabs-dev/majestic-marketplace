@@ -1,0 +1,81 @@
+# Built-in Rails preset - uses majestic-engineer agents only
+# Stack plugins (majestic-rails) can enhance with specialized agents
+schema_version: 1
+tech_stack: rails
+
+research_hooks:
+  - id: auth_patterns
+    agent: majestic-engineer:research:best-practices-researcher
+    context: "Rails authorization: Action Policy, Pundit, CanCanCan"
+    triggers:
+      any_substring:
+        - "authorization"
+        - "policy"
+        - "permission"
+        - "access control"
+        - "authorize"
+
+  - id: background_jobs
+    agent: majestic-engineer:research:best-practices-researcher
+    context: "Rails background jobs: Solid Queue, Sidekiq, Active Job"
+    triggers:
+      any_substring:
+        - "background"
+        - "job"
+        - "queue"
+        - "async"
+        - "worker"
+        - "perform_later"
+
+  - id: realtime_patterns
+    agent: majestic-engineer:research:best-practices-researcher
+    context: "Rails real-time: Action Cable, Turbo Streams, AnyCable"
+    triggers:
+      any_substring:
+        - "websocket"
+        - "cable"
+        - "turbo stream"
+        - "live update"
+        - "broadcast"
+        - "real-time"
+
+  - id: db_patterns
+    agent: majestic-engineer:research:best-practices-researcher
+    context: "Rails database patterns, Active Record optimization, N+1 queries"
+    triggers:
+      any_substring:
+        - "migration"
+        - "index"
+        - "N+1"
+        - "query"
+        - "database"
+        - "optimize"
+
+  - id: stimulus_patterns
+    agent: majestic-engineer:research:best-practices-researcher
+    context: "Stimulus.js controller patterns, Hotwire conventions"
+    triggers:
+      any_substring:
+        - "stimulus"
+        - "hotwire"
+        - "turbo"
+        - "controller"
+        - "data-controller"
+
+  - id: email_patterns
+    agent: majestic-engineer:research:best-practices-researcher
+    context: "Rails email: Action Mailer, delivery strategies"
+    triggers:
+      any_substring:
+        - "email"
+        - "mailer"
+        - "deliver"
+        - "notification"
+
+coding_styles:
+  - majestic-engineer:tdd-workflow
+
+quality_gate:
+  reviewers:
+    - majestic-engineer:qa:security-review
+    - majestic-engineer:review:project-topics-reviewer
