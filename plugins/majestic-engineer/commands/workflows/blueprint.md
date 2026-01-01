@@ -132,13 +132,7 @@ Task(subagent_type="majestic-engineer:plan:plan-review", prompt="Review plan at 
 
 Incorporate feedback and update the plan file.
 
-### 8. Set Terminal Title
-
-```
-Skill(skill: "rename", args="<plan-title>")
-```
-
-### 9. Preview and User Options
+### 8. Preview and User Options
 
 **Check auto_preview config:**
 ```
@@ -153,16 +147,16 @@ Question: "Blueprint ready at `docs/plans/<filename>.md`. What next?"
 
 | Option | Action |
 |--------|--------|
-| Build as single task | Go to Step 10A |
-| Break into small tasks | Go to Step 10B |
-| Create as single epic | Go to Step 10C |
-| Deepen with more research | Go to Step 9D |
-| Preview plan | Read and display plan content, return to Step 9 |
+| Build as single task | Go to Step 9A |
+| Break into small tasks | Go to Step 9B |
+| Create as single epic | Go to Step 9C |
+| Deepen with more research | Go to Step 8D |
+| Preview plan | Read and display plan content, return to Step 8 |
 | Revise | Ask what to change, return to Step 6 |
 
 **IMPORTANT:** After user selects an option, EXECUTE that action. Do not stop.
 
-### 9D: Deepen Plan
+### 8D: Deepen Plan
 
 **Ask user what aspect needs more research:**
 
@@ -190,9 +184,9 @@ Task(subagent_type="majestic-engineer:research:web-research", prompt="[user's as
 3. Enrich that section with research findings
 4. Write updated plan: `Edit(file_path="docs/plans/<filename>.md", ...)`
 
-**Return to Step 9** to present options again.
+**Return to Step 8** to present options again.
 
-### 10A: Build Single Task
+### 9A: Build Single Task
 
 ```
 Skill(skill: "majestic-engineer:workflows:build-task", args="docs/plans/<filename>.md")
@@ -200,7 +194,7 @@ Skill(skill: "majestic-engineer:workflows:build-task", args="docs/plans/<filenam
 
 **End workflow.**
 
-### 10B: Task Breakdown
+### 9B: Task Breakdown
 
 ```
 Task(subagent_type="majestic-engineer:plan:task-breakdown", prompt="Plan: docs/plans/<filename>.md")
@@ -216,21 +210,21 @@ The agent appends `## Implementation Tasks` section with:
 Skill(skill: "config-reader", args: "blueprint.auto_create_task false")
 ```
 
-- **If `true`:** Skip to Step 11
+- **If `true`:** Skip to Step 10
 - **If `false`:** Ask user "Tasks added to plan. Create these in your task manager?"
-  - If Yes → Go to Step 11
+  - If Yes → Go to Step 10
   - If No → End workflow
 
-### 10C: Single Epic
+### 9C: Single Epic
 
 Create a single task covering the entire plan:
 ```
 Skill(skill: "backlog-manager")
 ```
 
-Update the plan document with the task reference, then go to Step 12.
+Update the plan document with the task reference, then go to Step 11.
 
-### 11: Create Tasks
+### 10: Create Tasks
 
 For each task in the Implementation Tasks section:
 1. Create task: `Skill(skill: "backlog-manager")`
@@ -245,7 +239,7 @@ For each task in the Implementation Tasks section:
 | Beads | `BEADS-123` |
 | File-based | `TODO-123` |
 
-### 12: Offer Build
+### 11: Offer Build
 
 Use AskUserQuestion:
 

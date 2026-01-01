@@ -15,7 +15,7 @@ Set up AI agent documentation and machine-readable config for this project.
 Check existing state first:
 
 ```bash
-./init/check-existing.sh
+{baseDir}/init/check-existing.sh
 ```
 
 **If AGENTS.md exists**, ask: Regenerate | Enhance | Skip
@@ -45,7 +45,7 @@ Use `AskUserQuestion` to gather config. Ask in batches of max 4 questions.
 
 ### Stack-Specific Questions
 
-**Rails** (auto-detect ruby/rails versions first via `./init/detect-versions.sh`):
+**Rails** (auto-detect ruby/rails versions first via `{baseDir}/init/detect-versions.sh`):
 
 | Question | Options |
 |----------|---------|
@@ -56,7 +56,7 @@ Use `AskUserQuestion` to gather config. Ask in batches of max 4 questions.
 | Deployment (multi) | Kamal, Fly.io, Heroku, Render |
 | Solid Gems (multi) | Solid Cache, Solid Queue, Solid Cable |
 
-**Python** (auto-detect python version, framework via `./init/detect-tech-stack.sh`):
+**Python** (auto-detect python version, framework via `{baseDir}/init/detect-tech-stack.sh`):
 
 | Question | Options |
 |----------|---------|
@@ -88,8 +88,8 @@ Use `AskUserQuestion` to gather config. Ask in batches of max 4 questions.
 ## Step 3: Auto-Detect Values
 
 ```bash
-./init/detect-branch.sh              # Default branch
-./init/detect-tech-stack.sh stack    # If Generic selected
+{baseDir}/init/detect-branch.sh              # Default branch
+{baseDir}/init/detect-tech-stack.sh stack    # If Generic selected
 ```
 
 Search for design system files (design-system.md). If found, record path in toolbox config.
@@ -114,9 +114,9 @@ Replace placeholders with collected values. Handle conditionals:
 ### Gitignore + Local Config
 
 ```bash
-./init/gitignore-add.sh .claude/current_task.txt  # Always
-./init/gitignore-add.sh .agents.yml               # If not tracked
-./init/gitignore-add.sh .agents.local.yml         # If local overrides
+{baseDir}/init/gitignore-add.sh .claude/current_task.txt  # Always
+{baseDir}/init/gitignore-add.sh .agents.yml               # If not tracked
+{baseDir}/init/gitignore-add.sh .agents.local.yml         # If local overrides
 ```
 
 If local overrides requested, write `.agents.local.yml` using template from `resources/local-config-template.yaml`.
@@ -125,7 +125,7 @@ If local overrides requested, write `.agents.local.yml` using template from `res
 
 1. **Create review-topics.md** - If selected, create `docs/agents/review-topics.md` with starter template
 2. **Create symlink** - `ln -s AGENTS.md CLAUDE.md` (backup if exists)
-3. **Verify** - Run `./init/verify-setup.sh`
+3. **Verify** - Run `{baseDir}/init/verify-setup.sh`
 
 ## Output Summary
 

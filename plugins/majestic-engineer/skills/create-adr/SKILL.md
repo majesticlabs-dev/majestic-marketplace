@@ -63,7 +63,7 @@ If the diff doesn't provide enough context:
 
 ### 4. Use the Template
 
-Use the template from `./assets/adr-template.md` to structure the document.
+Use the template from `{baseDir}/assets/adr-template.md` to structure the document.
 
 **Key sections to complete:**
 - **Status**: Proposed, Accepted, Deprecated, or Superseded

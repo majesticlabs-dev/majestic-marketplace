@@ -33,7 +33,7 @@ This skill provides a unified interface for managing git worktrees, enabling iso
 All operations use the unified `worktree-manager.sh` script:
 
 ```bash
-bash scripts/worktree-manager.sh <command> [options]
+bash {baseDir}/scripts/worktree-manager.sh <command> [options]
 ```
 
 ### Create Worktree
@@ -112,11 +112,11 @@ worktree-manager.sh cleanup
 If you have existing worktrees created before the automatic env copying feature:
 
 ```bash
-bash scripts/worktree-manager.sh copy-env feature-branch
+bash {baseDir}/scripts/worktree-manager.sh copy-env feature-branch
 ```
 
 Or from within the worktree directory:
 
 ```bash
-bash scripts/worktree-manager.sh copy-env
+bash {baseDir}/scripts/worktree-manager.sh copy-env
 ```
