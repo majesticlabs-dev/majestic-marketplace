@@ -12,11 +12,34 @@ The config file has **core fields** plus **stack-specific fields** based on tech
 
 | Version | Changes |
 |---------|---------|
+| 1.5 | Added `lessons_path` for learnings discovery, deprecated `review_topics_path` |
 | 1.4 | Multi-stack `tech_stack` (array support), built-in toolbox presets |
 | 1.3 | Added `commit.pre_prompt`, `commit.post_prompt` for LLM-based commit hooks |
 | 1.2 | Moved `auto_create_task` under `plan:` namespace |
 | 1.1 | Added `workflow_labels`, `workspace_setup.post_create` |
 | 1.0 | Initial release |
+
+### Migration from 1.4 to 1.5
+
+**Breaking change:** `review_topics_path` is deprecated and replaced by `lessons_path`.
+
+Old format (1.4):
+```yaml
+review_topics_path: docs/agents/review-topics.md
+```
+
+New format (1.5):
+```yaml
+lessons_path: .claude/lessons/  # Default location for learnings discovery
+```
+
+**Migration steps:**
+1. Replace `review_topics_path` with `lessons_path: .claude/lessons/`
+2. Create `.claude/lessons/` directory
+3. Move existing review topics to lessons with `workflow_phase: [review]` frontmatter
+4. The `lessons-discoverer` agent handles discovery at runtime
+
+**Why the change:** Unified institutional memory system. Lessons now support multiple workflow phases (planning, debugging, review, implementation) and semantic discovery via Claude headless mode.
 
 ### Migration from 1.3 to 1.4
 
@@ -60,7 +83,7 @@ plan:
 
 ```yaml
 # .agents.yml - Project configuration for Claude Code commands
-config_version: 1.2
+config_version: 1.5
 default_branch: main
 app_status: development
 
@@ -83,7 +106,7 @@ extras:
 task_management: github
 workflow: worktrees
 branch_naming: type/issue-desc
-review_topics_path: docs/agents/review-topics.md
+lessons_path: .claude/lessons/
 
 # Workspace setup hooks
 # workspace_setup:
@@ -115,7 +138,7 @@ toolbox:
 ### Python Project
 
 ```yaml
-config_version: 1.2
+config_version: 1.5
 default_branch: main
 app_status: development
 
@@ -128,7 +151,7 @@ database: postgres
 task_management: github
 workflow: worktrees
 branch_naming: type/issue-desc
-review_topics_path: docs/agents/review-topics.md
+lessons_path: .claude/lessons/
 
 auto_preview: true
 plan:
@@ -138,7 +161,7 @@ plan:
 ### Node Project
 
 ```yaml
-config_version: 1.2
+config_version: 1.5
 default_branch: main
 app_status: development
 
@@ -154,7 +177,7 @@ deployment: vercel
 task_management: github
 workflow: worktrees
 branch_naming: type/issue-desc
-review_topics_path: docs/agents/review-topics.md
+lessons_path: .claude/lessons/
 
 auto_preview: true
 plan:
@@ -174,7 +197,8 @@ plan:
 | `task_management` | Task tracking system | `github` \| `linear` \| `beads` \| `file` \| `none` | `none` |
 | `workflow` | Feature development workflow | `worktrees` \| `branches` | `branches` |
 | `branch_naming` | Branch naming convention | `feature/desc` \| `issue-desc` \| `type/issue-desc` \| `user/desc` | `feature/desc` |
-| `review_topics_path` | Path to review topics file | file path | (none) |
+| `lessons_path` | Path to lessons directory for discovery | directory path | `.claude/lessons/` |
+| `review_topics_path` | **DEPRECATED** - Use `lessons_path` with `workflow_phase: review` | file path | (none) |
 | `auto_preview` | Auto-open markdown files (plans, PRDs, briefs, handoffs) | `true` \| `false` | `false` |
 | `plan.auto_create_task` | Auto-create task when `/majestic:plan` completes | `true` \| `false` | `false` |
 | `session.ledger` | Enable session state checkpointing to file | `true` \| `false` | `false` |

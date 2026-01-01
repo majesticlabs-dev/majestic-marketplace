@@ -19,7 +19,7 @@ preconditions:
 
 This skill captures problem solutions immediately after confirmation, creating structured documentation that serves as a searchable knowledge base for future sessions.
 
-**Organization:** Single-file architecture - each problem documented as one markdown file in its symptom category directory (e.g., `docs/solutions/performance-issues/n-plus-one-queries.md`). Files use YAML frontmatter for metadata and searchability.
+**Organization:** Single-file architecture - each problem documented as one markdown file in its symptom category directory within `lessons_path` (default: `.claude/lessons/`, e.g., `{lessons_path}/performance-issues/n-plus-one-queries.md`). Files use YAML frontmatter for metadata and searchability. Lessons with `workflow_phase` fields are automatically discoverable by the lessons-discoverer agent.
 
 <critical_sequence name="documentation-capture" enforce_order="strict">
 
@@ -87,14 +87,17 @@ I need a few details to document this properly:
 <step number="3" required="false" depends_on="2">
 ### Step 3: Check Existing Docs
 
-Search docs/solutions/ for similar issues:
+Read lessons_path from config and search for similar issues:
 
 ```bash
+# Get lessons path from config (default: .claude/lessons/)
+LESSONS_PATH=$(claude -p "/majestic:config lessons_path .claude/lessons/")
+
 # Search by error message keywords
-grep -r "exact error phrase" docs/solutions/
+grep -r "exact error phrase" "$LESSONS_PATH/"
 
 # Search by symptom category
-ls docs/solutions/[category]/
+ls "$LESSONS_PATH/[category]/"
 ```
 
 **IF similar issue found:**
@@ -169,6 +172,11 @@ Please provide corrected values.
 <step number="6" required="true" depends_on="5">
 ### Step 6: Create Documentation
 
+**Read lessons_path from config:**
+```bash
+LESSONS_PATH=$(claude -p "/majestic:config lessons_path .claude/lessons/")
+```
+
 **Determine category from problem_type:** Use the category mapping defined in `references/yaml-schema.md`.
 
 **Create documentation file:**
@@ -177,20 +185,23 @@ Please provide corrected values.
 PROBLEM_TYPE="[from validated YAML]"
 CATEGORY="[mapped from problem_type]"
 FILENAME="[generated-filename].md"
-DOC_PATH="docs/solutions/${CATEGORY}/${FILENAME}"
+DOC_PATH="${LESSONS_PATH}/${CATEGORY}/${FILENAME}"
 
 # Create directory if needed
-mkdir -p "docs/solutions/${CATEGORY}"
+mkdir -p "${LESSONS_PATH}/${CATEGORY}"
 
 # Write documentation using template from assets/resolution-template.md
 # (Content populated with Step 2 context and validated YAML frontmatter)
 ```
 
 **Result:**
-- Single file in category directory
+- Single file in category directory under lessons_path
 - Enum validation ensures consistent categorization
+- Optional discovery fields enable lessons-discoverer integration
 
 **Create documentation:** Populate the structure from `assets/resolution-template.md` with context gathered in Step 2 and validated YAML frontmatter from Step 5.
+
+**Discovery opt-in:** If this lesson should surface automatically during workflows, add the optional discovery fields (lesson_type, workflow_phase, tech_stack, impact, keywords) to the frontmatter.
 </step>
 
 <step number="7" required="false" depends_on="6">
@@ -260,7 +271,7 @@ After successful documentation, present options and WAIT for user response:
 Solution documented
 
 File created:
-- docs/solutions/[category]/[filename].md
+- {lessons_path}/[category]/[filename].md
 
 What's next?
 1. Continue workflow (recommended)
@@ -269,7 +280,8 @@ What's next?
 4. Add to existing skill - Add to a learning skill
 5. Create new skill - Extract into new learning skill
 6. View documentation - See what was captured
-7. Other
+7. Enable discovery - Add workflow_phase fields for auto-discovery
+8. Other
 ```
 
 **Handle responses:**
@@ -325,7 +337,23 @@ Action:
 - Display the created documentation
 - Present decision menu again
 
-**Option 7: Other**
+**Option 7: Enable discovery**
+
+User selects this to make the lesson discoverable by lessons-discoverer agent:
+
+Action:
+1. Prompt: "Which workflow phases? [planning, debugging, review, implementation]"
+2. Prompt: "Which tech stacks? [rails, python, react, node, generic]"
+3. Prompt: "What's the lesson type? [antipattern, gotcha, pattern, setup, workflow]"
+4. Update the file's YAML frontmatter with:
+   - `workflow_phase`: Selected phases
+   - `tech_stack`: Selected stacks
+   - `lesson_type`: Selected type
+   - `impact`: Derived from severity (critical→blocks_work, high→major_time_sink, medium/low→minor_inconvenience)
+   - `keywords`: Extract from tags + symptom keywords
+5. Confirm: "Lesson now discoverable during [phases] workflows"
+
+**Option 8: Other**
 
 - Ask what they'd like to do
 
@@ -447,7 +475,7 @@ Documentation is successful when ALL of the following are true:
    ```
    Valid
 6. **Create documentation:**
-   - `docs/solutions/performance-issues/n-plus-one-user-queries-UserService-20251110.md`
+   - `{lessons_path}/performance-issues/n-plus-one-user-queries-UserService-20251110.md`
 7. **Cross-reference:** None needed (no similar issues)
 
 **Output:**
@@ -456,7 +484,7 @@ Documentation is successful when ALL of the following are true:
 Solution documented
 
 File created:
-- docs/solutions/performance-issues/n-plus-one-user-queries-UserService-20251110.md
+- {lessons_path}/performance-issues/n-plus-one-user-queries-UserService-20251110.md
 
 What's next?
 1. Continue workflow (recommended)
@@ -465,5 +493,6 @@ What's next?
 4. Add to existing skill - Add to a learning skill
 5. Create new skill - Extract into new learning skill
 6. View documentation - See what was captured
-7. Other
+7. Enable discovery - Add workflow_phase fields for auto-discovery
+8. Other
 ```

@@ -11,6 +11,13 @@ framework_version: [e.g., Rails 7.1.2, Next.js 14.0 - optional]
 resolution_type: [code_fix|migration|config_change|test_fix|dependency_update|environment_setup|workflow_improvement|documentation_update|tooling_addition]
 severity: [critical|high|medium|low]
 tags: [keyword1, keyword2, keyword3]
+
+# Learnings Discovery Fields (optional - enable auto-discovery)
+# lesson_type: [antipattern|gotcha|pattern|setup|workflow]
+# workflow_phase: [planning, debugging, review, implementation]
+# tech_stack: [rails, python, react, node, generic]
+# impact: [blocks_work|major_time_sink|minor_inconvenience]
+# keywords: [semantic, keywords, for, task, matching]
 ---
 
 # Troubleshooting: [Clear Problem Title]

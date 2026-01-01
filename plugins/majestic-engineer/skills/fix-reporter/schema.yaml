@@ -129,6 +129,51 @@ optional_fields:
       - "test-isolation"
       - "api-integration"
 
+  # Learnings Discovery Fields (for lessons-discoverer integration)
+  lesson_type:
+    type: enum
+    values:
+      - antipattern         # "Never do X because Y"
+      - gotcha              # "Watch out for X in context Y"
+      - pattern             # "When doing X, follow pattern Y"
+      - setup               # "Missing setup/config step"
+      - workflow            # "Process or workflow improvement"
+    description: "Type of lesson for categorization in discovery"
+
+  workflow_phase:
+    type: array[enum]
+    values:
+      - planning            # /blueprint before architecture design
+      - debugging           # /debug initialization
+      - review              # quality-gate reviewers
+      - implementation      # build-task coding phase
+    description: "Which workflow phases should see this lesson?"
+
+  tech_stack:
+    type: array[string]
+    description: "Which stacks does this apply to? (rails, python, react, node, generic)"
+    examples:
+      - ["rails"]
+      - ["python", "fastapi"]
+      - ["generic"]
+    default: ["generic"]
+
+  impact:
+    type: enum
+    values:
+      - blocks_work         # Critical - prevents progress (severity:critical)
+      - major_time_sink     # High impact - wastes hours (severity:high)
+      - minor_inconvenience # Low impact - small speed bump (severity:medium/low)
+    description: "Impact level for discovery prioritization"
+
+  keywords:
+    type: array[string]
+    max_items: 10
+    description: "Semantic keywords for task matching (e.g., 'authentication', 'oauth', 'token')"
+    examples:
+      - ["authentication", "oauth", "token"]
+      - ["n+1", "eager-loading", "includes"]
+
 validation_rules:
   - "module must be a valid project module name"
   - "date must be in YYYY-MM-DD format"

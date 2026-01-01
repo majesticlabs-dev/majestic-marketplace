@@ -18,6 +18,54 @@ argument-hint: "[error message or description]"
 
 Do not proceed until you have a clear bug description.
 
+## Discover Similar Past Issues
+
+**Read lessons_path from config:**
+```
+Skill(skill: "config-reader", args: "lessons_path .claude/lessons/")
+```
+
+**Check if directory exists, then discover similar past issues:**
+```
+Task(subagent_type="majestic-engineer:workflow:lessons-discoverer",
+     prompt="workflow_phase: debugging | tech_stack: [tech_stack from context] | task: [bug_description]")
+```
+
+**If lessons found with score > 70:**
+
+Present the high-confidence matches to the user BEFORE starting investigation:
+
+```
+Found similar past issues:
+
+1. [Lesson title] (score: 78)
+   {lessons_path}/[category]/[filename].md
+
+2. [Lesson title] (score: 65)
+   {lessons_path}/[category]/[filename].md
+```
+
+Use AskUserQuestion:
+```
+High-confidence match found. Read the documented solution first?
+1. Read Lesson 1 (Recommended)
+2. Read Lesson 2
+3. Continue with full investigation
+```
+
+**If user chooses to read a lesson:**
+- Display the lesson content using `Read(file_path="[lesson_path]")`
+- Ask: "Does this apply to your issue?"
+- If yes: Apply the documented solution, verify it works
+- If no: Continue with full investigation
+
+**Error handling:**
+- If lessons directory doesn't exist: Continue to Project Context Detection
+- If discovery returns 0 lessons: Continue to Project Context Detection
+- If discovery fails: Log warning, continue to Project Context Detection
+
+This step is **non-blocking** - failures do not stop the workflow.
+
 ## Project Context Detection
 
 **Step 1: Check config**

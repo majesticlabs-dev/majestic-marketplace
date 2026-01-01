@@ -18,6 +18,30 @@
 - **framework_version** (string): Framework version (e.g., "Rails 7.1.0", "Next.js 14.0")
 - **tags** (array): Searchable keywords (lowercase, hyphen-separated)
 
+### Learnings Discovery Fields (Optional)
+
+These fields enable automatic discovery by the lessons-discoverer agent:
+
+- **lesson_type** (enum): One of [antipattern, gotcha, pattern, setup, workflow]
+  - `antipattern`: "Never do X because Y"
+  - `gotcha`: "Watch out for X in context Y"
+  - `pattern`: "When doing X, follow pattern Y"
+  - `setup`: "Missing setup/config step"
+  - `workflow`: "Process or workflow improvement"
+
+- **workflow_phase** (array): When should this lesson surface? One or more of [planning, debugging, review, implementation]
+  - `planning`: Before architecture design in /blueprint
+  - `debugging`: During /debug initialization
+  - `review`: For quality-gate reviewers
+  - `implementation`: During build-task coding
+
+- **tech_stack** (array): Which stacks apply? (rails, python, react, node, generic). Defaults to [generic].
+
+- **impact** (enum): One of [blocks_work, major_time_sink, minor_inconvenience]
+  - Maps to severity for discovery prioritization
+
+- **keywords** (array): Semantic keywords for task matching (e.g., "authentication", "oauth", "token")
+
 ## Validation Rules
 
 1. All required fields must be present
@@ -45,18 +69,24 @@ tags: [n-plus-one, eager-loading, performance]
 
 ## Category Mapping
 
-Based on `problem_type`, documentation is filed in:
+Based on `problem_type`, documentation is filed in `lessons_path` (default: `.claude/lessons/`):
 
-- **build_error** → `docs/solutions/build-errors/`
-- **test_failure** → `docs/solutions/test-failures/`
-- **runtime_error** → `docs/solutions/runtime-errors/`
-- **performance_issue** → `docs/solutions/performance-issues/`
-- **database_issue** → `docs/solutions/database-issues/`
-- **security_issue** → `docs/solutions/security-issues/`
-- **ui_bug** → `docs/solutions/ui-bugs/`
-- **integration_issue** → `docs/solutions/integration-issues/`
-- **logic_error** → `docs/solutions/logic-errors/`
-- **developer_experience** → `docs/solutions/developer-experience/`
-- **workflow_issue** → `docs/solutions/workflow-issues/`
-- **best_practice** → `docs/solutions/best-practices/`
-- **documentation_gap** → `docs/solutions/documentation-gaps/`
+- **build_error** → `{lessons_path}/build-errors/`
+- **test_failure** → `{lessons_path}/test-failures/`
+- **runtime_error** → `{lessons_path}/runtime-errors/`
+- **performance_issue** → `{lessons_path}/performance-issues/`
+- **database_issue** → `{lessons_path}/database-issues/`
+- **security_issue** → `{lessons_path}/security-issues/`
+- **ui_bug** → `{lessons_path}/ui-bugs/`
+- **integration_issue** → `{lessons_path}/integration-issues/`
+- **logic_error** → `{lessons_path}/logic-errors/`
+- **developer_experience** → `{lessons_path}/developer-experience/`
+- **workflow_issue** → `{lessons_path}/workflow-issues/`
+- **best_practice** → `{lessons_path}/best-practices/`
+- **documentation_gap** → `{lessons_path}/documentation-gaps/`
+
+**Configuration:**
+```bash
+# Read lessons_path from config (default: .claude/lessons/)
+LESSONS_PATH=$(claude -p "/majestic:config lessons_path .claude/lessons/")
+```

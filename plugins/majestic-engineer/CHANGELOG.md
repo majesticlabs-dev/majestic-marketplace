@@ -2,6 +2,66 @@
 
 All notable changes to majestic-engineer will be documented in this file.
 
+## [3.33.0] - 2026-01-01
+
+### Added
+
+- **Learnings Discovery System** - Unified institutional memory for workflows
+  - New `lessons-discoverer` agent discovers relevant lessons using Claude headless mode for semantic scoring
+  - Lessons are surfaced at the right moment: planning, debugging, review, or implementation
+  - Returns paths and scores (not full content) to minimize token overhead
+  - Integrates with `/majestic:blueprint`, `/majestic:debug`, and `quality-gate`
+
+- **New config field: `lessons_path`** - Configurable location for lessons storage
+  - Default: `.claude/lessons/`
+  - Replaces fragmented `review_topics_path` approach with unified system
+
+- **New YAML frontmatter fields for fix-reporter** - Enable discovery opt-in
+  - `lesson_type`: antipattern, gotcha, pattern, setup, workflow
+  - `workflow_phase`: planning, debugging, review, implementation
+  - `tech_stack`: rails, python, react, node, generic
+  - `impact`: blocks_work, major_time_sink, minor_inconvenience
+  - `keywords`: semantic keywords for task matching
+
+### Changed
+
+- **`/majestic:blueprint`** - New Step 2.5 discovers relevant lessons before research
+  - Lessons context passed to architect agent for informed design decisions
+  - Non-blocking: failures don't stop workflow
+
+- **`/majestic:debug`** - Discovers similar past issues before investigation
+  - High-confidence matches (>70 score) presented first
+  - User can read documented solution or continue with full investigation
+
+- **`quality-gate` agent** - New Step 2.6 discovers critical patterns
+  - Anti-patterns with workflow_phase: review are injected into all reviewer prompts
+  - Consistent pattern checking across all reviewers
+
+- **`fix-reporter` skill** - Now writes to `lessons_path` (default: `.claude/lessons/`)
+  - New decision menu option: "Enable discovery" to add workflow_phase fields
+  - Template includes commented discovery fields for easy opt-in
+
+- **Config schema bump to 1.5** - See CONFIG-SYSTEM.md for migration guide
+
+### Removed
+
+- **`/majestic:add-lesson` command** - Replaced by fix-reporter with `workflow_phase: review`
+- **`project-topics-reviewer` agent** - Replaced by lessons-discoverer with `workflow_phase: review`
+- **`review_topics_path` config** - Deprecated, use `lessons_path` instead
+
+### Migration
+
+Replace in `.agents.yml`:
+```yaml
+# Old
+review_topics_path: docs/agents/review-topics.md
+
+# New
+lessons_path: .claude/lessons/
+```
+
+Create `.claude/lessons/` directory and move review topics to lessons with `workflow_phase: [review]` frontmatter.
+
 ## [3.24.1] - 2025-12-29
 
 ### Fixed

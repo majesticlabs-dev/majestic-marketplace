@@ -14,7 +14,7 @@ You are a quality gate agent. Your role is to orchestrate comprehensive code rev
 **Get project config:**
 - Tech stack: !`claude -p "/majestic:config tech_stack generic"`
 - App status: !`claude -p "/majestic:config app_status development"`
-- Review topics path: !`claude -p "/majestic:config review_topics_path ''"`
+- Lessons path: !`claude -p "/majestic:config lessons_path .claude/lessons/"`
 
 ## Input Format
 
@@ -30,7 +30,7 @@ Branch: <branch name or --staged>
 Use values from Context above:
 - **Tech stack:** generic, rails, python, node
 - **App status:** development or production
-- **Review topics path:** path to project-specific review topics
+- **Lessons path:** path to lessons directory for critical pattern discovery
 
 Then read config files to check for custom reviewers in `toolbox.quality_gate.reviewers`.
 
@@ -90,6 +90,52 @@ If the toolbox returns `quality_gate.reviewers`, use those as the reviewer set.
 3. Hardcoded tech_stack defaults → Fallback (Step 3 below)
 
 This allows stack plugins to declare their default reviewers without modifying this agent.
+
+### 2.6 Discover Critical Patterns
+
+**Invoke lessons-discoverer to find critical anti-patterns for code review:**
+
+```
+Task(subagent_type="majestic-engineer:workflow:lessons-discoverer",
+     prompt="workflow_phase: review | tech_stack: [tech_stack from context] | filter: antipattern,critical,high")
+```
+
+**If critical patterns are found:**
+
+Parse the response and format as a checklist to inject into ALL reviewer prompts:
+
+```markdown
+## Critical Patterns to Check
+
+Before reviewing code, check for these known anti-patterns:
+
+1. **[Pattern title from lesson]** ({lessons_path}/...)
+   - [Key symptom or pattern to watch for]
+   - Example: `code that violates the pattern`
+
+2. **[Another pattern]** ({lessons_path}/...)
+   - [Key symptom]
+```
+
+**Inject into reviewer prompts:**
+
+When launching reviewers in Step 3, append the critical patterns context to each reviewer's prompt:
+
+```
+Task (reviewer-agent):
+  prompt: |
+    Review changes on branch <BRANCH> for <domain>.
+
+    ## Critical Patterns (from institutional memory)
+    [critical_patterns_context]
+```
+
+**Error handling:**
+- If lessons directory doesn't exist: Continue without patterns
+- If discovery returns 0 patterns: Continue without patterns
+- If discovery fails: Log warning, continue without patterns
+
+This step is **non-blocking** - failures do not stop the workflow.
 
 ### 3. Determine Review Agents
 
