@@ -30,7 +30,7 @@ claude plugins add majestic-creative@majestic-marketplace
 1. Install the Python dependency:
 
 ```bash
-pip install "google-genai>=1.0.0"
+pip install "google-genai>=1.35.0"
 ```
 
 2. Get your API key from [Google AI Studio](https://aistudio.google.com/api-keys)
