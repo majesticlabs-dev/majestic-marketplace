@@ -47,15 +47,13 @@ After sufficient info, synthesize and confirm before PRD generation.
 
 ## Phase 2: Generate PRD
 
-Invoke the prd-builder skill for templates:
+Invoke the prd-builder skill which will guide you to find and read the templates:
 
 ```
 Skill(skill="prd-builder")
 ```
 
-Read and customize templates:
-- `@plugins/majestic-engineer/skills/prd-builder/resources/prd-template.md` - Core PRD
-- `@plugins/majestic-engineer/skills/prd-builder/resources/technical-expansion.md` - If technical depth requested
+Follow the skill's instructions to load the templates.
 
 Customize with user's answers:
 - Fill in problem statement, user personas

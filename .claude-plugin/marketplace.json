@@ -12,7 +12,7 @@
     {
       "name": "majestic-engineer",
       "description": "Language-agnostic engineering workflows. Includes 29 specialized agents, 23 commands, 18 skills, and 5 toolbox presets.",
-      "version": "3.28.0",
+      "version": "3.28.1",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -107,7 +107,7 @@
     {
       "name": "majestic-agent-sdk",
       "description": "Claude Agent SDK tools for building custom AI agents. Includes project scaffolding and SDK documentation.",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -168,7 +168,7 @@
     {
       "name": "majestic-marketing",
       "description": "Marketing and SEO tools for Claude Code. Includes 15 specialized agents, 5 commands, and 34 skills.",
-      "version": "3.8.0",
+      "version": "3.8.1",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -291,7 +291,7 @@
     {
       "name": "majestic-experts",
       "description": "Expert panel discussion system with 22 curated personas. Includes 2 agents, 1 command, and 22 expert definitions.",
-      "version": "3.0.2",
+      "version": "3.1.2",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",

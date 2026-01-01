@@ -72,7 +72,7 @@ Invoke the agent-scaffold skill for templates:
 Skill(skill="agent-scaffold")
 ```
 
-Read templates from `@plugins/majestic-agent-sdk/skills/agent-scaffold/resources/`:
+Follow the skill's instructions to read templates from the resources directory:
 
 ### Directory Structure
 

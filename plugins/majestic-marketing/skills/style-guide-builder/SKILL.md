@@ -11,9 +11,9 @@ Provides templates for creating project-specific style guides.
 
 Automatically invoked by `/majestic:style-guide:new` command.
 
-## Templates
+## Template
 
-- `resources/style-guide-template.md` - Complete style guide output format
+- [resources/style-guide-template.md](resources/style-guide-template.md) - Complete style guide output format
 
 ## Integration
 

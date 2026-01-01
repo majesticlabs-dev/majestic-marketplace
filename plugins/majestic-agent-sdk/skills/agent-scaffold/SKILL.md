@@ -14,22 +14,22 @@ Automatically invoked by `/agent-sdk:agent-scaffold` command.
 ## Templates
 
 ### Core Files
-- `resources/typescript/package.json` - Node.js package config
-- `resources/typescript/agent.ts` - TypeScript agent entry point
-- `resources/python/pyproject.toml` - Python package config
-- `resources/python/agent.py` - Python agent entry point
+- [resources/typescript/package.json](resources/typescript/package.json) - Node.js package config
+- [resources/typescript/agent.ts](resources/typescript/agent.ts) - TypeScript agent entry point
+- [resources/python/pyproject.toml](resources/python/pyproject.toml) - Python package config
+- [resources/python/agent.py](resources/python/agent.py) - Python agent entry point
 
 ### Environment
-- `resources/env-anthropic.example` - Anthropic API key config
-- `resources/env-bedrock.example` - AWS Bedrock config
-- `resources/env-vertex.example` - Google Vertex AI config
-- `resources/gitignore` - Standard gitignore
+- [resources/env-anthropic.example](resources/env-anthropic.example) - Anthropic API key config
+- [resources/env-bedrock.example](resources/env-bedrock.example) - AWS Bedrock config
+- [resources/env-vertex.example](resources/env-vertex.example) - Google Vertex AI config
+- [resources/gitignore](resources/gitignore) - Standard gitignore
 
 ### Claude Code Files
-- `resources/claude/example-subagent.md` - Subagent template
-- `resources/claude/example-skill.md` - Skill template
-- `resources/claude/example-command.md` - Command template
-- `resources/claude/settings.json` - Hooks configuration
+- [resources/claude/example-subagent.md](resources/claude/example-subagent.md) - Subagent template
+- [resources/claude/example-skill.md](resources/claude/example-skill.md) - Skill template
+- [resources/claude/example-command.md](resources/claude/example-command.md) - Command template
+- [resources/claude/settings.json](resources/claude/settings.json) - Hooks configuration
 
 ## Tool Mapping
 

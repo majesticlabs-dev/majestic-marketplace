@@ -123,10 +123,9 @@ If local overrides requested, write `.agents.local.yml` using template from `res
 
 ## Step 5: Finalize Setup
 
-1. **Update AGENTS.md** - Add `Load config: @.agents.yml` after title
-2. **Create review-topics.md** - If selected, create `docs/agents/review-topics.md` with starter template
-3. **Create symlink** - `ln -s AGENTS.md CLAUDE.md` (backup if exists)
-4. **Verify** - Run `./init/verify-setup.sh`
+1. **Create review-topics.md** - If selected, create `docs/agents/review-topics.md` with starter template
+2. **Create symlink** - `ln -s AGENTS.md CLAUDE.md` (backup if exists)
+3. **Verify** - Run `./init/verify-setup.sh`
 
 ## Output Summary
 

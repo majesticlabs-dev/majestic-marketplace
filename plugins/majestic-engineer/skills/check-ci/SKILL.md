@@ -22,10 +22,10 @@ Trigger this skill when the user requests:
 
 ### 1. Execute CI Polling
 
-Run the `check_ci.sh` script (located in this skill's `scripts/` folder) to monitor PR checks:
+Run the `check_ci.sh` script to monitor PR checks:
 
 ```bash
-./scripts/check_ci.sh [PR_NUMBER] [INTERVAL] [TIMEOUT]
+bash scripts/check_ci.sh [PR_NUMBER] [INTERVAL] [TIMEOUT]
 ```
 
 **Parameters:**
@@ -36,13 +36,13 @@ Run the `check_ci.sh` script (located in this skill's `scripts/` folder) to moni
 **Examples:**
 ```bash
 # Auto-detect PR from current branch
-./scripts/check_ci.sh
+bash scripts/check_ci.sh
 
 # Monitor specific PR #123
-./scripts/check_ci.sh 123
+bash scripts/check_ci.sh 123
 
 # Custom interval (30s) and timeout (15 min)
-./scripts/check_ci.sh 123 30 900
+bash scripts/check_ci.sh 123 30 900
 ```
 
 ### 2. Interpret Results

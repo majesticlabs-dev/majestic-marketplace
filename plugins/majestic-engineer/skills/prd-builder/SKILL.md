@@ -17,8 +17,8 @@ Automatically invoked by `/majestic:prd` command. Provides:
 
 ## Templates
 
-- `resources/prd-template.md` - Core PRD structure (10 sections)
-- `resources/technical-expansion.md` - API, Data Model, Security, Performance sections
+- [resources/prd-template.md](resources/prd-template.md) - Core PRD structure (10 sections)
+- [resources/technical-expansion.md](resources/technical-expansion.md) - API, Data Model, Security, Performance sections
 
 ## Best Practices
 

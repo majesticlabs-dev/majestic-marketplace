@@ -9,9 +9,10 @@ Provides narrative templates for transforming git history into documentary-style
 
 ## Templates
 
-- `resources/minimal-template.md` - 1-2 page executive summary
-- `resources/standard-template.md` - 5-10 page story with acts
-- `resources/comprehensive-template.md` - 20+ page deep dive
+Read the appropriate template based on detail level:
+- [resources/minimal-template.md](resources/minimal-template.md) - 1-2 page executive summary
+- [resources/standard-template.md](resources/standard-template.md) - 5-10 page story with acts
+- [resources/comprehensive-template.md](resources/comprehensive-template.md) - 20+ page deep dive
 
 ## Narrative Guidelines
 
