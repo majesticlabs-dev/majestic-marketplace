@@ -25,6 +25,21 @@ claude plugins add majestic-creative@majestic-marketplace
 - Google AI API key with Gemini access
 - `google-genai` Python package
 
+## Setup
+
+1. Install the Python dependency:
+
+```bash
+pip install "google-genai>=1.0.0"
+```
+
+2. Get your API key from [Google AI Studio](https://aistudio.google.com/api-keys)
+3. Set the `GEMINI_API_KEY` environment variable:
+
+```bash
+export GEMINI_API_KEY="your-api-key-here"
+```
+
 ## Usage
 
 The skill activates when you're working on image generation tasks. It provides:
