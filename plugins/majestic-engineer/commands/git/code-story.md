@@ -75,16 +75,13 @@ Task (majestic-engineer:research:git-researcher):
 
 ### Pass 4: Narrative Synthesis
 
-Invoke code-story skill and use template based on detail level:
+Invoke code-story skill which will guide you to find and read the appropriate template:
 
 ```
 Skill(skill="code-story")
 ```
 
-Read templates from `@plugins/majestic-engineer/skills/code-story/resources/`:
-- `minimal-template.md` - 1-2 pages
-- `standard-template.md` - 5-10 pages
-- `comprehensive-template.md` - 20+ pages
+Follow the skill's instructions to load the template matching the detail level.
 
 ### Pass 5: Output Generation
 

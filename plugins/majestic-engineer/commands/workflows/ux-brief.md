@@ -80,13 +80,13 @@ When user mentions reference sites:
 
 ## Phase 4: Design System Generation
 
-After gathering information, invoke the ux-brief skill for the template:
+After gathering information, invoke the ux-brief skill which will guide you to find and read the design system template:
 
 ```
 Skill(skill="ux-brief")
 ```
 
-Then read and customize the template at `@plugins/majestic-engineer/skills/ux-brief/resources/design-system-template.md` with the user's specific choices:
+Follow the skill's instructions to load the template, then customize it with the user's specific choices:
 
 - Replace all `[placeholder]` values with actual design decisions
 - Fill in color hex values based on palette

@@ -110,13 +110,13 @@ If "Mixed" content types or detailed control needed:
 
 ## Phase 5: Generate Style Guide
 
-Invoke skill for template:
+Invoke skill which will guide you to find and read the template:
 
 ```
 Skill(skill="style-guide-builder")
 ```
 
-Read and customize `@plugins/majestic-marketing/skills/style-guide-builder/resources/style-guide-template.md`:
+Follow the skill's instructions to load the template, then customize it:
 
 - Fill Quick Reference table
 - Configure voice and tone sections

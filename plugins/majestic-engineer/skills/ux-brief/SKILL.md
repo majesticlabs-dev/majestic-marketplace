@@ -16,9 +16,9 @@ This skill is automatically invoked by the `/majestic:ux-brief` command. It prov
 - Component state definitions
 - Framework configuration examples
 
-## Template Reference
+## Template
 
-See `resources/design-system-template.md` for the full design system output template.
+Read the design system template: [resources/design-system-template.md](resources/design-system-template.md)
 
 ## Key Principles
 
