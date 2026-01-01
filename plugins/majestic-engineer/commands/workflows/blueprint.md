@@ -150,13 +150,13 @@ Question: "Blueprint ready at `docs/plans/<filename>.md`. What next?"
 | Build as single task | Go to Step 9A |
 | Break into small tasks | Go to Step 9B |
 | Create as single epic | Go to Step 9C |
-| Deepen with more research | Go to Step 8D |
+| Deep dive into specifics | Go to Step 8D |
 | Preview plan | Read and display plan content, return to Step 8 |
 | Revise | Ask what to change, return to Step 6 |
 
 **IMPORTANT:** After user selects an option, EXECUTE that action. Do not stop.
 
-### 8D: Deepen Plan
+### 8D: Deep Dive
 
 **Ask user what aspect needs more research:**
 
