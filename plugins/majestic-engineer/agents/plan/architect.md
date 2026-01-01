@@ -33,6 +33,18 @@ When invoked, you must follow these steps:
 - Identify reusable patterns and components
 - Understand the technology stack and constraints
 
+### 2.5 Review Relevant Lessons (if provided)
+
+If `lessons_context` is provided in the prompt:
+- Parse the lessons JSON to identify relevant past learnings
+- For each lesson with score > 50:
+  - Read the full lesson file if constraints are critical
+  - Note anti-patterns to avoid
+  - Apply patterns from similar past implementations
+- Document which lessons influenced the design in the plan
+
+**Lessons are institutional memory from past work.** They help avoid repeating mistakes and apply proven patterns.
+
 ### 3. Research External Resources
 - Search for relevant packages/libraries based on the detected stack
 - Evaluate trade-offs of external dependencies vs custom code

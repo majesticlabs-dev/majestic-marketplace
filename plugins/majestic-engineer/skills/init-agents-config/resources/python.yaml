@@ -21,7 +21,7 @@ workflow_labels:                      # Issue workflow states
   - done                              # Completed
 workflow: {{workflow}}
 branch_naming: {{branch_naming}}
-review_topics_path: docs/agents/review-topics.md
+lessons_path: .claude/lessons/             # Institutional memory for discovery
 
 # Auto-preview markdown files (plans, PRDs, briefs, handoffs)
 auto_preview: true
