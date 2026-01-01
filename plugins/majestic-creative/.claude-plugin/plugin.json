@@ -1,0 +1,19 @@
+{
+  "name": "majestic-creative",
+  "version": "1.0.0",
+  "description": "AI-powered creative tools for image generation, editing, and visual content creation. Includes skills for Gemini image generation.",
+  "author": {
+    "name": "David Paluy",
+    "url": "https://github.com/dpaluy",
+    "email": "marketplace@it.majesticlabs.dev"
+  },
+  "keywords": [
+    "creative",
+    "image-generation",
+    "ai-art",
+    "gemini",
+    "visual-content",
+    "text-to-image",
+    "image-editing"
+  ]
+}

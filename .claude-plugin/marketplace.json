@@ -365,6 +365,27 @@
         "real-browser"
       ],
       "source": "./plugins/majestic-browser"
+    },
+    {
+      "name": "majestic-creative",
+      "description": "AI-powered creative tools for image generation, editing, and visual content creation. Includes 1 skill for Gemini image generation.",
+      "version": "1.0.0",
+      "author": {
+        "name": "David Paluy",
+        "url": "https://github.com/dpaluy",
+        "email": "marketplace@it.majesticlabs.dev"
+      },
+      "homepage": "https://github.com/majesticlabs-dev/majestic-marketplace/tree/master/plugins/majestic-creative",
+      "tags": [
+        "creative",
+        "image-generation",
+        "ai-art",
+        "gemini",
+        "visual-content",
+        "text-to-image",
+        "image-editing"
+      ],
+      "source": "./plugins/majestic-creative"
     }
   ]
 }
