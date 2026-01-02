@@ -1,4 +1,5 @@
 ---
+name: tools:ultrathink-task
 allowed-tools: Read, Grep, Glob, Bash(git *), mcp__sequential-thinking
 description: Plan the task efficiently with multiple agenets (Architect, Research, Coder, Tester)
 ---

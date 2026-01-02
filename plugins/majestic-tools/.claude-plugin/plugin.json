@@ -1,6 +1,6 @@
 {
   "name": "majestic-tools",
-  "version": "3.6.0",
+  "version": "3.6.1",
   "description": "Claude Code customization tools. Includes 1 agent, 13 commands, and 4 skills.",
   "author": {
     "name": "David Paluy",

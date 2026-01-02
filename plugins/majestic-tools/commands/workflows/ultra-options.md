@@ -1,4 +1,5 @@
 ---
+name: tools:ultra-options
 allowed-tools: Read, Grep, Glob, Bash(git *), mcp__sequential-thinking__sequentialthinking
 description: Deep analysis generating multiple solution options using sequential thinking
 ---

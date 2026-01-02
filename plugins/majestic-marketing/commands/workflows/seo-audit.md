@@ -1,4 +1,5 @@
 ---
+name: majestic:seo-audit
 allowed-tools: Read, Write, Edit, Grep, Glob, WebSearch
 description: Quick SEO audit of provided content with actionable recommendations
 ---
