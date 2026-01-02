@@ -1,6 +1,6 @@
 # Majestic Company
 
-Business operations tools. Includes 4 specialized agents and 21 skills.
+Business operations tools. Includes 4 specialized agents and 19 skills.
 
 ## Installation
 
@@ -49,13 +49,11 @@ Invoke with: `skill majestic-company:ceo:<name>`
 | `decision-framework` | First-principles, cost/benefit, and second-order effects analysis |
 | `decisions` | Tree of Thoughts business decisions with expert consultants |
 | `financial-model` | Revenue projections, unit economics, P&L, and scenario analysis |
-| `founder-mode` | Contrarian principles that break conventional management wisdom |
 | `future-back` | Reverse-engineer pathway from vision to reality |
 | `growth-audit` | 360-degree business audit with 5-10X growth blueprint |
 | `industry-pulse` | Real-time pulse check on any industry for operators/investors |
 | `industry-research` | Research market, identify pain, design venture for 12-month capture |
 | `market-expansion` | Strategic expansion analysis with financial projections |
-| `pareto` | Identify the vital 20% that produces 80% of results |
 | `pricing-strategy` | Competitor pricing analysis with optimal structure roadmap |
 | `startup-blueprint` | Interactive 10-phase startup planning tailored to your profile |
 | `strategic-planning` | One-page strategic briefs with objective, milestones, and risks |
@@ -176,9 +174,6 @@ skill majestic-company:ceo:industry-research
 
 # Develop AI competitive strategy
 skill majestic-company:ceo:ai-advantage
-
-# Identify your vital 20%
-skill majestic-company:ceo:pareto
 
 # Create a future back plan
 skill majestic-company:ceo:future-back

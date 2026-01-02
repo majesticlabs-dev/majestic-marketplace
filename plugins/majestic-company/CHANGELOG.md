@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.3.0] - 2026-01-02
+
+### Changed
+
+- Moved `founder-mode` and `pareto` skills to new `majestic-founder` plugin
+  - These skills focus on personal effectiveness rather than business operations
+  - Access them via `skill majestic-founder:founder-mode` and `skill majestic-founder:pareto`
+
 ## [3.2.0] - 2025-12-21
 
 ### Added

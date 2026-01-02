@@ -196,8 +196,8 @@
     },
     {
       "name": "majestic-company",
-      "description": "Business operations tools. Includes 3 specialized agents and 23 skills.",
-      "version": "3.1.1",
+      "description": "Business operations tools. Includes 4 specialized agents and 19 skills.",
+      "version": "3.3.0",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -389,7 +389,7 @@
     },
     {
       "name": "majestic-founder",
-      "description": "Personal effectiveness tools for founders, solopreneurs, and business builders. Includes 1 skill.",
+      "description": "Personal effectiveness tools for founders, solopreneurs, and business builders. Includes 3 skills.",
       "version": "1.0.0",
       "author": {
         "name": "David Paluy",

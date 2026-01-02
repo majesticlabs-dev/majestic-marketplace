@@ -182,9 +182,3 @@ Then ask:
 1. "What activities/inputs are involved?" (Get the full list)
 2. "What results/outputs matter?" (Define success)
 3. "Do you have data, or should we estimate?" (Quantify)
-
----
-
-*"The 80/20 Principle is the cornerstone of results-based living."* — Richard Koch
-
-*"Focus on being productive instead of busy."* — Tim Ferriss

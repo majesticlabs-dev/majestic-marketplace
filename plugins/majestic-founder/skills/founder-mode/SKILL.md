@@ -111,9 +111,3 @@ When applying founder mode to a challenge:
 - Legal/compliance where expertise matters more than instinct
 - Areas where you lack context (use it to GET context, then decide)
 - When you're exhausted and need to recharge (founder mode requires energy)
-
----
-
-*"The moment you feel the need to tightly manage someone, you've made a hiring mistake."* — Brian Chesky
-
-*"Stay in the details. The details are what matter."* — Patrick Collison
