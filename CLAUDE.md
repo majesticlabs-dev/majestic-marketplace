@@ -59,6 +59,12 @@ Run `skill-linter` for new skills.
 - Skills must contain NEW info Claude doesn't know
 - Exclude: generic advice, personas, "best practices" prose
 - Include: concrete limits, project-specific patterns, exact templates
+- **Skills are LLM instructions, not human documentation**
+  - ❌ Attribution ("using X's framework") - LLM can't retrieve by author name
+  - ❌ Source credits - no functional value for execution
+  - ❌ Decorative quotes - human aesthetic, wastes tokens
+  - ✅ Every line must help the LLM execute better
+  - Ask: "Does this sentence improve LLM behavior?" If no, cut it.
 
 ### Anti-Patterns
 - ❌ Do NOT hardcode language/framework-specific agents in generic orchestrators

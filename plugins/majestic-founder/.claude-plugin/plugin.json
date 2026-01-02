@@ -1,0 +1,24 @@
+{
+  "name": "majestic-founder",
+  "version": "1.0.0",
+  "description": "Personal effectiveness tools for founders, solopreneurs, and business builders. Includes 1 skill.",
+  "author": {
+    "name": "David Paluy",
+    "url": "https://github.com/dpaluy",
+    "email": "marketplace@it.majesticlabs.dev"
+  },
+  "keywords": [
+    "founder",
+    "productivity",
+    "calendar",
+    "time-management",
+    "effectiveness",
+    "personal-operating-system",
+    "focus",
+    "deep-work",
+    "energy-management",
+    "ceo",
+    "solopreneur",
+    "indie-hacker"
+  ]
+}
