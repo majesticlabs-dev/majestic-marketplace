@@ -70,6 +70,12 @@ def generate_image(
     text_response = None
     image_saved = False
 
+    if response.parts is None:
+        raise RuntimeError(
+            "API returned no content. Possible causes: content policy violation, "
+            "rate limiting, or API error. Try a different prompt or wait and retry."
+        )
+
     for part in response.parts:
         if part.text is not None:
             text_response = part.text

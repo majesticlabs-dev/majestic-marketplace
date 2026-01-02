@@ -1,6 +1,6 @@
 ---
 name: gemini-image-coder
-description: Generate and edit images using Google's Gemini API. Supports text-to-image, image editing, multi-turn refinement, and composition from multiple reference images. Use when creating images from prompts, editing existing images, generating logos, stickers, or product mockups.
+description: Gemini image coder - Generate and edit images using Google's Gemini API. Supports text-to-image, image editing, multi-turn refinement, and composition from multiple reference images. Use when user asks to generate images, create images, edit images, or mentions "gemini image coder".
 allowed-tools: Read, Write, Bash, WebSearch
 ---
 

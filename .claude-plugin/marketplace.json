@@ -368,8 +368,8 @@
     },
     {
       "name": "majestic-creative",
-      "description": "AI-powered creative tools for image generation, editing, and visual content creation. Includes 1 skill for Gemini image generation.",
-      "version": "1.0.0",
+      "description": "AI-powered creative tools for image generation, editing, and visual content creation. Includes 1 command and 1 skill for Gemini image generation.",
+      "version": "1.1.0",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
