@@ -6,7 +6,7 @@ allowed-tools: AskUserQuestion
 
 # Calendar Optimization
 
-Balance your professional time across 4 essential categories using Sahil Bloom's framework.
+Balance your professional time across 4 essential categories.
 
 ## The 4 Types of Professional Time
 
