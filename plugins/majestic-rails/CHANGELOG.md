@@ -2,6 +2,12 @@
 
 All notable changes to majestic-rails will be documented in this file.
 
+## [3.12.1] - 2026-01-02
+
+### Changed
+
+- Remove project attributions from `dhh-coder` skill (LLM content rule compliance)
+
 ## [3.12.0] - 2025-12-22
 
 ### Added
