@@ -6,6 +6,12 @@ Claude Code plugin marketplace. **Work in `plugins/*/` only.**
 
 NEVER modify `~/.claude/`. All plugin work goes in `majestic-marketplace/plugins/`.
 
+## Git Merge Operations
+
+- NEVER merge branches to master without explicit user approval
+- Always ask: "Ready to merge to master?" or create a PR for review
+- Merging to production is irreversible - requires conscious decision
+
 ## Structure
 
 ```
@@ -65,6 +71,10 @@ Run `skill-linter` for new skills.
   - ❌ Decorative quotes - human aesthetic, wastes tokens
   - ✅ Every line must help the LLM execute better
   - Ask: "Does this sentence improve LLM behavior?" If no, cut it.
+- **Expert names: patterns vs attribution**
+  - ✅ Keep names that define a style/approach (DHH, Warren Buffett) - LLM needs this context
+  - ❌ Remove "inspired by X" or "based on X's methodology" - pure credibility signal
+  - Ask: Is this name part of what the LLM should DO, or just proof someone credible said it?
 
 ### Anti-Patterns
 - ❌ Do NOT hardcode language/framework-specific agents in generic orchestrators
