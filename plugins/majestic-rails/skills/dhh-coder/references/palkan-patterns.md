@@ -1,6 +1,6 @@
 # Palkan Rails Patterns
 
-Patterns from Vladimir Palkan (palkan), Rails contributor and Evil Martians developer. These patterns complement DHH's philosophy with practical architectural guidance.
+Patterns that complement DHH's philosophy with practical architectural guidance.
 
 ## Namespaced Model Classes (NOT Service Objects)
 

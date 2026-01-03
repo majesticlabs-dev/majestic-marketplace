@@ -7,8 +7,6 @@ description: Write Ruby and Rails code in DHH's distinctive 37signals style. Use
 
 Write Ruby and Rails code following DHH's philosophy: **clarity over cleverness**, **convention over configuration**, **developer happiness** above all.
 
-Patterns derived from 37signals' production applications: Basecamp, HEY, Campfire, and the open-source **Fizzy SaaS** project.
-
 ## Quick Reference
 
 ### Controller Actions
