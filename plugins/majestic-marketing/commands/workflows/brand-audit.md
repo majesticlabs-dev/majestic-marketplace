@@ -23,23 +23,15 @@ Comprehensive brand health evaluation across voice, visual, and positioning dime
 
 ## Phase 1: Asset Discovery
 
-Scan for brand documentation:
+**Scan for brand documentation (run all globs in parallel):**
 
-```bash
-# Brand strategy documents
-glob "**/brand-positioning.md" || glob ".claude/brand-positioning.md"
-glob "**/brand-voice.md" || glob ".claude/brand-voice.md"
-glob "**/STYLE_GUIDE.md" || glob ".claude/style-guide.md"
-
-# Design system
-glob "**/design-system.md" || glob "docs/design/*.md"
-
-# Configuration files
-glob "**/tailwind.config.*"
-glob "**/*.css" | head -5
-
-# Content samples
-glob "content/**/*.md" || glob "blog/**/*.md" || glob "app/views/**/*.erb"
+```
+Glob 1: "**/brand-positioning.md" OR ".claude/brand-positioning.md"
+Glob 2: "**/brand-voice.md" OR ".claude/brand-voice.md"
+Glob 3: "**/STYLE_GUIDE.md" OR ".claude/style-guide.md"
+Glob 4: "**/design-system.md" OR "docs/design/*.md"
+Glob 5: "**/tailwind.*" OR "**/*.css" (head -5)
+Glob 6: "content/**/*.md" OR "blog/**/*.md" OR "app/views/**/*.erb"
 ```
 
 ### Asset Inventory
@@ -57,6 +49,16 @@ Report what exists and what's missing:
 **If critical assets missing:**
 - Recommend creating them before audit
 - Offer to run `/brand-positioning`, `/brand-voice`, `/style-guide:new`
+
+---
+
+## Phases 2-4: Audit Execution
+
+**If scope="full":** Run Phases 2, 3, and 4 in parallel (they are independent).
+
+**If scope is specific:** Run only the matching phase.
+
+---
 
 ## Phase 2: Voice Consistency Audit
 

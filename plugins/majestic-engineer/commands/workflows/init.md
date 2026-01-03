@@ -87,12 +87,18 @@ Use `AskUserQuestion` to gather config. Ask in batches of max 4 questions.
 
 ## Step 3: Auto-Detect Values
 
+**Run these operations in parallel:**
+
 ```bash
 {baseDir}/init/detect-branch.sh              # Default branch
 {baseDir}/init/detect-tech-stack.sh stack    # If Generic selected
 ```
 
-Search for design system files (design-system.md). If found, record path in toolbox config.
+```
+Glob: "**/design-system.md"                  # Design system file
+```
+
+If design system found, record path in toolbox config.
 
 ## Step 4: Write .agents.yml
 

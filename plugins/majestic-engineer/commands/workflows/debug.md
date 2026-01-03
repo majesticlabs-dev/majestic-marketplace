@@ -6,9 +6,10 @@ argument-hint: "[error message or description]"
 
 # Debug Command
 
-## Context
+## Context (read in parallel)
 
 - Tech stack: !`claude -p "/majestic:config tech_stack generic"`
+- Lessons path: !`claude -p "/majestic:config lessons_path .claude/lessons/"`
 
 ## Bug Description
 
@@ -20,12 +21,7 @@ Do not proceed until you have a clear bug description.
 
 ## Discover Similar Past Issues
 
-**Read lessons_path from config:**
-```
-Skill(skill: "config-reader", args: "lessons_path .claude/lessons/")
-```
-
-**Check if directory exists, then discover similar past issues:**
+**Check if lessons directory exists, then discover similar past issues:**
 ```
 Task(subagent_type="majestic-engineer:workflow:lessons-discoverer",
      prompt="workflow_phase: debugging | tech_stack: [tech_stack from context] | task: [bug_description]")

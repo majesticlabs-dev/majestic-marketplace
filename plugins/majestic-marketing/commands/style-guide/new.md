@@ -62,17 +62,12 @@ Save responses to include in output:
 
 ## Phase 2: Discovery
 
-Check for existing context:
+**Check for existing context (run globs in parallel):**
 
-```bash
-# Existing style guide
-glob "STYLE_GUIDE.md" || glob ".claude/style-guide.md"
-
-# Brand voice guide
-glob "**/brand-voice.md"
-
-# Content samples
-glob "content/**/*.md" || glob "blog/**/*.md"
+```
+Glob 1: "STYLE_GUIDE.md" OR ".claude/style-guide.md"  # Existing style guide
+Glob 2: "**/brand-voice.md"                            # Brand voice guide
+Glob 3: "content/**/*.md" OR "blog/**/*.md"            # Content samples
 ```
 
 If style guide exists, offer to update rather than create new.

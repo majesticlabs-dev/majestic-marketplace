@@ -38,46 +38,35 @@ Detect feature type and delegate to specialists:
 Skill(skill: "majestic-devops:devops-plan")
 ```
 
-### 2. Resolve Toolbox
+### 2. Resolve Toolbox + Discover Lessons
 
-**Read tech stack from project config:**
+**Read config values (run in parallel):**
 ```
 Skill(skill: "config-reader", args: "tech_stack generic")
-```
-
-**Get stack-specific configuration:**
-```
-Task(subagent_type="majestic-engineer:workflow:toolbox-resolver",
-     prompt="Stage: blueprint | Tech Stack: [tech_stack from config-reader]")
-```
-
-Store the returned config for subsequent steps:
-- `research_hooks` → use in Step 3
-- `coding_styles` → use in Step 5
-
-**If no toolbox found:** Continue with core agents only (Step 3).
-
-### 2.5 Discover Relevant Lessons
-
-**Read lessons_path from config:**
-```
 Skill(skill: "config-reader", args: "lessons_path .claude/lessons/")
 ```
 
-**Check if directory exists, then discover relevant lessons:**
+**Run both agents in parallel:**
 ```
-Task(subagent_type="majestic-engineer:workflow:lessons-discoverer",
-     prompt="workflow_phase: planning | tech_stack: [tech_stack from config-reader] | task: [feature description]")
+Task 1 (majestic-engineer:workflow:toolbox-resolver):
+  prompt: "Stage: blueprint | Tech Stack: [tech_stack from config-reader]"
+
+Task 2 (majestic-engineer:workflow:lessons-discoverer):
+  prompt: "workflow_phase: planning | tech_stack: [tech_stack] | task: [feature description]"
 ```
 
-**Store the returned lessons_context for Step 5 (architect).**
+**Store outputs for subsequent steps:**
+- `research_hooks` → use in Step 3
+- `coding_styles` → use in Step 4
+- `lessons_context` → use in Step 5 (architect)
 
 **Error handling:**
+- If no toolbox found: Continue with core agents only (Step 3)
 - If lessons directory doesn't exist: Continue (no error)
 - If discovery returns 0 lessons: Continue (log "No relevant lessons found")
 - If discovery fails: Log warning, continue with original workflow
 
-This step is **non-blocking** - failures do not stop the workflow.
+These are **non-blocking** - failures do not stop the workflow.
 
 ### 3. Research (Parallel Agents)
 
@@ -123,13 +112,13 @@ The architect MUST receive spec findings to avoid designing for incomplete requi
 
 ```
 Task(subagent_type="majestic-engineer:plan:architect",
-     prompt="Feature: [feature] | Research: [research] | Spec: [spec_findings] | Skills: [skill_content] | Lessons: [lessons_context from Step 2.5]")
+     prompt="Feature: [feature] | Research: [research] | Spec: [spec_findings] | Skills: [skill_content] | Lessons: [lessons_context from Step 2]")
 ```
 
 The architect agent:
 - Studies existing codebase architecture
 - Designs solution approach informed by spec gaps
-- Considers lessons from past implementations (from Step 2.5)
+- Considers lessons from past implementations (from Step 2)
 - Identifies integration points
 - Recommends libraries/packages if needed
 

@@ -110,11 +110,12 @@ Or configure `tech_stack: generic` in AGENTS.md to use generic reviewers.
 For unknown or generic tech stacks, run minimal reviewers directly:
 
 1. Load project topics (if configured)
-2. Run `majestic-engineer:review/simplicity-reviewer`
-3. Run `majestic-engineer:review/project-topics-reviewer` (if topics exist)
-4. Synthesize output
+2. **Run both reviewers in parallel:**
+3. Synthesize output
 
 ```
+# Run these tasks in parallel:
+
 Task 1: majestic-engineer:review/simplicity-reviewer
 Prompt: "Review these files for YAGNI violations, unnecessary complexity: [file list]"
 
