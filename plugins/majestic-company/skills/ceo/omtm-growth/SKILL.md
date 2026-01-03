@@ -163,8 +163,3 @@ Next week focus:
 - Use with `founder-mode` for execution discipline
 - Reference in `idea-validator` for post-validation tracking
 
-## Sources
-
-- Paul Graham: "Startup = Growth"
-- YC Startup School curriculum
-- "Lean Analytics" by Croll & Yoskovitz

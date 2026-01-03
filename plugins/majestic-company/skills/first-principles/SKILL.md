@@ -120,7 +120,3 @@ When applying first-principles thinking, produce:
 | Technical debt | #10 (restart today), #3 (fundamental components) |
 | Resource constraints | #4 (if cost didn't exist), #15 (maximum leverage) |
 | Risk assessment | #6 (pre-mortem), #11 (hidden constraints) |
-
----
-
-*Framework inspired by Elon Musk's first-principles methodology.*
