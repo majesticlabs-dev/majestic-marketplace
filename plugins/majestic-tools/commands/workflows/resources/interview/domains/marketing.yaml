@@ -1,0 +1,156 @@
+# Marketing Interview Domain
+name: marketing
+description: Discover campaign goals, audience insights, and messaging strategy through conversational exploration
+
+triggers:
+  - campaign
+  - content strategy
+  - audience
+  - messaging
+  - marketing plan
+  - launch
+  - promotion
+  - content calendar
+
+discovery_domains:
+  campaign_goal:
+    name: Campaign Goal
+    description: Probe for the desired action and outcome
+    questions:
+      - What do you want people to DO after seeing this?
+      - What's the one metric that matters most?
+      - Is this about awareness, consideration, or conversion?
+      - What happens if this campaign succeeds? What changes?
+      - What's the timeline and why?
+    dig_deeper_when:
+      - pattern: "We want more leads..."
+        probe: how many? What quality?
+      - pattern: "We need brand awareness..."
+        probe: awareness from whom? For what purpose?
+      - pattern: "It needs to go viral..."
+        probe: what would viral actually get you?
+
+  audience:
+    name: Audience
+    description: Probe for who you're trying to reach
+    questions:
+      - Who specifically are you trying to reach?
+      - Where do they hang out online? What do they read/watch?
+      - What's their current awareness of you/your category?
+      - What do they believe that you need to change?
+      - What objections or skepticism do they have?
+    dig_deeper_when:
+      - pattern: "Decision makers at companies..."
+        probe: which decision makers? What size companies?
+      - pattern: "Anyone who needs [solution]..."
+        probe: who needs it MOST urgently?
+      - pattern: "They're on LinkedIn..."
+        probe: doing what on LinkedIn?
+
+  message:
+    name: Message
+    description: Probe for the core communication
+    questions:
+      - If they remember ONE thing, what should it be?
+      - What's the emotional response you want?
+      - What proof or evidence supports your message?
+      - How is this different from what competitors say?
+      - What's the story you're telling?
+    dig_deeper_when:
+      - pattern: "We're the best at..."
+        probe: best by what measure? Says who?
+      - pattern: "We help companies [benefit]..."
+        probe: so does everyone—what's unique?
+      - pattern: "Our message is [feature]..."
+        probe: what does that enable for them?
+
+  differentiation:
+    name: Differentiation
+    description: Probe for competitive positioning
+    questions:
+      - Who else is trying to reach this audience?
+      - What are they saying? What's working for them?
+      - Why should someone choose you over alternatives?
+      - What can you credibly claim that no one else can?
+      - What's your unfair advantage in reaching this audience?
+    dig_deeper_when:
+      - pattern: "No one else does what we do..."
+        probe: really? What's the closest thing?
+      - pattern: "We're better because..."
+        probe: do customers agree? What's the evidence?
+
+  constraints:
+    name: Constraints
+    description: Probe for practical boundaries
+    questions:
+      - What's the budget and timeline?
+      - What channels are available to you?
+      - What assets do you already have? (content, email list, partnerships)
+      - What's worked before? What's failed?
+      - Who needs to approve this?
+    dig_deeper_when:
+      - pattern: "We want to be everywhere..."
+        probe: with what budget?
+      - pattern: "We've tried everything..."
+        probe: what specifically? Why didn't it work?
+
+question_style_examples:
+  - instead_of: "What's the campaign about?"
+    ask: "What do you want people to DO after seeing this?"
+  - instead_of: "Who's the target audience?"
+    ask: "Who specifically are you trying to reach and where do they hang out?"
+  - instead_of: "What's the message?"
+    ask: "If they remember one thing, what should it be?"
+  - instead_of: "What makes you different?"
+    ask: "Why should someone choose you over the obvious alternatives?"
+  - instead_of: "What's the budget?"
+    ask: "What constraints are we working within?"
+
+synthesis:
+  title: Marketing Interview Summary
+  sections:
+    campaign_goal:
+      items:
+        - "Desired action: [What you want people to do]"
+        - "Success metric: [How you'll measure it]"
+        - "Stage: [Awareness / Consideration / Conversion]"
+        - "Timeline: [When and why]"
+    target_audience:
+      items:
+        - "Who: [Specific description]"
+        - "Where they are: [Channels, communities, media]"
+        - "Current belief: [What they think now]"
+        - "Desired belief: [What you want them to think]"
+    core_message:
+      items:
+        - "One thing to remember: [The key takeaway]"
+        - "Emotional response: [How they should feel]"
+        - "Proof points: [Evidence and credibility]"
+    differentiation:
+      format: list
+      description: "vs. [Competitor]: [Your advantage]"
+      include: "Unique claim: [What only you can say]"
+    quotable_moments:
+      format: quotes
+    constraints:
+      items:
+        - "Budget: [Available resources]"
+        - "Channels: [Where you can reach them]"
+        - "Existing assets: [What you have to work with]"
+        - "Approvals: [Who decides]"
+    open_questions:
+      format: checklist
+      description: Messaging to test, audience assumptions to validate
+    risks:
+      format: list
+      description: What could make this fail
+
+next_steps:
+  primary:
+    label: Create content calendar
+    action: invoke content-calendar skill
+  alternatives:
+    - label: Write the copy
+      action: invoke relevant content skill
+    - label: I need to think more
+      action: end workflow

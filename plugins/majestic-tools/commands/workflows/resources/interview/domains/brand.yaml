@@ -1,0 +1,135 @@
+# Brand Voice Interview Domain
+name: brand
+description: Discover and codify a brand's unique voice through conversational exploration
+
+triggers:
+  - brand voice
+  - tone of voice
+  - writing style
+  - voice guide
+  - brand style
+  - how we sound
+  - brand personality
+
+discovery_domains:
+  voice_identity:
+    name: Voice Identity
+    description: Probe for the brand's personality as a human
+    questions:
+      - If your brand walked into a party, how would they introduce themselves?
+      - What 3-5 adjectives describe how you want to come across?
+      - Who's a real person (celebrity, character, friend) whose voice feels close to yours?
+      - What makes your voice different from competitors?
+    dig_deeper_when:
+      - pattern: "We want to sound professional..."
+        probe: what does professional mean to YOU?
+      - pattern: "We're friendly but..."
+        probe: where's the line?
+      - pattern: "Like [big brand]..."
+        probe: what specifically about them?
+
+  audience_connection:
+    name: Audience Connection
+    description: Probe for who they're talking to and how
+    questions:
+      - Describe your ideal reader. What's their day like?
+      - How does your audience talk to each other?
+      - What level of jargon/expertise can you assume?
+      - What emotional state are they in when they find you?
+    dig_deeper_when:
+      - pattern: "Everyone is our audience..."
+        probe: who do you NOT want to attract?
+      - pattern: "They're busy professionals..."
+        probe: what does busy mean for your content?
+
+  tone_boundaries:
+    name: Tone Boundaries
+    description: Probe for what they should NEVER sound like
+    questions:
+      - What would make someone say "this doesn't sound like us"?
+      - Name a brand whose voice feels totally wrong for you. Why?
+      - What words or phrases make you cringe in your industry?
+      - When should your tone shift? (errors, success, sales, support)
+    dig_deeper_when:
+      - pattern: "We never want to sound salesy..."
+        probe: what crosses the line?
+      - pattern: "We avoid corporate speak..."
+        probe: give me specific examples
+
+  existing_patterns:
+    name: Existing Patterns
+    description: Probe for what's already working
+    questions:
+      - Share content you've written that feels most "you"
+      - What have customers quoted back to you?
+      - What feedback have you gotten on your writing?
+      - Is there content that performed well AND felt authentic?
+    dig_deeper_when:
+      - pattern: "I don't have examples..."
+        probe: what about emails, Slack messages, tweets?
+      - pattern: "It's all over the place..."
+        probe: pick one piece that felt right
+
+  practical_rules:
+    name: Practical Rules
+    description: Probe for concrete style decisions
+    questions:
+      - "Contractions: \"you're\" or \"you are\"?"
+      - "First person: \"I\", \"we\", or avoid?"
+      - Sentence length preference?
+      - "Emoji usage: never, sometimes, often?"
+      - "Humor: never, occasionally, frequently?"
+
+question_style_examples:
+  - instead_of: "What's your brand voice?"
+    ask: "If your brand was a person at a party, how would they talk?"
+  - instead_of: "Who's your audience?"
+    ask: "Picture your ideal customer reading this. What's their day been like?"
+  - instead_of: "What tone do you want?"
+    ask: "Show me something you wrote that felt really 'you'"
+  - instead_of: "Be more specific about professional"
+    ask: "What would sound TOO casual for you?"
+  - instead_of: "What words do you avoid?"
+    ask: "What makes you cringe when you see it in competitor copy?"
+
+synthesis:
+  title: Brand Voice Interview Summary
+  sections:
+    voice_identity:
+      description: One paragraph describing the brand as a person—how they talk, their energy, their relationship to the audience
+    personality_traits:
+      format: table
+      columns: [Trait, Meaning, Example]
+    audience:
+      items:
+        - "Who they are: [Description]"
+        - "How they speak: [Their language patterns]"
+        - "Their context: [When/why they're reading]"
+    tone_boundaries:
+      items:
+        - "Never sound like: [Anti-examples]"
+        - "Cringe words: [Words to avoid]"
+        - "Tone shifts: [When to adjust]"
+    quotable_moments:
+      description: Verbatim insights about their voice
+    style_rules:
+      items:
+        - "Contractions: [Yes/No/Sometimes]"
+        - "Person: [First/Second/Third]"
+        - "Humor: [Level]"
+        - "Emoji: [Level]"
+        - "Jargon: [Level]"
+    open_questions:
+      format: checklist
+    existing_content:
+      description: Links/quotes from content that "feels right"
+
+next_steps:
+  primary:
+    label: Create a full voice guide
+    action: invoke brand-voice skill with this summary
+  alternatives:
+    - label: I need to think more
+      action: end workflow
+    - label: Refine specific section
+      action: continue interview on that area

@@ -15,6 +15,16 @@ allowed-tools: Read, Write, Edit, Grep, Glob, WebSearch, AskUserQuestion
 
 Codify your brand's unique voice into a living style guide that ensures consistency across all content—website, emails, social, ads, and beyond.
 
+## Deep Discovery (Optional)
+
+For thorough voice exploration before creating the guide, run:
+
+```
+/majestic-tools:interview "brand voice"
+```
+
+This triggers a conversational interview with brand-specific questions about voice identity, audience connection, tone boundaries, and existing patterns. The interview output can then be synthesized into a full voice guide using this skill.
+
 ## Why This Matters
 
 - **Consistency builds trust** - Readers recognize you instantly

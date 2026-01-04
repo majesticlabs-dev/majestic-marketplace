@@ -1,0 +1,179 @@
+# Sales Interview Domain
+name: sales
+description: Discover deal context, buyer dynamics, and closing strategy through conversational exploration
+
+triggers:
+  - sales process
+  - objections
+  - pitch
+  - deal
+  - pricing
+  - close
+  - prospect
+  - buyer
+  - proposal
+
+discovery_domains:
+  deal_context:
+    name: Deal Context
+    description: Probe for what's being sold and to whom
+    questions:
+      - What are you selling? (product, service, solution)
+      - Who's the buyer? (company, role, decision maker)
+      - How did they find you / how did you find them?
+      - What's the deal size and significance?
+      - What's at stake for them if this works/fails?
+    dig_deeper_when:
+      - pattern: "It's a big opportunity..."
+        probe: big how? Revenue? Strategic?
+      - pattern: "They reached out to us..."
+        probe: what triggered their search?
+      - pattern: "They're a perfect fit..."
+        probe: why specifically?
+
+  buyer_journey:
+    name: Buyer Journey
+    description: Probe for where they are in the process
+    questions:
+      - Where are they in the decision process?
+      - What have they already tried or evaluated?
+      - Who else are they considering?
+      - What's their timeline for deciding?
+      - What event is driving the timing?
+    dig_deeper_when:
+      - pattern: "They're ready to buy..."
+        probe: what signals tell you that?
+      - pattern: "They're just exploring..."
+        probe: exploring what specifically?
+      - pattern: "We're the front-runner..."
+        probe: what makes you confident?
+
+  decision_makers:
+    name: Decision Makers
+    description: Probe for who's involved and what they care about
+    questions:
+      - Who's involved in this decision?
+      - What does each person care about?
+      - Who's the champion? Who's the skeptic?
+      - Who has budget authority?
+      - What's the approval process?
+    dig_deeper_when:
+      - pattern: "I'm talking to the right person..."
+        probe: who else influences them?
+      - pattern: "It's their decision alone..."
+        probe: really? No procurement, legal, boss?
+      - pattern: "The team loves us..."
+        probe: does the budget holder?
+
+  objections:
+    name: Objections
+    description: Probe for concerns and pushback
+    questions:
+      - What concerns or objections have they raised?
+      - What concerns haven't they raised but probably have?
+      - What's the biggest risk in their mind?
+      - What would make them say no?
+      - What's making them hesitate?
+    dig_deeper_when:
+      - pattern: "They don't have objections..."
+        probe: what are they quiet about?
+      - pattern: "Price is the issue..."
+        probe: is it really price or something else?
+      - pattern: "They need to think about it..."
+        probe: think about what specifically?
+
+  competition:
+    name: Competition
+    description: Probe for alternatives and positioning
+    questions:
+      - Who else is in the running?
+      - What do competitors offer that you don't?
+      - What do you offer that they don't?
+      - Why might they choose a competitor?
+      - What would you lose on? What would you win on?
+    dig_deeper_when:
+      - pattern: "We don't have competition..."
+        probe: what's the alternative to buying?
+      - pattern: "We're obviously better..."
+        probe: obvious to you—is it to them?
+
+  pricing_value:
+    name: Pricing & Value
+    description: Probe for the economics
+    questions:
+      - What's your pricing strategy for this deal?
+      - How does pricing compare to alternatives?
+      - What's the ROI story?
+      - What would make them feel it's "worth it"?
+      - What's their budget reality?
+    dig_deeper_when:
+      - pattern: "Price isn't an issue..."
+        probe: then what is?
+      - pattern: "We need to discount to win..."
+        probe: why? What value aren't they seeing?
+      - pattern: "They don't have budget..."
+        probe: no budget, or no budget for THIS?
+
+question_style_examples:
+  - instead_of: "Tell me about the deal"
+    ask: "What's at stake for them if this works?"
+  - instead_of: "What's the objection?"
+    ask: "What's making them hesitate?"
+  - instead_of: "Who's the decision maker?"
+    ask: "Walk me through how this decision gets made there"
+  - instead_of: "What's the competition?"
+    ask: "Why might they choose someone else?"
+  - instead_of: "How's pricing?"
+    ask: "What would make them feel this is worth it?"
+
+synthesis:
+  title: Sales Interview Summary
+  sections:
+    deal_overview:
+      items:
+        - "Prospect: [Company, size, context]"
+        - "Champion: [Your internal advocate]"
+        - "Deal size: [Value and significance]"
+        - "Timeline: [When they need to decide and why]"
+    buyer_journey:
+      items:
+        - "Stage: [Exploring / Evaluating / Deciding / Negotiating]"
+        - "Trigger: [What started their search]"
+        - "Alternatives evaluated: [What they've looked at]"
+    decision_makers:
+      format: table
+      columns: [Person, Role, "Cares About", Stance]
+      stance_options: [Champion, Neutral, Skeptic]
+    objections_concerns:
+      items:
+        - "Stated: [What they've said]"
+        - "Unstated: [What they probably worry about]"
+        - "Biggest risk: [Their main fear]"
+    competition:
+      format: list
+      description: "vs. [Competitor]: [Their advantage / Your advantage]"
+      include: "vs. Do nothing: [Why they might not act]"
+    pricing_value:
+      items:
+        - "Budget reality: [What they can/will spend]"
+        - "ROI story: [The value case]"
+        - "Pricing approach: [Strategy for this deal]"
+    quotable_moments:
+      format: quotes
+    next_actions:
+      format: checklist
+      description: Specific actions to move deal forward
+    win_loss_prediction:
+      items:
+        - "Likely to win if: [Conditions]"
+        - "Likely to lose if: [Conditions]"
+
+next_steps:
+  primary:
+    label: Create a proposal
+    action: invoke proposal-writer skill
+  alternatives:
+    - label: Prepare for objections
+      action: create objection handling guide
+    - label: I need to think more
+      action: end workflow

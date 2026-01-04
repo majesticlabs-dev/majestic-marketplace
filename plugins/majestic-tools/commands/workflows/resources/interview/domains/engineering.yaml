@@ -1,0 +1,117 @@
+# Engineering Interview Domain
+name: engineering
+description: Default domain for feature development, bug fixes, and system design
+
+triggers:
+  - feature
+  - features
+  - bug
+  - fix
+  - issue
+  - system
+  - architecture
+  - implement
+  - build
+  - create
+  - refactor
+  - migrate
+  # default when no other domain matches
+
+discovery_domains:
+  technical_architecture:
+    name: Technical & Architecture
+    description: Probe for implementation clarity and system fit
+    questions:
+      - What's your implementation approach and what tradeoffs does it involve?
+      - How does this fit with existing systems?
+      - What could break, need migration, or have edge cases?
+      - What are the data model implications?
+      - What are the performance/scale considerations?
+    dig_deeper_when:
+      - pattern: "I think we can just..."
+        probe: what assumptions are you making?
+      - pattern: "It should be simple..."
+        probe: what would make it not simple?
+      - pattern: "We'll figure that out later..."
+        probe: what's the risk of deferring?
+
+  human_workflow:
+    name: Human & Workflow
+    description: Probe for operational reality
+    questions:
+      - Who else is affected (users, team members, external parties)?
+      - What's the manual fallback if automation fails?
+      - How will you know it's working? What does success look like?
+      - What's the learning curve or adoption path?
+    dig_deeper_when:
+      - pattern: "Users will understand..."
+        probe: how will they learn?
+      - pattern: "The team can handle..."
+        probe: what's the onboarding?
+      - pattern: "We'll document it..."
+        probe: who writes and maintains docs?
+
+  strategic:
+    name: Strategic
+    description: Probe for scope and timing
+    questions:
+      - Why now? What's the cost of waiting?
+      - What's the simplest version that delivers value (MVP)?
+      - What would make you regret building this?
+      - What are you explicitly NOT building?
+    dig_deeper_when:
+      - pattern: "We need all of it..."
+        probe: what if you had half the time?
+      - pattern: "It's urgent because..."
+        probe: what happens if it slips a week?
+      - pattern: "We can add that later..."
+        probe: how hard is later vs now?
+
+question_style_examples:
+  - instead_of: "What are the requirements?"
+    ask: "Walk me through how a user would actually use this"
+  - instead_of: "What are the edge cases?"
+    ask: "What happens when [specific scenario from their answer]?"
+  - instead_of: "Is this important?"
+    ask: "What breaks if we ship without this?"
+  - instead_of: "What's the timeline?"
+    ask: "What's forcing the timing here?"
+  - instead_of: "What's the tech stack?"
+    ask: "What existing code will this touch?"
+
+synthesis:
+  title: "Interview Summary: [Feature Name]"
+  sections:
+    core_intent:
+      description: One paragraph capturing what they're really trying to achieve
+    key_decisions:
+      format: list
+      description: "[Decision] — [Rationale captured during interview]"
+    technical_approach:
+      items:
+        - Implementation approach agreed upon
+        - Key tradeoffs accepted
+    quotable_moments:
+      format: quotes
+      description: Verbatim quotes that capture intent clearly
+    open_questions:
+      format: checklist
+      description: Questions that need more thought or external input
+    out_of_scope:
+      format: list
+      description: Things they decided NOT to build
+    success_criteria:
+      description: How they'll know it's working
+    risks_concerns:
+      format: list
+      description: Things that could go wrong, uncertainties that surfaced
+
+next_steps:
+  primary:
+    label: Create a blueprint from this
+    action: /blueprint [spec file path]
+  alternatives:
+    - label: I need to think more
+      action: end workflow
+    - label: Refine specific section
+      action: continue interview on that section

@@ -1,0 +1,145 @@
+# Product Interview Domain
+name: product
+description: Discover the problem space, user needs, and product boundaries through conversational exploration
+
+triggers:
+  - product
+  - user research
+  - discovery
+  - jobs to be done
+  - user needs
+  - problem space
+  - product requirements
+
+discovery_domains:
+  problem_space:
+    name: Problem Space
+    description: Probe for the real pain being solved
+    questions:
+      - What problem are you solving? (Don't let them describe the solution)
+      - How do people deal with this today?
+      - What triggers someone to seek a solution?
+      - How painful is this? What's the cost of the status quo?
+      - Who has this problem most acutely?
+    dig_deeper_when:
+      - pattern: "People need a better way to..."
+        probe: what's wrong with the current way?
+      - pattern: "It's really frustrating when..."
+        probe: how often? How many people?
+      - pattern: "Everyone has this problem..."
+        probe: who has it worst?
+
+  user_context:
+    name: User Context
+    description: Probe for who experiences the problem and when
+    questions:
+      - Walk me through a day in your user's life when this problem shows up
+      - What are they trying to accomplish when they hit this?
+      - What do they do right before and right after dealing with this?
+      - What's their expertise level? What can you assume they know?
+      - What tools/products are already in their workflow?
+    dig_deeper_when:
+      - pattern: "Our users are [broad category]..."
+        probe: which specific segment?
+      - pattern: "They want to [outcome]..."
+        probe: why? What does that enable?
+
+  current_alternatives:
+    name: Current Alternatives
+    description: Probe for competitive landscape and substitutes
+    questions:
+      - What do they do today? (Include "do nothing" and manual workarounds)
+      - What's good about current solutions?
+      - What's broken or missing?
+      - What would make them switch to something new?
+      - What would make them NOT switch?
+    dig_deeper_when:
+      - pattern: "There's nothing like this..."
+        probe: what's the closest thing?
+      - pattern: "Competitors don't do [feature]..."
+        probe: why not? Is it hard or not valuable?
+
+  success_signals:
+    name: Success Signals
+    description: Probe for what "working" looks like
+    questions:
+      - How will users know this is solving their problem?
+      - What will they be able to do that they couldn't before?
+      - What's the moment of "aha, this is it"?
+      - How will YOU know it's working? What metrics matter?
+      - What would make users tell others about this?
+    dig_deeper_when:
+      - pattern: "Users will love it..."
+        probe: how will you know they love it?
+      - pattern: "It just needs to work..."
+        probe: what does working mean specifically?
+
+  scope_boundaries:
+    name: Scope Boundaries
+    description: Probe for what's in and out
+    questions:
+      - What's the smallest version that delivers real value?
+      - What are you explicitly NOT building?
+      - What would you add in v2 if v1 succeeds?
+      - What's a feature request you'd say no to? Why?
+      - What would make this too complex?
+    dig_deeper_when:
+      - pattern: "We need all of it for MVP..."
+        probe: what if you had half the time?
+      - pattern: "Users expect [feature]..."
+        probe: do they? Have you validated?
+
+question_style_examples:
+  - instead_of: "What's the product?"
+    ask: "What problem is this solving?"
+  - instead_of: "Who's the user?"
+    ask: "Walk me through someone's day when this problem shows up"
+  - instead_of: "What's the MVP?"
+    ask: "What's the smallest thing that delivers real value?"
+  - instead_of: "What are the features?"
+    ask: "What will users be able to do that they can't today?"
+  - instead_of: "Who are competitors?"
+    ask: "What do people do today to deal with this?"
+
+synthesis:
+  title: Product Interview Summary
+  sections:
+    the_problem:
+      description: One paragraph describing the core problem—no solutions yet
+    who_has_this_problem:
+      items:
+        - "Primary user: [Specific description]"
+        - "Their context: [When/where this problem hits]"
+        - "Pain level: [Low/Medium/High + evidence]"
+    current_alternatives:
+      format: table
+      columns: [Alternative, "What's Good", "What's Broken"]
+      include_do_nothing: true
+    success_looks_like:
+      items:
+        - "For users: [Observable outcome]"
+        - "For business: [Measurable metrics]"
+        - "Aha moment: [The moment it clicks]"
+    quotable_moments:
+      format: quotes
+    scope_decisions:
+      items:
+        - "MVP: [Smallest valuable version]"
+        - "Not building: [Explicit exclusions]"
+        - "V2 candidates: [Things to add later]"
+    open_questions:
+      format: checklist
+      description: Validation needed, research to conduct
+    risks_assumptions:
+      format: list
+      description: Assumptions that could be wrong, risks to mitigate
+
+next_steps:
+  primary:
+    label: Create a PRD from this
+    action: /prd with this context
+  alternatives:
+    - label: Validate assumptions
+      action: suggest user research approaches
+    - label: I need to think more
+      action: end workflow
