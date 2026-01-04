@@ -1,6 +1,6 @@
 # Majestic Tools
 
-Claude Code customization tools. Includes 8 agents, 15 commands, and 5 skills.
+Claude Code customization tools. Includes 8 agents, 11 commands, and 5 skills.
 
 ## Installation
 
@@ -22,7 +22,6 @@ claude /plugin install majestic-tools
 | Create a new hook | `/majestic-tools:meta:new-hook` |
 | Track token usage | `/majestic-tools:insight:ccusage` |
 | Brainstorm ideas | `skill brainstorming` |
-| Deep multi-option analysis | `/majestic-tools:workflows:ultra-options` |
 
 ## Agents
 
@@ -64,13 +63,6 @@ Invoke with: `/majestic-tools:<category>:<name>`
 | `meta:new-command` | Generate any Claude Code command with production patterns |
 | `meta:new-hook` | Create and configure Claude Code hooks for automation |
 | `meta:new-prompt` | Build a well-structured prompt following Anthropic's best practices |
-
-### workflows
-
-| Command | Description |
-|---------|-------------|
-| `workflows:ultra-options` | Deep analysis generating multiple solution options |
-| `workflows:ultrathink-task` | Plan tasks with multiple agents (Architect, Research, Coder, Tester) |
 
 ## Skills
 
@@ -163,29 +155,6 @@ Triggers Raycast confetti celebration when Claude completes a task.
 }
 ```
 
-## Configuration
-
-### Sequential Thinking MCP Server
-
-The `workflows:ultrathink-task` and `workflows:ultra-options` commands require the Sequential Thinking MCP server.
-
-**Installation:**
-
-1. Add to your Claude Code MCP settings (`~/.claude/settings.json`):
-
-```json
-{
-  "mcpServers": {
-    "sequential-thinking": {
-      "command": "npx",
-      "args": ["-y", "@anthropic/mcp-sequential-thinking"]
-    }
-  }
-}
-```
-
-2. Restart Claude Code to load the MCP server.
-
 ## Usage Examples
 
 ```bash
@@ -215,9 +184,6 @@ The `workflows:ultrathink-task` and `workflows:ultra-options` commands require t
 
 # Reflect on improvements
 /majestic-tools:insight:reflect
-
-# Deep analysis with multiple options (requires Sequential Thinking MCP)
-/majestic-tools:workflows:ultra-options "How should we implement caching?"
 
 # Brainstorm before implementing
 skill majestic-tools:brainstorming

@@ -84,7 +84,6 @@ Guide users to the most appropriate skill, command, or agent for their task.
    - Create agents → `/new-agent` command
    - Create hooks → `/new-hook` command
    - Brainstorming → `brainstorming` skill
-   - Deep thinking → `/ultrathink-task`, `/ultra-options` commands
 
 4. **Present Recommendation**
 
