@@ -174,7 +174,7 @@ This command is designed to work with ralph-wiggum for autonomous iteration.
 
 **Start with ralph:**
 ```bash
-/ralph-loop "/majestic:run-blueprint docs/plans/xxx.md" --max-iterations 50 --completion-promise "RUN_BLUEPRINT_COMPLETE"
+/ralph-wiggum:ralph-loop "/majestic:run-blueprint docs/plans/xxx.md" --max-iterations 50 --completion-promise "RUN_BLUEPRINT_COMPLETE"
 ```
 
 **Completion signal:** Output `<promise>RUN_BLUEPRINT_COMPLETE</promise>` when:
@@ -247,5 +247,5 @@ Please fix dependencies in blueprint file before continuing.
 /majestic:run-blueprint docs/plans/20241228_add-auth.md
 
 # With ralph-wiggum for autonomous execution
-/ralph-loop "/majestic:run-blueprint docs/plans/20241228_add-auth.md" --max-iterations 50 --completion-promise "RUN_BLUEPRINT_COMPLETE"
+/ralph-wiggum:ralph-loop "/majestic:run-blueprint docs/plans/20241228_add-auth.md" --max-iterations 50 --completion-promise "RUN_BLUEPRINT_COMPLETE"
 ```
