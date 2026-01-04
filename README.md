@@ -53,19 +53,15 @@ Then install a plugin:
 
 #### Factory AI (Droid)
 
-Use [droid-factory](https://github.com/iannuttall/droid-factory) to import Claude Code marketplace agents:
+Use [droid-import](https://www.npmjs.com/package/droid-import) to import Claude Code marketplace agents:
 
 ```bash
-bunx droid-factory
+bunx droid-import
 ```
 
-This launches a guided installer that can import agents from Claude Code marketplaces into Factory's `.factory/droids/` directory.
+This launches a guided installer that can import agents from Claude Code marketplaces into Factory's `.factory/` directory.
 
 **Prerequisites:** Enable Custom Droids in Factory (`/settings` → Experimental → Custom Droids)
-
-**Note:** Skills and commands are Claude Code-specific and won't transfer directly.
-
-![Droid Factory Installer](instructions/droid-factory.png)
 
 ## Majestic Plugins
 
