@@ -15,6 +15,28 @@ Create comprehensive, junior-dev-ready design system documents through guided di
 
 **If empty, ask:** "What would you like to design? Describe the component, page, or feature."
 
+## Phase 0: Interview Option (Optional)
+
+For complex features where requirements are unclear, offer a deep interview first:
+
+```
+AskUserQuestion: "This design could benefit from a requirements interview to clarify goals and constraints. Would you like to explore it in depth first?"
+Options:
+- "Yes, interview me first" → Skill(skill: "majestic:interview", args: "[design target]"), then use refined output
+- "No, proceed to design discovery" → Continue to Phase 1
+```
+
+**When to suggest interview:**
+- Design target is vague (e.g., "dashboard", "admin panel")
+- Multiple user types or stakeholders involved
+- Business goals not clearly stated
+- User seems uncertain about what they want
+
+**Skip interview suggestion for:**
+- Specific components with clear scope (e.g., "login form", "settings page")
+- When user has existing specs/mockups
+- Iteration on existing designs
+
 ## Phase 1: Context Gathering
 
 Before asking questions, understand the project:

@@ -247,5 +247,6 @@ For commercial licensing: [Contact Us](https://majesticlabs.dev/contact/)
 - [Continuous-Claude-v2](https://github.com/parcadei/Continuous-Claude-v2) - Context management via ledgers and handoffs
 - [Anthropic Marketplace](https://github.com/anthropics/claude-code/tree/main/plugins)
 - [Every Marketplace](https://github.com/EveryInc/every-marketplace)
+- [gmickel Claude Marketplace](https://github.com/gmickel/gmickel-claude-marketplace) - Flow plugin with disciplined plan-first workflows
 - [Superpowers](https://github.com/obra/superpowers)
 - [Rails Development Skills](https://github.com/alec-c4/claude-skills-rails-dev)

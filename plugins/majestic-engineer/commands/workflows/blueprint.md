@@ -19,6 +19,28 @@ Transform feature descriptions into well-structured markdown plans.
 
 ## Workflow
 
+### 0. Interview Option (Optional)
+
+For complex or ambiguous features, offer a deep requirements interview first:
+
+```
+AskUserQuestion: "This feature could benefit from a requirements interview. Would you like to explore it in depth first?"
+Options:
+- "Yes, interview me first" → Skill(skill: "majestic:interview", args: "[feature description]"), then use interview output as refined input
+- "No, proceed to planning" → Continue to Step 1
+```
+
+**When to suggest interview:**
+- Feature description is vague or short (< 2 sentences)
+- Contains words like "maybe", "probably", "something like"
+- Involves multiple stakeholders or systems
+- User seems uncertain when describing
+
+**Skip interview suggestion for:**
+- Bug fixes with clear reproduction steps
+- Small, well-defined tasks
+- Features with existing specs/PRDs
+
 ### 1. Feature Classification
 
 Detect feature type and delegate to specialists:
