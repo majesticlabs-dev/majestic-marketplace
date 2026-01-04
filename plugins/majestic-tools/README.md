@@ -1,6 +1,6 @@
 # Majestic Tools
 
-Claude Code customization tools. Includes 8 agents, 11 commands, and 5 skills.
+Claude Code customization tools. Includes 8 agents, 12 commands, and 5 skills.
 
 ## Installation
 
@@ -13,6 +13,7 @@ claude /plugin install majestic-tools
 | I want to... | Use this |
 |--------------|----------|
 | Find the right tool for my task | `/majestic-guide "what I want to do"` |
+| Discover requirements through conversation | `/majestic-tools:interview "topic"` |
 | Get expert perspectives on a difficult question | `/expert-panel "topic"` |
 | Resume a saved expert panel discussion | `/expert-panel --resume {panel-id}` |
 | List all saved panel sessions | `/expert-panel --list` |
@@ -63,6 +64,12 @@ Invoke with: `/majestic-tools:<category>:<name>`
 | `meta:new-command` | Generate any Claude Code command with production patterns |
 | `meta:new-hook` | Create and configure Claude Code hooks for automation |
 | `meta:new-prompt` | Build a well-structured prompt following Anthropic's best practices |
+
+### workflows
+
+| Command | Description |
+|---------|-------------|
+| `interview` | Domain-aware discovery interview for engineering, brand, product, marketing, or sales |
 
 ## Skills
 
@@ -163,6 +170,13 @@ Triggers Raycast confetti celebration when Claude completes a task.
 /majestic-guide "optimize database queries"
 /majestic-guide "create a landing page"
 
+# Discovery interviews (auto-detects domain from keywords)
+/majestic-tools:interview "brand voice"       # → brand domain
+/majestic-tools:interview "new campaign"      # → marketing domain
+/majestic-tools:interview "sales pitch"       # → sales domain
+/majestic-tools:interview "user needs"        # → product domain
+/majestic-tools:interview "new feature"       # → engineering domain (default)
+
 # Expert panel discussions
 /expert-panel "Should we migrate from monolith to microservices?"
 /expert-panel "What's the best authentication strategy for our SaaS app?"
@@ -191,3 +205,60 @@ skill majestic-tools:brainstorming
 # Create a new skill
 skill majestic-tools:new-skill
 ```
+
+## Interview Command Deep Dive
+
+The `/majestic-tools:interview` command provides domain-aware discovery through conversational probing.
+
+### Domain Detection
+
+| Domain | Trigger Keywords | Use Case |
+|--------|-----------------|----------|
+| `brand` | brand voice, tone, writing style | Codify voice and messaging |
+| `product` | product, user research, discovery | Explore problem space and users |
+| `marketing` | campaign, content strategy, audience | Plan campaigns and messaging |
+| `sales` | sales process, objections, pitch | Prepare for deals and proposals |
+| `engineering` | feature, bug, system (default) | Plan implementation |
+
+### What Each Domain Covers
+
+**Brand Discovery:**
+- Voice identity (brand as a person)
+- Audience connection
+- Tone boundaries (what to avoid)
+- Existing patterns that work
+
+**Product Discovery:**
+- Problem space (the pain, not the solution)
+- User context (when/where it hurts)
+- Current alternatives
+- Success signals
+- Scope boundaries (MVP vs v2)
+
+**Marketing Discovery:**
+- Campaign goals (desired action)
+- Audience (where they are, what they believe)
+- Core message (one thing to remember)
+- Differentiation (why you vs others)
+- Constraints (budget, channels, timeline)
+
+**Sales Discovery:**
+- Deal context (what, who, stakes)
+- Buyer journey (stage, timeline, trigger)
+- Decision makers (champion, skeptic, budget holder)
+- Objections (stated and unstated)
+- Competition and positioning
+
+**Engineering Discovery:**
+- Technical approach and tradeoffs
+- System fit and dependencies
+- Human/workflow impact
+- Strategic scope (MVP, not-building)
+
+### Output
+
+Each domain produces a structured synthesis with:
+- Key findings organized by domain area
+- Quotable moments (verbatim insights)
+- Open questions (things to resolve)
+- Domain-appropriate next steps
