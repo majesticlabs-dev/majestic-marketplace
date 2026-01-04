@@ -53,15 +53,13 @@ Extract from `$ARGUMENTS`:
 
 ### Step 3: Generate Image
 
-Use the bundled script:
+Use the bundled script (located at `skills/gemini-image-coder/scripts/generate_image.py` in the plugin):
 
 ```bash
-python {baseDir}/../skills/gemini-image-coder/scripts/generate_image.py \
-  "<prompt>" \
-  "<output-path>" \
-  [--aspect <ratio>] \
-  [--size <size>]
+python generate_image.py "<prompt>" "<output-path>" [--aspect <ratio>] [--size <size>]
 ```
+
+Replace placeholders with actual values from the parsed arguments.
 
 ### Step 4: Verify and Report
 

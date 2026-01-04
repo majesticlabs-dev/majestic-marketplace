@@ -1,7 +1,16 @@
 ---
 name: majestic:init
 description: Initialize AGENTS.md with hierarchical structure and .agents.yml config
-allowed-tools: Bash, Write, Read, Grep, Glob, AskUserQuestion, Skill
+allowed-tools:
+  - Bash(${CLAUDE_PLUGIN_ROOT}/commands/workflows/init/*)
+  - Bash(ln -s *)
+  - Bash(mv *)
+  - Write
+  - Read
+  - Grep
+  - Glob
+  - AskUserQuestion
+  - Skill
 ---
 
 # Initialize AGENTS.md
@@ -14,8 +23,8 @@ Set up AI agent documentation and machine-readable config for this project.
 
 Check existing state first:
 
-```bash
-{baseDir}/init/check-existing.sh
+```!
+"${CLAUDE_PLUGIN_ROOT}/commands/workflows/init/check-existing.sh"
 ```
 
 **If AGENTS.md exists**, ask: Regenerate | Enhance | Skip
@@ -45,7 +54,7 @@ Use `AskUserQuestion` to gather config. Ask in batches of max 4 questions.
 
 ### Stack-Specific Questions
 
-**Rails** (auto-detect ruby/rails versions first via `{baseDir}/init/detect-versions.sh`):
+**Rails** (auto-detect ruby/rails versions first):
 
 | Question | Options |
 |----------|---------|
@@ -56,7 +65,7 @@ Use `AskUserQuestion` to gather config. Ask in batches of max 4 questions.
 | Deployment (multi) | Kamal, Fly.io, Heroku, Render |
 | Solid Gems (multi) | Solid Cache, Solid Queue, Solid Cable |
 
-**Python** (auto-detect python version, framework via `{baseDir}/init/detect-tech-stack.sh`):
+**Python** (auto-detect python version, framework):
 
 | Question | Options |
 |----------|---------|
@@ -89,9 +98,12 @@ Use `AskUserQuestion` to gather config. Ask in batches of max 4 questions.
 
 **Run these operations in parallel:**
 
-```bash
-{baseDir}/init/detect-branch.sh              # Default branch
-{baseDir}/init/detect-tech-stack.sh stack    # If Generic selected
+```!
+"${CLAUDE_PLUGIN_ROOT}/commands/workflows/init/detect-branch.sh"
+```
+
+```!
+"${CLAUDE_PLUGIN_ROOT}/commands/workflows/init/detect-tech-stack.sh" stack
 ```
 
 ```
@@ -119,10 +131,18 @@ Replace placeholders with collected values. Handle conditionals:
 
 ### Gitignore + Local Config
 
-```bash
-{baseDir}/init/gitignore-add.sh .claude/current_task.txt  # Always
-{baseDir}/init/gitignore-add.sh .agents.yml               # If not tracked
-{baseDir}/init/gitignore-add.sh .agents.local.yml         # If local overrides
+```!
+"${CLAUDE_PLUGIN_ROOT}/commands/workflows/init/gitignore-add.sh" .claude/current_task.txt
+```
+
+If not tracking in git:
+```!
+"${CLAUDE_PLUGIN_ROOT}/commands/workflows/init/gitignore-add.sh" .agents.yml
+```
+
+If local overrides requested:
+```!
+"${CLAUDE_PLUGIN_ROOT}/commands/workflows/init/gitignore-add.sh" .agents.local.yml
 ```
 
 If local overrides requested, write `.agents.local.yml` using template from `resources/local-config-template.yaml`.
@@ -131,7 +151,11 @@ If local overrides requested, write `.agents.local.yml` using template from `res
 
 1. **Create review-topics.md** - If selected, create `docs/agents/review-topics.md` with starter template
 2. **Create symlink** - `ln -s AGENTS.md CLAUDE.md` (backup if exists)
-3. **Verify** - Run `{baseDir}/init/verify-setup.sh`
+3. **Verify** - Run verification:
+
+```!
+"${CLAUDE_PLUGIN_ROOT}/commands/workflows/init/verify-setup.sh"
+```
 
 ## Output Summary
 

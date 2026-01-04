@@ -21,16 +21,16 @@ Generate and edit images using Google's Gemini API. Requires `GEMINI_API_KEY` en
 ### Generate Image
 
 ```bash
-bash {baseDir}/scripts/generate_image.py "A cat in space" output.jpg
-bash {baseDir}/scripts/generate_image.py "Epic landscape" landscape.jpg --aspect 16:9 --size 2K
-bash {baseDir}/scripts/generate_image.py "Logo for Acme Corp" logo.jpg --aspect 1:1
+python scripts/generate_image.py "A cat in space" output.jpg
+python scripts/generate_image.py "Epic landscape" landscape.jpg --aspect 16:9 --size 2K
+python scripts/generate_image.py "Logo for Acme Corp" logo.jpg --aspect 1:1
 ```
 
 ### Edit Image
 
 ```bash
-bash {baseDir}/scripts/edit_image.py input.jpg "Add a rainbow" output.jpg
-bash {baseDir}/scripts/edit_image.py photo.jpg "Make it look like Van Gogh" artistic.jpg
+python scripts/edit_image.py input.jpg "Add a rainbow" output.jpg
+python scripts/edit_image.py photo.jpg "Make it look like Van Gogh" artistic.jpg
 ```
 
 ## Core API Pattern

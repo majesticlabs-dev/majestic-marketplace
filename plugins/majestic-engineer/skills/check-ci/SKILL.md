@@ -25,7 +25,7 @@ Trigger this skill when the user requests:
 Run the `check_ci.sh` script to monitor PR checks:
 
 ```bash
-bash {baseDir}/scripts/check_ci.sh [PR_NUMBER] [INTERVAL] [TIMEOUT]
+bash scripts/check_ci.sh [PR_NUMBER] [INTERVAL] [TIMEOUT]
 ```
 
 **Parameters:**
@@ -36,13 +36,13 @@ bash {baseDir}/scripts/check_ci.sh [PR_NUMBER] [INTERVAL] [TIMEOUT]
 **Examples:**
 ```bash
 # Auto-detect PR from current branch
-bash {baseDir}/scripts/check_ci.sh
+bash scripts/check_ci.sh
 
 # Monitor specific PR #123
-bash {baseDir}/scripts/check_ci.sh 123
+bash scripts/check_ci.sh 123
 
 # Custom interval (30s) and timeout (15 min)
-bash {baseDir}/scripts/check_ci.sh 123 30 900
+bash scripts/check_ci.sh 123 30 900
 ```
 
 ### 2. Interpret Results

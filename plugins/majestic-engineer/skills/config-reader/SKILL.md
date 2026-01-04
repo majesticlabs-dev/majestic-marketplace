@@ -26,7 +26,7 @@ Examples:
 Run the config reader script with parsed arguments:
 
 ```bash
-bash {baseDir}/scripts/config_reader.sh FIELD DEFAULT
+bash scripts/config_reader.sh FIELD DEFAULT
 ```
 
 Replace `FIELD` and `DEFAULT` with the parsed arguments.
