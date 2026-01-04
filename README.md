@@ -63,6 +63,25 @@ This launches a guided installer that can import agents from Claude Code marketp
 
 **Prerequisites:** Enable Custom Droids in Factory (`/settings` → Experimental → Custom Droids)
 
+#### Codex CLI (OpenAI)
+
+Export Majestic skills and commands to Codex CLI:
+
+```bash
+# Interactive selection
+./scripts/install-codex.sh
+
+# Install all plugins
+./scripts/install-codex.sh --all
+
+# Install specific plugins
+./scripts/install-codex.sh engineer rails tools
+```
+
+This copies skills to `~/.codex/skills/` and commands to `~/.codex/prompts/`.
+
+**Limitations:** Codex doesn't support Claude Code's Task tool, so subagents (parallel research) won't run. Core skills and commands still provide valuable guidance.
+
 ## Majestic Plugins
 
 | Plugin | Description |
