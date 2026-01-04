@@ -2,6 +2,19 @@
 
 All notable changes to majestic-marketing will be documented in this file.
 
+## [3.9.0] - 2026-01-04
+
+### Added
+
+**Skills (1)**
+- `positioning-angles` - Find the angle that makes something sell. 24 frameworks (based on Julian Mills' copywriting angles) to surface differentiated hooks before writing. Includes:
+  - **24 Angles** organized by category (Benefit, Fear, Authority, Identity, Contrarian, Story, Relevance)
+  - **Selection Matrix** by awareness stage, audience type, and competitive position
+  - **Quick Decision Tree** based on strongest asset (proof, speed, price, insight, story, enemy, timing, tribe)
+  - **Angle Combinations** with high-converting combo examples
+  - **Testing Protocol** for validating angle choices
+  - Integration with `value-prop-sharpener`, `hook-writer`, `competitive-positioning`, and other marketing skills
+
 ## [3.8.0] - 2025-12-20
 
 ### Enhanced
