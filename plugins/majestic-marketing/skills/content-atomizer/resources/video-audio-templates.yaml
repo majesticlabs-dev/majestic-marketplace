@@ -1,0 +1,175 @@
+# Video & Audio Format Templates
+
+video_script_60s:
+  name: "Video Script (60s)"
+  structure:
+    hook:
+      timing: "0-3 seconds"
+      content: "[Pattern interrupt. Stop the scroll.]"
+      script: "[Exact words to say]"
+    setup:
+      timing: "3-10 seconds"
+      content: "[Context. Why this matters.]"
+      script: "[Exact words]"
+    body:
+      timing: "10-45 seconds"
+      content: "[Core insight in 2-3 beats]"
+      beats:
+        - "[Beat 1 words]"
+        - "[Beat 2 words]"
+        - "[Beat 3 words]"
+    payoff:
+      timing: "45-55 seconds"
+      content: "[The aha moment]"
+      script: "[Exact words]"
+    cta:
+      timing: "55-60 seconds"
+      content: "[What to do next]"
+      script: "[Exact words]"
+  production:
+    b_roll: "[suggestions]"
+    text_overlays: "[key phrases]"
+    pacing: "[fast/medium/slow sections]"
+  rules:
+    - "Write for speaking, not reading"
+    - "Hook works with sound OFF"
+    - "60 seconds max (45-60 ideal)"
+    - "One clear takeaway"
+
+tiktok_script:
+  name: "TikTok Script"
+  structure:
+    hook:
+      timing: "0-2s"
+      content: "[Pattern interrupt - text + spoken]"
+      options:
+        - "POV: [relatable scenario]"
+        - "The [thing] nobody talks about..."
+        - "[Controversial opinion] - here's why"
+        - "Stop [common mistake]"
+    context:
+      timing: "2-5s"
+      spoken: "[Quick setup]"
+      text_overlay: "[key phrase]"
+    body:
+      timing: "5-25s"
+      beats:
+        - "[Point 1 + visual]"
+        - "[Point 2 + visual]"
+        - "[Point 3 + visual]"
+    payoff:
+      timing: "25-28s"
+      content: "[The aha or satisfying conclusion]"
+    cta:
+      timing: "28-30s"
+      warning: "Avoid 'follow for more'"
+      options:
+        - "Save this for later"
+        - "Comment [X] if you want part 2"
+        - "Send to someone who needs it"
+  production:
+    sound: "[Trending sound or 'original audio']"
+    text_style: "[Bold, center]"
+    transitions: "[Cut/zoom/swipe]"
+    green_screen: "[Y/N]"
+  algorithm_2025:
+    - "Completion rate > everything"
+    - "First 1-2 seconds = 90% of performance"
+    - "Saves/shares weighted heavily"
+    - "'Follow for more' suppressed"
+
+youtube_shorts:
+  name: "YouTube Shorts Description"
+  structure:
+    title:
+      format: "[Hook + keyword] - #Shorts"
+      max_chars: 100
+    description:
+      first_lines: "[First 2 lines visible - make them count]"
+      expanded: "[What viewer learns]"
+      link: "Full video/article: [LINK]"
+    timestamps:
+      - "0:00 - [Hook]"
+      - "0:15 - [Main point]"
+      - "0:45 - [CTA]"
+    hashtags:
+      count: "3-5"
+      include:
+        - "#[Primary keyword]"
+        - "#[Secondary keyword]"
+        - "#[Niche hashtag]"
+        - "#Shorts"
+    pinned_comment: "[Question OR additional resource]"
+
+audiogram:
+  name: "Audiogram Script"
+  duration: "45 seconds"
+  structure:
+    intro:
+      timing: "0-5s"
+      script: "[Hook question or bold statement]"
+    core_insight:
+      timing: "5-35s"
+      script:
+        - "[Most quotable, standalone insight]"
+        - "[Keep sentences short. Pause between ideas.]"
+        - "[Works without context.]"
+    closer:
+      timing: "35-45s"
+      script:
+        - "[Callback to hook or forward tease]"
+        - "Link in bio for the full [article/episode]."
+  production:
+    background: "[color/brand element]"
+    waveform: "[Bars/line/circular]"
+    text_overlay: "[Key phrase]"
+    optimal_length: "30-45s Stories, 60s feed"
+  rules:
+    - "Write for LISTENING"
+    - "One idea only"
+    - "Works with sound OFF (text overlay)"
+
+podcast_outline:
+  name: "Podcast Episode Outline"
+  duration: "15-20 minutes"
+  structure:
+    title: "[Curiosity-driven, SEO-friendly]"
+    description:
+      word_count: 150
+      include: "[Hook + what listener learns + CTA]"
+    intro:
+      timing: "0:00-2:00"
+      hook: "[Attention-grabbing opener]"
+      context: "[Why this matters now]"
+      promise: "[What listener walks away with]"
+    segment_1:
+      timing: "2:00-6:00"
+      topic: "[Topic 1 from article]"
+      elements:
+        - "Main point"
+        - "Example/story"
+        - "Transition"
+    segment_2:
+      timing: "6:00-10:00"
+      topic: "[Topic 2]"
+      elements:
+        - "Main point"
+        - "Example/story"
+        - "Transition"
+    segment_3:
+      timing: "10:00-14:00"
+      topic: "[Topic 3]"
+      elements:
+        - "Main point"
+        - "Example/story"
+        - "Transition"
+    recap:
+      timing: "14:00-16:00"
+      elements:
+        - "3 key takeaways"
+        - "Specific action step"
+        - "Where to go next"
+    show_notes:
+      timestamps: "[key moments]"
+      links: "[resources mentioned]"
+      related: "[if applicable]"

@@ -1,6 +1,6 @@
 ---
 name: content-atomizer
-description: Transform long-form content into platform-ready assets. One article becomes Twitter threads, LinkedIn carousels, email excerpts, video scripts, and Instagram posts.
+description: Transform long-form content into 15+ platform-ready assets. One article becomes threads, carousels, audiograms, video scripts, quizzes, discussion prompts, and more.
 triggers:
   - atomize content
   - repurpose content
@@ -13,23 +13,16 @@ allowed-tools: Read, Write, Edit, Grep, Glob, WebSearch, AskUserQuestion
 
 # Content Atomizer
 
-Transform one piece of long-form content into 5-10 platform-ready distribution assets.
+Transform one piece of long-form content into 19 platform-ready distribution assets across social, video, audio, written, and interactive formats.
 
-## The Multiplier Effect
+## What This Produces
 
-```
-┌─────────────────────────────────────────────────────┐
-│           LONG-FORM CONTENT                         │
-│  (Article, Newsletter, Podcast Transcript, Video)   │
-└─────────────────────────────────────────────────────┘
-                        │
-                   ATOMIZER
-                        │
-    ┌───────┬───────┬───────┬───────┬───────┐
-    ↓       ↓       ↓       ↓       ↓       ↓
- Twitter  LinkedIn  Email   Video  Instagram  Short
- Thread   Carousel  Excerpt Script  Carousel   Post
-```
+**1 long-form piece → 19 platform-ready assets**
+
+- 6 social (Thread, LinkedIn, IG, Short Post, Threads, Pinterest)
+- 5 video/audio (Video, TikTok, Shorts, Audiogram, Podcast)
+- 3 written (Email, Blog spin-offs, SEO snippets)
+- 5 interactive/visual (Quiz, Discussion, Challenge, Infographic, Quotes)
 
 ## Input
 
@@ -42,193 +35,51 @@ If the user just pastes content, proceed immediately. Don't over-ask.
 
 ## Output Formats
 
-### 1. Twitter/X Thread
+**19 formats across 5 categories.** Templates in `resources/`:
+- `social-templates.yaml` - Twitter, LinkedIn, IG, Threads, Pinterest
+- `video-audio-templates.yaml` - Video, TikTok, Shorts, Audiogram, Podcast
+- `written-templates.yaml` - Email, Blog spin-offs, SEO snippets
+- `interactive-templates.yaml` - Quiz, Discussion, Challenge
+- `visual-templates.yaml` - Infographic, Quote graphics
 
-**Structure:**
-```
-Tweet 1 (Hook - MOST IMPORTANT):
-[Scroll-stopping opener. Pattern interrupt or curiosity gap.]
-[Max 280 chars. No hashtags in hook.]
+### Social Formats (6)
+| # | Format | Best For | Key Rule |
+|---|--------|----------|----------|
+| 1 | Twitter/X Thread | Big ideas, educational | First tweet = 90% of success |
+| 2 | LinkedIn Carousel | Professional depth | Max 30 words per slide |
+| 3 | Instagram Carousel | Visual learners | Save + Share focus |
+| 4 | Short-Form Post | Quick wins | Under 100 char hook |
+| 5 | Threads (Meta) | Authentic takes | No hard CTAs |
+| 6 | Pinterest Pin | Evergreen traffic | Keyword in first 40 chars |
 
-🧵 Thread:
+### Video & Audio Formats (5)
+| # | Format | Best For | Key Rule |
+|---|--------|----------|----------|
+| 7 | Video Script (60s) | General short-form | Hook works with sound OFF |
+| 8 | TikTok Script | Trend-driven content | Completion rate is everything |
+| 9 | YouTube Shorts | SEO-driven video | First 2 lines of description matter |
+| 10 | Audiogram Script | Podcast promotion | One idea only, 45 seconds |
+| 11 | Podcast Outline | Deep-dive expansion | 15-20 min from one article |
 
-Tweet 2-8 (Body):
-[One key insight per tweet]
-[Use line breaks for readability]
-[Keep each tweet standalone but connected]
+### Written Formats (3)
+| # | Format | Best For | Key Rule |
+|---|--------|----------|----------|
+| 12 | Email Excerpt | Newsletter/nurture | P.S. always gets read |
+| 13 | Blog Spin-Offs | Content cluster SEO | 5 derivative articles |
+| 14 | SEO Snippets | Featured snippet capture | Answer query in 40-60 words |
 
-Tweet 9 (Summary + CTA):
-TL;DR:
-• [Key point 1]
-• [Key point 2]
-• [Key point 3]
+### Interactive & Community (3)
+| # | Format | Best For | Key Rule |
+|---|--------|----------|----------|
+| 15 | Quiz/Poll | Engagement + education | Deploy across IG/LinkedIn/X |
+| 16 | Discussion Prompts | Reddit/Discord/Slack | Question format, seed with your take |
+| 17 | Challenge Prompt | UGC generation | You go first with example |
 
-[CTA: Follow, retweet, or comment prompt]
-```
-
-**Rules:**
-- 7-10 tweets ideal (not too long)
-- First tweet = 90% of success
-- Each tweet should work if read alone
-- Use "1/" numbering if >5 tweets
-- No hashtags except maybe 1-2 in final tweet
-
-### 2. LinkedIn Carousel
-
-**Structure:**
-```
-SLIDE 1: Cover
-[Bold statement or question]
-[Curiosity hook]
-[Your name/handle small]
-
-SLIDE 2: The Problem/Hook
-[Relatable pain point or insight]
-
-SLIDES 3-9: Core Content
-[One idea per slide]
-[Large text, minimal words]
-[Max 30 words per slide]
-
-SLIDE 10: Summary
-[Key takeaways as bullets]
-
-SLIDE 11: CTA
-[Follow for more]
-[Comment your take]
-[Save for later]
-```
-
-**Rules:**
-- 8-12 slides optimal
-- Max 30 words per slide
-- Use contrast (dark/light)
-- Each slide = one screenshot-able idea
-- Include your handle on every slide
-
-### 3. Email Excerpt
-
-**Structure:**
-```
-SUBJECT LINE OPTIONS:
-1. [Curiosity-driven - 6-10 words]
-2. [Benefit-driven - 6-10 words]
-3. [Pattern interrupt - 6-10 words]
-
-PREVIEW TEXT:
-[First 40-90 chars that appear in inbox]
-
----
-
-EMAIL BODY:
-
-[Personal opener - 1 sentence]
-
-[Key insight from content - 2-3 paragraphs]
-
-[Transition to full piece]
-
-Read the full article: [LINK]
-
-[Sign-off]
-
-P.S. [Bonus hook or question]
-```
-
-**Rules:**
-- Subject line < 50 chars (mobile)
-- Open with value, not "Hi [Name]"
-- Pull the most interesting insight
-- Create open loop to full content
-- P.S. always gets read
-
-### 4. Video Script (Short-Form)
-
-**Structure:**
-```
-HOOK (0-3 seconds):
-[Pattern interrupt. Stop the scroll.]
-"[Exact words to say]"
-
-SETUP (3-10 seconds):
-[Context. Why this matters.]
-"[Exact words]"
-
-BODY (10-45 seconds):
-[Core insight in 2-3 beats]
-
-Beat 1: "[Words]"
-Beat 2: "[Words]"
-Beat 3: "[Words]"
-
-PAYOFF (45-55 seconds):
-[The "aha" moment]
-"[Exact words]"
-
-CTA (55-60 seconds):
-[What to do next]
-"[Exact words]"
-
----
-PRODUCTION NOTES:
-- B-roll suggestions: [list]
-- Text overlays: [key phrases]
-- Pacing: [fast/medium/slow sections]
-```
-
-**Rules:**
-- Write for speaking, not reading
-- Hook must work with sound OFF (text overlay)
-- 60 seconds max (45-60 ideal)
-- One clear takeaway
-
-### 5. Instagram Carousel
-
-**Structure:**
-```
-SLIDE 1: Hook
-[Big bold text - max 8 words]
-[Swipe prompt or emoji →]
-
-SLIDES 2-8: Content
-[One insight per slide]
-[Large text, high contrast]
-[Max 20 words per slide]
-
-SLIDE 9: Summary
-[Recap as checklist or bullets]
-
-SLIDE 10: CTA
-[Save this post]
-[Share with someone who needs it]
-[Follow @handle for more]
-```
-
-**Rules:**
-- 1:1 ratio (1080x1080)
-- Less text than LinkedIn carousels
-- Visual-first, text-support
-- Save + Share focus (algorithm loves these)
-- Use slide numbers subtly
-
-### 6. Short-Form Post (Universal)
-
-For quick single posts across platforms:
-
-```
-HOOK:
-[First line that stops scroll - under 100 chars]
-
-BODY:
-[Core message - 2-3 short sentences]
-[Use line breaks liberally]
-
-TAKEAWAY:
-[One clear insight or action]
-
-CTA:
-[Engagement prompt OR link]
-```
+### Visual Assets - Copy Only (2)
+| # | Format | Best For | Key Rule |
+|---|--------|----------|----------|
+| 18 | Infographic Outline | Designer handoff | Include chart type suggestions |
+| 19 | Quote Graphics List | Social visuals | 5-10 standalone quotes |
 
 ## Atomization Process
 
@@ -244,14 +95,46 @@ From the source content, identify:
 
 ### Step 2: Platform Mapping
 
-| Element | Best Platform | Why |
-|---------|---------------|-----|
-| Central thesis | LinkedIn post, Video hook | Authority |
-| Key insights | Thread, Carousel | Educational |
-| Stories | Video, Long-form post | Emotional |
-| Data/stats | Carousel slide, Tweet | Shareable |
-| Contrarian take | Tweet, LinkedIn | Engagement |
-| Takeaways | Email, Carousel end | Value |
+| Element | Best Formats | Buyer Stage |
+|---------|--------------|-------------|
+| Central thesis | LinkedIn post, Video hook, Audiogram | Awareness |
+| Key insights | Thread, Carousel, Podcast segment | Awareness/Consideration |
+| Stories | TikTok, Video script, Discussion prompt | Awareness |
+| Data/stats | Infographic, Pinterest, Quote graphic | Consideration |
+| Contrarian take | Tweet, Threads, Reddit post | Awareness |
+| Actionable takeaways | Email, Challenge, Quiz | Consideration/Decision |
+| How-to steps | YouTube Shorts, Blog spin-off, Carousel | Decision |
+| Social proof | Case study excerpt, Quote graphic | Decision |
+
+### Step 2b: Buyer Journey Mapping
+
+Map each asset to the customer journey:
+
+```
+AWARENESS (Top of Funnel)
+├── Twitter/X Thread - hook with big idea
+├── TikTok/Reels - pattern interrupt
+├── Audiogram - quotable insight
+├── Discussion prompts - start conversations
+└── Threads post - authentic take
+
+CONSIDERATION (Middle of Funnel)
+├── LinkedIn Carousel - educational depth
+├── Podcast outline - deep dive
+├── Infographic - visual summary
+├── Blog spin-offs - SEO capture
+├── Quiz/Poll - engagement + education
+└── YouTube Shorts - how-to snippets
+
+DECISION (Bottom of Funnel)
+├── Email excerpt - direct CTA
+├── Pinterest pin - save for later
+├── SEO snippets - capture search intent
+├── Challenge prompt - activation
+└── Quote graphics - social proof
+```
+
+**Strategy:** Release awareness content first, then consideration, then decision. Don't blast all at once.
 
 ### Step 3: Generate Assets
 
@@ -288,76 +171,183 @@ When user asks for "optimized" or "researched" versions:
 
 ---
 
-## TWITTER/X THREAD
+# SOCIAL FORMATS
 
+## 1. TWITTER/X THREAD
 [Full thread with numbering]
 
----
-
-## LINKEDIN CAROUSEL
-
+## 2. LINKEDIN CAROUSEL
 [Slide-by-slide content]
 
+## 3. INSTAGRAM CAROUSEL
+[Slide-by-slide content]
+
+## 4. SHORT-FORM POST
+[Universal single post]
+
+## 5. THREADS (META) POST
+[Conversational thread]
+
+## 6. PINTEREST PIN
+[Title, description, visual concept]
+
 ---
 
-## EMAIL EXCERPT
+# VIDEO & AUDIO FORMATS
 
-[Complete email with subject options]
-
----
-
-## VIDEO SCRIPT (60s)
-
+## 7. VIDEO SCRIPT (60s)
 [Full script with timing]
 
+## 8. TIKTOK SCRIPT
+[Platform-native with hooks]
+
+## 9. YOUTUBE SHORTS DESCRIPTION
+[SEO-optimized]
+
+## 10. AUDIOGRAM SCRIPT
+[45-second audio excerpt]
+
+## 11. PODCAST EPISODE OUTLINE
+[15-20 min expansion]
+
 ---
 
-## INSTAGRAM CAROUSEL
+# WRITTEN FORMATS
 
-[Slide-by-slide content]
+## 12. EMAIL EXCERPT
+[Complete email with subject options]
+
+## 13. BLOG SPIN-OFF IDEAS
+[5 derivative article concepts]
+
+## 14. SEO SNIPPET VARIATIONS
+[Featured snippet optimized]
 
 ---
 
-## SHORT-FORM POST
+# INTERACTIVE & COMMUNITY
 
-[Universal single post]
+## 15. QUIZ/POLL PROMPTS
+[Questions and poll options]
+
+## 16. DISCUSSION PROMPTS
+[Reddit/Discord/community posts]
+
+## 17. CHALLENGE PROMPT
+[UGC activation]
+
+---
+
+# VISUAL ASSETS (Copy Only)
+
+## 18. INFOGRAPHIC OUTLINE
+[Structured for designer]
+
+## 19. QUOTE GRAPHICS LIST
+[5-10 pull quotes]
 
 ---
 
 ## DISTRIBUTION CHECKLIST
 
-- [ ] Twitter thread scheduled for [optimal time]
-- [ ] LinkedIn carousel designed and queued
-- [ ] Email drafted with link to full content
-- [ ] Video script ready for recording
-- [ ] Instagram carousel slides created
-- [ ] Short post ready for [platform]
+### Awareness Phase (Days 1-3)
+- [ ] Twitter/X thread posted
+- [ ] TikTok script recorded
+- [ ] Audiogram created and shared
+- [ ] Threads post published
+- [ ] Discussion prompt seeded in community
 
-## REPURPOSING CALENDAR
+### Consideration Phase (Days 4-7)
+- [ ] LinkedIn carousel published
+- [ ] YouTube Short uploaded
+- [ ] Instagram carousel posted
+- [ ] Podcast episode scheduled
+- [ ] Quiz/poll launched
+- [ ] Blog spin-off #1 drafted
 
-| Day | Platform | Asset | Notes |
-|-----|----------|-------|-------|
-| Day 1 | [Primary] | [Asset] | Launch |
-| Day 2 | [Secondary] | [Asset] | Cross-post |
-| Day 3 | [Tertiary] | [Asset] | Extend reach |
-| Day 7 | Email | Excerpt | Newsletter |
+### Decision Phase (Days 8-14)
+- [ ] Email excerpt sent to list
+- [ ] Pinterest pin published
+- [ ] Challenge prompt launched
+- [ ] SEO snippets added to original
+- [ ] Quote graphics shared
+
+---
+
+## STAGGERED RELEASE CALENDAR
+
+| Day | Platform | Asset | Buyer Stage | Optimal Time |
+|-----|----------|-------|-------------|--------------|
+| Day 1 | Twitter/X | Thread | Awareness | 9am or 12pm |
+| Day 1 | TikTok | Video | Awareness | 7pm |
+| Day 2 | Threads | Post | Awareness | 10am |
+| Day 2 | Reddit/Discord | Discussion | Awareness | Evening |
+| Day 3 | LinkedIn | Carousel | Consideration | 8am Tue-Thu |
+| Day 4 | Instagram | Carousel | Consideration | 11am or 7pm |
+| Day 5 | YouTube | Short | Consideration | 3pm |
+| Day 5 | Podcast | Episode | Consideration | Release day |
+| Day 7 | Email | Excerpt | Decision | Tue/Thu 10am |
+| Day 7 | Pinterest | Pin | Decision | 8pm Sat |
+| Day 10 | Twitter/X | Challenge | Decision | 12pm |
+| Day 14 | Blog | Spin-off | Decision | Anytime |
+
+**Staggered Release Strategy:**
+- Never publish more than 2 platforms same day
+- Space awareness → consideration → decision
+- Repurpose top performer into more formats
+- Week 2: Evaluate and double down on winners
 ```
+
+## Platform Algorithm Notes (2025-2026)
+
+| Platform | Algorithm Priority | What to Optimize |
+|----------|-------------------|------------------|
+| Twitter/X | Replies, quotes, bookmarks | Controversial hooks, question endings |
+| LinkedIn | Dwell time, comments | First line hook, carousel saves |
+| Instagram | Saves, shares, watch time | Reels completion, carousel swipes |
+| TikTok | Completion rate, shares | First 2 seconds, save prompts |
+| YouTube Shorts | Watch time, subscribe clicks | Hook + payoff loop |
+| Pinterest | Saves, click-through | Keyword-rich descriptions |
+| Threads | Replies, reposts | Authentic voice, no hard CTAs |
+| Podcast | Completion, reviews | Strong intro, clear segments |
+
+**Universal 2025-2026 Trends:**
+- "Follow for more" CTAs penalized across platforms
+- Saves/bookmarks weighted higher than likes
+- Completion rate matters more than views
+- Native content outperforms cross-posted
+- Carousels/threads outperform single posts
 
 ## Quality Checklist
 
 Before delivering, verify:
+
+### Format Quality
 - [ ] Each format uses platform-native conventions
-- [ ] Hooks are different across platforms (not copy-paste)
-- [ ] Video script is speakable (read it aloud)
-- [ ] Carousels work as standalone (no context needed)
-- [ ] Email creates genuine curiosity for full content
-- [ ] No AI-slop phrases ("In today's landscape", "Let's dive in")
+- [ ] Hooks are DIFFERENT across platforms (not copy-paste)
+- [ ] Video scripts are speakable (read aloud test)
+- [ ] Carousels work standalone (no context needed)
+- [ ] Audio scripts work with sound OFF (text overlays noted)
+
+### Content Quality
+- [ ] No AI-slop phrases ("In today's landscape", "Let's dive in", "Game-changer")
+- [ ] Each piece has ONE clear takeaway
+- [ ] CTAs are platform-appropriate (soft for TikTok/Threads, direct for email)
+- [ ] Hooks create genuine curiosity, not clickbait
+
+### Strategic Quality
+- [ ] Assets mapped to buyer journey stages
+- [ ] Staggered release calendar makes sense
+- [ ] High-value formats prioritized (not just easy ones)
+- [ ] Internal linking strategy for blog spin-offs
 
 ## What This Skill Does NOT Do
 
-- **Design visuals** - Provides text/copy only, not graphics
-- **Schedule posts** - Provides content, not automation
-- **Write the original** - Atomizes existing content only
+- **Design visuals** - Provides copy/outlines for infographics, not actual graphics
+- **Schedule posts** - Provides content and timing guidance, not automation
+- **Write the original** - Atomizes existing content only (use `content-writer` for original)
+- **Record audio/video** - Provides scripts, not production
+- **Post to platforms** - Provides content, user must publish
 
 ## When to Use This vs. Other Skills
 
@@ -367,3 +357,6 @@ Before delivering, verify:
 | Need multi-platform distribution | Single platform strategy (`linkedin-content`) |
 | Want to maximize one piece's reach | Building content calendar (`content-calendar`) |
 | Repurposing newsletters, articles | Writing from scratch (`viral-content`) |
+| Need 15+ assets from one piece | Need just 1-2 quick posts |
+| Strategic buyer-journey mapping | Quick social post (`hook-writer`) |
+| Full atomization with calendar | Just need quote graphics |

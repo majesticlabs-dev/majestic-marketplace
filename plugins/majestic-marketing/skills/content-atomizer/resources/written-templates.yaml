@@ -1,0 +1,85 @@
+# Written Format Templates
+
+email_excerpt:
+  name: "Email Excerpt"
+  structure:
+    subject_lines:
+      count: 3
+      options:
+        - "[Curiosity-driven - 6-10 words]"
+        - "[Benefit-driven - 6-10 words]"
+        - "[Pattern interrupt - 6-10 words]"
+      max_chars: 50
+    preview_text:
+      chars: "40-90"
+      content: "[First visible text in inbox]"
+    body:
+      opener: "[Personal opener - 1 sentence]"
+      insight: "[Key insight from content - 2-3 paragraphs]"
+      transition: "[Bridge to full piece]"
+      link: "Read the full article: [LINK]"
+      signoff: "[Sign-off]"
+      ps: "[Bonus hook or question]"
+  rules:
+    - "Subject line < 50 chars (mobile)"
+    - "Open with value, not 'Hi [Name]'"
+    - "Pull most interesting insight"
+    - "Create open loop to full content"
+    - "P.S. always gets read"
+
+blog_spinoffs:
+  name: "Blog Spin-Off Ideas"
+  count: 5
+  template:
+    from_original: "[Article Title]"
+    spinoffs:
+      - title: "[Deep-dive on subtopic 1]"
+        angle: "[How differs from original]"
+        keyword: "[SEO term]"
+        length: "[word count]"
+      - title: "[How-to based on one section]"
+        angle: "[Practical application]"
+        keyword: "[SEO term]"
+      - title: "[Contrarian take on aspect]"
+        angle: "[Challenge assumption]"
+        keyword: "[SEO term]"
+      - title: "[Case study expansion]"
+        angle: "[Story-driven]"
+        keyword: "[SEO term]"
+      - title: "[Beginner's guide to concept]"
+        angle: "[101-level for new audience]"
+        keyword: "[SEO term]"
+    internal_linking:
+      original_links_to: "[Spin-offs 1, 3]"
+      spinoff_1_links_to: "[Original, Spin-off 2]"
+      strategy: "[Map the cluster]"
+
+seo_snippets:
+  name: "SEO Snippet Variations"
+  structure:
+    target_query: "[What question does this answer?]"
+    paragraph_snippet:
+      word_count: "40-60"
+      format: "[Direct answer first, then context. Featured snippet optimized.]"
+    listicle_snippet:
+      intro: "[Query answer] includes:"
+      points:
+        - "[Point 1]"
+        - "[Point 2]"
+        - "[Point 3]"
+        - "[Point 4]"
+        - "[Point 5]"
+    table_snippet:
+      columns: ["[Column 1]", "[Column 2]", "[Column 3]"]
+      rows:
+        - ["[Data]", "[Data]", "[Data]"]
+        - ["[Data]", "[Data]", "[Data]"]
+    definition_snippet:
+      format: "[Term] is [definition in 1-2 sentences]. [Context or example.]"
+    people_also_ask:
+      - question: "[Related question 1]"
+        answer: "[40-50 word answer]"
+      - question: "[Related question 2]"
+        answer: "[40-50 word answer]"
+      - question: "[Related question 3]"
+        answer: "[40-50 word answer]"

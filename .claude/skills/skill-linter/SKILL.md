@@ -40,6 +40,21 @@ allowed-tools: Bash Read Glob Grep
 | Line limit | Max 500 lines in SKILL.md |
 | Subdirectories | Only `scripts/`, `references/`, `assets/` allowed |
 
+### Content Quality Rules
+
+| Rule | Requirement |
+|------|-------------|
+| No ASCII art | Box-drawing characters (─│┌┐└┘├┤┬┴┼), arrows (↑↓←→↔), and decorative diagrams waste tokens. LLMs tokenize character-by-character, not visually. Use plain lists or tables instead. |
+| No decorative quotes | Inspirational quotes or attributions ("As X said...") have no functional value for LLM execution. |
+| Functional content only | Every line should improve LLM behavior. Ask: "Does this help Claude execute better?" |
+
+**ASCII Art Detection Pattern:**
+```regex
+[─│┌┐└┘├┤┬┴┼╭╮╯╰═║╔╗╚╝╠╣╦╩╬↑↓←→↔⇒⇐⇔▲▼◄►]{3,}
+```
+
+Files matching this pattern should be flagged for review.
+
 ### Name Pattern
 
 ```regex
@@ -88,6 +103,7 @@ The linter script at `scripts/validate-skill.sh` performs these checks:
 5. **Optional fields valid** - if present, match constraints
 6. **Line count** - under 500 lines
 7. **Subdirectory names** - only allowed directories
+8. **No ASCII art** - detects box-drawing characters and decorative diagrams
 
 ## Error Codes
 
@@ -101,6 +117,7 @@ The linter script at `scripts/validate-skill.sh` performs these checks:
 | 5 | Optional field validation failed |
 | 6 | Line limit exceeded |
 | 7 | Invalid subdirectory |
+| 8 | ASCII art detected (warning) |
 
 ## Example Output
 

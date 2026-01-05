@@ -1,0 +1,88 @@
+# Interactive & Community Templates
+
+quiz_poll:
+  name: "Quiz/Poll Prompts"
+  quiz:
+    title: "[Title based on article topic]"
+    intro: "[1-2 sentences - create curiosity]"
+    questions:
+      - question: "[Question from key concept]"
+        options:
+          a: "[Wrong but plausible]"
+          b: "[Correct answer]"
+          c: "[Common misconception]"
+          d: "[Obviously wrong for humor]"
+        explanation: "[Why B is correct]"
+      - question: "[Scenario-based question]"
+        options: ["A)", "B)", "C)", "D)"]
+      - question: "[Application question]"
+        options: ["A)", "B)", "C)", "D)"]
+  polls:
+    - type: "opinion"
+      question: "[Opinion question]"
+      options:
+        - "[One stance]"
+        - "[Opposite stance]"
+    - type: "preference"
+      question: "[Preference question]"
+      options:
+        - "[Option A]"
+        - "[Option B]"
+    - type: "experience"
+      question: "[Experience question]"
+      options:
+        - "Yes, I've done this"
+        - "No, but I want to"
+        - "Never heard of it"
+  deployment:
+    instagram: "poll/quiz stickers"
+    linkedin: "Native polls (1 week)"
+    twitter: "Poll tweet"
+    newsletter: "Embedded quiz link"
+
+discussion_prompts:
+  name: "Discussion Prompts"
+  reddit:
+    title: "[Question format - 'How do you...' or 'What's your experience with...']"
+    body:
+      - "[Personal context - why asking]"
+      - "[Core question from article topic]"
+      - "[Optional: Your take to seed discussion]"
+      - "[End with open question]"
+  discord_slack:
+    opener: "Hey everyone"
+    body:
+      - "[Casual intro on topic]"
+      - "[Question inviting experiences]"
+    closer: "Curious what's worked for you all."
+  community_questions:
+    count: 5
+    types:
+      - "[Open-ended experience question]"
+      - "[Debate: 'which is better' question]"
+      - "[Problem-solving: 'how would you handle']"
+      - "[Prediction about future of topic]"
+      - "[Contrarian: 'unpopular opinion' prompt]"
+
+challenge_prompt:
+  name: "Challenge Prompt"
+  structure:
+    name: "[The [X] Challenge] or [#BrandChallenge]"
+    description: "[1 sentence: what participants do]"
+    launch_post:
+      hook: "[Why this challenge exists]"
+      rules:
+        - "[Action step 1]"
+        - "[Action step 2]"
+        - "[Share using #ChallengeHashtag]"
+      incentive: "[What participants get - recognition, feature, learning]"
+      example: "I'll go first: [Your example]"
+    participation_template: |
+      I tried [the challenge] and here's what happened:
+      [Space for experience]
+      #ChallengeHashtag
+    engagement_plan:
+      day_1: "Launch with your example"
+      day_2_3: "Reshare early participants"
+      day_4_5: "Share insights/patterns"
+      day_7: "Wrap-up featuring best entries"

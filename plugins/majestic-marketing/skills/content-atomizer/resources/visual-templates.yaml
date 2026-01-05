@@ -1,0 +1,64 @@
+# Visual Asset Templates (Copy Only)
+
+infographic_outline:
+  name: "Infographic Outline"
+  structure:
+    title: "[Benefit-driven headline]"
+    subtitle: "[Context or 'A guide to...']"
+    sections:
+      - header: "[Section 1]"
+        content: "[Key stat or fact]"
+        visual: "[icon/chart type]"
+      - header: "[Section 2]"
+        content: "[Key stat or fact]"
+        visual: "[icon/chart type]"
+      - header: "[Section 3]"
+        content: "[Key stat or fact]"
+        visual: "[icon/chart type]"
+    section_count: "4-6 total"
+    data_points:
+      - stat: "[Stat 1]"
+        value: "[Number]"
+        chart: "[pie/bar/icon array]"
+      - stat: "[Stat 2]"
+        value: "[Number]"
+        chart: "[chart type]"
+      - stat: "[Stat 3]"
+        value: "[Number]"
+        chart: "[chart type]"
+    layout_options:
+      - "Vertical scroll (social/blog)"
+      - "Horizontal timeline"
+      - "Comparison (vs./before-after)"
+      - "Process flow (steps)"
+      - "Hub and spoke"
+    footer:
+      source: "[Attribution]"
+      brand: "[URL]"
+      cta: "[Next action]"
+
+quote_graphics:
+  name: "Quote Graphics List"
+  count: "5-10 per article"
+  quotes:
+    - type: "hero"
+      content: "[Most powerful statement]"
+      use: "[When to deploy]"
+      style: "[Bold/minimal/branded]"
+    - type: "contrarian"
+      content: "[Surprising or contrarian point]"
+      use: "[Engagement/debate]"
+    - type: "actionable"
+      content: "[Actionable advice]"
+      use: "[Save-worthy, practical]"
+    - type: "emotional"
+      content: "[Emotional/relatable statement]"
+      use: "[Share-worthy, connection]"
+    - type: "data"
+      content: "[Data-driven insight]"
+      use: "[Authority-building]"
+  formatting:
+    max_chars: 150
+    attribution: "Include if quoting others"
+    emoji: "Pair with relevant emoji for social"
+    requirement: "Each works completely standalone"

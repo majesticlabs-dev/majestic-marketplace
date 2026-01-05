@@ -1,0 +1,125 @@
+# Social Format Templates
+
+twitter_thread:
+  name: "Twitter/X Thread"
+  structure:
+    tweet_1_hook:
+      content: "[Scroll-stopping opener. Pattern interrupt or curiosity gap.]"
+      max_chars: 280
+      no_hashtags: true
+    tweets_2_to_8_body:
+      content: "[One key insight per tweet]"
+      guidelines:
+        - "Use line breaks for readability"
+        - "Keep each tweet standalone but connected"
+    tweet_9_summary:
+      format: |
+        TL;DR:
+        - [Key point 1]
+        - [Key point 2]
+        - [Key point 3]
+        [CTA: Follow, retweet, or comment prompt]
+  rules:
+    - "7-10 tweets ideal"
+    - "First tweet = 90% of success"
+    - "Each tweet works standalone"
+    - "Use 1/ numbering if >5 tweets"
+    - "No hashtags except 1-2 in final tweet"
+
+linkedin_carousel:
+  name: "LinkedIn Carousel"
+  structure:
+    slide_1_cover:
+      - "[Bold statement or question]"
+      - "[Curiosity hook]"
+      - "[Your name/handle small]"
+    slide_2_hook:
+      - "[Relatable pain point or insight]"
+    slides_3_to_9_content:
+      - "[One idea per slide]"
+      - "[Large text, minimal words]"
+      - "[Max 30 words per slide]"
+    slide_10_summary:
+      - "[Key takeaways as bullets]"
+    slide_11_cta:
+      - "[Follow for more]"
+      - "[Comment your take]"
+      - "[Save for later]"
+  rules:
+    - "8-12 slides optimal"
+    - "Max 30 words per slide"
+    - "Each slide = one screenshot-able idea"
+    - "Include handle on every slide"
+
+instagram_carousel:
+  name: "Instagram Carousel"
+  structure:
+    slide_1_hook:
+      content: "[Big bold text - max 8 words]"
+      include: "[Swipe prompt or emoji]"
+    slides_2_to_8_content:
+      per_slide:
+        - "[One insight per slide]"
+        - "[Large text, high contrast]"
+        - "[Max 20 words per slide]"
+    slide_9_summary:
+      - "[Recap as checklist or bullets]"
+    slide_10_cta:
+      - "[Save this post]"
+      - "[Share with someone who needs it]"
+      - "[Follow @handle for more]"
+  rules:
+    - "1:1 ratio (1080x1080)"
+    - "Less text than LinkedIn"
+    - "Visual-first, text-support"
+    - "Save + Share focus"
+
+short_form_post:
+  name: "Short-Form Post (Universal)"
+  structure:
+    hook: "[First line that stops scroll - under 100 chars]"
+    body: "[Core message - 2-3 short sentences with line breaks]"
+    takeaway: "[One clear insight or action]"
+    cta: "[Engagement prompt OR link]"
+
+threads_meta:
+  name: "Threads (Meta) Post"
+  structure:
+    post_1_opener: "[Personal observation or hot take - write like texting a friend]"
+    post_2: "[Expand with context - 500 chars allowed]"
+    post_3: "[First key insight - use 'here's the thing...' framing]"
+    post_4: "[Second insight or example]"
+    post_5: "[Third insight - most actionable]"
+    post_6_closer: "[Summary or question - NO hard CTA]"
+  tone:
+    - "More casual than LinkedIn"
+    - "Less performative than Twitter"
+    - "Group chat energy"
+  warning: "Threads penalizes 'link in bio' CTAs"
+
+pinterest_pin:
+  name: "Pinterest Pin"
+  structure:
+    title:
+      content: "[Keyword-rich, benefit-driven]"
+      max_chars: 100
+    description:
+      max_chars: 500
+      include:
+        - "[Hook sentence]"
+        - "[What they'll learn - 2-3 bullets implied]"
+        - "[CTA: Click to read the full guide]"
+        - "[3-5 relevant hashtags]"
+    visual:
+      format: "1000x1500px (2:3 ratio)"
+      style: "[List/steps/quote/how-to]"
+    text_overlay:
+      line_1: "[Bold headline - 5-8 words]"
+      line_2: "[Subhead or 'X steps to...']"
+      body: "[3-5 key points as visual list]"
+      footer: "[URL or brand handle]"
+    board: "[Relevant board name]"
+  rules:
+    - "Keyword in first 40 chars"
+    - "Readable at thumbnail size"
+    - "Pinterest is a search engine"
