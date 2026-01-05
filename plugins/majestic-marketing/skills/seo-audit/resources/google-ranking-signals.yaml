@@ -1,0 +1,235 @@
+# Google Ranking Signals Reference
+# Derived from 2024 Content Warehouse API leak analysis
+# Source: Evidence-based SEO framework post-leak
+
+ranking_pipeline:
+  description: "Google's multi-stage evaluation pipeline - pages must pass each gate sequentially"
+  stages:
+    - name: Mustang
+      order: 1
+      function: "Initial content scoring"
+      evaluates:
+        - relevance
+        - originality
+        - spam_signals
+      note: "Pages must qualify here before subsequent evaluation"
+
+    - name: Topicality
+      order: 2
+      alias: "T*"
+      function: "Query-dependent relevance scoring"
+      signals:
+        anchors:
+          description: "Link text describing page content"
+          weight: high
+        body:
+          description: "Query terms in page text, titles, headings"
+          weight: high
+        clicks:
+          description: "User dwell time after clicking result"
+          weight: high
+
+    - name: NavBoost
+      order: 3
+      function: "Re-ranking based on aggregated user click behavior"
+      data_window: "13 months"
+      note: "Uses historical click patterns to adjust rankings"
+
+    - name: Twiddlers
+      order: 4
+      function: "Final editorial adjustments"
+      adjustments:
+        - freshness_boosts
+        - quality_promotion
+        - demotions
+        - whitelists_for_sensitive_topics
+
+fundamental_pillars:
+  q_star:
+    name: "Q* (Quality/Trustworthiness)"
+    scope: "site-level"
+    description: "Overall site quality score"
+    inputs:
+      - tofu  # site-level content quality predictor
+      - clutterScore  # penalty for excessive ads
+      - smallPersonalSite  # boost for personal blogs
+      - ugcScore  # user-generated content quality
+      - siteNavBrandingScore
+      - queriesForWhichOfficial
+
+  p_star:
+    name: "P* (Popularity)"
+    scope: "site-level"
+    description: "Website popularity measurement"
+    inputs:
+      - chrome_data
+      - link_analysis
+      - chromeInTotal  # total site views from Chrome users
+
+content_signals:
+  titlematchScore:
+    description: "Relevance of page title to query"
+    optimization: "Include primary keyword in first 30 characters"
+
+  OriginalContentScore:
+    description: "Uniqueness measurement for content"
+    scale: "0-512"
+    note: "Higher scores for genuinely original content"
+
+  contentEffort:
+    description: "ML assessment of effort invested in content"
+    note: "Technical foundation of Helpful Content System"
+    factors:
+      - depth_of_coverage
+      - research_quality
+      - presentation_effort
+
+  semanticDate:
+    description: "Whether content's data/sources are current"
+    evaluation: "Relative to web corpus freshness"
+    note: "Protects against freshness spam (changing timestamps without updating content)"
+
+  syntacticDate:
+    description: "Dates extracted from URLs"
+    warning: "Avoid dates in URLs for evergreen content"
+
+  pageregions:
+    description: "Encodes different page sections"
+    regions:
+      - header
+      - footer
+      - body
+    note: "Main content receives higher weighting than boilerplate"
+
+  webrefEntities:
+    description: "Associates documents with Knowledge Graph entities"
+    optimization: "Build clear entity relationships"
+
+token_limits:
+  description: "Google uses token limits - extremely long documents may be truncated"
+  implications:
+    - "Critical information must appear early (inverted pyramid)"
+    - "Front-load key facts in each section"
+    - "Concise paragraphs preferred over lengthy prose"
+  recommendation: "Keep paragraphs under 120 words, lead with key facts"
+
+freshness_signals:
+  evaluation_methods:
+    - type: "Explicit byline dates"
+      description: "Published/updated dates shown on page"
+    - type: "syntacticDate"
+      description: "Dates extracted from URLs"
+    - type: "semanticDate"
+      description: "Currency of facts/sources in content"
+
+  freshness_spam_protection: "Merely changing timestamps without updating substance is detected"
+
+  url_strategy:
+    recommendation: "Use evergreen URLs without dates"
+    reason: "Avoids built-in signal conflicts, preserves historical value"
+
+authority_signals:
+  siteAuthority:
+    description: "Explicit site-level authority score"
+    note: "Definitively confirmed in leak - settles years of debate"
+    inheritance: "New pages inherit baseline authority from homepage PageRank"
+    implication: "Page potential is capped by domain authority"
+
+  chrome_data:
+    chromeInTotal:
+      description: "Total site views from Chrome users regardless of search origin"
+    topUrl:
+      description: "Most important/popular pages identified via Chrome click data"
+    note: "Provides unfiltered view of site popularity beyond search metrics"
+
+sandbox_mechanisms:
+  hostAge:
+    scope: "domain-level"
+    description: "New domains receive probationary treatment"
+    effect: "Fresh spam sandbox"
+
+  documentHistory:
+    scope: "page-level"
+    description: "New URLs without history receive negative impact"
+    note: "Even established domains face this for new pages"
+
+  domainAge:
+    description: "Domain creation date influences trust"
+
+  dual_penalty:
+    description: "New sites face both hostAge and documentHistory penalties"
+    established_domain_benefit: "Bypasses host-level filter but still faces page demotion"
+
+  graduation:
+    requirements:
+      - consistent_quality_publishing
+      - social_signals
+      - backlinks
+      - positive_user_engagement
+    note: "Patience is structurally required"
+
+url_permanence:
+  history_tracking: "Google maintains copies of all previous page versions"
+  analysis_depth: "Primarily analyzes last 20 changes to a URL"
+  warning: "Changing URLs is costly - resets history and accumulated trust"
+  recommendation: "Maintain URL stability for important content"
+
+user_behavior_signals:
+  good_clicks:
+    description: "Google distinguishes quality clicks from mere clicks"
+    note: "Clickbait gets clicks but poor dwell time signals low quality"
+    metrics:
+      - dwell_time
+      - engagement_patterns
+      - return_visits
+
+  navboost_influence:
+    data_window: "13 months of aggregated behavior"
+    weight: "Significant ranking factor"
+
+eeat_technical_mapping:
+  experience:
+    signals:
+      - first_hand_knowledge_indicators
+      - case_studies
+      - original_data
+  expertise:
+    signals:
+      - contentEffort
+      - OriginalContentScore
+      - technical_depth
+  authoritativeness:
+    signals:
+      - author_attribute
+      - siteAuthority
+      - external_citations
+  trustworthiness:
+    signals:
+      - contact_information
+      - privacy_policy
+      - security_indicators
+      - editorial_guidelines
+
+disconnected_entity_problem:
+  description: "Sites failing to provide verifiable ownership/author info trigger distrust"
+  required_signals:
+    - verifiable_ownership
+    - author_information
+    - contact_transparency
+  consequence: "Demotion even if content quality is high"
+
+editorial_controls:
+  whitelists:
+    description: "Explicit whitelists for sensitive topics"
+    attribute: "isElectionAuthority"
+    topics:
+      - elections
+      - health (YMYL)
+    note: "Merit-based ranking has boundaries for critical information"
+
+font_weight_signals:
+  description: "Larger text receives more weight"
+  elements:
+    - headings
+    - bold_text
+  optimization: "Use semantic HTML for emphasis"
