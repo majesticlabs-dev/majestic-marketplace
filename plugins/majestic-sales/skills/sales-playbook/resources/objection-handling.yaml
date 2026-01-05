@@ -1,0 +1,101 @@
+# Objection Handling Playbook
+
+framework:
+  name: "LAER"
+  steps:
+    - step: "Listen"
+      action: "Let them finish, don't interrupt"
+    - step: "Acknowledge"
+      action: "Show you heard them"
+    - step: "Explore"
+      action: "Understand the real concern"
+    - step: "Respond"
+      action: "Address with specifics"
+
+price_objections:
+  investment_framing:
+    principle: "Frame pricing discussions around ROI, not cost"
+    bad: "The cost is $X"
+    good: "The investment is $X, which delivers [outcome] in [timeframe]"
+
+  too_expensive:
+    acknowledge: "I hear you - investment size is always a consideration."
+    explore: "Help me understand - too expensive compared to what? Your current solution, a competitor, or the budget you had in mind?"
+    respond:
+      vs_current: "What's the cost of staying with the current approach? You mentioned [pain] costs you [amount]."
+      vs_competitor: "You're right, we're not the cheapest. What [Competitor] doesn't include is [differentiator]. Our customers find that saves them [X]."
+      vs_budget: "Let's look at the return. Based on similar clients, this delivers 5x return in 90 days."
+
+  no_budget:
+    explore: "Is it that budget doesn't exist, or that it hasn't been allocated yet?"
+    respond:
+      not_allocated: "When does your planning cycle start? Let's time this so you can include it."
+      no_budget_exists: "What would need to happen for this to become a budget priority?"
+      investment_framing: "Most teams find budget when they see the ROI. Based on your numbers, this investment returns [X]x in [timeframe]."
+      alternative: "We have flexible payment terms - would quarterly payments help?"
+
+timing_objections:
+  not_right_time:
+    explore: "I understand. What would need to change for the timing to be right?"
+    respond:
+      - "You mentioned [pain] is costing you [X] per month. Every month you wait, that's [X] you're not getting back."
+      - "What's happening in [their suggested timeframe] that makes it better?"
+      - "What if we started with a smaller scope to reduce the lift?"
+
+  too_busy:
+    explore: "Makes sense - you're dealing with [current priority]. How long do you expect that to last?"
+    respond:
+      - "What if [Product] actually reduced the workload on [current priority]?"
+      - "Our implementation is designed for busy teams - most customers are live in [timeframe] with [minimal hours] of their time."
+
+competitor_objections:
+  evaluating_competitor:
+    explore: "Good - they're a solid option. What's attracting you to them?"
+    respond:
+      - "[Competitor] is great at [what they're good at]. Where we differ is [differentiator]."
+      - "Most customers who evaluate both choose us because [reason]."
+      - "What criteria are you using to compare?"
+
+  already_using_competitor:
+    explore: "How's that working for you? What do you like about it? What's missing?"
+    respond:
+      - "I wouldn't suggest ripping that out. But I'm curious - how are you handling [thing competitor doesn't do well]?"
+      - "We actually integrate with [Competitor]. Many customers use us for [specific use case] alongside them."
+
+authority_objections:
+  need_approval:
+    explore: "Of course. What do you think their main concerns will be?"
+    respond:
+      - "What can I provide that would help you make the case?"
+      - "Would it help if I joined that conversation to answer technical questions?"
+      - "What outcome would make you a hero to your boss?"
+
+  decision_maker_not_interested:
+    explore: "What's their main hesitation?"
+    respond:
+      - "What if we focused on [specific benefit for decision maker's priorities]?"
+      - "I've seen this before. Usually [title] cares about [higher-level metric]. Can I share how [similar company] presented it internally?"
+
+trust_objections:
+  never_heard_of_you:
+    respond:
+      - "That's fair - we're more focused on building product than marketing. But we work with [notable customer names]."
+      - "Here's a case study from [company in their industry]. Happy to connect you with them directly."
+
+  going_out_of_business:
+    respond:
+      - "Valid concern. We're [funding status/profitable/backed by X]. Here's what that means for product continuity."
+      - "All your data is exportable at any time. You're never locked in."
+
+status_quo_objections:
+  build_ourselves:
+    explore: "Tell me about that - what would the timeline look like?"
+    respond:
+      - "You could. But engineering time costs [X]. By the time you build and maintain it, you'd spend [Y]. We're [fraction] of that and you get it now."
+      - "What would your engineers be building instead of this? That's the real cost."
+
+  fine_with_current:
+    explore: "What's working well? What's not?"
+    respond:
+      - "I hear that a lot, until I ask about [specific pain]. How are you handling that today?"
+      - "Your competitors are already using [modern approach]. What's your plan to keep up?"

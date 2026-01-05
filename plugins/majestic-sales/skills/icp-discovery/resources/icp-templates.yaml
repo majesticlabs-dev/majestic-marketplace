@@ -1,0 +1,377 @@
+# ICP Discovery Templates
+
+current_state_analysis:
+  best_customers:
+    description: "Analyze 3-5 best customers"
+    fields:
+      - customer: "[Name]"
+        industry: "[Industry]"
+        size: "[Employees]"
+        acv: "$[X]"
+        time_to_close: "[Days]"
+        churn_risk: "Low/Med/High"
+        nps: "[Score]"
+        why_bought: "[Reason]"
+    patterns:
+      - "[Pattern 1]"
+      - "[Pattern 2]"
+      - "[Pattern 3]"
+
+  worst_customers:
+    description: "Analyze 3-5 worst customers"
+    fields:
+      - customer: "[Name]"
+        industry: "[Industry]"
+        size: "[Employees]"
+        acv: "$[X]"
+        time_to_close: "[Days]"
+        churned: "Yes/No"
+        why_failed: "[Reason]"
+    patterns:
+      - "[Pattern 1]"
+      - "[Pattern 2]"
+      - "[Pattern 3]"
+
+  hypothesis_vs_reality:
+    dimensions:
+      - dimension: "Industry"
+        hypothesis: "[You think]"
+        reality: "[Data shows]"
+        gap: "[Insight]"
+      - dimension: "Company size"
+        hypothesis: "[You think]"
+        reality: "[Data shows]"
+        gap: "[Insight]"
+      - dimension: "Buyer title"
+        hypothesis: "[You think]"
+        reality: "[Data shows]"
+        gap: "[Insight]"
+      - dimension: "Pain point"
+        hypothesis: "[You think]"
+        reality: "[Data shows]"
+        gap: "[Insight]"
+
+firmographic_criteria:
+  company_characteristics:
+    - criterion: "Employee count"
+      ideal: "[Range]"
+      acceptable: "[Range]"
+      disqualify: "[Range]"
+    - criterion: "Annual revenue"
+      ideal: "[Range]"
+      acceptable: "[Range]"
+      disqualify: "[Range]"
+    - criterion: "Funding stage"
+      ideal: "[Stage]"
+      acceptable: "[Stage]"
+      disqualify: "[Stage]"
+    - criterion: "Industry"
+      ideal: "[List]"
+      acceptable: "[List]"
+      disqualify: "[List]"
+    - criterion: "Geography"
+      ideal: "[Regions]"
+      acceptable: "[Regions]"
+      disqualify: "[Regions]"
+    - criterion: "Business model"
+      ideal: "[B2B/B2C/etc]"
+      acceptable: "[Types]"
+      disqualify: "[Types]"
+
+  technographic_signals:
+    - type: "CRM"
+      ideal_stack: "[Tools]"
+      why_matters: "[Indicates X]"
+    - type: "Marketing tools"
+      ideal_stack: "[Tools]"
+      why_matters: "[Indicates X]"
+    - type: "Engineering stack"
+      ideal_stack: "[Tools]"
+      why_matters: "[Indicates X]"
+    - type: "Existing solutions"
+      ideal_stack: "[Tools]"
+      why_matters: "[Competitor or complement]"
+    detection_methods:
+      - "Job postings (BuiltWith, LinkedIn jobs)"
+      - "G2/Capterra reviews they've left"
+      - "GitHub repos (if relevant)"
+      - "Integration requests"
+
+  organizational_signals:
+    - signal: "Hiring for [role]"
+      good_fit: "[Why good]"
+      bad_fit: "[Why bad]"
+    - signal: "Recently raised"
+      good_fit: "[Why good]"
+      bad_fit: "[Why bad]"
+    - signal: "New [title] hired"
+      good_fit: "[Why good]"
+      bad_fit: "[Why bad]"
+    - signal: "Public growth metrics"
+      good_fit: "[Why good]"
+      bad_fit: "[Why bad]"
+
+psychographic_criteria:
+  pain_point_intensity:
+    - pain: "[Pain 1]"
+      intensity: "[1-10]"
+      urgency: "[Daily/Weekly/Monthly]"
+      frequency: "[How often]"
+      alternatives: "[What they do instead]"
+    - pain: "[Pain 2]"
+      intensity: "[1-10]"
+      urgency: "[Daily/Weekly/Monthly]"
+      frequency: "[How often]"
+      alternatives: "[What they do instead]"
+
+  trigger_events:
+    - trigger: "New exec hire"
+      why_urgent: "[Reason]"
+      detection: "LinkedIn alerts, news"
+      timing_window: "First 90 days"
+    - trigger: "Funding round"
+      why_urgent: "[Reason]"
+      detection: "Crunchbase, news"
+      timing_window: "First 6 months"
+    - trigger: "Competitor loss"
+      why_urgent: "[Reason]"
+      detection: "G2 reviews, LinkedIn"
+      timing_window: "Immediate"
+    - trigger: "Scaling pain"
+      why_urgent: "[Reason]"
+      detection: "Job postings, growth"
+      timing_window: "Ongoing"
+    - trigger: "Tech migration"
+      why_urgent: "[Reason]"
+      detection: "Job postings, news"
+      timing_window: "3-6 month window"
+    - trigger: "Compliance deadline"
+      why_urgent: "[Reason]"
+      detection: "Industry news"
+      timing_window: "Before deadline"
+
+  buying_behavior:
+    - behavior: "Research style"
+      icp_signal: "[How they research]"
+      non_icp_signal: "[Red flag behavior]"
+    - behavior: "Decision speed"
+      icp_signal: "[Typical timeline]"
+      non_icp_signal: "[Too fast/slow]"
+    - behavior: "Budget authority"
+      icp_signal: "[Who decides]"
+      non_icp_signal: "[Diffuse/unclear]"
+    - behavior: "Risk tolerance"
+      icp_signal: "[Early adopter/etc]"
+      non_icp_signal: "[Requires consensus]"
+
+  mindset_values:
+    - dimension: "Growth orientation"
+      icp: "[Description]"
+      non_icp: "[Description]"
+    - dimension: "Technology adoption"
+      icp: "[Description]"
+      non_icp: "[Description]"
+    - dimension: "Investment philosophy"
+      icp: "[Description]"
+      non_icp: "[Description]"
+    - dimension: "Success metrics"
+      icp: "[What they measure]"
+      non_icp: "[What they measure]"
+
+buyer_personas:
+  economic_buyer:
+    who: "[Title(s)]"
+    reports_to: "[Title]"
+    budget_authority: "$[Range]"
+    goals:
+      - "[Goal 1]"
+      - "[Goal 2]"
+    fears:
+      - "[Fear 1]"
+      - "[Fear 2]"
+    success_metrics:
+      - "[Metric 1]"
+      - "[Metric 2]"
+    messaging: "[Key message that speaks to their priorities]"
+    objections:
+      - objection: "[Objection 1]"
+        response: "[How to handle]"
+      - objection: "[Objection 2]"
+        response: "[How to handle]"
+
+  champion:
+    who: "[Title(s)]"
+    reports_to: "[Title]"
+    motivation: "[Why they champion]"
+    goals:
+      - "[Goal 1]"
+      - "[Goal 2]"
+    success_outcomes:
+      - "[What makes them look good 1]"
+      - "[What makes them look good 2]"
+    enablement:
+      - "[Resource/content they need]"
+      - "[Talking points for internal selling]"
+
+  user:
+    who: "[Title(s)]"
+    daily_workflow: "[Description]"
+    pain_frequency: "[Daily/Weekly]"
+    goals:
+      - "[Goal 1]"
+      - "[Goal 2]"
+    frustrations:
+      - "[Frustration 1]"
+      - "[Frustration 2]"
+    adoption_drivers:
+      - "[What makes them actually use it]"
+
+  blocker:
+    who: "[Title(s)]"
+    why_they_block:
+      - "[Reason 1]"
+      - "[Reason 2]"
+    concerns:
+      - "[Concern 1]"
+      - "[Concern 2]"
+    neutralization:
+      - "[Strategy 1]"
+      - "[Strategy 2]"
+    walk_away_signal: "[Signal that blocker will kill deal]"
+
+anti_icp:
+  hard_disqualifiers:
+    - signal: "[Signal 1]"
+      reason: "[Why disqualify]"
+      exception: "[If any]"
+    - signal: "[Signal 2]"
+      reason: "[Why disqualify]"
+      exception: "[If any]"
+
+  soft_disqualifiers:
+    - signal: "[Signal 1]"
+      risk: "[What goes wrong]"
+      mitigation: "[How to handle]"
+    - signal: "[Signal 2]"
+      risk: "[What goes wrong]"
+      mitigation: "[How to handle]"
+
+  time_waster_profiles:
+    tire_kicker:
+      signals: "[How to spot]"
+      cost: "[Wasted time/resources]"
+      escape: "[How to qualify out fast]"
+    feature_demander:
+      signals: "[How to spot]"
+      cost: "[Wasted roadmap/resources]"
+      escape: "[How to handle]"
+    discount_hunter:
+      signals: "[How to spot]"
+      cost: "[Margin erosion]"
+      escape: "[How to handle]"
+    consensus_seeker:
+      signals: "[How to spot]"
+      cost: "[Infinite sales cycle]"
+      escape: "[How to qualify out]"
+
+  red_flag_questions:
+    - question: "[Question 1]"
+      indicates: "[Problem]"
+    - question: "[Question 2]"
+      indicates: "[Problem]"
+
+scoring_matrix:
+  criteria:
+    - criterion: "Company size"
+      weight: "[X]%"
+      ideal_3pts: "[Criteria]"
+      good_2pts: "[Criteria]"
+      acceptable_1pt: "[Criteria]"
+      disqualify_0pts: "[Criteria]"
+    - criterion: "Industry"
+      weight: "[X]%"
+      ideal_3pts: "[Criteria]"
+      good_2pts: "[Criteria]"
+      acceptable_1pt: "[Criteria]"
+      disqualify_0pts: "[Criteria]"
+    - criterion: "Pain intensity"
+      weight: "[X]%"
+      ideal_3pts: "[Criteria]"
+      good_2pts: "[Criteria]"
+      acceptable_1pt: "[Criteria]"
+      disqualify_0pts: "[Criteria]"
+    - criterion: "Budget"
+      weight: "[X]%"
+      ideal_3pts: "[Criteria]"
+      good_2pts: "[Criteria]"
+      acceptable_1pt: "[Criteria]"
+      disqualify_0pts: "[Criteria]"
+    - criterion: "Timeline"
+      weight: "[X]%"
+      ideal_3pts: "[Criteria]"
+      good_2pts: "[Criteria]"
+      acceptable_1pt: "[Criteria]"
+      disqualify_0pts: "[Criteria]"
+    - criterion: "Champion present"
+      weight: "[X]%"
+      ideal_3pts: "[Criteria]"
+      good_2pts: "[Criteria]"
+      acceptable_1pt: "[Criteria]"
+      disqualify_0pts: "[Criteria]"
+    - criterion: "Tech fit"
+      weight: "[X]%"
+      ideal_3pts: "[Criteria]"
+      good_2pts: "[Criteria]"
+      acceptable_1pt: "[Criteria]"
+      disqualify_0pts: "[Criteria]"
+    - criterion: "Commitment velocity"
+      weight: "10-15%"
+      ideal_3pts: "3+ micro-yes/week"
+      good_2pts: "1-2 micro-yes/week"
+      acceptable_1pt: "<1 micro-yes/week"
+      disqualify_0pts: "Ghosting"
+
+  score_interpretation:
+    - range: "85-100%"
+      tier: "Tier 1 - Ideal ICP"
+      action: "Prioritize, full resources, founder attention"
+    - range: "70-84%"
+      tier: "Tier 2 - Good Fit"
+      action: "Standard process, good prospect"
+    - range: "50-69%"
+      tier: "Tier 3 - Acceptable"
+      action: "Qualify harder, watch for red flags"
+    - range: "<50%"
+      tier: "Not ICP"
+      action: "Disqualify or nurture for later"
+
+segments:
+  template:
+    name: "[Segment Name]"
+    description: "[One-line description]"
+    revenue_target_pct: "[X]%"
+    dimensions:
+      company_size: "[Range]"
+      industry: "[List]"
+      primary_pain: "[Pain]"
+      buyer: "[Title]"
+      acv: "$[Range]"
+      sales_cycle: "[Days]"
+    gtm_motion: "[PLG/Sales-led/Hybrid]"
+    key_channels: "[Channels]"
+
+  prioritization:
+    - segment: "[Segment 1]"
+      tam: "$[X]"
+      win_rate: "[X]%"
+      acv: "$[X]"
+      cac: "$[X]"
+      ltv: "$[X]"
+      priority: "[1/2/3]"
+    - segment: "[Segment 2]"
+      tam: "$[X]"
+      win_rate: "[X]%"
+      acv: "$[X]"
+      cac: "$[X]"
+      ltv: "$[X]"
+      priority: "[1/2/3]"

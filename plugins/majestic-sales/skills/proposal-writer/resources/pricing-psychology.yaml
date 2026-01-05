@@ -1,0 +1,130 @@
+# Pricing Psychology Strategy
+
+anchoring:
+  principle: "Present pricing using strategic anchoring to influence perception of value"
+  steps:
+    - step: 1
+      action: "Anchor high first"
+      description: "Lead with premium/enterprise tier to set reference point"
+    - step: 2
+      action: "Recommend middle"
+      description: "Guide to mid-tier option (highest margin, best value perception)"
+    - step: 3
+      action: "Offer downsell"
+      description: "Provide entry option for budget-constrained prospects"
+  example:
+    - tier: "Enterprise"
+      price: "$50K"
+      note: "Full scale anchor"
+    - tier: "Business"
+      price: "$30K"
+      note: "⭐ Recommended"
+    - tier: "Starter"
+      price: "$15K"
+      note: "Entry option"
+
+psychological_tactics:
+  bundle_bonuses:
+    principle: "Inflate perceived value without cutting price"
+    examples:
+      - "Includes $5K in implementation services (marginal cost to you: $500)"
+      - "3 months priority support ($2K value)"
+      - "Quarterly strategy sessions ($3K value)"
+
+  investment_framing:
+    bad: "The cost is $30K"
+    good: "The investment is $30K, which delivers $150K in annual value"
+
+  decoy_pricing:
+    principle: "Make middle option attractive"
+    example:
+      - tier: "Premium"
+        price: "$50K"
+        note: "Only 20% more features than Business"
+      - tier: "Business"
+        price: "$30K"
+        note: "⭐ Looks like better deal"
+      - tier: "Starter"
+        price: "$15K"
+        note: "Missing key features"
+
+value_perception_rules:
+  - "Show original price with discount: ~~$35K~~ $30K (creates urgency)"
+  - "Bundle related services: Appears higher value than à la carte"
+  - "Never apologize for pricing: Confidence signals quality"
+
+pricing_options_template:
+  option_a:
+    name: "[Name - Premium/Complete]"
+    best_for: "[When this makes sense]"
+    components:
+      - item: "[Item 1]"
+        investment: "$[X]"
+      - item: "[Item 2]"
+        investment: "$[X]"
+      - item: "[Item 3]"
+        investment: "$[X]"
+    total: "$[X]"
+    includes: "[Key differentiator from other options]"
+
+  option_b:
+    name: "[Name - Recommended] ⭐"
+    best_for: "[When this makes sense - position as ideal]"
+    components:
+      - item: "[Item 1]"
+        investment: "$[X]"
+      - item: "[Item 2]"
+        investment: "$[X]"
+    total: "$[X]"
+    includes: "[What's included]"
+    recommendation: "Recommended based on your goals of [specific goal from discovery]"
+
+  option_c:
+    name: "[Name - Starter/Essential]"
+    best_for: "[When this makes sense]"
+    components:
+      - item: "[Item 1]"
+        investment: "$[X]"
+    total: "$[X]"
+    note: "[What's limited/excluded]"
+
+payment_terms:
+  milestones:
+    - milestone: "Upon signing"
+      percentage: "[X]%"
+      amount: "$[X]"
+      due: "Contract execution"
+    - milestone: "[Milestone 1]"
+      percentage: "[X]%"
+      amount: "$[X]"
+      due: "[Date/event]"
+    - milestone: "[Milestone 2]"
+      percentage: "[X]%"
+      amount: "$[X]"
+      due: "[Date/event]"
+    - milestone: "Final delivery"
+      percentage: "[X]%"
+      amount: "$[X]"
+      due: "[Date/event]"
+
+roi_justification:
+  metrics:
+    - metric: "[Metric 1]"
+      current_cost: "$[X]"
+      after_implementation: "$[Y]"
+      annual_savings: "$[Savings]"
+    - metric: "[Metric 2]"
+      current_cost: "$[X]"
+      after_implementation: "$[Y]"
+      annual_savings: "$[Savings]"
+  total_annual_value: "$[Total]"
+  payback_period: "[X] months"
+  three_year_roi: "[X]%"
+
+optional_addons:
+  - addon: "[Add-on 1]"
+    description: "[Description]"
+    investment: "$[X]"
+  - addon: "[Add-on 2]"
+    description: "[Description]"
+    investment: "$[X]"

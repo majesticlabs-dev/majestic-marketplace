@@ -1,0 +1,250 @@
+# Proposal Section Templates
+
+executive_summary:
+  note: "Most important page - many stakeholders only read this"
+
+  challenge:
+    intro: "During our conversations, [Champion Name] shared that [Company] is facing:"
+    pain_points:
+      - pain: "[Pain Point 1]"
+        impact: "[Specific impact - quantified if possible]"
+      - pain: "[Pain Point 2]"
+        impact: "[Specific impact - quantified if possible]"
+      - pain: "[Pain Point 3]"
+        impact: "[Specific impact - quantified if possible]"
+    urgency: "[One sentence on cost of inaction or urgency]"
+
+  solution:
+    intro: "[Company Name] proposes [solution name/description] to help [Prospect] achieve:"
+    outcomes:
+      - outcome: "[Outcome 1]"
+        result: "[Measurable result]"
+      - outcome: "[Outcome 2]"
+        result: "[Measurable result]"
+      - outcome: "[Outcome 3]"
+        result: "[Measurable result]"
+
+  investment:
+    components:
+      - phase: "[Phase/Component 1]"
+        investment: "$[X]"
+        timeline: "[Duration]"
+      - phase: "[Phase/Component 2]"
+        investment: "$[X]"
+        timeline: "[Duration]"
+    total:
+      investment: "$[X]"
+      timeline: "[Duration]"
+
+  why_us: "[2-3 sentences on why you're the right partner - differentiation, not features]"
+
+  next_steps:
+    - action: "[Action 1]"
+      owner: "[Owner]"
+      date: "[Date]"
+    - action: "[Action 2]"
+      owner: "[Owner]"
+      date: "[Date]"
+    - action: "[Action 3]"
+      owner: "[Owner]"
+      date: "[Date]"
+
+understanding_approach:
+  current_situation:
+    intro: "Based on our discussions with [names], we understand that [Company]:"
+    current_state:
+      - "[Current process/situation]"
+      - "[Tools/methods currently used]"
+      - "[Team structure/resources]"
+    challenges:
+      - "[Challenge 1 with specific detail from discovery]"
+      - "[Challenge 2 with specific detail from discovery]"
+      - "[Challenge 3 with specific detail from discovery]"
+    impact:
+      - "[Quantified business impact if available]"
+      - "[Qualitative impact on team/operations]"
+
+  future_state:
+    intro: "[Company] envisions:"
+    outcomes:
+      - "[Desired outcome 1]"
+      - "[Desired outcome 2]"
+      - "[Desired outcome 3]"
+    success_metrics:
+      - metric: "[Metric 1]"
+        current: "[Current]"
+        target: "[Goal]"
+        timeline: "[When]"
+      - metric: "[Metric 2]"
+        current: "[Current]"
+        target: "[Goal]"
+        timeline: "[When]"
+
+  methodology:
+    phases:
+      - name: "[Phase/Pillar 1]"
+        description: "[2-3 sentences on what this involves and why it matters]"
+      - name: "[Phase/Pillar 2]"
+        description: "[2-3 sentences on what this involves and why it matters]"
+      - name: "[Phase/Pillar 3]"
+        description: "[2-3 sentences on what this involves and why it matters]"
+
+  differentiators:
+    - typical: "[What others do]"
+      ours: "[What we do differently]"
+      benefit: "[Outcome for them]"
+    - typical: "[What others do]"
+      ours: "[What we do differently]"
+      benefit: "[Outcome for them]"
+
+scope_of_work:
+  deliverable_template:
+    name: "[Deliverable/Component Name]"
+    description: "[What it is]"
+    includes:
+      - "[Specific item]"
+      - "[Specific item]"
+      - "[Specific item]"
+    acceptance_criteria: "[How they'll know it's complete]"
+
+  exclusions:
+    - item: "[Exclusion 1]"
+      alternative: "Available as [add-on/phase 2]"
+    - item: "[Exclusion 2]"
+      alternative: "[Reason or alternative]"
+    - item: "[Exclusion 3]"
+      alternative: "[Reason or alternative]"
+
+  assumptions:
+    note: "Changes to these assumptions may impact timeline or investment"
+    items:
+      - "[Assumption about their team/resources]"
+      - "[Assumption about timeline/availability]"
+      - "[Assumption about access/information]"
+      - "[Assumption about decision process]"
+
+  client_responsibilities:
+    intro: "For project success, [Company] will:"
+    items:
+      - "[Designate point of contact]"
+      - "[Provide access to systems]"
+      - "[Attend weekly calls]"
+      - "[Timely feedback/approvals]"
+
+timeline:
+  milestones:
+    - milestone: "Kickoff"
+      description: "Project initiation meeting"
+      target: "Week 1"
+      deliverable: "Kickoff deck, project plan"
+    - milestone: "[Milestone 2]"
+      description: "[Description]"
+      target: "Week [X]"
+      deliverable: "[Deliverable]"
+    - milestone: "[Milestone 3]"
+      description: "[Description]"
+      target: "Week [X]"
+      deliverable: "[Deliverable]"
+    - milestone: "Go-Live"
+      description: "[Description]"
+      target: "Week [X]"
+      deliverable: "[Deliverable]"
+
+  key_dates:
+    - event: "Proposal valid until"
+      date: "[Date]"
+      notes: "Pricing guaranteed"
+    - event: "Decision needed by"
+      date: "[Date]"
+      notes: "To meet [their deadline]"
+    - event: "Kickoff"
+      date: "[Date]"
+      notes: "Assuming [decision date]"
+    - event: "Go-live"
+      date: "[Date]"
+      notes: "[Any dependencies]"
+
+social_proof:
+  case_study:
+    client: "[Client 1 - Similar Industry/Size]"
+    challenge: "[Similar to prospect's challenge]"
+    solution: "[What you did]"
+    result: "[Quantified outcome]"
+    testimonial:
+      quote: "[Testimonial quote]"
+      name: "[Name]"
+      title: "[Title]"
+      company: "[Company]"
+
+  industry_clients: "[Logos or names of relevant clients]"
+
+  metrics:
+    - metric: "Years in business"
+      value: "[X]"
+    - metric: "Clients served"
+      value: "[X]+"
+    - metric: "[Relevant metric]"
+      value: "[X]"
+    - metric: "Customer satisfaction"
+      value: "[X]%"
+
+team_support:
+  project_team:
+    - role: "Account Executive"
+      name: "[Name]"
+      responsibility: "Overall relationship, escalation"
+      experience: "[Relevant experience]"
+    - role: "Project Lead"
+      name: "[Name]"
+      responsibility: "Day-to-day delivery"
+      experience: "[Relevant experience]"
+    - role: "[Specialist]"
+      name: "[Name]"
+      responsibility: "[Area of focus]"
+      experience: "[Relevant experience]"
+
+  support_model:
+    implementation:
+      - "[Communication cadence - e.g., weekly calls]"
+      - "[Response time commitments]"
+      - "[Escalation path]"
+    post_implementation:
+      - "[Ongoing support model]"
+      - "[SLA if applicable]"
+      - "[Account management]"
+
+terms:
+  contract:
+    term: "[Duration]"
+    payment: "[Net 30, etc.]"
+    cancellation: "[Policy]"
+
+  next_steps:
+    - step: 1
+      action: "Review proposal, gather questions"
+      owner: "[Prospect]"
+      date: "[Date]"
+    - step: 2
+      action: "Q&A call to finalize scope"
+      owner: "Both"
+      date: "[Date]"
+    - step: 3
+      action: "Legal/procurement review"
+      owner: "[Prospect]"
+      date: "[Date]"
+    - step: 4
+      action: "Contract signature"
+      owner: "Both"
+      date: "[Date]"
+    - step: 5
+      action: "Kickoff meeting"
+      owner: "Both"
+      date: "[Date]"
+
+  acceptance:
+    prospect:
+      company: "[Prospect Company Name]"
+      fields: ["Signature", "Name", "Title", "Date"]
+    vendor:
+      company: "[Your Company Name]"
+      fields: ["Signature", "Name", "Title", "Date"]

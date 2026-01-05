@@ -1,0 +1,95 @@
+# Delivery Models & Alternative Proposal Formats
+
+exploratory_outline:
+  name: "Trojan Horse Proposal"
+  purpose: "Faster close velocity with exploratory outlines instead of full proposals"
+  when_to_use:
+    - "Early-stage discussions where full proposal feels premature"
+    - "Deals with significant uncertainty or evolving scope"
+    - "Prospects who resist traditional sales process"
+    - "When you want to turn objections into collaborative refinements"
+
+  template:
+    title: "EXPLORATORY OUTLINE: [Solution] for [Company]"
+    sections:
+      what_we_heard:
+        intro: "Based on our conversations:"
+        items:
+          - "[Pain point 1]"
+          - "[Pain point 2]"
+          - "[Desired outcome]"
+
+      proposed_direction:
+        phases:
+          - name: "[Name]"
+            approach: "[High-level approach]"
+            deliverable: "[Key deliverable]"
+            question: "Does this align with your Q[X] goals?"
+          - name: "[Name]"
+            approach: "[High-level approach]"
+            deliverable: "[Key deliverable]"
+            question: "Would this timing work for your team?"
+
+      investment_range:
+        ballpark: "$[X] - $[Y]"
+        depends_on:
+          - "[Variable 1]"
+          - "[Variable 2]"
+        question: "Is this in the range you're thinking?"
+
+      next_steps:
+        process:
+          - "You review and share feedback"
+          - "We adjust based on your input"
+          - "We formalize into a detailed proposal"
+        closing: "This is a starting point, not a final offer. What questions does this raise?"
+
+done_with_you:
+  name: "Done-With-You Delivery Model"
+  target: "$30K+ Deals"
+  description: "Hybrid delivery to accelerate trust and reduce perceived risk"
+
+  comparison:
+    - aspect: "Approach"
+      traditional: "We deliver, you implement"
+      done_with_you: "We build together"
+    - aspect: "Risk"
+      traditional: "Higher perceived risk"
+      done_with_you: "Lower risk (you're involved)"
+    - aspect: "Process"
+      traditional: "Black box process"
+      done_with_you: "Transparent collaboration"
+    - aspect: "Knowledge"
+      traditional: "Knowledge transfer at end"
+      done_with_you: "Learning throughout"
+
+  phases:
+    foundation:
+      timing: "Weeks 1-2"
+      activities:
+        - "Joint kickoff workshop"
+        - "We facilitate, you participate"
+        - "Build initial framework together"
+        - "Immediate knowledge transfer"
+
+    co_creation:
+      timing: "Weeks 3-6"
+      activities:
+        - "Weekly working sessions (2-3 hours)"
+        - "We guide, you co-create"
+        - "Your team learns by doing"
+        - "Real-time feedback and iteration"
+
+    handoff:
+      timing: "Weeks 7-8"
+      activities:
+        - "Transition to independence"
+        - "We support, you lead"
+        - "Ongoing advisory as needed"
+
+  investment:
+    - "Same total investment as done-for-you"
+    - "Requires [X] hours/week from your team"
+    - "Faster time-to-value due to continuous alignment"
+
+  recommended_for: "$30K+ engagements where client has internal capacity and wants deeper involvement"

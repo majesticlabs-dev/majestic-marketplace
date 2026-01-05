@@ -1,0 +1,131 @@
+# Win-Back Offers & Feedback Collection
+
+offer_by_churn_reason:
+  - reason: "Price-sensitive"
+    recommended: "Discount (25-50%), extended trial, downgrade option"
+    avoid: "Premium features"
+  - reason: "Competition"
+    recommended: "Feature match, switching assistance, comparison"
+    avoid: "Generic discount"
+  - reason: "Non-usage"
+    recommended: "Free training, onboarding call, success manager"
+    avoid: "Price discounts"
+  - reason: "Poor experience"
+    recommended: "Apology + credit, priority support, fixed issues"
+    avoid: "Generic win-back"
+  - reason: "Changed needs"
+    recommended: "Future trigger, pause option, downgrade"
+    avoid: "Active win-back"
+  - reason: "Payment failure"
+    recommended: "Easy update link, grace period"
+    avoid: "Discount (not needed)"
+
+discount_strategy:
+  - segment: "High-value"
+    discount: "50% off"
+    duration: "3 months"
+    conditions: "Annual commit"
+  - segment: "Mid-value"
+    discount: "30% off"
+    duration: "2 months"
+    conditions: "Quarterly commit"
+  - segment: "Low-value"
+    discount: "20% off"
+    duration: "1 month"
+    conditions: "Monthly"
+
+non_discount_offers:
+  - offer: "Extended trial"
+    best_for: "Non-users"
+    implementation: "14-30 days free"
+  - offer: "Free upgrade"
+    best_for: "Feature-sensitive"
+    implementation: "Premium tier for 1 month"
+  - offer: "1:1 onboarding"
+    best_for: "Complex products"
+    implementation: "30-min call included"
+  - offer: "Priority support"
+    best_for: "Support issues"
+    implementation: "Skip the queue for 90 days"
+  - offer: "Pause subscription"
+    best_for: "Temporary situation"
+    implementation: "Hold account up to 3 months"
+
+expiration_strategy:
+  - urgency: "Soft"
+    expiration: "14 days"
+    language: "Available for the next two weeks"
+  - urgency: "Medium"
+    expiration: "7 days"
+    language: "Expires this Friday"
+  - urgency: "Hard"
+    expiration: "48 hours"
+    language: "Last chance—gone at midnight"
+
+exit_survey:
+  trigger: "Cancellation confirmation page / email"
+  questions:
+    primary_reason:
+      question: "Primary reason for leaving"
+      options:
+        - "Too expensive"
+        - "Switched to competitor"
+        - "No longer need the product"
+        - "Missing features I need"
+        - "Product too difficult to use"
+        - "Poor customer support"
+        - "Technical issues"
+        - "Other: ________"
+    improvement:
+      question: "What could we have done differently?"
+      type: "open_text"
+    nps:
+      question: "Would you recommend us to others?"
+      type: "scale_1_10"
+    future_contact:
+      question: "May we contact you in the future?"
+      options:
+        - "Yes, keep me updated"
+        - "No, please don't contact me"
+    referral:
+      question: "While we weren't the right fit for you, do you know anyone facing [problem we solve] who might benefit?"
+      type: "open_text_optional"
+
+churn_interview:
+  target: "High-value churned customers"
+  intro: "Hi [Name], thanks for taking the time. I'm reaching out because your feedback is valuable to us, even though you've moved on. This isn't a sales call—I genuinely want to understand what we could do better."
+  questions:
+    - "What originally brought you to [Product]?"
+    - "When did you first start feeling like it might not be the right fit?"
+    - "What was the final trigger that made you decide to leave?"
+    - "Is there anything specific that would have kept you as a customer?"
+    - "What are you using now instead? How is it working?"
+    - "If we fixed [issue they mentioned], would you consider coming back?"
+    - "What one thing would make this a yes next time?"
+  closing: "Thank you so much for your honesty. This is exactly the feedback we need. If anything changes, we'd love to have you back."
+  referral_ask: "One last thing—while we weren't the right fit for you, do you know anyone else facing [problem]? I'd be happy to reach out and see if we can help them."
+
+post_loss_referral:
+  timing: "7-14 days after churn"
+  condition: "Only customers who left on good terms"
+  subject: "Quick favor, {{first_name}}?"
+  body: |
+    Hi {{first_name}},
+
+    I hope [new solution] is working out for you.
+
+    I know we weren't the right fit, but I wanted to ask: do you know anyone else struggling with [problem we solve]?
+
+    If anyone comes to mind, I'd appreciate an intro. No pressure either way.
+
+    Thanks for your time with us.
+
+    [Your name]
+
+    P.S. If your situation ever changes, the door's always open.
+
+feedback_analysis:
+  template:
+    columns: ["Churn Reason", "Count", "% of Total", "Actionable?", "Owner"]
+  action_loop:
+    columns: ["Feedback Theme", "Frequency", "Action", "Status"]

@@ -1,0 +1,145 @@
+# QBR & Expansion Conversations
+
+qbr_template:
+  title: "QUARTERLY BUSINESS REVIEW: [Customer Name]"
+  agenda:
+    duration: "45-60 min"
+    sections:
+      - name: "Success Metrics Review"
+        duration: "15 min"
+      - name: "Roadmap & What's New"
+        duration: "10 min"
+      - name: "Challenges & Opportunities"
+        duration: "15 min"
+      - name: "Next Quarter Planning"
+        duration: "10 min"
+
+  success_metrics:
+    goals_vs_results:
+      columns: ["Goal", "Target", "Actual", "Status"]
+      rows:
+        - goal: "[Goal 1]"
+          target: "[Target]"
+          actual: "[Actual]"
+          status: "[Met/Not Met]"
+        - goal: "[Goal 2]"
+          target: "[Target]"
+          actual: "[Actual]"
+          status: "[Met/Not Met]"
+
+    usage_statistics:
+      columns: ["Metric", "This Quarter", "Last Quarter", "Trend"]
+      rows:
+        - metric: "Active users"
+          this_quarter: "[X]"
+          last_quarter: "[Y]"
+          trend: "[Up/Down X%]"
+        - metric: "[Key metric]"
+          this_quarter: "[X]"
+          last_quarter: "[Y]"
+          trend: "[Trend]"
+
+    roi_summary: |
+      Based on your usage, you've achieved:
+      - [X hours] saved per week
+      - $[Y] in [cost savings / revenue generated]
+      - [Z]% improvement in [metric]
+
+  roadmap:
+    intro: "New Features Relevant to You:"
+    features:
+      - name: "[Feature]"
+        benefit: "[How it helps them specifically]"
+      - name: "[Feature]"
+        benefit: "[How it helps them specifically]"
+    expansion_hook: "This feature is available on [higher tier]. Based on your usage, you'd get [specific benefit]."
+
+  discovery_questions:
+    - "What's preventing you from getting more value from [Product]?"
+    - "If you could change one thing about how your team uses [Product], what would it be?"
+    - "Are there other teams that could benefit from [Product]?"
+    - "What goals do you have for next quarter that we could help with?"
+
+  next_quarter:
+    action_template:
+      - action: "[Action]"
+        owner: "[Name]"
+        by: "[Date]"
+    expansion_pitch: |
+      Based on what we've discussed, I'd recommend exploring [expansion option]. Here's what that would look like:
+      - Additional investment: $[X]
+      - Additional value: [Specific outcome]
+      - Timeline: [Implementation time]
+
+      Would you like me to put together a formal proposal?
+
+expansion_triggers:
+  seat_limit:
+    trigger: "Approaching Seat Limit"
+    subject: "Quick heads up on your account"
+    body: |
+      Hi {{first_name}},
+
+      I noticed {{company}} is at [X]% of your seat limit. You have [Y] seats, and [Z] team members are waiting for access.
+
+      Two options:
+      1. Add [N] seats now ($[X]/month) so everyone can get in
+      2. Review usage to see if anyone can be removed
+
+      Which would you prefer? Happy to hop on a quick call to discuss.
+
+      [Your name]
+
+  power_user:
+    trigger: "Power User Identified"
+    subject: "Your team is crushing it"
+    body: |
+      Hi {{first_name}},
+
+      [Team member] has been using some advanced features that most of our [higher tier] customers use. They've [specific accomplishment].
+
+      Worth exploring whether [higher tier] makes sense for your whole team? It includes [key differentiator].
+
+      [Your name]
+
+  mid_contract:
+    trigger: "6-Month Check-In"
+    subject: "6-month check-in"
+    body: |
+      Hi {{first_name}},
+
+      We're halfway through your contract year. Based on your results so far:
+
+      - You've achieved [X result]
+      - Your team is using [Y% of features]
+      - You mentioned [goal from onboarding]
+
+      I'd like to discuss:
+      1. How we can help you hit [remaining goals] before renewal
+      2. Whether [expansion option] makes sense to accelerate results
+
+      Do you have 30 minutes next week?
+
+      [Your name]
+
+expansion_objections:
+  no_budget:
+    objection: "We don't have budget right now"
+    responses:
+      - "When does your next budget cycle start? Let's plan for that."
+      - "What if we pro-rate it into your existing contract?"
+      - "What ROI would make this a no-brainer for budget approval?"
+
+  underutilized:
+    objection: "We're not using what we have"
+    responses:
+      - "What's blocking adoption? Let's solve that first."
+      - "Which team members would benefit most? Let's focus there."
+      - "Would training help? I can set that up this week."
+
+  defer_renewal:
+    objection: "Let's discuss at renewal"
+    responses:
+      - "Fair enough. What would need to be true for you to expand at renewal?"
+      - "If we started [expansion] now, you'd have [X months] of results to show by renewal."
+      - "Happy to wait—let me send a proposal so you have it when you're ready."

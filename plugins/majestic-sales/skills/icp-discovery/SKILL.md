@@ -55,7 +55,7 @@ Analyze best vs. worst customers to find patterns:
 - Worst customers: Why they churned, warning signs
 - Hypothesis vs. reality gaps
 
-Full template: [resources/icp-templates.md](resources/icp-templates.md)
+Full template: [resources/icp-templates.yaml](resources/icp-templates.yaml)
 
 ### 2. Firmographic Criteria
 
@@ -75,7 +75,7 @@ Plus: Technographic signals (CRM, marketing tools, engineering stack) and organi
 - **Buying behavior**: Research style, decision speed, risk tolerance
 - **Mindset & values**: Growth orientation, tech adoption
 
-Full template: [resources/icp-templates.md](resources/icp-templates.md)
+Full template: [resources/icp-templates.yaml](resources/icp-templates.yaml)
 
 ### 4. Buyer Personas (Within ICP)
 
@@ -86,7 +86,7 @@ Full template: [resources/icp-templates.md](resources/icp-templates.md)
 | **User** | Daily workflow, frustrations, adoption drivers |
 | **Blocker** | Why they block, how to neutralize |
 
-Full persona templates: [resources/icp-templates.md](resources/icp-templates.md)
+Full persona templates: [resources/icp-templates.yaml](resources/icp-templates.yaml)
 
 ### 5. Anti-ICP Definition
 
@@ -125,13 +125,13 @@ For each segment:
 - Monitor for ICP drift
 - Quarterly review cadence
 
-Full framework: [resources/validation-activation.md](resources/validation-activation.md)
+Full framework: [resources/validation-activation.yaml](resources/validation-activation.yaml)
 
 ### 9. Activation Checklist
 
 Update: Outbound targeting, ad audiences, lead scoring, website copy, sales playbook, content calendar, case studies, SDR training.
 
-Full checklist: [resources/validation-activation.md](resources/validation-activation.md)
+Full checklist: [resources/validation-activation.yaml](resources/validation-activation.yaml)
 
 ## Output Format
 

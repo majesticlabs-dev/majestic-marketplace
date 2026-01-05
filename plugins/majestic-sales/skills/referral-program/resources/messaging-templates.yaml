@@ -1,0 +1,65 @@
+# Referral Messaging Templates
+
+email_invite:
+  purpose: "Referrer to Friend"
+  subject: "[First Name], I thought of you"
+  body: |
+    Hey [Friend Name],
+
+    I've been using [Product] for [time period] and thought you'd love it too.
+
+    [One sentence on the core benefit you've experienced]
+
+    I have a special link that gets you [referee reward]. Here it is:
+    [REFERRAL_LINK]
+
+    [Optional: personal note about why you think they'd benefit]
+
+    [Your name]
+
+    P.S. [Secondary benefit or urgency if applicable]
+
+landing_page:
+  headline: "[Referrer Name] wants to give you [reward]"
+  subhead: "Join [X] people who [key benefit] with [Product]"
+  body:
+    - "[Benefit 1 with proof point]"
+    - "[Benefit 2 with proof point]"
+    - "[Benefit 3 with proof point]"
+  cta: "Claim Your [Reward] →"
+  trust_elements:
+    - "[X] customers referred by friends"
+    - "Testimonial from referred customer"
+    - "Security/guarantee badges"
+
+social_share:
+  twitter: "I've been using @[Product] for [outcome achieved]. If you want to try it, here's a link for [reward]: [LINK]"
+  linkedin: "Been getting a lot of questions about how I [achieved outcome]. I use [Product]—and I have a referral link if you want to try it: [LINK]"
+  facebook: "Found a tool that [solves problem]. If anyone wants to try it, I have a link that gets you [reward]: [LINK]"
+
+thank_you:
+  to_referrer:
+    subject: "You earned $[X]! 🎉"
+    body: |
+      Hey [Name],
+
+      [Friend Name] just signed up using your link. Your reward of [reward] has been [credited/sent/applied].
+
+      You've referred [total number] friends so far. Keep sharing:
+      [REFERRAL_LINK]
+
+      Thanks for spreading the word!
+
+  to_referee:
+    subject: "Welcome! [Referrer Name] sent you"
+    body: |
+      Hey [Name],
+
+      Welcome to [Product]! You're here because [Referrer Name] thought you'd benefit.
+
+      Your [reward] has been applied to your account.
+
+      Here's how to get started:
+      [Onboarding CTA]
+
+      Questions? Just reply to this email.

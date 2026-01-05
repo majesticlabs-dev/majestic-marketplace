@@ -1,0 +1,87 @@
+# Competitive Battle Cards
+
+gap_analysis_framework:
+  discovery_question: "What's one thing your current provider falls short on?"
+
+  follow_up:
+    - step: 1
+      action: "Quantify the impact"
+      prompt: "How much is that costing you in [time/money/opportunity]?"
+    - step: 2
+      action: "Position your strength"
+      prompt: "That's exactly what we built [Product] to solve. Let me show you how we handle [their gap]."
+    - step: 3
+      action: "Summarize with 3-bullet competitive edge"
+      format: |
+        Here's how we're different from [Competitor]:
+        - **[Gap they mentioned]:** We [your approach] vs. their [their limitation]
+        - **[Additional differentiator 1]:** [Specific capability]
+        - **[Additional differentiator 2]:** [Specific capability]
+
+  example:
+    discovery: "What's one thing your current provider falls short on?"
+    prospect_response: "Their reporting is really limited. We can't customize dashboards."
+    follow_up: "How much time does your team spend manually creating reports each week?"
+    prospect_answer: "Probably 10 hours across the team."
+    close: |
+      That's exactly why we built our reporting engine. Here's how we're different from [Competitor]:
+      - **Custom dashboards:** Drag-and-drop builder vs. their fixed templates
+      - **Real-time data:** Live updates vs. their 24-hour lag
+      - **Export flexibility:** Any format vs. CSV only
+
+      That 10 hours goes back to your team immediately.
+
+battle_card_template:
+  quick_stats:
+    columns: ["Attribute", "[Competitor]", "Us"]
+    rows:
+      - attribute: "Founded"
+        value: "[Year]"
+      - attribute: "Pricing"
+        value: "[Model]"
+      - attribute: "Best for"
+        value: "[Segment]"
+      - attribute: "Weakest at"
+        value: "[Area]"
+
+  when_we_win:
+    scenarios:
+      - scenario: "[Scenario 1]"
+        reason: "They choose us because [reason]"
+      - scenario: "[Scenario 2]"
+        reason: "We win when [condition]"
+      - scenario: "[Scenario 3]"
+        reason: "Our advantage is [feature/capability]"
+
+  when_we_lose:
+    scenarios:
+      - scenario: "[Scenario 1]"
+        reason: "They choose [Competitor] because [reason]"
+      - scenario: "[Scenario 2]"
+        reason: "We lose when [condition]"
+    counter_strategy: "[Strategy]"
+
+  positioning_statement: "[Competitor] is a great choice if you need [their strength]. We're different because we focus on [our strength], which means [benefit to customer]. Most companies choose us when [ideal scenario]."
+
+  landmines:
+    purpose: "Questions that expose competitor weakness"
+    questions:
+      - "How do they handle [thing they do poorly]?"
+      - "Ask them about [known issue]."
+      - "What happens when you need [capability they lack]?"
+
+  objection_handling:
+    cheaper:
+      objection: "[Competitor] is cheaper"
+      response: "You're right - and here's why. [Competitor] doesn't include [X, Y, Z]. When you add those, the total cost is actually [comparison]."
+    feature:
+      objection: "[Competitor] has feature X"
+      response: "True - and here's why we built it differently. [Explanation of our approach and why it's better for them]."
+
+  customer_proof:
+    template: "[Similar company] evaluated [Competitor] and chose us because [reason]. Quote: \"[direct quote about why they chose us]\""
+
+  do_not_say:
+    - "[Negative statement that backfires]"
+    - "[Claim we can't substantiate]"
+    - "[Anything that acknowledges competitor strength unnecessarily]"

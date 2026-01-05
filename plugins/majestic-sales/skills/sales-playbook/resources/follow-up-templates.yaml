@@ -1,0 +1,57 @@
+# Follow-Up Email Templates
+
+post_discovery:
+  timing: "Within 24 hours of discovery call"
+  subject: "Next steps for {{company}}"
+  body: |
+    Hi {{first_name}},
+
+    Thanks for the conversation today. Based on what we discussed:
+
+    **What I heard:**
+    - [Pain point 1] is costing you [impact]
+    - [Stakeholder X] needs to weigh in on [concern]
+    - Timeline goal: [date/quarter]
+
+    **Proposed next steps:**
+    1. [Action 1] - Me - [Date]
+    2. [Action 2] - You - [Date]
+    3. [Action 3] - Both - [Date]
+
+    Does this align with what you're thinking? Reply with any adjustments.
+
+    [Your name]
+
+investment_framing:
+  purpose: "For price objection handling"
+  template: |
+    Based on what you've shared:
+    - [Problem] is currently costing you $[X] per [month/year]
+    - Our solution eliminates [Y]% of that cost
+    - That's $[savings] in your pocket within [timeframe]
+    - The investment is $[price], which pays for itself in [X] months
+
+    What matters more to you - the upfront investment or the ongoing return?
+
+shadow_selling:
+  purpose: "Internal pitch framework for champion"
+  talking_points:
+    opening: "I've been evaluating [Product] to solve [our problem]. Here's what I found."
+    risk_free: "We can start with a [pilot/trial] to prove value before full commitment."
+    cost: "The investment is $[X], which pays for itself in [Y] months based on [our current cost of the problem]."
+    implementation: "Implementation takes [timeframe] with [minimal disruption to team]."
+    competitor_comparison: "I evaluated [Competitor]. They fall short on [gap], which is critical for us."
+    data_close: "[Similar company in our industry] saw [result] in [timeframe]. I believe we can achieve similar results."
+
+champion_support_materials:
+  provide:
+    - item: "ROI Calculator"
+      description: "Pre-filled with their numbers"
+    - item: "One-page summary"
+      description: "Executive-friendly overview"
+    - item: "Comparison chart"
+      description: "You vs. competitors on their key criteria"
+    - item: "Reference contacts"
+      description: "Similar companies they can call"
+    - item: "FAQ document"
+      description: "Anticipated questions with answers"

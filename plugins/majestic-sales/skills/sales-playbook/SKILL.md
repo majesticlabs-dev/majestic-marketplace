@@ -89,7 +89,7 @@ Track "micro-yes" count (replies, meeting books, questions asked) per lead in th
 
 ### 3. Discovery Call Framework
 
-See [resources/discovery-framework.md](resources/discovery-framework.md) for complete structure including:
+See [resources/discovery-framework.yaml](resources/discovery-framework.yaml) for complete structure including:
 - Pre-call prep checklist
 - Opening script with agenda-setting
 - Situation → Problem → Impact → Future State flow
@@ -98,7 +98,7 @@ See [resources/discovery-framework.md](resources/discovery-framework.md) for com
 
 ### 4. Demo Framework
 
-See [resources/demo-framework.md](resources/demo-framework.md) for complete structure including:
+See [resources/demo-framework.yaml](resources/demo-framework.yaml) for complete structure including:
 - Pre-demo prep checklist
 - Problem → Solution → Proof demo flow
 - Handling demo objections
@@ -106,7 +106,7 @@ See [resources/demo-framework.md](resources/demo-framework.md) for complete stru
 
 ### 5. Objection Handling Library
 
-See [resources/objection-handling.md](resources/objection-handling.md) for complete playbook covering:
+See [resources/objection-handling.yaml](resources/objection-handling.yaml) for complete playbook covering:
 - LAER framework (Listen, Acknowledge, Explore, Respond)
 - Price objections with investment framing
 - Timing objections
@@ -117,14 +117,14 @@ See [resources/objection-handling.md](resources/objection-handling.md) for compl
 
 ### 6. Competitive Battle Cards
 
-See [resources/battle-cards.md](resources/battle-cards.md) for template including:
+See [resources/battle-cards.yaml](resources/battle-cards.yaml) for template including:
 - Competitor gap analysis discovery question
 - 3-bullet competitive edge framework
 - Battle card template with positioning, landmines, proof
 
 ### 7. Closing Techniques
 
-See [resources/closing-techniques.md](resources/closing-techniques.md) for techniques including:
+See [resources/closing-techniques.yaml](resources/closing-techniques.yaml) for techniques including:
 - Trial closes
 - Assumptive, summary, urgency closes
 - Shadow selling (arming champions)

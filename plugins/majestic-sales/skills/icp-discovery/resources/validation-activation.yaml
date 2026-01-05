@@ -1,0 +1,87 @@
+# ICP Validation & Activation
+
+validation_questions:
+  - question: "Can you name 10+ companies that fit this ICP?"
+    if_no: "ICP too narrow or aspirational"
+  - question: "Do your best customers actually fit this ICP?"
+    if_no: "ICP is theoretical, not data-driven"
+  - question: "Can you reach this ICP affordably?"
+    if_no: "Right ICP, wrong go-to-market"
+  - question: "Is this ICP big enough to hit revenue goals?"
+    if_no: "Need to expand or add segments"
+
+customer_interview:
+  target: "5-10 best-fit customers"
+  opening: "I'm trying to understand what made us a good fit for you so we can help more companies like yours."
+  questions:
+    - "What was happening in your business when you started looking for a solution?"
+    - "What other solutions did you consider? Why didn't you choose them?"
+    - "Who else was involved in the decision? What were their concerns?"
+    - "What would have happened if you didn't solve this problem?"
+    - "What surprised you most about working with us?"
+    - "Who else do you know that has this same problem?"
+
+signal_validation:
+  template:
+    columns: ["ICP Signal", "Validation Method", "Target", "Actual"]
+
+icp_drift_indicators:
+  reevaluate_when:
+    - "Win rate drops below [X]%"
+    - "Churn rate exceeds [X]%"
+    - "Sales cycle extends beyond [X] days"
+    - "ACV trends downward"
+    - "Best customers no longer match profile"
+
+quarterly_review:
+  metrics:
+    - metric: "Win rate for ICP tier 1"
+      track: "quarterly"
+    - metric: "Churn rate for ICP tier 1"
+      track: "quarterly"
+    - metric: "% of pipeline that is ICP"
+      track: "quarterly"
+    - metric: "ICP criteria changes needed?"
+      track: "quarterly"
+
+activation_checklist:
+  update_assets:
+    - asset: "Outbound targeting"
+      action: "Update Apollo/ZoomInfo/LinkedIn filters"
+    - asset: "Ad audiences"
+      action: "Rebuild lookalike and interest-based audiences"
+    - asset: "Lead scoring"
+      action: "Update CRM scoring model"
+    - asset: "Website copy"
+      action: "Align messaging to ICP pain points"
+    - asset: "Sales playbook"
+      action: "Update discovery questions and objection handling"
+    - asset: "Content calendar"
+      action: "Plan content for ICP pain points"
+    - asset: "Case studies"
+      action: "Prioritize stories from ICP customers"
+    - asset: "SDR training"
+      action: "Role-play ICP conversations"
+
+  communication:
+    share_with:
+      - "Sales team"
+      - "Marketing team"
+      - "Product team"
+      - "Customer success"
+      - "Executives"
+
+post_activation_metrics:
+  track:
+    - metric: "Lead-to-meeting rate"
+      compare: ["Before ICP", "After ICP (30d)", "After ICP (90d)"]
+    - metric: "Meeting-to-opportunity rate"
+      compare: ["Before ICP", "After ICP (30d)", "After ICP (90d)"]
+    - metric: "Win rate"
+      compare: ["Before ICP", "After ICP (30d)", "After ICP (90d)"]
+    - metric: "Average sales cycle"
+      compare: ["Before ICP", "After ICP (30d)", "After ICP (90d)"]
+    - metric: "Average ACV"
+      compare: ["Before ICP", "After ICP (30d)", "After ICP (90d)"]
+    - metric: "90-day churn"
+      compare: ["Before ICP", "After ICP (30d)", "After ICP (90d)"]

@@ -1,0 +1,129 @@
+# Tracking & Launch Guide
+
+attribution:
+  data_points:
+    - field: "Referrer ID"
+      purpose: "Credit rewards"
+      tracking: "Unique code in URL"
+    - field: "Referee ID"
+      purpose: "Match relationships"
+      tracking: "Account creation"
+    - field: "Referral timestamp"
+      purpose: "Attribution window"
+      tracking: "Event logging"
+    - field: "Conversion event"
+      purpose: "Trigger rewards"
+      tracking: "Purchase/signup event"
+    - field: "Reward status"
+      purpose: "Fulfillment"
+      tracking: "Database flag"
+
+tracking_methods:
+  url_parameter:
+    format: "yoursite.com/?ref=USER123"
+    pros:
+      - "Simple to implement"
+      - "Works across sessions with cookies"
+    cons:
+      - "Vulnerable to cookie deletion"
+
+  unique_link:
+    format: "yoursite.com/r/USER123"
+    pros:
+      - "Cleaner URLs"
+      - "Better for sharing"
+    cons:
+      - "Requires redirect handling"
+
+  hybrid:
+    approach:
+      - "Unique links for active sharing"
+      - "Cookies for attribution persistence"
+      - "Email/account matching as backup"
+
+fraud_prevention:
+  - fraud_type: "Self-referral"
+    prevention: "Email domain matching, IP tracking"
+  - fraud_type: "Fake accounts"
+    prevention: "Email verification, phone verification"
+  - fraud_type: "Abuse at scale"
+    prevention: "Rate limiting, manual review thresholds"
+  - fraud_type: "Reward exploitation"
+    prevention: "Delayed reward release, clawback terms"
+
+attribution_window:
+  - model: "First-touch"
+    window: "30-90 days"
+    best_for: "Longer sales cycles"
+  - model: "Last-touch"
+    window: "7-14 days"
+    best_for: "Impulse purchases"
+  - model: "Multi-touch"
+    window: "Weighted"
+    best_for: "Complex journeys"
+
+launch_roadmap:
+  phase_1:
+    name: "Soft Launch"
+    timing: "Week 1-2"
+    goals:
+      - "Test mechanics with small group"
+      - "Identify friction points"
+      - "Baseline metrics"
+    actions:
+      - "Launch to top 10% of customers (NPS promoters)"
+      - "Personal outreach explaining program"
+      - "Monitor closely for issues"
+      - "Gather qualitative feedback"
+    success_criteria:
+      - "[X]% participation rate"
+      - "No technical issues"
+      - "Positive feedback"
+
+  phase_2:
+    name: "Expansion"
+    timing: "Week 3-4"
+    goals:
+      - "Increase visibility"
+      - "Optimize based on learnings"
+      - "Build momentum"
+    actions:
+      - "Launch to all existing customers"
+      - "Add in-app prompts"
+      - "Email announcement"
+      - "Optimize landing page based on data"
+    success_criteria:
+      - "[X] referrals generated"
+      - "[X]% conversion rate"
+      - "K-factor > [X]"
+
+  phase_3:
+    name: "Optimization"
+    timing: "Week 5+"
+    goals:
+      - "Maximize viral coefficient"
+      - "Scale sustainably"
+      - "Automate operations"
+    actions:
+      - "A/B test incentive levels"
+      - "A/B test messaging"
+      - "Add gamification elements"
+      - "Implement advanced fraud detection"
+
+ab_testing:
+  priorities:
+    - test: "Incentive amount"
+      hypothesis: "Higher reward → more shares"
+      metric: "Shares per customer"
+    - test: "Incentive type"
+      hypothesis: "Credit vs. cash"
+      metric: "Conversion rate"
+    - test: "CTA placement"
+      hypothesis: "Earlier prompt → more action"
+      metric: "Click rate"
+    - test: "Email timing"
+      hypothesis: "Day 7 vs. Day 14"
+      metric: "Response rate"
+    - test: "Landing page"
+      hypothesis: "Video vs. text"
+      metric: "Signup rate"
