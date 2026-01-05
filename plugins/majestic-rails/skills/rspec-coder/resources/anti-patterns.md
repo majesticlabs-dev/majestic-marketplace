@@ -112,3 +112,52 @@ RSpec.describe User do
   end
 end
 ```
+
+## ❌ Freezing fixtures with exact collection assertions
+
+Tests that assert exact collections "freeze" fixtures—adding new fixture records breaks unrelated tests.
+
+```ruby
+# ❌ BAD - Adding any new active project fixture breaks this test
+it "returns active projects" do
+  expect(Project.active).to eq([projects(:active1), projects(:active2)])
+end
+
+# ❌ BAD - Exact count freezes how many fixtures can exist
+it "counts active projects" do
+  expect(Project.active.count).to eq(2)
+end
+```
+
+### ✅ Flexible assertions that survive fixture changes
+
+```ruby
+# ✅ GOOD - Test passes regardless of other fixtures added
+it "includes active projects and excludes inactive" do
+  expect(Project.active).to include(projects(:active1))
+  expect(Project.active).to include(projects(:active2))
+  expect(Project.active).not_to include(projects(:inactive))
+end
+
+# ✅ GOOD - For ordering tests, verify sort property instead of exact order
+it "returns projects in name order" do
+  names = Project.ordered.map(&:name)
+  expect(names).to eq(names.sort)
+end
+
+# ✅ GOOD - Test relative count changes, not absolute values
+it "activating adds to active count" do
+  project = projects(:inactive)
+  expect { project.activate! }.to change { Project.active.count }.by(1)
+end
+```
+
+### Key Principle
+
+**Test the property you care about, not the exact fixture state.**
+
+| Instead of... | Use... |
+|---------------|--------|
+| `expect(collection).to eq([a, b])` | `expect(collection).to include(a, b)` |
+| `expect(collection.count).to eq(2)` | `expect { action }.to change { ... }.by(n)` |
+| `expect(sorted).to eq([a, b, c])` | `expect(names).to eq(names.sort)` |

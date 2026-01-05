@@ -86,6 +86,7 @@ When invoked, you must follow these steps:
 - No error case coverage
 - Tests tightly coupled to implementation details
 - Missing database state verification
+- **Frozen fixture assertions**: Exact collection comparisons (`assert_equal [a, b], scope` or `expect(scope).to eq([a, b])`) that break when unrelated fixtures are added. Recommend `assert_includes`/`expect(...).to include(...)` instead.
 
 ## Test Quality Review Report
 

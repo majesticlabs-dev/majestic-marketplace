@@ -161,3 +161,58 @@ test "something" do
   user = users(:alice)  # Fast fixture lookup
 end
 ```
+
+---
+
+## Frozen Fixtures Anti-Pattern
+
+Tests that assert exact collections "freeze" fixtures—adding new fixture records breaks unrelated tests.
+
+### ❌ Freezing fixtures with exact collection assertions
+
+```ruby
+# BAD: Adding any new active project fixture breaks this test
+test "returns active projects" do
+  assert_equal [projects(:active1), projects(:active2)], Project.active
+end
+
+# BAD: Exact count freezes how many fixtures can exist
+test "counts active projects" do
+  assert_equal 2, Project.active.count
+end
+```
+
+### ✅ Flexible assertions that survive fixture changes
+
+```ruby
+# GOOD: Test passes regardless of other fixtures added
+test "includes active projects and excludes inactive" do
+  assert_includes Project.active, projects(:active1)
+  assert_includes Project.active, projects(:active2)
+  refute_includes Project.active, projects(:inactive)
+end
+
+# GOOD: For ordering tests, verify sort property instead of exact order
+test "returns projects in name order" do
+  names = Project.ordered.map(&:name)
+  assert_equal names, names.sort
+end
+
+# GOOD: Test relative count changes, not absolute values
+test "activating adds to active count" do
+  project = projects(:inactive)
+  assert_difference "Project.active.count", 1 do
+    project.activate!
+  end
+end
+```
+
+### Key Principle
+
+**Test the property you care about, not the exact fixture state.**
+
+| Instead of... | Use... |
+|---------------|--------|
+| `assert_equal [a, b], collection` | `assert_includes` for each expected item |
+| `assert_equal 2, collection.count` | `assert_difference` for count changes |
+| `assert_equal [a, b, c], sorted` | `assert_equal names, names.sort` |
