@@ -6,6 +6,11 @@ default_branch: {{default_branch}}
 tech_stack: generic
 app_status: development
 
+# Owner Context - Tailors skill outputs to your experience level
+# Skills adjust explanations based on this (beginner|intermediate|senior|expert)
+owner:
+  level: {{owner_level}}
+
 # Workflow
 task_management: {{task_management}}
 workflow_labels:                      # Issue workflow states

@@ -12,12 +12,35 @@ The config file has **core fields** plus **stack-specific fields** based on tech
 
 | Version | Changes |
 |---------|---------|
+| 1.6 | Added `owner.level` for experience-based skill tailoring |
 | 1.5 | Added `lessons_path` for learnings discovery, deprecated `review_topics_path` |
 | 1.4 | Multi-stack `tech_stack` (array support), built-in toolbox presets |
 | 1.3 | Added `commit.pre_prompt`, `commit.post_prompt` for LLM-based commit hooks |
 | 1.2 | Moved `auto_create_task` under `plan:` namespace |
 | 1.1 | Added `workflow_labels`, `workspace_setup.post_create` |
 | 1.0 | Initial release |
+
+### Migration from 1.5 to 1.6
+
+**Backwards compatible:** New optional field.
+
+New format (1.6) adds owner context for experience-based skill tailoring:
+```yaml
+# Owner Context - Skills adjust explanations based on level
+owner:
+  level: intermediate  # beginner | intermediate | senior | expert
+  # For multi-stack projects, specify per-technology:
+  # rails: senior
+  # react: beginner
+```
+
+**Level definitions:**
+- `beginner` - New to the technology, skills provide detailed explanations
+- `intermediate` - Comfortable with basics, focus on advanced patterns
+- `senior` - Deep knowledge, skip basics, focus on edge cases
+- `expert` - Authoritative, minimal explanation, just show the code
+
+**Why the change:** Skills can now tailor outputs to the user's experience. Instead of "You are an expert..." persona prompting, skills use audience framing that references this config.
 
 ### Migration from 1.4 to 1.5
 

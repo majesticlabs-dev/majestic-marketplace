@@ -35,6 +35,7 @@ Assemble `.agents.yml` from collected user answers during `/majestic:init`.
 2. Replace placeholders with collected answers:
    - `{{config_version}}` - Read from `CONFIG_VERSION` file
    - `{{default_branch}}` - From git detection or user answer
+   - `{{owner_level}}` - beginner, intermediate, senior, expert
    - `{{task_management}}` - github, linear, beads, file, none
    - Stack-specific fields from user answers
 3. Conditionally include/exclude sections:
