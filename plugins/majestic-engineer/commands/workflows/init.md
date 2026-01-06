@@ -60,15 +60,15 @@ Capture experience level to tailor skill outputs (explanations, assumed knowledg
 
 | Question | Options |
 |----------|---------|
-| Experience Level | Beginner, Intermediate, Senior, Expert |
+| Experience Level | Expert (Recommended), Senior, Intermediate, Beginner |
 
 **Multi-stack projects** (e.g., Rails + React detected):
 
 Ask per-stack:
 | Question | Options |
 |----------|---------|
-| Rails Experience | Beginner, Intermediate, Senior, Expert |
-| React Experience | Beginner, Intermediate, Senior, Expert |
+| Rails Experience | Expert (Recommended), Senior, Intermediate, Beginner |
+| React Experience | Expert (Recommended), Senior, Intermediate, Beginner |
 
 **Level definitions:**
 - **Beginner**: New to the technology, needs detailed explanations
