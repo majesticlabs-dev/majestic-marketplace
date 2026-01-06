@@ -2,6 +2,16 @@
 
 All notable changes to majestic-tools will be documented in this file.
 
+## [3.10.0] - 2026-01-05
+
+### Added
+
+- **`/burst-generator` command** - Generate multiple response variants with probability scores
+  - Adaptive probability interpretation based on request type (marketing → conversion, tech → feasibility, etc.)
+  - Configurable count: `count:N`, `n:N`, `Nx` syntax (default: 5, max: 10)
+  - Diversity enforcement - each variant meaningfully different
+  - Summary table with recommendations
+
 ## [3.5.0] - 2025-12-29
 
 ### Removed
