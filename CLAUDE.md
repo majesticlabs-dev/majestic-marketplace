@@ -45,6 +45,18 @@ plugins/{engineer,rails,python,react,marketing,sales,company,llm,tools,agent-sdk
 - Skills: <500 lines
 - Agents: <300 lines
 
+### Step Numbering Conventions
+
+| Pattern | When to Use | Example |
+|---------|-------------|---------|
+| `1, 2, 3...` | Main sequential steps | Step 1, Step 2, Step 3 |
+| `1.1, 1.2` | Substeps or alternatives under a parent | Step 11.1, Step 11.2, Step 11.3 |
+
+**Rules:**
+- Start numbering at 1, never 0
+- Prefer adding new main steps over decimals (renumber if needed)
+- ❌ Never use: `0A`, `8.5`, `Step 0`, letter suffixes
+
 ### File Locations
 - Skill resources → `skills/*/resources/`
 - Agent resources → `agents/**/resources/{agent-name}/`

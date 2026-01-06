@@ -60,6 +60,17 @@
 - [ ] Documentation completeness
 - [ ] Code review approval
 
+## Definition of Done
+
+Work is complete when ALL of the following are checked:
+
+- [ ] [DOD_ITEM_1]
+- [ ] [DOD_ITEM_2]
+- [ ] [DOD_ITEM_3]
+- [ ] [DOD_ITEM_4]
+
+> User-defined completion criteria from requirements gathering
+
 ## Success Metrics
 
 [Detailed KPIs and measurement methods]

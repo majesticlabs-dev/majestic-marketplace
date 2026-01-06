@@ -10,6 +10,11 @@
 - [ ] Core requirement 1
 - [ ] Core requirement 2
 
+## Definition of Done
+
+- [ ] [DOD_ITEM_1]
+- [ ] [DOD_ITEM_2]
+
 ## Context
 
 [Any critical information]
