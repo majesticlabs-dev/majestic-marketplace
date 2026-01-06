@@ -178,7 +178,7 @@ Incorporate feedback and update the plan file.
 Skill(skill: "config-reader", args: "auto_preview false")
 ```
 
-If `auto_preview` is `true`: Show plan content using `Read(file_path="docs/plans/<filename>.md")`
+If `auto_preview` is `true`: Execute `open docs/plans/<filename>.md`
 
 **MANDATORY: Use AskUserQuestion to present options:**
 
