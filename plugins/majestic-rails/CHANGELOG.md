@@ -2,6 +2,15 @@
 
 All notable changes to majestic-rails will be documented in this file.
 
+## [3.12.3] - 2026-01-05
+
+### Added
+
+- **`gem-builder` engine migrations reference** - Keep migrations in Rails engines:
+  - Initializer pattern to add engine migrations to host app automatically
+  - Guard clause for dummy app test environments
+  - Anti-patterns: direct Migrator manipulation, mixed approaches, relative paths
+
 ## [3.12.1] - 2026-01-02
 
 ### Changed

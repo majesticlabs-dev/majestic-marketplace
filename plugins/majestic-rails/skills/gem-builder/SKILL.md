@@ -333,3 +333,4 @@ bundle exec rake release
 
 - `references/templates.md` - Copy-paste templates (CI, gemspec, README)
 - `references/advanced-patterns.md` - Database adapters, multi-version testing
+- `references/engine-migrations.md` - Keep migrations in Rails engines
