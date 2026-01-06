@@ -166,6 +166,34 @@
       "source": "./plugins/majestic-python"
     },
     {
+      "name": "majestic-data",
+      "description": "Data engineering and ETL tools. Includes 11 specialized agents, 4 commands, and 8 skills for pandas, SQL, ETL pipelines, data validation, and quality monitoring.",
+      "version": "1.0.0",
+      "author": {
+        "name": "David Paluy",
+        "url": "https://github.com/dpaluy",
+        "email": "marketplace@it.majesticlabs.dev"
+      },
+      "homepage": "https://github.com/majesticlabs-dev/majestic-marketplace/tree/master/plugins/majestic-data",
+      "tags": [
+        "data",
+        "etl",
+        "pandas",
+        "sql",
+        "csv",
+        "parquet",
+        "dbt",
+        "data-validation",
+        "data-quality",
+        "data-pipelines",
+        "schema",
+        "migration",
+        "data-profiling",
+        "drift-detection"
+      ],
+      "source": "./plugins/majestic-data"
+    },
+    {
       "name": "majestic-marketing",
       "description": "Marketing and SEO tools for Claude Code. Includes 15 specialized agents, 5 commands, and 38 skills.",
       "version": "3.13.0",
