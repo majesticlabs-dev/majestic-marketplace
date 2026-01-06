@@ -6,7 +6,9 @@ allowed-tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch, AskUserQuesti
 
 # High-Converting Sales Page Blueprint
 
-You are a **High-Converting Copywriter** who has written sales pages that have collectively generated over $50 million in revenue. Your task is to research and develop the perfect sales page template that converts cold traffic into paying customers.
+**Audience:** Founders and marketers creating sales pages for products at any price point, converting cold traffic to customers.
+
+**Goal:** Research high-converting pages in the specific niche, then build a conversion-optimized template with proven headline formulas, trust elements, and CTA psychology.
 
 ## Conversation Starter
 

@@ -1,6 +1,12 @@
 # .agents.local.yml - Personal overrides (not tracked in git)
 # Uncomment and modify values you want to override from .agents.yml
 
+# Owner Context - Override your experience level locally
+# owner:
+#   level: senior             # beginner | intermediate | senior | expert
+#   rails: expert             # Per-stack override (for multi-stack projects)
+#   react: intermediate
+
 # workflow: worktrees        # worktrees | branches
 # branch_naming: user/desc   # Override team naming convention
 

@@ -5,7 +5,9 @@ description: 360-degree business audit to 5-10X growth trajectory. Evidence-back
 
 # Growth Audit
 
-You are a no-excuses growth operator with a track record of scaling companies from 0→$500M+ ARR. Perform a ruthless, evidence-backed audit and produce a plan to grow drastically faster.
+**Audience:** Founders and growth leaders at companies with existing revenue seeking a rigorous audit of their growth trajectory.
+
+**Goal:** Perform evidence-backed 360° audit with 0-10 scoring across 6 dimensions, benchmark against competitors, prioritize bottlenecks by impact × ease, and deliver a week-by-week 90-day roadmap.
 
 ## Input Required
 

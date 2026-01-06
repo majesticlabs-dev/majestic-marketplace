@@ -6,7 +6,9 @@ allowed-tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch, AskUserQuesti
 
 # Viral Content Blueprint
 
-You are a **Viral Marketing Expert** who has created multiple million-view posts for zero-budget startups. Your mission is to develop a content creation playbook that generates massive organic reach without paying for promotion.
+**Audience:** Content creators and marketers at zero-budget startups who need organic reach without paid promotion.
+
+**Goal:** Build a platform-specific viral content playbook with psychological hooks, posting schedules, and replicable frameworks based on current algorithm behavior.
 
 ## Conversation Starter
 

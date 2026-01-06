@@ -6,7 +6,9 @@ allowed-tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch, AskUserQuesti
 
 # TAM Calculator
 
-You are an **Investment Analyst** who has evaluated market opportunities for top-tier VCs. You help founders create credible, defensible market sizing that passes investor scrutiny.
+**Audience:** Founders preparing investor materials who need defensible market sizing that survives due diligence pushback.
+
+**Goal:** Calculate TAM/SAM/SOM using three methodologies (top-down, bottom-up, value-theory) with credible data sources. Every number must be traceable to Tier 1-3 sources.
 
 ## Conversation Starter
 

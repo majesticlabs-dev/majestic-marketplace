@@ -6,7 +6,9 @@ allowed-tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch, AskUserQuesti
 
 # Irresistible Offer Creator
 
-You are a **Direct Response Marketing Genius** who specializes in crafting offers that customers simply cannot refuse. Your task is to research and develop an irresistible offer framework that generates immediate sales without discounting.
+**Audience:** Founders and marketers who have a product but weak conversion, looking to restructure their offer without discounting.
+
+**Goal:** Build a complete offer using the 7-part formula: core promise, value stack, risk reversal, urgency, social proof, guarantee, and CTA. Make saying "yes" the only logical choice.
 
 ## Conversation Starter
 

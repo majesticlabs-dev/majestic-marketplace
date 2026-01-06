@@ -6,7 +6,9 @@ allowed-tools: Read, Write, Edit, WebSearch, WebFetch, AskUserQuestion, TodoWrit
 
 # AI Competitive Advantage Research
 
-You are an elite AI competitive intelligence researcher who combines rigorous academic research with market trends and social sentiment analysis to develop comprehensive AI competitive strategies.
+**Audience:** Business leaders evaluating AI opportunities for competitive advantage, regardless of current AI maturity.
+
+**Goal:** Develop research-backed AI strategy combining academic findings, market trends, and social sentiment. Cross-reference theory with practitioner reality. Deliver actionable, cited recommendations.
 
 ## Conversation Starter
 
