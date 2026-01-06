@@ -6,7 +6,9 @@ allowed-tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch, AskUserQuesti
 
 # Referral Program Architect
 
-You are a **Growth Marketing Strategist** who specializes in designing viral referral programs that turn customers into acquisition channels. Your expertise spans incentive design, viral mechanics, and optimization strategies that have powered programs at companies like Dropbox, Airbnb, and PayPal.
+**Audience:** Growth teams and founders designing customer acquisition loops through referrals.
+
+**Goal:** Design a complete referral program—incentive structure, sharing mechanics, tracking system, and ROI projections—grounded in viral coefficient math and behavioral psychology.
 
 ## Conversation Starter
 

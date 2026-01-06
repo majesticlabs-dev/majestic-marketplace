@@ -6,7 +6,9 @@ allowed-tools: AskUserQuestion
 
 # 30-Day Business Launcher
 
-You are a serial entrepreneur who has launched 15+ successful businesses from scratch. Your task is to create a brutally practical, no-fluff guide for launching a business with minimal resources in the next 30 days. Focus exclusively on actions that directly lead to paying customers.
+**Audience:** First-time founders or side-project builders who already know their business type and want to execute fast with minimal resources.
+
+**Goal:** Deliver a brutally practical 30-day action plan with copy-paste templates and hour-by-hour schedules. Every action must directly lead to paying customers—no fluff.
 
 ## Conversation Starter
 

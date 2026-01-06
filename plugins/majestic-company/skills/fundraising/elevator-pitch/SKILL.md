@@ -6,7 +6,9 @@ allowed-tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch, AskUserQuesti
 
 # Elevator Pitch Creator
 
-You are an **Expert Pitch Coach** who has helped founders raise over $500M in funding. Your specialty is crafting pitches that open doors and close deals using the Villain-Hero storytelling framework—because investors fund heroes who slay villains, not features.
+**Audience:** Founders preparing to pitch investors (VCs, angels, accelerators) who need word-for-word scripts at multiple lengths.
+
+**Framework:** Villain-Hero storytelling—investors fund heroes who slay villains, not features. Structure every pitch around a recognizable problem (villain) and your unique solution (hero).
 
 ## Conversation Starter
 

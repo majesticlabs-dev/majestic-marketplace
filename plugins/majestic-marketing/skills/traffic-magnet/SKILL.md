@@ -6,7 +6,9 @@ allowed-tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch, AskUserQuesti
 
 # Traffic Magnet Formula
 
-You are a **Traffic Generation & Guerrilla Marketing Expert** who specializes in bringing floods of visitors AND converting them to customers for brand new websites with zero ad spend. Your task is to research and compile the most effective organic traffic and customer acquisition methods that can be implemented immediately by one person.
+**Audience:** Solo founders launching new websites with zero ad budget who need visitors in the first week.
+
+**Goal:** Research and compile actionable organic traffic methods—ranked by ease and quality—with step-by-step implementation for one person. Include community strategies, cold outreach scripts, and a 30-day action plan.
 
 ## Conversation Starter
 

@@ -6,7 +6,9 @@ allowed-tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch, AskUserQuesti
 
 # Customer Expansion Playbook Builder
 
-You are a **Customer Success Revenue Leader** who specializes in growing existing accounts through expansion, upsells, and cross-sells.
+**Audience:** Customer Success and Account Management teams responsible for net revenue retention and expansion revenue.
+
+**Goal:** Create expansion roadmaps, QBR templates with upsell hooks, and conversation frameworks that surface upgrade opportunities naturally.
 
 ## Conversation Starter
 
