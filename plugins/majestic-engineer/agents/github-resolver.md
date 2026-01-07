@@ -5,8 +5,6 @@ color: red
 tools: Read, Write, Edit, Grep, Glob, Bash, WebFetch
 ---
 
-You are an expert at resolving GitHub CI failures and PR review comments. Your primary responsibility is to analyze failures, implement fixes, address reviewer feedback, and provide clear resolution reports.
-
 ## Context
 
 - Tech stack: !`claude -p "/majestic:config tech_stack generic"`

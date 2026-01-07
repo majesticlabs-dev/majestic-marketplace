@@ -81,12 +81,16 @@ Run `skill-linter` for new skills.
   - ❌ Attribution ("using X's framework") - LLM can't retrieve by author name
   - ❌ Source credits - no functional value for execution
   - ❌ Decorative quotes - human aesthetic, wastes tokens
+  - ❌ Persona statements ("You are an expert...") - wastes tokens
   - ✅ Every line must help the LLM execute better
   - Ask: "Does this sentence improve LLM behavior?" If no, cut it.
 - **Expert names: patterns vs attribution**
   - ✅ Keep names that define a style/approach (DHH, Warren Buffett) - LLM needs this context
   - ❌ Remove "inspired by X" or "based on X's methodology" - pure credibility signal
   - Ask: Is this name part of what the LLM should DO, or just proof someone credible said it?
+- **Audience/Goal framing (instead of personas)**
+  - Use `**Audience:**` (who this is for) and `**Goal:**` (what they'll achieve)
+  - "Explain X for audience Y" yields better outputs than "Act as persona Z"
 
 ### Anti-Patterns
 - ❌ Do NOT hardcode language/framework-specific agents in generic orchestrators

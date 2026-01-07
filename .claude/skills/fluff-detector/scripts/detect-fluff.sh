@@ -78,11 +78,15 @@ while IFS= read -r line || [[ -n "$line" ]]; do
   lower_line=$(echo "$line" | tr '[:upper:]' '[:lower:]')
 
   # 1. Attribution signals (ERROR)
-  if echo "$line" | grep -qiE '(inspired by|based on .+'"'"'s|according to|as recommended by) [A-Z]'; then
+  if echo "$line" | grep -qiE '(inspired by|based on .+'"'"'s|as recommended by) [A-Z]'; then
     # Exclude "based on user input", "based on config", etc.
     if ! echo "$lower_line" | grep -qE 'based on (user|config|input|the|this|that|your)'; then
       error "$LINE_NUM" "Attribution signal" "$line" "Remove attribution or rephrase as pattern name"
     fi
+  fi
+  # "according to" only for person names (Firstname Lastname pattern)
+  if echo "$line" | grep -qE '[Aa]ccording to [A-Z][a-z]+ [A-Z][a-z]+'; then
+    error "$LINE_NUM" "Attribution signal" "$line" "Remove attribution or rephrase as pattern name"
   fi
 
   # 2. Decorative quotes (WARN)
@@ -100,7 +104,8 @@ while IFS= read -r line || [[ -n "$line" ]]; do
   fi
 
   # 4. Marketing language (ERROR)
-  if echo "$lower_line" | grep -qE '(best-in-class|world-class|cutting-edge|state-of-the-art|revolutionary|game-chang|next-gen|ensures? perfect|guarantee)'; then
+  # Note: "guarantee" excluded - too many false positives with technical "type guarantees"
+  if echo "$lower_line" | grep -qE '(best-in-class|world-class|cutting-edge|state-of-the-art|revolutionary|game-chang|next-gen|ensures? perfect|guarantees? (success|results|quality|perfect))'; then
     error "$LINE_NUM" "Marketing language" "$line" "Remove promotional language"
   fi
 

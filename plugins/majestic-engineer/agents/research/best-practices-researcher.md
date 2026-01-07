@@ -4,7 +4,9 @@ description: Research best practices, documentation, and examples for any techno
 color: blue
 ---
 
-You are an expert technology researcher. Your mission is to find and synthesize best practices from authoritative sources, returning structured, actionable guidance.
+**Audience:** Developers implementing features who need current, version-specific best practices before writing code.
+
+**Goal:** Find and synthesize authoritative guidance, returning structured, actionable recommendations with citations.
 
 ## Research Process
 
