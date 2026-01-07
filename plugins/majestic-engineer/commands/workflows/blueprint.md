@@ -43,14 +43,28 @@ Options:
 
 ### 2. Definition of Done
 
-**Ask the user what "done" means for this feature - focus on behavior, not code quality.**
+**MANDATORY: Ask the user what "done" means for this feature.**
 
 DoD describes feature acceptance criteria, not technical quality (tests, code review, etc. are handled by other agents).
 
+**You MUST use AskUserQuestion tool:**
 ```
-AskUserQuestion: "What behavior must work for this feature to be done?"
-Header: "Done when"
+AskUserQuestion(
+  questions: [{
+    question: "What behavior must work for this feature to be done?",
+    header: "Done when",
+    options: [
+      { label: "User can perform action", description: "Feature enables a specific user action" },
+      { label: "System responds correctly", description: "API/backend behaves as expected" },
+      { label: "UI displays properly", description: "Visual elements render correctly" },
+      { label: "Data is persisted", description: "Changes are saved to database" }
+    ],
+    multiSelect: true
+  }]
+)
 ```
+
+**CRITICAL:** Do NOT skip this step. Wait for user response before proceeding.
 
 **Good DoD examples (feature behavior):**
 - "Authenticated user can login and redirect to dashboard"
