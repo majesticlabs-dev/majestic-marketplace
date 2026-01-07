@@ -212,7 +212,10 @@ Incorporate feedback and update the plan file.
 Skill(skill: "config-reader", args: "auto_preview false")
 ```
 
-If `auto_preview` is `true`: Execute `open docs/plans/<filename>.md`
+**If `auto_preview` is `true`:** Open the plan file in the user's default editor:
+```
+Bash(command: "open docs/plans/<filename>.md")
+```
 
 **MANDATORY: Use AskUserQuestion to present options:**
 
