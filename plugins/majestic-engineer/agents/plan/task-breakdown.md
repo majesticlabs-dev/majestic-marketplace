@@ -2,7 +2,6 @@
 name: task-breakdown
 description: Break implementation plans into small, actionable tasks (1-3 story points) with dependencies and parallelization matrix
 tools: Read, Write, Edit, Grep, Glob, Task
-argument-hint: "[plan] [task-manager]"
 color: cyan
 ---
 
@@ -12,12 +11,7 @@ color: cyan
 
 Transform implementation plans into small, actionable tasks stored in the plan document. Uses Fibonacci-based story point estimation. Does NOT create tasks in external systems - only analyzes and documents.
 
-## Arguments
-
-| Argument | Description |
-|----------|-------------|
-| `plan` | Path to the plan file |
-| `task-manager` | Task manager type (github, beads, linear, etc.) |
+**Expected in task prompt:** Plan file path and task manager type (github, beads, linear, etc.).
 
 ## Instructions
 

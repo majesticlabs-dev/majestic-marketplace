@@ -2,7 +2,6 @@
 name: dod-verifier
 description: Verify Definition of Done items from a plan. Returns structured result for parent agent.
 tools: Bash, Read, Grep, Glob, AskUserQuestion
-argument-hint: "<plan-path> <branch>"
 color: yellow
 ---
 
@@ -10,18 +9,17 @@ color: yellow
 
 Verify that Definition of Done criteria from a plan have been fulfilled. Returns structured result for parent agent.
 
-## Arguments
-
-| Argument | Description |
-|----------|-------------|
-| `plan-path` | Path to the plan file containing DoD section |
-| `branch` | Branch name being verified |
+**Expected in task prompt:** Plan file path and optionally branch name.
 
 ## Process
 
 ### 1. Extract DoD from Plan
 
-Read `$1` (plan file) and parse the `## Definition of Done` table.
+From the task prompt, identify:
+- **Plan path** (required): Path to the plan file containing DoD section
+- **Branch** (optional): Branch name being verified
+
+Read the plan file and parse the `## Definition of Done` table.
 
 ### 2. Verify Each Item
 

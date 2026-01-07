@@ -9,9 +9,7 @@ color: green
 
 Orchestrate the execution phase of task building. Execute ALL steps in order - skipping is not allowed.
 
-```
-agent build-task-workflow-manager "$ARGUMENTS"
-```
+**Expected in task prompt:** Structured input block with task details (see Input section).
 
 ## Input
 

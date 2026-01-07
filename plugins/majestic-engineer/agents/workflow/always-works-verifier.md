@@ -21,7 +21,7 @@ Read config to determine the tech stack:
 
 ### 2. Identify What Changed
 
-Analyze `$ARGUMENTS` or check git status for modified files:
+From the task prompt, identify branch or files to verify. If not specified, check git status for modified files:
 
 ```bash
 git diff --name-only HEAD~1 2>/dev/null || git diff --name-only --cached
