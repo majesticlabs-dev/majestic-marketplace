@@ -60,6 +60,16 @@
 - [ ] Documentation completeness
 - [ ] Code review approval
 
+## Definition of Done
+
+Feature behaviors that must work (code quality handled by other agents):
+
+| Item | Verification |
+|------|--------------|
+| [Feature behavior 1] | [Command or manual check] |
+| [Feature behavior 2] | [Command or manual check] |
+| [Feature behavior 3] | [Command or manual check] |
+
 ## Success Metrics
 
 [Detailed KPIs and measurement methods]

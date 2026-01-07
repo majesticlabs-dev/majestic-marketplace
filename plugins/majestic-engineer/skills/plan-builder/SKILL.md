@@ -45,6 +45,7 @@ Include in every plan:
 - Research findings with file paths (e.g., `src/models/user.rb:42`)
 - External documentation URLs
 - Related issues/PRs if known
+- **Definition of Done** from user input (populated from blueprint Step 2)
 
 ## Conditional Sections
 

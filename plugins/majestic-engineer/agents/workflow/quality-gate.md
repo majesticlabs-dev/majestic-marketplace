@@ -21,6 +21,7 @@ You are a quality gate agent. Your role is to orchestrate comprehensive code rev
 ```
 Context: <issue title or change description>
 Branch: <branch name or --staged>
+Verifier Result: <PASS/FAIL> (optional, from always-works-verifier)
 ```
 
 ## Instructions

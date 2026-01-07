@@ -1,0 +1,73 @@
+backend: beads
+tool: bd
+install: "curl -fsSL https://raw.githubusercontent.com/steveyegge/beads/main/install.sh | bash"
+init: "bd init"
+verify: "bd list"
+
+status_mapping:
+  open: pending
+  in_progress: ready
+  closed: complete
+
+priority_mapping:
+  0: p1      # Critical
+  1: p2      # Important
+  2: p2
+  3: p3      # Nice-to-have
+  4: p3
+
+operations:
+  create:
+    basic: 'bd create "{title}"'
+    with_priority: 'bd create "{title}" -p {priority} -t {type}'
+    full: 'bd create "{title}" -d "{description}" -p {priority} -t {type} --assignee {assignee}'
+    types: [bug, feature, task, chore]
+
+  list:
+    all: "bd list"
+    by_status: "bd list --status {status}"
+    by_priority: "bd list --priority {priority}"
+    json: "bd list --json"
+    ready: "bd ready"  # Key feature: shows unblocked work
+
+  view:
+    command: "bd show {id}"
+
+  update:
+    status: "bd update {id} --status {status}"
+    priority: "bd update {id} --priority {priority}"
+    assignee: "bd update {id} --assignee {assignee}"
+
+  complete:
+    with_reason: 'bd close {id} --reason "{reason}"'
+    multiple: 'bd close {id1} {id2} --reason "{reason}"'
+    simple: "bd close {id}"
+
+dependencies:
+  add: "bd dep add {blocked_id} {blocker_id}"
+  tree: "bd dep tree {id}"
+  cycles: "bd dep cycles"
+  types:
+    blocks: "Task B must complete before task A"
+    related: "Soft connection, doesn't block"
+    parent-child: "Epic/subtask hierarchy"
+    discovered-from: "Auto-created by AI discovery"
+
+features:
+  ready_work:
+    command: "bd ready"
+    description: "Shows issues ready to work on (open status + no blocking deps)"
+    use_case: "AI agents claim next available work without duplication"
+
+  git_sync:
+    description: "Auto-syncs database via JSONL export/import"
+    disable_export: 'bd --no-auto-flush create "..."'
+    disable_import: "bd --no-auto-import list"
+
+mapping:
+  file_to_beads:
+    create_pending: 'bd create "..." -p 2'
+    triage_approve: "bd update {id} --status in_progress"
+    mark_complete: "bd close {id}"
+    check_dependencies: "bd dep tree {id}"
+    list_ready: "bd ready"

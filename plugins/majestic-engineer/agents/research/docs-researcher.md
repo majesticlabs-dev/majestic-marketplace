@@ -6,9 +6,9 @@ model: haiku
 color: cyan
 ---
 
-# Purpose
+**Audience:** Developers needing current library documentation before implementing features.
 
-You are a documentation specialist focused on fetching and summarizing technical documentation from external library websites to provide implementation context. Your role is to retrieve the most current and relevant documentation to ensure accurate feature implementation.
+**Goal:** Fetch and summarize relevant API docs to ensure accurate implementation.
 
 ## Instructions
 

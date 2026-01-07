@@ -19,7 +19,7 @@ Transform feature descriptions into well-structured markdown plans.
 
 ## Workflow
 
-### 0. Interview Option (Optional)
+### 1. Interview (Optional)
 
 For complex or ambiguous features, offer a deep requirements interview first:
 
@@ -27,7 +27,7 @@ For complex or ambiguous features, offer a deep requirements interview first:
 AskUserQuestion: "This feature could benefit from a requirements interview. Would you like to explore it in depth first?"
 Options:
 - "Yes, interview me first" → Skill(skill: "majestic:interview", args: "[feature description]"), then use interview output as refined input
-- "No, proceed to planning" → Continue to Step 1
+- "No, proceed to planning" → Continue to Step 2
 ```
 
 **When to suggest interview:**
@@ -41,7 +41,41 @@ Options:
 - Small, well-defined tasks
 - Features with existing specs/PRDs
 
-### 1. Feature Classification
+### 2. Definition of Done
+
+**Ask the user what "done" means for this feature - focus on behavior, not code quality.**
+
+DoD describes feature acceptance criteria, not technical quality (tests, code review, etc. are handled by other agents).
+
+```
+AskUserQuestion: "What behavior must work for this feature to be done?"
+Header: "Done when"
+```
+
+**Good DoD examples (feature behavior):**
+- "Authenticated user can login and redirect to dashboard"
+- "Form validates email format before submission"
+- "API returns 404 for non-existent resources"
+- "Export button generates CSV with all visible columns"
+
+**Bad DoD examples (already handled by other agents):**
+- ❌ "Tests pass" → always-works-verifier
+- ❌ "Code reviewed" → quality-gate
+- ❌ "No lint errors" → slop-remover
+
+**For each DoD item, capture how to verify:**
+
+| Item | Verification |
+|------|--------------|
+| User can login and redirect | `curl -X POST /login` or manual check |
+| Form validates email | `bundle exec rspec spec/features/signup_spec.rb` |
+| API returns 404 | `curl /api/nonexistent` returns 404 |
+
+**Store the DoD table** - it will be:
+- Written to plan document (Step 8)
+- Verified by `dod-verifier` agent during quality gate
+
+### 3. Feature Classification
 
 Detect feature type and delegate to specialists:
 
@@ -60,7 +94,7 @@ Detect feature type and delegate to specialists:
 Skill(skill: "majestic-devops:devops-plan")
 ```
 
-### 2. Resolve Toolbox + Discover Lessons
+### 4. Resolve Toolbox + Discover Lessons
 
 **Read config values (run in parallel):**
 ```
@@ -78,19 +112,19 @@ Task 2 (majestic-engineer:workflow:lessons-discoverer):
 ```
 
 **Store outputs for subsequent steps:**
-- `research_hooks` → use in Step 3
-- `coding_styles` → use in Step 4
-- `lessons_context` → use in Step 5 (architect)
+- `research_hooks` → use in Step 5
+- `coding_styles` → use in Step 6
+- `lessons_context` → use in Step 7 (architect)
 
 **Error handling:**
-- If no toolbox found: Continue with core agents only (Step 3)
+- If no toolbox found: Continue with core agents only (Step 5)
 - If lessons directory doesn't exist: Continue (no error)
 - If discovery returns 0 lessons: Continue (log "No relevant lessons found")
 - If discovery fails: Log warning, continue with original workflow
 
 These are **non-blocking** - failures do not stop the workflow.
 
-### 3. Research (Parallel Agents)
+### 5. Research (Parallel Agents)
 
 **Core agents (always run):**
 
@@ -110,7 +144,7 @@ Cap at 5 total agents to avoid noise.
 
 Collect results from all agents before proceeding.
 
-### 4. Spec Review + Skill Injection (Parallel)
+### 6. Spec Review + Skill Injection (Parallel)
 
 Run these two steps in parallel - they have no dependencies on each other:
 
@@ -120,27 +154,27 @@ Task(subagent_type="majestic-engineer:plan:spec-reviewer", prompt="Feature: [fea
 Skill(skill: "[each skill from toolbox.coding_styles]")
 ```
 
-**Wait for BOTH to complete before proceeding to Step 5.**
+**Wait for BOTH to complete before proceeding to Step 7.**
 
 Store outputs:
 - `spec_findings` → gaps, edge cases, questions from spec-reviewer
 - `skill_content` → loaded coding style content
 
-### 5. Architecture Design
+### 7. Architecture Design
 
-**CRITICAL: Do NOT run in parallel with Step 4. Wait for spec-reviewer to complete.**
+**CRITICAL: Do NOT run in parallel with Step 6. Wait for spec-reviewer to complete.**
 
 The architect MUST receive spec findings to avoid designing for incomplete requirements.
 
 ```
 Task(subagent_type="majestic-engineer:plan:architect",
-     prompt="Feature: [feature] | Research: [research] | Spec: [spec_findings] | Skills: [skill_content] | Lessons: [lessons_context from Step 2]")
+     prompt="Feature: [feature] | Research: [research] | Spec: [spec_findings] | Skills: [skill_content] | Lessons: [lessons_context from Step 4]")
 ```
 
 The architect agent:
 - Studies existing codebase architecture
 - Designs solution approach informed by spec gaps
-- Considers lessons from past implementations (from Step 2)
+- Considers lessons from past implementations (from Step 4)
 - Identifies integration points
 - Recommends libraries/packages if needed
 
@@ -149,7 +183,7 @@ The architect agent:
 - Apply patterns from similar past work
 - Avoid known pitfalls documented in lessons
 
-### 6. Write Plan
+### 8. Write Plan
 
 Load the plan-builder skill for template guidance:
 ```
@@ -163,7 +197,7 @@ Select template based on complexity:
 
 **Output:** Write to `docs/plans/[YYYYMMDDHHMMSS]_<title>.md`
 
-### 7. Review Plan
+### 9. Review Plan
 
 ```
 Task(subagent_type="majestic-engineer:plan:plan-review", prompt="Review plan at docs/plans/<filename>.md")
@@ -171,7 +205,7 @@ Task(subagent_type="majestic-engineer:plan:plan-review", prompt="Review plan at 
 
 Incorporate feedback and update the plan file.
 
-### 8. Preview and User Options
+### 10. Preview and User Options
 
 **Check auto_preview config:**
 ```
@@ -186,16 +220,16 @@ Question: "Blueprint ready at `docs/plans/<filename>.md`. What next?"
 
 | Option | Action |
 |--------|--------|
-| Build as single task | Go to Step 9A |
-| Break into small tasks | Go to Step 9B |
-| Create as single epic | Go to Step 9C |
-| Deep dive into specifics | Go to Step 8D |
-| Preview plan | Read and display plan content, return to Step 8 |
-| Revise | Ask what to change, return to Step 6 |
+| Build as single task | Go to Step 11.1 |
+| Break into small tasks | Go to Step 11.2 |
+| Create as single epic | Go to Step 11.3 |
+| Deep dive into specifics | Go to Step 10.1 |
+| Preview plan | Read and display plan content, return to Step 10 |
+| Revise | Ask what to change, return to Step 8 |
 
 **IMPORTANT:** After user selects an option, EXECUTE that action. Do not stop.
 
-### 8D: Deep Dive
+### 10.1. Deep Dive
 
 **Ask user what aspect needs more research:**
 
@@ -223,9 +257,9 @@ Task(subagent_type="majestic-engineer:research:web-research", prompt="[user's as
 3. Enrich that section with research findings
 4. Write updated plan: `Edit(file_path="docs/plans/<filename>.md", ...)`
 
-**Return to Step 8** to present options again.
+**Return to Step 10** to present options again.
 
-### 9A: Build Single Task
+### 11.1. Build Single Task
 
 ```
 Skill(skill: "majestic-engineer:workflows:build-task", args="docs/plans/<filename>.md")
@@ -233,7 +267,7 @@ Skill(skill: "majestic-engineer:workflows:build-task", args="docs/plans/<filenam
 
 **End workflow.**
 
-### 9B: Task Breakdown
+### 11.2. Task Breakdown
 
 ```
 Task(subagent_type="majestic-engineer:plan:task-breakdown", prompt="Plan: docs/plans/<filename>.md")
@@ -249,21 +283,21 @@ The agent appends `## Implementation Tasks` section with:
 Skill(skill: "config-reader", args: "blueprint.auto_create_task false")
 ```
 
-- **If `true`:** Skip to Step 10
+- **If `true`:** Skip to Step 12
 - **If `false`:** Ask user "Tasks added to plan. Create these in your task manager?"
-  - If Yes → Go to Step 10
+  - If Yes → Go to Step 12
   - If No → End workflow
 
-### 9C: Single Epic
+### 11.3. Single Epic
 
 Create a single task covering the entire plan:
 ```
 Skill(skill: "backlog-manager")
 ```
 
-Update the plan document with the task reference, then go to Step 11.
+Update the plan document with the task reference, then go to Step 13.
 
-### 10: Create Tasks
+### 12. Create Tasks
 
 For each task in the Implementation Tasks section:
 1. Create task: `Skill(skill: "backlog-manager")`
@@ -278,7 +312,7 @@ For each task in the Implementation Tasks section:
 | Beads | `BEADS-123` |
 | File-based | `TODO-123` |
 
-### 11: Offer Build
+### 13. Offer Build
 
 Use AskUserQuestion:
 
@@ -310,8 +344,8 @@ Question: "Tasks created. Start building?"
 
 - This is a blueprint-only command - no implementation code
 - Research agents run in parallel to save time
-- Step 4 (spec-review + skill injection) runs in parallel internally
-- **Step 5 (architect) MUST wait for Step 4** - architect needs spec findings to avoid designing for incomplete requirements
+- Step 6 (spec-review + skill injection) runs in parallel internally
+- **Step 7 (architect) MUST wait for Step 6** - architect needs spec findings to avoid designing for incomplete requirements
 - Toolbox provides stack-specific capabilities without hardcoding
-- All steps are mandatory except branches (10A/10B/10C)
+- All steps are mandatory except branches (11.1/11.2/11.3)
 - Always execute user's selected option - never stop at presenting choices

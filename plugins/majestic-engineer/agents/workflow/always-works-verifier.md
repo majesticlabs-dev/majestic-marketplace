@@ -5,9 +5,9 @@ tools: Bash, Read, Grep, Glob
 color: yellow
 ---
 
-# Purpose
+**Audience:** Developers who just implemented a feature or fix and need verification it actually works.
 
-You are a verification specialist. Your role is to ensure implementations actually work—not just "should work." You systematically test changes before declaring them complete.
+**Goal:** Systematically test changes before declaring completion - prove it works, don't assume.
 
 ## Core Philosophy
 
@@ -25,7 +25,7 @@ Read config to determine the tech stack:
 
 ### 2. Identify What Changed
 
-Analyze `$ARGUMENTS` or check git status for modified files:
+From the task prompt, identify branch or files to verify. If not specified, check git status for modified files:
 
 ```bash
 git diff --name-only HEAD~1 2>/dev/null || git diff --name-only --cached

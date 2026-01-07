@@ -1,0 +1,73 @@
+tool: bv
+description: "High-performance terminal UI for Beads with dependency graph analysis"
+install: "curl -fsSL https://raw.githubusercontent.com/Dicklesworthstone/beads_viewer/main/install.sh | bash"
+verify: "which bv"
+
+robot_mode:
+  description: "AI-facing commands that return deterministic JSON output"
+  commands:
+    help:
+      command: "bv --robot-help"
+      purpose: "List all robot commands"
+      phase: instant
+    insights:
+      command: "bv --robot-insights"
+      purpose: "Graph metrics (PageRank, betweenness, HITS, critical path, cycles)"
+      phase: 2
+    plan:
+      command: "bv --robot-plan"
+      purpose: "Execution plan: parallel tracks, unblocks lists"
+      phase: 1
+    priority:
+      command: "bv --robot-priority"
+      purpose: "Priority recommendations with reasoning"
+      phase: 2
+    recipes:
+      command: "bv --robot-recipes"
+      purpose: "List available recipes (actionable, blocked, etc.)"
+      phase: instant
+    diff:
+      command: "bv --robot-diff --diff-since {commit_or_date}"
+      purpose: "Issue changes, new/closed, cycles delta"
+      phase: 2
+
+use_cases:
+  next_work: "bv --robot-plan"
+  bottlenecks: "bv --robot-insights"
+  changes_since_sprint: "bv --robot-diff --diff-since HEAD~10"
+  filtered_plan: "bv --recipe actionable --robot-plan"
+
+performance:
+  phases:
+    1:
+      metrics: [degree, topo_sort, basic_stats]
+      availability: instant
+    2:
+      metrics: [pagerank, betweenness, hits, cycles]
+      availability: background_async
+
+  large_graphs:
+    threshold: 500
+    behavior:
+      - "Expensive metrics (betweenness) may be skipped"
+      - "Cycle detection limited"
+      - "Check --robot-insights for skipped flags"
+      - "All algorithms have 500ms timeouts"
+
+  diagnostics:
+    timing: "bv --profile-startup"
+    json: "bv --profile-startup --profile-json"
+
+best_practices:
+  - "Use --robot-plan for immediate work (Phase 1 only)"
+  - "Use --robot-insights for analysis (waits for Phase 2)"
+  - "Avoid --force-full-analysis unless needed"
+  - "Handle partial data - check timeout flags"
+  - "Prefer bv over hand-rolled graph logic"
+
+vs_bd_cli:
+  create_update_close: bd
+  list_ready: "bd ready or bv --robot-plan"
+  graph_analysis: "bv --robot-insights"
+  execution_planning: "bv --robot-plan"
+  dependency_viz: "bv (interactive TUI)"

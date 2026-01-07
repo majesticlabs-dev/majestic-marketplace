@@ -46,7 +46,27 @@ allowed-tools: Bash Read Glob Grep
 |------|-------------|
 | No ASCII art | Box-drawing characters (─│┌┐└┘├┤┬┴┼), arrows (↑↓←→↔), and decorative diagrams waste tokens. LLMs tokenize character-by-character, not visually. Use plain lists or tables instead. |
 | No decorative quotes | Inspirational quotes or attributions ("As X said...") have no functional value for LLM execution. |
+| No persona statements | "You are an expert..." wastes tokens. Use **Audience:** / **Goal:** framing instead. |
 | Functional content only | Every line should improve LLM behavior. Ask: "Does this help Claude execute better?" |
+
+### Audience/Goal Framing (Required)
+
+Replace persona roleplay with audience-focused framing:
+
+**❌ Bad (persona):**
+```
+You are an expert software engineer with deep expertise in testing.
+Your role is to analyze code and generate thorough test coverage.
+```
+
+**✅ Good (audience/goal):**
+```
+**Audience:** Developers needing test coverage for new or changed code.
+
+**Goal:** Generate comprehensive tests based on specified test type and framework.
+```
+
+**Rationale:** "Explain X for audience Y" yields better-tailored outputs than "Act as persona Z".
 
 **ASCII Art Detection Pattern:**
 ```regex

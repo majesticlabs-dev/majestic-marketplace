@@ -2,7 +2,6 @@
 name: task-breakdown
 description: Break implementation plans into small, actionable tasks (1-3 story points) with dependencies and parallelization matrix
 tools: Read, Write, Edit, Grep, Glob, Task
-argument-hint: "[plan] [task-manager]"
 color: cyan
 ---
 
@@ -12,12 +11,7 @@ color: cyan
 
 Transform implementation plans into small, actionable tasks stored in the plan document. Uses Fibonacci-based story point estimation. Does NOT create tasks in external systems - only analyzes and documents.
 
-## Arguments
-
-| Argument | Description |
-|----------|-------------|
-| `plan` | Path to the plan file |
-| `task-manager` | Task manager type (github, beads, linear, etc.) |
+**Expected in task prompt:** Plan file path and task manager type (github, beads, linear, etc.).
 
 ## Instructions
 
@@ -26,6 +20,7 @@ Transform implementation plans into small, actionable tasks stored in the plan d
 Read the plan file and identify:
 - Implementation phases/steps
 - Acceptance criteria
+- **Definition of Done** (from `## Definition of Done` section)
 - Technical components mentioned
 - File paths referenced
 
@@ -135,16 +130,16 @@ Append the `## Implementation Tasks` section to the plan file:
   - Story Points: 3
   - Depends on: none
   - Files: [likely files to modify]
-  - Acceptance: [how to verify done]
+  - DoD: [specific behavior this task must achieve] | [verification command or "manual"]
 
 #### Group B (After Group A)
 
 - [ ] **T2**: [Clear action title]
   - Priority: p2
-  - Story Points: 5
+  - Story Points: 2
   - Depends on: T1
   - Files: [files]
-  - Acceptance: [verification]
+  - DoD: [behavior] | [verification]
 ```
 
 ## Task Title Guidelines

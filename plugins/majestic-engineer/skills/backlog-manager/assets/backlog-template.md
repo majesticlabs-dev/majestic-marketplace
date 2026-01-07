@@ -112,16 +112,20 @@ Links to errors, tests, PRs, documentation, similar issues.
 - **Documentation:** [relevant docs]
 - **Similar patterns:** Issue #200 (completed, ref for approach)
 
-## Acceptance Criteria
+## Definition of Done
 
-Testable checklist items for verifying completion.
+Feature behaviors that must work (code quality handled by other agents):
 
-- [ ] All acceptance criteria checked
-- [ ] Tests pass (unit + integration if applicable)
-- [ ] Code reviewed and approved
-- [ ] (Example) Test coverage > 85%
-- [ ] (Example) Performance metrics acceptable
-- [ ] (Example) Documentation updated
+| Item | Verification |
+|------|--------------|
+| [Feature behavior 1] | [command or manual check] |
+| [Feature behavior 2] | [command or manual check] |
+
+**Example:**
+| Item | Verification |
+|------|--------------|
+| User can login with valid credentials | `curl -X POST /login -d '...'` returns 200 |
+| Invalid password shows error message | manual check |
 
 ## Work Log
 

@@ -1,28 +1,24 @@
 ---
 name: build-task-workflow-manager
-description: |
-  Orchestrates build execution workflow - build, verify, quality, fix loop, and ship.
-  Invoke: agent build-task-workflow-manager "Task ID: ... | Title: ... | Branch: ... | Plan: ... | Build Agent: ... | Fix Agent: ... | Coding Styles: ... | Design System Path: ... | Pre-Ship Hooks: ... | Quality Gate Reviewers: ... | Source: task|plan"
+description: Orchestrates build execution workflow - build, verify, quality, fix loop, and ship.
 tools: Write, Edit, Read, Bash, Skill, AskUserQuestion, Task, Glob, Grep
 color: green
 ---
 
 # Purpose
 
-You are the build task workflow manager agent. Your role is to orchestrate the execution phase of task building after context has been gathered. You MUST execute ALL steps in order - skipping steps is not allowed.
+Orchestrate the execution phase of task building. Execute ALL steps in order - skipping is not allowed.
 
-**Invocation:** Call this agent by name:
-```
-agent build-task-workflow-manager "<arguments>"
-```
+**Expected in task prompt:** Structured input block with task details (see Input section).
 
-## Input Format
+## Input
 
 ```
 Task ID: <task reference or "plan">
 Title: <task title>
 Branch: <feature branch name>
 Plan: <implementation plan content>
+Plan Path: <path to plan file> (for DoD verification)
 Build Agent: <agent name from toolbox or "general-purpose">
 Fix Agent: <agent name from toolbox or "general-purpose">
 Coding Styles: <comma-separated skill names>
@@ -109,7 +105,10 @@ Task (majestic-engineer:workflow:always-works-verifier):
 Run quality-gate with configured reviewers:
 ```
 Task (majestic-engineer:workflow:quality-gate):
-  prompt: Context: <title> | Branch: <branch>
+  prompt: |
+    Context: <title>
+    Branch: <branch>
+    Verifier Result: <result from Step 5>
 ```
 
 **Result:** APPROVED, NEEDS CHANGES, or BLOCKED
@@ -149,7 +148,22 @@ Fix → Slop → Verify → Quality → (Pass? Ship : Fix again)
 
 **This gate is NOT optional.**
 
-### Step 9: Pre-Ship Hooks (skip if Skip Ship: true)
+### Step 9: DoD Verification
+
+Verify Definition of Done from the task/plan:
+
+```
+Task (majestic-engineer:qa:dod-verifier):
+  prompt: <Plan Path> <branch>
+```
+
+**Result handling:**
+- `DOD_RESULT: PASS` → Continue to Step 10
+- `DOD_RESULT: FAIL` → Enter fix loop (Step 7) with failed items as findings
+
+**If Plan Path is empty:** Skip DoD verification (no DoD defined).
+
+### Step 10: Pre-Ship Hooks (skip if Skip Ship: true)
 
 **If `Skip Ship: true`:** Skip this step entirely.
 
@@ -162,7 +176,7 @@ Task (<hook.agent>):
 - **Required hooks:** Block on failure
 - **Optional hooks:** Log warnings only
 
-### Step 10: Ship (skip if Skip Ship: true)
+### Step 11: Ship (skip if Skip Ship: true)
 
 **If `Skip Ship: true`:** Skip this step. Report "Quality gate passed, shipping deferred."
 
@@ -176,7 +190,7 @@ Task (<hook.agent>):
 /majestic-engineer:workflows:ship-it
 ```
 
-### Step 11: Complete Task Status (skip if Skip Ship: true or plan source)
+### Step 12: Complete Task Status (skip if Skip Ship: true or plan source)
 
 **If `Skip Ship: true`:** Skip this step.
 

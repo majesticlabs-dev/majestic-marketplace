@@ -1,0 +1,98 @@
+backend: github
+tool: gh
+config_key: task_management
+
+prerequisites:
+  - "GitHub CLI (gh) installed and authenticated: gh auth status"
+  - "Repository must have Issues enabled"
+  - "Must be in a git repository with GitHub remote"
+
+labels:
+  priority:
+    p1: { color: "FF0000", description: "Critical priority" }
+    p2: { color: "FFA500", description: "Important priority" }
+    p3: { color: "00FF00", description: "Nice-to-have" }
+  status:
+    backlog: { color: "0000FF", description: "Backlog item" }
+    pending: { color: "FFFF00", description: "Needs triage" }
+    ready: { color: "00FFFF", description: "Ready for work" }
+
+  setup: |
+    gh label create backlog --color 0000FF --description "Backlog item" 2>/dev/null || true
+    gh label create p1 --color FF0000 --description "Critical priority" 2>/dev/null || true
+    gh label create p2 --color FFA500 --description "Important priority" 2>/dev/null || true
+    gh label create p3 --color 00FF00 --description "Nice-to-have" 2>/dev/null || true
+    gh label create pending --color FFFF00 --description "Needs triage" 2>/dev/null || true
+    gh label create ready --color 00FFFF --description "Ready for work" 2>/dev/null || true
+
+  validate: "gh label list --json name --jq '.[].name'"
+
+operations:
+  create:
+    basic: 'gh issue create --title "{title}" --body "{body}" --label "backlog"'
+    with_priority: 'gh issue create --title "[{priority}] {title}" --body "{body}" --label "backlog,{priority}"'
+    body_template: |
+      ## Problem Statement
+
+      {problem}
+
+      ## Definition of Done
+
+      | Item | Verification |
+      |------|--------------|
+      | {dod_item} | {verification} |
+
+      ## Priority
+
+      {priority} - {priority_description}
+
+  list:
+    all_backlog: "gh issue list --label backlog --state open"
+    by_priority: "gh issue list --label {priority} --state open"
+    assigned_to_me: "gh issue list --assignee @me --state open"
+    by_milestone: 'gh issue list --milestone "{milestone}"'
+    json: "gh issue list --label backlog --json number,title,labels,state"
+
+  view:
+    terminal: "gh issue view {id}"
+    browser: "gh issue view {id} --web"
+    json: "gh issue view {id} --json title,body,labels,assignees"
+
+  update:
+    add_label: "gh issue edit {id} --add-label {label}"
+    remove_label: "gh issue edit {id} --remove-label {label}"
+    assign: "gh issue edit {id} --add-assignee @{username}"
+    milestone: 'gh issue edit {id} --milestone "{milestone}"'
+    triage: "gh issue edit {id} --remove-label pending --add-label ready"
+    work_log: |
+      gh issue comment {id} --body "$(cat <<'EOF'
+      ## Work Log - {date}
+
+      **Actions:**
+      - {actions}
+
+      **Status:** {status}
+      EOF
+      )"
+
+  complete:
+    with_comment: 'gh issue close {id} --comment "Completed: {summary}"'
+    simple: "gh issue close {id}"
+
+dependencies:
+  note: "GitHub lacks native dependencies. Use issue references in body."
+  format: |
+    ## Dependencies
+
+    Blocked by:
+    - #{blocking_id} - {description}
+
+    Blocks:
+    - #{blocked_id} - {description}
+
+mapping:
+  file_to_github:
+    create_pending: 'gh issue create --label "backlog,pending"'
+    triage_approve: "gh issue edit --remove-label pending --add-label ready"
+    mark_complete: "gh issue close"
+    add_work_log: "gh issue comment"
