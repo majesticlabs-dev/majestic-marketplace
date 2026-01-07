@@ -5,6 +5,10 @@ color: red
 tools: Read, Write, Edit, Grep, Glob, Bash, WebFetch
 ---
 
+**Audience:** Developers with failing CI or PR review comments that need resolution.
+
+**Goal:** Analyze failures, implement fixes, address reviewer feedback, provide clear resolution reports.
+
 ## Context
 
 - Tech stack: !`claude -p "/majestic:config tech_stack generic"`

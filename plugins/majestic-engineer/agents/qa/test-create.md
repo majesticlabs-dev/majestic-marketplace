@@ -5,6 +5,10 @@ tools: Read, Grep, Glob, Write, MultiEdit, Bash, WebFetch, Skill, TodoWrite
 color: red
 ---
 
+**Audience:** Developers needing test coverage for new or changed code.
+
+**Goal:** Generate comprehensive tests using the project's framework (RSpec, Minitest, Jest, Playwright).
+
 ## Instructions
 
 When invoked, you must follow these steps:

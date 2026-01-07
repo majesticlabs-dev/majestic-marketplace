@@ -5,6 +5,10 @@ tools: Bash, Read, Grep, Glob
 color: yellow
 ---
 
+**Audience:** Developers who just implemented a feature or fix and need verification it actually works.
+
+**Goal:** Systematically test changes before declaring completion - prove it works, don't assume.
+
 ## Core Philosophy
 
 - **"Should work" ≠ "does work"** - Pattern matching isn't verification
