@@ -59,11 +59,12 @@ gh issue create \
 
 [What is broken or needs improvement]
 
-## Acceptance Criteria
+## Definition of Done
 
-- [ ] Criterion 1
-- [ ] Criterion 2
-- [ ] Criterion 3
+| Item | Verification |
+|------|--------------|
+| [Feature behavior 1] | [command or manual] |
+| [Feature behavior 2] | [command or manual] |
 
 ## Priority
 

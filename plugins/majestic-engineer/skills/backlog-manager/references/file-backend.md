@@ -32,7 +32,7 @@ Each backlog item is a markdown file with YAML frontmatter. Use the template at 
 - **Findings** - Investigation results, root cause, key discoveries
 - **Proposed Solutions** - Multiple options with pros/cons, effort, risk
 - **Recommended Action** - Clear plan (filled during triage)
-- **Acceptance Criteria** - Testable checklist items
+- **Definition of Done** - Feature behaviors with verification methods
 - **Work Log** - Chronological record with date, actions, learnings
 
 **Optional sections:**
@@ -69,7 +69,7 @@ dependencies: ["001"]     # Issue IDs this is blocked by
    - Problem Statement
    - Findings (if from investigation)
    - Proposed Solutions (multiple options)
-   - Acceptance Criteria
+   - Definition of Done
    - Add initial Work Log entry
 
 4. Determine status: `pending` (needs triage) or `ready` (pre-approved)

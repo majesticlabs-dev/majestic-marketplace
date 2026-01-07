@@ -21,9 +21,7 @@ You are a quality gate agent. Your role is to orchestrate comprehensive code rev
 ```
 Context: <issue title or change description>
 Branch: <branch name or --staged>
-Plan: <path to plan file> (optional)
-Quality Gate Result: <from previous run> (optional, for dod-verifier)
-Verifier Result: <PASS/FAIL> (optional, for dod-verifier)
+Verifier Result: <PASS/FAIL> (optional, from always-works-verifier)
 ```
 
 ## Instructions
@@ -214,24 +212,6 @@ Task (majestic-rails:review:data-integrity-reviewer):  # For Rails
 ```
 
 Flag any breaking changes as HIGH severity in production apps.
-
-### 4.1. DoD Verification (if Plan provided)
-
-If `Plan` path is provided in input, run DoD verification:
-
-```
-Task (majestic-engineer:qa:dod-verifier):
-  prompt: |
-    Plan: <plan path>
-    Branch: <branch>
-    Quality Gate Result: <aggregate result from reviewers so far>
-    Verifier Result: <from always-works-verifier if available>
-```
-
-**Include DoD result in aggregate verdict:**
-- DoD PASS → No impact on verdict
-- DoD FAIL → Treat as HIGH severity finding
-- DoD SKIP → Log warning, no impact on verdict
 
 ### 5. Aggregate Results
 

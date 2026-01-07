@@ -104,19 +104,16 @@ Task (majestic-engineer:workflow:always-works-verifier):
 
 ### Step 6: Quality Gate (MANDATORY)
 
-Run quality-gate with configured reviewers and DoD verification:
+Run quality-gate with configured reviewers:
 ```
 Task (majestic-engineer:workflow:quality-gate):
   prompt: |
     Context: <title>
     Branch: <branch>
-    Plan: <Plan Path from input>
     Verifier Result: <result from Step 5>
 ```
 
 **Result:** APPROVED, NEEDS CHANGES, or BLOCKED
-
-The quality-gate will run DoD verification if Plan path is provided.
 
 ### Step 7: Fix Loop (if needed)
 
@@ -153,7 +150,22 @@ Fix → Slop → Verify → Quality → (Pass? Ship : Fix again)
 
 **This gate is NOT optional.**
 
-### Step 9: Pre-Ship Hooks (skip if Skip Ship: true)
+### Step 9: DoD Verification
+
+Verify Definition of Done from the task/plan:
+
+```
+Task (majestic-engineer:qa:dod-verifier):
+  prompt: <Plan Path> <branch>
+```
+
+**Result handling:**
+- `DOD_RESULT: PASS` → Continue to Step 10
+- `DOD_RESULT: FAIL` → Enter fix loop (Step 7) with failed items as findings
+
+**If Plan Path is empty:** Skip DoD verification (no DoD defined).
+
+### Step 10: Pre-Ship Hooks (skip if Skip Ship: true)
 
 **If `Skip Ship: true`:** Skip this step entirely.
 
@@ -166,7 +178,7 @@ Task (<hook.agent>):
 - **Required hooks:** Block on failure
 - **Optional hooks:** Log warnings only
 
-### Step 10: Ship (skip if Skip Ship: true)
+### Step 11: Ship (skip if Skip Ship: true)
 
 **If `Skip Ship: true`:** Skip this step. Report "Quality gate passed, shipping deferred."
 
@@ -180,7 +192,7 @@ Task (<hook.agent>):
 /majestic-engineer:workflows:ship-it
 ```
 
-### Step 11: Complete Task Status (skip if Skip Ship: true or plan source)
+### Step 12: Complete Task Status (skip if Skip Ship: true or plan source)
 
 **If `Skip Ship: true`:** Skip this step.
 

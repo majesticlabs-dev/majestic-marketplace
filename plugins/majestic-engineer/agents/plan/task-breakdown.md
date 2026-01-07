@@ -26,6 +26,7 @@ Transform implementation plans into small, actionable tasks stored in the plan d
 Read the plan file and identify:
 - Implementation phases/steps
 - Acceptance criteria
+- **Definition of Done** (from `## Definition of Done` section)
 - Technical components mentioned
 - File paths referenced
 
@@ -135,16 +136,16 @@ Append the `## Implementation Tasks` section to the plan file:
   - Story Points: 3
   - Depends on: none
   - Files: [likely files to modify]
-  - Acceptance: [how to verify done]
+  - DoD: [specific behavior this task must achieve] | [verification command or "manual"]
 
 #### Group B (After Group A)
 
 - [ ] **T2**: [Clear action title]
   - Priority: p2
-  - Story Points: 5
+  - Story Points: 2
   - Depends on: T1
   - Files: [files]
-  - Acceptance: [verification]
+  - DoD: [behavior] | [verification]
 ```
 
 ## Task Title Guidelines
