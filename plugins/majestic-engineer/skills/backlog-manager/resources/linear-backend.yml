@@ -1,0 +1,100 @@
+backend: linear
+protocol: mcp
+config_key: task_management
+
+mcp_server:
+  name: linear
+  command: npx
+  args: ["-y", "mcp-remote", "https://mcp.linear.app/mcp"]
+  auth: oauth
+
+config:
+  required:
+    linear_team_id: "Your Linear team ID"
+  optional:
+    linear_project_id: "Default project"
+    linear_default_labels: ["ai-generated"]
+
+priority_mapping:
+  1: p1  # Urgent
+  2: p1  # High
+  3: p2  # Medium
+  4: p3  # Low
+
+operations:
+  create:
+    tool: mcp__linear__create_issue
+    params:
+      required: [title, teamId]
+      optional: [description, priority, projectId, labelIds, assigneeId]
+    example:
+      title: "Fix N+1 query in dashboard"
+      description: "## Problem\n\nSlow page load...\n\n## Definition of Done\n\n| Item | Verification |\n|------|--------------|\n| Query optimized | manual |"
+      teamId: "TEAM-123"
+      priority: 2
+
+  list:
+    tools:
+      all: mcp__linear__list_issues
+      mine: mcp__linear__list_my_issues
+    filters: [team, status, assignee, project, labels]
+
+  view:
+    tool: mcp__linear__get_issue
+    params:
+      required: [id]
+    returns: [title, description, status, priority, assignee, labels, comments, activity]
+
+  update:
+    tool: mcp__linear__update_issue
+    params:
+      required: [id]
+      optional: [title, description, stateId, priority, assigneeId, labelIds, cycleId, estimate, parentId]
+    status_workflow:
+      get_statuses: mcp__linear__list_issue_statuses
+      common: [Backlog, Todo, In Progress, In Review, Done, Cancelled]
+
+  complete:
+    tool: mcp__linear__update_issue
+    steps:
+      - "Get status IDs: mcp__linear__list_issue_statuses"
+      - "Find Done stateId"
+      - "Update issue with stateId"
+
+  comment:
+    tool: mcp__linear__create_comment
+    params:
+      required: [issueId, body]
+
+features:
+  cycles:
+    update: "mcp__linear__update_issue with cycleId"
+    list: mcp__linear__list_cycles
+
+  estimates:
+    description: "Team-specific (story points or T-shirt)"
+    param: estimate
+
+  parent_issues:
+    description: "Create sub-issues with parentId"
+    param: parentId
+
+  projects:
+    list: mcp__linear__list_projects
+    assign: projectId
+
+verify:
+  command: 'ListMcpResourcesTool with server: "linear"'
+  confirms: [mcp_configured, auth_complete, tools_accessible]
+
+mapping:
+  file_to_linear:
+    create_pending: "create_issue with Backlog status"
+    triage_approve: "update_issue status to Todo"
+    mark_complete: "update_issue status to Done"
+    add_work_log: create_comment
+    set_priority: "update_issue with priority 1-4"
+
+resources:
+  docs: "https://linear.app/docs/mcp"
+  api: "https://developers.linear.app/docs"
