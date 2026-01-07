@@ -51,30 +51,15 @@ Use `AskUserQuestion` to gather config. Ask in batches of max 4 questions.
 | App Status | Development, Production |
 | Task Management | GitHub Issues, Linear, Beads, File-based |
 | Workflow | Worktrees, Branches |
-
-### Owner Context
-
-Capture experience level to tailor skill outputs (explanations, assumed knowledge).
-
-**Single-stack projects:**
-
-| Question | Options |
-|----------|---------|
 | Experience Level | Expert (Recommended), Senior, Intermediate, Beginner |
 
-**Multi-stack projects** (e.g., Rails + React detected):
-
-Ask per-stack:
-| Question | Options |
-|----------|---------|
-| Rails Experience | Expert (Recommended), Senior, Intermediate, Beginner |
-| React Experience | Expert (Recommended), Senior, Intermediate, Beginner |
-
-**Level definitions:**
+**Experience level definitions:**
 - **Beginner**: New to the technology, needs detailed explanations
 - **Intermediate**: Comfortable with basics, learning advanced patterns
 - **Senior**: Deep knowledge, focus on edge cases and best practices
 - **Expert**: Authoritative, skip explanations, just show the code
+
+**Multi-stack projects** (e.g., Rails + React detected): Ask per-stack experience level instead of single level.
 
 ### Stack-Specific Questions
 
