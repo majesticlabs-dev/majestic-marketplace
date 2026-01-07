@@ -47,8 +47,8 @@ Options:
 
 DoD describes feature acceptance criteria, not technical quality (tests, code review, etc. are handled by other agents).
 
-**You MUST use AskUserQuestion tool:**
-```
+Execute:
+
 AskUserQuestion(
   questions: [{
     question: "What behavior must work for this feature to be done?",
@@ -62,9 +62,8 @@ AskUserQuestion(
     multiSelect: true
   }]
 )
-```
 
-**CRITICAL:** Do NOT skip this step. Wait for user response before proceeding.
+Wait for user response before proceeding.
 
 **Good DoD examples (feature behavior):**
 - "Authenticated user can login and redirect to dashboard"
@@ -221,15 +220,13 @@ Incorporate feedback and update the plan file.
 
 ### 10. Preview and User Options
 
-**Check auto_preview config:**
-```
-Skill(skill: "config-reader", args: "auto_preview false")
-```
+Check auto_preview config:
 
-**If `auto_preview` is `true`:** Open the plan file in the user's default editor:
-```
+Skill(skill: "config-reader", args: "auto_preview false")
+
+If result is `true`, open the plan file:
+
 Bash(command: "open docs/plans/<filename>.md")
-```
 
 **MANDATORY: Use AskUserQuestion to present options:**
 
