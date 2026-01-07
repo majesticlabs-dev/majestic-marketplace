@@ -6,7 +6,7 @@
   },
   "metadata": {
     "description": "Majestic Labs plugin marketplace for Claude Code extensions",
-    "version": "3.2.0"
+    "version": "3.3.0"
   },
   "plugins": [
     {
@@ -438,6 +438,29 @@
         "indie-hacker"
       ],
       "source": "./plugins/majestic-founder"
+    },
+    {
+      "name": "majestic-ralph",
+      "description": "Autonomous AI coding loops. Ship features while you sleep with iterative prompts that compound learnings. Includes 3 commands, 1 skill, and stop hook.",
+      "version": "1.0.0",
+      "author": {
+        "name": "David Paluy",
+        "url": "https://github.com/dpaluy",
+        "email": "marketplace@it.majesticlabs.dev"
+      },
+      "homepage": "https://github.com/majesticlabs-dev/majestic-marketplace/tree/master/plugins/majestic-ralph",
+      "tags": [
+        "ralph",
+        "autonomous",
+        "iteration",
+        "loop",
+        "agentic",
+        "ship-while-sleeping",
+        "tdd",
+        "learnings",
+        "compound"
+      ],
+      "source": "./plugins/majestic-ralph"
     }
   ]
 }

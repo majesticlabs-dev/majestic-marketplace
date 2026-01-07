@@ -15,15 +15,16 @@ NEVER modify `~/.claude/`. All plugin work goes in `majestic-marketplace/plugins
 ## Structure
 
 ```
-plugins/{engineer,rails,python,react,marketing,sales,company,llm,tools,agent-sdk,devops,experts}/
+plugins/{engineer,rails,python,react,marketing,sales,company,llm,tools,agent-sdk,devops,experts,ralph}/
 ```
 
 ## Dependencies
 
 | Plugin | Can Reference |
 |--------|--------------|
-| `engineer` | rails, python, react, llm, tools |
+| `engineer` | rails, python, react, llm, tools, ralph |
 | `rails`, `python`, `react` | engineer |
+| `ralph` | (none) |
 | `marketing`, `sales`, `company`, `llm`, `tools`, `agent-sdk`, `devops`, `experts` | (none) |
 
 ## Documentation
@@ -70,6 +71,12 @@ plugins/{engineer,rails,python,react,marketing,sales,company,llm,tools,agent-sdk
 - Agents do autonomous work, not just advice
 - `name:` in frontmatter overrides path-based naming
 
+### Command Naming
+- Command names in frontmatter must include full plugin prefix
+- Format: `name: plugin-name:command-name` (e.g., `majestic-ralph:start`)
+- Matches cross-plugin invocation: `/majestic-ralph:start`
+- Avoid redundant patterns like `ralph:ralph` — use descriptive names (`start`, `cancel`, `help`)
+
 ### Validation
 Run `skill-linter` for new skills.
 
@@ -91,6 +98,10 @@ Run `skill-linter` for new skills.
 - **Audience/Goal framing (instead of personas)**
   - Use `**Audience:**` (who this is for) and `**Goal:**` (what they'll achieve)
   - "Explain X for audience Y" yields better outputs than "Act as persona Z"
+- **Self-contained documentation**
+  - Remove external implementation references from feature docs
+  - Document patterns you implement, not who inspired them
+  - Keep credits in separate Credits section, not inline
 
 ### Anti-Patterns
 - ❌ Do NOT hardcode language/framework-specific agents in generic orchestrators
@@ -118,6 +129,22 @@ When discovering incorrect patterns that require moving/restructuring files:
 2. Wait for user confirmation before refactoring
 3. Don't assume path patterns - verify with user or docs
 
+### Plugin Architecture Decisions
+- For new orchestration systems (loops, workflows), create **separate plugins**
+- Don't add to existing feature plugins unless tightly coupled to that plugin's core domain
+- Separate plugins are easier to install/remove independently
+
+### State Files: Ephemeral vs Permanent
+- Session working files: Use `.local.` suffix (gitignored)
+- Example: `.claude/ralph-progress.local.yml` during iteration
+- Promote valuable patterns to permanent docs (AGENTS.md) at session end
+- Ephemeral files = working memory; Permanent docs = durable knowledge
+
+### Data Format Selection
+- For progress/state tracking, prefer YAML over markdown
+- YAML: structured, parseable, patterns accessible at top level
+- Markdown: patterns buried in narrative, harder to parse
+
 ## Plugin Release Checklist
 
 1. Update version in `plugins/*/.claude-plugin/plugin.json`
@@ -128,3 +155,4 @@ When discovering incorrect patterns that require moving/restructuring files:
    - Source path
 3. Update internal references to new plugin namespace
 4. Commit registry + plugin files together
+5. README must include "What Makes This Different" section for new plugins
