@@ -105,7 +105,14 @@ while IFS= read -r line || [[ -n "$line" ]]; do
 
   # 4. Marketing language (ERROR)
   # Note: "guarantee" excluded - too many false positives with technical "type guarantees"
-  if echo "$lower_line" | grep -qE '(best-in-class|world-class|cutting-edge|state-of-the-art|revolutionary|game-chang|next-gen|ensures? perfect|guarantees? (success|results|quality|perfect))'; then
+  # Also exclude negated forms like "does NOT guarantee"
+  # Skip lines starting with ❌ (bad examples in docs)
+  if echo "$lower_line" | grep -qE '(best-in-class|world-class|cutting-edge|state-of-the-art|revolutionary|game-chang|next-gen|ensures? perfect)'; then
+    if ! echo "$line" | grep -q '❌'; then
+      error "$LINE_NUM" "Marketing language" "$line" "Remove promotional language"
+    fi
+  fi
+  if echo "$lower_line" | grep -qE 'guarantees? (success|results|quality|perfect)' && ! echo "$lower_line" | grep -qiE '(not|no|never|don.t|doesn.t|does not) guarantee'; then
     error "$LINE_NUM" "Marketing language" "$line" "Remove promotional language"
   fi
 
