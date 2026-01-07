@@ -45,7 +45,7 @@ Check if already running inside ralph-loop:
 **If NOT in loop:** Invoke ralph-loop with run-blueprint as the prompt:
 
 ```
-Skill(skill: "ralph-loop:ralph-loop", args: '"/majestic:run-blueprint <blueprint_file>" --max-iterations 50 --completion-promise "RUN_BLUEPRINT_COMPLETE"')
+Skill(skill: "majestic-ralph:start", args: '"/majestic:run-blueprint <blueprint_file>" --max-iterations 50 --completion-promise "RUN_BLUEPRINT_COMPLETE"')
 ```
 
 Then **STOP** - ralph-loop will re-invoke this command and handle iterations.
@@ -174,7 +174,7 @@ This command is designed to work with ralph-loop for autonomous iteration.
 
 **Start with ralph:**
 ```bash
-/ralph-loop:ralph-loop "/majestic:run-blueprint docs/plans/xxx.md" --max-iterations 50 --completion-promise "RUN_BLUEPRINT_COMPLETE"
+/majestic-ralph:start "/majestic:run-blueprint docs/plans/xxx.md" --max-iterations 50 --completion-promise "RUN_BLUEPRINT_COMPLETE"
 ```
 
 **Completion signal:** Output `<promise>RUN_BLUEPRINT_COMPLETE</promise>` when:
@@ -247,5 +247,5 @@ Please fix dependencies in blueprint file before continuing.
 /majestic:run-blueprint docs/plans/20241228_add-auth.md
 
 # With ralph-loop for autonomous execution
-/ralph-loop:ralph-loop "/majestic:run-blueprint docs/plans/20241228_add-auth.md" --max-iterations 50 --completion-promise "RUN_BLUEPRINT_COMPLETE"
+/majestic-ralph:start "/majestic:run-blueprint docs/plans/20241228_add-auth.md" --max-iterations 50 --completion-promise "RUN_BLUEPRINT_COMPLETE"
 ```
