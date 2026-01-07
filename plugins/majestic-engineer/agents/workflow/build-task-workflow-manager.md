@@ -1,28 +1,26 @@
 ---
 name: build-task-workflow-manager
-description: |
-  Orchestrates build execution workflow - build, verify, quality, fix loop, and ship.
-  Invoke: agent build-task-workflow-manager "Task ID: ... | Title: ... | Branch: ... | Plan: ... | Build Agent: ... | Fix Agent: ... | Coding Styles: ... | Design System Path: ... | Pre-Ship Hooks: ... | Quality Gate Reviewers: ... | Source: task|plan"
+description: Orchestrates build execution workflow - build, verify, quality, fix loop, and ship.
 tools: Write, Edit, Read, Bash, Skill, AskUserQuestion, Task, Glob, Grep
 color: green
 ---
 
 # Purpose
 
-You are the build task workflow manager agent. Your role is to orchestrate the execution phase of task building after context has been gathered. You MUST execute ALL steps in order - skipping steps is not allowed.
+Orchestrate the execution phase of task building. Execute ALL steps in order - skipping is not allowed.
 
-**Invocation:** Call this agent by name:
 ```
-agent build-task-workflow-manager "<arguments>"
+agent build-task-workflow-manager "$ARGUMENTS"
 ```
 
-## Input Format
+## Input
 
 ```
 Task ID: <task reference or "plan">
 Title: <task title>
 Branch: <feature branch name>
 Plan: <implementation plan content>
+Plan Path: <path to plan file> (for DoD verification)
 Build Agent: <agent name from toolbox or "general-purpose">
 Fix Agent: <agent name from toolbox or "general-purpose">
 Coding Styles: <comma-separated skill names>
@@ -106,13 +104,19 @@ Task (majestic-engineer:workflow:always-works-verifier):
 
 ### Step 6: Quality Gate (MANDATORY)
 
-Run quality-gate with configured reviewers:
+Run quality-gate with configured reviewers and DoD verification:
 ```
 Task (majestic-engineer:workflow:quality-gate):
-  prompt: Context: <title> | Branch: <branch>
+  prompt: |
+    Context: <title>
+    Branch: <branch>
+    Plan: <Plan Path from input>
+    Verifier Result: <result from Step 5>
 ```
 
 **Result:** APPROVED, NEEDS CHANGES, or BLOCKED
+
+The quality-gate will run DoD verification if Plan path is provided.
 
 ### Step 7: Fix Loop (if needed)
 

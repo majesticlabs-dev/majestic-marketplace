@@ -43,32 +43,37 @@ Options:
 
 ### 2. Definition of Done
 
-**Always ask the user what "done" means for this work.**
+**Ask the user what "done" means for this feature - focus on behavior, not code quality.**
+
+DoD describes feature acceptance criteria, not technical quality (tests, code review, etc. are handled by other agents).
 
 ```
-AskUserQuestion: "What's the Definition of Done for this feature?"
+AskUserQuestion: "What behavior must work for this feature to be done?"
 Header: "Done when"
-MultiSelect: true
-Options (suggest based on feature type):
 ```
 
-| Feature Type | Suggested DoD Options |
-|--------------|----------------------|
-| **Bug fix** | Tests pass, Bug no longer reproducible, Regression test added |
-| **New feature** | Tests pass, Code reviewed, Documentation updated, Feature flag configured |
-| **Refactor** | Tests pass, No behavior change verified, Code reviewed |
-| **UI feature** | Tests pass, Design review approved, Accessibility checked, Cross-browser tested |
-| **DevOps** | Tests pass, Validated in staging, Rollback plan documented, Monitoring configured |
+**Good DoD examples (feature behavior):**
+- "Authenticated user can login and redirect to dashboard"
+- "Form validates email format before submission"
+- "API returns 404 for non-existent resources"
+- "Export button generates CSV with all visible columns"
 
-**Always include these base options:**
-- Tests pass
-- Code reviewed
-- (Other - let user add custom criteria)
+**Bad DoD examples (already handled by other agents):**
+- ❌ "Tests pass" → always-works-verifier
+- ❌ "Code reviewed" → quality-gate
+- ❌ "No lint errors" → slop-remover
 
-**Store the selected DoD** - it will be included in:
-- Plan document (Step 8)
-- Task descriptions (Step 12)
-- Build verification (Step 11.1/13)
+**For each DoD item, capture how to verify:**
+
+| Item | Verification |
+|------|--------------|
+| User can login and redirect | `curl -X POST /login` or manual check |
+| Form validates email | `bundle exec rspec spec/features/signup_spec.rb` |
+| API returns 404 | `curl /api/nonexistent` returns 404 |
+
+**Store the DoD table** - it will be:
+- Written to plan document (Step 8)
+- Verified by `dod-verifier` agent during quality gate
 
 ### 3. Feature Classification
 

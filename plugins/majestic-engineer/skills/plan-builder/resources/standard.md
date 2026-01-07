@@ -29,11 +29,12 @@
 
 ## Definition of Done
 
-Work is complete when ALL of the following are checked:
+Feature behaviors that must work (code quality handled by other agents):
 
-- [ ] [DOD_ITEM_1]
-- [ ] [DOD_ITEM_2]
-- [ ] [DOD_ITEM_3]
+| Item | Verification |
+|------|--------------|
+| [Feature behavior 1] | [Command or manual check] |
+| [Feature behavior 2] | [Command or manual check] |
 
 ## Success Metrics
 

@@ -12,8 +12,10 @@
 
 ## Definition of Done
 
-- [ ] [DOD_ITEM_1]
-- [ ] [DOD_ITEM_2]
+| Item | Verification |
+|------|--------------|
+| [Feature behavior 1] | [Command or manual check] |
+| [Feature behavior 2] | [Command or manual check] |
 
 ## Context
 
