@@ -115,10 +115,10 @@ Create `.claude/lessons/` directory and move review topics to lessons with `work
   - Orders tasks by dependencies
   - Runs `/majestic:build-task` for each task reference
   - Updates plan checkboxes as tasks complete
-  - Integrates with ralph-wiggum for autonomous execution
+  - Integrates with ralph-loop for autonomous execution
   - Outputs `BUILD_PLAN_COMPLETE` promise for ralph loop detection
 
-- **Ralph-wiggum integration in `/majestic:plan`** - New step 10 after task creation
+- **Ralph-loop integration in `/majestic:plan`** - New step 10 after task creation
   - "Build all tasks now" option using build-plan
   - "Build with ralph (autonomous)" shows ralph-loop command
   - Enables overnight/walkaway task execution

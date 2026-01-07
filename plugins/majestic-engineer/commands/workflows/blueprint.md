@@ -340,7 +340,7 @@ Question: "Tasks created. Start building?"
 
 **Ralph command to display:**
 ```
-/ralph-wiggum:ralph-loop "/majestic:run-blueprint docs/plans/<filename>.md" --max-iterations 50 --completion-promise "RUN_BLUEPRINT_COMPLETE"
+/ralph-loop:ralph-loop "/majestic:run-blueprint docs/plans/<filename>.md" --max-iterations 50 --completion-promise "RUN_BLUEPRINT_COMPLETE"
 ```
 
 ## Error Handling

@@ -104,7 +104,7 @@ This copies skills to `~/.codex/skills/` and commands to `~/.codex/prompts/`.
 
 | Plugin | Description | Install |
 |--------|-------------|---------|
-| [ralph-wiggum](https://github.com/anthropics/claude-plugins-official/tree/main/plugins/ralph-wiggum) | Continuous AI agent loop - iterates until task completion using stop hooks | `/plugin marketplace add anthropics/claude-plugins-official` |
+| [ralph-loop](https://github.com/anthropics/claude-plugins-official/tree/main/plugins/ralph-loop) | Continuous AI agent loop - iterates until task completion using stop hooks | `/plugin marketplace add anthropics/claude-plugins-official` |
 | [skills](https://github.com/anthropics/skills) | Skill creation tools - scaffold, lint, and manage Claude Code skills | `/plugin marketplace add anthropics/skills` |
 
 ### Community Tools

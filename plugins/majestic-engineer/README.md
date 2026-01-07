@@ -216,7 +216,7 @@ Invoke with: `/majestic-engineer:<category>:<name>`
 
 | Command | Description |
 |---------|-------------|
-| `workflows:run-blueprint` | Execute all tasks in a blueprint using build-task workflow with ralph-wiggum iteration |
+| `workflows:run-blueprint` | Execute all tasks in a blueprint using build-task workflow with ralph-loop iteration |
 | `workflows:build-task` | Autonomous task implementation from any task management system (GitHub, Beads, Linear, file) |
 | `workflows:debug` | Debug errors, test failures, or unexpected behavior (auto-detects project type) |
 | `workflows:init` | Initialize AGENTS.md with hierarchical structure and create CLAUDE.md symlink |

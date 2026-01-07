@@ -1,6 +1,6 @@
 ---
 name: majestic:run-blueprint
-description: Execute all tasks in a blueprint using build-task workflow with ralph-wiggum iteration
+description: Execute all tasks in a blueprint using build-task workflow with ralph-loop iteration
 argument-hint: "<blueprint-file.md>"
 allowed-tools: Bash, Read, Edit, Grep, Glob, Task, Skill, SlashCommand
 ---
@@ -45,7 +45,7 @@ Check if already running inside ralph-loop:
 **If NOT in loop:** Invoke ralph-loop with run-blueprint as the prompt:
 
 ```
-Skill(skill: "ralph-wiggum:ralph-loop", args: '"/majestic:run-blueprint <blueprint_file>" --max-iterations 50 --completion-promise "RUN_BLUEPRINT_COMPLETE"')
+Skill(skill: "ralph-loop:ralph-loop", args: '"/majestic:run-blueprint <blueprint_file>" --max-iterations 50 --completion-promise "RUN_BLUEPRINT_COMPLETE"')
 ```
 
 Then **STOP** - ralph-loop will re-invoke this command and handle iterations.
@@ -168,13 +168,13 @@ This creates a single PR containing all the changes from the completed tasks.
 
 ---
 
-## Ralph-Wiggum Integration
+## Ralph-Loop Integration
 
-This command is designed to work with ralph-wiggum for autonomous iteration.
+This command is designed to work with ralph-loop for autonomous iteration.
 
 **Start with ralph:**
 ```bash
-/ralph-wiggum:ralph-loop "/majestic:run-blueprint docs/plans/xxx.md" --max-iterations 50 --completion-promise "RUN_BLUEPRINT_COMPLETE"
+/ralph-loop:ralph-loop "/majestic:run-blueprint docs/plans/xxx.md" --max-iterations 50 --completion-promise "RUN_BLUEPRINT_COMPLETE"
 ```
 
 **Completion signal:** Output `<promise>RUN_BLUEPRINT_COMPLETE</promise>` when:
@@ -246,6 +246,6 @@ Please fix dependencies in blueprint file before continuing.
 # Explicit blueprint file
 /majestic:run-blueprint docs/plans/20241228_add-auth.md
 
-# With ralph-wiggum for autonomous execution
-/ralph-wiggum:ralph-loop "/majestic:run-blueprint docs/plans/20241228_add-auth.md" --max-iterations 50 --completion-promise "RUN_BLUEPRINT_COMPLETE"
+# With ralph-loop for autonomous execution
+/ralph-loop:ralph-loop "/majestic:run-blueprint docs/plans/20241228_add-auth.md" --max-iterations 50 --completion-promise "RUN_BLUEPRINT_COMPLETE"
 ```
