@@ -21,11 +21,7 @@ Set up AI agent documentation and machine-readable config for this project.
 
 ## Step 1: Generate AGENTS.md
 
-Check existing state first:
-
-```!
-"${CLAUDE_PLUGIN_ROOT}/commands/workflows/init/check-existing.sh"
-```
+Check existing state first: !`${CLAUDE_PLUGIN_ROOT}/commands/workflows/init/check-existing.sh`
 
 **If AGENTS.md exists**, ask: Regenerate | Enhance | Skip
 
@@ -107,17 +103,9 @@ Use `AskUserQuestion` to gather config. Ask in batches of max 4 questions.
 
 **Run these operations in parallel:**
 
-```!
-"${CLAUDE_PLUGIN_ROOT}/commands/workflows/init/detect-branch.sh"
-```
-
-```!
-"${CLAUDE_PLUGIN_ROOT}/commands/workflows/init/detect-tech-stack.sh" stack
-```
-
-```
-Glob: "**/design-system.md"                  # Design system file
-```
+- Default branch: !`${CLAUDE_PLUGIN_ROOT}/commands/workflows/init/detect-branch.sh`
+- Tech stack: !`${CLAUDE_PLUGIN_ROOT}/commands/workflows/init/detect-tech-stack.sh stack`
+- Design system: `Glob: "**/design-system.md"`
 
 If design system found, record path in toolbox config.
 
@@ -140,19 +128,11 @@ Replace placeholders with collected values. Handle conditionals:
 
 ### Gitignore + Local Config
 
-```!
-"${CLAUDE_PLUGIN_ROOT}/commands/workflows/init/gitignore-add.sh" .claude/current_task.txt
-```
+Always add: !`${CLAUDE_PLUGIN_ROOT}/commands/workflows/init/gitignore-add.sh .claude/current_task.txt`
 
-If not tracking in git:
-```!
-"${CLAUDE_PLUGIN_ROOT}/commands/workflows/init/gitignore-add.sh" .agents.yml
-```
+If not tracking in git: !`${CLAUDE_PLUGIN_ROOT}/commands/workflows/init/gitignore-add.sh .agents.yml`
 
-If local overrides requested:
-```!
-"${CLAUDE_PLUGIN_ROOT}/commands/workflows/init/gitignore-add.sh" .agents.local.yml
-```
+If local overrides requested: !`${CLAUDE_PLUGIN_ROOT}/commands/workflows/init/gitignore-add.sh .agents.local.yml`
 
 If local overrides requested, write `.agents.local.yml` using template from `resources/local-config-template.yaml`.
 
@@ -160,11 +140,7 @@ If local overrides requested, write `.agents.local.yml` using template from `res
 
 1. **Create review-topics.md** - If selected, create `docs/agents/review-topics.md` with starter template
 2. **Create symlink** - `ln -s AGENTS.md CLAUDE.md` (backup if exists)
-3. **Verify** - Run verification:
-
-```!
-"${CLAUDE_PLUGIN_ROOT}/commands/workflows/init/verify-setup.sh"
-```
+3. **Verify** - Run verification: !`${CLAUDE_PLUGIN_ROOT}/commands/workflows/init/verify-setup.sh`
 
 ## Output Summary
 

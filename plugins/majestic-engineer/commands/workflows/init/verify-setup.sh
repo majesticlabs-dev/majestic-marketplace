@@ -74,5 +74,6 @@ if [ "$errors" -eq 0 ]; then
   echo "=== Setup Complete ==="
 else
   echo "=== $errors issue(s) found ==="
-  exit 1
+  # Exit 0 - script succeeded, issues are informational output
+  # Exit 1 reserved for actual script failures
 fi
