@@ -2,6 +2,20 @@
 
 All notable changes to majestic-marketing will be documented in this file.
 
+## [3.14.0] - 2026-01-07
+
+### Added
+
+**Skills (1)**
+- `help-docs-writer` - Create customer-facing help documentation for product features. Analyzes codebase to extract feature details, transforms into user-friendly walkthroughs. Includes:
+  - **Feature discovery** - Search codebase for implementation details
+  - **Article templates** - Feature walkthrough, quick reference, settings guide
+  - **Customer-focused writing** - Second person, active voice, no jargon
+  - **Screenshot placeholders** - Markers for visual documentation
+  - **Troubleshooting sections** - Common issues with solutions
+  - **Output formats** - Markdown (default) or semantic HTML
+  - **Platform notes** - Zendesk, Intercom, Notion, GitBook specifics
+
 ## [3.9.0] - 2026-01-04
 
 ### Added
