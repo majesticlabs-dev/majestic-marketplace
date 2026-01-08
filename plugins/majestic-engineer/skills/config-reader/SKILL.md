@@ -26,10 +26,10 @@ Examples:
 Run the config reader script with parsed arguments:
 
 ```bash
-bash scripts/config_reader.sh FIELD DEFAULT
+bash {baseDir}/scripts/config_reader.sh FIELD DEFAULT
 ```
 
-Replace `FIELD` and `DEFAULT` with the parsed arguments.
+Replace `FIELD` and `DEFAULT` with the parsed arguments from `$ARGUMENTS`.
 
 ## Return Value
 

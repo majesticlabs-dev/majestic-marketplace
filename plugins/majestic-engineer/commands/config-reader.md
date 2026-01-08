@@ -2,7 +2,7 @@
 name: majestic:config
 description: Get a config value from .agents.yml (with local overrides)
 argument-hint: "<field> [default]"
-allowed-tools: Bash
+allowed-tools: Bash, Skill
 ---
 
 # Config Reader
@@ -13,17 +13,16 @@ Get a config value from `.agents.yml` with `.agents.local.yml` overrides.
 
 `$ARGUMENTS` = `<field> [default]`
 
+Supports dot notation for nested fields: `plan.auto_create_task`, `toolbox.build_task.design_system_path`
+
 ## Execute
 
-```bash
-bash -c '
-FIELD="$1"
-DEFAULT="${2:-}"
-value=""
-[[ -f .agents.local.yml ]] && value=$(grep -m1 "^${FIELD}:" .agents.local.yml 2>/dev/null | cut -d: -f2- | sed "s/^ *//")
-[[ -z "$value" && -f .agents.yml ]] && value=$(grep -m1 "^${FIELD}:" .agents.yml 2>/dev/null | cut -d: -f2- | sed "s/^ *//")
-echo "${value:-$DEFAULT}"
-' -- $ARGUMENTS
+Invoke the config-reader skill which provides the script and merge logic:
+
 ```
+Skill(skill="config-reader")
+```
+
+Follow the skill's instructions to run the config reader script with `$ARGUMENTS`.
 
 Report the value to the user.
