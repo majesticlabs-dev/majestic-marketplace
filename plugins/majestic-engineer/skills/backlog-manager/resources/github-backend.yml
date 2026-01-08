@@ -36,11 +36,11 @@ operations:
 
       {problem}
 
-      ## Definition of Done
+      ## Acceptance Criteria
 
-      | Item | Verification |
-      |------|--------------|
-      | {dod_item} | {verification} |
+      | Criterion | Verification |
+      |-----------|--------------|
+      | {criterion} | {verification} |
 
       ## Priority
 

@@ -41,11 +41,11 @@ Options:
 - Small, well-defined tasks
 - Features with existing specs/PRDs
 
-### 2. Definition of Done
+### 2. Acceptance Criteria
 
 **MANDATORY: Ask the user what "done" means for this feature.**
 
-DoD describes feature acceptance criteria, not technical quality (tests, code review, etc. are handled by other agents).
+Acceptance Criteria describes feature behaviors, not technical quality (tests, code review, etc. are handled by other agents).
 
 Execute:
 
@@ -65,28 +65,28 @@ AskUserQuestion(
 
 Wait for user response before proceeding.
 
-**Good DoD examples (feature behavior):**
+**Good Acceptance Criteria examples (feature behavior):**
 - "Authenticated user can login and redirect to dashboard"
 - "Form validates email format before submission"
 - "API returns 404 for non-existent resources"
 - "Export button generates CSV with all visible columns"
 
-**Bad DoD examples (already handled by other agents):**
+**Bad Acceptance Criteria examples (already handled by other agents):**
 - ❌ "Tests pass" → always-works-verifier
 - ❌ "Code reviewed" → quality-gate
 - ❌ "No lint errors" → slop-remover
 
-**For each DoD item, capture how to verify:**
+**For each criterion, capture how to verify:**
 
-| Item | Verification |
-|------|--------------|
+| Criterion | Verification |
+|-----------|--------------|
 | User can login and redirect | `curl -X POST /login` or manual check |
 | Form validates email | `bundle exec rspec spec/features/signup_spec.rb` |
 | API returns 404 | `curl /api/nonexistent` returns 404 |
 
-**Store the DoD table** - it will be:
+**Store the Acceptance Criteria table** - it will be:
 - Written to plan document (Step 8)
-- Verified by `dod-verifier` agent during quality gate
+- Verified by `acceptance-criteria-verifier` agent during quality gate
 
 ### 3. Feature Classification
 

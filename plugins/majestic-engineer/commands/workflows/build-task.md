@@ -142,8 +142,16 @@ Task (majestic-engineer:workflow:context-proxy):
 Pass all gathered context to the build-task-workflow-manager agent:
 
 ```
-agent build-task-workflow-manager "Task ID: <ID or 'plan'> | Title: <title> | Branch: <branch> | Plan: <plan content> | Build Agent: <build_agent> | Fix Agent: <fix_agent> | Coding Styles: <styles> | Design System Path: <path> | Pre-Ship Hooks: <hooks> | Quality Gate Reviewers: <reviewers> | Source: <task or plan> | Skip Ship: <skip_ship>"
+agent build-task-workflow-manager "Task ID: <ID or 'plan'> | Title: <title> | Branch: <branch> | Plan: <plan content> | AC Path: <ac_path> | Build Agent: <build_agent> | Fix Agent: <fix_agent> | Coding Styles: <styles> | Design System Path: <path> | Pre-Ship Hooks: <hooks> | Quality Gate Reviewers: <reviewers> | Source: <task or plan> | Skip Ship: <skip_ship>"
 ```
+
+**AC Path determination:**
+| Source | AC Path Value |
+|--------|---------------|
+| Plan file | The plan file path (e.g., `docs/plans/20240115_feature.md`) |
+| GitHub Issue | `#<number>` or the full URL |
+| Linear/Beads | The task ID (e.g., `PROJ-123`) |
+| File-based task | The task file path |
 
 The agent handles:
 1. Loading design system (if configured)

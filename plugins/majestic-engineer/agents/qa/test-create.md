@@ -106,7 +106,7 @@ When invoked, you must follow these steps:
    - If tests fail, debug and fix before proceeding
    - Check test output for warnings or deprecations
 
-10. **Validate Test Coverage - Definition of Done**
+10. **Validate Test Coverage - Acceptance Criteria**
 
    A test is considered "DONE" when ALL of the following criteria are met:
 
@@ -184,7 +184,7 @@ Provide your final response with:
 
 8. **Code Snippet**: Show the most critical or complex test examples from the generated tests
 
-9. **Definition of Done Verification**: Confirm ALL criteria are met:
+9. **Acceptance Criteria Verification**: Confirm ALL criteria are met:
    - ✅ All coverage completeness criteria met (all test plan cases implemented)
    - ✅ All test quality criteria met
    - ✅ All framework compliance criteria met
@@ -196,6 +196,6 @@ Provide your final response with:
    - Command to run specific test (by line number or description)
    - Any setup required before running tests
 
-**IMPORTANT**: If any "Definition of Done" criteria are NOT met, clearly state which criteria are missing and what needs to be done to complete them. Do not report tests as "done" if they don't meet all criteria.
+**IMPORTANT**: If any "Acceptance Criteria" criteria are NOT met, clearly state which criteria are missing and what needs to be done to complete them. Do not report tests as "done" if they don't meet all criteria.
 
 All file paths must be absolute. Focus on creating tests that serve as both verification and documentation of the system's expected behavior.

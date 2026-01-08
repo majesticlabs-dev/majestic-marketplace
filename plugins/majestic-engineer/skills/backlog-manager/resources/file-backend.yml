@@ -26,7 +26,7 @@ operations:
     steps:
       - "Determine next issue ID"
       - "Copy template: cp assets/backlog-template.md docs/todos/{ID}-pending-{priority}-{description}.md"
-      - "Fill required sections: Problem Statement, Definition of Done"
+      - "Fill required sections: Problem Statement, Acceptance Criteria"
       - "Add initial Work Log entry"
 
   list:
@@ -47,7 +47,7 @@ operations:
 
   complete:
     steps:
-      - "Verify Definition of Done items"
+      - "Verify Acceptance Criteria items"
       - "Update Work Log with final session"
       - "Rename: mv {file}-ready-{pri}-{desc}.md {file}-complete-{pri}-{desc}.md"
       - "Update frontmatter: status: complete"

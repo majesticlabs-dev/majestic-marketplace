@@ -136,6 +136,7 @@ Return a normalized task object:
 **Title:** <title>
 **Type:** <bug|feature|task|chore>
 **Status:** <open|in_progress|blocked|closed>
+**AC Path:** <reference for Acceptance Criteria verification>
 
 ### Description
 <full description/body>
@@ -149,6 +150,14 @@ Return a normalized task object:
 
 Status: SUCCESS
 ```
+
+**AC Path values by backend:**
+| Backend | AC Path Format |
+|---------|----------------|
+| GitHub | `#<number>` (e.g., `#123`) |
+| Beads | `BEADS-<id>` |
+| Linear | `<project>-<number>` |
+| File | The file path (e.g., `docs/todos/001-ready-p1-task.md`) |
 
 ### Error Report
 

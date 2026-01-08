@@ -112,18 +112,18 @@ Links to errors, tests, PRs, documentation, similar issues.
 - **Documentation:** [relevant docs]
 - **Similar patterns:** Issue #200 (completed, ref for approach)
 
-## Definition of Done
+## Acceptance Criteria
 
 Feature behaviors that must work (code quality handled by other agents):
 
-| Item | Verification |
-|------|--------------|
+| Criterion | Verification |
+|-----------|--------------|
 | [Feature behavior 1] | [command or manual check] |
 | [Feature behavior 2] | [command or manual check] |
 
 **Example:**
-| Item | Verification |
-|------|--------------|
+| Criterion | Verification |
+|-----------|--------------|
 | User can login with valid credentials | `curl -X POST /login -d '...'` returns 200 |
 | Invalid password shows error message | manual check |
 

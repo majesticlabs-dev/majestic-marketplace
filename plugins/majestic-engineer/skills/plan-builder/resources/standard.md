@@ -23,16 +23,10 @@
 
 ## Acceptance Criteria
 
-- [ ] Detailed requirement 1
-- [ ] Detailed requirement 2
-- [ ] Testing requirements
-
-## Definition of Done
-
 Feature behaviors that must work (code quality handled by other agents):
 
-| Item | Verification |
-|------|--------------|
+| Criterion | Verification |
+|-----------|--------------|
 | [Feature behavior 1] | [Command or manual check] |
 | [Feature behavior 2] | [Command or manual check] |
 

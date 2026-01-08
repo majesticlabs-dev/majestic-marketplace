@@ -117,7 +117,7 @@ Create lightweight root file with these sections:
    - Links to sub-AGENTS.md files
    - Quick find commands
 
-7. **Definition of Done** (3-5 lines)
+7. **Acceptance Criteria** (3-5 lines)
    - Pre-PR checklist
    - What must pass
 

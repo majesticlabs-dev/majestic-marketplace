@@ -175,7 +175,7 @@ rg -n "def method_name" app/**/*.rb
 rg -n "describe ClassName|context 'ClassName'" spec
 \`\`\`
 
-## Definition of Done
+## Acceptance Criteria
 
 Before creating a PR:
 - [ ] All tests pass: `bundle exec rspec`
@@ -238,7 +238,7 @@ rg -n "class.*< ApplicationRecord" engines/**/app/models
 rg -n "mount.*::Engine" config/routes.rb
 \`\`\`
 
-## Definition of Done
+## Acceptance Criteria
 
 - [ ] All tests pass: `bundle exec rspec`
 - [ ] RuboCop clean: `bundle exec rubocop`
@@ -811,7 +811,7 @@ rg -n "class.*< ApplicationRecord" app/models    # Models
 rg -n "def (index|show)" app/controllers          # Actions
 \`\`\`
 
-## Definition of Done
+## Acceptance Criteria
 \`\`\`bash
 bundle exec rspec && bundle exec rubocop
 \`\`\`
@@ -862,7 +862,7 @@ After generating all AGENTS.md files:
 - [ ] ❌ DON'T examples reference real anti-patterns
 - [ ] No duplication between root and sub-files
 - [ ] JIT Index links all sub-files
-- [ ] Definition of Done is clear and executable
+- [ ] Acceptance Criteria is clear and executable
 - [ ] Ruby/Rails conventions documented
 - [ ] Test framework patterns included
 - [ ] Pre-PR checks are single commands

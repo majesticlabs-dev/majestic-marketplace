@@ -7,13 +7,8 @@
 
 ## Acceptance Criteria
 
-- [ ] Core requirement 1
-- [ ] Core requirement 2
-
-## Definition of Done
-
-| Item | Verification |
-|------|--------------|
+| Criterion | Verification |
+|-----------|--------------|
 | [Feature behavior 1] | [Command or manual check] |
 | [Feature behavior 2] | [Command or manual check] |
 

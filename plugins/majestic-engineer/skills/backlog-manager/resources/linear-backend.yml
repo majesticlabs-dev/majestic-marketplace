@@ -29,7 +29,7 @@ operations:
       optional: [description, priority, projectId, labelIds, assigneeId]
     example:
       title: "Fix N+1 query in dashboard"
-      description: "## Problem\n\nSlow page load...\n\n## Definition of Done\n\n| Item | Verification |\n|------|--------------|\n| Query optimized | manual |"
+      description: "## Problem\n\nSlow page load...\n\n## Acceptance Criteria\n\n| Criterion | Verification |\n|-----------|--------------|\n| Query optimized | manual |"
       teamId: "TEAM-123"
       priority: 2
 

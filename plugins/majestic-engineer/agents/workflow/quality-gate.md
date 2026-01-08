@@ -21,6 +21,7 @@ You are a quality gate agent. Your role is to orchestrate comprehensive code rev
 ```
 Context: <issue title or change description>
 Branch: <branch name or --staged>
+AC Path: <path to plan/task file or issue URL> (optional, for Acceptance Criteria verification)
 Verifier Result: <PASS/FAIL> (optional, from always-works-verifier)
 ```
 
@@ -201,6 +202,21 @@ Task (majestic-engineer:review:simplicity-reviewer):
 Task (majestic-engineer:qa:security-review):
   prompt: Review changes on branch <BRANCH> for security vulnerabilities.
 ```
+
+### 3.5 Acceptance Criteria Verification (Mandatory)
+
+**If AC Path is provided**, ALWAYS include acceptance-criteria-verifier in the parallel reviewer set:
+
+```
+Task (majestic-engineer:qa:acceptance-criteria-verifier):
+  prompt: <AC Path> <Branch>
+```
+
+**Result handling:**
+- `AC_RESULT: PASS` → No findings added
+- `AC_RESULT: FAIL` → Add failed items as HIGH severity findings
+
+**If AC Path is empty or not provided:** Skip this reviewer.
 
 ### 4. Apply Production Strictness
 

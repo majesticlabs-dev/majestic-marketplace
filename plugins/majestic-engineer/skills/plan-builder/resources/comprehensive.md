@@ -46,7 +46,11 @@
 
 ### Functional Requirements
 
-- [ ] Detailed functional criteria
+| Criterion | Verification |
+|-----------|--------------|
+| [Feature behavior 1] | [Command or manual check] |
+| [Feature behavior 2] | [Command or manual check] |
+| [Feature behavior 3] | [Command or manual check] |
 
 ### Non-Functional Requirements
 
@@ -59,16 +63,6 @@
 - [ ] Test coverage requirements
 - [ ] Documentation completeness
 - [ ] Code review approval
-
-## Definition of Done
-
-Feature behaviors that must work (code quality handled by other agents):
-
-| Item | Verification |
-|------|--------------|
-| [Feature behavior 1] | [Command or manual check] |
-| [Feature behavior 2] | [Command or manual check] |
-| [Feature behavior 3] | [Command or manual check] |
 
 ## Success Metrics
 

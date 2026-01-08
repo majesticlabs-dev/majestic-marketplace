@@ -45,7 +45,7 @@ Include in every plan:
 - Research findings with file paths (e.g., `src/models/user.rb:42`)
 - External documentation URLs
 - Related issues/PRs if known
-- **Definition of Done** from user input (populated from blueprint Step 2)
+- **Acceptance Criteria** from user input (populated from blueprint Step 2)
 
 ## Conditional Sections
 
@@ -64,6 +64,6 @@ Include "Infrastructure Context" section when feature involves:
 | Don't | Do |
 |-------|-----|
 | Use comprehensive for simple bugs | Match template to actual complexity |
-| Skip acceptance criteria | Always include testable criteria |
+| Skip Acceptance Criteria | Always include testable criteria |
 | Leave placeholder text | Fill all sections or remove them |
 | Over-plan obvious changes | Minimal template exists for a reason |
