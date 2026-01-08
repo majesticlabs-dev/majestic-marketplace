@@ -5,8 +5,8 @@
 
 set -euo pipefail
 
-# Try remote HEAD first
-branch=$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/remotes/origin/@@')
+# Try remote HEAD first (use || true to prevent pipefail from exiting)
+branch=$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/remotes/origin/@@' || true)
 [ -n "$branch" ] && echo "$branch" && exit 0
 
 # Fallback: check for main
