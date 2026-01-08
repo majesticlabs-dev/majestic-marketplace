@@ -27,6 +27,26 @@ The command auto-detects your tech stack (Rails, Python, Node, etc.) and configu
 
 **Legend:** `(/command)` = user triggers | `{{agent}}` = runs automatically | `((state))` = outcome
 
+### PRD vs Blueprint
+
+| Aspect | `/majestic:prd` | `/majestic:blueprint` |
+|--------|-----------------|----------------------|
+| **Purpose** | Define WHAT to build & WHY | Define HOW to build it |
+| **Output** | `docs/prd/prd-[name].md` | `docs/plans/[timestamp]_[name].md` |
+| **Audience** | Stakeholders, PMs, leadership | Developers implementing the feature |
+| **Focus** | Problem, users, features, metrics | Architecture, files, tasks, dependencies |
+
+**When to use each:**
+
+| Situation | Use |
+|-----------|-----|
+| New product/major feature, need stakeholder alignment | PRD first → Blueprint → build-task |
+| Clear feature, just need implementation plan | Blueprint → build-task |
+| Bug fix or small improvement | Blueprint → build-task |
+| Fuzzy idea, need discovery | PRD with `--guided` flag |
+
+---
+
 ### PRD-First (New Products/Features)
 
 ```mermaid
