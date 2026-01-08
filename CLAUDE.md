@@ -18,6 +18,8 @@ NEVER modify `~/.claude/`. All plugin work goes in `majestic-marketplace/plugins
 plugins/{engineer,rails,python,react,marketing,sales,company,llm,tools,agent-sdk,devops,experts,ralph}/
 ```
 
+**Wiki repo**: `../majestic-marketplace.wiki/` (separate git repo, requires separate commit/push)
+
 ## Dependencies
 
 | Plugin | Can Reference |
@@ -63,7 +65,8 @@ plugins/{engineer,rails,python,react,marketing,sales,company,llm,tools,agent-sdk
 - Agent resources → `agents/**/resources/{agent-name}/`
 - Command resources → `commands/**/resources/{command-name}/`
 - Resources referenced via relative paths from the markdown file
-- No .md files in `commands/` (they become executable)
+- No `.md` files in `commands/` (they become executable)
+- Templates in command resources must use `.txt` or `.yml` extensions
 
 ### Behaviors
 - Skills = knowledge (Claude MAY follow)
