@@ -2,7 +2,7 @@
 name: majestic:prd
 description: Create a Product Requirements Document (PRD) for a new product or feature
 argument-hint: "[--guided] [product or feature description]"
-allowed-tools: Read, Write, Edit, WebSearch, WebFetch, AskUserQuestion, Skill
+allowed-tools: Read, Write, Edit, WebSearch, WebFetch, AskUserQuestion
 ---
 
 # Create a Product Requirements Document (PRD)
@@ -47,13 +47,7 @@ After sufficient info, synthesize and confirm before PRD generation.
 
 ## Phase 2: Generate PRD
 
-Invoke the prd-builder skill which will guide you to find and read the templates:
-
-```
-Skill(skill="prd-builder")
-```
-
-Follow the skill's instructions to load the templates.
+Read the PRD template from `resources/prd/prd-template.txt` (relative to this command file).
 
 Customize with user's answers:
 - Fill in problem statement, user personas
@@ -81,7 +75,7 @@ Customize with user's answers:
 
 ## Phase 4: Technical Expansion (If Requested)
 
-Add sections from `resources/technical-expansion.md`:
+Add sections from `resources/prd/technical-expansion.txt`:
 - API Specifications (endpoints, schemas, auth)
 - Data Model with Mermaid ERD
 - Security Considerations (AuthN/AuthZ, OWASP)

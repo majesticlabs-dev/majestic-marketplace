@@ -2,6 +2,21 @@
 
 All notable changes to majestic-engineer will be documented in this file.
 
+## [3.39.0] - 2026-01-08
+
+### Changed
+
+- **`/majestic:prd` command** - Consolidated prd-builder skill into command
+  - Templates now embedded in `commands/workflows/resources/prd/`
+  - Removed unnecessary `Skill("prd-builder")` indirection
+  - Templates renamed to `.txt` extension (avoids command detection)
+
+### Removed
+
+- **`prd-builder` skill** - Merged into `/majestic:prd` command
+  - Templates moved to command resources folder
+  - No functional change to PRD workflow
+
 ## [3.33.0] - 2026-01-01
 
 ### Added

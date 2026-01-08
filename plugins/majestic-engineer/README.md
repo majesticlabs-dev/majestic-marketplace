@@ -1,6 +1,6 @@
 # Majestic Engineer
 
-Language-agnostic engineering workflows. Includes 26 specialized agents, 19 commands, and 13 skills.
+Language-agnostic engineering workflows. Includes 30 specialized agents, 23 commands, and 18 skills.
 
 ## Installation
 
