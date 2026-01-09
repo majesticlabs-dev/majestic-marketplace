@@ -96,23 +96,42 @@ def premium_users = User.recently_active.premium
 
 Search for: `TODO`, `FIXME`, `HACK`, `XXX`
 
+## Review Methodology
+
+Apply these lenses systematically:
+
+1. **Necessity** - Does each line contribute to core purpose?
+2. **Logic** - Can conditionals be simplified or consolidated?
+3. **Redundancy** - Are there duplicate checks or patterns?
+4. **Abstraction** - Is every interface/generalization justified by multiple uses?
+5. **YAGNI** - Is anything built for speculative future needs?
+6. **Readability** - Does code self-document, or rely on comments?
+
 ## Output Format
 
 ```markdown
 ## Simplification Analysis
 
+### Complexity Score: X/10
+(1=minimal, 10=severely over-engineered)
+
 ### Core Purpose
-[What this code actually needs to do]
+[What this code actually needs to do in 1-2 sentences]
 
-### Unnecessary Complexity
-| Location | Issue | Simplification |
+### Findings (Priority Order)
 
-### Code to Remove
-- [file:lines] - [reason]
-- Estimated reduction: X lines
+| Priority | Location | Issue | Fix | Lines Saved |
+|----------|----------|-------|-----|-------------|
+| HIGH | file:line | [issue] | [fix] | ~N |
+| MED | file:line | [issue] | [fix] | ~N |
 
-### Top 3 Simplifications
-1. [Most impactful] - saves X lines
+### YAGNI Violations
+- [Speculative code that should be removed]
+
+### Reduction Estimate
+- Current: X lines
+- After simplification: Y lines
+- **Reduction: Z% (~N lines)**
 ```
 
 **Remember:** The simplest code that works is the best code.
