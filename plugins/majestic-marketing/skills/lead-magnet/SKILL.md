@@ -25,6 +25,45 @@ Create lead magnets that people actually want—and that convert visitors into s
 | **Relevant** | Attracts your ideal customer |
 | **High perceived value** | Looks worth giving email for |
 
+## The Three Principles
+
+### 1. The Specificity Principle
+
+**Narrow beats broad. Every time.**
+
+"5-Step Framework to Land Your First 10 Clients in 30 Days (Even If You Hate Networking)" converts dramatically better than "Marketing Guide for Freelancers."
+
+When generating concepts, push toward:
+- Specific outcome (not "grow your business" but "add $10k MRR")
+- Specific timeframe (not "eventually" but "in 30 days")
+- Specific audience (not "entrepreneurs" but "B2B SaaS founders")
+- Specific method (not "marketing tips" but "The LinkedIn DM Framework")
+
+### 2. The Bridge Principle
+
+**The lead magnet must logically connect to the paid offer.**
+
+If someone downloads a lead magnet about Instagram growth and you sell SEO services, there's no bridge.
+
+The best lead magnets are "Step 1" of what you sell:
+- Course on copywriting → Lead magnet: "The Headline Formula" (first skill)
+- Agency doing SEO audits → Lead magnet: Free mini-audit (demonstrates full audit)
+- Coach on productivity → Lead magnet: "Morning Routine Builder" (taste of methodology)
+
+The bridge should be obvious: "If you liked this free thing, the paid thing is more/deeper/complete."
+
+### 3. The Quick Win Principle
+
+**Solve one specific problem completely.**
+
+The best lead magnets deliver immediate value:
+- A checklist they complete in 10 minutes that reveals gaps
+- A template they customize in an hour for their business
+- An assessment that gives them a score and action items immediately
+- A calculator that shows their specific numbers right now
+
+Quick wins create reciprocity.
+
 ## Conversation Starter
 
 Use `AskUserQuestion` to gather context:
@@ -261,6 +300,38 @@ When you're ready to [next level], check out [your offer].
 - "The Ultimate [Topic] Toolkit"
 - "[Outcome] Starter Kit"
 - "The [Audience] Toolkit"
+
+## Hook Generators
+
+Every lead magnet needs a hook—the reason someone would want it badly enough to give their email.
+
+### Hook Type 1: The Shortcut
+"Get the [outcome] without [usual pain/time/effort]"
+> "The 5-Minute Morning Routine That Replaced My 2-Hour Gym Sessions"
+
+### Hook Type 2: The Secret
+"The [hidden thing] that [impressive result]"
+> "The Pricing Secret That Doubled My Agency's Revenue"
+
+### Hook Type 3: The System
+"The [named method] for [specific outcome]"
+> "The PASTOR Framework: Write Sales Pages in 30 Minutes"
+
+### Hook Type 4: The Specific Number
+"[Number] [things] to [outcome]"
+> "7 Email Subject Lines That Get 40%+ Open Rates"
+
+### Hook Type 5: The Assessment
+"Discover your [type/score/level]"
+> "What's Your Entrepreneur Personality Type? Take the 2-Minute Quiz"
+
+### Hook Type 6: The Transformation
+"How to go from [painful current state] to [desired outcome]"
+> "From Stuck at $5k/month to Consistent $20k Months: The Roadmap"
+
+### Hook Type 7: The Case Study
+"How [specific person/company] achieved [specific result]"
+> "How Sarah Built a 10,000-Person Email List in 90 Days (And You Can Too)"
 
 ## Landing Page Copy
 
