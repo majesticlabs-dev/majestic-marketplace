@@ -8,7 +8,6 @@ Ralph Loop creates a **self-referential feedback loop** where:
 - A single prompt never changes between iterations
 - Your previous work persists in files and git history
 - Each iteration sees modified files and improves upon them
-- Learnings compound in a progress file across iterations
 
 ## Installation
 
@@ -39,47 +38,44 @@ claude plugins add majestic-ralph
 - `--max-iterations N` - Safety limit (recommended: 10-50)
 - `--completion-promise "<text>"` - Phrase that signals genuine completion
 
-## Files
+## State File
 
-| File | Purpose | Git |
-|------|---------|-----|
-| `.claude/ralph-loop.local.md` | Loop state (iteration, prompt) | Ignored |
-| `.claude/ralph-progress.local.yml` | Patterns and story log | Ignored |
-
-## Progress File
-
-Learnings compound across iterations via `.claude/ralph-progress.local.yml`:
+Location: `.claude/ralph-loop.local.yml` (gitignored)
 
 ```yaml
-patterns:
-  migrations: "Use IF NOT EXISTS for all column additions"
-  forms: "Zod schema validation"
-  auth: "Server actions in actions.ts"
-
-stories:
-  - id: US-001
-    title: Add login form
-    completed_at: 2024-01-15T10:45:00Z
-    files:
-      - app/login/page.tsx
-    learnings:
-      - "Form validation uses zod"
+iteration: 1
+max_iterations: 50
+completion_promise: DONE
+started_at: 2024-01-15T10:30:00Z
+prompt: |
+  Your prompt here.
 ```
 
-**Workflow:**
-1. Read patterns before each iteration
-2. Update after completing each story
-3. Promote valuable patterns to AGENTS.md at loop end
+## Monitoring
+
+```bash
+# Check iteration
+grep '^iteration:' .claude/ralph-loop.local.yml
+
+# Cancel loop
+/majestic-ralph:cancel
+```
+
+---
 
 ## Best Practices
 
 ### 1. Small, Focused Tasks
+
 ```
 ✅ "Add login form with email validation"
 ❌ "Build entire auth system"
 ```
 
+**Heuristic:** If you can't verify it with a single test run, it's too big.
+
 ### 2. Explicit Completion Criteria
+
 ```
 "Implement feature X:
 - Acceptance criteria 1
@@ -89,11 +85,86 @@ Output <promise>COMPLETE</promise> when ALL criteria met."
 ```
 
 ### 3. Include Escape Hatches
+
 ```
 "After 15 iterations, if not complete:
 - Document blockers
 - List attempts
-- Suggest alternatives"
+- Suggest alternatives
+- Output <promise>BLOCKED</promise>"
+```
+
+### 4. Idempotent Operations
+
+```sql
+-- Always use IF NOT EXISTS for migrations
+ALTER TABLE users ADD COLUMN IF NOT EXISTS email TEXT;
+```
+
+### 5. Non-Interactive Commands
+
+```bash
+# Pipe input to avoid interactive prompts
+echo -e "\n\n\n" | npm run db:generate
+
+# Use --yes flags where available
+npm init -y
+```
+
+## Prompt Templates
+
+### Basic Autonomous Loop
+
+```
+Implement: [TASK TITLE]
+
+Acceptance Criteria:
+- [Criterion 1]
+- [Criterion 2]
+- typecheck passes
+- tests pass
+
+Output <promise>COMPLETE</promise> when ALL criteria met.
+```
+
+### With TDD
+
+```
+Implement [FEATURE] following TDD:
+1. Write failing tests first
+2. Implement minimum code to pass
+3. Run typecheck and tests
+4. If any fail, debug and fix
+5. Refactor if needed
+6. Repeat until all green
+
+Output <promise>COMPLETE</promise> when tests pass.
+```
+
+### With Escape Hatch
+
+```
+Implement [FEATURE].
+
+After 15 iterations, if not complete:
+- Document what's blocking progress
+- List approaches attempted
+- Suggest alternatives
+- Output <promise>BLOCKED</promise>
+
+Otherwise, output <promise>COMPLETE</promise> when done.
+```
+
+### Multi-Phase
+
+```
+Build [SYSTEM] in phases:
+
+Phase 1: [Component A] - tests passing
+Phase 2: [Component B] - tests passing
+Phase 3: [Integration] - all tests passing
+
+Output <promise>COMPLETE</promise> when all phases done.
 ```
 
 ## When to Use
@@ -108,39 +179,58 @@ Output <promise>COMPLETE</promise> when ALL criteria met."
 - Tasks requiring human judgment
 - Production debugging
 - Unclear success criteria
+- Major refactors needing architecture decisions
+- Security-critical changes
 
-## Monitoring
+## Integration with Blueprints
+
+Use Ralph with `/majestic:run-blueprint` for multi-task features:
 
 ```bash
-# Check iteration
-grep '^iteration:' .claude/ralph-loop.local.md
-
-# View patterns
-cat .claude/ralph-progress.local.yml
-
-# Cancel loop
-/majestic-ralph:cancel
+# Just run this - ralph is auto-launched
+/majestic:run-blueprint docs/plans/add-auth.md
 ```
+
+**The blueprint provides:**
+- Task breakdown with dependencies (T1, T2, T3...)
+- Acceptance criteria as checkboxes per task
+- Status markers (⏳ 🔄 ✅ 🔴) updated during execution
+- Learnings captured to closest AGENTS.md after each task
+- Quality gates per task
+- Batch shipping at end
+
+**Progress tracking:** The looped agent (run-blueprint) tracks progress in the blueprint file. Ralph only manages the loop itself.
 
 ## What Makes This Different
 
 | Feature | Other Implementations | majestic-ralph |
 |---------|----------------------|----------------|
-| **Progress format** | Markdown (unstructured) | YAML (structured, parseable) |
-| **Git handling** | Committed to history | Gitignored → promotes to AGENTS.md |
-| **Pattern access** | Buried in narrative | Top-level `patterns:` key |
+| **Responsibility** | Manages stories/patterns | Pure loop mechanism |
+| **Progress tracking** | In ralph's files | In the looped agent |
+| **State format** | Markdown | YAML (parseable) |
 | **Blueprint integration** | None | Built-in via `/majestic:run-blueprint` |
 | **Ecosystem** | Standalone | Integrates with majestic-engineer workflows |
 
-### Key Innovation: Ephemeral → Permanent Memory
+### Key Principle: Ralph is Just a Loop
 
 ```
-During loop:     .claude/ralph-progress.local.yml  (gitignored, working memory)
-                              ↓
-After loop:      AGENTS.md patterns section         (committed, permanent)
+What Ralph IS:
+┌─────────────────────────────────┐
+│ 1. Start with prompt            │
+│ 2. Check: completion promise?   │
+│    YES → Exit                   │
+│    NO  → Re-feed same prompt    │
+│ 3. Repeat until max iterations  │
+└─────────────────────────────────┘
+
+What Ralph DOESN'T know:
+- Stories, tasks, sprints, points
+- Acceptance criteria format
+- Testing methodology
+- Progress tracking details
 ```
 
-Learnings compound during the loop, then valuable patterns promote to permanent documentation.
+Progress tracking belongs to the looped agent (e.g., run-blueprint), not ralph.
 
 ## Credits
 

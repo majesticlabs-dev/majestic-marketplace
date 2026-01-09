@@ -44,8 +44,8 @@ research_hooks:
         - "jwt"
         - "oauth"
 
-coding_styles:
-  - majestic-engineer:tdd-workflow
+coding_styles: []
+  # User configures in .agents.yml
 
 quality_gate:
   reviewers:

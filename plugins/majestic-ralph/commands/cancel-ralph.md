@@ -11,9 +11,9 @@ Stop the currently running Ralph loop by removing the state file.
 ## Execute
 
 ```bash
-if [ -f .claude/ralph-loop.local.md ]; then
-  ITERATION=$(grep '^iteration:' .claude/ralph-loop.local.md | cut -d' ' -f2)
-  rm .claude/ralph-loop.local.md
+if [ -f .claude/ralph-loop.local.yml ]; then
+  ITERATION=$(grep '^iteration:' .claude/ralph-loop.local.yml | cut -d' ' -f2)
+  rm .claude/ralph-loop.local.yml
   echo "Ralph loop cancelled at iteration ${ITERATION:-unknown}"
 else
   echo "No active Ralph loop found"

@@ -72,8 +72,9 @@ research_hooks:
         - "deliver"
         - "notification"
 
-coding_styles:
-  - majestic-engineer:tdd-workflow
+coding_styles: []
+  # Stack plugins (majestic-rails) add: majestic-rails:dhh-coder, etc.
+  # User can override in .agents.yml
 
 quality_gate:
   reviewers:

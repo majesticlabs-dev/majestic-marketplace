@@ -124,22 +124,54 @@ Append the `## Implementation Tasks` section to the plan file:
 
 #### Group A (Start Immediately)
 
-- [ ] **T1**: [Clear action title]
-  - Priority: p1
-  - Story Points: 3
-  - Depends on: none
-  - Files: [likely files to modify]
-  - Acceptance Criteria: [specific behavior this task must achieve] | [verification command or "manual"]
+##### T1: [Clear action title]
+- **Priority:** p1 | **Points:** 2
+- **Files:** [likely files to modify]
+- **Depends on:** —
 
-#### Group B (After Group A)
+**Acceptance Criteria:**
+- [ ] [Specific verifiable behavior 1]
+- [ ] [Specific verifiable behavior 2]
 
-- [ ] **T2**: [Clear action title]
-  - Priority: p2
-  - Story Points: 2
-  - Depends on: T1
-  - Files: [files]
-  - Acceptance Criteria: [behavior] | [verification]
+**Status:** ⏳ Pending
+
+---
+
+##### T2: [Clear action title]
+- **Priority:** p2 | **Points:** 2
+- **Files:** [files]
+- **Depends on:** T1
+
+**Acceptance Criteria:**
+- [ ] [Behavior this task must achieve]
+- [ ] [Another verifiable outcome]
+
+**Status:** ⏳ Pending
 ```
+
+### Task Format Rules
+
+| Element | Format | Notes |
+|---------|--------|-------|
+| **Header** | `##### T1: Title` | H5 heading for easy parsing |
+| **Metadata** | Single line with pipes | Priority, Points |
+| **AC Items** | Checkboxes `- [ ]` | Each criterion separately |
+| **Status** | Emoji marker | ⏳ Pending, 🔄 In Progress, ✅ Complete, 🔴 Blocked |
+| **Separator** | `---` | Between tasks |
+
+### Acceptance Criteria Guidelines
+
+**Good AC (verifiable):**
+- `Form renders with email and password fields`
+- `Invalid email shows inline error message`
+- `API returns 404 for non-existent resources`
+- npm run typecheck passes
+
+**Bad AC (vague):**
+- ❌ `Works correctly`
+- ❌ `Looks good`
+- ❌ `Is fast enough`
+
 
 ## Task Title Guidelines
 
@@ -178,6 +210,3 @@ After appending to the plan file:
 Review the tasks in the plan file. When ready, the calling agent can create these in your task manager.
 ```
 
-## Example
-
-See `plugins/majestic-engineer/agents/plan/resources/task-breakdown-example.md` for a complete example of task breakdown output.

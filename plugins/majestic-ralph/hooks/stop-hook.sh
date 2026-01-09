@@ -4,8 +4,7 @@ set -euo pipefail
 # Ralph Loop Stop Hook
 # Intercepts session exit and re-feeds the prompt if loop is active
 
-STATE_FILE=".claude/ralph-loop.local.md"
-PROGRESS_FILE=".claude/ralph-progress.local.yml"
+STATE_FILE=".claude/ralph-loop.local.yml"
 
 # Check if loop is active
 if [ ! -f "$STATE_FILE" ]; then
@@ -13,7 +12,7 @@ if [ ! -f "$STATE_FILE" ]; then
   exit 0
 fi
 
-# Parse state file (YAML frontmatter)
+# Parse YAML field from state file
 parse_field() {
   grep "^$1:" "$STATE_FILE" 2>/dev/null | sed "s/^$1: *//" | head -1
 }
@@ -38,8 +37,6 @@ fi
 # Check max iterations limit
 if [ -n "$MAX_ITERATIONS" ] && [ "$ITERATION" -ge "$MAX_ITERATIONS" ]; then
   echo "Ralph loop reached maximum iterations ($MAX_ITERATIONS)" >&2
-  echo "" >&2
-  echo "Promote valuable patterns from $PROGRESS_FILE to AGENTS.md" >&2
   rm -f "$STATE_FILE"
   exit 0
 fi
@@ -68,9 +65,6 @@ if [ -n "$COMPLETION_PROMISE" ]; then
     echo "╠════════════════════════════════════════════════════════════════╣"
     echo "║ Promise fulfilled: $COMPLETION_PROMISE"
     echo "║ Iterations: $ITERATION"
-    echo "╠════════════════════════════════════════════════════════════════╣"
-    echo "║ Next: Promote patterns from ralph-progress.local.yml          ║"
-    echo "║       to relevant AGENTS.md files                             ║"
     echo "╚════════════════════════════════════════════════════════════════╝"
     rm -f "$STATE_FILE"
     exit 0
@@ -80,8 +74,8 @@ fi
 # Increment iteration counter
 NEW_ITERATION=$((ITERATION + 1))
 
-# Extract prompt from state file (everything after ---\n at end of frontmatter)
-PROMPT=$(awk '/^---$/{if(++n==2){getline; found=1}} found' "$STATE_FILE")
+# Extract prompt from state file (multiline YAML value after "prompt: |")
+PROMPT=$(awk '/^prompt: \|/{found=1; next} found && /^[^ ]/{exit} found{sub(/^  /,""); print}' "$STATE_FILE")
 
 if [ -z "$PROMPT" ]; then
   echo "Error: No prompt found in state file" >&2
@@ -95,13 +89,6 @@ rm -f "$STATE_FILE.bak"
 
 # Build context message
 CONTEXT_MSG="[RALPH LOOP] Iteration $NEW_ITERATION${MAX_ITERATIONS:+ of $MAX_ITERATIONS}
-
-## Before continuing:
-1. Read \`.claude/ralph-progress.local.yml\` for accumulated patterns
-2. Apply learned patterns to avoid repeating mistakes
-
-## After completing work:
-Update \`.claude/ralph-progress.local.yml\` with new patterns and story entry.
 
 ---
 
