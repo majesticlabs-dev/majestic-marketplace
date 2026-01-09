@@ -16,7 +16,6 @@ allowed-tools: Bash, Read, Edit, Grep, Glob, Task, Skill
 If ARGUMENTS empty: BLUEPRINT = `ls -t docs/plans/*.md | head -1`
 Else: BLUEPRINT = ARGUMENTS
 Read(BLUEPRINT)
-If missing "## Implementation Tasks": error → run /majestic:blueprint first
 
 # 2. Start ralph-loop if not in one
 If NOT exists .claude/ralph-loop.local.yml:
