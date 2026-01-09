@@ -26,9 +26,9 @@ Implement a task autonomously through the full development lifecycle.
 ls -t docs/plans/*.md 2>/dev/null | head -1
 ```
 
-**Parse `--no-ship` flag:**
-- If `$ARGUMENTS` contains `--no-ship`: Set `skip_ship=true`, remove flag from arguments
-- Otherwise: Set `skip_ship=false`
+**Parse flags:**
+- `--no-ship`: Set `skip_ship=true`, remove flag
+- `--ac "<criteria>"`: Set `ac_items` to provided criteria, remove flag
 
 | Input | Source | Skip Steps |
 |-------|--------|------------|
@@ -109,7 +109,7 @@ Task (majestic-engineer:workflow:toolbox-resolver):
     Task Description: <description>
 ```
 
-**Stores:** `build_agent`, `fix_agent`, `coding_styles`, `design_system_path`, `research_hooks`, `pre_ship_hooks`, `quality_gate.reviewers`
+**Stores:** `methodology`, `build_agent`, `fix_agent`, `coding_styles`, `design_system_path`, `research_hooks`, `pre_ship_hooks`, `quality_gate.reviewers`
 
 ### 7. Auto Research (if triggers match)
 
@@ -142,30 +142,52 @@ Task (majestic-engineer:workflow:context-proxy):
 Pass all gathered context to the build-task-workflow-manager agent:
 
 ```
-agent build-task-workflow-manager "Task ID: <ID or 'plan'> | Title: <title> | Branch: <branch> | Plan: <plan content> | AC Path: <ac_path> | Build Agent: <build_agent> | Fix Agent: <fix_agent> | Coding Styles: <styles> | Design System Path: <path> | Pre-Ship Hooks: <hooks> | Quality Gate Reviewers: <reviewers> | Source: <task or plan> | Skip Ship: <skip_ship>"
+agent build-task-workflow-manager "
+Task ID: <ID or 'plan'>
+Title: <title>
+Branch: <branch>
+Plan: <plan content>
+Acceptance Criteria:
+  <ac_items>
+Methodology: <methodology>
+Build Agent: <build_agent>
+Fix Agent: <fix_agent>
+Coding Styles: <styles>
+Design System Path: <path>
+Pre-Ship Hooks: <hooks>
+Quality Gate Reviewers: <reviewers>
+Source: <task or plan>
+Skip Ship: <skip_ship>
+"
 ```
 
-**AC Path determination:**
-| Source | AC Path Value |
-|--------|---------------|
-| Plan file | The plan file path (e.g., `docs/plans/20240115_feature.md`) |
-| GitHub Issue | `#<number>` or the full URL |
-| Linear/Beads | The task ID (e.g., `PROJ-123`) |
-| File-based task | The task file path |
+**AC source:**
+| Input | AC Source |
+|-------|-----------|
+| `--ac` flag provided | Use provided AC directly |
+| Plan file | Extract from `**Acceptance Criteria:**` section |
+| GitHub Issue | Extract from issue body (look for AC section) |
+| Linear/Beads | Extract from task description |
 
 The agent handles:
 1. Loading design system (if configured)
 2. Activating coding style skills
 3. Building the implementation
 4. Slop removal (MANDATORY)
-5. Verification (MANDATORY)
+5. AC Verification (MANDATORY)
 6. Quality gate (MANDATORY)
 7. Fix loop (if needed, max 3 attempts)
-8. Pre-ship hooks
-9. Shipping (PR creation)
-10. Task completion (if task source)
+8. Capture learnings
+9. Pre-ship hooks
+10. Shipping (PR creation)
+11. Task completion (if task source)
 
-**IMPORTANT:** The workflow manager agent executes all build/verify/ship steps sequentially. Do not add additional steps after delegation - the agent handles everything through completion.
+**Agent returns:**
+- AC verification results (which criteria passed/failed)
+- Learnings discovered
+- Status (PASS or FAIL)
+
+**Caller responsibility:** If caller needs to persist results (e.g., update blueprint checkboxes), it handles that based on the returned results.
 
 ---
 

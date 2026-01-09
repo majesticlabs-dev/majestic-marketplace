@@ -12,7 +12,7 @@
     {
       "name": "majestic-engineer",
       "description": "Language-agnostic engineering workflows. Includes 30 specialized agents, 23 commands, 18 skills, and 5 toolbox presets.",
-      "version": "3.39.0",
+      "version": "3.40.0",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -441,8 +441,8 @@
     },
     {
       "name": "majestic-ralph",
-      "description": "Autonomous AI coding loops. Ship features while you sleep with iterative prompts that compound learnings. Includes 3 commands, 1 skill, and stop hook.",
-      "version": "1.0.0",
+      "description": "Autonomous AI coding loops. Ship features while you sleep with iterative prompt re-feeding. Includes 3 commands, 1 skill, and stop hook.",
+      "version": "1.2.0",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",

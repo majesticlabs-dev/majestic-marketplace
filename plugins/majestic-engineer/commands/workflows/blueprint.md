@@ -126,7 +126,6 @@ Task 2 (majestic-engineer:workflow:lessons-discoverer):
 
 **Store outputs for subsequent steps:**
 - `research_hooks` → use in Step 5
-- `coding_styles` → use in Step 6
 - `lessons_context` → use in Step 7 (architect)
 
 **Error handling:**
@@ -196,7 +195,67 @@ The architect agent:
 - Apply patterns from similar past work
 - Avoid known pitfalls documented in lessons
 
-### 8. Write Plan
+### 8. Capture Planning Learnings
+
+Document patterns and conventions discovered during planning to closest AGENTS.md.
+
+```
+# Identify primary affected directory from architect output
+PRIMARY_DIR = extract main folder from architect's file recommendations
+
+# Find closest AGENTS.md
+AGENTS_MD = walk up from PRIMARY_DIR until AGENTS.md found
+If not found: AGENTS_MD = "AGENTS.md" (root)
+
+# Extract learnings from research and architect phases
+PLANNING_LEARNINGS = []
+
+# From research (Step 5)
+For each FINDING in research_outputs:
+  If FINDING describes existing pattern or convention:
+    PLANNING_LEARNINGS.append({
+      type: "pattern",
+      content: FINDING.pattern,
+      location: FINDING.file_path
+    })
+
+# From architect (Step 7)
+For each DECISION in architect_output.decisions:
+  PLANNING_LEARNINGS.append({
+    type: "decision",
+    content: DECISION.what,
+    rationale: DECISION.why
+  })
+
+# Dedupe against existing AGENTS.md content
+EXISTING = Read(AGENTS_MD) → extract ## Patterns section
+NEW_LEARNINGS = PLANNING_LEARNINGS - EXISTING
+
+# Append if new learnings found
+If NEW_LEARNINGS not empty:
+  FORMAT = """
+## Patterns (discovered {date})
+
+| Pattern | Location | Notes |
+|---------|----------|-------|
+{for each L in NEW_LEARNINGS where L.type == "pattern":}
+| {L.content} | `{L.location}` | |
+{end for}
+
+## Decisions
+
+{for each L in NEW_LEARNINGS where L.type == "decision":}
+- **{L.content}** — {L.rationale}
+{end for}
+"""
+  Edit(AGENTS_MD, append to relevant section or create if missing)
+```
+
+Skip if:
+- No significant patterns discovered (trivial feature)
+- All patterns already documented in AGENTS.md
+
+### 9. Write Plan
 
 Load the plan-builder skill for template guidance:
 ```
@@ -210,7 +269,7 @@ Select template based on complexity:
 
 **Output:** Write to `docs/plans/[YYYYMMDDHHMMSS]_<title>.md`
 
-### 9. Review Plan
+### 10. Review Plan
 
 ```
 Task(subagent_type="majestic-engineer:plan:plan-review", prompt="Review plan at docs/plans/<filename>.md")
@@ -218,7 +277,7 @@ Task(subagent_type="majestic-engineer:plan:plan-review", prompt="Review plan at 
 
 Incorporate feedback and update the plan file.
 
-### 10. Preview and User Options
+### 11. Preview and User Options
 
 Check auto_preview config:
 
@@ -234,16 +293,16 @@ Question: "Blueprint ready at `docs/plans/<filename>.md`. What next?"
 
 | Option | Action |
 |--------|--------|
-| Build as single task | Go to Step 11.1 |
-| Break into small tasks | Go to Step 11.2 |
-| Create as single epic | Go to Step 11.3 |
-| Deep dive into specifics | Go to Step 10.1 |
-| Preview plan | Read and display plan content, return to Step 10 |
-| Revise | Ask what to change, return to Step 8 |
+| Build as single task | Go to Step 12.1 |
+| Break into small tasks | Go to Step 12.2 |
+| Create as single epic | Go to Step 12.3 |
+| Deep dive into specifics | Go to Step 11.1 |
+| Preview plan | Read and display plan content, return to Step 11 |
+| Revise | Ask what to change, return to Step 9 |
 
 **IMPORTANT:** After user selects an option, EXECUTE that action. Do not stop.
 
-### 10.1. Deep Dive
+### 11.1. Deep Dive
 
 **Ask user what aspect needs more research:**
 
@@ -271,9 +330,9 @@ Task(subagent_type="majestic-engineer:research:web-research", prompt="[user's as
 3. Enrich that section with research findings
 4. Write updated plan: `Edit(file_path="docs/plans/<filename>.md", ...)`
 
-**Return to Step 10** to present options again.
+**Return to Step 11** to present options again.
 
-### 11.1. Build Single Task
+### 12.1. Build Single Task
 
 ```
 Skill(skill: "majestic-engineer:workflows:build-task", args="docs/plans/<filename>.md")
@@ -281,7 +340,7 @@ Skill(skill: "majestic-engineer:workflows:build-task", args="docs/plans/<filenam
 
 **End workflow.**
 
-### 11.2. Task Breakdown
+### 12.2. Task Breakdown
 
 ```
 Task(subagent_type="majestic-engineer:plan:task-breakdown", prompt="Plan: docs/plans/<filename>.md")
@@ -297,21 +356,21 @@ The agent appends `## Implementation Tasks` section with:
 Skill(skill: "config-reader", args: "blueprint.auto_create_task false")
 ```
 
-- **If `true`:** Skip to Step 12
+- **If `true`:** Skip to Step 13
 - **If `false`:** Ask user "Tasks added to plan. Create these in your task manager?"
-  - If Yes → Go to Step 12
+  - If Yes → Go to Step 13
   - If No → End workflow
 
-### 11.3. Single Epic
+### 12.3. Single Epic
 
 Create a single task covering the entire plan:
 ```
 Skill(skill: "backlog-manager")
 ```
 
-Update the plan document with the task reference, then go to Step 13.
+Update the plan document with the task reference, then go to Step 14.
 
-### 12. Create Tasks
+### 13. Create Tasks
 
 For each task in the Implementation Tasks section:
 1. Create task: `Skill(skill: "backlog-manager")`
@@ -326,7 +385,7 @@ For each task in the Implementation Tasks section:
 | Beads | `BEADS-123` |
 | File-based | `TODO-123` |
 
-### 13. Offer Build
+### 14. Offer Build
 
 Use AskUserQuestion:
 

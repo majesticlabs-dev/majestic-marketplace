@@ -37,9 +37,8 @@ Task Description: <optional, for context>
 
 ### 1. Read Project Tech Stack
 
-Read `tech_stack` from project config:
 ```
-Skill(skill: "config-reader", args: "tech_stack generic")
+TECH_STACK = Skill("config-reader", args: "tech_stack generic")
 ```
 
 **Multi-stack support:**
@@ -112,7 +111,7 @@ For each discovered manifest:
 **Scalar fields** (`build_task.executor.build_agent`, `build_task.executor.fix_agent`, `build_task.design_system_path`):
 - Last one wins (in merge order)
 
-**List fields** (`coding_styles`, `research_hooks`, `pre_ship_hooks`, `quality_gate.reviewers`):
+**List fields** (`research_hooks`, `pre_ship_hooks`, `quality_gate.reviewers`):
 - Union by `id` (for hooks) or by full agent/skill path (for others)
 - Deduplicate by id
 - Keep all unique entries from all sources
@@ -128,17 +127,22 @@ If same `id` appears in multiple sources with different agents:
 
 ### 6. Apply User Overrides
 
-Check if `.agents.yml` contains `toolbox:` section:
+```
+USER_TOOLBOX = Skill("config-reader", args: "toolbox {}")
+```
+
+Merge USER_TOOLBOX with preset/plugin config:
 
 ```yaml
 # .agents.yml example
 toolbox:
   build_task:
+    methodology:
+      - tdd
     executor:
-      build_agent: general-purpose  # Replaces merged config
-    coding_styles:                  # Replaces merged config
+      build_agent: general-purpose
+    coding_styles:
       - majestic-rails:dhh-coder
-      - majestic-engineer:tdd-workflow
     design_system_path: docs/design/design-system.md
     research_hooks:
       - id: custom_hook             # ADDS to merged config
@@ -151,6 +155,7 @@ toolbox:
 ```
 
 **Merge behavior:**
+- `build_task.methodology`: User **replaces** (array: `[tdd]`, etc.)
 - `build_task.executor`: User **replaces** merged config
 - `build_task.coding_styles`: User **replaces** merged config
 - `build_task.design_system_path`: User **replaces** merged config
@@ -176,13 +181,14 @@ overrides_applied: []
 warnings: []
 
 build_task:
+  methodology: [tdd]
+
   executor:
     build_agent: general-purpose
     fix_agent: general-purpose
 
   coding_styles:
     - majestic-rails:dhh-coder
-    - majestic-engineer:tdd-workflow
 
   design_system_path: docs/design/design-system.md
 
@@ -242,11 +248,11 @@ overrides_applied: []
 warnings: []
 
 build_task:
+  methodology: []
   executor:
     build_agent: null
     fix_agent: null
-  coding_styles:
-    - majestic-engineer:tdd-workflow
+  coding_styles: []
   design_system_path: null
   research_hooks: []
   pre_ship_hooks: []

@@ -106,6 +106,40 @@ Run `skill-linter` for new skills.
   - Document patterns you implement, not who inspired them
   - Keep credits in separate Credits section, not inline
 
+### Agent Instruction Patterns
+- **Pseudocode format (not prose):**
+  - ✅ `If X: do Y | Else: do Z`
+  - ✅ `For each ITEM in LIST: process ITEM`
+  - ✅ `While CONDITION: loop body`
+  - ❌ "Check if X exists, and if so, do Y" (prose)
+  - ❌ "This step is optional unless..." (conditional prose)
+- **Variables enable control flow (required, not optional):**
+  ```
+  RESULT = Task(...) → If RESULT.status == PASS: proceed
+  ITEMS = Skill(...) → For each I in ITEMS: invoke(I)
+  ```
+- **Schemas over examples:** Document I/O with YAML/JSON schemas
+  - ✅ `task_id: string # T1, T2 (from header)`
+  - ❌ Markdown example blocks expecting agent to infer structure
+- **Skill invocation:** `Skill("skill-name", args: "...")`
+- **Explicit config reads:** Show the Skill() call, don't say "read from config"
+- **Arrays for extensibility:** `methodology: [tdd]` not `methodology: tdd`
+
+### Agent/Command Doc Structure
+- ✅ Purpose (1 line max)
+- ✅ Input Schema (YAML)
+- ✅ Workflow (pseudocode only)
+- ✅ Output Schema (YAML)
+- ✅ Error Handling (decision table)
+- ❌ "How It Works" narratives
+- ❌ "Critical Rules" / "Notes" / "Safety" prose
+- ❌ "Monitoring" / "Examples" sections
+
+### Verification Phase Separation
+- **Quality Gate:** lint, typecheck, tests, security (standard checks)
+- **Acceptance Criteria:** task-specific behavior (file exists, endpoint returns X)
+- ❌ Don't include quality gate checks in AC (no "npm run typecheck passes")
+
 ### Anti-Patterns
 - ❌ Do NOT hardcode language/framework-specific agents in generic orchestrators
   - Bad: Putting "majestic-rails:auth-researcher" directly in blueprint.md

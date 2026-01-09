@@ -13,7 +13,6 @@ A **self-referential feedback loop** where:
 - A single prompt never changes between iterations
 - Your previous work persists in files and git history
 - Each iteration sees modified files and improves upon them
-- Learnings compound in progress file across iterations
 
 ## Available Commands
 
@@ -35,33 +34,13 @@ A **self-referential feedback loop** where:
 - `--max-iterations N` - Safety limit (recommended: 10-50)
 - `--completion-promise "TEXT"` - Phrase that signals genuine completion
 
-## Files
+## State File
 
 | File | Purpose |
 |------|---------|
-| `.claude/ralph-loop.local.md` | Loop state (iteration, prompt) |
-| `.claude/ralph-progress.local.yml` | Patterns and story log |
+| `.claude/ralph-loop.local.yml` | Loop state (iteration, prompt) |
 
-Both are gitignored (`.local.` suffix).
-
-## Progress File
-
-Read at start of each iteration, update after completing work:
-
-```yaml
-patterns:
-  migrations: "Use IF NOT EXISTS"
-  forms: "Zod validation"
-
-stories:
-  - id: US-001
-    title: Add login form
-    files: [app/login/page.tsx]
-    learnings:
-      - "Submit handler in separate action"
-```
-
-Promote valuable patterns to AGENTS.md at loop end.
+Gitignored (`.local.` suffix).
 
 ## Best Practices
 
@@ -103,7 +82,6 @@ Output <promise>COMPLETE</promise> when ALL criteria met."
 
 **Not good for:**
 - Tasks requiring human judgment/design decisions
-- One-shot operations
 - Unclear success criteria
 - Production debugging
 
@@ -111,20 +89,8 @@ Output <promise>COMPLETE</promise> when ALL criteria met."
 
 ```bash
 # Check current iteration
-grep '^iteration:' .claude/ralph-loop.local.md
-
-# View accumulated patterns
-cat .claude/ralph-progress.local.yml
+grep '^iteration:' .claude/ralph-loop.local.yml
 ```
-
-## Philosophy
-
-| Principle | Description |
-|-----------|-------------|
-| **Iteration > Perfection** | Don't aim for perfect first try; let the loop refine |
-| **Failures Are Data** | Each failure informs the next attempt |
-| **Learnings Compound** | By iteration 10, patterns from 1-9 are visible |
-| **Persistence Wins** | Keep trying until genuine success |
 
 ## Reference
 

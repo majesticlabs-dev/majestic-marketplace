@@ -4,8 +4,7 @@ set -euo pipefail
 # Ralph Loop Setup Script
 # Creates state file and initializes the iteration loop
 
-STATE_FILE=".claude/ralph-loop.local.md"
-PROGRESS_FILE=".claude/ralph-progress.local.yml"
+STATE_FILE=".claude/ralph-loop.local.yml"
 STATE_DIR=".claude"
 
 # Initialize variables
@@ -63,35 +62,14 @@ fi
 # Create state directory if needed
 mkdir -p "$STATE_DIR"
 
-# Get current branch
-CURRENT_BRANCH=$(git branch --show-current 2>/dev/null || echo "unknown")
-
-# Create state file with YAML frontmatter
+# Create state file (YAML format)
 cat > "$STATE_FILE" << EOF
----
 iteration: 1
 max_iterations: ${MAX_ITERATIONS:-}
 completion_promise: ${COMPLETION_PROMISE:-}
 started_at: $(date -Iseconds)
----
-$PROMPT
-EOF
-
-# Create progress file
-cat > "$PROGRESS_FILE" << EOF
-# Ralph Progress - Ephemeral session memory
-# Patterns promote to AGENTS.md at loop end
-
-started_at: $(date -Iseconds)
-branch: ${CURRENT_BRANCH}
-
-patterns: {}
-  # Add discovered patterns here, e.g.:
-  # migrations: "Use IF NOT EXISTS for all column additions"
-  # forms: "Zod schema validation"
-
-stories: []
-  # Append completed stories here
+prompt: |
+$(echo "$PROMPT" | sed 's/^/  /')
 EOF
 
 # Display startup message
@@ -104,8 +82,8 @@ if [ -n "$COMPLETION_PROMISE" ]; then
 echo "║ Completion: Output <promise>$COMPLETION_PROMISE</promise> when done"
 fi
 echo "╠════════════════════════════════════════════════════════════════╣"
-echo "║ Progress: .claude/ralph-progress.local.yml                     ║"
-echo "║ Monitor:  grep '^iteration:' .claude/ralph-loop.local.md       ║"
+echo "║ State: .claude/ralph-loop.local.yml                            ║"
+echo "║ Monitor: grep '^iteration:' .claude/ralph-loop.local.yml       ║"
 echo "╠════════════════════════════════════════════════════════════════╣"
 echo "║ ⚠️  Use /cancel-ralph to stop the loop manually                ║"
 echo "╚════════════════════════════════════════════════════════════════╝"
@@ -116,30 +94,6 @@ cat << 'EOF'
 ---
 
 **RALPH LOOP ACTIVE**
-
-## Before Starting Work
-
-1. Read `.claude/ralph-progress.local.yml` for accumulated patterns
-2. Check patterns section for project-specific learnings
-
-## After Completing Each Story
-
-Update `.claude/ralph-progress.local.yml`:
-
-```yaml
-patterns:
-  <key>: "<learning>"  # Add new patterns discovered
-
-stories:
-  - id: <story-id>
-    title: <title>
-    completed_at: <timestamp>
-    files:
-      - <file1>
-      - <file2>
-    learnings:
-      - "<specific learning>"
-```
 
 ## Completion Rule
 

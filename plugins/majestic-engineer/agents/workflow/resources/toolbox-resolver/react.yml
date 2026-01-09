@@ -71,8 +71,9 @@ research_hooks:
         - "validation"
         - "submit"
 
-coding_styles:
-  - majestic-engineer:tdd-workflow
+coding_styles: []
+  # Stack plugins (majestic-react) add styles
+  # User can override in .agents.yml
 
 quality_gate:
   reviewers:

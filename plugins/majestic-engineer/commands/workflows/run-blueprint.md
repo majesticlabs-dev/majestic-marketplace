@@ -25,32 +25,29 @@ Run `/majestic:blueprint` with "Break into small tasks" option first if tasks do
 
 ## Step 0: Load Blueprint
 
-```bash
-# If empty, find most recent blueprint
-ls -t docs/plans/*.md 2>/dev/null | head -1
 ```
+If ARGUMENTS empty:
+  BLUEPRINT = ls -t docs/plans/*.md | head -1
+Else:
+  BLUEPRINT = ARGUMENTS
 
-Read the blueprint file and verify it has an Implementation Tasks section.
+Read(BLUEPRINT)
+Assert "## Implementation Tasks" section exists
+```
 
 ---
 
 ## Step 1: Ralph Loop Detection
 
-Check if already running inside ralph-loop:
-
-```bash
-[ -f .claude/ralph-loop.local.md ] && echo "IN_RALPH_LOOP" || echo "NOT_IN_LOOP"
 ```
+IN_LOOP = [ -f .claude/ralph-loop.local.yml ]
 
-**If NOT in loop:** Invoke ralph-loop with run-blueprint as the prompt:
+If NOT IN_LOOP:
+  Skill("majestic-ralph:start", args: '"/majestic:run-blueprint <BLUEPRINT>" --max-iterations 50 --completion-promise "RUN_BLUEPRINT_COMPLETE"')
+  STOP
 
+# Continue if IN_LOOP
 ```
-Skill(skill: "majestic-ralph:start", args: '"/majestic:run-blueprint <blueprint_file>" --max-iterations 50 --completion-promise "RUN_BLUEPRINT_COMPLETE"')
-```
-
-Then **STOP** - ralph-loop will re-invoke this command and handle iterations.
-
-**If IN loop:** Continue with Step 2.
 
 ---
 
@@ -58,153 +55,120 @@ Then **STOP** - ralph-loop will re-invoke this command and handle iterations.
 
 Extract tasks from `## Implementation Tasks` section.
 
-**Supported formats:**
-
-Table format:
-```markdown
-| Task | Points | Dependencies | Tracker |
-|------|--------|--------------|---------|
-| Set up database schema | 2 | - | #123 |
-| Create API endpoints | 3 | #123 | #124 |
+**Task schema:**
+```yaml
+task_id: string       # T1, T2, etc. (from ##### header)
+title: string         # Task title (from ##### header after ID)
+priority: string      # p0, p1, p2, p3
+points: integer       # Story points
+files: string[]       # File paths
+dependencies: string[] # Task IDs this depends on (or empty)
+ac_items: string[]    # Acceptance criteria text lines
+status: enum          # ⏳|🔄|✅|🔴
 ```
 
-Checkbox format:
-```markdown
-- [ ] Set up database schema (2 pts) → #123
-- [x] Create API endpoints (3 pts, depends: #123) → #124
-```
-
-**Extract for each task:**
-- `task_ref`: Task reference (#123, PROJ-123, BEADS-123)
-- `dependencies`: List of task refs this depends on
-- `completed`: Whether checkbox is checked or row is struck through
+**Status markers:**
+| Marker | Status |
+|--------|--------|
+| ⏳ Pending | Not started |
+| 🔄 In Progress | Build in progress |
+| ✅ Complete | All AC passed, quality gate passed |
+| 🔴 Blocked | Cannot proceed (dependency issue) |
 
 ---
 
 ## Step 3: Build Dependency Graph
 
-Order tasks respecting dependencies:
-
 ```
-Independent tasks (no deps) → Run first
-Dependent tasks → Run after their dependencies complete
+TASKS = sort by dependencies (independent first, dependent after their deps)
 ```
-
-**Parallelization:** Tasks with no mutual dependencies CAN run in parallel, but for simplicity run sequentially to maintain clean git history.
 
 ---
 
 ## Step 4: Execute Tasks
 
-For each task in dependency order:
-
-### 4a. Skip if Complete
-
-If task already marked complete in blueprint, skip it.
-
-### 4b. Check Dependencies
-
-Verify all dependencies are marked complete before proceeding.
-
-### 4c. Run Build-Task
-
 ```
-SlashCommand(command: "majestic:build-task", args: "<task_ref> --no-ship")
+For each TASK in TASKS:
+  # 4a. Skip complete
+  If TASK.status == "✅ Complete": continue
+
+  # 4b. Check dependencies
+  For each DEP in TASK.dependencies:
+    If DEP.status != "✅ Complete": mark TASK as 🔴 Blocked, continue
+
+  # 4c. Extract AC, update status
+  AC_ITEMS = extract "- [ ]" lines from TASK's Acceptance Criteria section
+  Edit(BLUEPRINT, "**Status:** ⏳ Pending", "**Status:** 🔄 In Progress")
+
+  # 4d. Run build-task
+  RESULT = SlashCommand("majestic:build-task", args: "<TASK.id> --no-ship --ac '<AC_ITEMS>'")
+
+  # 4e. Update blueprint from results
+  For each AC_RESULT in RESULT.ac_results:
+    If AC_RESULT.passed:
+      Edit(BLUEPRINT, "- [ ] <criterion>", "- [x] <criterion>")
+
+  If RESULT.status == PASS:
+    Edit(BLUEPRINT, "**Status:** 🔄 In Progress", "**Status:** ✅ Complete")
+  Else:
+    Edit(BLUEPRINT, "**Status:** 🔄 In Progress", "**Status:** 🔴 Blocked")
+
+  # 4f. Continue or stop
+  If all remaining TASKS blocked: STOP
 ```
-
-This invokes the build-task workflow with deferred shipping:
-- Workspace setup (reuses existing branch or creates new)
-- Toolbox resolution
-- Research hooks
-- Build
-- Slop-remover (MANDATORY)
-- Verify (MANDATORY)
-- Quality-gate (MANDATORY)
-- Fix loop if needed
-- **Shipping deferred** (handled in Step 6 after all tasks complete)
-
-### 4d. Update Blueprint Progress
-
-After successful completion, update the blueprint file:
-
-**Table format:** Add checkmark or strikethrough to completed row
-**Checkbox format:** Change `- [ ]` to `- [x]`
-
-```
-Edit(file_path: "<blueprint_file>", old_string: "- [ ] <task_desc> → <ref>", new_string: "- [x] <task_desc> → <ref>")
-```
-
-### 4e. Continue or Retry
-
-- **Success:** Move to next task
-- **Failure after 3 fix attempts:** Log failure, continue to next independent task
-- **All tasks blocked:** Stop and report
 
 ---
 
 ## Step 5: Completion Check
 
-After processing all tasks:
+```
+COMPLETED = grep -c "✅ Complete" <blueprint_file>
+BLOCKED = grep -c "🔴 Blocked" <blueprint_file>
+PENDING = grep -c "⏳ Pending" <blueprint_file>
 
-| Status | Action |
-|--------|--------|
-| All tasks complete | Proceed to Step 6 (Ship) |
-| Some tasks failed | List failures, still proceed to Step 6 if any succeeded |
-| Blocked tasks remain | List blocked tasks and their blockers |
+If COMPLETED > 0:
+  Proceed to Step 6
+Else:
+  Report "No tasks completed" and exit
+```
 
 ---
 
 ## Step 6: Ship (MANDATORY)
 
-After all tasks have been built and passed quality gates, run ship-it to create the PR:
-
 ```
-Skill(skill: "majestic-engineer:workflows:ship-it")
+If COMPLETED > 0:
+  Skill("majestic-engineer:workflows:ship-it")
 ```
 
-This creates a single PR containing all the changes from the completed tasks.
-
-**Note:** This step runs even if some tasks failed. The PR will contain changes from all successfully completed tasks.
+Ships all completed task changes in single PR (even if some tasks blocked).
 
 ---
 
 ## Ralph-Loop Integration
 
-This command is designed to work with ralph-loop for autonomous iteration.
-
-**Start with ralph:**
-```bash
-/majestic-ralph:start "/majestic:run-blueprint docs/plans/xxx.md" --max-iterations 50 --completion-promise "RUN_BLUEPRINT_COMPLETE"
 ```
-
-**Completion signal:** Output `<promise>RUN_BLUEPRINT_COMPLETE</promise>` when:
-- All tasks marked complete in blueprint file
-- All PRs created successfully
-
-**Ralph handles:**
-- Tasks that fail quality gates repeatedly
-- Regressions (earlier task broken by later changes)
-- Interrupted sessions (resumes from unchecked tasks)
+Completion signal: <promise>RUN_BLUEPRINT_COMPLETE</promise>
+Condition: All tasks ✅ Complete OR no more tasks can proceed
+```
 
 ---
 
-## Output
+## Output Schema
 
-```markdown
-## Build Blueprint Complete: <blueprint-title>
-
-### Tasks Executed
-- [x] #123 - Set up database schema ✓ Quality passed
-- [x] #124 - Create API endpoints ✓ Quality passed
-- [x] #125 - Build UI components ✓ Quality passed
-
-### Summary
-- Blueprint: docs/plans/xxx.md
-- Tasks: 3/3 complete
-- PR: #456 (contains all tasks)
-- Quality: All passed
-
-<promise>RUN_BLUEPRINT_COMPLETE</promise>
+```yaml
+title: string           # "Build Blueprint Complete: <title>"
+tasks: array
+  - id: string          # T1, T2, etc.
+    title: string
+    status: enum        # ✅|🔴
+    ac_progress: string # "4/4"
+summary:
+  blueprint: string     # file path
+  completed: integer
+  blocked: integer
+  pr: integer           # PR number
+promise: string         # RUN_BLUEPRINT_COMPLETE (always output)
 ```
 
 ---

@@ -7,240 +7,262 @@ color: green
 
 # Purpose
 
-Orchestrate the execution phase of task building. Execute ALL steps in order - skipping is not allowed.
+Execute ALL steps in order. Skipping is not allowed.
 
-**Expected in task prompt:** Structured input block with task details (see Input section).
+## Input Schema
 
-## Input
-
+```yaml
+task_id: string           # task reference or "plan"
+title: string
+branch: string
+plan: string              # implementation plan content
+acceptance_criteria: string[]
+methodology: string[]     # [tdd, etc.]
+build_agent: string       # agent name or "general-purpose"
+fix_agent: string
+coding_styles: string[]
+design_system_path: string | null
+pre_ship_hooks: string[]
+quality_gate_reviewers: string[]
+source: enum              # "task" | "plan"
+skip_ship: boolean        # default: false
 ```
-Task ID: <task reference or "plan">
-Title: <task title>
-Branch: <feature branch name>
-Plan: <implementation plan content>
-AC Path: <path to plan/task file or issue URL> (for Acceptance Criteria verification)
-Build Agent: <agent name from toolbox or "general-purpose">
-Fix Agent: <agent name from toolbox or "general-purpose">
-Coding Styles: <comma-separated skill names>
-Design System Path: <path or empty>
-Pre-Ship Hooks: <comma-separated hook agents>
-Quality Gate Reviewers: <comma-separated reviewer names>
-Source: <"task" or "plan">
-Skip Ship: <true or false> (optional, defaults to false)
-```
-
-**Skip Ship Mode:** When `Skip Ship: true`, steps 9-11 (Pre-Ship Hooks, Ship, Complete Task Status) are skipped. Used by run-blueprint for batch shipping at the end.
 
 ## Workflow (MANDATORY - EXECUTE ALL STEPS)
 
-### Step 1: Load Design System (if configured)
+### Step 1: Load Design System
 
-If `Design System Path` is provided and file exists:
-1. Read the design system file
-2. Store content for inclusion in build prompt
-
-**UI Detection Heuristic:** Load design system if ANY of:
-- Plan contains UI keywords (form, button, page, component, modal, card, input)
-- Task description contains UI keywords
-- Design system path is explicitly configured
-
-### Step 2: Activate Coding Styles
-
-For each skill in `Coding Styles` (if non-empty):
 ```
-Skill(skill: "<skill-name>")
+UI_KEYWORDS = [form, button, page, component, modal, card, input]
+
+If design_system_path exists OR plan contains UI_KEYWORDS:
+  DESIGN_SYSTEM = Read(design_system_path)
 ```
 
-Example:
-```
-Skill(skill: "majestic-rails:dhh-coder")
-Skill(skill: "majestic-engineer:tdd-workflow")
-```
+### Step 2: Activate Methodology and Coding Styles
 
-**Note:** Coding styles are **skills** (knowledge/context), not agents. They influence how the build agent writes code.
+```
+METHODOLOGIES = Skill("config-reader", args: "toolbox.build_task.methodology []")
+CODING_STYLES = Skill("config-reader", args: "toolbox.build_task.coding_styles []")
+
+For each M in METHODOLOGIES:
+  If M == "tdd": Skill("majestic-engineer:tdd-workflow")
+
+For each S in CODING_STYLES:
+  Skill(S)
+```
 
 ### Step 3: Build
 
-Invoke build agent with all context:
-
-**If design system was loaded:**
 ```
-Task (<build_agent>):
-  prompt: |
-    Implement: <title>
-    Plan: <plan content>
-    Design System: Follow these specifications for all UI work: <design_system_content>
-```
-
-**If no design system:**
-```
-Task (<build_agent>):
-  prompt: |
-    Implement: <title>
-    Plan: <plan content>
+If DESIGN_SYSTEM:
+  Task(build_agent, prompt: "Implement: <title> | Plan: <plan> | Design System: <DESIGN_SYSTEM>")
+Else:
+  Task(build_agent, prompt: "Implement: <title> | Plan: <plan>")
 ```
 
 ### Step 4: Slop Removal (MANDATORY)
 
-Run slop-remover on branch changes:
 ```
-Task (majestic-engineer:qa:slop-remover):
-  prompt: Clean branch changes on <branch>
+Task("majestic-engineer:qa:slop-remover", prompt: "Clean branch changes on <branch>")
 ```
-
-**This step is NOT optional.** Even "simple" or "obvious" fixes must be cleaned.
 
 ### Step 5: Verify (MANDATORY)
 
-Run always-works-verifier:
 ```
-Task (majestic-engineer:workflow:always-works-verifier):
-  prompt: Verify branch: <branch>
+VERIFY_RESULT = Task("majestic-engineer:workflow:always-works-verifier", prompt: "Verify branch: <branch>")
 ```
 
-**Result:** PASS or FAIL with findings
+### Step 6: AC Verification (MANDATORY)
 
-### Step 6: Quality Gate (MANDATORY)
-
-Run quality-gate with configured reviewers:
 ```
-Task (majestic-engineer:workflow:quality-gate):
-  prompt: |
-    Context: <title>
-    Branch: <branch>
-    AC Path: <Plan Path>
-    Verifier Result: <result from Step 5>
-```
+For each AC in acceptance_criteria:
+  If AC starts with [npm, rails, bundle, pytest, make]:
+    RESULT = Bash(AC), check exit 0
+  Else if AC contains "localhost" or URL:
+    RESULT = dev-browser or curl
+  Else if AC contains file path:
+    RESULT = check file exists
+  Else:
+    RESULT = always-works-verifier
 
-**Result:** APPROVED, NEEDS CHANGES, or BLOCKED
+  AC_RESULTS.append({criterion: AC, passed: RESULT})
 
-**Note:** Quality gate automatically runs acceptance-criteria-verifier when AC Path is provided.
-
-### Step 7: Fix Loop (if needed)
-
-If verify or quality gate failed:
-
-1. **Attempt counter:** Track attempts (max 3)
-2. **Run fix agent:**
-   ```
-   Task (<fix_agent>):
-     prompt: Fix findings: <findings from verify/quality>
-   ```
-3. **Re-run verification:** Go back to Step 4 (Slop Removal)
-4. **If 3 attempts fail:** Stop and report failure
-
-**Fix loop flow:**
-```
-Fix → Slop → Verify → Quality → (Pass? Ship : Fix again)
+If any AC_RESULTS.passed == false: goto Step 8
 ```
 
-### Step 8: Quality Gate Checkpoint
+### Step 7: Quality Gate (MANDATORY)
 
-**Before ANY shipping actions, confirm ALL mandatory checks passed:**
-
-| Check | Requirement |
-|-------|-------------|
-| slop-remover | Ran and cleaned code |
-| always-works-verifier | Returned PASS |
-| quality-gate | Returned APPROVED |
-
-**If ANY step was skipped or failed:**
-1. **STOP** - do not proceed to Ship
-2. Return to the failed step
-3. Complete it before continuing
-
-**This gate is NOT optional.**
-
-### Step 9: Pre-Ship Hooks (skip if Skip Ship: true)
-
-**If `Skip Ship: true`:** Skip this step entirely.
-
-For each hook in `Pre-Ship Hooks`:
 ```
-Task (<hook.agent>):
-  prompt: Pre-ship check on branch: <branch>
+QUALITY_RESULT = Task("majestic-engineer:workflow:quality-gate", prompt: "Context: <title> | Branch: <branch> | Verifier: <VERIFY_RESULT> | AC: <AC_RESULTS>")
 ```
 
-- **Required hooks:** Block on failure
-- **Optional hooks:** Log warnings only
+### Step 8: Fix Loop
 
-### Step 10: Ship (skip if Skip Ship: true)
-
-**If `Skip Ship: true`:** Skip this step. Report "Quality gate passed, shipping deferred."
-
-**For task source (with task ID):**
 ```
-/majestic-engineer:workflows:ship-it closes #<ID>
-```
+ATTEMPTS = 0
+MAX_ATTEMPTS = 3
 
-**For plan source (no task ID):**
-```
-/majestic-engineer:workflows:ship-it
+While VERIFY_RESULT != PASS OR QUALITY_RESULT != APPROVED:
+  ATTEMPTS++
+  If ATTEMPTS > MAX_ATTEMPTS: return FAIL
+
+  Task(fix_agent, prompt: "Fix findings: <findings>")
+  goto Step 4  # Slop → Verify → Quality
 ```
 
-### Step 11: Complete Task Status (skip if Skip Ship: true or plan source)
+### Step 9: Quality Gate Checkpoint
 
-**If `Skip Ship: true`:** Skip this step.
-
-If source is "task" (not "plan"):
 ```
-Task (majestic-engineer:workflow:task-status-updater):
-  prompt: Action: ship | Task: <ID> | PR: <number>
-```
+Assert slop-remover ran
+Assert VERIFY_RESULT == PASS
+Assert QUALITY_RESULT == APPROVED
 
-Skip this step if source is "plan".
-
-## Output Format
-
-**Success (with ship):**
-```markdown
-## Build Complete: <title>
-
-- Source: <task #ID or plan file>
-- Branch: <branch>
-- PR: #<number>
-- Quality: Passed (attempt <n> of 3)
-- Next: PR awaits review
+If any assertion fails: goto Step 8
 ```
 
-**Success (skip ship mode):**
-```markdown
-## Build Complete: <title>
+### Step 10: Capture Implementation Learnings
 
-- Source: <task #ID or plan file>
-- Branch: <branch>
-- Quality: Passed (attempt <n> of 3)
-- Status: Shipping deferred (batch mode)
+Document patterns, gotchas, and anti-patterns discovered during implementation to closest AGENTS.md.
+
+```
+# Get modified files from this task
+MODIFIED_FILES = git diff --name-only $(git merge-base HEAD main)..HEAD
+
+If MODIFIED_FILES empty: SKIP
+
+# Find primary directory (most common parent)
+PRIMARY_DIR = most common parent directory of MODIFIED_FILES
+
+# Find closest AGENTS.md
+AGENTS_MD = walk up from PRIMARY_DIR until AGENTS.md found
+If not found: AGENTS_MD = "AGENTS.md" (root)
+
+# Extract implementation learnings
+IMPL_LEARNINGS = []
+
+# Patterns: What conventions emerged from the code?
+For each FILE in MODIFIED_FILES:
+  PATTERNS = analyze for:
+    - Import organization
+    - Naming conventions
+    - File structure patterns
+    - Code organization
+  If PATTERN is consistent across 2+ files:
+    IMPL_LEARNINGS.append({type: "pattern", content: PATTERN, location: FILE})
+
+# Gotchas: What non-obvious things were required?
+For each GOTCHA discovered during build/fix:
+  IMPL_LEARNINGS.append({
+    type: "gotcha",
+    content: GOTCHA.what,
+    context: GOTCHA.why_needed
+  })
+
+# Anti-patterns: What failed in fix-loop?
+If ATTEMPTS > 1:
+  For each FAILED_APPROACH in fix_loop_history:
+    IMPL_LEARNINGS.append({
+      type: "anti_pattern",
+      dont: FAILED_APPROACH.what,
+      why: FAILED_APPROACH.why_failed,
+      do_instead: FAILED_APPROACH.what_worked
+    })
+
+# Dedupe against existing AGENTS.md
+EXISTING = Read(AGENTS_MD)
+NEW_LEARNINGS = IMPL_LEARNINGS - EXISTING (by content similarity)
+
+If NEW_LEARNINGS empty: SKIP
+
+# Format and append
+FORMAT = """
+## Patterns
+
+| Pattern | Location |
+|---------|----------|
+{for each L in NEW_LEARNINGS where L.type == "pattern":}
+| {L.content} | `{L.location}` |
+{end for}
+
+## Gotchas
+
+{for each L in NEW_LEARNINGS where L.type == "gotcha":}
+- {L.content} — {L.context}
+{end for}
+
+## Anti-Patterns
+
+{if any L.type == "anti_pattern":}
+| Don't | Why | Do Instead |
+|-------|-----|------------|
+{for each L in NEW_LEARNINGS where L.type == "anti_pattern":}
+| {L.dont} | {L.why} | {L.do_instead} |
+{end for}
+{end if}
+"""
+
+# Append to relevant section or create if missing
+Edit(AGENTS_MD, append FORMAT to existing sections or create new ones)
 ```
 
-**Failure:**
-```markdown
-## Build Failed: <title>
+Skip if:
+- No files modified
+- All learnings already documented
+- Trivial changes (typos, formatting only)
 
-- Source: <task #ID or plan file>
-- Branch: <branch>
-- Attempts: 3/3 exhausted
-- Last Error: <error summary>
-- Findings: <quality gate findings>
+### Step 11: Pre-Ship Hooks
 
-Manual intervention required.
+```
+If skip_ship: SKIP
+
+For each HOOK in pre_ship_hooks:
+  HOOK_RESULT = Task(HOOK.agent, prompt: "Pre-ship check on branch: <branch>")
+  If HOOK.required AND HOOK_RESULT == FAIL: return FAIL
+```
+
+### Step 12: Ship
+
+```
+If skip_ship: return {status: PASS, message: "shipping deferred"}
+
+If source == "task":
+  Skill("majestic-engineer:workflows:ship-it", args: "closes #<task_id>")
+Else:
+  Skill("majestic-engineer:workflows:ship-it")
+```
+
+### Step 13: Complete Task Status
+
+```
+If skip_ship OR source == "plan": SKIP
+
+Task("majestic-engineer:workflow:task-status-updater", prompt: "Action: ship | Task: <task_id> | PR: <pr_number>")
+```
+
+## Output Schema
+
+```yaml
+status: enum              # PASS | FAIL
+title: string
+ac_results: array
+  - criterion: string
+    passed: boolean
+    error: string | null
+source: string            # task #ID or plan file
+branch: string
+pr: integer | null        # null if skip_ship
+attempts: integer         # 1-3
+error: string | null      # if FAIL
 ```
 
 ## Error Handling
 
 | Scenario | Action |
 |----------|--------|
-| Build agent fails | Log error, attempt fix loop |
-| Verify fails | Enter fix loop (max 3 attempts) |
-| Quality fails | Enter fix loop (max 3 attempts) |
-| 3 fix attempts exhausted | Report failure, stop |
-| Pre-ship hook fails (required) | Stop and report |
-| Ship fails | Log error, report partial completion |
-
-## Notes
-
-- This agent handles execution only - context gathering happens before invocation
-- Steps 4, 5, 6 are MANDATORY - never skip them
-- The fix loop re-runs slop → verify → quality after each fix
-- Track attempt count to prevent infinite loops
-- Always report final status (success or failure)
+| Build fails | goto Step 8 |
+| Verify fails | goto Step 8 |
+| Quality fails | goto Step 8 |
+| 3 attempts exhausted | return FAIL |
+| Required hook fails | return FAIL |
+| Ship fails | return FAIL |
