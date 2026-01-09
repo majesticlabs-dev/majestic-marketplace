@@ -116,13 +116,13 @@ Run `skill-linter` for new skills.
 - **Variables enable control flow (required, not optional):**
   ```
   RESULT = Task(...) → If RESULT.status == PASS: proceed
-  ITEMS = Skill(...) → For each I in ITEMS: invoke(I)
+  ITEMS = /majestic:config ... → For each I in ITEMS: invoke(I)
   ```
 - **Schemas over examples:** Document I/O with YAML/JSON schemas
   - ✅ `task_id: string # T1, T2 (from header)`
   - ❌ Markdown example blocks expecting agent to infer structure
-- **Skill invocation:** `Skill("skill-name", args: "...")`
-- **Explicit config reads:** Show the Skill() call, don't say "read from config"
+- **Command invocation:** `/command-name args` (direct slash syntax)
+- **Config reads:** `/majestic:config field default`
 - **Arrays for extensibility:** `methodology: [tdd]` not `methodology: tdd`
 
 ### Agent/Command Doc Structure

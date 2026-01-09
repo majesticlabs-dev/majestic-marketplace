@@ -84,6 +84,31 @@ Files matching this pattern should be flagged for review.
 **Valid:** `my-skill`, `skill1`, `api-v2-handler`
 **Invalid:** `-skill`, `skill-`, `my--skill`, `MySkill`, `my_skill`
 
+### Command/Agent Invocation Patterns
+
+Skills should primarily provide knowledge, not orchestration. If invocations are needed:
+
+| Pattern | Status | Use Instead |
+|---------|--------|-------------|
+| `Skill("command", args: "...")` | ❌ Deprecated | `/command args` |
+| `SlashCommand("command", ...)` | ❌ Deprecated | `/command args` |
+| `Task(subagent_type="agent", ...)` | ✅ Correct | (no change) |
+
+**✅ Preferred command invocation:**
+```
+/majestic:config tech_stack generic
+/majestic-engineer:tdd-workflow
+/majestic-ralph:start "task" --max-iterations 50
+```
+
+**❌ Deprecated patterns:**
+```
+Skill("config-reader", args: "tech_stack generic")
+SlashCommand("majestic:build-task", args: "...")
+```
+
+**Note:** Agent invocation via `Task()` is correct - there is no `@agent` syntax.
+
 ## Usage
 
 ### Validate Single Skill
