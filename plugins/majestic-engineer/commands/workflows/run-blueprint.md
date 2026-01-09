@@ -1,42 +1,17 @@
 ---
 name: majestic:run-blueprint
-description: Execute all tasks in a blueprint using build-task workflow with ralph-loop iteration
+description: Execute all tasks in a blueprint using build-task workflow
 argument-hint: "<blueprint-file.md>"
-allowed-tools: Bash, Read, Edit, Grep, Glob, Task, Skill
 ---
 
-# Run Blueprint
+Run these steps in order. Do not do anything else.
 
-<blueprint_file> $ARGUMENTS </blueprint_file>
+1. `/majestic-ralph:ralph-loop "complete all blueprint tasks" --completion-promise "RUN_BLUEPRINT_COMPLETE"`
+2. Load blueprint from $ARGUMENTS (required)
+3. Find next task with status ⏳ (skip if dependencies not ✅)
+4. `/majestic:build-task "<task-id>" --no-ship`
+5. Update task status in blueprint: ✅ if passed, 🔴 if failed
+6. If all tasks ✅ or 🔴: `/majestic:ship-it`
+7. Output `<promise>RUN_BLUEPRINT_COMPLETE</promise>` when shipped
 
-## Workflow
-
-```
-# 1. Load blueprint
-If ARGUMENTS empty: BLUEPRINT = `ls -t docs/plans/*.md | head -1`
-Else: BLUEPRINT = ARGUMENTS
-Read(BLUEPRINT)
-
-# 2. Start ralph-loop if not in one
-If NOT exists .claude/ralph-loop.local.yml:
-  /majestic-ralph:ralph-loop "/majestic:run-blueprint <BLUEPRINT>" --max-iterations 50 --completion-promise "RUN_BLUEPRINT_COMPLETE"
-  STOP
-
-# 3. Parse tasks from ## Implementation Tasks
-TASKS = extract tasks sorted by dependencies (independent first)
-Status markers: ⏳ Pending | 🔄 In Progress | ✅ Complete | 🔴 Blocked
-
-# 4. Execute next incomplete task
-For TASK in TASKS where status != ✅:
-  If any dependency not ✅: mark 🔴 Blocked, continue
-  Edit blueprint: ⏳ → 🔄
-  RESULT = /majestic:build-task "<TASK.id>" --no-ship --ac "<TASK.ac_items>"
-  If RESULT.passed: Edit blueprint: 🔄 → ✅
-  Else: Edit blueprint: 🔄 → 🔴
-  Break after first task (ralph-loop handles iteration)
-
-# 5. Check completion
-If all tasks ✅ OR all remaining 🔴:
-  /majestic:ship-it
-  Output <promise>RUN_BLUEPRINT_COMPLETE</promise>
-```
+Start with step 1 now.
