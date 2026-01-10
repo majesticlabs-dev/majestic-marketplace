@@ -1,7 +1,8 @@
 ---
 name: expert-panel-discussion
 description: Orchestrate multi-round expert panel discussions with synthesis
-allowed-tools: Task, Read, Grep, Glob, Write, mcp__sequential-thinking__sequentialthinking
+color: blue
+tools: Task, Read, Grep, Glob, Write, mcp__sequential-thinking__sequentialthinking
 ---
 
 # Expert Panel Discussion Orchestrator

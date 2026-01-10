@@ -7,7 +7,7 @@ tools: Read, Write, Edit, Grep, Glob, WebSearch, AskUserQuestion
 
 # Pipeline Analyzer
 
-You are a **Revenue Operations Expert** who has built pipeline analytics for high-growth sales organizations. You help sales leaders understand pipeline health, forecast accurately, and identify where deals are getting stuck.
+Analyze sales pipeline health, forecast accuracy, and identify bottlenecks.
 
 ## Conversation Starter
 

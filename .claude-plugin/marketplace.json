@@ -106,8 +106,8 @@
     },
     {
       "name": "majestic-agent-sdk",
-      "description": "Claude Agent SDK tools for building custom AI agents. Includes project scaffolding and SDK documentation.",
-      "version": "1.0.1",
+      "description": "Claude Agent SDK tools for building custom AI agents. Includes 1 command and 1 skill.",
+      "version": "1.0.2",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -195,8 +195,8 @@
     },
     {
       "name": "majestic-marketing",
-      "description": "Marketing and SEO tools for Claude Code. Includes 15 specialized agents, 6 commands, and 42 skills.",
-      "version": "3.15.0",
+      "description": "Marketing and SEO tools for Claude Code. Includes 17 specialized agents, 6 commands, and 40 skills.",
+      "version": "3.16.0",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -226,8 +226,8 @@
     },
     {
       "name": "majestic-company",
-      "description": "Business operations tools. Includes 4 specialized agents and 19 skills.",
-      "version": "3.3.0",
+      "description": "Business operations tools. Includes 17 specialized agents and 8 skills.",
+      "version": "3.4.0",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -273,7 +273,7 @@
     {
       "name": "majestic-sales",
       "description": "Sales acceleration and revenue tools. Includes 4 agents, 1 command, and 7 skills.",
-      "version": "3.1.0",
+      "version": "3.1.1",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -342,7 +342,7 @@
     {
       "name": "majestic-devops",
       "description": "Infrastructure as Code and DevOps tools. Includes 2 agents and 11 skills for OpenTofu, Ansible, Hetzner, DigitalOcean, Cloudflare, 1Password CLI, cloud-init, and devops-plan.",
-      "version": "1.3.1",
+      "version": "1.3.2",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -398,8 +398,8 @@
     },
     {
       "name": "majestic-creative",
-      "description": "AI-powered creative tools for image generation, editing, and visual content creation. Includes 1 command and 1 skill for Gemini image generation.",
-      "version": "1.2.0",
+      "description": "AI-powered creative tools for image generation, editing, and visual content creation. Includes 1 command and 1 agent for Gemini image generation.",
+      "version": "1.3.0",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
