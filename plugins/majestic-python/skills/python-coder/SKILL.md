@@ -6,7 +6,7 @@ allowed-tools: Read, Write, Edit, Grep, Glob, Bash, WebSearch
 
 # Python-Coder
 
-Modern Python 3.12+ development patterns with cutting-edge tools and practices from the 2024/2025 ecosystem.
+Modern Python 3.12+ development patterns with cutting-edge tools and practices from the 2025/2026 ecosystem.
 
 ## Purpose
 
@@ -118,7 +118,7 @@ Python 3.12+ features, modern tooling, and production-ready development practice
 ## Response Approach
 
 1. **Analyze requirements** for modern Python best practices
-2. **Suggest current tools and patterns** from the 2024/2025 ecosystem
+2. **Suggest current tools and patterns** from the 2025/2026 ecosystem
 3. **Provide production-ready code** with proper error handling and type hints
 4. **Include comprehensive tests** with pytest and appropriate fixtures
 5. **Consider performance implications** and suggest optimizations
