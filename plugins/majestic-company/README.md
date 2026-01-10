@@ -1,6 +1,6 @@
 # Majestic Company
 
-Business operations tools. Includes 4 specialized agents and 19 skills.
+Business operations tools. Includes 17 specialized agents and 8 skills.
 
 ## Installation
 
@@ -14,80 +14,83 @@ claude /plugin install majestic-company
 |--------------|----------|
 | Identify my blind spots | `agent blind-spot-analyzer` |
 | Validate a business idea | `agent idea-validator` |
-| Strategic problem analysis | `agent first-principles` |
+| Research competitor pain points | `agent problem-research` |
 | Create interview kit | `agent people-ops` |
-| Build a strategic plan | `skill ceo:strategic-planning` |
+| Conduct industry research | `agent ceo:industry-research` |
+| Build a financial model | `agent ceo:financial-model` |
+| Design a startup | `agent ceo:startup-blueprint` |
+| Launch in 30 days | `agent ceo:thirty-day-launch` |
+| Create elevator pitch | `agent fundraising:elevator-pitch` |
+| Calculate TAM/SAM/SOM | `agent fundraising:tam-calculator` |
 | Make a business decision | `skill ceo:decision-framework` |
-| Design a startup | `skill ceo:startup-blueprint` |
-| Launch in 30 days | `skill ceo:30-day-launch` |
-| Build financial model | `skill ceo:financial-model` |
-| Research competitor pain points | `skill problem-research` |
+| Strategic problem analysis | `skill first-principles` |
 | Review legal document | `skill legal:document-review` |
-| Create elevator pitch | `skill fundraising:elevator-pitch` |
 
 ## Agents
 
-Invoke with: `agent <name>`
+### Core Agents
+
+Invoke with: `agent majestic-company:<name>`
 
 | Agent | Description |
 |-------|-------------|
-| `blind-spot-analyzer` | Identify the single most critical blind spot limiting founder/business growth through integrated analysis of thinking patterns and strategic gaps |
-| `idea-validator` | Validate startup ideas with real market research - orchestrates problem-research, customer-discovery, competitive-positioning for GO/NO-GO verdict |
-| `first-principles` | Strategic thinking using Elon Musk's first-principles methodology |
+| `blind-spot-analyzer` | Identify the single most critical blind spot limiting founder/business growth |
+| `idea-validator` | Validate startup ideas with real market research for GO/NO-GO verdict |
 | `people-ops` | People operations - hiring, onboarding, PTO, performance management |
+| `problem-research` | Research competitor pain points from G2, Capterra, Reddit with viability assessment |
+
+### CEO Agents
+
+Invoke with: `agent majestic-company:ceo:<name>`
+
+| Agent | Description |
+|-------|-------------|
+| `ai-advantage` | AI competitive strategies combining research, trends, and sentiment analysis |
+| `decisions` | Tree of Thoughts business decisions with expert consultant panel |
+| `financial-model` | Revenue projections, unit economics, P&L, and scenario analysis |
+| `future-back` | Reverse-engineer pathway from vision to reality using backward planning |
+| `growth-audit` | 360-degree business audit with 0-10 scoring and 90-day roadmap |
+| `industry-research` | Research market, identify pain, design venture for 12-month capture |
+| `market-expansion` | Strategic expansion analysis with quantified decision trees |
+| `pricing-strategy` | Competitor pricing analysis with psychological thresholds and implementation roadmap |
+| `startup-blueprint` | Interactive 10-phase startup planning tailored to your profile |
+| `thirty-day-launch` | Tactical 30-day business launch with templates and revenue forecasts |
+
+### Fundraising Agents
+
+Invoke with: `agent majestic-company:fundraising:<name>`
+
+| Agent | Description |
+|-------|-------------|
+| `elevator-pitch` | 30/60/90-second pitches with Villain-Hero storytelling framework |
+| `funding-ask-optimizer` | Compelling funding asks with comparables and milestone roadmaps |
+| `tam-calculator` | TAM/SAM/SOM with top-down, bottom-up, and value-theory approaches |
 
 ## Skills
 
-### ceo
+### CEO Skills
 
 Invoke with: `skill majestic-company:ceo:<name>`
 
 | Skill | Description |
 |-------|-------------|
-| `30-day-launch` | Tactical 30-day business launch with templates and revenue forecasts |
-| `ai-advantage` | AI competitive strategies combining research, trends, and sentiment |
 | `decision-framework` | First-principles, cost/benefit, and second-order effects analysis |
-| `decisions` | Tree of Thoughts business decisions with expert consultants |
-| `financial-model` | Revenue projections, unit economics, P&L, and scenario analysis |
-| `future-back` | Reverse-engineer pathway from vision to reality |
-| `growth-audit` | 360-degree business audit with 5-10X growth blueprint |
 | `industry-pulse` | Real-time pulse check on any industry for operators/investors |
-| `industry-research` | Research market, identify pain, design venture for 12-month capture |
-| `market-expansion` | Strategic expansion analysis with financial projections |
-| `pricing-strategy` | Competitor pricing analysis with optimal structure roadmap |
-| `startup-blueprint` | Interactive 10-phase startup planning tailored to your profile |
+| `omtm-growth` | One Metric That Matters growth framework |
 | `strategic-planning` | One-page strategic briefs with objective, milestones, and risks |
 
-### fundraising
+### Other Skills
 
-Invoke with: `skill majestic-company:fundraising:<name>`
+| Skill | Invoke with | Description |
+|-------|-------------|-------------|
+| `first-principles` | `skill majestic-company:first-principles` | 15 strategic prompts for first-principles thinking |
+| `pm-discovery` | `skill majestic-company:pm-discovery` | Product management discovery techniques |
+| `document-review` | `skill majestic-company:legal:document-review` | Legal document analysis with specific replacement text |
+| `objection-destroyer` | `skill majestic-company:fundraising:objection-destroyer` | 45-second pitch closings with FOMO triggers |
 
-| Skill | Description |
-|-------|-------------|
-| `elevator-pitch` | 30/60/90-second pitches with Villain-Hero storytelling |
-| `funding-ask-optimizer` | Compelling asks with comparables and milestone roadmaps |
-| `objection-destroyer` | 45-second pitch closings with FOMO triggers |
-| `tam-calculator` | TAM/SAM/SOM with top-down, bottom-up, and value-theory approaches |
+## Choosing Between startup-blueprint and thirty-day-launch
 
-### legal
-
-Invoke with: `skill majestic-company:legal:<name>`
-
-| Skill | Description |
-|-------|-------------|
-| `document-review` | Legal document analysis with specific replacement text |
-
-### research
-
-Invoke with: `skill majestic-company:<name>`
-
-| Skill | Description |
-|-------|-------------|
-| `problem-research` | Competitor pain points from G2, Capterra, Reddit with viability assessment |
-
-## Choosing Between startup-blueprint and 30-day-launch
-
-| Use startup-blueprint when... | Use 30-day-launch when... |
+| Use startup-blueprint when... | Use thirty-day-launch when... |
 |------------------------------|--------------------------|
 | You're exploring business ideas | You already know your business type |
 | You want comprehensive planning | You want to launch in 30 days |
@@ -95,7 +98,7 @@ Invoke with: `skill majestic-company:<name>`
 | You're building something new | You're launching a proven model |
 
 **startup-blueprint** = "What should I build and how should I plan it?"
-**30-day-launch** = "I know what I'm building, help me launch it fast."
+**thirty-day-launch** = "I know what I'm building, help me launch it fast."
 
 ## Usage Examples
 
@@ -110,9 +113,6 @@ agent majestic-company:blind-spot-analyzer "We lost our biggest customer and I d
 
 # Pre-fundraise check
 agent majestic-company:blind-spot-analyzer "I'm about to raise - what am I not seeing?"
-
-# Growth plateau
-agent majestic-company:blind-spot-analyzer "Stuck at $50K MRR for 8 months - what am I avoiding?"
 ```
 
 ### Idea Validation
@@ -122,146 +122,89 @@ agent majestic-company:blind-spot-analyzer "Stuck at $50K MRR for 8 months - wha
 agent majestic-company:idea-validator "AI tool that summarizes meeting notes for sales teams"
 
 # With more context
-agent majestic-company:idea-validator "I want to build a project management tool for marketing agencies. I've worked at 3 agencies."
-
-# Specific question
-agent majestic-company:idea-validator "Should I build a Notion competitor for developers?"
+agent majestic-company:idea-validator "I want to build a project management tool for marketing agencies"
 ```
 
-### First-Principles Thinking
+### CEO Agents
 
 ```bash
-# Strategic problem analysis
-agent majestic-company:first-principles "My business is plateauing at $1M ARR"
-
-# Decision making
-agent majestic-company:first-principles "Should I pivot from B2C to B2B?"
-
-# Product prioritization
-agent majestic-company:first-principles "My product roadmap has 50 items - help me cut 90%"
-```
-
-### People Operations
-
-```bash
-# Create a structured interview kit
-agent majestic-company:people-ops "Create interview kit for Senior Engineer in California"
-
-# Draft a PTO policy
-agent majestic-company:people-ops "Draft accrual-based PTO policy for 50-person company"
-
-# Generate onboarding plan
-agent majestic-company:people-ops "Create 30/60/90 onboarding plan for remote Product Manager"
-```
-
-### CEO Skills
-
-```bash
-# Build a strategic plan
-skill majestic-company:ceo:strategic-planning
-
-# Walk through a decision
-skill majestic-company:ceo:decision-framework
-
-# Get industry pulse check
-skill majestic-company:ceo:industry-pulse
+# Research a market and design a venture
+agent majestic-company:ceo:industry-research "Healthcare tech"
 
 # Comprehensive growth audit
-skill majestic-company:ceo:growth-audit
+agent majestic-company:ceo:growth-audit
 
-# Research a market and design a venture
-skill majestic-company:ceo:industry-research
-
-# Develop AI competitive strategy
-skill majestic-company:ceo:ai-advantage
-
-# Create a future back plan
-skill majestic-company:ceo:future-back
-
-# Get structured decision analysis
-skill majestic-company:ceo:decisions
+# Get structured decision analysis with Tree of Thoughts
+agent majestic-company:ceo:decisions
 
 # Analyze market expansion opportunity
-skill majestic-company:ceo:market-expansion
+agent majestic-company:ceo:market-expansion
 
 # Build a financial model
-skill majestic-company:ceo:financial-model
+agent majestic-company:ceo:financial-model
 
 # Start interactive startup planning
-skill majestic-company:ceo:startup-blueprint
+agent majestic-company:ceo:startup-blueprint
 
 # Start tactical launch planning
-skill majestic-company:ceo:30-day-launch
+agent majestic-company:ceo:thirty-day-launch
 ```
 
-### Research & Legal
+### Fundraising Agents
 
 ```bash
-# Research competitor pain points
-skill majestic-company:problem-research "Project management software for marketing teams"
+# Create elevator pitch with Villain-Hero framework
+agent majestic-company:fundraising:elevator-pitch
+
+# Calculate TAM/SAM/SOM
+agent majestic-company:fundraising:tam-calculator
+
+# Craft compelling funding ask
+agent majestic-company:fundraising:funding-ask-optimizer
+```
+
+### Skills
+
+```bash
+# Walk through a decision (skill)
+skill majestic-company:ceo:decision-framework
+
+# First-principles thinking (skill)
+skill majestic-company:first-principles
 
 # Review a legal document
 skill majestic-company:legal:document-review
 ```
 
-### Fundraising
+## Key Capabilities
 
-```bash
-# Create elevator pitch
-skill majestic-company:fundraising:elevator-pitch
+### Problem Research Agent
+Research competitor pain points from review platforms to identify market opportunities:
+- Analyzes G2, Capterra, TrustRadius, Reddit reviews
+- Calculates Pain Point Scores (PPS) for ranking opportunities
+- Delivers GO / PROCEED WITH CAUTION / RECONSIDER / NO-GO verdicts
 
-# Calculate TAM/SAM/SOM
-skill majestic-company:fundraising:tam-calculator
+### Blind-Spot-Analyzer Agent
+Surfaces the ONE most critical blind spot through structured intake:
+- **Founder Psychology** - Optimism bias, sunk cost attachment, identity-business fusion
+- **Strategic Gaps** - Market timing blindness, competition underestimation, customer misunderstanding
 
-# Craft funding ask
-skill majestic-company:fundraising:funding-ask-optimizer
+### Growth Audit Agent
+Evidence-backed 360-degree audit with:
+- 0-10 scoring across 6 dimensions
+- Benchmarking vs winners/laggards
+- Bottleneck prioritization by impact x ease
+- Week-by-week 90-day roadmap
 
-# Create pitch closing
-skill majestic-company:fundraising:objection-destroyer
-```
-
-## Blind-Spot-Analyzer Capabilities
-
-The blind-spot-analyzer agent uses structured intake questions to surface the ONE most critical blind spot:
-
-- **Founder Psychology** - Optimism bias, sunk cost attachment, identity-business fusion, fear-driven avoidance, expertise trap
-- **Strategic Gaps** - Market timing blindness, competition underestimation, customer misunderstanding, premature scaling, metric misdirection
-
-Output includes diagnosis with evidence from your own words, consequences analysis, and highest-leverage prescription.
-
-## Idea-Validator Capabilities
-
-The idea-validator agent orchestrates real research tools for evidence-based validation:
-
-- **Problem Validation** - Uses `problem-research` to find real pain points from G2/Capterra/Reddit
-- **Customer Discovery** - Uses `customer-discovery` to find where customers talk and their language
-- **Market Sizing** - Uses `market-research` and `tam-calculator` for TAM/SAM/SOM
-- **Competitive Positioning** - Uses `competitive-positioning` to find differentiation opportunities
-- **Synthesis** - Delivers GO / PROCEED WITH CAUTION / PIVOT / NO-GO verdict
-
-Three validation depths: Quick (10-15 min), Standard (20-30 min), Full (45-60 min).
-
-## First-Principles Capabilities
-
-The first-principles agent uses 15 strategic prompts organized into 6 categories:
-
-- **Foundation** - Strip problems to objective reality, challenge assumptions
-- **Ideal State** - Envision optimal solutions, apply brutal prioritization
-- **Risk Analysis** - Pre-mortem failure analysis, challenge industry norms
-- **Breakthrough** - Find minimum viable breakthrough, clean slate thinking
-- **Constraints & Politics** - Identify hidden constraints, remove social friction
-- **Scale & Leverage** - 10x acceleration, design for millions, highest-leverage actions
-
-## People-Ops Capabilities
-
-- **Hiring & Recruiting** - Job descriptions, interview kits, candidate communication
-- **Onboarding & Offboarding** - 30/60/90 plans, IT checklists, exit interviews
-- **PTO & Leave** - Accrual/grant-based policies, jurisdiction-aware templates
-- **Performance Management** - Competency matrices, SMART goals, PIP templates
-- **Employee Relations** - Investigation templates, documentation standards
+### Elevator Pitch Agent
+Creates word-for-word scripts using Villain-Hero framework:
+- Investor-customized versions (Technical, Market, Customer-focused)
+- Length variations (10s, 30s, 60s, 90s)
+- Psychological hooks library
+- Delivery coaching
 
 ## Important Notes
 
 - **Not legal advice** - Consult qualified counsel before implementing policies
 - **Jurisdiction-aware** - Agents ask for location to provide appropriate guidance
-- **Compliance-focused** - Templates follow labor law best practices
+- **Tool-using agents** - CEO and Fundraising agents use WebSearch, AskUserQuestion, and other tools

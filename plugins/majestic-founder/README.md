@@ -1,6 +1,6 @@
 # Majestic Founder
 
-Personal effectiveness tools for founders, solopreneurs, and business builders. Includes 3 skills.
+Personal effectiveness tools for founders, solopreneurs, and business builders. Includes 4 skills.
 
 ## Installation
 
@@ -12,6 +12,7 @@ claude /plugin install majestic-founder
 
 | I want to... | Use this |
 |--------------|----------|
+| Challenge my thinking aggressively | `skill challenge-mode` |
 | Optimize my calendar balance | `skill calendar-optimization` |
 | Apply founder mindset | `skill founder-mode` |
 | Find my vital 20% | `skill pareto` |
@@ -22,6 +23,7 @@ Invoke with: `skill majestic-founder:<name>`
 
 | Skill | Description |
 |-------|-------------|
+| `challenge-mode` | Aggressive intellectual challenge for truth-seeking - identifies blind spots, challenges assumptions |
 | `calendar-optimization` | Balance 4 types of professional time (Management, Creation, Consumption, Ideation) |
 | `founder-mode` | Contrarian principles that break conventional management wisdom |
 | `pareto` | Identify the vital 20% of activities that produce 80% of results |

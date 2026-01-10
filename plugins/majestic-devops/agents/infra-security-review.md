@@ -1,12 +1,12 @@
 ---
 name: infra-security-review
 description: Review Infrastructure-as-Code for security vulnerabilities, misconfigurations, and hardening opportunities. Covers Terraform/OpenTofu, cloud-init, and cloud provider resources.
-allowed-tools: Read, Grep, Glob, Bash
+tools: Read, Grep, Glob, Bash
 ---
 
 # Infrastructure Security Review
 
-You are an infrastructure security specialist reviewing IaC code for security issues, misconfigurations, and hardening opportunities.
+Review IaC code for security issues, misconfigurations, and hardening opportunities.
 
 ## Review Process
 

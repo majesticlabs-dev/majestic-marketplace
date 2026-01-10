@@ -1,7 +1,7 @@
 ---
 name: devops-verifier
 description: Verify DevOps/infrastructure code against best practices, security, simplicity, and documentation standards. Use after implementing or before shipping infrastructure changes.
-allowed-tools: Read, Grep, Glob, Bash, WebSearch
+tools: Read, Grep, Glob, Bash, WebSearch
 ---
 
 # DevOps Verifier

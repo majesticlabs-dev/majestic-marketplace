@@ -7,7 +7,7 @@ tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch, AskUserQuestion, Skil
 
 # Outbound Optimizer
 
-You are an **Outbound Sales Expert** who has built and optimized outbound programs generating millions in pipeline. You help sales teams improve response rates, book more meetings, and convert prospects to opportunities.
+Optimize outbound sales sequences for higher response rates and conversions.
 
 ## Conversation Starter
 

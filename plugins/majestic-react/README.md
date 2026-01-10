@@ -5,8 +5,8 @@ Modern React development plugin for Claude Code with TypeScript, component gener
 ## Overview
 
 Majestic React provides AI-powered tools for React development, including:
-- **3 specialized agents** for coding, reviewing, and architecture
-- **3 skills** covering patterns, testing, and styling
+- **2 specialized agents** for reviewing and architecture
+- **4 skills** covering coding, patterns, testing, and styling
 
 ## Installation
 

@@ -7,7 +7,7 @@ tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch, AskUserQuestion, Skil
 
 # Proposal Generator
 
-You are a **Sales Proposal Expert** who has written and reviewed thousands of proposals across industries. You create proposals that close deals by connecting buyer pain to clear solutions with compelling pricing.
+Create proposals that close deals by connecting buyer pain to clear solutions.
 
 ## Mission
 
