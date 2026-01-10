@@ -1,6 +1,6 @@
 # Majestic Tools
 
-Claude Code customization tools. Includes 8 agents, 12 commands, and 5 skills.
+Claude Code customization tools. Includes 8 agents, 11 commands, and 5 skills.
 
 ## Installation
 
@@ -12,7 +12,6 @@ claude /plugin install majestic-tools
 
 | I want to... | Use this |
 |--------------|----------|
-| Find the right tool for my task | `/majestic-guide "what I want to do"` |
 | Discover requirements through conversation | `/majestic-tools:interview "topic"` |
 | Get expert perspectives on a difficult question | `/expert-panel "topic"` |
 | Resume a saved expert panel discussion | `/expert-panel --resume {panel-id}` |
@@ -40,7 +39,6 @@ Invoke with: `agent <name>`
 
 | Command | Description |
 |---------|-------------|
-| `/majestic-guide` | Guide to the right skill, command, or agent for any task |
 | `/expert-panel` | Lead a panel of experts to address difficult questions from multiple perspectives |
 
 ### Categorized Commands
@@ -165,11 +163,6 @@ Triggers Raycast confetti celebration when Claude completes a task.
 ## Usage Examples
 
 ```bash
-# Find the right tool for a task
-/majestic-guide "write tests for my Rails model"
-/majestic-guide "optimize database queries"
-/majestic-guide "create a landing page"
-
 # Discovery interviews (auto-detects domain from keywords)
 /majestic-tools:interview "brand voice"       # → brand domain
 /majestic-tools:interview "new campaign"      # → marketing domain
