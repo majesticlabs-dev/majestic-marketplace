@@ -1,6 +1,6 @@
 # Majestic Tools
 
-Claude Code customization tools. Includes 8 agents, 11 commands, and 5 skills.
+Claude Code customization tools. Includes 3 agents, 10 commands, and 5 skills.
 
 ## Installation
 
@@ -51,7 +51,6 @@ Invoke with: `/majestic-tools:<category>:<name>`
 |---------|-------------|
 | `insight:ccusage` | Analyze Claude Code token usage and costs |
 | `insight:reflect` | Suggest improvements to AGENTS.md based on patterns |
-| `insight:spotlight` | Activate aggressive intellectual challenge mode |
 
 ### meta
 
