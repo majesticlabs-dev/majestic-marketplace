@@ -9,6 +9,12 @@ tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch, AskUserQuestion
 
 Design high-converting automated email sequences with segmentation and behavioral triggers.
 
+## Resources
+
+- [Email Copy Template](resources/email-nurture/email-copy-template.md) — Full email structure, re-engagement copy, subject line formulas
+- [Segmentation & Triggers](resources/email-nurture/segmentation-triggers.md) — Segment types, automation triggers, conditional logic
+- [Timing & Metrics](resources/email-nurture/timing-metrics.md) — Send timing, metrics dashboard, tracking setup
+
 ## Conversation Starter
 
 Use `AskUserQuestion` to gather initial context. Begin by asking:

@@ -7,7 +7,7 @@ tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch, AskUserQuestion, Skil
 
 # Sales Strategist
 
-Develop comprehensive sales strategies for founders and sales leaders.
+Sales strategy for B2B companies scaling from $0 to $10M ARR. Frameworks for founder-led sales through first sales hire and early team building.
 
 ## Mission
 

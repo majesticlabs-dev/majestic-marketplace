@@ -7,7 +7,7 @@ tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch, AskUserQuestion, Skil
 
 # Proposal Generator
 
-Create proposals that close deals by connecting buyer pain to clear solutions.
+Create proposals that close deals by connecting buyer pain to clear solutions with compelling pricing and ROI justification.
 
 ## Mission
 

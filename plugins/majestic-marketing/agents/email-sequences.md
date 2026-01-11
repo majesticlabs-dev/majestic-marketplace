@@ -9,6 +9,11 @@ tools: Read, Write, Edit, Grep, Glob, WebSearch, AskUserQuestion
 
 Build email sequences that convert. The gap between "opted in" and "bought" is where money is made or lost.
 
+## Resources
+
+- [Email Templates](resources/email-sequences/email-templates.md) — Structure templates for each email type
+- [Subject Formulas](resources/email-sequences/subject-formulas.md) — Subject line formulas and patterns
+
 ## Conversation Starter
 
 Use `AskUserQuestion` to gather context:
@@ -40,9 +45,11 @@ I'll create complete emails with subject lines, timing, and full copy."
 | **Launch** | Time-bound campaign | 6-10 emails | Product launch |
 | **Re-engagement** | Win back cold subscribers | 3-4 emails | Inactive 30+ days |
 
-## The Welcome Sequence (5-7 emails)
+## Sequence Frameworks
 
-### Framework: DELIVER → CONNECT → VALUE → BRIDGE
+### Welcome Sequence (5-7 emails)
+
+**Framework: DELIVER → CONNECT → VALUE → BRIDGE**
 
 ```
 Email 1: DELIVER — Give them what they came for
@@ -54,58 +61,9 @@ Email 6: SOFT PITCH — Introduce the offer gently
 Email 7: DIRECT PITCH — Make the ask
 ```
 
-### Email 1: Delivery (Immediately)
+### Conversion Sequence (4-7 emails)
 
-**Purpose:** Deliver lead magnet, set expectations, get micro-engagement.
-
-**Subject formulas:**
-- "[Lead magnet name] is inside"
-- "Your [lead magnet] + quick start guide"
-- "Here's [what they asked for]"
-
-**Structure:**
-```
-[Greeting — keep it simple]
-[Deliver the goods — link]
-[Quick start — one action in 5 minutes]
-[Set expectations — what emails coming]
-[Micro-CTA — hit reply, answer a question]
-[Sign off]
-```
-
-### Email 2: Connection (Day 2)
-
-**Purpose:** Build rapport through vulnerability.
-
-**Subject formulas:**
-- "Why I created [lead magnet]"
-- "The mistake that led to this"
-- "Quick story about [topic]"
-
-### Email 3-4: Value (Days 4, 6)
-
-**Purpose:** Teach something useful, demonstrate expertise.
-
-**Subject formulas:**
-- "The [X] mistake everyone makes"
-- "Try this: [specific tactic]"
-- "What [person] discovered about [topic]"
-
-### Email 5: Bridge (Day 8)
-
-**Purpose:** Show gap between current state and possibility.
-
-### Email 6: Soft Pitch (Day 10)
-
-**Purpose:** Introduce offer properly, let them self-select.
-
-### Email 7: Direct Pitch (Day 12)
-
-**Purpose:** Make the clear ask.
-
-## The Conversion Sequence (4-7 emails)
-
-### Framework: OPEN → DESIRE → PROOF → OBJECTION → URGENCY → CLOSE
+**Framework: OPEN → DESIRE → PROOF → OBJECTION → URGENCY → CLOSE**
 
 ```
 Email 1: Introduce offer, core promise
@@ -119,21 +77,18 @@ Email 7: Last call (deadline if applicable)
 
 **Timing:** Every 2 days (daily for launches)
 
-## The Launch Sequence (6-10 emails)
+### Launch Sequence (6-10 emails)
 
-### Framework: SEED → OPEN → VALUE → PROOF → URGENCY → CLOSE
+**Framework: SEED → OPEN → VALUE → PROOF → URGENCY → CLOSE**
 
-**Pre-Launch (1-2 emails):** Seed interest, build anticipation
+- **Pre-Launch (1-2 emails):** Seed interest, build anticipation
+- **Cart Open (2-3 emails):** Announcement, full details, value deep-dive, social proof
+- **Mid-Launch (2-3 emails):** Objection handling, case study, FAQ
+- **Cart Close (2-3 emails):** 48-hour warning, 24-hour warning, last call
 
-**Cart Open (2-3 emails):** Announcement, full details, value deep-dive, social proof
+### Re-engagement Sequence (3-4 emails)
 
-**Mid-Launch (2-3 emails):** Objection handling, case study, FAQ
-
-**Cart Close (2-3 emails):** 48-hour warning, 24-hour warning, last call
-
-## The Re-engagement Sequence (3-4 emails)
-
-### Framework: PATTERN INTERRUPT → VALUE → DECISION
+**Framework: PATTERN INTERRUPT → VALUE → DECISION**
 
 ```
 Email 1: Different subject style, acknowledge absence
@@ -141,46 +96,6 @@ Email 2: Pure value — best content, no ask
 Email 3: Direct question — do you want to stay?
 Email 4: Final — removing from list (creates urgency)
 ```
-
-**Subject lines:**
-- "Did I do something wrong?"
-- "Should I stop emailing you?"
-- "Breaking up is hard to do"
-- "[First name], still there?"
-
-## Subject Line Formulas
-
-### What Gets Opens
-
-**Curiosity Gap:**
-- "The [X] mistake that cost me [Y]"
-- "Why [surprising thing] works"
-- "I was wrong about [topic]"
-
-**Direct Benefit:**
-- "How to [outcome] in [timeframe]"
-- "[Number] ways to [benefit]"
-
-**Personal/Story:**
-- "Quick story about [topic]"
-- "What happened when I [action]"
-
-**Question:**
-- "Can I ask you something?"
-- "Are you making this mistake?"
-
-**Pattern Interrupt:**
-- "." (just a period)
-- "So..."
-- "Bad news"
-
-### What Kills Opens
-
-- ALL CAPS
-- Excessive punctuation!!!
-- "Newsletter #47"
-- "[COMPANY NAME] Weekly Update"
-- Clickbait that doesn't deliver
 
 ## Email Copy Principles
 
@@ -192,9 +107,6 @@ Multiple CTAs = no CTAs. Every email drives ONE action.
 
 ### Short Paragraphs
 1-3 sentences max. Email is scanned, not read.
-
-### Preview Text Matters
-First 40-90 characters appear in inbox preview.
 
 ### Specificity Creates Credibility
 - Not "made money" → "$47,329 in one day"
@@ -210,8 +122,6 @@ First 40-90 characters appear in inbox preview.
 | Low (<$100) | 3-5 emails |
 | Medium ($100-500) | 5-7 emails |
 | High (>$500) | 7-10 emails or call |
-
-Trust required scales with price.
 
 ### Best Send Times
 - B2B: Tuesday-Thursday, 9-11am recipient time

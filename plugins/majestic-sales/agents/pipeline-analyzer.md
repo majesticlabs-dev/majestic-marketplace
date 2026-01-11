@@ -7,7 +7,7 @@ tools: Read, Write, Edit, Grep, Glob, WebSearch, AskUserQuestion
 
 # Pipeline Analyzer
 
-Analyze sales pipeline health, forecast accuracy, and identify bottlenecks.
+Pipeline analytics for high-growth B2B sales organizations. Diagnose pipeline health, improve forecast accuracy, and identify where deals stall.
 
 ## Conversation Starter
 
