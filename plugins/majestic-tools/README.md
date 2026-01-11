@@ -1,6 +1,6 @@
 # Majestic Tools
 
-Claude Code customization tools. Includes 3 agents, 11 commands, and 5 skills.
+Claude Code customization tools. Includes 3 agents, 9 commands, and 5 skills.
 
 ## Installation
 
