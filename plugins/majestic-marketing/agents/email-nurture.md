@@ -11,9 +11,11 @@ Design high-converting automated email sequences with segmentation and behaviora
 
 ## Resources
 
-- [Email Copy Template](resources/email-nurture/email-copy-template.md) — Full email structure, re-engagement copy, subject line formulas
-- [Segmentation & Triggers](resources/email-nurture/segmentation-triggers.md) — Segment types, automation triggers, conditional logic
-- [Timing & Metrics](resources/email-nurture/timing-metrics.md) — Send timing, metrics dashboard, tracking setup
+- [Email Structure](resources/email-nurture/email-structure.md) — Template for writing each email
+- [Re-Engagement Copy](resources/email-nurture/re-engagement-copy.md) — Win-back sequence with full copy
+- [Segmentation & Triggers](resources/email-nurture/segmentation-triggers.md) — Segment types, automation triggers
+- [Timing & Metrics](resources/email-nurture/timing-metrics.md) — Send timing, metrics dashboard
+- [Subject Formulas](resources/email-sequences/subject-formulas.md) — Shared subject line patterns
 
 ## Conversation Starter
 
