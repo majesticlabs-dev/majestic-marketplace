@@ -68,11 +68,41 @@ plugins/{engineer,rails,python,react,marketing,sales,company,llm,tools,agent-sdk
 - No `.md` files in `commands/` (they become executable)
 - Templates in command resources must use `.txt` or `.yml` extensions
 
+**Resource file patterns:**
+- One primary concern per file (don't mix unrelated templates)
+- Keep shared content in parent folder, reference via relative path
+  - Example: email-nurture references `../email-sequences/subject-formulas.md`
+- Split files if they serve different purposes:
+  - ✅ email-structure.md + re-engagement-copy.md
+  - ❌ email-copy-template.md (mixing everything)
+- Avoid duplication: If two agents need same resource, one file in shared location
+
 ### Behaviors
 - Skills = knowledge (Claude MAY follow)
 - Hooks = enforcement (FORCES behavior)
 - Agents do autonomous work, not just advice
 - `name:` in frontmatter overrides path-based naming
+
+**Skill vs Agent distinction:**
+- SKILL: Guidance/knowledge executed in main conversation
+  - Can have `allowed-tools` (enabled just for that skill's context)
+  - Examples: proposal-writer (uses WebSearch), email-nurture (uses AskUserQuestion)
+  - Runs inline with user, not as subprocess
+- AGENT: Autonomous work spawned as subprocess via Task tool
+  - Has own context, runs independently
+  - Examples: proposal-generator (spawned to orchestrate workflow)
+- RULE: Don't convert skills to agents just because they have `allowed-tools`
+  - ❌ Wrong: "This skill uses tools → must be an agent"
+  - ✅ Right: "This does autonomous workflow → should be agent"
+
+### Agent/Skill Pairing Pattern
+When an agent invokes a skill:
+- AGENT responsibility: Workflow steps, validation, error handling, delivery
+  - Gather context → Validate inputs → Analyze situation → Invoke skill → Validate output
+- SKILL responsibility: Templates, frameworks, patterns
+  - Receives structured context from agent
+  - Does the actual work (writes, builds, creates)
+- RULE: Remove duplication — if agent contains the template, don't duplicate in skill
 
 ### Command Naming
 - Command names in frontmatter must include full plugin prefix
@@ -105,6 +135,14 @@ Run `skill-linter` for new skills.
   - Remove external implementation references from feature docs
   - Document patterns you implement, not who inspired them
   - Keep credits in separate Credits section, not inline
+- **Functional context vs fluff (when refactoring)**
+  - Scope/stage context is FUNCTIONAL — affects what advice applies
+    - ✅ Keep: "$0-$10M ARR", "early-stage", "enterprise", "high-growth"
+    - These are constraints on when to use the guidance
+  - Persona statements are FLUFF — remove if they just describe role
+    - ❌ Remove: "You are an expert", "VP-level thinking", "has built X"
+    - Safe to remove if they don't change the guidance itself
+  - Test: "Does removing this change what the agent should do?" If yes, keep it.
 
 ### Agent Instruction Patterns
 - **Pseudocode format (not prose):**
@@ -165,6 +203,14 @@ When discovering incorrect patterns that require moving/restructuring files:
 1. Clarify the correct approach (present options)
 2. Wait for user confirmation before refactoring
 3. Don't assume path patterns - verify with user or docs
+
+**Before removing content in refactors:**
+1. Is this describing a persona/role? → Safe to remove
+2. Is this a template/framework? → Keep or move to resources/
+3. Is this stage/scope context? → Keep as functional context
+4. Is this execution logic? → Move to agent workflow
+- When in doubt: Keep it, then ask user if it should be removed
+- Don't assume "cleanup" passes are correct — validate against actual usage
 
 ### Plugin Architecture Decisions
 - For new orchestration systems (loops, workflows), create **separate plugins**
