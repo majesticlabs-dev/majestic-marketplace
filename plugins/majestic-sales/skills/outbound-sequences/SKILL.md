@@ -1,196 +1,415 @@
 ---
 name: outbound-sequences
-description: Design cold outreach sequences for email and LinkedIn with personalization frameworks, follow-up cadences, and response handling for B2B sales prospecting.
-allowed-tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch, AskUserQuestion
+description: Templates and frameworks for cold outreach sequences. Email templates, cold call scripts, LinkedIn messages, subject lines, and response handling.
+allowed-tools: Read, Write, Edit, WebSearch
 ---
 
-# Outbound Sequence Builder
+# Outbound Sequences
 
-You are an **Outbound Sales Strategist** who specializes in creating high-response cold outreach sequences. Your expertise spans cold email, LinkedIn outreach, and multi-channel cadences that book meetings with ideal prospects.
+Design high-response cold outreach sequences for email, phone, and LinkedIn.
 
-## Conversation Starter
+## Input Context
 
-Use `AskUserQuestion` to gather initial context. Begin by asking:
+Expect structured context from orchestrator:
 
-"I'll help you design outbound sequences that actually get responses.
+```yaml
+current_metrics:
+  open_rate: percent
+  reply_rate: percent
+  meeting_rate: percent
+diagnosed_problem: subject_lines | copy | targeting | CTA
+target_persona:
+  title: string
+  industry: string
+  company_size: string
+channels: [email, phone, linkedin]
+value_prop: string
+social_proof: string
+current_best: string  # sample copy
+tool: Apollo | Outreach | Lemlist | etc.
+```
 
-Please provide:
+## Sequence Architecture
 
-1. **Target Persona**: Who are you reaching out to? (Title, company size, industry)
-2. **Your Offer**: What are you selling? (Product/service, price point)
-3. **Value Prop**: What's the main problem you solve?
-4. **Social Proof**: Any notable customers, results, or credentials?
-5. **Current Approach**: What have you tried? What's your response rate?
-6. **Tools**: What outreach tools do you use? (Apollo, Outreach, Lemlist, LinkedIn Sales Nav, etc.)
-
-I'll research current outbound best practices and design a complete sequence architecture tailored to your ICP."
-
-## Research Methodology
-
-Use WebSearch extensively to find:
-- Current cold email benchmarks (2024-2025) - open rates, reply rates by industry
-- LinkedIn outreach best practices and InMail response rates
-- Spam filter triggers and deliverability best practices
-- Successful cold email templates and frameworks
-- Multi-channel sequence timing research
-
-## Required Deliverables
-
-### 1. Sequence Architecture
+### Multi-Channel Sequence (7 touches)
 
 ```
-Day 1:  Email #1 ──→ Day 3: LinkedIn Connect
-Day 4:  Email #2 ──→ Day 6: LinkedIn Message
-Day 8:  Email #3 ──→ Day 10: LinkedIn Engage
-Day 12: Email #4 ──→ Day 15: Breakup Email
+Day 1:  Email #1 (Initial) ──→ Day 3: LinkedIn Connect
+Day 4:  Email #2 (Value-add) ──→ Day 6: LinkedIn Message
+Day 7:  Phone Call ──→ Day 8: Email #3 (Insight)
+Day 10: LinkedIn Engage ──→ Day 12: Email #4 (Case Study)
+Day 15: Email #5 (Breakup)
 
 RESPONSE BRANCHES:
-Positive → Discovery call booking
+Positive → Discovery call booking sequence
 Objection → Objection handler sequence
-Not Now → Nurture sequence (30-day follow-up)
+"Not Now" → Nurture sequence (30-day follow-up)
 ```
 
-### 2. Cold Email Sequence (5-7 emails)
+### Email-Only Sequence (5 touches)
 
-| Email | Day | Type | Goal | Length |
-|-------|-----|------|------|--------|
-| 1 | 1 | Initial outreach | Spark curiosity | 50-75 words |
-| 2 | 4 | Follow-up | Add value | 40-60 words |
-| 3 | 8 | Value add | Share insight | 60-80 words |
-| 4 | 12 | Social proof | Case study | 70-90 words |
-| 5 | 15 | Breakup | Create urgency | 30-50 words |
+```
+Day 1:  Initial outreach (50-75 words)
+Day 4:  Follow-up + new angle (40-60 words)
+Day 8:  Value add / insight (60-80 words)
+Day 12: Social proof / case study (70-90 words)
+Day 15: Breakup (30-50 words)
+```
 
-For each email provide: Subject lines (3 options), complete copy, personalization variables, A/B test ideas.
+## Email Templates
 
-Full template: [resources/sequence-templates.yaml](resources/sequence-templates.yaml)
+### Template 1: Problem-Agitate-Solve
 
-### 3. LinkedIn Sequence (4-5 touches)
+```
+Subject: [Pain point] at {{company}}?
 
-| Touch | Day | Type |
-|-------|-----|------|
-| 1 | 3 | Connection request (300 chars, no pitch) |
-| 2 | 6 | First message (value-first, soft CTA) |
-| 3 | 10 | Engagement (comment on their post) |
-| 4 | 14 | Direct message (clear ask) |
-| 5 | 17 | Voice note (optional, personal) |
+{{first_name}},
 
-Full template: [resources/sequence-templates.yaml](resources/sequence-templates.yaml)
+{{companies_like_yours}} often tell us {{specific_pain}}.
 
-### 4. Subject Line Library
+The cost? {{quantified_impact}}.
 
-Categories to provide:
-- **Pattern interrupt**: Highest open rates
-- **Trigger-based**: Reference recent events
-- **Value-focused**: Lead with results
-- **Curiosity**: Create intrigue
-- **Hyper-specific pain hooks**: Problem + solution in <100 words
+{{one_sentence_solution_with_result}}.
 
-Full library with examples: [resources/sequence-templates.yaml](resources/sequence-templates.yaml)
+Open to a quick call to see if this applies to {{company}}?
 
-### 5. Opening Line Library
+{{sender_name}}
+```
 
-Categories:
-- Observation-based (specific to their company)
-- Trigger-based (recent events)
-- Mutual connection
-- Problem-focused
+### Template 2: Trigger Event
 
-Plus AVOID list: what NOT to write.
+```
+Subject: Congrats on {{trigger_event}}
 
-Full library: [resources/sequence-templates.yaml](resources/sequence-templates.yaml)
+{{first_name}},
 
-### 6. CTA Library
+Saw that {{company}} just {{trigger: funding, expansion, hire}}.
 
-- Low-friction (highest response)
-- Specific time (higher conversion)
-- Binary choice
-- Value-first
+Usually when companies {{trigger}}, they run into {{related_pain}}.
 
-Full library: [resources/sequence-templates.yaml](resources/sequence-templates.yaml)
+We helped {{similar_company}} navigate this and {{specific_result}}.
 
-### 7. Response Handling Playbook
+Worth 15 minutes to share what worked for them?
 
-| Response Type | Template |
-|---------------|----------|
-| Positive | Calendar + agenda |
-| "Not interested" | Graceful + referral ask |
-| "We use [Competitor]" | Differentiate + offer comparison |
-| "Send more info" | One asset + follow-up question |
-| "Bad timing" | Confirm timing + nurture |
-| No response | Move to nurture |
+{{sender_name}}
+```
 
-Full playbook: [resources/response-playbook.yaml](resources/response-playbook.yaml)
+### Template 3: Mutual Connection
 
-### 8. Personalization Framework
+```
+Subject: {{connection_name}} suggested I reach out
+
+{{first_name}},
+
+{{connection_name}} mentioned you're working on {{initiative}}.
+
+We've helped {{2-3_similar_companies}} with similar goals and {{specific_results}}.
+
+Would love to share what's working for them if useful.
+
+Open to a brief call this week?
+
+{{sender_name}}
+```
+
+### Template 4: Breakup Email
+
+```
+Subject: Should I close your file?
+
+{{first_name}},
+
+I've reached out a few times but haven't heard back.
+
+I'll assume {{their_pain}} isn't a priority right now and close your file.
+
+If anything changes, feel free to reach back out.
+
+{{sender_name}}
+
+PS: {{final_value_piece}}
+```
+
+### Email Body Framework (AIDA)
+
+```
+Subject: [Personalized hook]
+
+Hey {{first_name}},
+
+[ATTENTION: Personal observation about them/their company]
+Saw that {{specific_detail_showing_research}}.
+
+[INTEREST: Problem statement they likely have]
+Most {{their_role}} at {{company_type}} struggle with {{specific_pain}}.
+
+[DESIRE: Quick value/proof]
+We helped {{similar_company}} solve this by {{specific_result}}.
+
+[ACTION: Clear, low-friction CTA]
+Worth a 15-min call to see if we can help with {{specific_goal}}?
+
+{{sender_name}}
+```
+
+## Subject Line Library
+
+### Pattern Interrupt (Highest Opens)
+
+- "Quick question about {{topic}}"
+- "{{Mutual_connection}} suggested I reach out"
+- "Thought of you when I saw {{trigger}}"
+- "{{first_name}} - quick thought"
+
+### Trigger-Based
+
+- "Congrats on {{trigger_event}}"
+- "Saw your post on {{topic}}"
+- "{{company}}'s {{news}} caught my eye"
+
+### Value-Focused
+
+- "How {{competitor}} increased X by 30%"
+- "{{result}} for {{similar_company}}"
+- "Cut {{pain}} in half?"
+
+### Curiosity
+
+- "{{first_name}}?"
+- "Bad idea?"
+- "Thought about this..."
+
+### Avoid These
+
+- "Touching base" / "Following up"
+- "EXCLUSIVE OFFER" / "Don't miss out"
+- "Quick chat" / "Partnership opportunity"
+- "Hope you're well"
+
+## Cold Call Script
+
+### Opening (15 seconds)
+
+```
+"Hi {{name}}, this is {{your_name}} from {{company}}.
+
+Did I catch you at a bad time?
+
+[If yes: When's better?]
+[If no: Continue]
+
+I'm reaching out because {{trigger_or_reason}}.
+
+{{one_sentence_value}}.
+
+Is {{their_pain}} something you're focused on right now?"
+```
+
+### Call Structure
+
+```
+1. Permission opener (10 sec)
+2. Reason for call (15 sec)
+3. Qualifying question (listen)
+4. Bridge to pain (based on answer)
+5. Share relevant insight/case study
+6. Ask for meeting
+7. Handle objection (if needed)
+8. Confirm next steps
+```
+
+### Objection Responses
+
+| Objection | Response |
+|-----------|----------|
+| "Not interested" | "Totally understand. Quick question - is that because {{pain}} isn't a priority, or you're handling it differently?" |
+| "Send me an email" | "Happy to. What specifically would be most helpful to include?" |
+| "We have a solution" | "Makes sense. How's that working? Any gaps you're looking to address?" |
+| "No budget" | "Understood. When do budgets get reviewed? Happy to reconnect then." |
+| "Who is this?" | "{{name}} from {{company}}. We help {{their_title}} with {{specific_pain}}. Worth 2 minutes?" |
+
+## LinkedIn Templates
+
+### Connection Request (300 char max, no pitch)
+
+```
+{{first_name}}, I came across your {{post/profile/company}} and noticed {{specific_observation}}.
+
+I work with {{similar_role/company_type}} on {{relevant_topic}}.
+
+Would love to connect and learn more about {{their_focus_area}}.
+
+{{your_name}}
+```
+
+### First Message After Connect
+
+```
+Thanks for connecting, {{first_name}}.
+
+I noticed {{company}} is focused on {{initiative_from_research}}.
+
+We've been helping {{similar_companies}} with {{related_challenge}} and thought you might find {{specific_resource}} useful.
+
+Happy to share if interested.
+```
+
+### Direct Message (Clear Ask)
+
+```
+{{first_name}},
+
+I've been following {{company}}'s work on {{initiative}} - impressive results.
+
+We helped {{similar_company}} achieve {{specific_result}} with a similar challenge.
+
+Would a 15-minute call to share what worked for them be useful?
+
+Either way, keep up the great work.
+```
+
+### Engage Before Outreach
+
+Before InMail:
+1. Like 2-3 of their posts
+2. Leave thoughtful comment
+3. Share their content (if relevant)
+4. Then send connection/message
+
+## Response Handling
+
+### Positive Response
+
+```
+{{first_name}}, great to hear from you!
+
+I have {{day}} at {{time}} or {{day}} at {{time}} available.
+
+Here's my calendar if easier: {{link}}
+
+Looking forward to it.
+
+{{sender_name}}
+```
+
+### Objection Response
+
+```
+{{first_name}}, appreciate the candid response.
+
+Totally understand {{their_objection}}.
+
+Quick question: {{question_uncovering_real_concern}}
+
+Either way, happy to {{lower_commitment_offer}}.
+
+{{sender_name}}
+```
+
+### "Not Now" Response
+
+```
+{{first_name}}, completely understand - timing is everything.
+
+When would be a better time to revisit this?
+
+Happy to reach back out in {{timeframe}} if that works.
+
+{{sender_name}}
+```
+
+### "Send More Info" Response
+
+```
+{{first_name}}, happy to share more.
+
+Here's {{one_specific_asset}}: {{link}}
+
+Quick question: What specifically prompted the interest?
+
+That'll help me tailor what I send next.
+
+{{sender_name}}
+```
+
+## Personalization Framework
 
 | Tier | Time/Prospect | What to Include |
 |------|---------------|-----------------|
 | Tier 1 (Basic) | 30 sec | Name, company, industry |
 | Tier 2 (Researched) | 2-3 min | News, LinkedIn content, job postings |
-| Tier 3 (Deep) | 10-15 min | Podcast quotes, custom video |
+| Tier 3 (Deep) | 10-15 min | Podcast quotes, custom video, mutual connections |
 
-Research sources and trigger events: [resources/response-playbook.yaml](resources/response-playbook.yaml)
+### Research Sources
 
-### 9. Timing Optimization
+- LinkedIn posts and activity
+- Company news/press releases
+- Job postings (indicate priorities)
+- Podcast appearances
+- Conference presentations
+- Mutual connections
 
-- Best send times by day
-- Sequence spacing
-- Response time targets
+## Timing Optimization
 
-Full schedule: [resources/response-playbook.yaml](resources/response-playbook.yaml)
+### Best Send Times
 
-### 10. Metrics Dashboard
+| Day | Email | Calls | LinkedIn |
+|-----|-------|-------|----------|
+| Tuesday | 7-8am, 10-11am | 10-11am, 2-3pm | Afternoon |
+| Wednesday | 7-8am, 10-11am | 10-11am, 2-3pm | Afternoon |
+| Thursday | 7-8am, 10-11am | 10-11am, 2-3pm | Afternoon |
+| Friday | 7-8am only | Avoid | Morning |
 
-| Metric | Benchmark | Action if Below |
-|--------|-----------|-----------------|
-| Open rate | 40-60% | Fix subject lines |
-| Reply rate | 5-15% | Fix messaging |
-| Positive reply rate | 30-50% | Fix targeting |
-| Meeting book rate | 1-3% | Full funnel review |
+### Sequence Spacing
 
-Weekly review checklist and health indicators: [resources/response-playbook.yaml](resources/response-playbook.yaml)
+- Email to email: 3-4 days
+- Email to LinkedIn: 1-2 days
+- LinkedIn to phone: 1 day
+- After no response: wait 3 days
+- Breakup email: day 14-15
 
 ## Output Format
 
 ```markdown
-# OUTBOUND SEQUENCE PLAYBOOK: [Company Name]
+# OUTBOUND SEQUENCE: {{Company Name}}
 
-## Executive Summary
-[Strategy and expected results]
+## Target Persona
+{{title}}, {{industry}}, {{company_size}}
 
 ## Sequence Architecture
-[Visual map + channel strategy]
+[Visual flow diagram]
 
-## Cold Email Sequence
-[5-7 emails with complete copy]
+## Email Sequence
+### Email 1: Initial (Day 1)
+**Subject:** [3 options]
+**Preview:** [preview text]
+**Copy:** [full email]
+**Personalization:** [variables used]
+
+### Email 2: Follow-up (Day 4)
+...
 
 ## LinkedIn Sequence
-[4-5 touches with copy]
+### Touch 1: Connection (Day 3)
+...
 
-## Subject Line Library
-## Opening Lines
-## CTA Library
+## Cold Call Script
+[Opening + structure + objection handling]
+
 ## Response Playbook
-## Personalization Framework
-## Timing Optimization
-## Metrics Dashboard
+[Templates for each response type]
 
-## Implementation Checklist
-[ ] Week 1: Build list (100-200 contacts), set up email infrastructure
-[ ] Week 2: Write and load sequences
-[ ] Week 3: Launch to first 50 prospects, monitor
-[ ] Week 4: Iterate based on data
-[ ] Ongoing: Weekly optimization reviews
+## A/B Test Variants
+[Specific tests for diagnosed problem area]
 ```
 
-## Quality Standards
+## Anti-Patterns
 
-- **Research current benchmarks**: Use WebSearch for 2024-2025 outbound stats
-- **Copy-ready**: Every email should be ready to send
-- **Personalization-focused**: Include specific variables and research triggers
-- **Compliance-aware**: GDPR, CAN-SPAM considerations noted
-- **Tool-specific**: Tailor to their outreach platform
-
-## Tone
-
-Direct and practical. Write like an SDR leader who has sent 10,000+ cold emails and knows exactly what works. No theory - every word should be battle-tested and ready to deploy.
+| Mistake | Why It Fails | Fix |
+|---------|--------------|-----|
+| Generic opener | "Hope you're well" ignored | Specific observation |
+| Feature dump | They don't care yet | Lead with their pain |
+| Multiple CTAs | Confusion, lower response | Single clear ask |
+| Long emails | Won't be read on mobile | Under 75 words |
+| Same angle each email | No reason to reply | New value per touch |
+| No personalization | Feels like spam | Add {{variables}} |

@@ -1,135 +1,50 @@
 ---
 name: proposal-writer
-description: Create winning sales proposals and SOWs with executive summaries, scope of work, pricing strategies, timelines, and closing elements that convert prospects to customers.
-allowed-tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch, AskUserQuestion
+description: Templates and frameworks for creating winning sales proposals. Executive summaries, scope of work, pricing strategies, and closing elements.
+allowed-tools: Read, Write, Edit, WebSearch
 ---
 
 # Proposal Writer
 
-You are a **Sales Proposal Expert** who specializes in creating proposals that close deals. Your proposals connect discovery insights to clear solutions, present pricing strategically, and make it easy for buyers to say yes.
+Create proposals that close deals. Connect discovery insights to clear solutions, present pricing strategically, and make it easy for buyers to say yes.
 
-## Conversation Starter
+## Input Context
 
-Use `AskUserQuestion` to gather initial context. Begin by asking:
+Expect structured context from orchestrator:
 
-"I'll help you create a proposal that closes the deal.
+```yaml
+prospect:
+  company: string
+  industry: string
+  size: string
+deal_size: <$10K | $10-50K | $50K+
+stakeholders:
+  - title: string
+    concern: string
+pain_points: [list from discovery]
+solution: string
+pricing: number | range
+competition:
+  - name: string
+    weakness: string
+objections: [list to address]
+timeline:
+  decision_date: date
+  implementation_date: date
+```
 
-Please provide:
+## Proposal Length by Deal Size
 
-1. **Prospect info**: Company name, industry, size
-2. **Key stakeholders**: Who will read this? (Titles, concerns)
-3. **Discovery summary**: What problems did they share? What's the impact?
-4. **Your solution**: What are you proposing? (Products/services)
-5. **Pricing**: What's the investment? (Or range if flexible)
-6. **Competition**: Are they comparing you to alternatives?
-7. **Timeline**: When do they need to decide? Implement?
-8. **Objections raised**: Any concerns from the sales process?
+| Deal Size | Pages | Sections |
+|-----------|-------|----------|
+| <$10K | 3-5 | Exec summary, Scope, Pricing, Next steps |
+| $10K-$50K | 5-10 | + Understanding, Case study, Team |
+| $50K-$250K | 10-15 | + Detailed timeline, Multiple options, Risk mitigation |
+| >$250K | 15-25 | + Implementation methodology, Comprehensive terms, Appendix |
 
-I'll create a proposal tailored to close this specific deal."
+## Proposal Structure
 
-## Research Methodology
-
-Use context from discovery to personalize:
-- Reference specific pain points they mentioned
-- Use their language and terminology
-- Address objections raised during sales process
-- Align to their success metrics
-
-If needed, use WebSearch to find:
-- Industry-specific terminology
-- Competitor positioning to differentiate against
-- Compliance or procurement requirements for their industry
-
-## Required Deliverables
-
-### 1. Proposal Strategy
-
-| Element | Content |
-|---------|---------|
-| **Stakeholder Analysis** | Map each reader → their concern → what they need to see |
-| **Win Themes** | 2-3 themes to emphasize based on discovery |
-| **Competitive Positioning** | Their concern → competitor weakness → our strength |
-| **Tone** | Formal/Consultative/Partner-like based on culture |
-
-**Alternative format:** For early-stage deals, consider Trojan Horse "Exploratory Outline" instead. See [resources/delivery-models.yaml](resources/delivery-models.yaml).
-
-### 2. Executive Summary (Most Important Page)
-
-| Section | Purpose |
-|---------|---------|
-| **The Challenge** | Their problem in their words (2-3 bullets, quantified) |
-| **The Solution** | What you propose + measurable outcomes |
-| **Investment & Timeline** | Table: Component → Investment → Duration |
-| **Why You** | 2-3 sentences on differentiation |
-| **Next Steps** | Specific actions with owners and dates |
-
-Full template: [resources/proposal-templates.yaml](resources/proposal-templates.yaml)
-
-### 3. Understanding & Approach
-
-- Current situation (from discovery)
-- Desired future state + success metrics
-- Your methodology (phases/pillars, not feature lists)
-- Key differentiators table
-
-### 4. Scope of Work
-
-For each deliverable:
-- Description
-- What's included (specific items)
-- Acceptance criteria
-
-Plus:
-- What's NOT included (manage expectations)
-- Assumptions
-- Client responsibilities
-
-### 5. Timeline & Milestones
-
-| Milestone | Description | Target Date | Deliverable |
-|-----------|-------------|-------------|-------------|
-| Kickoff | Project initiation | Week 1 | Project plan |
-| [Phase] | [Description] | Week X | [Deliverable] |
-| Go-Live | [Description] | Week X | [Final deliverable] |
-
-### 6. Investment & Pricing
-
-**Strategy:** Use anchoring (high → recommended → starter). See [resources/pricing-psychology.yaml](resources/pricing-psychology.yaml) for:
-- Anchoring psychology and decoy pricing
-- Bundle "bonuses" to inflate perceived value
-- Investment framing (not "cost")
-- ROI justification template
-- Payment terms structure
-
-**Present 2-3 options:**
-- Option A: Premium (anchor high)
-- Option B: Recommended ⭐ (guide here)
-- Option C: Starter (for budget constraints)
-
-### 7. Why Us / Social Proof
-
-- Relevant experience (similar clients, quantified results)
-- Testimonial quotes
-- Industry-specific client logos
-- Key metrics (years, clients, satisfaction)
-
-### 8. Team & Support
-
-- Project team table (role, name, responsibility)
-- Support model (during + post implementation)
-- For $30K+ deals: Consider Done-With-You delivery model. See [resources/delivery-models.yaml](resources/delivery-models.yaml).
-
-### 9. Terms & Next Steps
-
-- Contract terms summary
-- Clear action table with owners and dates
-- Contact information
-- Proposal validity date
-- Acceptance signature block
-
-Full templates: [resources/proposal-templates.yaml](resources/proposal-templates.yaml)
-
-## Output Format
+### Cover Page
 
 ```markdown
 # PROPOSAL
@@ -139,53 +54,293 @@ Full templates: [resources/proposal-templates.yaml](resources/proposal-templates
 **Prepared for:** [Name, Title]
 **Prepared by:** [Name, Title]
 **Date:** [Date]
-**Valid until:** [Date]
-
----
-
-## Table of Contents
-
-1. Executive Summary
-2. Understanding & Approach
-3. Scope of Work
-4. Timeline & Milestones
-5. Investment
-6. Why [Your Company]
-7. Team & Support
-8. Terms & Next Steps
-
----
-
-[Full proposal content using templates]
+**Valid until:** [Date + 30 days]
 ```
 
-## Proposal Length Guidelines
+### Executive Summary (Most Critical Section)
 
-| Deal Size | Length | Focus |
-|-----------|--------|-------|
-| <$10K | 3-5 pages | Exec summary + pricing + next steps |
-| $10K-$50K | 5-10 pages | Add scope detail + case study |
-| $50K-$250K | 10-15 pages | Full proposal, multiple stakeholders |
-| >$250K | 15-25 pages | Comprehensive, appendix for detail |
+Decision-makers often read only this. Must stand alone.
 
-## Quality Standards
+```markdown
+## Executive Summary
 
-- **Personalized**: Reference specific discovery conversations
-- **Scannable**: Executive can get it in 2 minutes
-- **Specific**: No generic language or boilerplate feel
-- **Action-oriented**: Clear next steps with dates
-- **Visually clean**: Professional formatting, white space
+### The Challenge
 
-## Common Mistakes
+Based on our conversations, [Company] is facing:
 
-- Starting with company history (they don't care yet)
-- Burying pricing at the end
-- No clear next steps or call to action
-- Generic scope that could apply to anyone
-- Too long for the deal size
-- Missing stakeholder concerns
-- No ROI justification
+- **[Pain Point 1]**: [Quantified impact - "$X/month in lost revenue"]
+- **[Pain Point 2]**: [Quantified impact - "X hours/week wasted"]
+- **[Pain Point 3]**: [Quantified impact - "X% customer churn"]
 
-## Tone
+### Our Solution
 
-Confident and consultative. Write like a trusted advisor who understands their business and has a clear path to solving their problem. Not salesy, not desperate, not generic.
+[Product/Service] will help [Company] achieve:
+
+- **[Outcome 1]**: [Measurable result with number]
+- **[Outcome 2]**: [Measurable result with timeframe]
+- **[Outcome 3]**: [Measurable result with percentage]
+
+### Investment & Timeline
+
+| Component | Investment | Duration |
+|-----------|------------|----------|
+| [Phase/Item 1] | $X | X weeks |
+| [Phase/Item 2] | $X | X weeks |
+| **Total** | **$X** | **X weeks** |
+
+### Why [Your Company]
+
+[2-3 sentences on specific differentiators relevant to their situation]
+
+### Next Steps
+
+| Action | Owner | By Date |
+|--------|-------|---------|
+| Proposal review call | [Prospect] | [Date] |
+| Contract review | [Prospect legal] | [Date] |
+| Kickoff | Both teams | [Date] |
+```
+
+### Understanding & Approach
+
+```markdown
+## Understanding & Approach
+
+### Current Situation
+
+[Reference specific discovery conversation points]
+
+### Desired Future State
+
+| Metric | Current | Target | Impact |
+|--------|---------|--------|--------|
+| [Metric 1] | [Current] | [Goal] | [Business impact] |
+| [Metric 2] | [Current] | [Goal] | [Business impact] |
+
+### Our Approach
+
+**Phase 1: [Name]**
+[Description and deliverables]
+
+**Phase 2: [Name]**
+[Description and deliverables]
+
+**Phase 3: [Name]**
+[Description and deliverables]
+```
+
+### Scope of Work
+
+```markdown
+## Scope of Work
+
+### Included
+
+| Deliverable | Description | Acceptance Criteria |
+|-------------|-------------|---------------------|
+| [Deliverable 1] | [What it is] | [How we know it's done] |
+| [Deliverable 2] | [What it is] | [How we know it's done] |
+
+### Not Included
+
+- [Item 1] — available as add-on
+- [Item 2] — future phase
+- [Item 3] — client responsibility
+
+### Assumptions
+
+- [Assumption 1]
+- [Assumption 2]
+
+### Client Responsibilities
+
+- [Responsibility 1]
+- [Responsibility 2]
+```
+
+### Timeline & Milestones
+
+```markdown
+## Timeline & Milestones
+
+| Week | Milestone | Deliverable | Dependencies |
+|------|-----------|-------------|--------------|
+| 1 | Kickoff | Project plan | Contract signed |
+| 2-3 | [Phase 1] | [Deliverable] | [Dependency] |
+| 4-6 | [Phase 2] | [Deliverable] | [Dependency] |
+| 7-8 | Go-Live | [Final deliverable] | [Dependency] |
+```
+
+### Investment & Pricing
+
+**Strategy:** Present 2-3 options with recommended highlighted. Anchor high.
+
+```markdown
+## Investment Options
+
+### Option A: Comprehensive
+[Full solution with premium features]
+- [Feature 1]
+- [Feature 2]
+- [Bonus: Feature 3]
+
+**Investment: $XX,XXX**
+
+### Option B: Recommended ⭐
+[Core solution, best value for most situations]
+- [Feature 1]
+- [Feature 2]
+
+**Investment: $XX,XXX**
+
+### Option C: Essentials
+[Minimum viable solution]
+- [Feature 1]
+
+**Investment: $XX,XXX**
+
+---
+
+**Payment Terms:** [50% upfront, 50% on completion | Monthly | etc.]
+```
+
+### ROI Justification
+
+Use when price is a concern:
+
+```markdown
+## Return on Investment
+
+**Current Cost of Problem:**
+| Issue | Monthly Cost | Annual Cost |
+|-------|--------------|-------------|
+| [Problem 1] | $X | $X |
+| [Problem 2] | $X | $X |
+| **Total cost of inaction** | **$X** | **$X** |
+
+**With [Solution]:**
+| Improvement | Monthly Savings | Annual Savings |
+|-------------|-----------------|----------------|
+| [Outcome 1] | $X | $X |
+| [Outcome 2] | $X | $X |
+| **Total savings** | **$X** | **$X** |
+
+**Payback Period:** X months
+**First-Year ROI:** X.Xx
+```
+
+### Social Proof
+
+```markdown
+## Why [Your Company]
+
+### Relevant Experience
+
+| Client | Challenge | Result |
+|--------|-----------|--------|
+| [Similar company] | [Similar problem] | [Quantified outcome] |
+| [Similar company] | [Similar problem] | [Quantified outcome] |
+
+### Client Testimonial
+
+> "[Quote about working with you and results achieved]"
+> — [Name, Title, Company]
+
+### By the Numbers
+
+- X years in [industry]
+- X clients served
+- X% client satisfaction
+- $Xm in [results delivered]
+```
+
+### Team & Support
+
+```markdown
+## Your Team
+
+| Role | Name | Responsibility |
+|------|------|----------------|
+| Project Lead | [Name] | Overall delivery, your primary contact |
+| [Specialist] | [Name] | [Specific responsibility] |
+| [Support] | [Name] | [Ongoing support] |
+
+### Support Model
+
+**During Implementation:**
+- [Support type and availability]
+
+**Post-Implementation:**
+- [Ongoing support included]
+```
+
+### Terms & Next Steps
+
+```markdown
+## Next Steps
+
+| Step | Action | Owner | Target Date |
+|------|--------|-------|-------------|
+| 1 | Proposal review call | [Prospect] | [Date] |
+| 2 | Final questions addressed | [You] | [Date] |
+| 3 | Contract review | [Prospect legal] | [Date] |
+| 4 | Signed agreement | Both | [Date] |
+| 5 | Kickoff meeting | Both | [Date] |
+
+### Terms Summary
+
+- **Proposal valid until:** [Date]
+- **Payment terms:** [Terms]
+- **Contract length:** [Duration]
+- **Cancellation:** [Policy]
+
+---
+
+**To proceed:** [Clear instruction — sign and return, schedule call, etc.]
+
+**Questions?** Contact [Name] at [email/phone]
+```
+
+## One-Pager Template (Quick Deals)
+
+For deals <$5K or early-stage exploration:
+
+```markdown
+# [Your Company] + [Prospect Company]
+
+## The Problem
+- [Pain point 1 - quantified]
+- [Pain point 2 - quantified]
+
+## Our Solution
+- [Outcome 1 - measurable]
+- [Outcome 2 - measurable]
+
+## Investment
+$[Amount] for [scope] delivered in [timeframe]
+
+## Next Step
+[Single clear action with date]
+
+---
+Valid until [Date] | [Your contact info]
+```
+
+## Tone Guidelines
+
+- **Confident, not arrogant**: "We will deliver" not "We're the best"
+- **Consultative**: Trusted advisor solving their problem
+- **Specific**: Reference their words, their situation
+- **Action-oriented**: Every section moves toward next step
+- **Clean**: White space, scannable, professional
+
+## Anti-Patterns
+
+| Mistake | Why It Fails | Fix |
+|---------|--------------|-----|
+| Lead with company history | They don't care yet | Lead with their pain |
+| Generic scope | Feels like template | Reference specific discovery |
+| Bury pricing | Seems evasive | Put in exec summary |
+| Feature lists | Doesn't resonate | Focus on outcomes |
+| No next steps | Deal stalls | Action table with dates |
+| Wall of text | Won't be read | Headers, tables, bullets |

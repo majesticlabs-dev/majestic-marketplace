@@ -2,7 +2,9 @@
 
 Claude Code plugin marketplace. **Work in `plugins/*/` only.**
 
-## ⛔ FORBIDDEN
+**Quick Nav:** [Forbidden](#forbidden) · [Structure](#structure) · [Dependencies](#dependencies) · [Docs](#documentation) · [Rules](#key-rules) · [Release](#plugin-release-checklist)
+
+## FORBIDDEN
 
 NEVER modify `~/.claude/`. All plugin work goes in `majestic-marketplace/plugins/`.
 
@@ -58,7 +60,7 @@ plugins/{engineer,rails,python,react,marketing,sales,company,llm,tools,agent-sdk
 **Rules:**
 - Start numbering at 1, never 0
 - Prefer adding new main steps over decimals (renumber if needed)
-- ❌ Never use: `0A`, `8.5`, `Step 0`, letter suffixes
+- Never use: `0A`, `8.5`, `Step 0`, letter suffixes
 
 ### File Locations
 - Skill resources → `skills/*/resources/`
@@ -68,11 +70,38 @@ plugins/{engineer,rails,python,react,marketing,sales,company,llm,tools,agent-sdk
 - No `.md` files in `commands/` (they become executable)
 - Templates in command resources must use `.txt` or `.yml` extensions
 
+**Resource file patterns:**
+- One primary concern per file (don't mix unrelated templates)
+- Keep shared content in parent folder, reference via relative path
+  - Example: email-nurture references `../email-sequences/subject-formulas.md`
+- Split files if they serve different purposes:
+  - Good: email-structure.md + re-engagement-copy.md
+  - Bad: email-copy-template.md (mixing everything)
+- Avoid duplication: If two agents need same resource, one file in shared location
+
 ### Behaviors
 - Skills = knowledge (Claude MAY follow)
 - Hooks = enforcement (FORCES behavior)
 - Agents do autonomous work, not just advice
 - `name:` in frontmatter overrides path-based naming
+
+**Skill vs Agent:**
+
+| Type | Execution | Tools | Convert When |
+|------|-----------|-------|--------------|
+| Skill | Inline (main conversation) | Optional `allowed-tools` | N/A — default for guidance |
+| Agent | Subprocess (Task tool) | Own context | Autonomous multi-step workflow |
+
+Wrong: "Has tools → must be agent" · Right: "Does autonomous workflow → should be agent"
+
+### Agent/Skill Pairing Pattern
+When an agent invokes a skill:
+- AGENT responsibility: Workflow steps, validation, error handling, delivery
+  - Gather context → Validate inputs → Analyze situation → Invoke skill → Validate output
+- SKILL responsibility: Templates, frameworks, patterns
+  - Receives structured context from agent
+  - Does the actual work (writes, builds, creates)
+- RULE: Remove duplication — if agent contains the template, don't duplicate in skill
 
 ### Command Naming
 - Command names in frontmatter must include full plugin prefix
@@ -84,64 +113,60 @@ plugins/{engineer,rails,python,react,marketing,sales,company,llm,tools,agent-sdk
 Run `skill-linter` for new skills.
 
 ### Content Rules
-- Skills must contain NEW info Claude doesn't know
-- Exclude: generic advice, personas, "best practices" prose
-- Include: concrete limits, project-specific patterns, exact templates
-- **Skills are LLM instructions, not human documentation**
-  - ❌ Attribution ("using X's framework") - LLM can't retrieve by author name
-  - ❌ Source credits - no functional value for execution
-  - ❌ Decorative quotes - human aesthetic, wastes tokens
-  - ❌ Persona statements ("You are an expert...") - wastes tokens
-  - ✅ Every line must help the LLM execute better
-  - Ask: "Does this sentence improve LLM behavior?" If no, cut it.
-- **Expert names: patterns vs attribution**
-  - ✅ Keep names that define a style/approach (DHH, Warren Buffett) - LLM needs this context
-  - ❌ Remove "inspired by X" or "based on X's methodology" - pure credibility signal
-  - Ask: Is this name part of what the LLM should DO, or just proof someone credible said it?
-- **Audience/Goal framing (instead of personas)**
-  - Use `**Audience:**` (who this is for) and `**Goal:**` (what they'll achieve)
-  - "Explain X for audience Y" yields better outputs than "Act as persona Z"
-- **Self-contained documentation**
-  - Remove external implementation references from feature docs
-  - Document patterns you implement, not who inspired them
-  - Keep credits in separate Credits section, not inline
+Skills = LLM instructions, not human docs. Must contain NEW info Claude doesn't know.
+
+| Exclude | Include |
+|-----------|-----------|
+| Attribution ("using X's framework") | Concrete limits, exact templates |
+| Source credits, decorative quotes | Project-specific patterns |
+| Persona statements ("You are an expert") | Names that define style (DHH, Warren Buffett) |
+| "Inspired by X" credibility signals | Stage/scope context ($0-$10M ARR, enterprise) |
+
+**Single test:** "Does this line improve LLM behavior?" If no, cut it.
+
+**Framing:** Use `**Audience:**` + `**Goal:**` instead of personas. "Explain X for audience Y" > "Act as persona Z"
+
+**Self-contained:** Document patterns you implement, not who inspired them. Credits go in separate section.
 
 ### Agent Instruction Patterns
 - **Pseudocode format (not prose):**
-  - ✅ `If X: do Y | Else: do Z`
-  - ✅ `For each ITEM in LIST: process ITEM`
-  - ✅ `While CONDITION: loop body`
-  - ❌ "Check if X exists, and if so, do Y" (prose)
-  - ❌ "This step is optional unless..." (conditional prose)
+  - Good: `If X: do Y | Else: do Z`
+  - Good: `For each ITEM in LIST: process ITEM`
+  - Good: `While CONDITION: loop body`
+  - Bad: "Check if X exists, and if so, do Y" (prose)
+  - Bad: "This step is optional unless..." (conditional prose)
 - **Variables enable control flow (required, not optional):**
   ```
   RESULT = Task(...) → If RESULT.status == PASS: proceed
   ITEMS = /majestic:config ... → For each I in ITEMS: invoke(I)
   ```
 - **Schemas over examples:** Document I/O with YAML/JSON schemas
-  - ✅ `task_id: string # T1, T2 (from header)`
-  - ❌ Markdown example blocks expecting agent to infer structure
+  - Good: `task_id: string # T1, T2 (from header)`
+  - Bad: Markdown example blocks expecting agent to infer structure
 - **Command invocation:** `/command-name args` (direct slash syntax)
 - **Config reads:** `/majestic:config field default`
 - **Arrays for extensibility:** `methodology: [tdd]` not `methodology: tdd`
 
 ### Agent/Command Doc Structure
-- ✅ Purpose (1 line max)
-- ✅ Input Schema (YAML)
-- ✅ Workflow (pseudocode only)
-- ✅ Output Schema (YAML)
-- ✅ Error Handling (decision table)
-- ❌ "How It Works" narratives
-- ❌ "Critical Rules" / "Notes" / "Safety" prose
-- ❌ "Monitoring" / "Examples" sections
+**Include:**
+- Purpose (1 line max)
+- Input Schema (YAML)
+- Workflow (pseudocode only)
+- Output Schema (YAML)
+- Error Handling (decision table)
+
+**Exclude:**
+- "How It Works" narratives
+- "Critical Rules" / "Notes" / "Safety" prose
+- "Monitoring" / "Examples" sections
 
 ### Verification Phase Separation
 - **Quality Gate:** lint, typecheck, tests, security (standard checks)
 - **Acceptance Criteria:** task-specific behavior (file exists, endpoint returns X)
-- ❌ Don't include quality gate checks in AC (no "npm run typecheck passes")
+- Don't include quality gate checks in AC (no "npm run typecheck passes")
 
 ### Anti-Patterns
-- ❌ Do NOT hardcode language/framework-specific agents in generic orchestrators
+- Do NOT hardcode language/framework-specific agents in generic orchestrators
   - Bad: Putting "majestic-rails:auth-researcher" directly in blueprint.md
   - Good: Use toolbox-resolver to discover stack-specific capabilities dynamically
   - Reason: Multi-stack projects need flexible composition, not hard dependencies
@@ -165,6 +190,17 @@ When discovering incorrect patterns that require moving/restructuring files:
 1. Clarify the correct approach (present options)
 2. Wait for user confirmation before refactoring
 3. Don't assume path patterns - verify with user or docs
+
+**Content removal decision:**
+
+| Content Type | Action |
+|--------------|--------|
+| Persona/role description | Safe to remove |
+| Template/framework | Keep or move to `resources/` |
+| Stage/scope context | Keep (functional) |
+| Execution logic | Move to agent workflow |
+
+When in doubt: keep it, ask user. Don't assume "cleanup" is correct.
 
 ### Plugin Architecture Decisions
 - For new orchestration systems (loops, workflows), create **separate plugins**

@@ -1,6 +1,7 @@
 ---
 name: fact-checker
 description: Verify marketing content claims and return accuracy score. Checks statistics, quotes, and factual statements against sources.
+color: yellow
 tools: Read, Grep, Glob, WebSearch
 ---
 

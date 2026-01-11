@@ -1,7 +1,8 @@
 ---
 name: expert-perspective
 description: Simulate an expert's perspective on a topic with authentic voice and reasoning
-allowed-tools: Read, Grep, Glob
+color: blue
+tools: Read, Grep, Glob
 ---
 
 # Expert Perspective Agent
