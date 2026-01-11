@@ -1,6 +1,6 @@
 # Majestic Tools
 
-Claude Code customization tools. Includes 3 agents, 10 commands, and 5 skills.
+Claude Code customization tools. Includes 3 agents, 9 commands, and 5 skills.
 
 ## Installation
 
@@ -20,7 +20,6 @@ claude /plugin install majestic-tools
 | Create a new agent | `/majestic-tools:meta:new-agent` |
 | Create a new command | `/majestic-tools:meta:new-command` |
 | Create a new hook | `/majestic-tools:meta:new-hook` |
-| Track token usage | `/majestic-tools:insight:ccusage` |
 | Brainstorm ideas | `skill brainstorming` |
 
 ## Agents
@@ -49,7 +48,6 @@ Invoke with: `/majestic-tools:<category>:<name>`
 
 | Command | Description |
 |---------|-------------|
-| `insight:ccusage` | Analyze Claude Code token usage and costs |
 | `insight:reflect` | Suggest improvements to AGENTS.md based on patterns |
 
 ### meta
@@ -184,9 +182,6 @@ Triggers Raycast confetti celebration when Claude completes a task.
 
 # Generate a new command
 /majestic-tools:meta:new-command "Create a command for database backup"
-
-# Track token usage
-/majestic-tools:insight:ccusage
 
 # Reflect on improvements
 /majestic-tools:insight:reflect
