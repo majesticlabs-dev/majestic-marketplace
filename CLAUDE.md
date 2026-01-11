@@ -2,9 +2,9 @@
 
 Claude Code plugin marketplace. **Work in `plugins/*/` only.**
 
-**Quick Nav:** [Forbidden](#-forbidden) · [Structure](#structure) · [Dependencies](#dependencies) · [Docs](#documentation) · [Rules](#key-rules) · [Release](#plugin-release-checklist)
+**Quick Nav:** [Forbidden](#forbidden) · [Structure](#structure) · [Dependencies](#dependencies) · [Docs](#documentation) · [Rules](#key-rules) · [Release](#plugin-release-checklist)
 
-## ⛔ FORBIDDEN
+## FORBIDDEN
 
 NEVER modify `~/.claude/`. All plugin work goes in `majestic-marketplace/plugins/`.
 
@@ -60,7 +60,7 @@ plugins/{engineer,rails,python,react,marketing,sales,company,llm,tools,agent-sdk
 **Rules:**
 - Start numbering at 1, never 0
 - Prefer adding new main steps over decimals (renumber if needed)
-- ❌ Never use: `0A`, `8.5`, `Step 0`, letter suffixes
+- Never use: `0A`, `8.5`, `Step 0`, letter suffixes
 
 ### File Locations
 - Skill resources → `skills/*/resources/`
@@ -75,8 +75,8 @@ plugins/{engineer,rails,python,react,marketing,sales,company,llm,tools,agent-sdk
 - Keep shared content in parent folder, reference via relative path
   - Example: email-nurture references `../email-sequences/subject-formulas.md`
 - Split files if they serve different purposes:
-  - ✅ email-structure.md + re-engagement-copy.md
-  - ❌ email-copy-template.md (mixing everything)
+  - Good: email-structure.md + re-engagement-copy.md
+  - Bad: email-copy-template.md (mixing everything)
 - Avoid duplication: If two agents need same resource, one file in shared location
 
 ### Behaviors
@@ -92,7 +92,7 @@ plugins/{engineer,rails,python,react,marketing,sales,company,llm,tools,agent-sdk
 | Skill | Inline (main conversation) | Optional `allowed-tools` | N/A — default for guidance |
 | Agent | Subprocess (Task tool) | Own context | Autonomous multi-step workflow |
 
-❌ "Has tools → must be agent" · ✅ "Does autonomous workflow → should be agent"
+Wrong: "Has tools → must be agent" · Right: "Does autonomous workflow → should be agent"
 
 ### Agent/Skill Pairing Pattern
 When an agent invokes a skill:
@@ -115,7 +115,7 @@ Run `skill-linter` for new skills.
 ### Content Rules
 Skills = LLM instructions, not human docs. Must contain NEW info Claude doesn't know.
 
-| ❌ Exclude | ✅ Include |
+| Exclude | Include |
 |-----------|-----------|
 | Attribution ("using X's framework") | Concrete limits, exact templates |
 | Source credits, decorative quotes | Project-specific patterns |
@@ -130,40 +130,43 @@ Skills = LLM instructions, not human docs. Must contain NEW info Claude doesn't 
 
 ### Agent Instruction Patterns
 - **Pseudocode format (not prose):**
-  - ✅ `If X: do Y | Else: do Z`
-  - ✅ `For each ITEM in LIST: process ITEM`
-  - ✅ `While CONDITION: loop body`
-  - ❌ "Check if X exists, and if so, do Y" (prose)
-  - ❌ "This step is optional unless..." (conditional prose)
+  - Good: `If X: do Y | Else: do Z`
+  - Good: `For each ITEM in LIST: process ITEM`
+  - Good: `While CONDITION: loop body`
+  - Bad: "Check if X exists, and if so, do Y" (prose)
+  - Bad: "This step is optional unless..." (conditional prose)
 - **Variables enable control flow (required, not optional):**
   ```
   RESULT = Task(...) → If RESULT.status == PASS: proceed
   ITEMS = /majestic:config ... → For each I in ITEMS: invoke(I)
   ```
 - **Schemas over examples:** Document I/O with YAML/JSON schemas
-  - ✅ `task_id: string # T1, T2 (from header)`
-  - ❌ Markdown example blocks expecting agent to infer structure
+  - Good: `task_id: string # T1, T2 (from header)`
+  - Bad: Markdown example blocks expecting agent to infer structure
 - **Command invocation:** `/command-name args` (direct slash syntax)
 - **Config reads:** `/majestic:config field default`
 - **Arrays for extensibility:** `methodology: [tdd]` not `methodology: tdd`
 
 ### Agent/Command Doc Structure
-- ✅ Purpose (1 line max)
-- ✅ Input Schema (YAML)
-- ✅ Workflow (pseudocode only)
-- ✅ Output Schema (YAML)
-- ✅ Error Handling (decision table)
-- ❌ "How It Works" narratives
-- ❌ "Critical Rules" / "Notes" / "Safety" prose
-- ❌ "Monitoring" / "Examples" sections
+**Include:**
+- Purpose (1 line max)
+- Input Schema (YAML)
+- Workflow (pseudocode only)
+- Output Schema (YAML)
+- Error Handling (decision table)
+
+**Exclude:**
+- "How It Works" narratives
+- "Critical Rules" / "Notes" / "Safety" prose
+- "Monitoring" / "Examples" sections
 
 ### Verification Phase Separation
 - **Quality Gate:** lint, typecheck, tests, security (standard checks)
 - **Acceptance Criteria:** task-specific behavior (file exists, endpoint returns X)
-- ❌ Don't include quality gate checks in AC (no "npm run typecheck passes")
+- Don't include quality gate checks in AC (no "npm run typecheck passes")
 
 ### Anti-Patterns
-- ❌ Do NOT hardcode language/framework-specific agents in generic orchestrators
+- Do NOT hardcode language/framework-specific agents in generic orchestrators
   - Bad: Putting "majestic-rails:auth-researcher" directly in blueprint.md
   - Good: Use toolbox-resolver to discover stack-specific capabilities dynamically
   - Reason: Multi-stack projects need flexible composition, not hard dependencies

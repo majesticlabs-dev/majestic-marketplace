@@ -1,0 +1,80 @@
+# Power Words Library
+
+Emotionally charged words organized by psychological category.
+
+## 1. IMPATIENCE (Create Urgency)
+Amp, Blast, Ignite, Jumpstart, Kickstart, Launch, Quick-start, Speedy, Supercharge, Turbo-charge, Smuggle
+
+## 2. BEAUTY (Aesthetic Appeal)
+Adorable, Awe-Inspiring, Beautiful, Breathtaking, Dazzling, Gorgeous, Stunning, Swoon, Swoon-worthy
+
+## 3. LUST (Desire & Temptation)
+Begging, Crave, Decadent, Delirious, Fantasy, Forbidden, Irresistible, Naked, Provocative, Seductive, Sexy, Sinful, Tantalizing, Satisfy
+
+## 4. INDULGENCE (Guilt-Free Pleasure)
+Guilt, Guilt-free, Indulgent, Obsessed, Ravenous, Lazy
+
+## 5. EXCITEMENT (Energy & Anticipation)
+Bold, Exciting, Fascinating, Intriguing, Riveting, Tempting, Thrilling, Transform
+
+## 6. NOVELTY (New & Different)
+Challenge, Discover, Extraordinary, Hack, Latest, Life-changing, Magic, Miracle, New, Remarkable, Revolutionary, Sensational, Shocking, Spoiler, Startling, Suddenly, Surprising, Unexpected, Strange, Weird, Odd, Unusual
+
+## 7. MEMORABILITY (Unforgettable Impact)
+Captivate, Genius, Memorable, Undeniable, Unforgettable, Unpopular, Impressive, Embarrassing
+
+## 8. HAPPINESS (Positive Emotion)
+Heartwarming, Inspiring, Profound, Zen, Alive, Light, Healthy
+
+## 9. PRESTIGE (Status & Luxury)
+Expensive, Glamorous, Luxurious
+
+## 10. SIMPLICITY (Ease & Clarity)
+Basic, Cheat-Sheet, Easy, Effortless, Ingredients, Minimalist, On-Demand, Painless, Rules, Savvy, Simple, Step-by-Step, Stupid-simple, Tricks, Tweaks
+
+## 11. SADNESS (Pain & Loss)
+Alarming, Crushing, Dead, Deceptive, Devastating, Excruciating, Exposed, Heartbreaking, Sadly, Shaming, Suffer, Avoid, Demoralizing, Problem
+
+## 12. SAVAGERY (Intensity & Conflict)
+Agonizing, Apocalypse, Armageddon, Battle, Corrupt, Crazy, Deadly, Disgusting, Fight, Frenzy, Hate, Insane, Lunatic, Menacing, Painful, Poison, Rowdy, Sabotaging, Savage, Sins, Struggle, Treacherous, Uncontrollable, Vicious, Violent, Weak, Wild, Dying, Horrifying, Attack, Traumatized, Insult, Horribly, Hell
+
+## 13. COMPLETENESS (Comprehensive Value)
+Completely, Copy, Detailed, Essential, Impenetrable, Meticulous, Overcome, Painstaking, Practical, Recreate, Replicate, Relentless, Ultimate, Master, Perfect, Super, Best, Truly, Packed, Extremely, Deep, Better
+
+## 14. GRAVITY (Weight & Importance)
+Gargantuan, Gigantic, Huge, Intense, Massive, Gripping, Goddamn, Seriously
+
+## 15. GREED (Desire for More)
+Affordable, Bargain, Bonus, Budget, Cheap, Convert, Double, Triple, Free, Immediately, Instantly, Now, Today, Forever, Increase, Money, Never, Off-limits, Overnight, Profit, Sale, Unlimited, Envy, Lucrative, Steal
+
+## 16. HUMOR (Entertainment)
+Funniest, Hilarious, Laugh, Ridiculous
+
+## 17. AUTHORITY (Trust & Expertise)
+Absolute, All-Inclusive, Authentic, Authoritative, Authority, Backed, Bona fide, Complete, Comprehensive, Conclusive, Definitive, Document, Expert, Final, Formula, Genuine, Guaranteed, Honest, Iron-clad, Legitimate, Literally, Official, Powerful, Proven, Psychological, Reliable, Research, Studies, Results, Solution, Strategy, Surefire, Validate, Masterclass
+
+## 18. EXCLUSIVITY (Insider Access)
+Admit, Breaking, Confess, Confession, Divulge, Elite, Emerging, First, Hidden, Insider, Little-known, New, Popular, Priceless, Rare, Release, Reveal, Secret, Sly, Sneaky, Stealthy, Sneak-Peek, Special, Trend, Truth, Unadulterated, Unconventional, Uncovered, Undercover, Underused, Unique, Unseen, Untapped
+
+## 19. PRIDE (Achievement & Avoidance)
+**Positive:** Achieve, Success, Fail-Proof
+**Negative (avoid mistakes):** Absurd, Awkward, Blunder, Clueless, Cringeworthy, Dumb, Fail, Failure, Faux Pas, Fool, Foolish, Idiot, Lame, Last, Mediocre, Mistake, Obvious, Pitiful, Reject, Rookie, Ruin, Senseless, Shameful, Silly, Stupid, Threaten, Triggers, Unknowingly, Useless, Waste
+
+## 20. SAFETY (Protection & Security)
+Accuse, Assault, Beware, Broke, Catastrophe, Caution, Cheat, Dangerous, Diagnosed, Dirty, Emergency, Ethical, Exactly, Fierce, Hoax, Horror, Jeopardy, Lifetime, Protect, Provoke, Punch, Recession-Proof, Sacred, Safe, Scam, Scared, Shaking, Signs, Survive, Terrifying, Unstoppable, Belong, Promise, Stop
+
+## 21. MIND-BLOWING (Amazement)
+Alluring, Amazing, Astonishing, Astounding, Awesome, Badass, Bomb, Brilliant, Catapult, Charming, Defying, Delicious, Delightful, Dreamy, Epic, Explosive, Exquisite, Greatness, Heavenly, Incredible, Jaw-dropping, Kickass, Legendary, Mesmerizing, Mouth-watering, Nail, Spellbinding, Sublime, Triumph, Unbelievable, Unleashed, Polarizing, Dominate
+
+---
+
+## Category by Goal
+
+| Goal | Primary Categories |
+|------|--------------------|
+| Sales/Conversion | Greed, Urgency, Exclusivity |
+| Trust/Authority | Authority, Completeness |
+| Engagement | Novelty, Mind-blowing |
+| Fear-based | Safety, Sadness, Savagery |
+| Desire-based | Lust, Beauty, Prestige |
+| FOMO | Exclusivity, Impatience |
