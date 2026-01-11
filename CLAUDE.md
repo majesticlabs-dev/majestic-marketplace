@@ -2,6 +2,8 @@
 
 Claude Code plugin marketplace. **Work in `plugins/*/` only.**
 
+**Quick Nav:** [Forbidden](#-forbidden) · [Structure](#structure) · [Dependencies](#dependencies) · [Docs](#documentation) · [Rules](#key-rules) · [Release](#plugin-release-checklist)
+
 ## ⛔ FORBIDDEN
 
 NEVER modify `~/.claude/`. All plugin work goes in `majestic-marketplace/plugins/`.
@@ -83,17 +85,14 @@ plugins/{engineer,rails,python,react,marketing,sales,company,llm,tools,agent-sdk
 - Agents do autonomous work, not just advice
 - `name:` in frontmatter overrides path-based naming
 
-**Skill vs Agent distinction:**
-- SKILL: Guidance/knowledge executed in main conversation
-  - Can have `allowed-tools` (enabled just for that skill's context)
-  - Examples: proposal-writer (uses WebSearch), email-nurture (uses AskUserQuestion)
-  - Runs inline with user, not as subprocess
-- AGENT: Autonomous work spawned as subprocess via Task tool
-  - Has own context, runs independently
-  - Examples: proposal-generator (spawned to orchestrate workflow)
-- RULE: Don't convert skills to agents just because they have `allowed-tools`
-  - ❌ Wrong: "This skill uses tools → must be an agent"
-  - ✅ Right: "This does autonomous workflow → should be agent"
+**Skill vs Agent:**
+
+| Type | Execution | Tools | Convert When |
+|------|-----------|-------|--------------|
+| Skill | Inline (main conversation) | Optional `allowed-tools` | N/A — default for guidance |
+| Agent | Subprocess (Task tool) | Own context | Autonomous multi-step workflow |
+
+❌ "Has tools → must be agent" · ✅ "Does autonomous workflow → should be agent"
 
 ### Agent/Skill Pairing Pattern
 When an agent invokes a skill:
@@ -114,35 +113,20 @@ When an agent invokes a skill:
 Run `skill-linter` for new skills.
 
 ### Content Rules
-- Skills must contain NEW info Claude doesn't know
-- Exclude: generic advice, personas, "best practices" prose
-- Include: concrete limits, project-specific patterns, exact templates
-- **Skills are LLM instructions, not human documentation**
-  - ❌ Attribution ("using X's framework") - LLM can't retrieve by author name
-  - ❌ Source credits - no functional value for execution
-  - ❌ Decorative quotes - human aesthetic, wastes tokens
-  - ❌ Persona statements ("You are an expert...") - wastes tokens
-  - ✅ Every line must help the LLM execute better
-  - Ask: "Does this sentence improve LLM behavior?" If no, cut it.
-- **Expert names: patterns vs attribution**
-  - ✅ Keep names that define a style/approach (DHH, Warren Buffett) - LLM needs this context
-  - ❌ Remove "inspired by X" or "based on X's methodology" - pure credibility signal
-  - Ask: Is this name part of what the LLM should DO, or just proof someone credible said it?
-- **Audience/Goal framing (instead of personas)**
-  - Use `**Audience:**` (who this is for) and `**Goal:**` (what they'll achieve)
-  - "Explain X for audience Y" yields better outputs than "Act as persona Z"
-- **Self-contained documentation**
-  - Remove external implementation references from feature docs
-  - Document patterns you implement, not who inspired them
-  - Keep credits in separate Credits section, not inline
-- **Functional context vs fluff (when refactoring)**
-  - Scope/stage context is FUNCTIONAL — affects what advice applies
-    - ✅ Keep: "$0-$10M ARR", "early-stage", "enterprise", "high-growth"
-    - These are constraints on when to use the guidance
-  - Persona statements are FLUFF — remove if they just describe role
-    - ❌ Remove: "You are an expert", "VP-level thinking", "has built X"
-    - Safe to remove if they don't change the guidance itself
-  - Test: "Does removing this change what the agent should do?" If yes, keep it.
+Skills = LLM instructions, not human docs. Must contain NEW info Claude doesn't know.
+
+| ❌ Exclude | ✅ Include |
+|-----------|-----------|
+| Attribution ("using X's framework") | Concrete limits, exact templates |
+| Source credits, decorative quotes | Project-specific patterns |
+| Persona statements ("You are an expert") | Names that define style (DHH, Warren Buffett) |
+| "Inspired by X" credibility signals | Stage/scope context ($0-$10M ARR, enterprise) |
+
+**Single test:** "Does this line improve LLM behavior?" If no, cut it.
+
+**Framing:** Use `**Audience:**` + `**Goal:**` instead of personas. "Explain X for audience Y" > "Act as persona Z"
+
+**Self-contained:** Document patterns you implement, not who inspired them. Credits go in separate section.
 
 ### Agent Instruction Patterns
 - **Pseudocode format (not prose):**
@@ -204,13 +188,16 @@ When discovering incorrect patterns that require moving/restructuring files:
 2. Wait for user confirmation before refactoring
 3. Don't assume path patterns - verify with user or docs
 
-**Before removing content in refactors:**
-1. Is this describing a persona/role? → Safe to remove
-2. Is this a template/framework? → Keep or move to resources/
-3. Is this stage/scope context? → Keep as functional context
-4. Is this execution logic? → Move to agent workflow
-- When in doubt: Keep it, then ask user if it should be removed
-- Don't assume "cleanup" passes are correct — validate against actual usage
+**Content removal decision:**
+
+| Content Type | Action |
+|--------------|--------|
+| Persona/role description | Safe to remove |
+| Template/framework | Keep or move to `resources/` |
+| Stage/scope context | Keep (functional) |
+| Execution logic | Move to agent workflow |
+
+When in doubt: keep it, ask user. Don't assume "cleanup" is correct.
 
 ### Plugin Architecture Decisions
 - For new orchestration systems (loops, workflows), create **separate plugins**
