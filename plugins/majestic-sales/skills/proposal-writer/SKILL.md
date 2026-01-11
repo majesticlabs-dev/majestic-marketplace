@@ -5,7 +5,7 @@ description: Create winning sales proposals and SOWs with executive summaries, s
 
 # Proposal Writer
 
-Create proposals that close deals by connecting discovery insights to clear solutions.
+Create proposals that close deals. Connect discovery insights to clear solutions, present pricing strategically, and make it easy for buyers to say yes.
 
 ## Conversation Starter
 
