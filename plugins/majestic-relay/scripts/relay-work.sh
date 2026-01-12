@@ -157,7 +157,7 @@ while true; do
   OUTPUT=""
   EXIT_CODE=0
 
-  if OUTPUT=$(claude -p "$PROMPT" --output-format json --json-schema "$TASK_RESULT_SCHEMA" 2>&1); then
+  if OUTPUT=$(claude -p "$PROMPT" --permission-mode bypassPermissions --output-format json --json-schema "$TASK_RESULT_SCHEMA" 2>&1); then
     EXIT_CODE=0
   else
     EXIT_CODE=$?
