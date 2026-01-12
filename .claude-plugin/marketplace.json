@@ -6,7 +6,7 @@
   },
   "metadata": {
     "description": "Majestic Labs plugin marketplace for Claude Code extensions",
-    "version": "3.3.0"
+    "version": "3.4.0"
   },
   "plugins": [
     {
@@ -125,8 +125,8 @@
     },
     {
       "name": "majestic-tools",
-      "description": "Claude Code customization tools. Includes 3 agents, 9 commands, and 5 skills.",
-      "version": "3.10.4",
+      "description": "Claude Code customization tools. Includes 3 agents, 11 commands, and 5 skills.",
+      "version": "3.10.5",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -461,6 +461,30 @@
         "compound"
       ],
       "source": "./plugins/majestic-ralph"
+    },
+    {
+      "name": "majestic-relay",
+      "description": "Fresh-context task execution with attempt ledger. Shell-orchestrated epic workflow with re-anchoring and gating. Inspired by gmickel/flow-next. Includes 3 commands and 1 skill.",
+      "version": "1.0.0",
+      "author": {
+        "name": "David Paluy",
+        "url": "https://github.com/dpaluy",
+        "email": "marketplace@it.majesticlabs.dev"
+      },
+      "homepage": "https://github.com/majesticlabs-dev/majestic-marketplace/tree/master/plugins/majestic-relay",
+      "tags": [
+        "relay",
+        "fresh-context",
+        "epic",
+        "tasks",
+        "orchestration",
+        "attempt-ledger",
+        "gating",
+        "sequential",
+        "shell-driven",
+        "re-anchoring"
+      ],
+      "source": "./plugins/majestic-relay"
     }
   ]
 }
