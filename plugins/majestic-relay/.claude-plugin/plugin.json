@@ -1,6 +1,6 @@
 {
   "name": "majestic-relay",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Fresh-context task execution with attempt ledger. Shell-orchestrated epic workflow inspired by gmickel/flow-next.",
   "author": {
     "name": "David Paluy",

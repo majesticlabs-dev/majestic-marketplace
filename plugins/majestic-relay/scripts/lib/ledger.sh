@@ -99,7 +99,7 @@ ledger_record_attempt_success() {
   if [[ -n "$files_changed" ]]; then
     # Convert comma-separated to YAML array
     local files_yaml
-    files_yaml=$(echo "$files_changed" | tr ',' '\n' | sed 's/^ *//' | yq -n '[inputs]')
+    files_yaml=$(echo "$files_changed" | yq 'split(", ")')
     yq -i ".attempts.${task_id}[${idx}].receipt.files_changed = ${files_yaml}" "$LEDGER"
   fi
 
