@@ -92,7 +92,13 @@ Use `WebSearch` to fetch current best practices for detected stack:
 
 ### Dimension 3: Security
 
-Reference `infra-security-review` agent patterns, plus:
+**Use `infra-security-review` skill** for comprehensive security checks covering:
+- State backend security (encryption, locking, versioning)
+- Secret exposure (hardcoded keys, passwords, API keys)
+- Network security (SSH access, firewall rules, CIDR ranges)
+- Compute security (root login, password auth, monitoring)
+- Database security (VPC attachment, firewall rules)
+- Storage security (public buckets, encryption)
 
 | Category | Check |
 |----------|-------|
@@ -102,17 +108,7 @@ Reference `infra-security-review` agent patterns, plus:
 | Access | Least privilege, no wildcard permissions |
 | Audit | Logging enabled, monitoring configured |
 
-**Red flags to grep:**
-```bash
-# Hardcoded secrets
-grep -rE 'password\s*=\s*"[^$\{][^"]*"' *.tf
-grep -rE 'AKIA[0-9A-Z]{16}' *.tf
-grep -rE 'api_key\s*=\s*"' *.tf
-
-# Dangerous network rules
-grep -rE '0\.0\.0\.0/0.*22' *.tf
-grep -rE 'publicly_accessible\s*=\s*true' *.tf
-```
+Run the `infra-security-review` skill patterns against the codebase.
 
 ### Dimension 4: Simplicity
 

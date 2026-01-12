@@ -323,20 +323,21 @@ Manage Backblaze B2 Cloud Storage with B2 CLI and Terraform.
 
 ## Agents
 
-### infra-security-review
+### devops-verifier
 
-Review IaC for security vulnerabilities and misconfigurations.
+Comprehensive verification of infrastructure code across six dimensions.
 
-**Checks for:**
-- State backend security (encryption, locking, public access)
-- Secret exposure (hardcoded credentials)
-- Network security (SSH exposure, database access)
-- Compute hardening (root login, password auth)
-- Storage security (public buckets, encryption)
+**Dimensions:**
+1. **Best Practices** - Current patterns, pinned versions
+2. **Platform-Specific** - AWS, DigitalOcean, Hetzner, Cloudflare patterns
+3. **Security** - Uses `infra-security-review` skill patterns
+4. **Simplicity** - File count, module usage, directory depth
+5. **Maintainability** - Naming, formatting, DRY principle
+6. **Documentation** - README, diagrams, variable descriptions
 
 **Usage:**
 ```
-Review my infrastructure code for security issues
+Verify my infrastructure code before shipping
 ```
 
 ## Installation
@@ -456,10 +457,12 @@ majestic-devops/
 │   │   └── SKILL.md
 │   ├── hetzner-coder/
 │   │   └── SKILL.md
-│   └── wrangler-coder/
+│   ├── wrangler-coder/
+│   │   └── SKILL.md
+│   └── infra-security-review/
 │       └── SKILL.md
 ├── agents/
-│   └── infra-security-review.md
+│   └── devops-verifier.md
 ├── README.md
 └── CHANGELOG.md
 ```
