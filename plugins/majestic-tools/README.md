@@ -1,6 +1,6 @@
 # Majestic Tools
 
-Claude Code customization tools. Includes 3 agents, 9 commands, and 5 skills.
+Claude Code customization tools. Includes 1 agent, 11 commands, and 5 skills.
 
 ## Installation
 
@@ -30,8 +30,6 @@ Invoke with: `agent <name>`
 | Agent | Description |
 |-------|-------------|
 | `reasoning-verifier` | Verify LLM reasoning using RCoT - detect overlooked conditions and hallucinations |
-| `expert-perspective` | Simulate an expert's perspective with authentic voice and reasoning |
-| `expert-panel-discussion` | Orchestrate multi-round expert panel discussions with synthesis |
 
 ## Commands
 
