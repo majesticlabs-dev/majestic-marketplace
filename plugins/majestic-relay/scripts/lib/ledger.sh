@@ -240,3 +240,126 @@ find_next_task() {
   echo ""
 }
 
+# ============================================
+# Relay Process Status Tracking
+# ============================================
+
+# Record relay start
+# Usage: ledger_relay_start
+ledger_relay_start() {
+  local started_at
+  started_at=$(date -Iseconds)
+  local pid=$$
+
+  yq -i ".relay_status.state = \"running\"" "$LEDGER"
+  yq -i ".relay_status.pid = ${pid}" "$LEDGER"
+  yq -i ".relay_status.started_at = \"${started_at}\"" "$LEDGER"
+  yq -i ".relay_status.last_exit_code = null" "$LEDGER"
+  yq -i ".relay_status.last_exit_reason = null" "$LEDGER"
+}
+
+# Record relay stop
+# Usage: ledger_relay_stop "exit_code" "reason"
+# Reasons: epic_complete, no_runnable_tasks, error, interrupted
+ledger_relay_stop() {
+  local exit_code="$1"
+  local reason="$2"
+  local stopped_at
+  stopped_at=$(date -Iseconds)
+
+  yq -i ".relay_status.state = \"idle\"" "$LEDGER"
+  yq -i ".relay_status.pid = null" "$LEDGER"
+  yq -i ".relay_status.stopped_at = \"${stopped_at}\"" "$LEDGER"
+  yq -i ".relay_status.last_exit_code = ${exit_code}" "$LEDGER"
+  yq -i ".relay_status.last_exit_reason = \"${reason}\"" "$LEDGER"
+}
+
+# Check if relay is currently running (stale PID detection)
+# Usage: ledger_relay_is_running
+# Returns: 0 if running, 1 if not
+ledger_relay_is_running() {
+  local state
+  state=$(yq -r '.relay_status.state // "idle"' "$LEDGER" 2>/dev/null)
+
+  if [[ "$state" != "running" ]]; then
+    return 1
+  fi
+
+  # Check if PID is still alive
+  local pid
+  pid=$(yq -r '.relay_status.pid // 0' "$LEDGER" 2>/dev/null)
+
+  if [[ "$pid" -gt 0 ]] && kill -0 "$pid" 2>/dev/null; then
+    return 0
+  else
+    # Stale running state - clean it up
+    yq -i ".relay_status.state = \"idle\"" "$LEDGER"
+    yq -i ".relay_status.last_exit_reason = \"crashed\"" "$LEDGER"
+    return 1
+  fi
+}
+
+# Get relay status summary
+# Usage: ledger_relay_status
+# Returns: JSON with state, last_run info
+ledger_relay_status() {
+  yq -o=json '.relay_status // {}' "$LEDGER" 2>/dev/null
+}
+
+# ============================================
+# Epic & Task Timing
+# ============================================
+
+# Record epic completion
+# Usage: ledger_epic_complete
+ledger_epic_complete() {
+  local ended_at
+  ended_at=$(date -Iseconds)
+
+  yq -i ".ended_at = \"${ended_at}\"" "$LEDGER"
+
+  # Calculate duration if started_at exists
+  local started_at
+  started_at=$(yq -r '.started_at // ""' "$LEDGER")
+
+  if [[ -n "$started_at" ]]; then
+    # Calculate duration in minutes (portable approach)
+    local start_epoch end_epoch duration_minutes
+    start_epoch=$(date -j -f "%Y-%m-%dT%H:%M:%S" "${started_at%[-+]*}" "+%s" 2>/dev/null || date -d "$started_at" "+%s" 2>/dev/null)
+    end_epoch=$(date -j -f "%Y-%m-%dT%H:%M:%S" "${ended_at%[-+]*}" "+%s" 2>/dev/null || date -d "$ended_at" "+%s" 2>/dev/null)
+
+    if [[ -n "$start_epoch" && -n "$end_epoch" ]]; then
+      duration_minutes=$(( (end_epoch - start_epoch) / 60 ))
+      yq -i ".duration_minutes = ${duration_minutes}" "$LEDGER"
+    fi
+  fi
+}
+
+# Get task timing summary
+# Usage: ledger_get_task_timing "T1"
+# Returns: JSON with started_at, ended_at, duration_minutes, attempts
+ledger_get_task_timing() {
+  local task_id="$1"
+
+  local first_start last_end attempt_count
+
+  # Get first attempt start
+  first_start=$(yq -r ".attempts.${task_id}[0].started_at // \"\"" "$LEDGER")
+
+  # Get last attempt end
+  attempt_count=$(yq -r ".attempts.${task_id} | length // 0" "$LEDGER")
+  if [[ "$attempt_count" -gt 0 ]]; then
+    local last_idx=$((attempt_count - 1))
+    last_end=$(yq -r ".attempts.${task_id}[${last_idx}].ended_at // \"\"" "$LEDGER")
+  fi
+
+  # Output JSON
+  cat <<EOF
+{
+  "started_at": "${first_start}",
+  "ended_at": "${last_end}",
+  "attempts": ${attempt_count}
+}
+EOF
+}
+

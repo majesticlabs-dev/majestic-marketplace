@@ -43,7 +43,38 @@ Epic: {EPIC.id} ({COMPLETED}/{TOTAL_TASKS} tasks complete)
 Source: {EPIC.source}
 Started: {LEDGER.started_at}
 
+If LEDGER.ended_at exists:
+  Print: "Completed: {LEDGER.ended_at} ({LEDGER.duration_minutes} min)"
+
 Progress: [████████░░░░░░░░░░░░] {percentage}%
+```
+
+### 4.5. Display Relay Status
+
+```
+RELAY_STATE = LEDGER.relay_status.state // "unknown"
+RELAY_STOPPED_AT = LEDGER.relay_status.stopped_at
+RELAY_EXIT_REASON = LEDGER.relay_status.last_exit_reason
+
+If RELAY_STATE == "running":
+  PID = LEDGER.relay_status.pid
+  Print: "Relay: 🟢 running (PID {PID})"
+
+Else If RELAY_STATE == "idle":
+  TIME_AGO = humanize(now - RELAY_STOPPED_AT)
+
+  REASON_ICON = {
+    epic_complete: "✅",
+    no_runnable_tasks: "⏸️",
+    interrupted: "⚠️",
+    crashed: "💥",
+    error: "❌"
+  }
+
+  Print: "Relay: {REASON_ICON} {RELAY_EXIT_REASON} ({TIME_AGO} ago)"
+
+Else:
+  Print: "Relay: ⚪ never run"
 ```
 
 ### 5. Display Task List
@@ -118,11 +149,19 @@ Started: 2026-01-11T17:30:00Z
 
 Progress: [████████████░░░░░░░░] 60%
 
+Relay: 🟢 running (PID 12345)
+
 ✅ T1: Create users table migration
 ✅ T2: Add login form component
 ✅ T3: Implement password hashing
 🔄 T4: Add session management (attempt 2/3)
 ⏸️ T5: Add logout endpoint (blocked by T4)
+```
+
+**When relay is idle:**
+
+```
+Relay: ⏸️ no_runnable_tasks (5 min ago)
 ```
 
 ## Error Handling
