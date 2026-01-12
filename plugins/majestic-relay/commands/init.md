@@ -63,6 +63,8 @@ relay:
   review:
     enabled: false
     provider: none  # repoprompt | gemini | none
+  analysis:
+    enabled: true   # LLM failure analysis
 ```
 
 ### 3. Read Blueprint
@@ -145,8 +147,9 @@ tasks:
 ```
 MAX_ATTEMPTS = config-reader("relay.max_attempts_per_task", 3)
 TIMEOUT = config-reader("relay.timeout_minutes", 15)
-REVIEW_ENABLED = config-reader("relay.review.enabled", true)
+REVIEW_ENABLED = config-reader("relay.review.enabled", false)
 REVIEW_PROVIDER = config-reader("relay.review.provider", "none")
+ANALYSIS_ENABLED = config-reader("relay.analysis.enabled", true)
 ```
 
 ### 7. Generate attempt-ledger.yml
@@ -164,6 +167,8 @@ settings:
   review:
     enabled: {REVIEW_ENABLED}
     provider: "{REVIEW_PROVIDER}"
+  analysis:
+    enabled: {ANALYSIS_ENABLED}
 
 task_status:
   T1: pending

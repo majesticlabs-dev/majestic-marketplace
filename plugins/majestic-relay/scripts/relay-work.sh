@@ -14,6 +14,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "$SCRIPT_DIR/lib/ledger.sh"
 source "$SCRIPT_DIR/lib/prompt.sh"
 source "$SCRIPT_DIR/lib/review.sh"
+source "$SCRIPT_DIR/lib/analyze.sh"
 
 # File paths
 EPIC=".majestic/epic.yml"
@@ -86,6 +87,7 @@ fi
 MAX_ATTEMPTS=$(ledger_get_setting "max_attempts_per_task" "3")
 REVIEW_ENABLED=$(ledger_get_setting "review.enabled" "false")
 REVIEW_PROVIDER=$(ledger_get_setting "review.provider" "none")
+ANALYSIS_ENABLED=$(ledger_get_setting "analysis.enabled" "true")
 
 # Apply overrides
 [[ -n "$MAX_ATTEMPTS_OVERRIDE" ]] && MAX_ATTEMPTS="$MAX_ATTEMPTS_OVERRIDE"
@@ -125,6 +127,23 @@ while true; do
       echo -e "${YELLOW}⏸️  No executable tasks remaining${NC}"
       echo "  Completed: $COMPLETED/$TOTAL"
       [[ "$GATED" -gt 0 ]] && echo -e "  ${RED}Gated: $GATED tasks${NC}"
+
+      # Batch analysis on exit if there are failures
+      if [[ "$ANALYSIS_ENABLED" == "true" && "$GATED" -gt 0 ]]; then
+        echo ""
+        echo -e "${BLUE}🔬 Running batch failure analysis...${NC}"
+
+        BATCH_ANALYSIS=$(analyze_batch_failures "$EPIC" "$LEDGER")
+        SUMMARY=$(echo "$BATCH_ANALYSIS" | jq -r '.summary // "No patterns detected"')
+        RECOMMENDED=$(echo "$BATCH_ANALYSIS" | jq -r '.recommended_action // ""')
+
+        # Store in ledger
+        ledger_store_batch_analysis "$BATCH_ANALYSIS"
+
+        echo -e "${YELLOW}📊 $SUMMARY${NC}"
+        [[ -n "$RECOMMENDED" ]] && echo -e "${GREEN}💡 Recommended: $RECOMMENDED${NC}"
+      fi
+
       echo ""
       echo "Run '/relay:status --verbose' for details."
       exit 1
@@ -192,6 +211,28 @@ while true; do
   else
     echo -e "     ${RED}❌ Failed: $RESULT_MESSAGE${NC}"
     ledger_record_attempt_failure "$NEXT_TASK" "$ATTEMPT_ID" "$RESULT_MESSAGE" "$RESULT_ERROR_CAT" "$RESULT_SUGGESTION"
+
+    # Pre-gate analysis: analyze before final attempt would gate the task
+    if [[ "$ANALYSIS_ENABLED" == "true" && "$ATTEMPT_ID" -eq "$((MAX_ATTEMPTS - 1))" ]]; then
+      echo -e "     ${BLUE}🔬 Analyzing failures before final attempt...${NC}"
+
+      ANALYSIS=$(analyze_task_failures "$EPIC" "$LEDGER" "$NEXT_TASK")
+      FIXABLE=$(echo "$ANALYSIS" | jq -r '.fixable // false')
+      SUGGESTION=$(echo "$ANALYSIS" | jq -r '.suggestion // ""')
+      PATTERN=$(echo "$ANALYSIS" | jq -r '.pattern // "unknown"')
+
+      # Store analysis in ledger
+      ledger_store_analysis "$NEXT_TASK" "$ANALYSIS"
+
+      if [[ "$FIXABLE" == "true" && -n "$SUGGESTION" ]]; then
+        echo -e "     ${YELLOW}💡 Pattern: $PATTERN${NC}"
+        echo -e "     ${GREEN}🔧 Fix hint: $SUGGESTION${NC}"
+        # The hint will be available in the ledger for the next attempt
+        # The prompt builder can include it
+      else
+        echo -e "     ${YELLOW}⚠️  Pattern: $PATTERN (not auto-fixable)${NC}"
+      fi
+    fi
   fi
 
   echo ""
