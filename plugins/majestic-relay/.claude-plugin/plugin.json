@@ -1,0 +1,21 @@
+{
+  "name": "majestic-relay",
+  "version": "1.0.0",
+  "description": "Fresh-context task execution with attempt ledger. Shell-orchestrated epic workflow inspired by gmickel/flow-next.",
+  "author": {
+    "name": "David Paluy",
+    "url": "https://github.com/dpaluy",
+    "email": "marketplace@it.majesticlabs.dev"
+  },
+  "keywords": [
+    "relay",
+    "fresh-context",
+    "epic",
+    "tasks",
+    "orchestration",
+    "attempt-ledger",
+    "gating",
+    "sequential",
+    "shell-driven"
+  ]
+}

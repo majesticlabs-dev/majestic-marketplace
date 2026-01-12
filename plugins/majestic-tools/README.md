@@ -1,6 +1,6 @@
 # Majestic Tools
 
-Claude Code customization tools. Includes 3 agents, 9 commands, and 5 skills.
+Claude Code customization tools. Includes 3 agents, 11 commands, and 5 skills.
 
 ## Installation
 
@@ -20,6 +20,7 @@ claude /plugin install majestic-tools
 | Create a new agent | `/majestic-tools:meta:new-agent` |
 | Create a new command | `/majestic-tools:meta:new-command` |
 | Create a new hook | `/majestic-tools:meta:new-hook` |
+| Create a new skill | `/majestic:new-skill` |
 | Brainstorm ideas | `skill brainstorming` |
 
 ## Agents
@@ -59,6 +60,7 @@ Invoke with: `/majestic-tools:<category>:<name>`
 | `meta:new-command` | Generate any Claude Code command with production patterns |
 | `meta:new-hook` | Create and configure Claude Code hooks for automation |
 | `meta:new-prompt` | Build a well-structured prompt following Anthropic's best practices |
+| `meta:new-skill` | Create Claude Code skills following Anthropic best practices |
 
 ### workflows
 
@@ -73,7 +75,9 @@ Invoke with: `skill majestic-tools:<name>`
 | Skill | Description |
 |-------|-------------|
 | `brainstorming` | Refine rough ideas into fully-formed designs through collaborative questioning |
-| `new-skill` | Create and manage Claude Code skills following Anthropic best practices |
+| `command-patterns` | Best practices for generating Claude Code commands |
+| `compound-learnings` | Identify and persist valuable patterns as reusable artifacts |
+| `devils-advocate` | Challenge ideas and expose weak reasoning |
 | `skill-first` | Check for relevant skills before starting any task |
 
 ## Hooks
@@ -183,14 +187,14 @@ Triggers Raycast confetti celebration when Claude completes a task.
 # Generate a new command
 /majestic-tools:meta:new-command "Create a command for database backup"
 
+# Create a new skill
+/majestic:new-skill "Best practices for writing Stimulus controllers"
+
 # Reflect on improvements
 /majestic-tools:insight:reflect
 
 # Brainstorm before implementing
 skill majestic-tools:brainstorming
-
-# Create a new skill
-skill majestic-tools:new-skill
 ```
 
 ## Interview Command Deep Dive
