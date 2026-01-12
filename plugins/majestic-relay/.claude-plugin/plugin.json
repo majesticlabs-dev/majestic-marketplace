@@ -1,6 +1,6 @@
 {
   "name": "majestic-relay",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Fresh-context task execution with attempt ledger. Shell-orchestrated epic workflow with re-anchoring and gating.",
   "author": {
     "name": "David Paluy",

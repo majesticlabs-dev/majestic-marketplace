@@ -120,12 +120,27 @@ ${prev_attempts}
 
 ## Instructions
 
-1. Implement this task only - do not work on other tasks
+**CRITICAL: This is autonomous execution mode. DO NOT enter plan mode or ask for approval.**
+
+The task has already been planned and approved at the blueprint stage. Your job is to:
+
+1. **Implement the code NOW** - write files, run commands, make changes
 2. Run tests to verify acceptance criteria
 3. If successful, commit with message: "${task_id}: ${task_title}"
-4. If blocked by an issue you cannot resolve, explain what's missing
+4. If blocked by a genuine issue (missing dependency, unclear requirement), report it as a failure
 
-Your response will be automatically structured as JSON. Focus on the implementation.
-The orchestrator will capture your result status and summary.
+**Anti-patterns to avoid:**
+- Creating plan files or writing "implementation plans"
+- Asking "would you like me to proceed?"
+- Entering EnterPlanMode
+- Writing markdown about what you would do
+
+**Expected behavior:**
+- Read relevant files
+- Write/edit code
+- Run tests
+- Commit changes
+
+Your response will be automatically structured as JSON. The orchestrator captures your result status.
 EOF
 }
