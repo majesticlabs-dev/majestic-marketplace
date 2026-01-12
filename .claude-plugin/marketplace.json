@@ -464,7 +464,7 @@
     },
     {
       "name": "majestic-relay",
-      "description": "Fresh-context task execution with attempt ledger. Shell-orchestrated epic workflow with re-anchoring and gating. Inspired by gmickel/flow-next. Includes 3 commands and 1 skill.",
+      "description": "Fresh-context task execution with attempt ledger. Shell-orchestrated epic workflow with re-anchoring and gating. Includes 3 commands and 1 skill.",
       "version": "1.0.2",
       "author": {
         "name": "David Paluy",
