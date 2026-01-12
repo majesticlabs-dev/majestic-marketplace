@@ -8,3 +8,6 @@ docs/plans/
 context.txt
 docs/audits/
 .claude/*.local.*
+
+# Relay epic state (ephemeral)
+.majestic/
