@@ -1,32 +1,13 @@
 ---
 name: infra-security-review
-description: Review Infrastructure-as-Code for security vulnerabilities, misconfigurations, and hardening opportunities. Covers Terraform/OpenTofu, cloud-init, and cloud provider resources.
-color: cyan
-tools: Read, Grep, Glob, Bash
+description: Security patterns and checklists for reviewing Infrastructure-as-Code. Covers Terraform/OpenTofu state, secrets, network, compute, database, and storage security.
 ---
 
-# Infrastructure Security Review
+# Infrastructure Security Review Patterns
 
-Review IaC code for security issues, misconfigurations, and hardening opportunities.
+Security checklists and grep patterns for reviewing IaC code. Use these patterns when verifying infrastructure security.
 
-## Review Process
-
-1. **Discover IaC Files**
-   - Find all `.tf`, `.tfvars`, and cloud-init files
-   - Identify provider types (AWS, DigitalOcean, GCP, Azure)
-   - Check for state backend configuration
-
-2. **Run Security Checks**
-   - Execute `tofu validate` if available
-   - Search for hardcoded secrets
-   - Analyze resource configurations
-
-3. **Generate Report**
-   - Categorize findings by severity
-   - Provide specific remediation steps
-   - Include code snippets for fixes
-
-## Security Checklist
+## Security Checklists
 
 ### State Backend Security
 
@@ -81,19 +62,19 @@ Review IaC code for security issues, misconfigurations, and hardening opportunit
 | Missing encryption | High | No SSE configuration |
 | No access logging | Medium | Missing access log bucket |
 
-## Search Patterns
-
-Use these grep patterns to find issues:
+## Grep Patterns
 
 ```bash
 # Hardcoded secrets
 grep -rE 'AKIA[0-9A-Z]{16}' *.tf
-grep -rE 'password\s*=\s*"[^$][^"]*"' *.tf
-grep -rE 'secret.*=\s*"[^$][^"]*"' *.tf
+grep -rE 'password\s*=\s*"[^$\{][^"]*"' *.tf
+grep -rE 'secret.*=\s*"[^$\{][^"]*"' *.tf
+grep -rE 'api_key\s*=\s*"' *.tf
 
 # Network exposure
-grep -rE 'source_addresses.*0\.0\.0\.0/0.*port.*22' *.tf
+grep -rE '0\.0\.0\.0/0.*22' *.tf
 grep -rE 'cidr_blocks.*0\.0\.0\.0/0' *.tf
+grep -rE 'publicly_accessible\s*=\s*true' *.tf
 
 # State security
 grep -rE 'encrypt\s*=\s*false' *.tf
@@ -104,7 +85,7 @@ grep -rE 'PermitRootLogin\s+yes' *.tf *.yaml
 grep -rE 'PasswordAuthentication\s+yes' *.tf *.yaml
 ```
 
-## Report Format
+## Report Template
 
 ```markdown
 # Infrastructure Security Review
@@ -122,47 +103,25 @@ grep -rE 'PasswordAuthentication\s+yes' *.tf *.yaml
 | Medium | X |
 | Low | X |
 
-## Critical Findings
+## Findings
 
-### [CRIT-001] SSH Open to World
+### [SEVERITY-001] Title
 
-**File:** `production/core/main.tf:62`
-**Resource:** `digitalocean_firewall.app`
+**File:** `path/to/file.tf:line`
+**Resource:** `resource_type.name`
 
 **Issue:**
-SSH (port 22) is accessible from any IP address.
+Description of the security issue.
 
 **Current:**
 ```hcl
-inbound_rule {
-  protocol         = "tcp"
-  port_range       = "22"
-  source_addresses = ["0.0.0.0/0"]
-}
+[current code]
 ```
 
 **Remediation:**
-Restrict SSH to known IP addresses or VPN CIDR.
-
 ```hcl
-inbound_rule {
-  protocol         = "tcp"
-  port_range       = "22"
-  source_addresses = var.ssh_allowed_ips  # ["203.0.113.0/24"]
-}
+[fixed code]
 ```
-
-## High Findings
-
-### [HIGH-001] Database Without VPC
-
-...
-
-## Recommendations
-
-1. **Immediate:** Fix all Critical and High findings before deployment
-2. **Short-term:** Implement Medium findings within 30 days
-3. **Long-term:** Address Low findings in next infrastructure review
 
 ## Compliance Notes
 
@@ -172,27 +131,11 @@ inbound_rule {
 - [ ] Access logging enabled (all frameworks)
 ```
 
-## Execution
+## Severity Guide
 
-When invoked:
-
-1. Find all IaC files:
-```bash
-find . -name "*.tf" -o -name "*.tfvars" -o -name "cloud-init*"
-```
-
-2. Run validation if tofu available:
-```bash
-tofu validate 2>&1 || true
-```
-
-3. Search for each security pattern
-
-4. Read flagged files for context
-
-5. Generate structured report with:
-   - Severity rating
-   - File and line number
-   - Current code snippet
-   - Remediation code snippet
-   - Compliance implications
+| Severity | Definition | Action |
+|----------|------------|--------|
+| Critical | Direct security exposure, data breach risk | Block deployment |
+| High | Significant risk, exploitable weakness | Fix before production |
+| Medium | Best practice violation, indirect risk | Fix within 30 days |
+| Low | Minor hardening opportunity | Address when convenient |
