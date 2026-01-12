@@ -98,8 +98,11 @@ ledger_record_attempt_success() {
   # Add files_changed if provided
   if [[ -n "$files_changed" ]]; then
     # Convert comma-separated to YAML array
+    # Use strenv() to pass string safely (avoids yq trying to parse file paths as YAML)
     local files_yaml
-    files_yaml=$(echo "$files_changed" | yq 'split(", ")')
+    export FILES_CHANGED_VAR="$files_changed"
+    files_yaml=$(yq -n 'strenv(FILES_CHANGED_VAR) | split(", ")')
+    unset FILES_CHANGED_VAR
     yq -i ".attempts.${task_id}[${idx}].receipt.files_changed = ${files_yaml}" "$LEDGER"
   fi
 
