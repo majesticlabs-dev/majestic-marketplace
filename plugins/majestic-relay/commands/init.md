@@ -173,6 +173,14 @@ task_status:
 attempts: {}
 
 gated_tasks: {}
+
+relay_status:
+  state: idle
+  pid: null
+  started_at: null
+  stopped_at: null
+  last_exit_code: null
+  last_exit_reason: null
 ```
 
 ### 8. Create Directory

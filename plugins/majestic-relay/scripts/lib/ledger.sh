@@ -240,3 +240,69 @@ find_next_task() {
   echo ""
 }
 
+# ============================================
+# Relay Process Status Tracking
+# ============================================
+
+# Record relay start
+# Usage: ledger_relay_start
+ledger_relay_start() {
+  local started_at
+  started_at=$(date -Iseconds)
+  local pid=$$
+
+  yq -i ".relay_status.state = \"running\"" "$LEDGER"
+  yq -i ".relay_status.pid = ${pid}" "$LEDGER"
+  yq -i ".relay_status.started_at = \"${started_at}\"" "$LEDGER"
+  yq -i ".relay_status.last_exit_code = null" "$LEDGER"
+  yq -i ".relay_status.last_exit_reason = null" "$LEDGER"
+}
+
+# Record relay stop
+# Usage: ledger_relay_stop "exit_code" "reason"
+# Reasons: epic_complete, no_runnable_tasks, error, interrupted
+ledger_relay_stop() {
+  local exit_code="$1"
+  local reason="$2"
+  local stopped_at
+  stopped_at=$(date -Iseconds)
+
+  yq -i ".relay_status.state = \"idle\"" "$LEDGER"
+  yq -i ".relay_status.pid = null" "$LEDGER"
+  yq -i ".relay_status.stopped_at = \"${stopped_at}\"" "$LEDGER"
+  yq -i ".relay_status.last_exit_code = ${exit_code}" "$LEDGER"
+  yq -i ".relay_status.last_exit_reason = \"${reason}\"" "$LEDGER"
+}
+
+# Check if relay is currently running (stale PID detection)
+# Usage: ledger_relay_is_running
+# Returns: 0 if running, 1 if not
+ledger_relay_is_running() {
+  local state
+  state=$(yq -r '.relay_status.state // "idle"' "$LEDGER" 2>/dev/null)
+
+  if [[ "$state" != "running" ]]; then
+    return 1
+  fi
+
+  # Check if PID is still alive
+  local pid
+  pid=$(yq -r '.relay_status.pid // 0' "$LEDGER" 2>/dev/null)
+
+  if [[ "$pid" -gt 0 ]] && kill -0 "$pid" 2>/dev/null; then
+    return 0
+  else
+    # Stale running state - clean it up
+    yq -i ".relay_status.state = \"idle\"" "$LEDGER"
+    yq -i ".relay_status.last_exit_reason = \"crashed\"" "$LEDGER"
+    return 1
+  fi
+}
+
+# Get relay status summary
+# Usage: ledger_relay_status
+# Returns: JSON with state, last_run info
+ledger_relay_status() {
+  yq -o=json '.relay_status // {}' "$LEDGER" 2>/dev/null
+}
+

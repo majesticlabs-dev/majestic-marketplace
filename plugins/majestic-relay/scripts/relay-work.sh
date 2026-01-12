@@ -96,6 +96,21 @@ REVIEW_PROVIDER=$(ledger_get_setting "review.provider" "none")
 EPIC_ID=$(yq -r '.id' "$EPIC")
 EPIC_TITLE=$(yq -r '.title' "$EPIC")
 
+# Track relay process status
+ledger_relay_start
+
+# Cleanup on exit or interrupt
+cleanup() {
+  local exit_code=$?
+  # Only update if not already stopped (avoid double-update)
+  local state
+  state=$(yq -r '.relay_status.state // "idle"' "$LEDGER" 2>/dev/null)
+  if [[ "$state" == "running" ]]; then
+    ledger_relay_stop "$exit_code" "interrupted"
+  fi
+}
+trap cleanup EXIT INT TERM
+
 echo -e "${BLUE}🚀 Starting epic: ${EPIC_ID}${NC}"
 echo ""
 
@@ -118,6 +133,7 @@ while true; do
     if [[ "$COMPLETED" -eq "$TOTAL" ]]; then
       echo ""
       echo -e "${GREEN}✅ Epic complete! ($COMPLETED/$TOTAL tasks)${NC}"
+      ledger_relay_stop 0 "epic_complete"
       exit 0
     else
       GATED=$(yq -r '.gated_tasks | keys | length' "$LEDGER")
@@ -127,6 +143,7 @@ while true; do
       [[ "$GATED" -gt 0 ]] && echo -e "  ${RED}Gated: $GATED tasks${NC}"
       echo ""
       echo "Run '/relay:status --verbose' for details."
+      ledger_relay_stop 1 "no_runnable_tasks"
       exit 1
     fi
   fi
