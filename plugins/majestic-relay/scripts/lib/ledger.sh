@@ -306,3 +306,60 @@ ledger_relay_status() {
   yq -o=json '.relay_status // {}' "$LEDGER" 2>/dev/null
 }
 
+# ============================================
+# Epic & Task Timing
+# ============================================
+
+# Record epic completion
+# Usage: ledger_epic_complete
+ledger_epic_complete() {
+  local ended_at
+  ended_at=$(date -Iseconds)
+
+  yq -i ".ended_at = \"${ended_at}\"" "$LEDGER"
+
+  # Calculate duration if started_at exists
+  local started_at
+  started_at=$(yq -r '.started_at // ""' "$LEDGER")
+
+  if [[ -n "$started_at" ]]; then
+    # Calculate duration in minutes (portable approach)
+    local start_epoch end_epoch duration_minutes
+    start_epoch=$(date -j -f "%Y-%m-%dT%H:%M:%S" "${started_at%[-+]*}" "+%s" 2>/dev/null || date -d "$started_at" "+%s" 2>/dev/null)
+    end_epoch=$(date -j -f "%Y-%m-%dT%H:%M:%S" "${ended_at%[-+]*}" "+%s" 2>/dev/null || date -d "$ended_at" "+%s" 2>/dev/null)
+
+    if [[ -n "$start_epoch" && -n "$end_epoch" ]]; then
+      duration_minutes=$(( (end_epoch - start_epoch) / 60 ))
+      yq -i ".duration_minutes = ${duration_minutes}" "$LEDGER"
+    fi
+  fi
+}
+
+# Get task timing summary
+# Usage: ledger_get_task_timing "T1"
+# Returns: JSON with started_at, ended_at, duration_minutes, attempts
+ledger_get_task_timing() {
+  local task_id="$1"
+
+  local first_start last_end attempt_count
+
+  # Get first attempt start
+  first_start=$(yq -r ".attempts.${task_id}[0].started_at // \"\"" "$LEDGER")
+
+  # Get last attempt end
+  attempt_count=$(yq -r ".attempts.${task_id} | length // 0" "$LEDGER")
+  if [[ "$attempt_count" -gt 0 ]]; then
+    local last_idx=$((attempt_count - 1))
+    last_end=$(yq -r ".attempts.${task_id}[${last_idx}].ended_at // \"\"" "$LEDGER")
+  fi
+
+  # Output JSON
+  cat <<EOF
+{
+  "started_at": "${first_start}",
+  "ended_at": "${last_end}",
+  "attempts": ${attempt_count}
+}
+EOF
+}
+

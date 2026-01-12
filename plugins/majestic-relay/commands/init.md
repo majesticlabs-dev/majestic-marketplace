@@ -157,6 +157,8 @@ Write to `.majestic/attempt-ledger.yml`:
 version: 1
 epic_id: "{epic.id}"
 started_at: "{ISO timestamp}"
+ended_at: null           # Set when epic completes
+duration_minutes: null   # Calculated on completion
 
 settings:
   max_attempts_per_task: {MAX_ATTEMPTS}

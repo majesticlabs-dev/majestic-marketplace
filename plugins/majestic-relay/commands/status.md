@@ -43,6 +43,9 @@ Epic: {EPIC.id} ({COMPLETED}/{TOTAL_TASKS} tasks complete)
 Source: {EPIC.source}
 Started: {LEDGER.started_at}
 
+If LEDGER.ended_at exists:
+  Print: "Completed: {LEDGER.ended_at} ({LEDGER.duration_minutes} min)"
+
 Progress: [████████░░░░░░░░░░░░] {percentage}%
 ```
 

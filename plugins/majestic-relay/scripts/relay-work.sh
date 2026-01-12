@@ -131,8 +131,12 @@ while true; do
     TOTAL=$(yq -r '.tasks | keys | length' "$EPIC")
 
     if [[ "$COMPLETED" -eq "$TOTAL" ]]; then
+      # Record epic completion with timing
+      ledger_epic_complete
+
+      DURATION=$(yq -r '.duration_minutes // 0' "$LEDGER")
       echo ""
-      echo -e "${GREEN}✅ Epic complete! ($COMPLETED/$TOTAL tasks)${NC}"
+      echo -e "${GREEN}✅ Epic complete! ($COMPLETED/$TOTAL tasks in ${DURATION} min)${NC}"
       ledger_relay_stop 0 "epic_complete"
       exit 0
     else
