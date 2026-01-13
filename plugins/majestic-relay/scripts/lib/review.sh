@@ -30,52 +30,86 @@ run_review() {
   esac
 }
 
-# Run review via RepoPrompt MCP
+# Run review via RepoPrompt MCP (through Claude agent)
 # Usage: run_repoprompt_review "$task_id" "$output"
+# Invokes Claude headless with MCP access to call repoprompt/chat_send
 run_repoprompt_review() {
   local task_id="$1"
-  local output="$2"
+  local output="$2"  # Kept for signature compatibility
 
-  # Check if RepoPrompt MCP is available
-  if ! command -v mcp-cli &> /dev/null; then
-    echo "approved"  # Skip review if mcp-cli not available
+  # Check if claude CLI is available
+  if ! command -v claude &> /dev/null; then
+    echo "approved"  # Skip review if claude not available
     return
   fi
 
-  # Get changed files
+  # Check if jq is available (required for JSON parsing)
+  if ! command -v jq &> /dev/null; then
+    echo "approved"  # Skip review if jq not available
+    return
+  fi
+
+  # Get changed files from last commit
   local changed_files
-  changed_files=$(git diff --name-only HEAD~1 2>/dev/null | head -10)
+  changed_files=$(git diff --name-only HEAD~1 2>/dev/null | head -20)
 
   if [[ -z "$changed_files" ]]; then
     echo "approved"  # No changes to review
     return
   fi
 
-  # Build review prompt
-  local review_prompt="Review the following code changes for task ${task_id}:
+  # Build the review prompt for Claude
+  local review_prompt="You are a code reviewer. Review the code changes for relay task ${task_id}.
 
-Files changed:
+Changed files:
 ${changed_files}
 
-Please check for:
-1. Code quality and best practices
-2. Potential bugs or issues
-3. Security concerns
-4. Missing edge cases
+Instructions:
+1. First, switch RepoPrompt to the correct workspace using repoprompt/manage_workspaces
+2. Then call repoprompt/chat_send with mode=\"review\" and the changed files as selected_paths
+3. Parse the review response and return your verdict
 
-Respond with APPROVED if the changes are acceptable, or explain what needs to be fixed."
+Return your verdict as structured JSON."
 
-  # Call RepoPrompt for review
-  # Note: This assumes RepoPrompt MCP is configured
+  # JSON schema for structured output
+  local review_schema='{
+    "type": "object",
+    "properties": {
+      "verdict": {
+        "type": "string",
+        "enum": ["approved", "rejected"],
+        "description": "Review verdict"
+      },
+      "reason": {
+        "type": "string",
+        "description": "Brief explanation of the verdict"
+      }
+    },
+    "required": ["verdict", "reason"]
+  }'
+
+  # Invoke Claude with structured output
   local result
-  if result=$(mcp-cli call repoprompt/review "$(echo "$review_prompt" | jq -Rs .)" 2>/dev/null); then
-    if echo "$result" | grep -qi "APPROVED"; then
+  if result=$(claude -p "$review_prompt" \
+    --output-format json \
+    --json-schema "$review_schema" \
+    --max-turns 5 \
+    --permission-mode bypassPermissions \
+    2>/dev/null); then
+
+    # Parse the structured output
+    local verdict
+    verdict=$(echo "$result" | jq -r '.structured_output.verdict // "approved"')
+
+    if [[ "$verdict" == "approved" ]]; then
       echo "approved"
     else
-      echo "$result" | head -5
+      local reason
+      reason=$(echo "$result" | jq -r '.structured_output.reason // "Review rejected"')
+      echo "$reason" | head -3
     fi
   else
-    # If MCP call fails, approve anyway (don't block on review failure)
+    # If Claude invocation fails, approve anyway (don't block on review failure)
     echo "approved"
   fi
 }
