@@ -86,6 +86,15 @@ build_task_prompt() {
 **What to do differently:** Address the errors from previous attempts before trying the same approach.
 "
     fi
+
+    # Include analysis hint if available
+    local analysis_hint
+    analysis_hint=$(yq -r ".analysis.tasks.${task_id}.suggestion // \"\"" "$ledger" 2>/dev/null)
+    if [[ -n "$analysis_hint" && "$analysis_hint" != "null" ]]; then
+      prev_attempts+="
+**🔬 Analysis Hint:** ${analysis_hint}
+"
+    fi
   fi
 
   # Build the prompt
