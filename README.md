@@ -115,6 +115,7 @@ This copies skills to `~/.codex/skills/` and commands to `~/.codex/prompts/`.
 | [beads_viewer](https://github.com/Dicklesworthstone/beads_viewer) | Terminal UI for Beads with DAG visualization, graph metrics, and AI agent "robot mode" | `curl -fsSL https://raw.githubusercontent.com/Dicklesworthstone/beads_viewer/main/install.sh \| bash` |
 | [claude-hud](https://github.com/jarrodwatts/claude-hud) | Real-time session insights - context window usage, active tools, todo progress, git status in statusline | `/plugin marketplace add jarrodwatts/claude-hud` |
 | [browser-cdp](https://github.com/dpaluy/browser-cdp) | Browser automation via Chrome DevTools Protocol - control Chrome, Brave, Edge with real profiles | `npm install -g browser-cdp` or `bunx browser-cdp` |
+| [agent-browser](https://github.com/vercel-labs/agent-browser) | Fast Rust CLI for AI agents - semantic locators, accessibility snapshots, session isolation | `npm install -g agent-browser && agent-browser install` |
 
 ## Recommended Settings
 
