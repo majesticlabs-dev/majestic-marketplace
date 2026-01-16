@@ -22,7 +22,7 @@ skill_description: $ARGUMENTS
 ### Step 1: Load Design Philosophy
 
 ```
-Skill(skill: "skill-design-philosophy")
+/majestic-tools:skill-design-philosophy
 ```
 
 Validate the request passes the knowledge test:
@@ -55,7 +55,7 @@ WebFetch("https://docs.anthropic.com/en/docs/claude-code/skills", "Extract skill
 ### Step 4: Load Archetype
 
 ```
-Skill(skill: "skill-archetypes")
+/majestic-tools:skill-archetypes
 ```
 
 Select appropriate archetype based on Step 2 answer:
@@ -67,7 +67,7 @@ Select appropriate archetype based on Step 2 answer:
 ### Step 5: Load Structure Rules
 
 ```
-Skill(skill: "skill-structure")
+/majestic-tools:skill-structure
 ```
 
 Apply:
