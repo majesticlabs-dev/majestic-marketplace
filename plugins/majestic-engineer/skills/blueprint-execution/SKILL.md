@@ -1,123 +1,85 @@
 ---
 name: blueprint-execution
-description: Execution phase for blueprint workflow - task breakdown options, task creation, and build offering
+description: Execution phase for blueprint workflow - present options and delegate to appropriate commands
 ---
 
 # Blueprint Execution
 
-Handles Steps 12-14 of the blueprint workflow: Task breakdown options, task creation, and build offering.
+Present execution options after plan is written and delegate to appropriate commands.
 
 ## Input
 
 ```yaml
-plan_path: string              # e.g., docs/plans/20260114_auth.md
-user_choice: string            # "single_task" | "breakdown" | "epic"
+plan_path: string  # e.g., docs/plans/20260114_auth.md
 ```
 
-## 1. Execution Options
+## Workflow
 
-Present to user via AskUserQuestion:
-
-| Option | Description | Next Step |
-|--------|-------------|-----------|
-| Build as single task | Execute plan in one session | → Single Task Flow |
-| Break into small tasks | Decompose into 1-3 point tasks | → Task Breakdown Flow |
-| Create as single epic | Track as one backlog item | → Epic Flow |
-
-## 2. Single Task Flow
+### 1. Present Options
 
 ```
-Skill(skill: "majestic-engineer:workflows:build-task", args="{plan_path}")
+AskUserQuestion:
+  question: "Blueprint ready. How do you want to proceed?"
+  options:
+    - "Build as single task" → Step 2
+    - "Break into small tasks" → Step 3
+    - "Create as single epic" → Step 4
+```
+
+### 2. Single Task Flow
+
+Execute entire plan as one task:
+
+```
+/majestic:build-task "{plan_path}"
 ```
 
 **End workflow.**
 
-## 3. Task Breakdown Flow
+### 3. Task Breakdown Flow
+
+Decompose into small tasks:
 
 ```
 Task(majestic-engineer:plan:task-breakdown, prompt="Plan: {plan_path}")
 ```
 
-Agent appends to plan:
-```markdown
-## Implementation Tasks
+Then ask about task creation:
 
-| ID | Task | Points | Dependencies |
-|----|------|--------|--------------|
-| T1 | Setup auth middleware | 2 | - |
-| T2 | Create login endpoint | 2 | T1 |
-| T3 | Add session handling | 3 | T1 |
-
-### Parallelization Matrix
-- **Parallel Group 1:** T1
-- **Parallel Group 2:** T2, T3 (after T1)
+```
+AskUserQuestion:
+  question: "Tasks added to plan. Create in backlog?"
+  options:
+    - "Yes, create tasks" → Skill(skill: "backlog-manager") for each task
+    - "No, just the plan" → Step 5
 ```
 
-**Check auto-create config:**
-```
-/majestic:config blueprint.auto_create_task false
-```
+After tasks created, go to Step 5.
 
-- If `true` → Create tasks automatically
-- If `false` → Ask user confirmation
+### 4. Epic Flow
 
-## 4. Epic Flow
+Create single backlog item:
 
-Create single backlog item covering entire plan:
 ```
 Skill(skill: "backlog-manager")
 ```
 
-Update plan with task reference.
+Update plan with task reference, go to Step 5.
 
-## 5. Create Tasks
+### 5. Build Offering
 
-For each task in Implementation Tasks:
 ```
-Skill(skill: "backlog-manager")
-→ Collect returned task_id
-→ Update plan with reference
-```
-
-**Task ID formats by system:**
-
-| System | Format | Example |
-|--------|--------|---------|
-| GitHub Issues | `#{number}` | `#123` |
-| Linear | `{PROJECT}-{number}` | `PROJ-123` |
-| Beads | `BEADS-{number}` | `BEADS-123` |
-| File-based | `TODO-{number}` | `TODO-123` |
-
-## 6. Build Offering
-
-Present via AskUserQuestion:
-
-| Option | Action |
-|--------|--------|
-| Build all tasks now | Invoke run-blueprint |
-| Build with ralph (autonomous) | Display ralph command |
-| Done for now | End workflow |
-
-**Run-blueprint invocation:**
-```
-Skill(skill: "majestic-engineer:workflows:run-blueprint", args="{plan_path}")
-```
-
-**Ralph command to display:**
-```
-/ralph-loop "/majestic:run-blueprint {plan_path}" --max-iterations 50 --completion-promise "RUN_BLUEPRINT_COMPLETE"
+AskUserQuestion:
+  question: "Start building?"
+  options:
+    - "Build all tasks now" → /majestic:run-blueprint "{plan_path}"
+    - "Build with ralph" → /majestic-ralph:ralph-loop "/majestic:run-blueprint {plan_path}"
+    - "Done for now" → End workflow
 ```
 
 ## Output
 
 ```yaml
-execution_result:
-  execution_type: "single_task" | "breakdown" | "epic"
-  tasks_created:
-    - id: string
-      title: string
-      points: number
-  plan_updated: boolean
-  build_started: boolean
-  ralph_command: string | null  # If user chose ralph
+execution_type: "single_task" | "breakdown" | "epic"
+build_started: boolean
 ```
