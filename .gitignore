@@ -11,3 +11,4 @@ docs/audits/
 
 # Relay epic state (ephemeral)
 .majestic/
+docs/granularity-audit.md
