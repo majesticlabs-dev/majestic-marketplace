@@ -20,7 +20,7 @@ Do NOT use EnterPlanMode or ExitPlanMode tools.
 ### Phase 1: Discovery
 
 ```
-Skill(skill: "blueprint-discovery")
+/majestic-engineer:blueprint-discovery
 ```
 
 Handles: Interview decision, Acceptance Criteria, Feature Classification.
@@ -30,8 +30,7 @@ Handles: Interview decision, Acceptance Criteria, Feature Classification.
 ### Phase 2: Research
 
 ```
-Skill(skill: "blueprint-research")
-  Input: feature_description, discovery_result
+/majestic-engineer:blueprint-research feature_description, discovery_result
 ```
 
 Handles: Toolbox resolution, lessons discovery, parallel research agents, spec review.
@@ -65,7 +64,7 @@ If new patterns or decisions discovered:
 ### Phase 5: Write Plan
 
 ```
-Skill(skill: "plan-builder")
+/majestic-engineer:plan-builder
 ```
 
 Select template based on complexity:
@@ -123,8 +122,7 @@ Update plan with findings, return to Phase 7.
 ### Phase 8: Execution
 
 ```
-Skill(skill: "blueprint-execution")
-  Input: plan_path, user_choice
+/majestic-engineer:blueprint-execution plan_path, user_choice
 ```
 
 Handles: Task breakdown, task creation, build offering.
