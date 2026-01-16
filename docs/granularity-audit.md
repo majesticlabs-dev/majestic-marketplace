@@ -5,14 +5,14 @@
 
 ## Executive Summary
 
-| Category | Total | Issues Found | Compliance Rate |
-|----------|-------|--------------|-----------------|
-| **Commands** | 61 | 8 critical | 87% |
-| **Skills** | 168 | 15 critical | 91% |
-| **Agents** | 130 | 11 critical | 92% |
-| **Overall** | 359 | 34 critical | 91% |
+| Category | Total | Issues Found | Resolved | Compliance Rate |
+|----------|-------|--------------|----------|-----------------|
+| **Commands** | 61 | 8 critical | 1 | 88% |
+| **Skills** | 171 | 15 critical | 0 | 91% |
+| **Agents** | 130 | 11 critical | 0 | 92% |
+| **Overall** | 362 | 34 critical | 1 | 91% |
 
-**Key Finding:** The marketplace demonstrates strong granularity overall, but 34 components (9%) violate the "atomic primitives" principle by mixing unrelated concerns.
+**Key Finding:** The marketplace demonstrates strong granularity overall. Originally 34 components (9%) violated the "atomic primitives" principle. **1 resolved** (blueprint refactored into 3 skills).
 
 ---
 
@@ -20,22 +20,28 @@
 
 ### majestic-engineer (74 components)
 
-| Component | Type | Lines | Issue |
-|-----------|------|-------|-------|
-| `fix-reporter` | Skill | 498 | Mixes documentation capture with 8-option decision router |
-| `cloudflare-worker` | Skill | 165 | Covers 5 distinct Cloudflare services (Workers, Hono, KV, D1, R2, Durable Objects, Queues) |
-| `frontend-design` | Skill | 237 | Mixes design philosophy with 4 framework implementations (React, Vue, Rails, Hotwire) |
-| `blueprint` | Command | 425 | 11+ phases orchestrating discovery, research, planning, review, task creation |
-| `build-task` | Command | 235 | 9 sequential phases before delegating to workflow manager |
-| `prd` | Command | 107 | 5 distinct phases (questions, generate, review, expand, backlog) |
-| `test-create` | Agent | 227 | Duplicates test-reviewer's acceptance criteria validation |
-| `github-resolver` | Agent | 244 | Mixes CI failure resolution with PR comment resolution |
+| Component | Type | Lines | Issue | Status |
+|-----------|------|-------|-------|--------|
+| `fix-reporter` | Skill | 498 | Mixes documentation capture with 8-option decision router | Open |
+| `cloudflare-worker` | Skill | 165 | Covers 5 distinct Cloudflare services (Workers, Hono, KV, D1, R2, Durable Objects, Queues) | Open |
+| `frontend-design` | Skill | 237 | Mixes design philosophy with 4 framework implementations (React, Vue, Rails, Hotwire) | Open |
+| ~~`blueprint`~~ | Command | ~~425~~ 151 | ~~11+ phases~~ Refactored to thin orchestrator + 3 skills | **RESOLVED** |
+| `build-task` | Command | 235 | 9 sequential phases before delegating to workflow manager | Open |
+| `prd` | Command | 107 | 5 distinct phases (questions, generate, review, expand, backlog) | Open |
+| `test-create` | Agent | 227 | Duplicates test-reviewer's acceptance criteria validation | Open |
+| `github-resolver` | Agent | 244 | Mixes CI failure resolution with PR comment resolution | Open |
 
-**Recommendations:**
+**Resolved:**
+- ~~Split `blueprint` into discover, plan, review, build phases~~ **DONE** (PR #44)
+  - Created `blueprint-discovery` (78 lines)
+  - Created `blueprint-research` (75 lines)
+  - Created `blueprint-execution` (85 lines)
+  - Reduced `blueprint.md` from 425 → 151 lines
+
+**Remaining Recommendations:**
 - Split `fix-reporter` into capture + decision router
 - Split `cloudflare-worker` into 5 focused skills per service
 - Split `frontend-design` into design philosophy + framework-specific skills
-- Split `blueprint` into discover, plan, review, build phases
 - Remove AC verification from `test-create` (delegate to `test-reviewer`)
 - Split `github-resolver` into `ci-resolver` + `pr-comment-resolver`
 
@@ -255,11 +261,11 @@ Skills/agents that duplicate functionality in other components:
 
 ### Immediate (Breaking Architecture)
 
-| Priority | Plugin | Component | Action |
-|----------|--------|-----------|--------|
-| P0 | python | python-db | Split into 3 agents (exceeds limit) |
-| P0 | tools | new-skill | Refactor to agent + skills (443 lines) |
-| P0 | engineer | blueprint | Split into 3-4 focused commands |
+| Priority | Plugin | Component | Action | Status |
+|----------|--------|-----------|--------|--------|
+| P0 | python | python-db | Split into 3 agents (exceeds limit) | Open |
+| P0 | tools | new-skill | Refactor to agent + skills (443 lines) | Open |
+| ~~P0~~ | ~~engineer~~ | ~~blueprint~~ | ~~Split into 3-4 focused commands~~ | **DONE** (PR #44) |
 
 ### High (Significant Scope Creep)
 
