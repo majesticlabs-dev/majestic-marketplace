@@ -69,24 +69,18 @@ tags: [n-plus-one, eager-loading, performance]
 
 ## Category Mapping
 
-Based on `problem_type`, documentation is filed in `lessons_path` (default: `.claude/lessons/`):
+Based on `problem_type`, documentation is filed in `.agent-os/lessons/`:
 
-- **build_error** → `{lessons_path}/build-errors/`
-- **test_failure** → `{lessons_path}/test-failures/`
-- **runtime_error** → `{lessons_path}/runtime-errors/`
-- **performance_issue** → `{lessons_path}/performance-issues/`
-- **database_issue** → `{lessons_path}/database-issues/`
-- **security_issue** → `{lessons_path}/security-issues/`
-- **ui_bug** → `{lessons_path}/ui-bugs/`
-- **integration_issue** → `{lessons_path}/integration-issues/`
-- **logic_error** → `{lessons_path}/logic-errors/`
-- **developer_experience** → `{lessons_path}/developer-experience/`
-- **workflow_issue** → `{lessons_path}/workflow-issues/`
-- **best_practice** → `{lessons_path}/best-practices/`
-- **documentation_gap** → `{lessons_path}/documentation-gaps/`
-
-**Configuration:**
-```bash
-# Read lessons_path from config (default: .claude/lessons/)
-LESSONS_PATH=$(claude -p "/majestic:config lessons_path .claude/lessons/")
-```
+- **build_error** → `.agent-os/lessons/build-errors/`
+- **test_failure** → `.agent-os/lessons/test-failures/`
+- **runtime_error** → `.agent-os/lessons/runtime-errors/`
+- **performance_issue** → `.agent-os/lessons/performance-issues/`
+- **database_issue** → `.agent-os/lessons/database-issues/`
+- **security_issue** → `.agent-os/lessons/security-issues/`
+- **ui_bug** → `.agent-os/lessons/ui-bugs/`
+- **integration_issue** → `.agent-os/lessons/integration-issues/`
+- **logic_error** → `.agent-os/lessons/logic-errors/`
+- **developer_experience** → `.agent-os/lessons/developer-experience/`
+- **workflow_issue** → `.agent-os/lessons/workflow-issues/`
+- **best_practice** → `.agent-os/lessons/best-practices/`
+- **documentation_gap** → `.agent-os/lessons/documentation-gaps/`
