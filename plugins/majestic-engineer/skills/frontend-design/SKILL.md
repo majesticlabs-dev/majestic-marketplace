@@ -205,6 +205,15 @@ See [resources/landing-page-design.md](resources/landing-page-design.md) for:
 - Single-file HTML implementation patterns
 - Complements `landing-page-builder` skill (copy) with visual guidance
 
+### Web Interface Standards
+
+See [resources/web-interface-standards.md](resources/web-interface-standards.md) for:
+- Keyboard operability requirements (WAI-ARIA widget patterns)
+- Touch target sizing (44px mobile, 24px desktop)
+- Form behavior (Enter submission, autocomplete, mobile keyboards)
+- Animation accessibility (`prefers-reduced-motion`)
+- Network performance budgets (POST < 500ms, virtualization thresholds)
+
 ## Anti-Patterns
 
 | Category | Avoid |
