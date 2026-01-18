@@ -70,6 +70,7 @@ Map shorthand names to full agent paths:
 | `react-reviewer` | `majestic-react:review:react-reviewer` |
 | `codex-reviewer` | `majestic-llm:codex-reviewer` |
 | `gemini-reviewer` | `majestic-llm:gemini-reviewer` |
+| `ui-code-auditor` | `majestic-engineer:qa:ui-code-auditor` |
 
 If a name already contains `:`, use it as-is. Unknown names should be logged as warnings and skipped.
 
