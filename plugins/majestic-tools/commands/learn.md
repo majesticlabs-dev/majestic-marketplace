@@ -10,7 +10,7 @@ Extract patterns from git history, PRs, and handoffs to create durable artifacts
 
 **For single-session reflection, use `/reflect` instead.**
 
-**Reference**: Use methodology from `compound-learnings` skill.
+**Methodology:** Use `compound-learnings` skill for frequency thresholds and artifact categorization logic.
 
 ## Data Sources
 
@@ -52,49 +52,14 @@ ls "$HANDOFF_DIR"/*.md 2>/dev/null && cat "$HANDOFF_DIR"/*.md
 grep -A 50 "Key Learnings" CLAUDE.md 2>/dev/null
 ```
 
-### Step 3: Consolidate Similar Patterns
+### Step 3: Analyze Patterns
 
-Before counting, normalize patterns:
-- "Always validate X" + "Validate X before Y" → "Validate X"
-- "Don't use Z" + "Avoid Z" → "Avoid Z"
+Apply `compound-learnings` skill methodology:
+1. Consolidate similar patterns by semantic meaning
+2. Apply frequency thresholds (skip 1x, note 2x, recommend 3+, strong recommend 4+)
+3. Categorize into artifact types using the decision tree
 
-Group by semantic meaning, not exact wording.
-
-### Step 4: Apply Frequency Thresholds
-
-| Count | Action |
-|-------|--------|
-| 1 | Skip (noise) |
-| 2 | Note (emerging pattern) |
-| 3+ | Recommend artifact |
-| 4+ | Strong recommend |
-
-### Step 5: Categorize Artifacts
-
-Use this decision tree:
-
-```
-Is it a sequential workflow with distinct phases?
-  YES → COMMAND (user-invoked) or AGENT (autonomous)
-  NO ↓
-
-Should it trigger on file/context patterns?
-  YES → SKILL (probabilistic)
-    Is enforcement critical?
-      YES → HOOK (deterministic)
-  NO ↓
-
-Is it a simple rule or convention?
-  YES → RULE
-    Project-specific? → review-topics.md
-    Universal? → CLAUDE.md
-  NO ↓
-
-Does it enhance existing agent behavior?
-  YES → AGENT UPDATE
-```
-
-### Step 6: Present Findings
+### Step 4: Present Findings
 
 ```markdown
 ## Compound Learnings Analysis
@@ -122,55 +87,13 @@ Does it enhance existing agent behavior?
    - Draft content: ...
 ```
 
-### Step 7: Create Artifacts
+### Step 5: Create Artifacts
 
 Use `AskUserQuestion` to confirm each recommendation:
 - "Create these artifacts?"
 
-If approved:
+If approved, create using appropriate tools:
 - **Rules** → Edit CLAUDE.md or review-topics.md
 - **Skills** → Create in appropriate plugin's skills directory
 - **Hooks** → Create in .claude/hooks/
 - **Commands** → Create in appropriate plugin's commands directory
-
-## Quality Checks
-
-Before recommending, verify:
-- [ ] **Generality**: Applies beyond specific incidents
-- [ ] **Specificity**: Concrete enough to act on
-- [ ] **Uniqueness**: Doesn't duplicate existing rules/skills
-- [ ] **Correct Type**: Matches categorization logic
-
-## Example Output
-
-```
-## Compound Learnings Analysis
-
-**Sources scanned:**
-- Git commits: 87
-- PRs: 12
-- Handoffs: 5
-
-### Strong Signal (4+ occurrences)
-
-| Pattern | Count | Artifact | Rationale |
-|---------|-------|----------|-----------|
-| Always run tests before commit | 6 | Hook | Enforcement needed |
-| Use kebab-case for filenames | 4 | Rule | Simple convention |
-
-### Emerging Patterns (2-3 occurrences)
-
-| Pattern | Count | Potential | Notes |
-|---------|-------|-----------|-------|
-| Prefer composition over inheritance | 2 | Skill | Watch for recurrence |
-
-### Recommended Actions
-
-1. **Hook**: `pre-commit-tests`
-   - Run `bin/rails test` before allowing commit
-
-2. **Rule** → CLAUDE.md:
-   - "Use kebab-case for all file names"
-
-Create these artifacts?
-```

@@ -52,6 +52,8 @@ See [resources/templates.md](resources/templates.md) for detailed architecture d
 - **Competitor**: [competitor name], [competitor] pricing
 - **Research/TOFU**: what is [category], how to [solve problem]
 
+**For detailed BOFU keyword generation, use `bofu-keywords` skill.**
+
 **Match type strategy (2026):**
 
 Google has broadened match behaviors—exact match now triggers close variants and related terms, phrase match overlaps heavily with broad.
