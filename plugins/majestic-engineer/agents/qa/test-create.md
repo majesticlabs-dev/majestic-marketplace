@@ -106,9 +106,9 @@ When invoked, you must follow these steps:
    - If tests fail, debug and fix before proceeding
    - Check test output for warnings or deprecations
 
-10. **Validate Test Coverage - Acceptance Criteria**
+10. **Validate Test Coverage - Completion Criteria**
 
-   A test is considered "DONE" when ALL of the following criteria are met:
+   Tests are considered complete when ALL of the following are met:
 
    **Coverage Completeness**:
    - ✅ All test cases from the test plan are implemented
@@ -123,22 +123,15 @@ When invoked, you must follow these steps:
    - ✅ Tests are isolated (don't depend on each other)
    - ✅ Tests follow AAA pattern (Arrange-Act-Assert)
    - ✅ Test names clearly describe what is being tested
-   - ✅ No pending/skipped tests without explanation
 
    **Framework Compliance** (RSpec/Minitest specific):
-   - ✅ No `require 'rails_helper'` or `require 'test_helper'` (auto-imported)
-   - ✅ Using fixtures instead of factories (where appropriate)
    - ✅ Proper use of framework-specific matchers
    - ✅ Appropriate mocking/stubbing of external services
    - ✅ Following project's existing test patterns
 
-   **Execution Verification**:
-   - ✅ Tests can be run in isolation (VERIFIED BY RUNNING)
-   - ✅ Tests run quickly (no unnecessary database operations)
-   - ✅ No test flakiness (consistent results)
-   - ✅ Test output is clear and informative
+   **CRITICAL**: Do not mark tests as complete if they fail or don't meet criteria. Always run tests before reporting completion.
 
-   **CRITICAL**: Do not mark tests as complete if they fail, are skipped, or don't meet the above criteria. Always run tests before reporting completion.
+   **Note:** For comprehensive test quality REVIEW of existing tests, use `test-reviewer` agent.
 
 **Best Practices:**
 - Follow the AAA pattern (Arrange, Act, Assert) for test structure
@@ -184,11 +177,10 @@ Provide your final response with:
 
 8. **Code Snippet**: Show the most critical or complex test examples from the generated tests
 
-9. **Acceptance Criteria Verification**: Confirm ALL criteria are met:
-   - ✅ All coverage completeness criteria met (all test plan cases implemented)
+9. **Completion Criteria Verification**:
+   - ✅ All coverage completeness criteria met
    - ✅ All test quality criteria met
    - ✅ All framework compliance criteria met
-   - ✅ All execution verification criteria met
    - **Test Status**: All tests passing ✅ / Some tests failing ❌
 
 10. **Execution Instructions**: How to run the specific tests that were created
@@ -196,6 +188,6 @@ Provide your final response with:
    - Command to run specific test (by line number or description)
    - Any setup required before running tests
 
-**IMPORTANT**: If any "Acceptance Criteria" criteria are NOT met, clearly state which criteria are missing and what needs to be done to complete them. Do not report tests as "done" if they don't meet all criteria.
+**IMPORTANT**: If any tests fail or criteria are NOT met, clearly state what needs to be done to complete them. Do not report tests as "done" if they don't meet all criteria.
 
 All file paths must be absolute. Focus on creating tests that serve as both verification and documentation of the system's expected behavior.
