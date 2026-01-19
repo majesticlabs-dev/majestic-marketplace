@@ -1,0 +1,129 @@
+# Schema.org JSON-LD Templates
+
+organization:
+  template: |
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "{{company_name}}",
+      "url": "{{website_url}}",
+      "logo": "{{logo_url}}",
+      "description": "{{company_description}}",
+      "sameAs": [
+        "{{linkedin_url}}",
+        "{{twitter_url}}"
+      ],
+      "founder": {
+        "@type": "Person",
+        "name": "{{founder_name}}"
+      },
+      "foundingDate": "{{founding_year}}"
+    }
+
+faq_page:
+  template: |
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "{{question_text}}",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "{{answer_text}}"
+          }
+        }
+      ]
+    }
+  notes:
+    - Each Q&A pair is a separate Question entity
+    - Answers should be concise and factual
+    - Avoid promotional language in answers
+
+how_to:
+  template: |
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "{{title}}",
+      "description": "{{description}}",
+      "totalTime": "{{duration}}",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "name": "{{step_title}}",
+          "text": "{{step_description}}",
+          "image": "{{step_image_url}}"
+        }
+      ]
+    }
+  notes:
+    - Include images for each step when possible
+    - totalTime in ISO 8601 format (PT30M = 30 minutes)
+
+article:
+  template: |
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "{{title}}",
+      "description": "{{description}}",
+      "author": {
+        "@type": "Person",
+        "name": "{{author_name}}",
+        "url": "{{author_url}}"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "{{publisher_name}}",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "{{logo_url}}"
+        }
+      },
+      "datePublished": "{{publish_date}}",
+      "dateModified": "{{modified_date}}",
+      "image": "{{featured_image_url}}"
+    }
+
+product:
+  template: |
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "{{product_name}}",
+      "description": "{{description}}",
+      "image": "{{image_url}}",
+      "brand": {
+        "@type": "Brand",
+        "name": "{{brand_name}}"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "{{price}}",
+        "priceCurrency": "{{currency}}",
+        "availability": "https://schema.org/InStock"
+      }
+    }
+
+breadcrumb:
+  template: |
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "{{base_url}}"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "{{category}}",
+          "item": "{{category_url}}"
+        }
+      ]
+    }

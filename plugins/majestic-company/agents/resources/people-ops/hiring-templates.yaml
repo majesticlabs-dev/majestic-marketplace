@@ -1,0 +1,71 @@
+# Hiring Templates
+
+job_description:
+  sections:
+    - About the Role
+    - What You'll Do (90-day outcomes)
+    - What We're Looking For (competencies)
+    - Must-Have vs Nice-to-Have
+    - Compensation & Benefits
+    - Equal Opportunity Statement
+  template: |
+    # {{RoleTitle}} at {{CompanyName}}
+
+    ## About the Role
+    {{mission_statement}}
+
+    ## What You'll Do (First 90 Days)
+    - {{outcome_1}}
+    - {{outcome_2}}
+    - {{outcome_3}}
+
+    ## What We're Looking For
+    ### Must-Have
+    - {{must_have_1}}
+    - {{must_have_2}}
+
+    ### Nice-to-Have
+    - {{nice_to_have_1}}
+
+    ## Compensation
+    {{pay_band}} + {{benefits_summary}}
+
+    {{CompanyName}} is an equal opportunity employer.
+
+structured_interview_kit:
+  question_types:
+    behavioral: "Tell me about a time when..."
+    situational: "What would you do if..."
+    technical: "How would you approach..."
+
+  rubric_anchors:
+    5: "Exceptional - exceeds all criteria with clear examples"
+    4: "Strong - meets all criteria with solid examples"
+    3: "Competent - meets most criteria"
+    2: "Developing - meets some criteria, gaps in others"
+    1: "Does not meet - significant gaps in criteria"
+
+  scorecard: |
+    | Competency | Weight | Score (1-5) | Notes |
+    |------------|--------|-------------|-------|
+    | {{competency_1}} | {{weight}} | | |
+    | {{competency_2}} | {{weight}} | | |
+
+candidate_comms:
+  outreach: |
+    Subject: {{RoleTitle}} opportunity at {{CompanyName}}
+
+    Hi {{CandidateName}},
+
+    I came across your profile and was impressed by your experience in {{relevant_area}}.
+    We're hiring a {{RoleTitle}} and I think you could be a great fit.
+
+    Would you be open to a quick conversation?
+
+  rejection: |
+    Hi {{CandidateName}},
+
+    Thank you for taking the time to interview for the {{RoleTitle}} position.
+    After careful consideration, we've decided to move forward with another candidate.
+
+    We were impressed by {{positive_note}} and encourage you to apply for future roles.
