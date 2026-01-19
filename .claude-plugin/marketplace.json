@@ -373,30 +373,6 @@
       "source": "./plugins/majestic-devops"
     },
     {
-      "name": "majestic-browser",
-      "description": "Real browser automation via CDP. Control Chrome, Brave, or Edge with your actual profile and cookies - undetectable by bot detection. Includes 1 skill.",
-      "version": "1.0.0",
-      "author": {
-        "name": "David Paluy",
-        "url": "https://github.com/dpaluy",
-        "email": "marketplace@it.majesticlabs.dev"
-      },
-      "homepage": "https://github.com/majesticlabs-dev/majestic-marketplace/tree/master/plugins/majestic-browser",
-      "tags": [
-        "browser",
-        "automation",
-        "cdp",
-        "chrome",
-        "brave",
-        "edge",
-        "scraping",
-        "stealth",
-        "bot-detection",
-        "real-browser"
-      ],
-      "source": "./plugins/majestic-browser"
-    },
-    {
       "name": "majestic-creative",
       "description": "AI-powered creative tools for image generation, editing, and visual content creation. Includes 1 command and 1 agent for Gemini image generation.",
       "version": "1.3.0",
