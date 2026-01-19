@@ -6,9 +6,7 @@ allowed-tools: Read, Write, Edit, Grep, Glob, Bash
 
 # Wrangler Coder
 
-## Overview
-
-Wrangler is Cloudflare's official CLI for Workers, Pages, D1, R2, KV, Queues, and AI. This skill covers Wrangler configuration patterns and deployment workflows.
+Wrangler is Cloudflare's official CLI for Workers, Pages, D1, R2, KV, Queues, and AI.
 
 ## Installation
 
@@ -91,24 +89,6 @@ routes = [
   { pattern = "api.example.com/*", zone_name = "example.com" },
   { pattern = "example.com/api/*", zone_name = "example.com" }
 ]
-
-# Or single route
-# route = { pattern = "api.example.com/*", zone_name = "example.com" }
-```
-
-### Worker with Custom Domain
-
-```toml
-name = "my-worker"
-main = "src/index.ts"
-compatibility_date = "2024-12-01"
-account_id = "your-account-id"
-
-# Custom domains (requires DNS to be on Cloudflare)
-[env.production]
-routes = [
-  { pattern = "api.example.com", custom_domain = true }
-]
 ```
 
 ### Multi-Environment Configuration
@@ -139,132 +119,17 @@ routes = [
 vars = { ENVIRONMENT = "production" }
 ```
 
-## KV Namespaces
+## Cloudflare Products
 
-### Configuration
-
-```toml
-name = "my-worker"
-main = "src/index.ts"
-compatibility_date = "2024-12-01"
-
-# KV namespace bindings
-[[kv_namespaces]]
-binding = "CACHE"
-id = "your-kv-namespace-id"
-preview_id = "your-preview-kv-namespace-id"  # For wrangler dev
-
-[[kv_namespaces]]
-binding = "SESSIONS"
-id = "another-namespace-id"
-```
-
-### CLI Commands
-
-```bash
-# Create namespace
-wrangler kv:namespace create CACHE
-wrangler kv:namespace create CACHE --preview  # For development
-
-# List namespaces
-wrangler kv:namespace list
-
-# Put/Get/Delete values
-wrangler kv:key put --namespace-id=xxx "my-key" "my-value"
-wrangler kv:key get --namespace-id=xxx "my-key"
-wrangler kv:key delete --namespace-id=xxx "my-key"
-
-# Bulk operations
-wrangler kv:bulk put --namespace-id=xxx ./data.json
-wrangler kv:bulk delete --namespace-id=xxx ./keys.json
-```
-
-### Usage in Worker
-
-```typescript
-export interface Env {
-  CACHE: KVNamespace;
-  SESSIONS: KVNamespace;
-}
-
-export default {
-  async fetch(request: Request, env: Env): Promise<Response> {
-    // Get value
-    const cached = await env.CACHE.get("key");
-
-    // Get with metadata
-    const { value, metadata } = await env.CACHE.getWithMetadata("key");
-
-    // Put value with expiration
-    await env.CACHE.put("key", "value", {
-      expirationTtl: 3600,  // 1 hour
-      metadata: { version: 1 }
-    });
-
-    // List keys
-    const keys = await env.CACHE.list({ prefix: "user:" });
-
-    // Delete
-    await env.CACHE.delete("key");
-
-    return new Response("OK");
-  }
-};
-```
-
-## D1 Database & R2 Storage
-
-See [resources/d1-r2.md](resources/d1-r2.md) for D1 database (migrations, queries, batch operations) and R2 object storage (upload, download, delete) configuration and usage.
-
-## Queues & Durable Objects
-
-See [resources/queues-durable-objects.md](resources/queues-durable-objects.md) for Queues (producers, consumers, dead letter queues) and Durable Objects (stateful edge storage) configuration and usage.
-
-## Workers AI
-
-### Configuration
-
-```toml
-name = "my-worker"
-main = "src/index.ts"
-compatibility_date = "2024-12-01"
-
-[ai]
-binding = "AI"
-```
-
-### Usage
-
-```typescript
-export interface Env {
-  AI: Ai;
-}
-
-export default {
-  async fetch(request: Request, env: Env): Promise<Response> {
-    // Text generation
-    const response = await env.AI.run("@cf/meta/llama-2-7b-chat-int8", {
-      prompt: "What is Cloudflare Workers?",
-    });
-
-    // Image generation
-    const image = await env.AI.run("@cf/stabilityai/stable-diffusion-xl-base-1.0", {
-      prompt: "A cat wearing sunglasses",
-    });
-
-    // Text embeddings
-    const embeddings = await env.AI.run("@cf/baai/bge-base-en-v1.5", {
-      text: ["Hello world", "Goodbye world"],
-    });
-
-    return Response.json(response);
-  }
-};
-```
+| Product | Resource |
+|---------|----------|
+| KV Namespaces | [resources/kv-namespaces.md](resources/kv-namespaces.md) |
+| D1 Database & R2 Storage | [resources/d1-r2.md](resources/d1-r2.md) |
+| Queues & Durable Objects | [resources/queues-durable-objects.md](resources/queues-durable-objects.md) |
+| Workers AI | [resources/workers-ai.md](resources/workers-ai.md) |
+| Cloudflare Pages | [resources/pages.md](resources/pages.md) |
 
 ## Secrets Management
-
-### CLI Commands
 
 ```bash
 # Add secret
@@ -285,8 +150,6 @@ wrangler secret delete API_KEY
 # API_KEY=xxx
 # DB_PASSWORD=yyy
 ```
-
-### Usage
 
 ```typescript
 export interface Env {
@@ -372,68 +235,6 @@ wrangler versions list
 
 # Rollback to previous version
 wrangler rollback
-```
-
-## Cloudflare Pages
-
-### Configuration (wrangler.toml for Functions)
-
-```toml
-name = "my-site"
-compatibility_date = "2024-12-01"
-pages_build_output_dir = "./dist"
-
-[[kv_namespaces]]
-binding = "CACHE"
-id = "your-namespace-id"
-
-[[d1_databases]]
-binding = "DB"
-database_name = "my-database"
-database_id = "your-database-id"
-```
-
-### CLI Commands
-
-```bash
-# Create Pages project
-wrangler pages project create my-site
-
-# Deploy
-wrangler pages deploy ./dist
-
-# Deploy to specific branch/environment
-wrangler pages deploy ./dist --branch main
-wrangler pages deploy ./dist --branch staging
-
-# List deployments
-wrangler pages deployment list --project-name my-site
-
-# Tail logs
-wrangler pages deployment tail --project-name my-site
-```
-
-### Pages Functions
-
-```
-project/
-├── functions/
-│   ├── api/
-│   │   └── [[route]].ts  # Catch-all: /api/*
-│   ├── hello.ts          # /hello
-│   └── _middleware.ts    # Middleware for all routes
-├── public/
-└── wrangler.toml
-```
-
-```typescript
-// functions/api/[[route]].ts
-export const onRequest: PagesFunction<Env> = async (context) => {
-  const { request, env, params } = context;
-  const route = params.route;  // Array of path segments
-
-  return Response.json({ route });
-};
 ```
 
 ## Complete Worker Example
