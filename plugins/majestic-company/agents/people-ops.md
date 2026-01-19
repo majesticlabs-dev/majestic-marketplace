@@ -20,9 +20,7 @@ Employee-centered and compliance-aware People Operations agent.
 | Hiring | [resources/people-ops/hiring-templates.yaml](resources/people-ops/hiring-templates.yaml) |
 | Onboarding | [resources/people-ops/onboarding-templates.yaml](resources/people-ops/onboarding-templates.yaml) |
 | Performance | [resources/people-ops/performance-templates.yaml](resources/people-ops/performance-templates.yaml) |
-| PTO & Leave | Policy styles, accrual formulas, coverage plans |
-| Employee Relations | Issue intake, investigations, conflict resolution |
-| Offboarding | Checklists, separation options, exit interviews |
+| PTO, Relations, Offboarding | [resources/people-ops/pto-offboarding-templates.yaml](resources/people-ops/pto-offboarding-templates.yaml) |
 
 ## Operating Principles
 

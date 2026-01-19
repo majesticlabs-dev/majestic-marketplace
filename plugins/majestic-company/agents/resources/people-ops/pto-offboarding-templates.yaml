@@ -1,0 +1,226 @@
+# PTO, Employee Relations & Offboarding Templates
+
+pto_policies:
+  styles:
+    - name: Traditional Accrual
+      description: "Earn PTO based on tenure/hours worked"
+      accrual_formula: "{{hours_per_year}} / 12 months or {{hours_per_year}} / 26 pay periods"
+      carryover: "Cap at {{max_carryover}} hours or use-it-or-lose-it"
+
+    - name: Unlimited PTO
+      description: "No set limit; manager approval required"
+      guardrails:
+        - "Minimum usage requirement (e.g., 15 days/year)"
+        - "Blackout periods for critical business times"
+        - "Manager approval with 2-week notice for 5+ consecutive days"
+
+    - name: PTO Bank
+      description: "Single bucket for all time off (vacation, sick, personal)"
+      typical_allocations:
+        entry_level: "15-20 days"
+        mid_level: "20-25 days"
+        senior: "25-30 days"
+
+  leave_types:
+    - type: Sick Leave
+      considerations: "State mandates (CA, NY, etc.), documentation requirements"
+    - type: Parental Leave
+      considerations: "FMLA, state laws, paid vs unpaid, return-to-work transition"
+    - type: Bereavement
+      considerations: "Relationship tiers, typical 3-5 days"
+    - type: Jury Duty
+      considerations: "Pay continuation, documentation"
+    - type: Military Leave
+      considerations: "USERRA compliance, differential pay policies"
+
+  coverage_plans:
+    template: |
+      ## PTO Coverage Plan
+
+      **Employee**: {{name}}
+      **Dates**: {{start_date}} to {{end_date}}
+
+      ### Coverage Assignments
+      | Responsibility | Backup | Notes |
+      |---------------|--------|-------|
+      | {{task_1}} | {{backup_1}} | {{notes_1}} |
+
+      ### Emergency Contact
+      - Phone: {{phone}} (urgent only)
+      - Escalation: Contact {{manager}} first
+
+employee_relations:
+  issue_intake:
+    template: |
+      ## Employee Relations Issue Intake
+
+      **Date Reported**: {{date}}
+      **Reporter**: {{reporter_name}} ({{relationship_to_issue}})
+      **Confidentiality Level**: {{confidential|standard}}
+
+      ### Issue Summary
+      {{description}}
+
+      ### Parties Involved
+      | Name | Role | Department |
+      |------|------|------------|
+      | {{name}} | {{role}} | {{dept}} |
+
+      ### Urgency Assessment
+      - [ ] Immediate safety concern
+      - [ ] Legal/compliance risk
+      - [ ] Performance impact
+      - [ ] Workplace culture issue
+
+      ### Next Steps
+      1. {{action_1}} - Owner: {{owner}} - Due: {{date}}
+
+  investigation_framework:
+    steps:
+      - step: 1. Plan Investigation
+        actions:
+          - "Define scope and allegations"
+          - "Identify witnesses and evidence"
+          - "Set timeline (typically 5-10 business days)"
+          - "Assign investigator (neutral party, HR or external)"
+
+      - step: 2. Gather Evidence
+        actions:
+          - "Document review (emails, chat logs, policies)"
+          - "Witness interviews (confidential, documented)"
+          - "Physical evidence if applicable"
+
+      - step: 3. Interview Parties
+        actions:
+          - "Prepare structured questions"
+          - "Allow representation if required/requested"
+          - "Document verbatim responses"
+          - "No leading questions or presumption of guilt"
+
+      - step: 4. Analyze & Conclude
+        actions:
+          - "Weigh credibility of accounts"
+          - "Apply preponderance of evidence standard"
+          - "Document findings objectively"
+
+      - step: 5. Take Action
+        actions:
+          - "Determine appropriate response"
+          - "Communicate to relevant parties"
+          - "Implement corrective actions"
+          - "Follow up to prevent recurrence"
+
+  conflict_resolution:
+    approaches:
+      - name: Direct Conversation
+        when: "Minor disagreements, communication issues"
+        script: "I've noticed {{observation}}. Can we discuss how to work through this together?"
+
+      - name: Mediated Discussion
+        when: "Interpersonal conflict affecting work, impasse"
+        structure:
+          - "Ground rules (respect, confidentiality, no interrupting)"
+          - "Each party shares perspective uninterrupted"
+          - "Identify common ground and interests"
+          - "Brainstorm solutions together"
+          - "Agree on specific next steps"
+
+      - name: Formal Escalation
+        when: "Policy violations, harassment, repeated issues"
+        path: "Document → HR intake → Investigation → Resolution"
+
+offboarding:
+  checklists:
+    voluntary_resignation:
+      - category: Immediate (Day 0-1)
+        items:
+          - "Accept resignation in writing"
+          - "Determine last day (notice period)"
+          - "Notify IT, Security, Payroll, Benefits"
+          - "Schedule exit interview"
+
+      - category: Knowledge Transfer (Days 1-10)
+        items:
+          - "Identify critical knowledge and projects"
+          - "Assign transition owner for each area"
+          - "Document processes, passwords, contacts"
+          - "Introduce replacements to stakeholders"
+
+      - category: Final Week
+        items:
+          - "Conduct exit interview"
+          - "Collect company property (laptop, badge, keys)"
+          - "Revoke system access (schedule for last day EOD)"
+          - "Process final paycheck with accrued PTO"
+          - "Provide COBRA/benefits continuation info"
+          - "Obtain forwarding address for W-2/tax docs"
+
+    involuntary_termination:
+      - category: Pre-Termination
+        items:
+          - "Review documentation trail (PIPs, warnings)"
+          - "Consult legal counsel if high-risk"
+          - "Prepare separation agreement if applicable"
+          - "Schedule termination meeting (private, witness present)"
+
+      - category: Termination Meeting
+        items:
+          - "Be direct, brief, and respectful"
+          - "State decision clearly (not negotiable)"
+          - "Explain final pay, benefits, severance"
+          - "Collect property immediately"
+          - "Escort from building if necessary"
+
+      - category: Post-Termination
+        items:
+          - "Disable all access immediately"
+          - "Notify team appropriately (privacy-conscious)"
+          - "Process final pay per state law"
+          - "Send separation documents"
+
+  separation_options:
+    severance:
+      typical_formula: "1-2 weeks per year of service"
+      considerations:
+        - "Require signed release of claims"
+        - "Allow 21-45 days to consider (OWBPA for 40+)"
+        - "7-day revocation period"
+
+    garden_leave:
+      description: "Paid notice period where employee doesn't work"
+      when: "Sensitive roles, competitive concerns"
+
+    resignation_in_lieu:
+      description: "Allow resignation instead of termination"
+      when: "Performance issues, mutual agreement to part ways"
+
+  exit_interview:
+    template: |
+      ## Exit Interview Questions
+
+      **Employee**: {{name}}
+      **Last Day**: {{date}}
+      **Tenure**: {{years_months}}
+      **Interviewer**: {{hr_name}}
+
+      ### Departure Reason
+      1. What prompted your decision to leave?
+      2. Was there anything we could have done to retain you?
+
+      ### Role Experience
+      3. Did you have the resources and training needed to succeed?
+      4. How would you describe your relationship with your manager?
+      5. Did you receive regular, useful feedback?
+
+      ### Culture & Environment
+      6. How would you describe the company culture?
+      7. Did you feel valued and recognized for your contributions?
+      8. Were there any concerns you didn't feel comfortable raising?
+
+      ### Recommendations
+      9. What could we improve for future employees in your role?
+      10. Would you consider returning to the company in the future?
+      11. Would you recommend us as an employer? Why or why not?
+
+      ### Notes
+      {{notes}}
