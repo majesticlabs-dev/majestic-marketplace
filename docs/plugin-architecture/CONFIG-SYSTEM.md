@@ -15,7 +15,7 @@ The config file has **core fields** plus **stack-specific fields** based on tech
 | 1.6 | Added `owner.level` for experience-based skill tailoring |
 | 1.5 | Added `lessons_path` for learnings discovery, deprecated `review_topics_path` |
 | 1.4 | Multi-stack `tech_stack` (array support), built-in toolbox presets |
-| 1.3 | Added `commit.pre_prompt`, `commit.post_prompt` for LLM-based commit hooks |
+| 1.3 | (removed - commit hooks deprecated in favor of git native hooks) |
 | 1.2 | Moved `auto_create_task` under `plan:` namespace |
 | 1.1 | Added `workflow_labels`, `workspace_setup.post_create` |
 | 1.0 | Initial release |
@@ -134,11 +134,6 @@ lessons_path: .claude/lessons/
 # workspace_setup:
 #   post_create: bin/setup-worktree
 
-# Commit hooks (LLM prompts)
-# commit:
-#   pre_prompt: "Check staged files for console.log, binding.pry, and TODO comments"
-#   post_prompt: "If this is a feature/fix commit, suggest a CHANGELOG.md update"
-
 # Auto-preview markdown files (plans, PRDs, briefs, handoffs)
 auto_preview: true
 
@@ -223,8 +218,6 @@ plan:
 | `session.ledger` | Enable session state checkpointing to file | `true` \| `false` | `false` |
 | `session.ledger_path` | Path to session ledger file | file path | `.session_ledger.md` |
 | `workspace_setup.post_create` | Script to run after creating workspace | script path | (none) |
-| `commit.pre_prompt` | LLM prompt to execute before committing | text | (none) |
-| `commit.post_prompt` | LLM prompt to execute after successful commit | text | (none) |
 
 ### Rails-Specific Fields
 
