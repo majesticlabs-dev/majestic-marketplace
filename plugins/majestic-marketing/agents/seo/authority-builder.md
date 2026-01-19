@@ -14,13 +14,15 @@ Analyze and improve authority signals using specialized skills.
 | `eeat-analyzer` | E-E-A-T signal audit and improvement |
 | `topical-authority` | Coverage mapping and gap analysis |
 | `behavioral-seo` | CTR, dwell time, engagement optimization |
+| `press-release-aeo` | PR framing for AI citation and authority |
 
 ## Workflow
 
 1. **Audit** - Apply `eeat-analyzer` for current score
 2. **Map** - Apply `topical-authority` for coverage gaps
 3. **Optimize** - Apply `behavioral-seo` for engagement
-4. **Plan** - Create prioritized improvement roadmap
+4. **Amplify** - Apply `press-release-aeo` for PR strategy (if applicable)
+5. **Plan** - Create prioritized improvement roadmap
 
 ## Output Format
 
