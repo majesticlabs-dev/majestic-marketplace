@@ -1,0 +1,58 @@
+# Sales Process Map & Deal Stages
+
+stages:
+  - name: Qualify
+    entry_criteria: Lead responds
+    exit_criteria: BANT confirmed
+    target_conversion: 40-50%
+    probability: 10%
+    key_criteria: Fits ICP, agreed to discovery
+
+  - name: Discovery
+    entry_criteria: Meeting booked
+    exit_criteria: Pain + timeline
+    target_conversion: 60-70%
+    probability: 25%
+    key_criteria: Pain quantified, BANT >10, demo scheduled
+
+  - name: Demo
+    entry_criteria: Discovery complete
+    exit_criteria: Champion identified
+    target_conversion: 50-60%
+    probability: 50%
+    key_criteria: Stakeholders attended, technical fit confirmed
+
+  - name: Proposal
+    entry_criteria: Demo complete
+    exit_criteria: Proposal reviewed
+    target_conversion: 30-40%
+    probability: 75%
+    key_criteria: Proposal reviewed, legal engaged
+
+  - name: Negotiation
+    probability: 90%
+    key_criteria: Redlines received, close date confirmed
+
+  - name: Closed Won
+    probability: 100%
+    key_criteria: Signature + payment terms confirmed
+
+stakeholder_mapping:
+  template:
+    columns: [Name, Title, Role, Influence, Support, Concern, Message]
+  roles:
+    - role: Economic Buyer
+      example_title: CEO
+      influence: 10
+      sample_message: "This delivers [X] return in [Y] months"
+    - role: Blocker
+      example_title: CFO
+      influence: 8
+      sample_message: "Payback in [Z] months"
+    - role: Champion
+      example_title: CTO
+      influence: 9
+      sample_message: "Here's how to pitch internally"
+  discovery_questions:
+    - "Walk me through how decisions like this get made at {{company}}."
+    - "Who's the biggest skeptic we need to convince?"

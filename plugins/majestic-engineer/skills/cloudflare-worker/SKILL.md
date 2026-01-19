@@ -6,6 +6,12 @@ allowed-tools: Read, Write, Edit, MultiEdit, Grep, Glob, Bash, WebSearch, WebFet
 
 # Cloudflare Workers
 
+**Development patterns for TypeScript Workers.**
+
+**Related skills (majestic-devops):**
+- `wrangler-coder`: CLI deployment, secrets, testing, multi-environment
+- `cloudflare-coder`: Infrastructure provisioning with Terraform/OpenTofu
+
 ## Core Principles
 
 ### Edge-First Thinking

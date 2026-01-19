@@ -1,0 +1,59 @@
+# BANT+ Qualification Framework
+
+criteria:
+  - name: Budget
+    strong: Allocated
+    medium: Can be found
+    weak: Unknown
+    questions:
+      - "What budget range are you working with for this initiative?"
+      - "Has budget been allocated, or would this need to be approved?"
+
+  - name: Authority
+    strong: Decision maker
+    medium: Influencer
+    weak: End user
+    questions:
+      - "Walk me through how decisions like this typically get made at {{company}}."
+      - "Who else would need to weigh in on a decision like this?"
+
+  - name: Need
+    strong: Urgent, painful
+    medium: Nice to have
+    weak: Unclear
+    questions:
+      - "What's driving this conversation today?"
+      - "On a scale of 1-10, how urgent is solving this?"
+
+  - name: Timeline
+    strong: <90 days
+    medium: <6 months
+    weak: Undefined
+    questions:
+      - "Is there a specific date you're working toward?"
+      - "When would you need to make a decision to hit that timeline?"
+
+  - name: Champion
+    strong: Active advocate
+    medium: Supportive
+    weak: Passive
+    questions:
+      - "If this solves your problem, would you be willing to advocate for it internally?"
+      - "What would make you look good if this succeeds?"
+
+  - name: Commitment Velocity
+    strong: 3+ micro-yes/week
+    medium: 1-2 micro-yes/week
+    weak: <1 micro-yes/week
+    definition: Track "micro-yes" count (replies, meeting books, questions asked) per lead in the first week
+
+scoring:
+  fast_track: 16-18
+  standard: 12-15
+  nurture: 7-11
+  disqualify: <7
+
+# Scoring Guide:
+# - Strong (3 points)
+# - Medium (2 points)
+# - Weak (1 point)

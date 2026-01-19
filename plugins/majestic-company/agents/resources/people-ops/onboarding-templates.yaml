@@ -1,0 +1,68 @@
+# Onboarding Templates
+
+thirty_sixty_ninety:
+  structure:
+    day_1_7:
+      focus: "Orientation & Setup"
+      outcomes:
+        - Complete all IT/systems access
+        - Meet team members and key stakeholders
+        - Understand company culture and values
+        - Review role expectations with manager
+
+    day_8_30:
+      focus: "Learning & Observation"
+      outcomes:
+        - Complete required compliance training
+        - Shadow key processes
+        - Build stakeholder relationships
+        - Identify quick wins
+
+    day_31_60:
+      focus: "Contributing & Building"
+      outcomes:
+        - Take ownership of initial projects
+        - Provide first deliverables
+        - Gather feedback from stakeholders
+        - Identify process improvements
+
+    day_61_90:
+      focus: "Delivering & Expanding"
+      outcomes:
+        - Demonstrate measurable impact
+        - Operate independently
+        - Propose strategic initiatives
+        - Set goals for next quarter
+
+preboarding_checklist:
+  it_access:
+    - Email account created
+    - Slack/Teams access
+    - Core systems access requested
+    - Hardware ordered/shipped
+
+  hr_admin:
+    - Offer letter signed
+    - Background check completed
+    - I-9/tax documents collected
+    - Benefits enrollment initiated
+
+day_one_checklist:
+  - Welcome meeting with manager
+  - Team introductions
+  - Workspace setup (office or remote)
+  - Review 30/60/90 plan
+  - Schedule buddy lunch
+  - Complete orientation modules
+
+buddy_program:
+  responsibilities:
+    - Answer day-to-day questions
+    - Introduce to team culture
+    - Provide informal feedback
+    - Check in weekly (first month)
+
+  check_ins:
+    - Day 7: "How are you settling in?"
+    - Day 30: "What's working? What's confusing?"
+    - Day 90: "What would you change about onboarding?"

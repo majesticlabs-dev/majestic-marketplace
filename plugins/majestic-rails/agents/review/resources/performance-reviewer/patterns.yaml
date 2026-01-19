@@ -1,0 +1,79 @@
+# Rails Performance Anti-Patterns and Fixes
+
+database:
+  n_plus_one:
+    problem: |
+      @posts = Post.all
+      @posts.each { |post| puts post.author.name }
+    solution: |
+      @posts = Post.includes(:author)
+
+  inefficient_queries:
+    - bad: "User.all.map(&:email)"
+      good: "User.pluck(:email)"
+    - bad: "User.all.size"
+      good: "User.count"
+    - bad: "User.all.select { |u| u.active? }"
+      good: "User.where(active: true)"
+
+  counter_cache:
+    example: |
+      class Post < ApplicationRecord
+        belongs_to :user, counter_cache: true
+      end
+
+algorithmic:
+  quadratic_to_linear:
+    problem: |
+      # O(n²)
+      users.each { |user| posts.each { |post| } }
+    solution: |
+      # O(n)
+      posts_by_user = posts.index_by(&:user_id)
+      users.each { |user| post = posts_by_user[user.id] }
+
+memory:
+  batch_processing:
+    problem: |
+      User.all.each { |user| process(user) }
+    solution: |
+      User.find_each(batch_size: 1000) { |user| process(user) }
+
+caching:
+  memoization: |
+    def expensive_calculation
+      @expensive_calculation ||= compute_value
+    end
+
+  rails_cache: |
+    Rails.cache.fetch("user_#{id}_stats", expires_in: 1.hour) do
+      calculate_stats
+    end
+
+background_jobs:
+  blocking_request:
+    problem: |
+      def create
+        @report.generate_pdf  # Blocks request
+      end
+    solution: |
+      ReportGeneratorJob.perform_later(@report.id)
+
+locks:
+  long_held_lock:
+    problem: |
+      Document.transaction do
+        doc = Document.lock.find(id)
+        ExternalApi.process(doc)  # Holds lock during API call!
+      end
+    solution: |
+      doc = Document.find(id)
+      result = ExternalApi.process(doc)  # No lock held
+      doc.update!(status: result.success? ? "completed" : "failed")
+
+defensive:
+  strict_loading: "User.strict_loading.find(id)"
+  query_timeout: |
+    production:
+      variables:
+        statement_timeout: 30000

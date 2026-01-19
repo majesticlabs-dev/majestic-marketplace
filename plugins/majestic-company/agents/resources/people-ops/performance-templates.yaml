@@ -1,0 +1,81 @@
+# Performance Management Templates
+
+competency_matrix:
+  levels:
+    - level: IC1
+      expectations:
+        - Executes assigned tasks with guidance
+        - Learns and applies feedback quickly
+        - Communicates status proactively
+
+    - level: IC2
+      expectations:
+        - Works independently on standard tasks
+        - Contributes to team discussions
+        - Mentors new team members
+
+    - level: IC3
+      expectations:
+        - Leads complex projects end-to-end
+        - Influences team strategy
+        - Develops junior team members
+
+    - level: Manager
+      expectations:
+        - Builds and develops high-performing teams
+        - Sets team strategy aligned with company goals
+        - Manages performance and career development
+
+goal_setting:
+  smart_format:
+    specific: "What exactly will be accomplished?"
+    measurable: "How will success be quantified?"
+    achievable: "Is this realistic given resources?"
+    relevant: "How does this support team/company goals?"
+    time_bound: "When will this be completed?"
+
+  example: |
+    Goal: Reduce customer support response time from 4 hours to 2 hours by Q2
+    - Specific: Response time reduction
+    - Measurable: 4h → 2h (50% improvement)
+    - Achievable: Yes, with automation tools
+    - Relevant: Supports customer satisfaction OKR
+    - Time-bound: End of Q2
+
+review_cycle:
+  self_review:
+    - What were your key accomplishments?
+    - Where did you fall short of goals?
+    - What support do you need?
+    - What are your career aspirations?
+
+  manager_review:
+    - Overall performance rating (1-5)
+    - Strengths demonstrated
+    - Areas for development
+    - Goals for next period
+    - Compensation recommendation (if applicable)
+
+  calibration:
+    - Review rating distribution across team
+    - Discuss edge cases with peer managers
+    - Ensure consistent application of standards
+    - Document calibration decisions
+
+pip_template:
+  sections:
+    - Employee name, role, manager
+    - Performance concerns (specific, documented)
+    - Expected performance level
+    - Support to be provided
+    - Improvement timeline (30-60-90 days)
+    - Check-in schedule
+    - Consequences if not met
+    - Signatures and date
+
+  key_principles:
+    - Focus on coaching, not punishment
+    - Use objective, job-related criteria
+    - Document all conversations
+    - Provide resources and support
+    - Set realistic improvement timeline
