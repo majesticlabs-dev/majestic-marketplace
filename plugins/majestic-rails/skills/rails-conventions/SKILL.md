@@ -1,4 +1,5 @@
 ---
+name: rails-conventions
 description: Rails code patterns and conventions following rubocop-rails-omakase style.
 ---
 

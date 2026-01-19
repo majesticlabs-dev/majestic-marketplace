@@ -1,4 +1,5 @@
 ---
+name: competitive-positioning
 description: Build competitive positioning with positioning canvas, competitive wedge statements, and differentiation strategy.
 ---
 

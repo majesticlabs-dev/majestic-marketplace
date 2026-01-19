@@ -1,4 +1,5 @@
 ---
+name: conversion-optimization
 description: Optimize sales page architecture, offer positioning, pricing strategy, urgency mechanics, and checkout flow for maximum conversion.
 ---
 

@@ -1,4 +1,5 @@
 ---
+name: test-fixture-generator
 description: Generate synthetic test data with edge cases for ETL pipeline testing.
 ---
 

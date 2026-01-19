@@ -1,4 +1,5 @@
 ---
+name: pmf-validation
 description: Validate product-market fit through assumption testing, customer discovery, and MVP strategy.
 ---
 

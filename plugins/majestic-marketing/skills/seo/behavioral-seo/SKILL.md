@@ -1,4 +1,5 @@
 ---
+name: behavioral-seo
 description: Optimize for behavioral SEO signals including CTR, dwell time, engagement metrics, and Bing-specific factors.
 ---
 

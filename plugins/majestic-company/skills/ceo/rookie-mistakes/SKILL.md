@@ -1,4 +1,5 @@
 ---
+name: rookie-mistakes
 description: Industry-specific pitfalls that kill new businesses, with prevention strategies.
 ---
 
