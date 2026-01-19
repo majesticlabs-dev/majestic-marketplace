@@ -11,7 +11,7 @@ Execute a work plan efficiently while maintaining quality and finishing features
 
 ## Context
 
-**Get project config:** Invoke `config-reader` agent with `field: default_branch, default: main`
+**Get default branch:** Run `git remote show origin | grep 'HEAD branch' | awk '{print $NF}'`
 
 ## Introduction
 

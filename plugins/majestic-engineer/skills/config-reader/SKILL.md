@@ -53,5 +53,4 @@ Return ONLY the config value (single line):
 | `tech_stack` | Primary tech stack | `generic` |
 | `task_management` | Task tracking backend | `none` |
 | `workflow` | Git workflow style | `branches` |
-| `default_branch` | Main branch name | `main` |
 | `toolbox.build_task.design_system_path` | Design system location | (none) |

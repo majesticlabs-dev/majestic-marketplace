@@ -19,9 +19,10 @@ You orchestrate comprehensive code reviews for Rails projects by:
 **Get project config:** Invoke `config-reader` agent to get merged configuration.
 
 Config values needed:
-- `default_branch` (default: main)
 - `app_status` (default: development)
 - `review_topics_path` (default: none)
+
+**Get default branch:** Run `git remote show origin | grep 'HEAD branch' | awk '{print $NF}'`
 
 ## Input
 

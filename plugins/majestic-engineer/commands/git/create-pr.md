@@ -7,52 +7,97 @@ model: haiku
 
 ## Context
 
-- Default branch: !`claude -p "/majestic:config default_branch main"`
-
+- Default branch: !`git remote show origin | grep 'HEAD branch' | awk '{print $NF}'`
 - Current git status: !`git status`
 - Current branch: !`git branch --show-current`
 - Pending changes: !`git diff --stat`
-- Recent commits: !`git log --oneline -5`
+- Commits for PR: !`git log --oneline origin/main..HEAD 2>/dev/null || git log --oneline HEAD~10..HEAD`
 
-## Your task
-Create a pull request for the current feature branch. Follow these steps:
+## Your Task
 
-1. **Analyze the current state**:
-   - Check if there are uncommitted changes that need to be committed first
-   - Verify the current branch is different from the default branch (shown in Context)
-   - Review all commits that will be included in the PR
+Create a pull request with a well-structured description based on commit analysis.
 
-2. **Push branch if needed**:
-   - Check if current branch tracks a remote branch
-   - Push with `-u` flag if this is the first push: `git push -u origin <branch-name>`
+### Step 1: Validate State
 
-3. **Create pull request** using GitHub CLI:
-   ```bash
-   gh pr create --title "Clear descriptive title" --body "$(cat <<'EOF'
-   ## Summary
-   • Brief bullet point of key changes
-   • Main features/fixes implemented
-   • Any breaking changes or important notes
+- Check for uncommitted changes → commit first or warn user
+- Verify branch differs from default branch
+- Confirm commits exist between branches
 
-   ## Test plan
-   - [ ] Unit tests pass (`rails test`)
-   - [ ] Manual testing completed
-   - [ ] [Add specific test scenarios for this PR]
+### Step 2: Analyze Commits
 
-   Closes #XXX
-   EOF
-   )"
-   ```
+Run: `git log --format="### %s%n%n%b%n---" origin/main..HEAD`
 
-   **Task linking:** If `closes #123` or similar is provided in arguments, include `Closes #123` at the end of the PR body. This auto-closes the issue when merged. Omit if no task reference provided.
+For each commit, extract:
+- **What** changed (from subject + diff)
+- **Why** it changed (from body, or infer and mark as "Inferred:")
+
+### Step 3: Push Branch
+
+If no upstream: `git push -u origin <branch-name>`
+
+### Step 4: Generate PR Description
+
+Synthesize commits into structured sections:
+
+```bash
+gh pr create --title "<synthesized from most meaningful commit>" --body "$(cat <<'EOF'
+## Summary
+- [2-5 concrete bullets of high-level changes]
+- [Focus on WHAT changed, not HOW]
+
+## Why
+[Motivation: reliability, security, performance, product need, or tech debt]
+
+## Changes
+[Per-commit breakdown if multiple commits, or detailed explanation if single]
+
+### <Commit subject 1>
+- **What:** [concrete change]
+- **Why:** [motivation or "Inferred: likely reason"]
+
+## Testing
+- [ ] [Specific verification for this PR]
+- [ ] [Edge cases to check]
+
+## Risk & Rollout
+- **Risk:** [Low/Medium/High] - [brief justification]
+- **Rollback:** [How to revert if needed]
+- **Monitoring:** [What to watch post-merge]
+
+Closes #XXX
+EOF
+)"
+```
+
+### Section Guidelines
+
+| Section | Required | Notes |
+|---------|----------|-------|
+| Summary | Yes | 2-5 bullets, concrete changes |
+| Why | Yes | Connect to business/technical value |
+| Changes | If >1 commit | Per-commit What/Why breakdown |
+| Testing | Yes | Specific to this PR, not generic |
+| Risk & Rollout | If non-trivial | Skip for tiny fixes |
+
+### Uncertainty Flagging
+
+When inferring motivation or impact:
+- Prefix with "Inferred:" or "Likely:"
+- Never invent details not in commits
+- Preserve original commit subjects exactly
 
 ## Arguments
-- Use `$ARGUMENTS` for additional context or PR title/description
+
+- `$ARGUMENTS` for context, title override, or issue linking
 - Examples:
-  - `/create-pr Fix R2 storage issue` - customizes PR title
-  - `/create-pr closes #42` - adds "Closes #42" to PR body
+  - `/create-pr Fix R2 storage issue` - overrides title
+  - `/create-pr closes #42` - adds issue link
+  - `/create-pr` - auto-generates everything from commits
+
+**Task linking:** Include `Closes #123` only if provided in arguments or found in commit messages.
 
 ## Expected Output
-- Confirmation that branch was pushed (if needed)
-- Pull request URL for easy access
-- Summary of what was included in the PR
+
+- Confirmation branch was pushed (if needed)
+- Pull request URL
+- Brief summary of sections generated

@@ -1,272 +1,103 @@
 ---
 name: sales:funnel-builder
-allowed-tools: WebSearch, AskUserQuestion, Write
+allowed-tools: WebSearch, AskUserQuestion, Write, Skill
 description: Build comprehensive, high-converting sales funnels through a guided 5-phase process
 ---
 
 # Sales Funnel Builder
 
-**Audience:** Founders and marketers building end-to-end sales funnels for specific products and markets.
+**Audience:** Founders and marketers building end-to-end sales funnels.
 
-**Goal:** Guide through 5 phases—customer avatar, funnel architecture, copy, tech stack, optimization—to build a complete, conversion-optimized funnel. Ground all decisions in research from authoritative sources.
+**Goal:** Guide through 5 phases to build a complete, conversion-optimized funnel by orchestrating specialized skills.
 
 ## Input
 
 $ARGUMENTS
 
-## Process Overview
+## Skills
 
-This is a 5-phase interactive process. After each phase:
-1. Summarize key insights and decisions
-2. Provide specific recommendations for implementation
-3. Explain what happens in the next phase
-4. Use `AskUserQuestion` to confirm readiness to proceed
+| Phase | Skill | Purpose |
+|-------|-------|---------|
+| 1 | `icp-discovery` | Customer avatar and journey mapping |
+| 2 | `lead-magnet-design` | Lead magnets, entry points, opt-in |
+| 3 | `majestic-marketing:email-sequence-builder` | Nurture sequence development |
+| 4 | `conversion-optimization` | Sales page, offers, pricing, checkout |
+| 5 | `customer-expansion` | Upsells and cross-sells |
+| 5 | `referral-program` | Referral system design |
+| 5 | `win-back` | Retention and reactivation |
 
-## Initial Information Gathering
+## Initial Gathering
 
-Use `AskUserQuestion` to gather context. Begin by asking:
+Use `AskUserQuestion`:
 
-"I'll help you build a comprehensive, high-converting sales funnel. Please provide:
+"I'll help you build a high-converting sales funnel.
 
-**Product/Service Details:**
-1. What is your main offering? (Brief description)
-2. What is your price point/structure?
-3. What problem does it solve?
+**Product/Service:**
+1. Main offering? (Brief description)
+2. Price point/structure?
+3. Problem solved?
 4. What makes it unique?
-5. Current conversion rate (if known)?
 
 **Target Market:**
-1. Who is your ideal customer?
-2. Their main pain points?
-3. Where do they search for solutions?
-4. Common objections to purchasing?
-5. Typical buying process?"
+1. Ideal customer?
+2. Main pain points?
+3. Where they search for solutions?
+4. Common objections?"
 
----
+## Process
 
-## Phase 1: Customer Avatar Creation
+After each phase:
+1. Summarize insights and decisions
+2. Provide implementation recommendations
+3. Explain next phase
+4. Use `AskUserQuestion` to confirm readiness
 
-After receiving initial information, create:
+### Phase 1: Customer Avatar
 
-### Primary Customer Avatar
-- Detailed persona (name, age, role, income)
-- Day-in-the-life scenario
-- Goals and aspirations
-- Frustrations and challenges
-- Decision-making factors
-- Information consumption habits
-- Objections and concerns
-- Preferred communication style
+Apply `icp-discovery` patterns:
+- Primary customer avatar (persona, goals, frustrations)
+- Customer journey map (awareness → consideration → decision)
+- Pain point analysis with severity scoring
+- Value perception matrix
 
-### Secondary Customer Avatar (if applicable)
-- Same structure for secondary target
+### Phase 2: Lead Magnet & Entry Points
 
-### Customer Journey Map
-- **Awareness stage**: How they discover their problem
-- **Consideration stage**: How they evaluate solutions
-- **Decision stage**: How they make purchase decisions
-- Key touchpoints and influences at each stage
-- Emotional state throughout
+Apply `lead-magnet-design` patterns:
+- 3-5 lead magnet concepts with format selection
+- Entry point strategy by traffic source
+- Landing page blueprint with headline options
+- Segmentation strategy (quiz/survey if applicable)
 
-### Pain Point Analysis
-- Primary pain points (3-5)
-- Severity and impact assessment
-- Current solutions they're using
-- Gaps in existing solutions
-- Emotional impact
+### Phase 3: Nurture Sequence
 
-### Value Perception Matrix
-- Key value propositions ranked by importance
-- Price sensitivity assessment
-- Feature vs benefit prioritization
-- Competition perception
+Apply `majestic-marketing:email-sequence-builder` patterns:
+- 7-12 email nurture sequence
+- Content strategy (value-building, stories, social proof)
+- Objection handling framework
+- Behavioral triggers for acceleration/re-engagement
 
----
+### Phase 4: Conversion Mechanism
 
-## Phase 2: Lead Magnet and Entry Point Design
+Apply `conversion-optimization` patterns:
+- Sales page architecture and copy framework
+- Offer structure with value stack
+- Pricing strategy and payment options
+- Urgency/scarcity mechanics
+- Checkout optimization with order bumps
 
-### Lead Magnet Concepts (3-5 options)
-For each concept provide:
-- Title and format (guide, checklist, video, etc.)
-- Core problem it solves
-- Key content components
-- Unique value proposition
-- Production requirements
-- Delivery mechanism
-- Expected conversion rate
-- A/B testing recommendations
+### Phase 5: Upsell & Retention
 
-### Entry Point Strategy
-- Primary traffic sources based on avatar behaviors
-- Channel-specific messaging
-- Organic traffic strategies
-- Paid traffic recommendations
-- Content marketing approach
-- Partnership opportunities
-- SEO strategy
-
-### Opt-In Mechanism Design
-- Landing page blueprint
-- Headline formulas (3-5 options)
-- Form field optimization
-- CTA messaging
-- Social proof elements
-- Objection handling
-- Mobile optimization
-- Conversion rate targets
-
-### Segmentation Strategy
-- Initial segmentation criteria
-- Quiz/survey design (if applicable)
-- Behavioral segmentation plan
-- Personalization opportunities
-
----
-
-## Phase 3: Nurture Sequence Development
-
-### Email Nurture Sequence (7-12 emails)
-For each email:
-- Subject line options (2-3)
-- Core message and purpose
-- Content structure
-- Call-to-action
-- Timing and triggers
-
-Include:
-- Overall sequence flow and logic
-- Segmentation branch points
-- Performance metrics to track
-
-### Content Strategy
-- Value-building content pieces (3-5 concepts)
-- Story-driven content framework
-- Social proof integration
-- Authority-building elements
-- Case studies approach
-- FAQ content
-
-### Objection Handling Framework
-- Primary objections from avatars
-- Objection-specific content strategy
-- Proof elements for each objection
-- Timing for addressing objections
-
-### Engagement Escalation
-- Low-commitment engagement opportunities
-- Micro-conversion strategy
-- Interactive content recommendations
-- Community building (if applicable)
-
-### Behavioral Trigger System
-- Key triggers to track
-- Trigger-based messaging
-- Re-engagement sequences for inactive prospects
-- Acceleration sequences for engaged prospects
-
----
-
-## Phase 4: Conversion Mechanism Optimization
-
-### Sales Page Architecture
-- Complete page blueprint and flow
-- Headline framework (3-5 options)
-- Story-driven narrative structure
-- Problem-agitation-solution framework
-- Feature-benefit matrix
-- Social proof strategy
-- Guarantee and risk reversal
-- FAQ section design
-- CTA optimization
-- Mobile considerations
-
-### Offer Structure and Positioning
-- Core offer framing
-- Value stack presentation
-- Bonus strategy
-- Unique positioning vs alternatives
-- Results-focused language
-- Transformation emphasis
-- Implementation support positioning
-
-### Pricing Strategy
-- Price point recommendations
-- Payment options (one-time vs recurring)
-- Tiered pricing (if applicable)
-- Anchoring tactics
-- Value justification approach
-- ROI demonstration framework
-- Price objection handling
-
-### Urgency and Scarcity
-- Ethical scarcity mechanisms
-- Deadline strategy
-- Limited availability approach
-- Bonus expiration tactics
-- Evergreen funnel design options
-
-### Checkout Optimization
-- Checkout page design
-- Form field optimization
-- Trust indicators
-- Order bump opportunities
-- Abandonment reduction
-- Post-purchase page opportunities
-
----
-
-## Phase 5: Upsell and Retention System
-
-### Upsell/Cross-sell Strategy
-- Immediate upsell opportunity (post-purchase)
-- Logical next-step offers
-- Ascension model framework
-- Segmented upsell paths
-- Timing strategy
-- Value-justification framework
-- Upsell page blueprint
-
-### Order Bump Design
-- Order bump selection
-- Value proposition and pricing
-- Placement and design
-- Copy framework
-- Expected conversion rate
-
-### Customer Success System
-- Onboarding sequence blueprint
-- Implementation support strategy
-- Consumption encouragement tactics
-- Progress celebration triggers
-- Check-in system
-- Community integration
-- Feedback collection mechanism
-
-### Referral Program
-- Incentive structure
-- Request timing strategy
-- Promotional materials for customers
-- Tracking and attribution
-- Recognition and reward process
-- Multi-tier considerations
-
-### Win-back Campaign
-- Churn identification triggers
-- Re-engagement sequence
-- Special offer strategy
-- Feedback collection from lost customers
-- Segmented approach by exit reason
-- Long-term nurture for reactivation
-
----
+Apply retention skills:
+- `customer-expansion`: Immediate upsell, ascension model
+- `referral-program`: Incentive structure, request timing
+- `win-back`: Churn triggers, re-engagement sequence
 
 ## Output
 
-At the end, provide:
+At completion:
 1. Complete funnel architecture summary
 2. Implementation priority order
-3. Key metrics to track at each stage
+3. Key metrics per stage
 4. Testing recommendations
-5. Offer to elaborate on any specific aspect
 
-Use `Write` tool to save the complete funnel plan to a markdown file if requested.
+Use `Write` to save complete funnel plan if requested.
