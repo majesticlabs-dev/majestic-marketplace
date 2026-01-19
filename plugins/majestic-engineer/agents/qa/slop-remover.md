@@ -23,7 +23,7 @@ AI-generated code often includes:
 ### Step 1: Get the Diff
 
 First, get the default branch:
-- Default branch: !`claude -p "/majestic:config default_branch main"`
+- Default branch: !`git remote show origin | grep 'HEAD branch' | awk '{print $NF}'`
 
 Then get changed files:
 ```bash

@@ -107,7 +107,6 @@ plan:
 ```yaml
 # .agents.yml - Project configuration for Claude Code commands
 config_version: 1.5
-default_branch: main
 app_status: development
 
 # Tech Stack
@@ -162,7 +161,6 @@ toolbox:
 
 ```yaml
 config_version: 1.5
-default_branch: main
 app_status: development
 
 tech_stack: python
@@ -185,7 +183,6 @@ plan:
 
 ```yaml
 config_version: 1.5
-default_branch: main
 app_status: development
 
 tech_stack: node
@@ -214,7 +211,6 @@ plan:
 | Field | Description | Values | Default |
 |-------|-------------|--------|---------|
 | `config_version` | Schema version for update detection | version number (e.g., 1.0) | (none) |
-| `default_branch` | Main branch for git operations | branch name | `main` |
 | `tech_stack` | Primary tech stack | `rails` \| `python` \| `generic` | `generic` |
 | `app_status` | Application lifecycle stage | `development` \| `production` | `development` |
 | `task_management` | Task tracking system | `github` \| `linear` \| `beads` \| `file` \| `none` | `none` |

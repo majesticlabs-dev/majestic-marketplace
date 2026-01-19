@@ -10,7 +10,7 @@ You create changelogs from merged PRs. Your style adapts based on the audience.
 
 ## Context
 
-- Default branch: !`claude -p "/majestic:config default_branch main"`
+- Default branch: !`git remote show origin | grep 'HEAD branch' | awk '{print $NF}'`
 
 - Current branch: !`git branch --show-current`
 - Recent PRs merged: !`gh pr list --state merged --limit 20 --json number,title,author,mergedAt,labels`

@@ -19,33 +19,25 @@ get_repo_root() {
     }
 }
 
-# Get main branch name
-# Priority: DEFAULT_BRANCH env var > config files > git detection
+# Get main branch name from git remote
 get_main_branch() {
-    # 1. Check environment variable (set by caller via /majestic:config)
+    # 1. Check environment variable (set by caller)
     if [ -n "${DEFAULT_BRANCH:-}" ]; then
         echo "$DEFAULT_BRANCH"
         return
     fi
 
-    local repo_root
-    repo_root=$(git rev-parse --show-toplevel 2>/dev/null)
     local main_branch=""
 
-    # 2. Check config files (fallback for direct CLI usage)
-    if [ -n "$repo_root" ]; then
-        if [ -f "$repo_root/.agents.local.yml" ]; then
-            main_branch=$(grep "^default_branch:" "$repo_root/.agents.local.yml" 2>/dev/null | head -1 | awk '{print $2}')
-        fi
-        if [ -z "$main_branch" ] && [ -f "$repo_root/.agents.yml" ]; then
-            main_branch=$(grep "^default_branch:" "$repo_root/.agents.yml" 2>/dev/null | head -1 | awk '{print $2}')
-        fi
-    fi
+    # 2. Get from remote HEAD (most reliable)
+    main_branch=$(git remote show origin 2>/dev/null | grep 'HEAD branch' | awk '{print $NF}')
 
-    # 3. Fallback to git detection
+    # 3. Fallback to symbolic-ref
     if [ -z "$main_branch" ]; then
         main_branch=$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/remotes/origin/@@')
     fi
+
+    # 4. Final fallback: check common branch names
     if [ -z "$main_branch" ]; then
         if git show-ref --verify --quiet refs/heads/main; then
             main_branch="main"

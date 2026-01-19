@@ -7,7 +7,7 @@ model: haiku
 
 ## Context
 
-- Default branch: !`claude -p "/majestic:config default_branch main"`
+- Default branch: !`git remote show origin | grep 'HEAD branch' | awk '{print $NF}'`
 - Current git status: !`git status`
 - Current branch: !`git branch --show-current`
 - Pending changes: !`git diff --stat`

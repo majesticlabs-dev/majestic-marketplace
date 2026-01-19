@@ -9,7 +9,7 @@ Transform git history into an engaging documentary narrative.
 
 ## Context
 
-- Default branch: !`claude -p "/majestic:config default_branch main"`
+- Default branch: !`git remote show origin | grep 'HEAD branch' | awk '{print $NF}'`
 - Repository root: !`git rev-parse --show-toplevel 2>/dev/null`
 - Total commits: !`git rev-list --count HEAD 2>/dev/null`
 - First commit: !`git log --reverse --format="%H|%ai|%an|%s" 2>/dev/null | head -1`
