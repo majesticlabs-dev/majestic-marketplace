@@ -15,7 +15,7 @@ preconditions:
 
 **Purpose:** Document solved problems to build searchable institutional knowledge.
 
-**Organization:** Single-file per problem in `.agent-os/lessons/[category]/[filename].md` with YAML frontmatter. Files with `workflow_phase` fields are discoverable by lessons-discoverer agent.
+**Organization:** Single-file per problem in `.agents-os/lessons/[category]/[filename].md` with YAML frontmatter. Files with `workflow_phase` fields are discoverable by lessons-discoverer agent.
 
 ## 7-Step Capture Process
 
@@ -53,8 +53,8 @@ Extract from conversation:
 
 ```bash
 # Search for similar issues
-grep -r "exact error phrase" .agent-os/lessons/
-ls .agent-os/lessons/[category]/
+grep -r "exact error phrase" .agents-os/lessons/
+ls .agents-os/lessons/[category]/
 ```
 
 **If similar found:** Present options:
@@ -92,7 +92,7 @@ Validate against `schema.yaml` and `references/yaml-schema.md`.
 
 ```bash
 CATEGORY="[mapped from problem_type]"
-mkdir -p .agent-os/lessons/${CATEGORY}
+mkdir -p .agents-os/lessons/${CATEGORY}
 ```
 
 Populate `assets/resolution-template.md` with:
@@ -107,7 +107,7 @@ Populate `assets/resolution-template.md` with:
 - Add "Related Issues" links to both docs
 
 **If 3+ similar issues exist:**
-- Consider adding to `.agent-os/lessons/patterns/common-solutions.md`
+- Consider adding to `.agents-os/lessons/patterns/common-solutions.md`
 
 **If severity=critical + non-obvious solution:**
 - Note in output: "Consider adding to Critical Patterns"
@@ -117,7 +117,7 @@ Populate `assets/resolution-template.md` with:
 After capture, invoke `fix-decision-router` skill with:
 
 ```yaml
-doc_path: .agent-os/lessons/[category]/[filename].md
+doc_path: .agents-os/lessons/[category]/[filename].md
 category: [problem_type category]
 ```
 
@@ -142,7 +142,7 @@ category: [problem_type category]
 ## Success Criteria
 
 - [ ] YAML frontmatter validated
-- [ ] File created in `.agent-os/lessons/[category]/`
+- [ ] File created in `.agents-os/lessons/[category]/`
 - [ ] Enum values match schema exactly
 - [ ] Code examples included
 - [ ] Cross-references added if related issues found

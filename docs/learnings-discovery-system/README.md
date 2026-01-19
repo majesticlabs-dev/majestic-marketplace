@@ -19,7 +19,7 @@ The learnings discovery system surfaces relevant knowledge at the right moment d
 │                                                                  │
 │  /blueprint  ──┐                                                │
 │                │   ┌─────────────────────┐   ┌──────────────────┐ │
-│  /debug     ───┼──►│ lessons-discoverer  │──►│ .claude/lessons/ │ │
+│  /debug     ───┼──►│ lessons-discoverer  │──►│ .agents-os/lessons/ │ │
 │                │   │ (Claude headless)   │   │                  │ │
 │  quality-gate ─┘   └─────────────────────┘   │ ├─ antipatterns/ │ │
 │                            │                  │ ├─ gotchas/      │ │
@@ -41,7 +41,7 @@ Add to `.agents.yml`:
 
 ```yaml
 # Default location (recommended)
-lessons_path: .claude/lessons/
+lessons_path: .agents-os/lessons/
 
 # Or custom location
 lessons_path: docs/learnings/
@@ -50,7 +50,7 @@ lessons_path: docs/learnings/
 ## Directory Structure
 
 ```
-.claude/lessons/
+.agents-os/lessons/
 ├── performance-issues/
 │   └── n-plus-one-20251110.md
 ├── security-issues/
@@ -114,7 +114,7 @@ Use `/report-fix` after solving a non-trivial problem:
 ```
 User: "That worked! The N+1 query is fixed."
 Claude: [Detects confirmation, invokes fix-reporter skill]
-Claude: [Creates lesson in .claude/lessons/performance-issues/]
+Claude: [Creates lesson in .agents-os/lessons/performance-issues/]
 Claude: "Solution documented. Enable discovery for workflows?"
 ```
 
@@ -193,12 +193,12 @@ If you were using `review_topics_path`:
    review_topics_path: docs/agents/review-topics.md
 
    # New
-   lessons_path: .claude/lessons/
+   lessons_path: .agents-os/lessons/
    ```
 
 2. Create lessons directory:
    ```bash
-   mkdir -p .claude/lessons
+   mkdir -p .agents-os/lessons
    ```
 
 3. Convert existing review topics to lessons with frontmatter:
@@ -230,7 +230,7 @@ If you were using `review_topics_path`:
 
 ### Lessons not being discovered
 
-1. Check directory exists: `ls .claude/lessons/`
+1. Check directory exists: `ls .agents-os/lessons/`
 2. Verify frontmatter includes `workflow_phase` for desired workflows
 3. Check `tech_stack` matches project config
 4. Ensure lesson has required frontmatter fields

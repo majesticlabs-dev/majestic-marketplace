@@ -17,10 +17,10 @@ Scan these locations for patterns:
 | Git commits | `git log --oneline -100` | Repeated fix types, refactor patterns |
 | Git commit bodies | `git log -50 --format="%B---"` | Lessons in commit descriptions |
 | PR descriptions | `gh pr list --state merged -L 20` | Decisions, learnings |
-| Handoffs | `$MAIN_WORKTREE/.claude/handoffs/*.md` | Patterns, What Worked/Failed |
+| Handoffs | `$MAIN_WORKTREE/.agents-os/handoffs/*.md` | Patterns, What Worked/Failed |
 | Key Learnings | `CLAUDE.md` (Key Learnings section) | Existing encoded patterns |
 
-**Note:** Session ledger (`.claude/session_ledger.md`) is for `/reflect` only - ephemeral per-session state.
+**Note:** Session ledger (`.agents-os/session_ledger.md`) is for `/reflect` only - ephemeral per-session state.
 
 ## Pattern Extraction
 
@@ -31,7 +31,7 @@ Scan these locations for patterns:
 git log --oneline -100 | cut -d' ' -f2- | sort | uniq -c | sort -rn
 
 # Handoff patterns
-grep -h "^- " .claude/handoffs/*.md 2>/dev/null | sort | uniq -c | sort -rn
+grep -h "^- " .agents-os/handoffs/*.md 2>/dev/null | sort | uniq -c | sort -rn
 ```
 
 ### Step 2: Consolidate Similar Patterns

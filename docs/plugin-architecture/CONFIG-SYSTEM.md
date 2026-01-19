@@ -12,6 +12,7 @@ The config file has **core fields** plus **stack-specific fields** based on tech
 
 | Version | Changes |
 |---------|---------|
+| 1.7 | Migrated project knowledge from `.claude/` to `.agents-os/` (lessons, handoffs, session ledger) |
 | 1.6 | Added `owner.level` for experience-based skill tailoring |
 | 1.5 | Added `lessons_path` for learnings discovery, deprecated `review_topics_path` |
 | 1.4 | Multi-stack `tech_stack` (array support), built-in toolbox presets |
@@ -19,6 +20,27 @@ The config file has **core fields** plus **stack-specific fields** based on tech
 | 1.2 | Moved `auto_create_task` under `plan:` namespace |
 | 1.1 | Added `workflow_labels`, `workspace_setup.post_create` |
 | 1.0 | Initial release |
+
+### Migration from 1.6 to 1.7
+
+**Backwards compatible:** Path change with optional migration.
+
+Project knowledge storage moves from `.claude/` to `.agents-os/`:
+
+| Old Path | New Path |
+|----------|----------|
+| `.claude/lessons/` | `.agents-os/lessons/` |
+| `.claude/handoffs/` | `.agents-os/handoffs/` |
+| `.claude/session_ledger.md` | `.agents-os/session_ledger.md` |
+
+**Why the change:** Separates tool configuration (`.claude/` - settings, hooks, commands) from project knowledge (`.agents-os/` - lessons, handoffs, context). This makes project knowledge portable and tool-agnostic.
+
+**Migration steps:**
+1. Update `config_version: 1.7` in `.agents.yml`
+2. Move existing directories: `mv .claude/lessons .agents-os/lessons && mv .claude/handoffs .agents-os/handoffs`
+3. Update `.gitignore` if you have custom entries for these paths
+
+**Note:** `.claude/` remains for Claude Code tool configuration (settings.json, hooks, commands).
 
 ### Migration from 1.5 to 1.6
 
@@ -53,12 +75,12 @@ review_topics_path: docs/agents/review-topics.md
 
 New format (1.5):
 ```yaml
-lessons_path: .claude/lessons/  # Default location for learnings discovery
+lessons_path: .agents-os/lessons/  # Default location for learnings discovery
 ```
 
 **Migration steps:**
-1. Replace `review_topics_path` with `lessons_path: .claude/lessons/`
-2. Create `.claude/lessons/` directory
+1. Replace `review_topics_path` with `lessons_path: .agents-os/lessons/`
+2. Create `.agents-os/lessons/` directory
 3. Move existing review topics to lessons with `workflow_phase: [review]` frontmatter
 4. The `lessons-discoverer` agent handles discovery at runtime
 
@@ -128,7 +150,7 @@ extras:
 task_management: github
 workflow: worktrees
 branch_naming: type/issue-desc
-lessons_path: .claude/lessons/
+lessons_path: .agents-os/lessons/
 
 # Workspace setup hooks
 # workspace_setup:
@@ -167,7 +189,7 @@ database: postgres
 task_management: github
 workflow: worktrees
 branch_naming: type/issue-desc
-lessons_path: .claude/lessons/
+lessons_path: .agents-os/lessons/
 
 auto_preview: true
 plan:
@@ -192,7 +214,7 @@ deployment: vercel
 task_management: github
 workflow: worktrees
 branch_naming: type/issue-desc
-lessons_path: .claude/lessons/
+lessons_path: .agents-os/lessons/
 
 auto_preview: true
 plan:
@@ -211,7 +233,7 @@ plan:
 | `task_management` | Task tracking system | `github` \| `linear` \| `beads` \| `file` \| `none` | `none` |
 | `workflow` | Feature development workflow | `worktrees` \| `branches` | `branches` |
 | `branch_naming` | Branch naming convention | `feature/desc` \| `issue-desc` \| `type/issue-desc` \| `user/desc` | `feature/desc` |
-| `lessons_path` | Path to lessons directory for discovery | directory path | `.claude/lessons/` |
+| `lessons_path` | Path to lessons directory for discovery | directory path | `.agents-os/lessons/` |
 | `review_topics_path` | **DEPRECATED** - Use `lessons_path` with `workflow_phase: review` | file path | (none) |
 | `auto_preview` | Auto-open markdown files (plans, PRDs, briefs, handoffs) | `true` \| `false` | `false` |
 | `plan.auto_create_task` | Auto-create task when `/majestic:plan` completes | `true` \| `false` | `false` |
@@ -496,4 +518,4 @@ When commands create markdown files (plans, PRDs, briefs, handoffs), they follow
 - `/majestic:plan` → `docs/plans/<title>.md`
 - `/majestic:prd` → `docs/prd/prd-<name>.md`
 - `/majestic:ux-brief` → `docs/design/<name>-brief.md`
-- `/majestic:handoff` → `.claude/handoffs/<timestamp>-<slug>.md`
+- `/majestic:handoff` → `.agents-os/handoffs/<timestamp>-<slug>.md`

@@ -18,7 +18,7 @@ Extract patterns from git history, PRs, and handoffs to create durable artifacts
 |--------|---------|-----------------|
 | Git commits | `git log --oneline -100` | Repeated fix types, patterns |
 | PR descriptions | `gh pr list --state merged -L 20 --json title,body` | Lessons, decisions |
-| Handoffs | `.claude/handoffs/*.md` (main worktree) | Patterns, What Worked/Failed |
+| Handoffs | `.agents-os/handoffs/*.md` (main worktree) | Patterns, What Worked/Failed |
 | Existing learnings | `CLAUDE.md` Key Learnings section | Already encoded patterns |
 
 ## Process
@@ -27,7 +27,7 @@ Extract patterns from git history, PRs, and handoffs to create durable artifacts
 
 ```bash
 MAIN_WORKTREE=$(git worktree list --porcelain | grep "^worktree" | head -1 | cut -d' ' -f2)
-HANDOFF_DIR="$MAIN_WORKTREE/.claude/handoffs"
+HANDOFF_DIR="$MAIN_WORKTREE/.agents-os/handoffs"
 ```
 
 ### Step 2: Gather Patterns

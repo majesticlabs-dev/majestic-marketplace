@@ -15,7 +15,7 @@ Analyze the current session and suggest improvements to AGENTS.md based on patte
 | Source | What to Extract |
 |--------|-----------------|
 | Conversation history | User corrections, repeated feedback, preferences |
-| `.claude/session_ledger.md` | Key Decisions, patterns from current work (if exists) |
+| `.agents-os/session_ledger.md` | Key Decisions, patterns from current work (if exists) |
 
 ## Process
 
@@ -30,7 +30,7 @@ Analyze all messages in this conversation:
 ### Step 2: Check Session Ledger (if exists)
 
 ```bash
-[ -f ".claude/session_ledger.md" ] && cat ".claude/session_ledger.md"
+[ -f ".agents-os/session_ledger.md" ] && cat ".agents-os/session_ledger.md"
 ```
 
 Extract any Key Decisions or patterns documented there.
