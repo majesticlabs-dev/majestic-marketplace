@@ -1,132 +1,35 @@
 ---
 name: data-validation
-description: Schema enforcement and data validation using Pydantic, pandera, and Great Expectations patterns.
+description: Data validation patterns and pipeline helpers. Custom validation functions, schema evolution, and test assertions.
 allowed-tools: Read, Write, Edit, Grep, Glob, Bash
 ---
 
-# Data-Validation
+# Data Validation
 
-Production patterns for data validation and schema enforcement.
+Custom validation patterns and pipeline helpers.
 
-## Pydantic for Record Validation
+**Framework-specific skills:**
+- `pydantic-validation` - Record-level validation with Pydantic
+- `pandera-validation` - DataFrame schema validation
+- `great-expectations` - Pipeline expectations and monitoring
 
-```python
-from pydantic import BaseModel, Field, field_validator, model_validator
-from datetime import date
-from typing import Literal
+## Framework Selection
 
-class UserRecord(BaseModel):
-    id: int = Field(gt=0)
-    email: str = Field(pattern=r'^[\w\.-]+@[\w\.-]+\.\w+$')
-    status: Literal['active', 'inactive', 'pending']
-    created_at: date
-    age: int = Field(ge=0, le=150)
-
-    @field_validator('email')
-    @classmethod
-    def lowercase_email(cls, v: str) -> str:
-        return v.lower()
-
-    @model_validator(mode='after')
-    def check_consistency(self) -> 'UserRecord':
-        if self.status == 'active' and self.age < 13:
-            raise ValueError('Active users must be 13+')
-        return self
-
-# Batch validation
-def validate_records(records: list[dict]) -> tuple[list[UserRecord], list[dict]]:
-    valid, invalid = [], []
-    for record in records:
-        try:
-            valid.append(UserRecord(**record))
-        except ValidationError as e:
-            invalid.append({'record': record, 'errors': e.errors()})
-    return valid, invalid
-```
-
-## Pandera for DataFrame Validation
-
-```python
-import pandera as pa
-from pandera import Column, Check, DataFrameSchema
-
-# Define schema
-schema = DataFrameSchema({
-    "id": Column(int, Check.gt(0), unique=True),
-    "email": Column(str, Check.str_matches(r'^[\w\.-]+@[\w\.-]+\.\w+$')),
-    "revenue": Column(float, Check.ge(0)),
-    "date": Column("datetime64[ns]"),
-    "category": Column(str, Check.isin(['A', 'B', 'C'])),
-})
-
-# Validate DataFrame
-@pa.check_output(schema)
-def load_data(path: str) -> pd.DataFrame:
-    return pd.read_csv(path)
-
-# Schema with custom checks
-schema_with_custom = DataFrameSchema({
-    "start_date": Column("datetime64[ns]"),
-    "end_date": Column("datetime64[ns]"),
-}, checks=[
-    Check(lambda df: df['end_date'] > df['start_date'],
-          error="end_date must be after start_date")
-])
-```
-
-## Great Expectations Patterns
-
-```python
-import great_expectations as gx
-
-# Quick validation
-context = gx.get_context()
-
-# Define expectations
-suite = context.add_expectation_suite("user_data_suite")
-
-# Column existence
-suite.add_expectation(
-    gx.expectations.ExpectColumnToExist(column="user_id")
-)
-
-# Null checks
-suite.add_expectation(
-    gx.expectations.ExpectColumnValuesToNotBeNull(column="user_id")
-)
-
-# Value ranges
-suite.add_expectation(
-    gx.expectations.ExpectColumnValuesToBeBetween(
-        column="age", min_value=0, max_value=150
-    )
-)
-
-# Uniqueness
-suite.add_expectation(
-    gx.expectations.ExpectColumnValuesToBeUnique(column="user_id")
-)
-
-# Categorical values
-suite.add_expectation(
-    gx.expectations.ExpectColumnValuesToBeInSet(
-        column="status",
-        value_set=["active", "inactive", "pending"]
-    )
-)
-
-# Run validation
-results = context.run_checkpoint(
-    checkpoint_name="user_data_checkpoint",
-    batch_request={"datasource_name": "my_datasource", "data_asset_name": "users"}
-)
-```
+| Use Case | Framework |
+|----------|-----------|
+| API request/response | Pydantic |
+| Record-by-record ETL | Pydantic |
+| DataFrame validation | Pandera |
+| Type hints for DataFrames | Pandera |
+| Pipeline monitoring | Great Expectations |
+| Data warehouse checks | Great Expectations |
+| Custom business rules | Custom functions (below) |
 
 ## Custom Validation Functions
 
 ```python
-from typing import Callable
 from dataclasses import dataclass
+import pandas as pd
 
 @dataclass
 class ValidationResult:
@@ -165,8 +68,8 @@ def validate_referential_integrity(
 def validate_date_range(
     df: pd.DataFrame,
     column: str,
-    min_date: date,
-    max_date: date
+    min_date,
+    max_date
 ) -> ValidationResult:
     """Check dates within expected range."""
     out_of_range = df[(df[column] < min_date) | (df[column] > max_date)]
@@ -179,17 +82,47 @@ def validate_date_range(
     return ValidationResult(passed=True, message="All dates in range")
 ```
 
-## Schema Evolution Handling
+## Validation Pipeline
 
 ```python
-from typing import Any
+from typing import Callable
 
-def validate_with_schema_version(
-    data: dict,
-    schema_version: int
-) -> dict:
+class DataValidator:
+    def __init__(self):
+        self.checks: list[Callable[[pd.DataFrame], ValidationResult]] = []
+
+    def add_check(self, check: Callable[[pd.DataFrame], ValidationResult]):
+        self.checks.append(check)
+        return self
+
+    def validate(self, df: pd.DataFrame) -> dict:
+        results = {'passed': True, 'checks': []}
+        for check in self.checks:
+            result = check(df)
+            results['checks'].append({
+                'name': check.__name__,
+                'passed': result.passed,
+                'message': result.message
+            })
+            if not result.passed:
+                results['passed'] = False
+        return results
+
+# Usage
+validator = DataValidator()
+validator.add_check(lambda df: validate_no_duplicates(df, ['id']))
+validator.add_check(lambda df: validate_referential_integrity(df, 'user_id', users_df, 'id'))
+
+results = validator.validate(df)
+if not results['passed']:
+    raise ValueError(f"Validation failed: {results}")
+```
+
+## Schema Evolution
+
+```python
+def validate_with_schema_version(data: dict, schema_version: int) -> dict:
     """Handle multiple schema versions during migration."""
-
     if schema_version == 1:
         # Old schema: name was single field
         if 'name' in data and 'first_name' not in data:
@@ -204,80 +137,9 @@ def validate_with_schema_version(
             data['metadata'] = {}
 
     return data
-
-def infer_and_validate_schema(df: pd.DataFrame) -> dict:
-    """Infer schema from DataFrame and return validation report."""
-    report = {
-        'columns': {},
-        'row_count': len(df),
-        'issues': []
-    }
-
-    for col in df.columns:
-        col_info = {
-            'dtype': str(df[col].dtype),
-            'null_count': int(df[col].isnull().sum()),
-            'null_pct': float(df[col].isnull().mean()),
-            'unique_count': int(df[col].nunique())
-        }
-
-        if df[col].dtype in ['int64', 'float64']:
-            col_info['min'] = float(df[col].min())
-            col_info['max'] = float(df[col].max())
-            col_info['mean'] = float(df[col].mean())
-
-        report['columns'][col] = col_info
-
-        # Flag potential issues
-        if col_info['null_pct'] > 0.5:
-            report['issues'].append(f"Column '{col}' has >50% nulls")
-        if col_info['unique_count'] == 1:
-            report['issues'].append(f"Column '{col}' has only one unique value")
-
-    return report
 ```
 
-## Validation Pipeline
-
-```python
-class DataValidator:
-    def __init__(self):
-        self.checks: list[Callable[[pd.DataFrame], ValidationResult]] = []
-
-    def add_check(self, check: Callable[[pd.DataFrame], ValidationResult]):
-        self.checks.append(check)
-        return self
-
-    def validate(self, df: pd.DataFrame) -> dict:
-        results = {
-            'passed': True,
-            'checks': []
-        }
-
-        for check in self.checks:
-            result = check(df)
-            results['checks'].append({
-                'name': check.__name__,
-                'passed': result.passed,
-                'message': result.message
-            })
-            if not result.passed:
-                results['passed'] = False
-
-        return results
-
-# Usage
-validator = DataValidator()
-validator.add_check(lambda df: validate_no_duplicates(df, ['id']))
-validator.add_check(lambda df: validate_no_nulls(df, ['id', 'email']))
-validator.add_check(lambda df: validate_email_format(df, 'email'))
-
-results = validator.validate(df)
-if not results['passed']:
-    raise ValueError(f"Validation failed: {results}")
-```
-
-## Assertions for Tests
+## Test Assertions
 
 ```python
 def assert_schema_match(df: pd.DataFrame, expected: dict) -> None:
@@ -296,4 +158,38 @@ def assert_unique(df: pd.DataFrame, columns: list[str]) -> None:
     """Assert no duplicate values in column combination."""
     dup_count = df.duplicated(subset=columns).sum()
     assert dup_count == 0, f"Found {dup_count} duplicate rows for columns {columns}"
+
+def assert_values_in_set(df: pd.DataFrame, column: str, valid_values: set) -> None:
+    """Assert all values in column are from valid set."""
+    invalid = set(df[column].unique()) - valid_values
+    assert not invalid, f"Column {column} has invalid values: {invalid}"
+```
+
+## Pipeline Integration
+
+```python
+def run_validation_pipeline(
+    df: pd.DataFrame,
+    config: dict
+) -> tuple[pd.DataFrame, dict]:
+    """Run validation and return clean data + report."""
+    validator = DataValidator()
+
+    # Add checks from config
+    if 'unique_columns' in config:
+        validator.add_check(lambda df: validate_no_duplicates(df, config['unique_columns']))
+
+    if 'date_ranges' in config:
+        for col, (min_d, max_d) in config['date_ranges'].items():
+            validator.add_check(lambda df, c=col, mn=min_d, mx=max_d:
+                              validate_date_range(df, c, mn, mx))
+
+    results = validator.validate(df)
+
+    if not results['passed']:
+        # Optionally filter to only valid rows
+        # df = df[~df['_invalid']]
+        pass
+
+    return df, results
 ```
