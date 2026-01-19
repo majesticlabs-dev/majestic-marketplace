@@ -183,41 +183,6 @@ Benefits:
 - Catches conceptual matches ("authorization" ↔ "access control")
 - Adapts to any project domain
 
-## Migration from review_topics
-
-If you were using `review_topics_path`:
-
-1. Update `.agents.yml`:
-   ```yaml
-   # Old
-   review_topics_path: docs/agents/review-topics.md
-
-   # New
-   lessons_path: .agents-os/lessons/
-   ```
-
-2. Create lessons directory:
-   ```bash
-   mkdir -p .agents-os/lessons
-   ```
-
-3. Convert existing review topics to lessons with frontmatter:
-   ```yaml
-   ---
-   module: System
-   date: 2025-01-01
-   problem_type: best_practice
-   component: api
-   lesson_type: antipattern
-   workflow_phase: [review]
-   tech_stack: [generic]
-   ---
-
-   # API Convention: Always Use Timeouts
-
-   [content from review-topics.md]
-   ```
-
 ## Best Practices
 
 1. **Be specific** - Include exact error messages and code examples

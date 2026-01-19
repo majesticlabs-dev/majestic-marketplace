@@ -70,8 +70,8 @@ Should it trigger automatically on file/context patterns?
   NO ↓
 
 Is it a simple rule or convention?
-  YES → RULE (add to CLAUDE.md or review-topics.md)
-    Project-specific? → review-topics.md
+  YES → RULE (add to CLAUDE.md or .agents-os/lessons/)
+    Project-specific? → .agents-os/lessons/ (with workflow_phase: review)
     Universal? → CLAUDE.md
   NO ↓
 

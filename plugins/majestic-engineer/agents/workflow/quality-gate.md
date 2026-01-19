@@ -162,7 +162,7 @@ Task (majestic-rails:review:performance-reviewer):
   prompt: Review changes on branch <BRANCH> for performance issues.
 
 Task (majestic-engineer:review:project-topics-reviewer):
-  prompt: Review changes on branch <BRANCH> against project topics at <REVIEW_TOPICS>.
+  prompt: Review changes on branch <BRANCH> against project lessons with workflow_phase: review.
 ```
 
 #### Python (`tech_stack: python`)

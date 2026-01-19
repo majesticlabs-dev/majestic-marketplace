@@ -15,7 +15,7 @@ Read config values:
 - Tech stack: !`claude -p "/majestic:config tech_stack generic"`
 - Default branch: !`git remote show origin | grep 'HEAD branch' | awk '{print $NF}'`
 - App status: !`claude -p "/majestic:config app_status development"`
-- Review topics path: !`claude -p "/majestic:config review_topics_path ''"`
+- Lessons path: !`claude -p "/majestic:config lessons_path .agents-os/lessons/"`
 
 ## Arguments
 

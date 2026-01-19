@@ -64,7 +64,7 @@ quality_gate:
     - pragmatic-rails-reviewer  # Rails conventions and patterns
     - performance-reviewer      # N+1 queries, slow operations
     - test-reviewer             # Test coverage and quality
-    - project-topics-reviewer   # Custom rules (if review_topics_path set)
+    - project-topics-reviewer   # Custom rules from lessons (workflow_phase: review)
     # Optional - uncomment to enable:
     # - dhh-code-reviewer       # Strict DHH/37signals Rails style
     # - data-integrity-reviewer # Migration safety (recommended for production)

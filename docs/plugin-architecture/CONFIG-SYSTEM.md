@@ -14,7 +14,7 @@ The config file has **core fields** plus **stack-specific fields** based on tech
 |---------|---------|
 | 1.7 | Migrated project knowledge from `.claude/` to `.agents-os/` (lessons, handoffs, session ledger) |
 | 1.6 | Added `owner.level` for experience-based skill tailoring |
-| 1.5 | Added `lessons_path` for learnings discovery, deprecated `review_topics_path` |
+| 1.5 | Added `lessons_path` for learnings discovery |
 | 1.4 | Multi-stack `tech_stack` (array support), built-in toolbox presets |
 | 1.3 | (removed - commit hooks deprecated in favor of git native hooks) |
 | 1.2 | Moved `auto_create_task` under `plan:` namespace |
@@ -63,28 +63,6 @@ owner:
 - `expert` - Authoritative, minimal explanation, just show the code
 
 **Why the change:** Skills can now tailor outputs to the user's experience. Instead of "You are an expert..." persona prompting, skills use audience framing that references this config.
-
-### Migration from 1.4 to 1.5
-
-**Breaking change:** `review_topics_path` is deprecated and replaced by `lessons_path`.
-
-Old format (1.4):
-```yaml
-review_topics_path: docs/agents/review-topics.md
-```
-
-New format (1.5):
-```yaml
-lessons_path: .agents-os/lessons/  # Default location for learnings discovery
-```
-
-**Migration steps:**
-1. Replace `review_topics_path` with `lessons_path: .agents-os/lessons/`
-2. Create `.agents-os/lessons/` directory
-3. Move existing review topics to lessons with `workflow_phase: [review]` frontmatter
-4. The `lessons-discoverer` agent handles discovery at runtime
-
-**Why the change:** Unified institutional memory system. Lessons now support multiple workflow phases (planning, debugging, review, implementation) and semantic discovery via Claude headless mode.
 
 ### Migration from 1.3 to 1.4
 
@@ -234,7 +212,6 @@ plan:
 | `workflow` | Feature development workflow | `worktrees` \| `branches` | `branches` |
 | `branch_naming` | Branch naming convention | `feature/desc` \| `issue-desc` \| `type/issue-desc` \| `user/desc` | `feature/desc` |
 | `lessons_path` | Path to lessons directory for discovery | directory path | `.agents-os/lessons/` |
-| `review_topics_path` | **DEPRECATED** - Use `lessons_path` with `workflow_phase: review` | file path | (none) |
 | `auto_preview` | Auto-open markdown files (plans, PRDs, briefs, handoffs) | `true` \| `false` | `false` |
 | `plan.auto_create_task` | Auto-create task when `/majestic:plan` completes | `true` \| `false` | `false` |
 | `session.ledger` | Enable session state checkpointing to file | `true` \| `false` | `false` |
@@ -426,7 +403,7 @@ toolbox:
 |----------|--------|-------------|
 | `security-review` | majestic-engineer | OWASP Top 10, secrets, vulnerabilities |
 | `test-reviewer` | majestic-engineer | Test coverage, quality, edge cases |
-| `project-topics-reviewer` | majestic-engineer | Custom rules from review_topics_path |
+| `project-topics-reviewer` | majestic-engineer | Custom rules from lessons with `workflow_phase: review` |
 | `simplicity-reviewer` | majestic-engineer | Complexity and overengineering |
 | `pragmatic-rails-reviewer` | majestic-rails | Rails conventions, thin controllers |
 | `performance-reviewer` | majestic-rails | N+1 queries, slow operations |

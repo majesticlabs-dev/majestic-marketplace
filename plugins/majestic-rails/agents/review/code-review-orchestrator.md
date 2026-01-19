@@ -20,7 +20,7 @@ You orchestrate comprehensive code reviews for Rails projects by:
 
 Config values needed:
 - `app_status` (default: development)
-- `review_topics_path` (default: none)
+- `lessons_path` (default: .agents-os/lessons/)
 
 **Get default branch:** Run `git remote show origin | grep 'HEAD branch' | awk '{print $NF}'`
 
@@ -104,18 +104,18 @@ If >5 files and no clear patterns detected, use `AskUserQuestion`:
 3. **Data Integrity Reviewer** - Migration safety, data constraints
 4. **None** - Just run the standard reviewers
 
-## Step 3: Load Project Topics
+## Step 3: Load Project Lessons
 
-### Check for Topics Configuration
+### Check for Lessons
 
-1. Read `.agents.yml` from project root
-2. Look for `review_topics_path:` config
-3. If found → read topics from that file path
-4. If not found → no project topics (skip project-topics-reviewer)
+1. Read `lessons_path` from `.agents.yml` (default: `.agents-os/lessons/`)
+2. Look for lesson files with `workflow_phase: [review]` in frontmatter
+3. If found → pass lessons to project-topics-reviewer
+4. If not found → skip project-topics-reviewer
 
-Use "Review topics path" from Context above. If the path exists, read the topics file.
+Use "Lessons path" from Context above. Check for lesson files with review workflow phase.
 
-### If Topics Found
+### If Lessons Found
 
 Add `majestic-engineer:review/project-topics-reviewer` to the agent list.
 
@@ -140,11 +140,11 @@ Prompt: "Review these files for N+1 queries, performance issues, and query optim
 Task 4: majestic-rails:review/data-integrity-reviewer (if selected)
 Prompt: "Review these migration files for safety, reversibility, and data integrity: [file list]"
 
-Task 5: majestic-engineer:review/project-topics-reviewer (if topics exist)
-Prompt: "Review these files against these project-specific topics: [file list]
+Task 5: majestic-engineer:review/project-topics-reviewer (if lessons exist)
+Prompt: "Review these files against these project-specific lessons: [file list]
 
-Topics:
-[topics content]"
+Lessons:
+[lessons content from .agents-os/lessons/ with workflow_phase: review]"
 ```
 
 **CRITICAL:** Launch all tasks in a SINGLE message with multiple Task tool calls to ensure parallel execution.

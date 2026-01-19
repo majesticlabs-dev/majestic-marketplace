@@ -45,7 +45,7 @@ quality_gate:
   reviewers:
     - security-review           # OWASP security scanning
     - test-reviewer             # Test coverage and quality
-    - project-topics-reviewer   # Custom rules (if review_topics_path set)
+    - project-topics-reviewer   # Custom rules from lessons (workflow_phase: review)
     # Optional - uncomment to enable:
     # - simplicity-reviewer     # Complexity and overengineering
     # - codex-reviewer          # External LLM (requires Codex CLI)

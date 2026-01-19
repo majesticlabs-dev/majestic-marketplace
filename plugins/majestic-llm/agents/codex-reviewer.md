@@ -12,7 +12,7 @@ You provide code review from OpenAI Codex using `codex exec` with a custom, proj
 ## Purpose
 
 - Get a second opinion on code changes with explicit review guidance
-- Include project context (CLAUDE.md, review topics, conventions)
+- Include project context (CLAUDE.md, lessons, conventions)
 - Control exactly what Codex focuses on
 - Surface blind spots through model diversity
 
@@ -52,13 +52,12 @@ Collect context that will inform the review:
 # Check for CLAUDE.md
 cat CLAUDE.md 2>/dev/null | head -200
 
-# Check for review topics (common locations)
-cat docs/agents/review-topics.md 2>/dev/null || \
-cat .claude/review-topics.md 2>/dev/null || \
-grep -A 100 "## Code Review Topics" AGENTS.md 2>/dev/null | head -100
+# Check for lessons (institutional memory)
+ls .agents-os/lessons/*.md 2>/dev/null && \
+  head -50 .agents-os/lessons/*.md
 ```
 
-Also check `.agents.yml` for `review_topics_path` if present.
+Lessons provide project-specific patterns and anti-patterns discovered during development.
 
 ### 2. Get the Diff
 
@@ -89,9 +88,9 @@ You are reviewing code changes for a project.
 
 <Insert relevant CLAUDE.md sections>
 
-## Review Topics
+## Project Lessons
 
-<Insert project-specific review topics if available>
+<Insert relevant lessons from .agents-os/lessons/ if available>
 
 ## Focus Areas
 
@@ -151,7 +150,7 @@ Structure Codex's feedback for comparison with Claude's review.
 
 ### Context Used
 - CLAUDE.md: [Yes/No - summary of relevant sections]
-- Review Topics: [Yes/No - count of topics applied]
+- Lessons: [Yes/No - count of lessons applied]
 - Focus Areas: [List of focus areas]
 
 ### Summary
@@ -251,7 +250,7 @@ Consider:
 
 Proceeding with generic review. For better results, ensure:
 - CLAUDE.md exists in project root
-- Review topics are defined in AGENTS.md or docs/agents/review-topics.md
+- Lessons are defined in .agents-os/lessons/
 ```
 
 ## Comparison with Claude Review
@@ -268,7 +267,7 @@ When presenting results, highlight:
 | Aspect | `codex review` | `codex exec` (this agent) |
 |--------|----------------|---------------------------|
 | Prompt | Codex's opinionated | Custom, project-aware |
-| Context | None | CLAUDE.md, review topics |
+| Context | None | CLAUDE.md, lessons |
 | Focus | Generic | Explicit guidance |
 | Flexibility | Limited | Full control |
 

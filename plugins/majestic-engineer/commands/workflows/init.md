@@ -94,7 +94,6 @@ Use `AskUserQuestion` to gather config. Ask in batches of max 4 questions.
 | Question | Options |
 |----------|---------|
 | Branch Naming | feature/desc, issue-desc, type/issue-desc, user/desc |
-| Review Topics | Default (docs/agents/review-topics.md), Skip |
 | Track in Git | Yes (shared), No (local-only) |
 | Local Overrides | Yes (if tracked), No |
 | Browser | Chrome, Brave, Edge, Skip |
@@ -121,7 +120,6 @@ Select template by tech_stack from `resources/`:
 - `rails.yaml` | `python.yaml` | `node.yaml` | `generic.yaml`
 
 Replace placeholders with collected values. Handle conditionals:
-- Only include `review_topics_path` if user selected Default
 - Only include `extras` if user selected Solid gems
 - Only include `toolbox.build_task.design_system_path` if detected
 - Only uncomment `browser.type` if Brave or Edge selected
@@ -138,9 +136,8 @@ If local overrides requested, write `.agents.local.yml` using template from `res
 
 ## Step 5: Finalize Setup
 
-1. **Create review-topics.md** - If selected, create `docs/agents/review-topics.md` with starter template
-2. **Create symlink** - `ln -s AGENTS.md CLAUDE.md` (backup if exists)
-3. **Verify** - Run verification: !`${CLAUDE_PLUGIN_ROOT}/commands/workflows/init/verify-setup.sh`
+1. **Create symlink** - `ln -s AGENTS.md CLAUDE.md` (backup if exists)
+2. **Verify** - Run verification: !`${CLAUDE_PLUGIN_ROOT}/commands/workflows/init/verify-setup.sh`
 
 ## Output Summary
 

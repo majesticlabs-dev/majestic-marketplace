@@ -93,7 +93,7 @@ Use `AskUserQuestion` to confirm each recommendation:
 - "Create these artifacts?"
 
 If approved, create using appropriate tools:
-- **Rules** → Edit CLAUDE.md or review-topics.md
+- **Rules** → Edit CLAUDE.md or create lesson in .agents-os/lessons/
 - **Skills** → Create in appropriate plugin's skills directory
 - **Hooks** → Create in .claude/hooks/
 - **Commands** → Create in appropriate plugin's commands directory

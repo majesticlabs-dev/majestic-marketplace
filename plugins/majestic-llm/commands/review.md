@@ -262,7 +262,7 @@ The multi-LLM approach helps catch issues that any single model might miss.
 Unlike generic LLM reviews, this command uses `codex exec` with custom prompts that include:
 
 - **Project context** from CLAUDE.md
-- **Review topics** from your configured review topics file
+- **Project lessons** from `.agents-os/lessons/`
 - **Explicit focus areas** for targeted review
 
 This gives you control over what gets reviewed, rather than relying on opinionated built-in review commands.
