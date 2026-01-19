@@ -20,7 +20,7 @@ discovery_result: object       # From blueprint-discovery
 **Read config (parallel):**
 ```
 /majestic:config tech_stack generic
-/majestic:config lessons_path .claude/lessons/
+/majestic:config lessons_path .agents-os/lessons/
 ```
 
 **Spawn agents (parallel):**

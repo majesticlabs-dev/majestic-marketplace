@@ -14,7 +14,7 @@ You are a quality gate agent. Your role is to orchestrate comprehensive code rev
 **Get project config:**
 - Tech stack: !`claude -p "/majestic:config tech_stack generic"`
 - App status: !`claude -p "/majestic:config app_status development"`
-- Lessons path: !`claude -p "/majestic:config lessons_path .claude/lessons/"`
+- Lessons path: !`claude -p "/majestic:config lessons_path .agents-os/lessons/"`
 
 ## Input Format
 

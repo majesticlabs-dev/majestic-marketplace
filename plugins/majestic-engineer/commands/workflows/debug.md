@@ -9,7 +9,7 @@ argument-hint: "[error message or description]"
 ## Context (read in parallel)
 
 - Tech stack: !`claude -p "/majestic:config tech_stack generic"`
-- Lessons path: !`claude -p "/majestic:config lessons_path .claude/lessons/"`
+- Lessons path: !`claude -p "/majestic:config lessons_path .agents-os/lessons/"`
 
 ## Bug Description
 

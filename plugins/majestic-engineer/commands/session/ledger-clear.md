@@ -16,7 +16,7 @@ Removes the session ledger file to start fresh.
 Read session config:
 - Session config: !`claude -p "/majestic:config session {}"`
 
-Use `session.ledger_path` if set, otherwise default to `.claude/session_ledger.md`.
+Use `session.ledger_path` if set, otherwise default to `.agents-os/session_ledger.md`.
 
 ### Step 2: Check if File Exists
 
