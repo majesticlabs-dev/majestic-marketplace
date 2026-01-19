@@ -2,7 +2,7 @@
 
 Signs and patterns that indicate AI-generated text. Use this reference to identify and eliminate AI "slop" from prose.
 
-> **Source:** Compiled from Wikipedia's "Signs of AI writing" page and community observations. These patterns appear far more frequently in LLM output than in pre-2022 human writing.
+> **Source:** Compiled from Wikipedia's "Signs of AI writing" page, WikiProject AI Cleanup, and community observations. These patterns appear far more frequently in LLM output than in pre-2022 human writing.
 
 ## Quick Detection
 
@@ -177,6 +177,28 @@ Remove entirely:
 - "Great question!"
 - "That's an interesting point."
 
+### Knowledge Cutoff Disclaimers
+
+Remove chatbot leakage:
+- "As of my last update..."
+- "Based on my training data..."
+- "I don't have access to real-time information..."
+- "My knowledge cutoff is..."
+- "I cannot browse the internet..."
+
+### False Range Constructions
+
+AI creates artificial scope with "from X to Y" patterns:
+
+| AI Pattern | Problem |
+|------------|---------|
+| "from beginners to experts" | Vague, adds no information |
+| "from small startups to large enterprises" | Generic scope-padding |
+| "from theory to practice" | Filler phrase |
+| "from planning to execution" | Obvious lifecycle, no insight |
+
+**Fix:** Be specific about the actual audience or scope, or remove entirely.
+
 ---
 
 ## 3. Structural Patterns
@@ -223,9 +245,66 @@ AI defaults to academic essay format:
 
 **Fix:** Start with the most important information. Cut the summary conclusion.
 
+### The "-ing" Phrase Analysis
+
+AI uses superficial present participle phrases to add false depth:
+
+**Pattern:**
+```
+[Subject], combining [aspect] with [aspect], represents...
+Showcasing [quality] while maintaining [quality], the [subject]...
+Drawing from [influence] and incorporating [element]...
+```
+
+**Fix:** Replace with concrete statements. "The app combines X with Y" → "The app does X. It also does Y."
+
+### The Rule of Three
+
+AI mechanically groups things in threes:
+
+**Pattern:**
+```
+...brings together innovation, creativity, and excellence.
+...marked by dedication, perseverance, and passion.
+...offers quality, reliability, and value.
+```
+
+**Fix:** Use the actual number of items. If there are 2 things, list 2. If 4, list 4. Forced triples feel artificial.
+
 ---
 
-## 4. Attribution Red Flags
+## 4. Style & Formatting Patterns
+
+Visual and formatting choices that signal AI generation.
+
+### Punctuation Overuse
+
+| Pattern | Problem | Fix |
+|---------|---------|-----|
+| Excessive em dashes (—) | AI loves em dashes for interjections | Use commas, parentheses, or restructure |
+| Multiple em dashes per paragraph | Looks mechanical | Limit to 1 per paragraph max |
+| Curly quotes in plain text | AI defaults to typographic quotes | Match document conventions |
+
+### Text Decoration
+
+| Pattern | Problem | Fix |
+|---------|---------|-----|
+| Mechanical boldface emphasis | Bolding obvious keywords | Bold only truly important terms |
+| **Bolded inline headers:** with colons | Formulaic structure | Use proper headings or remove |
+| Emoji decoration 🎯 | Unprofessional in most business writing | Remove unless brand-appropriate |
+| Excessive bullet points | Everything becomes a list | Use prose where appropriate |
+
+### Heading Conventions
+
+| Pattern | Problem | Fix |
+|---------|---------|-----|
+| Title Case In Every Heading | AI defaults to title case | Match document style guide |
+| Generic heading names | "Overview", "Key Features", "Conclusion" | Use specific, descriptive headings |
+| Perfectly balanced sections | Each section suspiciously similar length | Vary section length naturally |
+
+---
+
+## 5. Attribution Red Flags
 
 ### Vague Expert Attribution
 
@@ -257,7 +336,7 @@ AI invents consensus without sources:
 
 ---
 
-## 5. Detection Checklist
+## 6. Detection Checklist
 
 Use this checklist when reviewing content:
 
@@ -285,31 +364,48 @@ Use this checklist when reviewing content:
 - [ ] Claims supported by specific sources
 - [ ] No overgeneralization to "the public" or "society"
 
+### Style & Formatting Check
+- [ ] Em dashes used sparingly (max 1 per paragraph)
+- [ ] No mechanical boldface on obvious keywords
+- [ ] No **Bolded Inline Headers:** pattern
+- [ ] Heading case matches document style
+- [ ] No emoji unless brand-appropriate
+- [ ] No forced "rule of three" groupings
+- [ ] No chatbot knowledge cutoff disclaimers
+
 ---
 
-## 6. Severity Levels
+## 7. Severity Levels
 
 ### High Severity (Always Fix)
 - Sycophantic phrases (chatbot leakage)
+- Knowledge cutoff disclaimers
 - "In conclusion..." / "In summary..."
 - "In today's landscape..."
 - Vague expert attribution without sources
 - Formulaic challenges/future sections
+- Emoji in professional writing
 
 ### Medium Severity (Fix When Clustered)
 - AI vocabulary words (3+ in same paragraph)
 - Mechanical balance phrases
 - Future speculation phrases
 - Essay-style structure
+- Forced "rule of three" groupings
+- Excessive em dashes
+- **Bolded inline headers:** pattern
+- False range constructions ("from X to Y")
 
 ### Low Severity (Context-Dependent)
 - Individual AI vocabulary words
 - Transition words like "moreover"
 - Single instances of hedge phrases
+- Title case in headings (may be house style)
+- Curly quotes (may be document convention)
 
 ---
 
-## 7. Before/After Examples
+## 8. Before/After Examples
 
 ### Example 1: Opening Paragraph
 
