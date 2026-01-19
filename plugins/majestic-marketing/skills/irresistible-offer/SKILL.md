@@ -164,7 +164,54 @@ Words proven to increase conversion:
 
 **Include specific placement recommendations for each trigger category.**
 
-### 3. Value-Building Techniques
+### 3. Mental Models for Offer Design
+
+Use these psychological models to strengthen offer elements:
+
+#### Buyer Decision Models
+
+| Model | Principle | Offer Application |
+|-------|-----------|-------------------|
+| **Loss Aversion** | Losses hurt 2x more than equivalent gains | Frame as "cost of NOT buying" - quantify what they lose by waiting |
+| **Anchoring** | First number shapes all subsequent judgments | Show higher reference price before revealing actual price |
+| **Social Proof** | People follow what others do | "[X] customers" near CTA, testimonials after claims |
+| **Reciprocity** | People return favors | Give value first (free resource, insight) before asking |
+| **Commitment/Consistency** | Small yeses lead to bigger yeses | Micro-commitments before purchase (quiz, assessment) |
+| **Scarcity** | Limited availability increases desire | Genuine capacity limits, time-based bonuses |
+| **Authority** | Experts are trusted | Credentials near claims, media logos, certifications |
+
+#### Pricing Psychology Models
+
+| Model | Principle | Application |
+|-------|-----------|-------------|
+| **Charm Pricing** | $97 feels significantly less than $100 | Use .97 or .99 endings for consumer offers |
+| **Decoy Effect** | Middle option wins when positioned right | 3-tier pricing with "recommended" middle tier |
+| **Price-Quality Inference** | Higher price = higher perceived quality | Don't underprice premium offers |
+| **Payment Decoupling** | Separate payment from consumption | Emphasize what they GET, not what they PAY |
+| **Endowment Effect** | People overvalue what they own | "Your [product]" language, trial periods |
+
+#### Persuasion Models
+
+| Model | Principle | Application |
+|-------|-----------|-------------|
+| **IKEA Effect** | People value what they help create | Customization options, "build your bundle" |
+| **Peak-End Rule** | Experiences judged by peak + end | Strong guarantee at end, highlight best testimonial |
+| **Mere Exposure** | Familiarity breeds preference | Retargeting, multiple touchpoints before offer |
+| **Framing Effect** | Same info, different frame = different response | "95% success rate" vs "5% failure rate" |
+| **Bandwagon Effect** | Popular = desirable | "Fastest-growing", "Most popular choice" |
+
+#### Model Selection Guide
+
+| Offer Challenge | Primary Model | Secondary Model |
+|-----------------|---------------|-----------------|
+| Price objections | Loss Aversion | Anchoring |
+| Building trust | Social Proof | Authority |
+| Creating urgency | Scarcity | Loss Aversion |
+| Increasing perceived value | Anchoring | Decoy Effect |
+| Reducing purchase anxiety | Endowment Effect | Commitment |
+| Cold audience conversion | Reciprocity | Mere Exposure |
+
+### 4. Value-Building Techniques
 
 **Price Anchoring:**
 - Compare to higher-priced alternatives
@@ -185,7 +232,7 @@ ROI: [X]x your investment
 - What opportunities are being missed?
 - What's the emotional cost?
 
-### 4. Before/After Offer Transformations
+### 5. Before/After Offer Transformations
 
 Provide 3 examples relevant to their business type:
 
@@ -210,7 +257,7 @@ Improvements:
 Expected Conversion Lift: [X]%
 ```
 
-### 5. Split-Test Recommendations
+### 6. Split-Test Recommendations
 
 Prioritized elements to test:
 

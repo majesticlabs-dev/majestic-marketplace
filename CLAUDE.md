@@ -110,7 +110,14 @@ When an agent invokes a skill:
 - Avoid redundant patterns like `ralph:ralph` — use descriptive names (`start`, `cancel`, `help`)
 
 ### Validation
-Run `skill-linter` for new skills.
+
+**New skills:** Run `skill-linter` before committing.
+
+**Modifying existing skills:**
+1. Read entire skill file first
+2. Make focused edits (one concern per Edit call)
+3. Run `skill-linter` on modified skill(s)
+4. Verify line count remains under 500
 
 ### Content Rules
 Skills = LLM instructions, not human docs. Must contain NEW info Claude doesn't know.

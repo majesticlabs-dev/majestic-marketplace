@@ -1,18 +1,27 @@
 ---
 name: landing-page-builder
-description: Generate structured landing page copy with hero, body, proof, and CTA sections. Framework-agnostic - adapts approach based on awareness level and offer type.
+description: Generate structured landing page copy OR audit existing pages for conversion optimization. Framework-agnostic - adapts approach based on awareness level and offer type.
 triggers:
   - landing page
   - landing page copy
   - sales page copy
   - conversion page
   - lead page
-allowed-tools: Read, Write, Edit, AskUserQuestion
+  - audit landing page
+  - optimize landing page
+  - review my landing page
+  - improve conversion
+  - cro audit
+allowed-tools: Read, Write, Edit, AskUserQuestion, WebFetch
 ---
 
 # Landing Page Builder
 
-Generate structured landing page copy that converts. Framework-agnostic approach - you choose the best structure based on context.
+Two modes:
+1. **Build Mode** (default): Generate structured landing page copy that converts
+2. **Audit Mode**: Analyze existing pages and recommend conversion improvements
+
+Detect mode from user intent. If they share a URL or existing copy, switch to Audit Mode.
 
 ## Required Inputs
 
@@ -210,6 +219,106 @@ Use these insights to:
 - Include design/visual direction - copy only
 - Promise specific conversion rates
 
+---
+
+## CRO Audit Mode
+
+When user provides existing page URL or copy, switch to audit mode.
+
+### Detection
+
+Audit mode triggers when user:
+- Shares a URL to analyze
+- Pastes existing landing page copy
+- Asks to "review", "audit", "optimize", or "improve" a page
+
+### CRO Analysis Hierarchy
+
+Analyze in order of conversion impact (highest first):
+
+| Priority | Element | What to Check |
+|----------|---------|---------------|
+| 1 | **Value Proposition** | Can visitor understand what this is and why they should care within 5 seconds? |
+| 2 | **Headline** | Does it match traffic source? Specific outcome? Customer language? |
+| 3 | **CTA Placement & Copy** | Above fold? Benefit-oriented? Repeated after proof? |
+| 4 | **Visual Hierarchy** | Clear reading path? Key info scannable? |
+| 5 | **Trust Signals** | Near CTAs? After benefit claims? Specific not generic? |
+| 6 | **Objection Handling** | Top 3 objections addressed? Before final CTA? |
+| 7 | **Friction Points** | Form length? Required fields? Unclear next steps? |
+
+### Page-Type Experiment Libraries
+
+Provide 3-5 prioritized experiments based on page type:
+
+**Homepage Experiments:**
+- Hero headline A/B (outcome vs. category statement)
+- Social proof placement (above fold vs. below hero)
+- CTA copy (action-focused vs. benefit-focused)
+- Navigation visibility (full vs. minimal)
+
+**Landing Page Experiments:**
+- Long-form vs. short-form copy
+- Video vs. text hero
+- Single CTA vs. multiple CTAs
+- Testimonial format (text vs. video vs. case study)
+- Price anchoring presence
+
+**Pricing Page Experiments:**
+- Number of tiers (2 vs. 3 vs. 4)
+- Feature comparison table presence
+- Annual vs. monthly default
+- "Most popular" badge placement
+- FAQ section inclusion
+
+**Signup Flow Experiments:**
+- Single-page vs. multi-step form
+- Social login prominence
+- Field reduction (email-only vs. full form)
+- Progress indicator presence
+- Benefit reminders during form
+
+### Audit Output Format
+
+```markdown
+## CRO AUDIT: [Page Name/URL]
+
+### 5-Second Test Result
+[What a visitor understands in 5 seconds - pass/fail]
+
+### Priority Issues (Fix First)
+1. **[Element]**: [Problem] → [Specific fix]
+2. **[Element]**: [Problem] → [Specific fix]
+3. **[Element]**: [Problem] → [Specific fix]
+
+### Quick Wins (Easy improvements)
+- [Change 1]
+- [Change 2]
+- [Change 3]
+
+### Recommended Experiments
+| Test | Hypothesis | Expected Impact |
+|------|------------|-----------------|
+| [Test 1] | [Why it might work] | High/Medium/Low |
+| [Test 2] | [Why it might work] | High/Medium/Low |
+
+### Rewritten Elements
+**Current Headline:** "[Original]"
+**Suggested Headline:** "[Improved version]"
+
+**Current CTA:** "[Original]"
+**Suggested CTA:** "[Improved version]"
+
+### Before/After Score
+| Element | Before | After (if implemented) |
+|---------|--------|------------------------|
+| Clarity | X/10 | X/10 |
+| Trust | X/10 | X/10 |
+| Urgency | X/10 | X/10 |
+| Overall | X/10 | X/10 |
+```
+
+---
+
 ## When to Use This vs. `sales-page`
 
 | Use `landing-page-builder` when... | Use `sales-page` when... |
@@ -218,3 +327,4 @@ Use these insights to:
 | Need quick copy execution | Want competitive research |
 | Already have positioning | Need formula libraries |
 | Time is limited | Want blueprint + templates |
+| Auditing an existing page | Building from scratch with templates |
