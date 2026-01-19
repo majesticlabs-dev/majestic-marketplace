@@ -1,166 +1,104 @@
 ---
 name: great-expectations
 description: Data validation using Great Expectations. Expectation suites, checkpoints, and data docs for pipeline monitoring.
-allowed-tools: Read, Write, Edit, Grep, Glob, Bash
+allowed-tools: Read Write Edit Bash
 ---
 
 # Great Expectations
 
-Expectation-based data validation for data pipelines.
+**Audience:** Data engineers building validated data pipelines.
 
-## Quick Start
+**Goal:** Provide GX patterns for expectation-based validation and monitoring.
 
-```python
-import great_expectations as gx
+## Scripts
 
-# Get or create context
-context = gx.get_context()
-
-# Add data source
-datasource = context.sources.add_pandas("my_datasource")
-
-# Add data asset
-asset = datasource.add_dataframe_asset(name="users")
-
-# Build batch request
-batch_request = asset.build_batch_request(dataframe=df)
-```
-
-## Define Expectations
+Execute GX functions from `scripts/expectations.py`:
 
 ```python
-# Create expectation suite
-suite = context.add_expectation_suite("user_data_suite")
-
-# Column existence
-suite.add_expectation(
-    gx.expectations.ExpectColumnToExist(column="user_id")
-)
-
-# Null checks
-suite.add_expectation(
-    gx.expectations.ExpectColumnValuesToNotBeNull(column="user_id")
-)
-
-# Value ranges
-suite.add_expectation(
-    gx.expectations.ExpectColumnValuesToBeBetween(
-        column="age",
-        min_value=0,
-        max_value=150
-    )
-)
-
-# Uniqueness
-suite.add_expectation(
-    gx.expectations.ExpectColumnValuesToBeUnique(column="user_id")
-)
-
-# Categorical values
-suite.add_expectation(
-    gx.expectations.ExpectColumnValuesToBeInSet(
-        column="status",
-        value_set=["active", "inactive", "pending"]
-    )
-)
-
-# Regex patterns
-suite.add_expectation(
-    gx.expectations.ExpectColumnValuesToMatchRegex(
-        column="email",
-        regex=r"^[\w\.-]+@[\w\.-]+\.\w+$"
-    )
+from scripts.expectations import (
+    get_pandas_context,
+    add_dataframe_asset,
+    create_basic_suite,
+    run_validation
 )
 ```
 
-## Common Expectations
+## Usage Examples
+
+### Quick Setup
 
 ```python
-# Table-level
-ExpectTableRowCountToBeBetween(min_value=1000, max_value=10000)
-ExpectTableColumnCountToEqual(value=10)
+from scripts.expectations import get_pandas_context, add_dataframe_asset
 
-# Column existence and types
-ExpectColumnToExist(column="id")
-ExpectColumnValuesToBeOfType(column="id", type_="int")
-
-# Null handling
-ExpectColumnValuesToNotBeNull(column="id")
-ExpectColumnValuesToBeNull(column="deprecated_field")
-
-# Numeric ranges
-ExpectColumnValuesToBeBetween(column="age", min_value=0, max_value=150)
-ExpectColumnMeanToBeBetween(column="revenue", min_value=100, max_value=1000)
-ExpectColumnSumToBeBetween(column="quantity", min_value=0)
-
-# String patterns
-ExpectColumnValuesToMatchRegex(column="phone", regex=r"^\d{3}-\d{4}$")
-ExpectColumnValueLengthsToBeBetween(column="name", min_value=1, max_value=100)
-
-# Categorical
-ExpectColumnValuesToBeInSet(column="status", value_set=["A", "B", "C"])
-ExpectColumnDistinctValuesToBeInSet(column="country", value_set=["US", "CA", "UK"])
-
-# Uniqueness
-ExpectColumnValuesToBeUnique(column="id")
-ExpectCompoundColumnsToBeUnique(column_list=["user_id", "date"])
+context, datasource = get_pandas_context("my_datasource")
+batch_request = add_dataframe_asset(datasource, "users", df)
 ```
 
-## Run Validation
+### Create Expectation Suite
 
 ```python
-# Create checkpoint
-checkpoint = context.add_or_update_checkpoint(
-    name="user_data_checkpoint",
-    validations=[{
-        "batch_request": batch_request,
-        "expectation_suite_name": "user_data_suite"
-    }]
+from scripts.expectations import create_basic_suite
+
+columns_config = {
+    'user_id': {'not_null': True, 'unique': True, 'type': 'int'},
+    'age': {'min': 0, 'max': 150},
+    'status': {'values': ['active', 'inactive', 'pending']},
+    'email': {'regex': r'^[\w\.-]+@[\w\.-]+\.\w+$'}
+}
+
+suite = create_basic_suite(context, "user_suite", columns_config)
+```
+
+### Run Validation
+
+```python
+from scripts.expectations import run_validation
+
+results = run_validation(
+    context,
+    checkpoint_name="user_checkpoint",
+    batch_request=batch_request,
+    suite_name="user_suite"
 )
 
-# Run checkpoint
-results = checkpoint.run()
-
-# Check if passed
-if results.success:
+if results['success']:
     print("All expectations passed!")
 else:
-    print("Validation failed")
-    for result in results.run_results.values():
-        for expectation_result in result.results:
-            if not expectation_result.success:
-                print(f"  Failed: {expectation_result.expectation_config.expectation_type}")
+    for failure in results['failures']:
+        print(f"Failed: {failure['expectation']} on {failure['column']}")
 ```
+
+## Common Expectations Reference
+
+| Category | Expectation | Description |
+|----------|-------------|-------------|
+| Table | `ExpectTableRowCountToBeBetween` | Row count range |
+| Existence | `ExpectColumnToExist` | Column must exist |
+| Nulls | `ExpectColumnValuesToNotBeNull` | No null values |
+| Range | `ExpectColumnValuesToBeBetween` | Value bounds |
+| Set | `ExpectColumnValuesToBeInSet` | Allowed values |
+| Pattern | `ExpectColumnValuesToMatchRegex` | Regex match |
+| Unique | `ExpectColumnValuesToBeUnique` | No duplicates |
 
 ## Data Docs
 
 ```python
-# Build and open data docs (HTML reports)
+# Build and open HTML reports
 context.build_data_docs()
 context.open_data_docs()
 ```
 
-## Profiler (Auto-generate Expectations)
+## Directory Structure
 
-```python
-# Create profiler
-profiler = gx.RuleBasedProfiler(
-    name="user_profiler",
-    config_version=1.0,
-    rules={
-        "rule_for_columns": {
-            "domain_builder": {
-                "class_name": "ColumnDomainBuilder",
-            },
-            "expectation_configuration_builders": [
-                {"class_name": "DefaultExpectationConfigurationBuilder"}
-            ]
-        }
-    }
-)
-
-# Run profiler
-suite = profiler.run(batch_request=batch_request)
+```
+great_expectations/
+├── great_expectations.yml     # Config
+├── expectations/              # Expectation suites (JSON)
+├── checkpoints/               # Checkpoint definitions
+├── plugins/                   # Custom expectations
+└── uncommitted/
+    ├── data_docs/            # Generated HTML docs
+    └── validations/          # Validation results
 ```
 
 ## When to Use Great Expectations
@@ -172,17 +110,10 @@ suite = profiler.run(batch_request=batch_request)
 | Automated data docs | ✓ | - |
 | Simple DataFrame checks | - | Pandera |
 | Record-level API validation | - | Pydantic |
-| Real-time streaming | - | Custom |
 
-## Directory Structure
+## Dependencies
 
 ```
-great_expectations/
-├── great_expectations.yml     # Config
-├── expectations/              # Expectation suites (JSON)
-├── checkpoints/               # Checkpoint definitions
-├── plugins/                   # Custom expectations
-├── uncommitted/
-│   ├── data_docs/            # Generated HTML docs
-│   └── validations/          # Validation results
+great_expectations>=0.18
+pandas
 ```
