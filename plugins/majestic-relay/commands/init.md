@@ -104,12 +104,54 @@ Extract from the blueprint:
 - [ ] Criterion 2
 ```
 
+### 4.5 Generate Missing Acceptance Criteria
+
+For each task that has no acceptance_criteria (or empty list):
+
+```
+For each TASK in parsed_tasks:
+  If TASK.acceptance_criteria is empty or missing:
+    AC = Generate using Claude headless:
+
+    prompt: |
+      Generate 2-4 specific, verifiable acceptance criteria for:
+
+      Task: {TASK.title}
+      Files: {TASK.files}
+
+      Requirements:
+      - Specific (not vague like "works correctly")
+      - Verifiable (can objectively check if done)
+      - Behavior-focused (what it does, not how)
+
+      Output ONLY a YAML list, nothing else:
+      - "First criterion"
+      - "Second criterion"
+
+    TASK.acceptance_criteria = parse_yaml(AC)
+```
+
+**Example:**
+
+Input task:
+```
+T1: Create users migration
+Files: db/migrate/xxx_create_users.rb
+```
+
+Generated AC:
+```yaml
+- "Migration creates users table with id, email, password_digest, timestamps"
+- "Migration is reversible (down method drops table)"
+- "Email column has unique index"
+```
+
 ### 5. Generate epic.yml
 
 Write to `.majestic/epic.yml`:
 
 ```yaml
-version: 1
+version: 2
 id: "{YYYYMMDD}-{slugified-title}"
 source: "{blueprint_path}"
 created_at: "{ISO timestamp}"

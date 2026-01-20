@@ -1,7 +1,7 @@
 {
   "name": "majestic-relay",
-  "version": "1.0.5",
-  "description": "Fresh-context task execution with attempt ledger. Shell-orchestrated epic workflow with re-anchoring and gating.",
+  "version": "1.1.0",
+  "description": "Fresh-context task execution with AC generation and quality-gate verification. Shell-orchestrated epic workflow with re-anchoring and gating.",
   "author": {
     "name": "David Paluy",
     "url": "https://github.com/dpaluy",

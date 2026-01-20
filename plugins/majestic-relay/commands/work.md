@@ -1,13 +1,13 @@
 ---
 name: majestic-relay:work
-description: Execute epic tasks with fresh-context Claude instances
-argument-hint: "[task_id] [--review|--no-review] [--max-attempts N]"
+description: Execute epic tasks with fresh-context Claude instances and quality gate verification
+argument-hint: "[task_id] [--max-attempts N]"
 allowed-tools: Bash(${CLAUDE_PLUGIN_ROOT}/scripts/relay-work.sh:*)
 ---
 
 # Execute Epic Tasks
 
-Run pending tasks from `.majestic/epic.yml` using fresh Claude instances per task.
+Run pending tasks from `.majestic/epic.yml` using fresh Claude instances per task. Each task must pass quality gate verification before completion.
 
 ## Input
 
@@ -16,8 +16,6 @@ Run pending tasks from `.majestic/epic.yml` using fresh Claude instances per tas
 
 Options:
   [task_id]         Run specific task only (e.g., T2)
-  --review          Force review step even if disabled in config
-  --no-review       Skip review step even if enabled in config
   --max-attempts N  Override max attempts per task
 ```
 
@@ -52,8 +50,14 @@ The shell script orchestrates task execution:
 │  3. Build re-anchoring prompt                          │
 │  4. Spawn fresh Claude: claude -p --output-format json │
 │  5. Parse structured result with jq                    │
-│  6. Run optional review (repoprompt/gemini)            │
-│  7. Update ledger with receipt                         │
+│  6. Run quality-gate agent (mandatory):                │
+│     - Verifies acceptance criteria                     │
+│     - Runs configured reviewers from .agents.yml       │
+│     - Returns: APPROVED | NEEDS CHANGES | BLOCKED      │
+│  7. Handle verdict:                                    │
+│     - APPROVED → Mark complete                         │
+│     - NEEDS CHANGES → Retry with findings              │
+│     - BLOCKED → Gate task                              │
 │  8. Loop until all tasks complete or blocked           │
 │                                                         │
 └─────────────────────────────────────────────────────────┘
@@ -106,20 +110,29 @@ Gated tasks require manual intervention:
 
 [T1] Create users table migration
      Attempt 1/3...
-     ✅ Success
+     🔍 Running quality gate...
+     ✅ Quality gate: APPROVED
+     ✅ Task complete
 
 [T2] Add login form component
      Attempt 1/3...
-     ❌ Failed: Missing dependency
+     🔍 Running quality gate...
+     ⚠️ Quality gate: NEEDS CHANGES
+     ❌ Failed: Quality gate requires changes
      Attempt 2/3...
-     ✅ Success
+     🔍 Running quality gate...
+     ✅ Quality gate: APPROVED
+     ✅ Task complete
 
 [T3] Implement password hashing
      Attempt 1/3...
-     🔍 Running review (gemini)...
-     ✅ Approved
+     🔍 Running quality gate...
+     🛑 Quality gate: BLOCKED
+     (Task gated - critical security issue)
 
-✅ Epic complete! (3/3 tasks)
+⏸️ No executable tasks remaining
+   Completed: 2/3
+   Gated: 1 tasks
 ```
 
 ## Error Handling
@@ -129,7 +142,8 @@ Gated tasks require manual intervention:
 | No pending tasks | Check for gated tasks, report status |
 | All tasks blocked | Report dependency chain, suggest manual fix |
 | Claude instance fails | Record failure receipt, retry or gate |
-| Review rejects | Record as failure, retry with feedback |
+| Quality gate: NEEDS CHANGES | Record findings, retry with feedback |
+| Quality gate: BLOCKED | Gate task immediately (critical issue) |
 | Ctrl+C interrupt | Save current state, exit cleanly |
 
 ## Notes

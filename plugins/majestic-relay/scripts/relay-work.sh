@@ -191,24 +191,71 @@ while true; do
   RESULT_ERROR_CAT=$(echo "$OUTPUT" | jq -r '.structured_output.error_category // ""')
   RESULT_SUGGESTION=$(echo "$OUTPUT" | jq -r '.structured_output.suggestion // ""')
 
-  # Optional review step
-  if [[ "$REVIEW_ENABLED" == "true" && "$RESULT_STATUS" == "success" ]]; then
-    echo -e "     ${BLUE}🔍 Running review ($REVIEW_PROVIDER)...${NC}"
+  # Run quality gate (replaces old review step)
+  # Quality gate verifies AC + runs configured reviewers
+  if [[ "$RESULT_STATUS" == "success" ]]; then
+    echo -e "     ${BLUE}🔍 Running quality gate...${NC}"
 
-    REVIEW_RESULT=$(run_review "$REVIEW_PROVIDER" "$NEXT_TASK" "$OUTPUT")
+    # Build quality gate prompt
+    # Quality gate agent expects: Context, Branch, AC Path, Task ID
+    CURRENT_BRANCH=$(git branch --show-current 2>/dev/null || echo 'unknown')
 
-    if [[ "$REVIEW_RESULT" != "approved" ]]; then
-      RESULT_STATUS="failure"
-      RESULT_MESSAGE="Review rejected: $REVIEW_RESULT"
-      echo -e "     ${RED}❌ Review rejected${NC}"
+    QG_PROMPT="You are running quality-gate verification for a relay task.
+
+Use the Task tool to invoke the quality-gate agent:
+
+Task(majestic-engineer:workflow:quality-gate):
+  prompt: |
+    Context: ${NEXT_TASK} - ${TASK_TITLE}
+    Branch: ${CURRENT_BRANCH}
+    AC Path: ${EPIC}
+    Task ID: ${NEXT_TASK}
+
+Return the verdict exactly as: Verdict: APPROVED or Verdict: NEEDS CHANGES or Verdict: BLOCKED"
+
+    # Call quality-gate via Claude
+    QG_OUTPUT=""
+    if QG_OUTPUT=$(claude -p "$QG_PROMPT" --allowedTools 'Task,Bash(git diff:*),Bash(git status:*),Bash(git log:*),Read,Grep,Glob' 2>&1); then
+      # Parse verdict from output (look for "Verdict: APPROVED/NEEDS CHANGES/BLOCKED")
+      QG_VERDICT=$(echo "$QG_OUTPUT" | grep -oE 'Verdict: (APPROVED|NEEDS CHANGES|BLOCKED)' | tail -1 | cut -d' ' -f2-)
+
+      case "$QG_VERDICT" in
+        "APPROVED")
+          echo -e "     ${GREEN}✅ Quality gate: APPROVED${NC}"
+          RESULT_STATUS="success"
+          ;;
+        "NEEDS CHANGES")
+          echo -e "     ${YELLOW}⚠️ Quality gate: NEEDS CHANGES${NC}"
+          RESULT_STATUS="failure"
+          RESULT_MESSAGE="Quality gate requires changes"
+          RESULT_ERROR_CAT="quality_gate"
+          # Extract findings for next attempt
+          RESULT_SUGGESTION=$(echo "$QG_OUTPUT" | grep -A 100 "### Required Fixes" | head -50)
+          ;;
+        "BLOCKED")
+          echo -e "     ${RED}🛑 Quality gate: BLOCKED${NC}"
+          # Gate the task immediately - critical issues found
+          ledger_gate_task "$NEXT_TASK" "quality_gate_blocked"
+          echo ""
+          continue
+          ;;
+        *)
+          # Fallback: if no clear verdict, treat as needs review
+          echo -e "     ${YELLOW}⚠️ Quality gate: unclear verdict, treating as needs changes${NC}"
+          RESULT_STATUS="failure"
+          RESULT_MESSAGE="Quality gate returned unclear verdict"
+          RESULT_ERROR_CAT="quality_gate"
+          ;;
+      esac
     else
-      echo -e "     ${GREEN}✓ Review approved${NC}"
+      # Quality gate failed to run - log warning but don't block
+      echo -e "     ${YELLOW}⚠️ Quality gate agent failed, using self-reported status${NC}"
     fi
   fi
 
   # Update ledger with receipt
   if [[ "$RESULT_STATUS" == "success" ]]; then
-    echo -e "     ${GREEN}✅ Success${NC}"
+    echo -e "     ${GREEN}✅ Task complete${NC}"
     ledger_record_attempt_success "$NEXT_TASK" "$ATTEMPT_ID" "$RESULT_MESSAGE" "$RESULT_FILES"
   else
     echo -e "     ${RED}❌ Failed: $RESULT_MESSAGE${NC}"
