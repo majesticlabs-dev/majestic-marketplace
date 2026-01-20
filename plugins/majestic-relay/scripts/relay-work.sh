@@ -194,14 +194,21 @@ Read the ledger and process all learnings. Use AskUserQuestion before making any
   PROMPT=$(build_task_prompt "$EPIC" "$LEDGER" "$NEXT_TASK")
 
   # Spawn fresh Claude instance with JSON output
-  OUTPUT=""
-  EXIT_CODE=0
+  # Use tee to stream output to terminal while capturing to temp file
+  TEMP_OUTPUT=$(mktemp)
+  trap "rm -f $TEMP_OUTPUT" RETURN
 
-  if OUTPUT=$(claude -p "$PROMPT" --permission-mode bypassPermissions --output-format json --json-schema "$TASK_RESULT_SCHEMA" 2>&1); then
+  EXIT_CODE=0
+  echo ""
+  if claude -p "$PROMPT" --permission-mode bypassPermissions --output-format json --json-schema "$TASK_RESULT_SCHEMA" 2>&1 | tee "$TEMP_OUTPUT"; then
     EXIT_CODE=0
   else
     EXIT_CODE=$?
   fi
+  echo ""
+
+  OUTPUT=$(cat "$TEMP_OUTPUT")
+  rm -f "$TEMP_OUTPUT"
 
   # Parse structured result with jq (from structured_output field)
   RESULT_STATUS=$(echo "$OUTPUT" | jq -r '.structured_output.status // "failure"')
@@ -232,9 +239,12 @@ Task(majestic-engineer:workflow:quality-gate):
 
 Return the verdict exactly as: Verdict: APPROVED or Verdict: NEEDS CHANGES or Verdict: BLOCKED"
 
-    # Call quality-gate via Claude
-    QG_OUTPUT=""
-    if QG_OUTPUT=$(claude -p "$QG_PROMPT" --allowedTools 'Task,Bash(git diff:*),Bash(git status:*),Bash(git log:*),Read,Grep,Glob' 2>&1); then
+    # Call quality-gate via Claude (stream output)
+    QG_TEMP=$(mktemp)
+    echo ""
+    if claude -p "$QG_PROMPT" --allowedTools 'Task,Bash(git diff:*),Bash(git status:*),Bash(git log:*),Read,Grep,Glob' 2>&1 | tee "$QG_TEMP"; then
+      QG_OUTPUT=$(cat "$QG_TEMP")
+      rm -f "$QG_TEMP"
       # Parse verdict from output (look for "Verdict: APPROVED/NEEDS CHANGES/BLOCKED")
       QG_VERDICT=$(echo "$QG_OUTPUT" | grep -oE 'Verdict: (APPROVED|NEEDS CHANGES|BLOCKED)' | tail -1 | cut -d' ' -f2-)
 
@@ -268,8 +278,10 @@ Return the verdict exactly as: Verdict: APPROVED or Verdict: NEEDS CHANGES or Ve
       esac
     else
       # Quality gate failed to run - log warning but don't block
+      rm -f "$QG_TEMP"
       echo -e "     ${YELLOW}⚠️ Quality gate agent failed, using self-reported status${NC}"
     fi
+    echo ""
   fi
 
   # Update ledger with receipt
