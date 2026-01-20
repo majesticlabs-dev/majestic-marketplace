@@ -6,7 +6,7 @@ argument-hint: "<path/to/blueprint.md>"
 
 # Initialize Epic from Blueprint
 
-Parse a blueprint markdown file and generate `.majestic/epic.yml` + `.majestic/attempt-ledger.yml` for fresh-context task execution.
+Parse a blueprint markdown file and generate `.agents-os/relay/epic.yml` + `.agents-os/relay/attempt-ledger.yml` for fresh-context task execution.
 
 ## Input
 
@@ -32,15 +32,15 @@ If file doesn't exist:
 
 ### 2. Setup Project (First Run)
 
-**Add `.majestic/` to `.gitignore`:**
+**Ensure `.agents-os/` is gitignored:**
 
 ```
 GITIGNORE = Read(".gitignore") or ""
 
-If ".majestic/" not in GITIGNORE:
+If ".agents-os/" not in GITIGNORE:
   Append to .gitignore:
-    # Relay epic state (ephemeral)
-    .majestic/
+    # Agent state (ephemeral)
+    .agents-os/
 ```
 
 **Initialize relay config in `.agents.yml`:**
@@ -104,12 +104,54 @@ Extract from the blueprint:
 - [ ] Criterion 2
 ```
 
+### 4.5 Generate Missing Acceptance Criteria
+
+For each task that has no acceptance_criteria (or empty list):
+
+```
+For each TASK in parsed_tasks:
+  If TASK.acceptance_criteria is empty or missing:
+    AC = Generate using Claude headless:
+
+    prompt: |
+      Generate 2-4 specific, verifiable acceptance criteria for:
+
+      Task: {TASK.title}
+      Files: {TASK.files}
+
+      Requirements:
+      - Specific (not vague like "works correctly")
+      - Verifiable (can objectively check if done)
+      - Behavior-focused (what it does, not how)
+
+      Output ONLY a YAML list, nothing else:
+      - "First criterion"
+      - "Second criterion"
+
+    TASK.acceptance_criteria = parse_yaml(AC)
+```
+
+**Example:**
+
+Input task:
+```
+T1: Create users migration
+Files: db/migrate/xxx_create_users.rb
+```
+
+Generated AC:
+```yaml
+- "Migration creates users table with id, email, password_digest, timestamps"
+- "Migration is reversible (down method drops table)"
+- "Email column has unique index"
+```
+
 ### 5. Generate epic.yml
 
-Write to `.majestic/epic.yml`:
+Write to `.agents-os/relay/epic.yml`:
 
 ```yaml
-version: 1
+version: 2
 id: "{YYYYMMDD}-{slugified-title}"
 source: "{blueprint_path}"
 created_at: "{ISO timestamp}"
@@ -151,7 +193,7 @@ REVIEW_PROVIDER = config-reader("relay.review.provider", "none")
 
 ### 7. Generate attempt-ledger.yml
 
-Write to `.majestic/attempt-ledger.yml`:
+Write to `.agents-os/relay/attempt-ledger.yml`:
 
 ```yaml
 version: 1
@@ -188,14 +230,14 @@ relay_status:
 ### 8. Create Directory
 
 ```bash
-mkdir -p .majestic
+mkdir -p .agents-os/relay
 ```
 
 ### 9. Write Files
 
 ```
-Write(.majestic/epic.yml, epic_content)
-Write(.majestic/attempt-ledger.yml, ledger_content)
+Write(.agents-os/relay/epic.yml, epic_content)
+Write(.agents-os/relay/attempt-ledger.yml, ledger_content)
 ```
 
 ### 10. Output Summary
@@ -209,9 +251,9 @@ Write(.majestic/attempt-ledger.yml, ledger_content)
    Group C: T4 (blocked by B)
 
 📁 Files created/updated:
-   - .majestic/epic.yml
-   - .majestic/attempt-ledger.yml
-   - .gitignore (added .majestic/)
+   - .agents-os/relay/epic.yml
+   - .agents-os/relay/attempt-ledger.yml
+   - .gitignore (added .agents-os/ if missing)
    - .agents.yml (added relay config)
 
 🚀 Next: Run `/relay:work` to start execution
@@ -224,12 +266,6 @@ Write(.majestic/attempt-ledger.yml, ledger_content)
 | Blueprint not found | Error with path suggestion |
 | Missing ## Implementation Tasks | Error suggesting /majestic:blueprint |
 | Malformed task format | Warning, skip task, continue |
-| .majestic/ already exists | Ask to overwrite or abort |
+| .agents-os/relay/ already exists | Ask to overwrite or abort |
 | Config read fails | Use default values |
 
-## Notes
-
-- Epic ID format: `YYYYMMDD-slugified-title` (e.g., `20260111-user-authentication`)
-- All tasks start as `pending` status
-- Settings inherit from `.agents.yml` with `.agents.local.yml` overrides
-- Parallelization groups are extracted from the matrix table

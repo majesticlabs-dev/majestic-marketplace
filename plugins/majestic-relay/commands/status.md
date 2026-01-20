@@ -13,7 +13,7 @@ Display the current epic progress, task status, and any gated tasks.
 ### 1. Check for Epic
 
 ```
-If not exists(".majestic/epic.yml"):
+If not exists(".agents-os/relay/epic.yml"):
   Error: "No epic found. Run `/relay:init <blueprint.md>` first."
   Exit
 ```
@@ -21,8 +21,8 @@ If not exists(".majestic/epic.yml"):
 ### 2. Load State
 
 ```
-EPIC = Read(".majestic/epic.yml") → parse YAML
-LEDGER = Read(".majestic/attempt-ledger.yml") → parse YAML
+EPIC = Read(".agents-os/relay/epic.yml") → parse YAML
+LEDGER = Read(".agents-os/relay/attempt-ledger.yml") → parse YAML
 ```
 
 ### 3. Calculate Progress
@@ -138,30 +138,6 @@ For each TASK_ID with attempts:
 Max attempts: {LEDGER.settings.max_attempts_per_task}
 Timeout: {LEDGER.settings.timeout_minutes} minutes
 Review: {LEDGER.settings.review.provider} ({enabled/disabled})
-```
-
-## Output Example
-
-```
-Epic: 20260111-user-authentication (3/5 tasks complete)
-Source: docs/plans/20260111_user_auth.md
-Started: 2026-01-11T17:30:00Z
-
-Progress: [████████████░░░░░░░░] 60%
-
-Relay: 🟢 running (PID 12345)
-
-✅ T1: Create users table migration
-✅ T2: Add login form component
-✅ T3: Implement password hashing
-🔄 T4: Add session management (attempt 2/3)
-⏸️ T5: Add logout endpoint (blocked by T4)
-```
-
-**When relay is idle:**
-
-```
-Relay: ⏸️ no_runnable_tasks (5 min ago)
 ```
 
 ## Error Handling

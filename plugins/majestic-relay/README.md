@@ -8,7 +8,7 @@ Fresh-context task execution with attempt ledger. Shell-orchestrated epic workfl
 
 | Command | Description |
 |---------|-------------|
-| `/relay:init <blueprint.md>` | Parse blueprint → `.majestic/epic.yml` |
+| `/relay:init <blueprint.md>` | Parse blueprint → `.agents-os/relay/epic.yml` |
 | `/relay:status` | Show progress and gated tasks |
 | `/relay:work` | Execute tasks with fresh contexts |
 
@@ -51,7 +51,7 @@ relay:
 ## File Structure
 
 ```
-.majestic/
+.agents-os/relay/
 ├── epic.yml              # Epic + tasks definition
 └── attempt-ledger.yml    # Attempt tracking with receipts
 ```
