@@ -269,9 +269,3 @@ Write(.agents-os/relay/attempt-ledger.yml, ledger_content)
 | .agents-os/relay/ already exists | Ask to overwrite or abort |
 | Config read fails | Use default values |
 
-## Notes
-
-- Epic ID format: `YYYYMMDD-slugified-title` (e.g., `20260111-user-authentication`)
-- All tasks start as `pending` status
-- Settings inherit from `.agents.yml` with `.agents.local.yml` overrides
-- Parallelization groups are extracted from the matrix table
