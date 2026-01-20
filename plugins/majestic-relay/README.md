@@ -34,11 +34,29 @@ Fresh-context task execution with attempt ledger. Shell-orchestrated epic workfl
 - **Re-anchoring**: Every task receives git state + spec + previous failures
 - **Automatic gating**: Blocks tasks after max retry attempts (default: 3)
 - **Quality gate**: Each successful task verified via quality-gate agent
+- **Compound learning**: Extracts patterns from each task, aggregates at epic completion
 
 ## File Structure
 
 ```
 .agents-os/relay/
 ├── epic.yml              # Epic + tasks definition
-└── attempt-ledger.yml    # Attempt tracking with receipts
+└── attempt-ledger.yml    # Attempt tracking with receipts + learnings
+```
+
+## Compound Learning
+
+Each task attempt extracts a reusable learning (1 sentence + tags). At epic completion:
+
+1. **Aggregate**: All learnings consolidated by semantic similarity
+2. **Threshold**: Frequency determines action (1x=skip, 2x=watch, 3+=recommend)
+3. **Categorize**: Project rules → AGENTS.md, quality rules → .agents.yml
+4. **Apply**: User confirms before any file changes
+
+```yaml
+# Example learning in attempt receipt
+receipt:
+  summary: "Created migration"
+  learning: "yq paths with dashes require quoting"
+  pattern_tags: [yq, shell, quoting]
 ```
