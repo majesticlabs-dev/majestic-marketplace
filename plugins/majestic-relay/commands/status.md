@@ -137,7 +137,6 @@ For each TASK_ID with attempts:
 
 Max attempts: {LEDGER.settings.max_attempts_per_task}
 Timeout: {LEDGER.settings.timeout_minutes} minutes
-Review: {LEDGER.settings.review.provider} ({enabled/disabled})
 ```
 
 ## Error Handling

@@ -52,16 +52,13 @@ tasks:
 
 ```yaml
 # .agents-os/relay/attempt-ledger.yml
-version: 2
+version: 1
 epic_id: "20260111-feature-name"
 started_at: "2026-01-11T17:30:00Z"
 
 settings:
   max_attempts_per_task: 3
   timeout_minutes: 15
-  review:
-    enabled: true
-    provider: repoprompt  # repoprompt | gemini | none
 
 task_status:
   T1: completed
@@ -159,17 +156,11 @@ This prevents context drift and ensures each attempt builds on prior learnings.
 | `/relay:status` | Show progress and gated tasks |
 | `/relay:work` | Execute tasks with attempt tracking |
 
-## Configuration
+## Defaults
 
-In `.agents.yml`:
+Settings are stored in `attempt-ledger.yml` at init time:
 
-```yaml
-relay:
-  max_attempts_per_task: 3
-  timeout_minutes: 15
-  review:
-    enabled: true
-    provider: none  # repoprompt | gemini | none
-```
+- `max_attempts_per_task: 3` - Retry limit before gating
+- `timeout_minutes: 15` - Max execution time per task
 
-Override locally in `.agents.local.yml` (gitignored).
+Override at runtime with `--max-attempts N` flag.

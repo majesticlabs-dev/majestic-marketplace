@@ -220,7 +220,6 @@ quality_gate:
   reviewers:
     - majestic-rails:review:pragmatic-rails-reviewer
     - majestic-engineer:qa:security-review
-    - majestic-engineer:review:project-topics-reviewer
 ```
 
 ## Error Handling
@@ -260,7 +259,6 @@ build_task:
 quality_gate:
   reviewers:
     - majestic-engineer:qa:security-review
-    - majestic-engineer:review:project-topics-reviewer
 ```
 
 Orchestrators receiving `build_agent: null` should fall back to `general-purpose`.

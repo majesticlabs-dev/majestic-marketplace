@@ -118,12 +118,6 @@ For unknown or generic tech stacks, run minimal reviewers directly:
 
 Task 1: majestic-engineer:review/simplicity-reviewer
 Prompt: "Review these files for YAGNI violations, unnecessary complexity: [file list]"
-
-Task 2: majestic-engineer:review/project-topics-reviewer (if topics exist)
-Prompt: "Review these files against project topics: [file list]
-
-Topics:
-[topics content]"
 ```
 
 ## Step 4: Report Results

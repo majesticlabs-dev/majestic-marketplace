@@ -186,12 +186,6 @@ Invoke with: `agent <name>`
 | `repo-analyst` | Repository onboarding - analyze structure, conventions, templates, and patterns |
 | `web-research` | Internet research for debugging, finding solutions, and technical problems |
 
-### review
-
-| Agent | Description |
-|-------|-------------|
-| `project-topics-reviewer` | Review code against project-specific topics defined in AGENTS.md |
-
 ### workflow
 
 | Agent | Description |

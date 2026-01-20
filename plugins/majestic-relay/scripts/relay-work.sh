@@ -5,7 +5,7 @@
 # Inspired by: https://github.com/gmickel/gmickel-claude-marketplace (flow-next plugin)
 #
 # Usage:
-#   relay-work.sh [task_id] [--review|--no-review] [--max-attempts N]
+#   relay-work.sh [task_id] [--max-attempts N]
 #
 
 set -euo pipefail
@@ -13,7 +13,6 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "$SCRIPT_DIR/lib/ledger.sh"
 source "$SCRIPT_DIR/lib/prompt.sh"
-source "$SCRIPT_DIR/lib/review.sh"
 
 # File paths
 EPIC=".agents-os/relay/epic.yml"
@@ -41,19 +40,10 @@ TASK_RESULT_SCHEMA='{
 
 # Parse arguments
 SPECIFIC_TASK=""
-REVIEW_OVERRIDE=""
 MAX_ATTEMPTS_OVERRIDE=""
 
 while [[ $# -gt 0 ]]; do
   case $1 in
-    --review)
-      REVIEW_OVERRIDE="true"
-      shift
-      ;;
-    --no-review)
-      REVIEW_OVERRIDE="false"
-      shift
-      ;;
     --max-attempts)
       MAX_ATTEMPTS_OVERRIDE="$2"
       shift 2
@@ -84,13 +74,9 @@ fi
 
 # Load settings
 MAX_ATTEMPTS=$(ledger_get_setting "max_attempts_per_task" "3")
-REVIEW_ENABLED=$(ledger_get_setting "review.enabled" "false")
-REVIEW_PROVIDER=$(ledger_get_setting "review.provider" "none")
 
 # Apply overrides
 [[ -n "$MAX_ATTEMPTS_OVERRIDE" ]] && MAX_ATTEMPTS="$MAX_ATTEMPTS_OVERRIDE"
-[[ "$REVIEW_OVERRIDE" == "true" ]] && REVIEW_ENABLED="true"
-[[ "$REVIEW_OVERRIDE" == "false" ]] && REVIEW_ENABLED="false"
 
 # Get epic info
 EPIC_ID=$(yq -r '.id' "$EPIC")

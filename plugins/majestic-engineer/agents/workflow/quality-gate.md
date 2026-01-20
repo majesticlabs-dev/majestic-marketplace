@@ -60,7 +60,6 @@ Map shorthand names to full agent paths:
 |-----------|-----------------|
 | `security-review` | `majestic-engineer:qa:security-review` |
 | `test-reviewer` | `majestic-engineer:qa:test-reviewer` |
-| `project-topics-reviewer` | `majestic-engineer:review:project-topics-reviewer` |
 | `simplicity-reviewer` | `majestic-engineer:review:simplicity-reviewer` |
 | `pragmatic-rails-reviewer` | `majestic-rails:review:pragmatic-rails-reviewer` |
 | `performance-reviewer` | `majestic-rails:review:performance-reviewer` |
@@ -160,9 +159,6 @@ Task (majestic-engineer:qa:security-review):
 
 Task (majestic-rails:review:performance-reviewer):
   prompt: Review changes on branch <BRANCH> for performance issues.
-
-Task (majestic-engineer:review:project-topics-reviewer):
-  prompt: Review changes on branch <BRANCH> against project lessons with workflow_phase: review.
 ```
 
 #### Python (`tech_stack: python`)
@@ -174,9 +170,6 @@ Task (majestic-python:python-reviewer):
 
 Task (majestic-engineer:qa:security-review):
   prompt: Review changes on branch <BRANCH> for security vulnerabilities.
-
-Task (majestic-engineer:review:project-topics-reviewer):
-  prompt: Review changes on branch <BRANCH> against project topics.
 ```
 
 #### Node (`tech_stack: node`)
@@ -188,9 +181,6 @@ Task (majestic-engineer:review:simplicity-reviewer):
 
 Task (majestic-engineer:qa:security-review):
   prompt: Review changes on branch <BRANCH> for security vulnerabilities.
-
-Task (majestic-engineer:review:project-topics-reviewer):
-  prompt: Review changes on branch <BRANCH> against project topics.
 ```
 
 #### Generic (`tech_stack: generic` or not configured)
@@ -344,7 +334,6 @@ Requires: Human review before proceeding
 Task 1: pragmatic-rails-reviewer
 Task 2: security-review
 Task 3: performance-reviewer
-Task 4: project-topics-reviewer
 ```
 
 Do NOT launch sequentially - this defeats the purpose of parallel review.

@@ -55,7 +55,6 @@ quality_gate:
     - security-review           # OWASP security scanning
     - react-reviewer            # React best practices (if React/Next.js project)
     - test-reviewer             # Test coverage and quality
-    - project-topics-reviewer   # Custom rules from lessons (workflow_phase: review)
     # Optional - uncomment to enable:
     # - codex-reviewer          # External LLM (requires Codex CLI)
     # - gemini-reviewer         # External LLM (requires Gemini API)
