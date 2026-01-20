@@ -118,7 +118,7 @@ receipt:
 
 ```yaml
 receipt:
-  error_category: missing_dependency | code_error | test_failure | quality_gate
+  error_category: missing_dependency | code_error | test_failure | quality_gate | cli_error
   error_summary: "What went wrong"
   quality_gate_verdict: NEEDS CHANGES | BLOCKED  # If quality gate failed
   quality_gate_findings: |  # Structured findings for retry context
