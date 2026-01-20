@@ -68,6 +68,39 @@ Run multiple epics sequentially with fail-fast behavior:
 - **Fail-fast**: Stops on first epic failure
 - **Resume support**: Continue from `current` index after interruption
 
+### Playlist Schema
+
+```yaml
+# playlist.yml (updated during execution)
+version: 1
+name: "Q1 MVP"
+created_at: "2024-01-15T10:00:00Z"
+status: in_progress    # pending | in_progress | completed | failed
+current: 2             # Index of current/next epic (0-based)
+started_at: "2024-01-15T10:00:00Z"
+ended_at: null
+duration_minutes: null
+
+epics:
+  - file: 260119-01-infrastructure.yml
+    status: completed
+    started_at: "2024-01-15T10:00:00Z"
+    completed_at: "2024-01-15T10:15:00Z"
+  - file: 260119-02-database.yml
+    status: in_progress
+    started_at: "2024-01-15T10:15:00Z"
+  - file: 260119-03-auth.yml
+    status: pending
+```
+
+### Testing Playlists
+
+- [ ] `/relay:init-playlist` discovers epics in `epics/` folder
+- [ ] `/relay:run-playlist` executes first epic successfully
+- [ ] Resume: interrupt mid-epic, verify `current` index, re-run continues
+- [ ] Fail-fast: playlist stops on epic failure
+- [ ] Verify symlink: `ls -l .agents-os/relay/epic.yml` → `epics/...yml`
+
 ## Key Features
 
 - **Fresh context per task**: Each task spawns a new Claude instance
