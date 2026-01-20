@@ -99,9 +99,10 @@ ledger_record_attempt_success() {
   if [[ -n "$files_changed" ]]; then
     # Convert comma-separated to YAML array
     # Use strenv() to pass string safely (avoids yq trying to parse file paths as YAML)
+    # Use -o=json so output can be interpolated into another yq expression
     local files_yaml
     export FILES_CHANGED_VAR="$files_changed"
-    files_yaml=$(yq -n 'strenv(FILES_CHANGED_VAR) | split(", ")')
+    files_yaml=$(yq -n -o=json 'strenv(FILES_CHANGED_VAR) | split(", ")')
     unset FILES_CHANGED_VAR
     yq -i ".attempts.${task_id}[${idx}].receipt.files_changed = ${files_yaml}" "$LEDGER"
   fi
@@ -391,7 +392,8 @@ ledger_record_learning() {
   if [[ -n "$tags" ]]; then
     export TAGS_VAR="$tags"
     local tags_yaml
-    tags_yaml=$(yq -n 'strenv(TAGS_VAR) | split(",")')
+    # Use -o=json so output can be interpolated into another yq expression
+    tags_yaml=$(yq -n -o=json 'strenv(TAGS_VAR) | split(",")')
     unset TAGS_VAR
     yq -i ".attempts.${task_id}[${idx}].receipt.pattern_tags = ${tags_yaml}" "$LEDGER"
   fi
