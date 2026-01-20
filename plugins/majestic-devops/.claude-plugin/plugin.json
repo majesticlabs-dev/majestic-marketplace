@@ -1,7 +1,7 @@
 {
   "name": "majestic-devops",
-  "version": "1.4.0",
-  "description": "Infrastructure as Code and DevOps tools. Includes 2 agents and 14 skills for OpenTofu, Ansible, Hetzner, DigitalOcean, Cloudflare, 1Password CLI, cloud-init, and devops-plan.",
+  "version": "1.4.1",
+  "description": "Infrastructure as Code and DevOps tools. Includes 1 agent and 14 skills for OpenTofu, Ansible, Hetzner, DigitalOcean, Cloudflare, 1Password CLI, cloud-init, and devops-plan.",
   "author": {
     "name": "David Paluy",
     "url": "https://github.com/dpaluy",

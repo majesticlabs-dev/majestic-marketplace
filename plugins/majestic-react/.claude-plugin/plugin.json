@@ -1,7 +1,7 @@
 {
   "name": "majestic-react",
-  "version": "3.1.1",
-  "description": "Modern React development toolkit for TypeScript/React stacks. Includes 5 specialized agents and 4 skills.",
+  "version": "3.1.2",
+  "description": "Modern React development toolkit for TypeScript/React stacks. Includes 2 specialized agents and 4 skills.",
   "author": {
     "name": "Majestic Labs LLC",
     "email": "hello@majesticlabs.dev",
