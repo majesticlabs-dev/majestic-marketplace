@@ -128,4 +128,3 @@ quality_gate:
     - majestic-rails:review:pragmatic-rails-reviewer
     - majestic-engineer:qa:security-review
     - majestic-rails:review:performance-reviewer
-    - majestic-engineer:review:project-topics-reviewer

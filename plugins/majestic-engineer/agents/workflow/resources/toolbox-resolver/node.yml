@@ -69,4 +69,3 @@ coding_styles: []
 quality_gate:
   reviewers:
     - majestic-engineer:qa:security-review
-    - majestic-engineer:review:project-topics-reviewer

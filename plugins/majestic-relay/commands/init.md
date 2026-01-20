@@ -43,28 +43,6 @@ If ".agents-os/" not in GITIGNORE:
     .agents-os/
 ```
 
-**Initialize relay config in `.agents.yml`:**
-
-```
-If not exists(".agents.yml"):
-  Create .agents.yml with relay defaults
-
-Else If "relay:" not in .agents.yml:
-  Append relay section to .agents.yml
-```
-
-Default relay configuration:
-
-```yaml
-relay:
-  version: 1
-  max_attempts_per_task: 3
-  timeout_minutes: 15
-  review:
-    enabled: false
-    provider: none  # repoprompt | gemini | none
-```
-
 ### 3. Read Blueprint
 
 ```
@@ -182,16 +160,7 @@ tasks:
       - "{criterion 2}"
 ```
 
-### 6. Load Settings from .agents.yml
-
-```
-MAX_ATTEMPTS = config-reader("relay.max_attempts_per_task", 3)
-TIMEOUT = config-reader("relay.timeout_minutes", 15)
-REVIEW_ENABLED = config-reader("relay.review.enabled", true)
-REVIEW_PROVIDER = config-reader("relay.review.provider", "none")
-```
-
-### 7. Generate attempt-ledger.yml
+### 6. Generate attempt-ledger.yml
 
 Write to `.agents-os/relay/attempt-ledger.yml`:
 
@@ -203,11 +172,8 @@ ended_at: null           # Set when epic completes
 duration_minutes: null   # Calculated on completion
 
 settings:
-  max_attempts_per_task: {MAX_ATTEMPTS}
-  timeout_minutes: {TIMEOUT}
-  review:
-    enabled: {REVIEW_ENABLED}
-    provider: "{REVIEW_PROVIDER}"
+  max_attempts_per_task: 3
+  timeout_minutes: 15
 
 task_status:
   T1: pending
@@ -227,20 +193,20 @@ relay_status:
   last_exit_reason: null
 ```
 
-### 8. Create Directory
+### 7. Create Directory
 
 ```bash
 mkdir -p .agents-os/relay
 ```
 
-### 9. Write Files
+### 8. Write Files
 
 ```
 Write(.agents-os/relay/epic.yml, epic_content)
 Write(.agents-os/relay/attempt-ledger.yml, ledger_content)
 ```
 
-### 10. Output Summary
+### 9. Output Summary
 
 ```
 ✅ Epic initialized: {epic.id}
@@ -254,7 +220,6 @@ Write(.agents-os/relay/attempt-ledger.yml, ledger_content)
    - .agents-os/relay/epic.yml
    - .agents-os/relay/attempt-ledger.yml
    - .gitignore (added .agents-os/ if missing)
-   - .agents.yml (added relay config)
 
 🚀 Next: Run `/relay:work` to start execution
 ```
@@ -267,5 +232,4 @@ Write(.agents-os/relay/attempt-ledger.yml, ledger_content)
 | Missing ## Implementation Tasks | Error suggesting /majestic:blueprint |
 | Malformed task format | Warning, skip task, continue |
 | .agents-os/relay/ already exists | Ask to overwrite or abort |
-| Config read fails | Use default values |
 

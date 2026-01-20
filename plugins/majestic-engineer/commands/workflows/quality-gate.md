@@ -119,7 +119,6 @@ quality_gate:
     - security-review
     - pragmatic-rails-reviewer
     - performance-reviewer
-    - project-topics-reviewer
 ```
 
 See CLAUDE.md for available reviewers and configuration options.

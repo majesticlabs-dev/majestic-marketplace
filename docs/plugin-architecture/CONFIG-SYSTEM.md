@@ -317,7 +317,6 @@ quality_gate:
     - majestic-rails:review:pragmatic-rails-reviewer
     - majestic-engineer:qa:security-review
     - majestic-rails:review:performance-reviewer
-    - majestic-engineer:review:project-topics-reviewer
 ```
 
 ### Key Concepts
@@ -378,7 +377,6 @@ toolbox:
       - majestic-engineer:qa:security-review
       - majestic-rails:review:pragmatic-rails-reviewer
       - majestic-rails:review:performance-reviewer
-      - majestic-engineer:review:project-topics-reviewer
 ```
 
 **Override behavior:**
@@ -403,7 +401,6 @@ toolbox:
 |----------|--------|-------------|
 | `security-review` | majestic-engineer | OWASP Top 10, secrets, vulnerabilities |
 | `test-reviewer` | majestic-engineer | Test coverage, quality, edge cases |
-| `project-topics-reviewer` | majestic-engineer | Custom rules from lessons with `workflow_phase: review` |
 | `simplicity-reviewer` | majestic-engineer | Complexity and overengineering |
 | `pragmatic-rails-reviewer` | majestic-rails | Rails conventions, thin controllers |
 | `performance-reviewer` | majestic-rails | N+1 queries, slow operations |

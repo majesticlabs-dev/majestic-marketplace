@@ -52,16 +52,13 @@ tasks:
 
 ```yaml
 # .agents-os/relay/attempt-ledger.yml
-version: 2
+version: 1
 epic_id: "20260111-feature-name"
 started_at: "2026-01-11T17:30:00Z"
 
 settings:
   max_attempts_per_task: 3
   timeout_minutes: 15
-  review:
-    enabled: true
-    provider: repoprompt  # repoprompt | gemini | none
 
 task_status:
   T1: completed
@@ -113,6 +110,8 @@ receipt:
   summary: "Brief description of what was done"
   files_changed: [list, of, files]
   quality_gate_verdict: APPROVED
+  learning: "Reusable insight from this task"  # Compound learning
+  pattern_tags: [yq, shell, quoting]           # For aggregation
 ```
 
 ### Failure Receipt
@@ -128,7 +127,39 @@ receipt:
     **File:** app/models/user.rb:15
     **Fix:** Add unit tests for validation
   suggestion: "What to try differently"
+  learning: "What was learned from the failure"  # Compound learning
+  pattern_tags: [migration, database]            # For aggregation
 ```
+
+## Compound Learning
+
+Learnings are extracted after each task attempt, aggregated at epic completion, then cleared.
+
+### Per-Task Extraction
+
+After each attempt (success or failure), a lightweight prompt extracts:
+- **learning**: One-sentence reusable insight
+- **pattern_tags**: Comma-separated tags for grouping
+
+### Epic Completion Flow
+
+When epic completes, the `learning-processor` agent:
+1. Reads all learnings from ledger
+2. Consolidates similar patterns by semantic meaning
+3. Applies frequency thresholds:
+   - 1x = Skip (noise)
+   - 2x = Emerging (watch)
+   - 3x = Recommend
+   - 4+ = Strong signal
+4. Promotes to AGENTS.md Key Learnings (primary destination)
+5. Clears learnings from ledger after promotion
+
+### Why Clear After Promotion?
+
+- Learnings are **temporary working memory**
+- AGENTS.md is the **permanent store** (always loaded by Claude)
+- Prevents accumulation across epics
+- Keeps ledger lean for next epic
 
 ## Task Status Flow
 
@@ -159,17 +190,11 @@ This prevents context drift and ensures each attempt builds on prior learnings.
 | `/relay:status` | Show progress and gated tasks |
 | `/relay:work` | Execute tasks with attempt tracking |
 
-## Configuration
+## Defaults
 
-In `.agents.yml`:
+Settings are stored in `attempt-ledger.yml` at init time:
 
-```yaml
-relay:
-  max_attempts_per_task: 3
-  timeout_minutes: 15
-  review:
-    enabled: true
-    provider: none  # repoprompt | gemini | none
-```
+- `max_attempts_per_task: 3` - Retry limit before gating
+- `timeout_minutes: 15` - Max execution time per task
 
-Override locally in `.agents.local.yml` (gitignored).
+Override at runtime with `--max-attempts N` flag.

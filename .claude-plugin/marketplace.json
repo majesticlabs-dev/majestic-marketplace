@@ -11,8 +11,8 @@
   "plugins": [
     {
       "name": "majestic-engineer",
-      "description": "Language-agnostic engineering workflows. Includes 32 specialized agents, 26 commands, 25 skills, and 5 toolbox presets.",
-      "version": "3.49.0",
+      "description": "Language-agnostic engineering workflows. Includes 31 specialized agents, 26 commands, 25 skills, and 5 toolbox presets.",
+      "version": "3.50.0",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -33,7 +33,7 @@
     {
       "name": "majestic-rails",
       "description": "Ruby on Rails development tools. Includes 15 specialized agents, 3 commands, 28 skills, enhanced toolbox with 6 research hooks, and LSP support.",
-      "version": "3.14.0",
+      "version": "3.15.0",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -145,7 +145,7 @@
     {
       "name": "majestic-python",
       "description": "Python development tools. Includes 6 specialized agents and 5 skills.",
-      "version": "3.3.0",
+      "version": "3.4.0",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -440,8 +440,8 @@
     },
     {
       "name": "majestic-relay",
-      "description": "Fresh-context task execution with AC generation and quality-gate verification. Shell-orchestrated epic workflow with re-anchoring and gating. Includes 3 commands and 1 skill.",
-      "version": "1.1.0",
+      "description": "Fresh-context task execution with quality-gate verification and compound learning. Shell-orchestrated epic workflow with re-anchoring, gating, and automatic knowledge extraction. Includes 3 commands, 1 agent, and 1 skill.",
+      "version": "1.3.0",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -458,7 +458,9 @@
         "gating",
         "sequential",
         "shell-driven",
-        "re-anchoring"
+        "re-anchoring",
+        "compound-learning",
+        "knowledge-extraction"
       ],
       "source": "./plugins/majestic-relay"
     }

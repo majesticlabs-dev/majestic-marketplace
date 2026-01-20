@@ -5,7 +5,7 @@
 # Inspired by: https://github.com/gmickel/gmickel-claude-marketplace (flow-next plugin)
 #
 # Usage:
-#   relay-work.sh [task_id] [--review|--no-review] [--max-attempts N]
+#   relay-work.sh [task_id] [--max-attempts N]
 #
 
 set -euo pipefail
@@ -13,7 +13,6 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "$SCRIPT_DIR/lib/ledger.sh"
 source "$SCRIPT_DIR/lib/prompt.sh"
-source "$SCRIPT_DIR/lib/review.sh"
 
 # File paths
 EPIC=".agents-os/relay/epic.yml"
@@ -41,19 +40,10 @@ TASK_RESULT_SCHEMA='{
 
 # Parse arguments
 SPECIFIC_TASK=""
-REVIEW_OVERRIDE=""
 MAX_ATTEMPTS_OVERRIDE=""
 
 while [[ $# -gt 0 ]]; do
   case $1 in
-    --review)
-      REVIEW_OVERRIDE="true"
-      shift
-      ;;
-    --no-review)
-      REVIEW_OVERRIDE="false"
-      shift
-      ;;
     --max-attempts)
       MAX_ATTEMPTS_OVERRIDE="$2"
       shift 2
@@ -84,13 +74,9 @@ fi
 
 # Load settings
 MAX_ATTEMPTS=$(ledger_get_setting "max_attempts_per_task" "3")
-REVIEW_ENABLED=$(ledger_get_setting "review.enabled" "false")
-REVIEW_PROVIDER=$(ledger_get_setting "review.provider" "none")
 
 # Apply overrides
 [[ -n "$MAX_ATTEMPTS_OVERRIDE" ]] && MAX_ATTEMPTS="$MAX_ATTEMPTS_OVERRIDE"
-[[ "$REVIEW_OVERRIDE" == "true" ]] && REVIEW_ENABLED="true"
-[[ "$REVIEW_OVERRIDE" == "false" ]] && REVIEW_ENABLED="false"
 
 # Get epic info
 EPIC_ID=$(yq -r '.id' "$EPIC")
@@ -137,6 +123,39 @@ while true; do
       DURATION=$(yq -r '.duration_minutes // 0' "$LEDGER")
       echo ""
       echo -e "${GREEN}✅ Epic complete! ($COMPLETED/$TOTAL tasks in ${DURATION} min)${NC}"
+
+      # Run compound learning aggregation
+      LEARNING_STATS=$(ledger_get_learning_stats)
+      TOTAL_LEARNINGS=$(echo "$LEARNING_STATS" | jq -r '.total_learnings // 0')
+
+      if [[ "$TOTAL_LEARNINGS" -gt 0 ]]; then
+        echo ""
+        echo -e "${BLUE}📚 Processing $TOTAL_LEARNINGS learnings from epic...${NC}"
+
+        EPIC_ID=$(yq -r '.id' "$EPIC")
+
+        LEARNING_PROMPT="You are the majestic-relay:learning-processor agent.
+
+Use the workflow defined in your agent spec to:
+1. Read learnings from: $LEDGER
+2. Consolidate similar patterns
+3. Apply frequency thresholds (1=skip, 2=emerging, 3+=recommend, 4+=strong)
+4. Categorize into AGENTS.md vs .agents.yml
+5. Present findings and ask user before applying changes
+
+Epic: $EPIC_ID
+Ledger: $LEDGER
+
+Read the ledger and process all learnings. Use AskUserQuestion before making any file changes."
+
+        # Run learning processor (interactive - user confirms changes)
+        claude -p "$LEARNING_PROMPT" --allowedTools 'Read,Write,Edit,Grep,Glob,Bash(yq:*),Bash(grep:*),AskUserQuestion' 2>/dev/null || {
+          echo -e "${YELLOW}⚠️  Learning processor skipped (non-critical)${NC}"
+        }
+      else
+        echo -e "${YELLOW}📝 No learnings captured during epic${NC}"
+      fi
+
       ledger_relay_stop 0 "epic_complete"
       exit 0
     else
@@ -260,6 +279,38 @@ Return the verdict exactly as: Verdict: APPROVED or Verdict: NEEDS CHANGES or Ve
   else
     echo -e "     ${RED}❌ Failed: $RESULT_MESSAGE${NC}"
     ledger_record_attempt_failure "$NEXT_TASK" "$ATTEMPT_ID" "$RESULT_MESSAGE" "$RESULT_ERROR_CAT" "$RESULT_SUGGESTION"
+  fi
+
+  # Extract learning from attempt (compound learning)
+  echo -e "     ${BLUE}📚 Extracting learning...${NC}"
+  LEARNING_CONTEXT="Task: $TASK_TITLE
+Result: $RESULT_STATUS
+Summary: $RESULT_MESSAGE"
+  [[ -n "$RESULT_ERROR_CAT" ]] && LEARNING_CONTEXT="$LEARNING_CONTEXT
+Error: $RESULT_ERROR_CAT"
+  [[ -n "$RESULT_SUGGESTION" ]] && LEARNING_CONTEXT="$LEARNING_CONTEXT
+Suggestion: $RESULT_SUGGESTION"
+
+  LEARNING_PROMPT="Based on this task attempt, extract ONE reusable learning (1 sentence max).
+Focus on: patterns, gotchas, techniques that apply beyond this specific task.
+
+$LEARNING_CONTEXT
+
+Output format: LEARNING: <sentence> | TAGS: <comma-separated>
+Or output 'none' if nothing generalizable."
+
+  LEARNING_OUTPUT=""
+  if LEARNING_OUTPUT=$(claude -p "$LEARNING_PROMPT" --model haiku 2>/dev/null); then
+    # Parse learning and tags
+    if [[ "$LEARNING_OUTPUT" != *"none"* ]]; then
+      LEARNING_TEXT=$(echo "$LEARNING_OUTPUT" | grep -oE 'LEARNING: [^|]+' | sed 's/LEARNING: //' | head -1)
+      LEARNING_TAGS=$(echo "$LEARNING_OUTPUT" | grep -oE 'TAGS: .+' | sed 's/TAGS: //' | head -1)
+
+      if [[ -n "$LEARNING_TEXT" ]]; then
+        ledger_record_learning "$NEXT_TASK" "$ATTEMPT_ID" "$LEARNING_TEXT" "$LEARNING_TAGS"
+        echo -e "     ${GREEN}📝 Learned: ${LEARNING_TEXT:0:60}...${NC}"
+      fi
+    fi
   fi
 
   echo ""

@@ -1,7 +1,7 @@
 {
   "name": "majestic-relay",
-  "version": "1.1.0",
-  "description": "Fresh-context task execution with AC generation and quality-gate verification. Shell-orchestrated epic workflow with re-anchoring and gating.",
+  "version": "1.3.0",
+  "description": "Fresh-context task execution with quality-gate verification and compound learning. Shell-orchestrated epic workflow with re-anchoring, gating, and automatic knowledge extraction.",
   "author": {
     "name": "David Paluy",
     "url": "https://github.com/dpaluy",
@@ -16,6 +16,8 @@
     "attempt-ledger",
     "gating",
     "sequential",
-    "shell-driven"
+    "shell-driven",
+    "compound-learning",
+    "knowledge-extraction"
   ]
 }

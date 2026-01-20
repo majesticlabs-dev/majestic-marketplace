@@ -104,22 +104,7 @@ If >5 files and no clear patterns detected, use `AskUserQuestion`:
 3. **Data Integrity Reviewer** - Migration safety, data constraints
 4. **None** - Just run the standard reviewers
 
-## Step 3: Load Project Lessons
-
-### Check for Lessons
-
-1. Read `lessons_path` from `.agents.yml` (default: `.agents-os/lessons/`)
-2. Look for lesson files with `workflow_phase: [review]` in frontmatter
-3. If found → pass lessons to project-topics-reviewer
-4. If not found → skip project-topics-reviewer
-
-Use "Lessons path" from Context above. Check for lesson files with review workflow phase.
-
-### If Lessons Found
-
-Add `majestic-engineer:review/project-topics-reviewer` to the agent list.
-
-## Step 4: Run Agents in Parallel
+## Step 3: Run Agents in Parallel
 
 Launch ALL selected agents simultaneously using the Task tool. Each agent receives:
 - List of changed files
@@ -139,17 +124,11 @@ Prompt: "Review these files for N+1 queries, performance issues, and query optim
 
 Task 4: majestic-rails:review/data-integrity-reviewer (if selected)
 Prompt: "Review these migration files for safety, reversibility, and data integrity: [file list]"
-
-Task 5: majestic-engineer:review/project-topics-reviewer (if lessons exist)
-Prompt: "Review these files against these project-specific lessons: [file list]
-
-Lessons:
-[lessons content from .agents-os/lessons/ with workflow_phase: review]"
 ```
 
 **CRITICAL:** Launch all tasks in a SINGLE message with multiple Task tool calls to ensure parallel execution.
 
-## Step 5: Synthesize Output
+## Step 4: Synthesize Output
 
 Collect all agent outputs and categorize findings by severity:
 

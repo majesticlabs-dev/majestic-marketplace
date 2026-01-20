@@ -363,3 +363,100 @@ ledger_get_task_timing() {
 EOF
 }
 
+# ============================================
+# Compound Learning Functions
+# ============================================
+
+# Record learning from an attempt
+# Usage: ledger_record_learning "T1" "1" "learning text" "tag1,tag2"
+ledger_record_learning() {
+  local task_id="$1"
+  local attempt_id="$2"
+  local learning="$3"
+  local tags="${4:-}"
+
+  # Skip if learning is empty or "none"
+  if [[ -z "$learning" || "$learning" == "none" || "$learning" == "null" ]]; then
+    return 0
+  fi
+
+  local idx=$((attempt_id - 1))
+
+  # Escape special characters for yq
+  export LEARNING_VAR="$learning"
+  yq -i ".attempts.${task_id}[${idx}].receipt.learning = strenv(LEARNING_VAR)" "$LEDGER"
+  unset LEARNING_VAR
+
+  # Add tags if provided
+  if [[ -n "$tags" ]]; then
+    export TAGS_VAR="$tags"
+    local tags_yaml
+    tags_yaml=$(yq -n 'strenv(TAGS_VAR) | split(",")')
+    unset TAGS_VAR
+    yq -i ".attempts.${task_id}[${idx}].receipt.pattern_tags = ${tags_yaml}" "$LEDGER"
+  fi
+}
+
+# Get all learnings from ledger
+# Usage: ledger_get_all_learnings
+# Returns: YAML list of learnings with context
+ledger_get_all_learnings() {
+  yq -o=yaml '
+    .attempts | to_entries | .[] |
+    .key as $task |
+    .value[] |
+    select(.receipt.learning != null and .receipt.learning != "") |
+    {
+      "task": $task,
+      "attempt": .id,
+      "result": .result,
+      "learning": .receipt.learning,
+      "tags": (.receipt.pattern_tags // []),
+      "error_category": (.receipt.error_category // null)
+    }
+  ' "$LEDGER" 2>/dev/null
+}
+
+# Get learning summary stats
+# Usage: ledger_get_learning_stats
+# Returns: JSON with counts
+ledger_get_learning_stats() {
+  local total success_learnings failure_learnings
+
+  total=$(yq -r '
+    [.attempts | to_entries | .[] | .value[] | select(.receipt.learning != null and .receipt.learning != "")] | length
+  ' "$LEDGER" 2>/dev/null || echo "0")
+
+  success_learnings=$(yq -r '
+    [.attempts | to_entries | .[] | .value[] | select(.result == "success" and .receipt.learning != null and .receipt.learning != "")] | length
+  ' "$LEDGER" 2>/dev/null || echo "0")
+
+  failure_learnings=$(yq -r '
+    [.attempts | to_entries | .[] | .value[] | select(.result == "failure" and .receipt.learning != null and .receipt.learning != "")] | length
+  ' "$LEDGER" 2>/dev/null || echo "0")
+
+  cat <<EOF
+{
+  "total_learnings": ${total},
+  "from_success": ${success_learnings},
+  "from_failure": ${failure_learnings}
+}
+EOF
+}
+
+# Clear all learnings from ledger after promotion to AGENTS.md
+# Usage: ledger_clear_learnings
+ledger_clear_learnings() {
+  # Remove learning and pattern_tags from all attempt receipts
+  yq -i '
+    .attempts |= with_entries(
+      .value |= map(
+        del(.receipt.learning) |
+        del(.receipt.pattern_tags)
+      )
+    )
+  ' "$LEDGER" 2>/dev/null
+
+  echo "Learnings cleared from ledger"
+}
+
