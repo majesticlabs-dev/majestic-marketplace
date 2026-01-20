@@ -440,8 +440,8 @@
     },
     {
       "name": "majestic-relay",
-      "description": "Fresh-context task execution with quality-gate verification and compound learning. Shell-orchestrated epic workflow with re-anchoring, gating, and automatic knowledge extraction. Includes 3 commands, 1 agent, and 1 skill.",
-      "version": "1.3.0",
+      "description": "Fresh-context task execution with quality-gate verification and compound learning. Shell-orchestrated epic workflow with re-anchoring, gating, automatic knowledge extraction, and multi-epic playlist orchestration. Includes 6 commands, 1 agent, and 1 skill.",
+      "version": "1.4.0",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -460,7 +460,9 @@
         "shell-driven",
         "re-anchoring",
         "compound-learning",
-        "knowledge-extraction"
+        "knowledge-extraction",
+        "playlist",
+        "multi-epic"
       ],
       "source": "./plugins/majestic-relay"
     }
