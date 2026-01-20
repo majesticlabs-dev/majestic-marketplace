@@ -7,6 +7,34 @@
 
 PLAYLIST="${PLAYLIST:-.agents-os/relay/playlist.yml}"
 
+# Colors
+PLAYLIST_RED='\033[0;31m'
+PLAYLIST_GREEN='\033[0;32m'
+PLAYLIST_YELLOW='\033[0;33m'
+PLAYLIST_BLUE='\033[0;34m'
+PLAYLIST_CYAN='\033[0;36m'
+PLAYLIST_BOLD='\033[1m'
+PLAYLIST_NC='\033[0m' # No Color
+
+# Announcement box
+# Usage: playlist_announce "icon" "title" "subtitle"
+playlist_announce() {
+  local icon="$1"
+  local title="$2"
+  local subtitle="${3:-}"
+
+  local width=65
+
+  echo ""
+  echo -e "${PLAYLIST_CYAN}╔$(printf '%*s' "$width" | tr ' ' '═')╗${PLAYLIST_NC}"
+  printf "${PLAYLIST_CYAN}║${PLAYLIST_NC}  ${PLAYLIST_BOLD}%s %-$((width - 4))s${PLAYLIST_NC}${PLAYLIST_CYAN}║${PLAYLIST_NC}\n" "$icon" "$title"
+  if [[ -n "$subtitle" ]]; then
+    printf "${PLAYLIST_CYAN}║${PLAYLIST_NC}  %-$((width - 2))s${PLAYLIST_CYAN}║${PLAYLIST_NC}\n" "$subtitle"
+  fi
+  echo -e "${PLAYLIST_CYAN}╚$(printf '%*s' "$width" | tr ' ' '═')╝${PLAYLIST_NC}"
+  echo ""
+}
+
 # Get playlist field
 # Usage: playlist_get "field.path" "default"
 playlist_get() {
