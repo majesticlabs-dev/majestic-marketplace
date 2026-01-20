@@ -1,13 +1,12 @@
 ---
 name: majestic-relay:run-playlist
-description: Execute epic playlist sequentially (fail-fast)
+description: Output terminal command to execute playlist
 argument-hint: "[playlist.yml]"
-allowed-tools: Bash(${CLAUDE_PLUGIN_ROOT}/scripts/relay-playlist.sh:*)
 ---
 
-# Execute Epic Playlist
+# Run Playlist
 
-Run multiple epics sequentially from a `playlist.yml` file. Stops on first failure.
+Output the terminal command to execute the playlist script. User runs it in a separate terminal.
 
 ## Input
 
@@ -18,18 +17,38 @@ playlist_path: string  # Path to playlist.yml (default: .agents-os/relay/playlis
 ## Workflow
 
 ```
-If not exists(".agents-os/relay/playlist.yml") AND $ARGUMENTS is empty:
-  Error: "No playlist found. Run `/relay:init-playlist` first."
+PLAYLIST_PATH = $ARGUMENTS or ".agents-os/relay/playlist.yml"
 
-Execute: "${CLAUDE_PLUGIN_ROOT}/scripts/relay-playlist.sh" $ARGUMENTS
+If not exists(PLAYLIST_PATH):
+  Error: "No playlist found at {PLAYLIST_PATH}"
+  Suggest: "Run `/relay:init-playlist` first"
+  Exit
+
+SCRIPT_PATH = "${CLAUDE_PLUGIN_ROOT}/scripts/relay-playlist.sh"
+
+Print:
+  Run this command in a separate terminal:
+
+  ```bash
+  {SCRIPT_PATH} {PLAYLIST_PATH}
+  ```
+
+  Or with tmux (recommended for long runs):
+
+  ```bash
+  tmux new -s relay '{SCRIPT_PATH} {PLAYLIST_PATH}'
+  ```
+
+  Monitor progress:
+
+  ```bash
+  /relay:playlist-status
+  ```
 ```
 
-## Error Handling
+## Why Not Execute Directly?
 
-| Scenario | Action |
-|----------|--------|
-| Playlist not found | Error with init-playlist suggestion |
-| Epic file missing | Error before starting |
-| Epic fails | Record failure, stop playlist |
-| Ctrl+C | Save progress, exit cleanly |
-| Resume after failure | Fix epic, run `/relay:run-playlist` again |
+- Playlist execution can take hours (multiple epics)
+- Should run in dedicated terminal (tmux/screen)
+- Survives Claude session disconnects
+- User controls Ctrl+C directly
