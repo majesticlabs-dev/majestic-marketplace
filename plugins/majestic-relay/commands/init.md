@@ -6,7 +6,7 @@ argument-hint: "<path/to/blueprint.md>"
 
 # Initialize Epic from Blueprint
 
-Parse a blueprint markdown file and generate `.majestic/epic.yml` + `.majestic/attempt-ledger.yml` for fresh-context task execution.
+Parse a blueprint markdown file and generate `.agents-os/relay/epic.yml` + `.agents-os/relay/attempt-ledger.yml` for fresh-context task execution.
 
 ## Input
 
@@ -32,15 +32,15 @@ If file doesn't exist:
 
 ### 2. Setup Project (First Run)
 
-**Add `.majestic/` to `.gitignore`:**
+**Ensure `.agents-os/` is gitignored:**
 
 ```
 GITIGNORE = Read(".gitignore") or ""
 
-If ".majestic/" not in GITIGNORE:
+If ".agents-os/" not in GITIGNORE:
   Append to .gitignore:
-    # Relay epic state (ephemeral)
-    .majestic/
+    # Agent state (ephemeral)
+    .agents-os/
 ```
 
 **Initialize relay config in `.agents.yml`:**
@@ -148,7 +148,7 @@ Generated AC:
 
 ### 5. Generate epic.yml
 
-Write to `.majestic/epic.yml`:
+Write to `.agents-os/relay/epic.yml`:
 
 ```yaml
 version: 2
@@ -193,7 +193,7 @@ REVIEW_PROVIDER = config-reader("relay.review.provider", "none")
 
 ### 7. Generate attempt-ledger.yml
 
-Write to `.majestic/attempt-ledger.yml`:
+Write to `.agents-os/relay/attempt-ledger.yml`:
 
 ```yaml
 version: 1
@@ -230,14 +230,14 @@ relay_status:
 ### 8. Create Directory
 
 ```bash
-mkdir -p .majestic
+mkdir -p .agents-os/relay
 ```
 
 ### 9. Write Files
 
 ```
-Write(.majestic/epic.yml, epic_content)
-Write(.majestic/attempt-ledger.yml, ledger_content)
+Write(.agents-os/relay/epic.yml, epic_content)
+Write(.agents-os/relay/attempt-ledger.yml, ledger_content)
 ```
 
 ### 10. Output Summary
@@ -251,9 +251,9 @@ Write(.majestic/attempt-ledger.yml, ledger_content)
    Group C: T4 (blocked by B)
 
 📁 Files created/updated:
-   - .majestic/epic.yml
-   - .majestic/attempt-ledger.yml
-   - .gitignore (added .majestic/)
+   - .agents-os/relay/epic.yml
+   - .agents-os/relay/attempt-ledger.yml
+   - .gitignore (added .agents-os/ if missing)
    - .agents.yml (added relay config)
 
 🚀 Next: Run `/relay:work` to start execution
@@ -266,7 +266,7 @@ Write(.majestic/attempt-ledger.yml, ledger_content)
 | Blueprint not found | Error with path suggestion |
 | Missing ## Implementation Tasks | Error suggesting /majestic:blueprint |
 | Malformed task format | Warning, skip task, continue |
-| .majestic/ already exists | Ask to overwrite or abort |
+| .agents-os/relay/ already exists | Ask to overwrite or abort |
 | Config read fails | Use default values |
 
 ## Notes

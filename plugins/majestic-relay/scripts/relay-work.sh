@@ -16,8 +16,8 @@ source "$SCRIPT_DIR/lib/prompt.sh"
 source "$SCRIPT_DIR/lib/review.sh"
 
 # File paths
-EPIC=".majestic/epic.yml"
-LEDGER=".majestic/attempt-ledger.yml"
+EPIC=".agents-os/relay/epic.yml"
+LEDGER=".agents-os/relay/attempt-ledger.yml"
 
 # Colors
 RED='\033[0;31m'

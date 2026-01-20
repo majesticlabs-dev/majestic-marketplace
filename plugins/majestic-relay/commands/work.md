@@ -7,7 +7,7 @@ allowed-tools: Bash(${CLAUDE_PLUGIN_ROOT}/scripts/relay-work.sh:*)
 
 # Execute Epic Tasks
 
-Run pending tasks from `.majestic/epic.yml` using fresh Claude instances per task. Each task must pass quality gate verification before completion.
+Run pending tasks from `.agents-os/relay/epic.yml` using fresh Claude instances per task. Each task must pass quality gate verification before completion.
 
 ## Input
 
@@ -22,11 +22,11 @@ Options:
 ## Prerequisites
 
 ```
-If not exists(".majestic/epic.yml"):
+If not exists(".agents-os/relay/epic.yml"):
   Error: "No epic found. Run `/relay:init <blueprint.md>` first."
   Exit
 
-If not exists(".majestic/attempt-ledger.yml"):
+If not exists(".agents-os/relay/attempt-ledger.yml"):
   Error: "Ledger missing. Run `/relay:init <blueprint.md>` to reinitialize."
   Exit
 ```
@@ -150,5 +150,5 @@ Gated tasks require manual intervention:
 
 - Tasks execute sequentially (one at a time)
 - Each task gets a fresh Claude context
-- Progress persists in `.majestic/attempt-ledger.yml`
+- Progress persists in `.agents-os/relay/attempt-ledger.yml`
 - Can resume anytime with `/relay:work`
