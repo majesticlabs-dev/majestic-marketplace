@@ -198,24 +198,29 @@ Read the ledger and process all learnings. Use AskUserQuestion before making any
   TEMP_OUTPUT=$(mktemp)
   trap "rm -f $TEMP_OUTPUT" RETURN
 
-  EXIT_CODE=0
   echo ""
-  if claude -p "$PROMPT" --permission-mode bypassPermissions --output-format json --json-schema "$TASK_RESULT_SCHEMA" 2>&1 | tee "$TEMP_OUTPUT"; then
-    EXIT_CODE=0
-  else
-    EXIT_CODE=$?
-  fi
+  claude -p "$PROMPT" --permission-mode bypassPermissions --output-format json --json-schema "$TASK_RESULT_SCHEMA" 2>&1 | tee "$TEMP_OUTPUT" || true
+  CLAUDE_EXIT_CODE=${PIPESTATUS[0]}
   echo ""
 
   OUTPUT=$(cat "$TEMP_OUTPUT")
   rm -f "$TEMP_OUTPUT"
 
-  # Parse structured result with jq (from structured_output field)
-  RESULT_STATUS=$(echo "$OUTPUT" | jq -r '.structured_output.status // "failure"')
-  RESULT_MESSAGE=$(echo "$OUTPUT" | jq -r '.structured_output.summary // "No summary provided"')
-  RESULT_FILES=$(echo "$OUTPUT" | jq -r '.structured_output.files_changed // [] | join(", ")')
-  RESULT_ERROR_CAT=$(echo "$OUTPUT" | jq -r '.structured_output.error_category // ""')
-  RESULT_SUGGESTION=$(echo "$OUTPUT" | jq -r '.structured_output.suggestion // ""')
+  # Validate JSON before parsing
+  if ! echo "$OUTPUT" | jq empty 2>/dev/null; then
+    RESULT_STATUS="failure"
+    RESULT_MESSAGE="CLI error: $(echo "$OUTPUT" | head -1 | cut -c1-100)"
+    RESULT_FILES=""
+    RESULT_ERROR_CAT="cli_error"
+    RESULT_SUGGESTION="Claude CLI returned non-JSON output (exit code: $CLAUDE_EXIT_CODE). May be transient."
+  else
+    # Parse structured result with jq (from structured_output field)
+    RESULT_STATUS=$(echo "$OUTPUT" | jq -r '.structured_output.status // "failure"')
+    RESULT_MESSAGE=$(echo "$OUTPUT" | jq -r '.structured_output.summary // "No summary provided"')
+    RESULT_FILES=$(echo "$OUTPUT" | jq -r '.structured_output.files_changed // [] | join(", ")')
+    RESULT_ERROR_CAT=$(echo "$OUTPUT" | jq -r '.structured_output.error_category // ""')
+    RESULT_SUGGESTION=$(echo "$OUTPUT" | jq -r '.structured_output.suggestion // ""')
+  fi
 
   # Run quality gate (replaces old review step)
   # Quality gate verifies AC + runs configured reviewers
