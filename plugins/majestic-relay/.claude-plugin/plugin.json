@@ -1,6 +1,6 @@
 {
   "name": "majestic-relay",
-  "version": "1.4.6",
+  "version": "1.5.0",
   "description": "Fresh-context task execution with quality-gate verification and compound learning. Shell-orchestrated epic workflow with re-anchoring, gating, automatic knowledge extraction, and multi-epic playlist orchestration.",
   "author": {
     "name": "David Paluy",

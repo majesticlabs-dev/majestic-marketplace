@@ -3,6 +3,32 @@
 # quality-gate.sh - Quality gate with fix loop
 #
 
+DEFERRED_LOG=".agents-os/relay/deferred-findings.log"
+
+# Extract and log deferred findings from quality gate output
+# Usage: log_deferred_findings "$qg_output" "$task_id"
+log_deferred_findings() {
+  local output="$1"
+  local task_id="$2"
+  local deferred timestamp
+
+  # Extract content between markers
+  deferred=$(echo "$output" | sed -n '/DEFERRED_FINDINGS_START/,/DEFERRED_FINDINGS_END/p' | grep -v 'DEFERRED_FINDINGS')
+
+  if [[ -n "$deferred" ]]; then
+    mkdir -p "$(dirname "$DEFERRED_LOG")"
+    timestamp=$(date -Iseconds)
+
+    echo "# [$timestamp] Task: $task_id" >> "$DEFERRED_LOG"
+    echo "$deferred" >> "$DEFERRED_LOG"
+    echo "" >> "$DEFERRED_LOG"
+
+    local count
+    count=$(echo "$deferred" | grep -c "^severity:" || echo "0")
+    echo -e "     ${YELLOW}📋 Deferred $count finding(s) to log${NC}"
+  fi
+}
+
 # Run quality gate with fix loop (up to 2 fix attempts via session resume)
 # Sets: RESULT_STATUS, RESULT_MESSAGE, RESULT_ERROR_CAT on failure
 # Returns: 0=approved, 1=failed, 2=blocked
@@ -40,6 +66,7 @@ Return the verdict exactly as: Verdict: APPROVED or Verdict: NEEDS CHANGES or Ve
 
     if [[ "$qg_verdict" == "APPROVED" ]]; then
       echo -e "     ${GREEN}✅ Quality gate: APPROVED${NC}"
+      log_deferred_findings "$qg_output" "$task_id"
       return 0
     elif [[ "$qg_verdict" == "BLOCKED" ]]; then
       echo -e "     ${RED}🛑 Quality gate: BLOCKED${NC}"
