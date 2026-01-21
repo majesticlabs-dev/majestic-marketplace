@@ -36,8 +36,8 @@ Or output 'none' if nothing generalizable."
   if output=$(claude -p "$prompt" --model haiku 2>/dev/null); then
     if [[ "$output" != *"none"* ]]; then
       local learning_text learning_tags
-      learning_text=$(echo "$output" | grep -oE 'LEARNING: [^|]+' | sed 's/LEARNING: //' | head -1)
-      learning_tags=$(echo "$output" | grep -oE 'TAGS: .+' | sed 's/TAGS: //' | head -1)
+      learning_text=$(echo "$output" | grep -oE 'LEARNING: [^|]+' | sed 's/LEARNING: //' | head -1 || true)
+      learning_tags=$(echo "$output" | grep -oE 'TAGS: .+' | sed 's/TAGS: //' | head -1 || true)
 
       if [[ -n "$learning_text" ]]; then
         ledger_record_learning "$task_id" "$attempt_id" "$learning_text" "$learning_tags"

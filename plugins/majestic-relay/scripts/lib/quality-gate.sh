@@ -13,7 +13,8 @@ log_deferred_findings() {
   local deferred timestamp
 
   # Extract content between markers
-  deferred=$(echo "$output" | sed -n '/DEFERRED_FINDINGS_START/,/DEFERRED_FINDINGS_END/p' | grep -v 'DEFERRED_FINDINGS')
+  # grep -v returns 1 on empty input, which with pipefail causes script exit
+  deferred=$(echo "$output" | sed -n '/DEFERRED_FINDINGS_START/,/DEFERRED_FINDINGS_END/p' | grep -v 'DEFERRED_FINDINGS' || true)
 
   if [[ -n "$deferred" ]]; then
     mkdir -p "$(dirname "$DEFERRED_LOG")"
@@ -62,7 +63,7 @@ Return the verdict exactly as: Verdict: APPROVED or Verdict: NEEDS CHANGES or Ve
     qg_output=$(cat "$qg_temp")
     rm -f "$qg_temp"
 
-    qg_verdict=$(echo "$qg_output" | grep -oE 'Verdict: (APPROVED|NEEDS CHANGES|BLOCKED)' | tail -1 | cut -d' ' -f2-)
+    qg_verdict=$(echo "$qg_output" | grep -oE 'Verdict: (APPROVED|NEEDS CHANGES|BLOCKED)' | tail -1 | cut -d' ' -f2- || true)
 
     if [[ "$qg_verdict" == "APPROVED" ]]; then
       echo -e "     ${GREEN}✅ Quality gate: APPROVED${NC}"
