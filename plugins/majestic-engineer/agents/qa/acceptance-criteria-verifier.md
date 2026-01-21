@@ -43,6 +43,7 @@ For each acceptance criterion:
 | Verification Type | Action |
 |-------------------|--------|
 | Command (backticks) | Execute command, check exit code |
+| Test-related (inferred) | Detect project type and run tests |
 | Manual check | `AskUserQuestion` to confirm |
 | Behavior check | Ask user to verify or provide test command |
 
@@ -51,7 +52,9 @@ For each acceptance criterion:
 - "Form validates email format before submission"
 - "API returns 404 for non-existent resources"
 
-If verification method is missing or unclear, ask user: "How do I verify: [item]?"
+If AC mentions tests (e.g., "All tests pass"), run the test suite.
+
+If verification method is unclear, ask user: "How do I verify: [item]?"
 
 ### 3. Return Result
 

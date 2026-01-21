@@ -11,8 +11,8 @@
   "plugins": [
     {
       "name": "majestic-engineer",
-      "description": "Language-agnostic engineering workflows. Includes 34 specialized agents, 26 commands, 26 skills, and 5 toolbox presets.",
-      "version": "3.51.0",
+      "description": "Language-agnostic engineering workflows. Includes 35 specialized agents, 26 commands, 26 skills, and 5 toolbox presets.",
+      "version": "3.52.0",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -441,7 +441,7 @@
     {
       "name": "majestic-relay",
       "description": "Fresh-context task execution with quality-gate verification, fix loop with session resume, and compound learning. Shell-orchestrated epic workflow with re-anchoring, gating, automatic knowledge extraction, and multi-epic playlist orchestration. Includes 6 commands, 1 agent, and 1 skill.",
-      "version": "1.5.0",
+      "version": "1.6.0",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",

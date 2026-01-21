@@ -58,7 +58,7 @@ Return the verdict exactly as: Verdict: APPROVED or Verdict: NEEDS CHANGES or Ve
   while [[ $fix_attempt -lt 3 ]]; do
     echo -e "     ${BLUE}🔍 Running quality gate...${NC}"
     qg_temp=$(mktemp)
-    claude -p "$qg_prompt" --allowedTools 'Task,Bash(git diff:*),Bash(git status:*),Bash(git log:*),Read,Grep,Glob' 2>&1 | tee "$qg_temp" || true
+    claude -p "$qg_prompt" --permission-mode bypassPermissions 2>&1 | tee "$qg_temp" || true
     qg_output=$(cat "$qg_temp")
     rm -f "$qg_temp"
 
