@@ -82,6 +82,19 @@ MAX_ATTEMPTS=$(ledger_get_setting "max_attempts_per_task" "3")
 EPIC_ID=$(yq -r '.id' "$EPIC")
 EPIC_TITLE=$(yq -r '.title' "$EPIC")
 
+# Detect and recover from stale state (crashed previous run)
+if ! ledger_relay_is_running; then
+  # Check for tasks stuck in in_progress
+  STUCK_TASKS=$(yq -r '.task_status | to_entries | .[] | select(.value == "in_progress") | .key' "$LEDGER" 2>/dev/null)
+  if [[ -n "$STUCK_TASKS" ]]; then
+    echo -e "${YELLOW}⚠️  Recovering from crashed state...${NC}"
+    for task_id in $STUCK_TASKS; do
+      yq -i ".task_status.${task_id} = \"pending\"" "$LEDGER"
+      echo -e "   Reset ${task_id} to pending"
+    done
+  fi
+fi
+
 # Track relay process status
 ledger_relay_start
 
@@ -92,10 +105,17 @@ cleanup() {
   local state
   state=$(yq -r '.relay_status.state // "idle"' "$LEDGER" 2>/dev/null)
   if [[ "$state" == "running" ]]; then
+    # Reset any in_progress tasks to pending before stopping
+    local stuck
+    stuck=$(yq -r '.task_status | to_entries | .[] | select(.value == "in_progress") | .key' "$LEDGER" 2>/dev/null || true)
+    for task_id in $stuck; do
+      yq -i ".task_status.${task_id} = \"pending\"" "$LEDGER" 2>/dev/null || true
+    done
     ledger_relay_stop "$exit_code" "interrupted"
   fi
 }
-trap cleanup EXIT INT TERM
+# Trap signals including SIGPIPE (from broken pipes like head/tail)
+trap cleanup EXIT INT TERM PIPE
 
 echo -e "${BLUE}🚀 Starting epic: ${EPIC_ID}${NC}"
 echo ""
