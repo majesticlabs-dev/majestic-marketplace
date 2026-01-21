@@ -227,12 +227,9 @@ When in doubt: keep it, ask user. Don't assume "cleanup" is correct.
 
 ## Plugin Release Checklist
 
-1. Update version in `plugins/*/.claude-plugin/plugin.json`
-2. Add/update entry in `.claude-plugin/marketplace.json` with **matching** version
-3. **VERIFY versions match before commit:**
-   ```bash
-   for p in plugins/*/; do n=$(basename "$p"); pv=$(jq -r '.version' "$p.claude-plugin/plugin.json" 2>/dev/null); mv=$(jq -r ".plugins[] | select(.name==\"$n\") | .version" .claude-plugin/marketplace.json 2>/dev/null); [[ "$pv" == "$mv" ]] && echo "✅ $n: $pv" || echo "❌ $n: plugin=$pv market=$mv"; done
-   ```
-4. Update internal references to new plugin namespace
-5. Commit registry + plugin files together
-6. README must include "What Makes This Different" section for new plugins
+1. Update version in **both** files (must match):
+   - `plugins/PLUGIN/.claude-plugin/plugin.json`
+   - `.claude-plugin/marketplace.json`
+2. Update internal references to new plugin namespace
+3. Commit registry + plugin files together
+4. README must include "What Makes This Different" section for new plugins
