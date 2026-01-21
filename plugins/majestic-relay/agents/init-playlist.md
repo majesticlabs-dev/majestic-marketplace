@@ -1,6 +1,7 @@
 ---
 name: majestic-relay:init-playlist
 description: Generate playlist.yml from epics folder (non-interactive)
+color: green
 allowed-tools:
   - Read
   - Write
