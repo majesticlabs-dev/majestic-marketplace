@@ -79,7 +79,7 @@ cleanup() {
     ledger_relay_stop "$?" "interrupted"
   fi
 }
-trap cleanup EXIT INT TERM PIPE
+trap cleanup EXIT INT TERM
 
 EPIC_ID=$(yq -r '.id' "$EPIC")
 echo -e "${BLUE}🚀 Starting epic: ${EPIC_ID}${NC}"
