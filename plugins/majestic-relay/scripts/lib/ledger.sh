@@ -93,7 +93,11 @@ ledger_record_attempt_success() {
   local idx=$((attempt_id - 1))
   yq -i ".attempts.${task_id}[${idx}].ended_at = \"${ended_at}\"" "$LEDGER"
   yq -i ".attempts.${task_id}[${idx}].result = \"success\"" "$LEDGER"
-  yq -i ".attempts.${task_id}[${idx}].receipt.summary = \"${summary}\"" "$LEDGER"
+
+  # Use strenv() to safely handle summaries with embedded quotes/special chars
+  export SUMMARY_VAR="$summary"
+  yq -i ".attempts.${task_id}[${idx}].receipt.summary = strenv(SUMMARY_VAR)" "$LEDGER"
+  unset SUMMARY_VAR
 
   # Add files_changed if provided
   if [[ -n "$files_changed" ]]; then
@@ -129,14 +133,21 @@ ledger_record_attempt_failure() {
   local idx=$((attempt_id - 1))
   yq -i ".attempts.${task_id}[${idx}].ended_at = \"${ended_at}\"" "$LEDGER"
   yq -i ".attempts.${task_id}[${idx}].result = \"failure\"" "$LEDGER"
-  yq -i ".attempts.${task_id}[${idx}].receipt.error_summary = \"${summary}\"" "$LEDGER"
+
+  # Use strenv() to safely handle summaries with embedded quotes/special chars
+  export SUMMARY_VAR="$summary"
+  yq -i ".attempts.${task_id}[${idx}].receipt.error_summary = strenv(SUMMARY_VAR)" "$LEDGER"
+  unset SUMMARY_VAR
 
   # Add optional fields if provided
   if [[ -n "$error_category" ]]; then
     yq -i ".attempts.${task_id}[${idx}].receipt.error_category = \"${error_category}\"" "$LEDGER"
   fi
   if [[ -n "$suggestion" ]]; then
-    yq -i ".attempts.${task_id}[${idx}].receipt.suggestion = \"${suggestion}\"" "$LEDGER"
+    # Use strenv() for suggestion which may contain special chars
+    export SUGGESTION_VAR="$suggestion"
+    yq -i ".attempts.${task_id}[${idx}].receipt.suggestion = strenv(SUGGESTION_VAR)" "$LEDGER"
+    unset SUGGESTION_VAR
   fi
 }
 
