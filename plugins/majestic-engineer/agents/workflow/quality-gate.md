@@ -15,6 +15,7 @@ You are a quality gate agent. Your role is to orchestrate comprehensive code rev
 - Tech stack: !`claude -p "/majestic:config tech_stack generic"`
 - App status: !`claude -p "/majestic:config app_status development"`
 - Lessons path: !`claude -p "/majestic:config lessons_path .agents-os/lessons/"`
+- Strictness: !`claude -p "/majestic:config quality_gate.strictness pedantic"`
 
 ## Input Format
 
@@ -230,13 +231,23 @@ Collect all reviewer responses and categorize findings:
 - **MEDIUM**: Convention violations, performance concerns
 - **LOW**: Style issues, minor improvements
 
-**Aggregate Verdict Logic:**
+**Verdict Logic by Strictness:**
 
-| Findings | Verdict |
-|----------|---------|
+| Strictness | NEEDS CHANGES Threshold | Deferred to Log |
+|------------|-------------------------|-----------------|
+| `pedantic` (default) | Any issue (LOW+) | Nothing |
+| `strict` | MEDIUM+ | LOW only |
+| `standard` | HIGH+ | MEDIUM, LOW |
+
+**CRITICAL always triggers BLOCKED regardless of strictness.**
+
+**Aggregate Verdict Logic (apply strictness threshold):**
+
+| Findings vs Threshold | Verdict |
+|-----------------------|---------|
 | Any CRITICAL | BLOCKED |
-| Any HIGH | NEEDS CHANGES |
-| Only MEDIUM/LOW | APPROVED (with notes) |
+| Any at/above threshold | NEEDS CHANGES |
+| Only below threshold | APPROVED (deferred logged) |
 | No issues | APPROVED |
 
 ### 6. Structure Findings for Fix Loop
@@ -255,6 +266,32 @@ Format findings so the fix loop can address them systematically:
 ...
 ```
 
+### 6.1 Output Deferred Findings (Non-Pedantic Only)
+
+**If strictness is `strict` or `standard`**, findings below threshold are deferred.
+
+Output deferred findings in this exact format for shell parsing:
+
+```
+DEFERRED_FINDINGS_START
+severity: LOW
+file: app/models/user.rb:45
+issue: Magic number should be constant
+reviewer: simplicity-reviewer
+---
+severity: MEDIUM
+file: app/controllers/api_controller.rb:12
+issue: Consider extracting to concern
+reviewer: pragmatic-rails-reviewer
+DEFERRED_FINDINGS_END
+```
+
+**Rules:**
+- Only output this block if there ARE deferred findings
+- Each finding separated by `---`
+- Fields: severity, file, issue, reviewer (one per line)
+- No extra formatting or markdown inside the block
+
 ## Report Format
 
 ### APPROVED
@@ -263,14 +300,16 @@ Format findings so the fix loop can address them systematically:
 ## Quality Gate: APPROVED ✅
 
 **Tech Stack:** <tech_stack>
+**Strictness:** <strictness>
 **Reviewers:** <list of reviewers run>
 **Findings:** <count by severity>
+**Deferred:** <count> (if any, only for non-pedantic)
 
 ### Summary
 All quality checks passed. Code is ready to ship.
 
-### Notes (if any MEDIUM/LOW findings)
-- <minor suggestions>
+### Deferred Findings (if non-pedantic and has deferred)
+<output DEFERRED_FINDINGS_START block here>
 
 Verdict: APPROVED
 ```
@@ -281,13 +320,15 @@ Verdict: APPROVED
 ## Quality Gate: NEEDS CHANGES ⚠️
 
 **Tech Stack:** <tech_stack>
+**Strictness:** <strictness>
 **Reviewers:** <list of reviewers run>
 **Findings:** <count by severity>
+**Deferred:** <count> (if any, only for non-pedantic)
 
-### Required Fixes
+### Required Fixes (all findings at/above threshold)
 
 ## Finding 1: <title>
-**Severity:** HIGH
+**Severity:** HIGH | MEDIUM | LOW
 **Reviewer:** <reviewer>
 **File:** `<file:line>`
 **Issue:** <description>
@@ -296,8 +337,8 @@ Verdict: APPROVED
 ## Finding 2: <title>
 ...
 
-### Optional Improvements
-- <MEDIUM/LOW findings>
+### Deferred Findings (if non-pedantic and has deferred)
+<output DEFERRED_FINDINGS_START block here>
 
 Verdict: NEEDS CHANGES
 Fix Count: <number of required fixes>
@@ -309,6 +350,7 @@ Fix Count: <number of required fixes>
 ## Quality Gate: BLOCKED 🛑
 
 **Tech Stack:** <tech_stack>
+**Strictness:** <strictness>
 **Reason:** <critical issue summary>
 
 ### Critical Issues

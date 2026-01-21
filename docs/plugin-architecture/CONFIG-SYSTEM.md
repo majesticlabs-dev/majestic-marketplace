@@ -12,6 +12,7 @@ The config file has **core fields** plus **stack-specific fields** based on tech
 
 | Version | Changes |
 |---------|---------|
+| 1.8 | Added `quality_gate.strictness` for controlling fix loop threshold |
 | 1.7 | Migrated project knowledge from `.claude/` to `.agents-os/` (lessons, handoffs, session ledger) |
 | 1.6 | Added `owner.level` for experience-based skill tailoring |
 | 1.5 | Added `lessons_path` for learnings discovery |
@@ -41,6 +42,28 @@ Project knowledge storage moves from `.claude/` to `.agents-os/`:
 3. Update `.gitignore` if you have custom entries for these paths
 
 **Note:** `.claude/` remains for Claude Code tool configuration (settings.json, hooks, commands).
+
+### Migration from 1.7 to 1.8
+
+**Backwards compatible:** New optional field with sensible default.
+
+New format (1.8) adds quality gate strictness control:
+```yaml
+quality_gate:
+  strictness: pedantic  # pedantic | strict | standard
+  reviewers:
+    - security-review
+    - pragmatic-rails-reviewer
+```
+
+**Strictness levels:**
+- `pedantic` (default) - Fix ALL issues while context is fresh
+- `strict` - Fix MEDIUM+ issues, defer LOW to log
+- `standard` - Fix HIGH+ issues, defer MEDIUM/LOW to log
+
+**Why the change:** Previously, MEDIUM/LOW findings were "approved with notes" but never addressed. With `pedantic` default, all issues are fixed while the session has context. Lower strictness defers findings to `.agents-os/relay/deferred-findings.log`.
+
+**No action required** - existing configs continue to work with `pedantic` default.
 
 ### Migration from 1.5 to 1.6
 
@@ -147,6 +170,7 @@ toolbox:
     coding_styles:
       - majestic-rails:dhh-coder
   quality_gate:
+    strictness: pedantic  # Address all issues while context is fresh
     reviewers:
       - majestic-rails:review:pragmatic-rails-reviewer
       - majestic-engineer:qa:security-review
@@ -217,6 +241,7 @@ plan:
 | `session.ledger` | Enable session state checkpointing to file | `true` \| `false` | `false` |
 | `session.ledger_path` | Path to session ledger file | file path | `.session_ledger.md` |
 | `workspace_setup.post_create` | Script to run after creating workspace | script path | (none) |
+| `quality_gate.strictness` | Minimum severity that triggers fix loop | `pedantic` \| `strict` \| `standard` | `pedantic` |
 
 ### Rails-Specific Fields
 
@@ -412,6 +437,29 @@ toolbox:
 | `gemini-reviewer` | majestic-tools | External LLM (Google Gemini) |
 
 **Invocation:** `Task(subagent_type: "majestic-engineer:qa:security-review")`
+
+### Quality Gate Strictness
+
+Controls the minimum severity that triggers the fix loop:
+
+| Strictness | Fix Loop Addresses | Deferred to Log |
+|------------|-------------------|-----------------|
+| `pedantic` (default) | ALL issues (LOW+) | Nothing |
+| `strict` | MEDIUM+ | LOW only |
+| `standard` | HIGH+ | MEDIUM, LOW |
+
+**Why pedantic is default:** Fix issues while context is fresh. Deferring loses context and accumulates tech debt.
+
+**Deferred findings log:** When strictness is not `pedantic`, findings below threshold are logged to `.agents-os/relay/deferred-findings.log` for later review.
+
+```yaml
+# .agents.yml
+quality_gate:
+  strictness: pedantic  # pedantic | strict | standard
+  reviewers:
+    - security-review
+    - pragmatic-rails-reviewer
+```
 
 ## Why .agents.yml?
 
