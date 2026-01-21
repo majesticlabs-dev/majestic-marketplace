@@ -4,9 +4,9 @@ description: Parse blueprint markdown into epic.yml for fresh-context execution
 argument-hint: "<path/to/blueprint.md>"
 ---
 
-# Initialize Epic from Blueprint
+# Initialize Relay from Blueprint
 
-Parse a blueprint markdown file and generate `.agents-os/relay/epic.yml` + `.agents-os/relay/attempt-ledger.yml` for fresh-context task execution.
+Parse a blueprint markdown file, split into multiple epics by phase, and generate playlist for execution.
 
 ## Input
 
@@ -30,9 +30,7 @@ If file doesn't exist:
   Exit
 ```
 
-### 2. Setup Project (First Run)
-
-**Ensure `.agents-os/` is gitignored:**
+### 2. Setup Project
 
 ```
 GITIGNORE = Read(".gitignore") or ""
@@ -41,147 +39,65 @@ If ".agents-os/" not in GITIGNORE:
   Append to .gitignore:
     # Agent state (ephemeral)
     .agents-os/
+
+Bash: mkdir -p .agents-os/relay/epics/
 ```
 
-### 3. Read Blueprint
+### 3. Call blueprint-to-epics Agent
 
 ```
-BLUEPRINT_CONTENT = Read(blueprint_path)
+RESULT = Task(subagent_type="majestic-relay:blueprint-to-epics"):
+  prompt: |
+    Split the blueprint into epics by logical phase.
 
-If "## Implementation Tasks" not in BLUEPRINT_CONTENT:
-  Error: "Blueprint missing '## Implementation Tasks' section. Run /majestic:blueprint first."
+    Blueprint path: {blueprint_path}
+
+    Read the blueprint and:
+    1. Parse all tasks from "## Implementation Tasks"
+    2. Classify into phases: foundation, core, integration, polish
+    3. Generate epic files in .agents-os/relay/epics/
+    4. Return summary of epics created
+
+If RESULT.status == "error":
+  Error: RESULT.error
+  Exit
+
+EPICS_CREATED = RESULT.epics_created
+```
+
+### 4. Call init-playlist Agent
+
+```
+PLAYLIST = Task(subagent_type="majestic-relay:init-playlist"):
+  prompt: |
+    Generate playlist.yml from epics folder.
+
+    Playlist name: auto-generate from date
+
+If PLAYLIST.status == "error":
+  Error: PLAYLIST.error
   Exit
 ```
 
-### 4. Parse Blueprint Structure
+### 5. Generate attempt-ledger.yml
 
-Extract from the blueprint:
-
-**Epic metadata:**
-- Title (from `# ` heading or filename)
-- Source path
-- Description (first paragraph or summary)
-
-**Parallelization matrix:**
-```markdown
-| Group | Tasks | Blocked By |
-|-------|-------|------------|
-| A | T1: [title] | - |
-| B | T2: [title], T3: [title] | A |
-```
-
-**Task details:**
-```markdown
-##### T1: [title]
-- **Priority:** p1 | **Points:** 2
-- **Files:** [files]
-- **Depends on:** —
-
-**Acceptance Criteria:**
-- [ ] Criterion 1
-- [ ] Criterion 2
-```
-
-### 4.5 Generate Missing Acceptance Criteria
-
-For each task that has no acceptance_criteria (or empty list):
-
-```
-For each TASK in parsed_tasks:
-  If TASK.acceptance_criteria is empty or missing:
-    AC = Generate using Claude headless:
-
-    prompt: |
-      Generate 2-4 specific, verifiable acceptance criteria for:
-
-      Task: {TASK.title}
-      Files: {TASK.files}
-
-      Requirements:
-      - Specific (not vague like "works correctly")
-      - Verifiable (can objectively check if done)
-      - Behavior-focused (what it does, not how)
-
-      Output ONLY a YAML list, nothing else:
-      - "First criterion"
-      - "Second criterion"
-
-    TASK.acceptance_criteria = parse_yaml(AC)
-```
-
-**Example:**
-
-Input task:
-```
-T1: Create users migration
-Files: db/migrate/xxx_create_users.rb
-```
-
-Generated AC:
-```yaml
-- "Migration creates users table with id, email, password_digest, timestamps"
-- "Migration is reversible (down method drops table)"
-- "Email column has unique index"
-```
-
-### 5. Generate epic.yml
-
-Write to `.agents-os/relay/epic.yml`:
-
-```yaml
-version: 2
-id: "{YYYYMMDD}-{slugified-title}"
-source: "{blueprint_path}"
-created_at: "{ISO timestamp}"
-
-title: "{extracted title}"
-description: |
-  {extracted description}
-
-parallelization:
-  - group: A
-    tasks: [T1]
-    blocked_by: []
-  - group: B
-    tasks: [T2, T3]
-    blocked_by: [A]
-
-tasks:
-  T1:
-    title: "{task title}"
-    priority: p1
-    points: 2
-    files:
-      - {file1}
-      - {file2}
-    depends_on: []
-    acceptance_criteria:
-      - "{criterion 1}"
-      - "{criterion 2}"
-```
-
-### 6. Generate attempt-ledger.yml
-
-Write to `.agents-os/relay/attempt-ledger.yml`:
+Initialize empty ledger for the first epic:
 
 ```yaml
 version: 1
-epic_id: "{epic.id}"
+epic_id: "{first_epic_id}"
 started_at: "{ISO timestamp}"
-ended_at: null           # Set when epic completes
-duration_minutes: null   # Calculated on completion
+ended_at: null
+duration_minutes: null
 
 settings:
   max_attempts_per_task: 3
   timeout_minutes: 15
 
 task_status:
-  T1: pending
-  T2: pending
-  # ... all tasks start as pending
+  # Will be populated when epic is loaded
 
 attempts: {}
-
 gated_tasks: {}
 
 relay_status:
@@ -193,33 +109,23 @@ relay_status:
   last_exit_reason: null
 ```
 
-### 7. Create Directory
+Write to `.agents-os/relay/attempt-ledger.yml`
 
-```bash
-mkdir -p .agents-os/relay
-```
-
-### 8. Write Files
+### 6. Output Summary
 
 ```
-Write(.agents-os/relay/epic.yml, epic_content)
-Write(.agents-os/relay/attempt-ledger.yml, ledger_content)
-```
+✅ Initialized from: {blueprint_path}
 
-### 9. Output Summary
+📋 Created {n} epics:
+   1. {epic_id_1} ({task_count} tasks) - {phase}
+   2. {epic_id_2} ({task_count} tasks) - {phase}
+   3. {epic_id_3} ({task_count} tasks) - {phase}
 
-```
-✅ Epic initialized: {epic.id}
-
-📋 Tasks: {task_count}
-   Group A: T1
-   Group B: T2, T3 (blocked by A)
-   Group C: T4 (blocked by B)
-
-📁 Files created/updated:
-   - .agents-os/relay/epic.yml
+📁 Files created:
+   - .agents-os/relay/epics/{epic_id_1}.yml
+   - .agents-os/relay/epics/{epic_id_2}.yml
+   - .agents-os/relay/playlist.yml
    - .agents-os/relay/attempt-ledger.yml
-   - .gitignore (added .agents-os/ if missing)
 
 🚀 Next: Run `/relay:work` to start execution
 ```
@@ -230,6 +136,7 @@ Write(.agents-os/relay/attempt-ledger.yml, ledger_content)
 |----------|--------|
 | Blueprint not found | Error with path suggestion |
 | Missing ## Implementation Tasks | Error suggesting /majestic:blueprint |
-| Malformed task format | Warning, skip task, continue |
-| .agents-os/relay/ already exists | Ask to overwrite or abort |
-
+| No tasks parsed | Error with details |
+| blueprint-to-epics fails | Report error, exit |
+| init-playlist fails | Report error, exit |
+| .agents-os/relay/ exists | Warn and ask to overwrite or abort |
