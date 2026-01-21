@@ -8,10 +8,9 @@ Fresh-context task execution with attempt ledger. Shell-orchestrated epic workfl
 
 | Command | Description |
 |---------|-------------|
-| `/relay:init <blueprint.md>` | Parse blueprint → `.agents-os/relay/epic.yml` |
+| `/relay:init <blueprint.md>` | Parse blueprint → split into epics by phase → generate playlist |
 | `/relay:status` | Show progress and gated tasks |
 | `/relay:work` | Execute tasks with fresh contexts |
-| `/relay:init-playlist` | Create playlist from epics in `epics/` folder |
 | `/relay:run-playlist` | Execute multiple epics sequentially (fail-fast) |
 | `/relay:playlist-status` | Show playlist progress across all epics |
 
@@ -21,7 +20,7 @@ Fresh-context task execution with attempt ledger. Shell-orchestrated epic workfl
 # 1. Create blueprint (existing command)
 /majestic:blueprint "Add user authentication"
 
-# 2. Initialize epic from blueprint
+# 2. Initialize relay (splits into epics + creates playlist)
 /relay:init docs/plans/xxx.md
 
 # 3. Execute tasks
@@ -30,27 +29,19 @@ Fresh-context task execution with attempt ledger. Shell-orchestrated epic workfl
 /relay:work --max-attempts 5   # Override max attempts
 ```
 
-## Multi-Epic Playlists
+### What `/relay:init` Does
 
-Run multiple epics sequentially with fail-fast behavior:
+1. Parses the blueprint's `## Implementation Tasks` section
+2. Classifies tasks into phases:
+   - **foundation** - migrations, models, schema, config
+   - **core** - services, business logic, handlers
+   - **integration** - controllers, endpoints, views
+   - **polish** - tests, validation, error handling
+3. Creates one epic file per phase in `.agents-os/relay/epics/`
+4. Generates `playlist.yml` with all epics in order
+5. Initializes `attempt-ledger.yml`
 
-```bash
-# 1. Initialize multiple epics (creates files in epics/ folder)
-/relay:init docs/plans/01-infrastructure.md
-/relay:init docs/plans/02-database.md
-/relay:init docs/plans/03-auth.md
-
-# 2. Create playlist from epics
-/relay:init-playlist "Q1 MVP"
-
-# 3. Execute all epics sequentially
-/relay:run-playlist
-
-# 4. Check progress
-/relay:playlist-status
-```
-
-### Playlist Architecture
+## File Structure
 
 ```
 .agents-os/relay/
@@ -58,9 +49,10 @@ Run multiple epics sequentially with fail-fast behavior:
 ├── attempt-ledger.yml          # Reset per epic
 ├── playlist.yml                # Tracks progress across epics
 └── epics/
-    ├── 260119-01-infrastructure.yml
-    ├── 260119-02-database.yml
-    └── 260119-03-auth.yml
+    ├── 260120-01-foundation.yml
+    ├── 260120-02-core.yml
+    ├── 260120-03-integration.yml
+    └── 260120-04-polish.yml
 ```
 
 - **Symlink approach**: `epic.yml` points to current epic (no file copying)
@@ -73,33 +65,25 @@ Run multiple epics sequentially with fail-fast behavior:
 ```yaml
 # playlist.yml (updated during execution)
 version: 1
-name: "Q1 MVP"
-created_at: "2024-01-15T10:00:00Z"
+name: "260120-playlist"
+created_at: "2026-01-20T10:00:00Z"
 status: in_progress    # pending | in_progress | completed | failed
 current: 2             # Index of current/next epic (0-based)
-started_at: "2024-01-15T10:00:00Z"
+started_at: "2026-01-20T10:00:00Z"
 ended_at: null
 duration_minutes: null
 
 epics:
-  - file: 260119-01-infrastructure.yml
+  - file: 260120-01-foundation.yml
     status: completed
-    started_at: "2024-01-15T10:00:00Z"
-    completed_at: "2024-01-15T10:15:00Z"
-  - file: 260119-02-database.yml
+    started_at: "2026-01-20T10:00:00Z"
+    completed_at: "2026-01-20T10:15:00Z"
+  - file: 260120-02-core.yml
     status: in_progress
-    started_at: "2024-01-15T10:15:00Z"
-  - file: 260119-03-auth.yml
+    started_at: "2026-01-20T10:15:00Z"
+  - file: 260120-03-integration.yml
     status: pending
 ```
-
-### Testing Playlists
-
-- [ ] `/relay:init-playlist` discovers epics in `epics/` folder
-- [ ] `/relay:run-playlist` executes first epic successfully
-- [ ] Resume: interrupt mid-epic, verify `current` index, re-run continues
-- [ ] Fail-fast: playlist stops on epic failure
-- [ ] Verify symlink: `ls -l .agents-os/relay/epic.yml` → `epics/...yml`
 
 ## Key Features
 
@@ -109,14 +93,7 @@ epics:
 - **Automatic gating**: Blocks tasks after max retry attempts (default: 3)
 - **Quality gate**: Each successful task verified via quality-gate agent
 - **Compound learning**: Extracts patterns from each task, aggregates at epic completion
-
-## File Structure
-
-```
-.agents-os/relay/
-├── epic.yml              # Epic + tasks definition
-└── attempt-ledger.yml    # Attempt tracking with receipts + learnings
-```
+- **Phase-based splitting**: Blueprints automatically split into logical phases
 
 ## Compound Learning
 
