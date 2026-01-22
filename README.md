@@ -51,18 +51,6 @@ Then install a plugin:
 /plugin install {plugin-name}
 ```
 
-#### Factory AI (Droid)
-
-Use [droid-import](https://www.npmjs.com/package/droid-import) to import Claude Code marketplace agents:
-
-```bash
-bunx droid-import
-```
-
-This launches a guided installer that can import agents from Claude Code marketplaces into Factory's `.factory/` directory.
-
-**Prerequisites:** Enable Custom Droids in Factory (`/settings` → Experimental → Custom Droids)
-
 #### Codex CLI (OpenAI)
 
 Export Majestic skills and commands to Codex CLI:
