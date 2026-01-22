@@ -5,7 +5,7 @@ description: Discovery phase for blueprint workflow - interview triggers, accept
 
 # Blueprint Discovery
 
-Handles Steps 1-4 of the blueprint workflow: Idea Refinement, Interview decision, Acceptance Criteria gathering, and Feature Classification.
+Handles Steps 1-5 of the blueprint workflow: Idea Refinement, Research Decision Signals, Interview decision, Acceptance Criteria gathering, and Feature Classification.
 
 ## Input
 
@@ -77,7 +77,35 @@ refined_description = original + goal + context/symptom (if asked)
 **Output skip offer:**
 > "Got it: {refined_description}. Ready to proceed, or clarify further?"
 
-## 2. Interview Decision
+## 2. Research Decision Signals
+
+During refinement, gather signals to inform the research decision in blueprint-research.
+
+**Infer from conversation:**
+
+| Signal | How to Detect |
+|--------|---------------|
+| `user_familiarity` | Points to existing code examples? Knows where files live? → `high` |
+| `user_intent` | "Quick fix", "ship today" → `speed` / "want it right", "research first" → `thoroughness` |
+| `topic_risk` | Keywords: auth, payment, stripe, security, encrypt, API key, webhook → `high` |
+| `uncertainty_level` | "Not sure how", "what's the best way", exploring options → `high` |
+
+**If signals unclear, quick probe:**
+
+```
+AskUserQuestion:
+  question: "What matters more for this task?"
+  header: "Priority"
+  options:
+    - label: "Get it done fast"
+      description: "Good enough solution, ship quickly"
+    - label: "Get it done right"
+      description: "Research best practices first"
+```
+
+**Store signals for research phase.**
+
+## 3. Interview Decision
 
 **Suggest interview when:**
 - Feature description < 2 sentences
@@ -99,7 +127,7 @@ AskUserQuestion:
     - "No, proceed to planning" → Continue
 ```
 
-## 3. Acceptance Criteria
+## 4. Acceptance Criteria
 
 **MANDATORY: Ask what "done" means.**
 
@@ -139,7 +167,7 @@ AskUserQuestion:
 | Form validates | `rspec spec/features/signup_spec.rb` |
 | API returns 404 | `curl /api/nonexistent` |
 
-## 4. Feature Classification
+## 5. Feature Classification
 
 | Type | Detection Keywords | Action |
 |------|-------------------|--------|
@@ -171,5 +199,10 @@ discovery_result:
       verification: string
   feature_type: "ui" | "devops" | "api" | "data" | "general"
   design_system_path: string | null  # For UI features
+  # Research decision signals (for blueprint-research)
+  user_familiarity: high | medium | low
+  user_intent: speed | thoroughness
+  topic_risk: high | medium | low
+  uncertainty_level: high | medium | low
   ready_for_research: boolean
 ```
