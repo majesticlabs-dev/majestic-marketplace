@@ -5,7 +5,7 @@ description: Discovery phase for blueprint workflow - interview triggers, accept
 
 # Blueprint Discovery
 
-Handles Steps 1-3 of the blueprint workflow: Interview decision, Acceptance Criteria gathering, and Feature Classification.
+Handles Steps 1-4 of the blueprint workflow: Idea Refinement, Interview decision, Acceptance Criteria gathering, and Feature Classification.
 
 ## Input
 
@@ -13,7 +13,71 @@ Handles Steps 1-3 of the blueprint workflow: Interview decision, Acceptance Crit
 feature_description: string  # Raw feature description from user
 ```
 
-## 1. Interview Decision
+## 1. Idea Refinement
+
+Quick clarification before deep discovery. Catches misunderstandings early with 1-3 targeted questions.
+
+**Trigger when:**
+- `feature_description` < 100 characters
+- Contains uncertainty: "maybe", "probably", "something like", "I think", "not sure"
+- Missing core elements: no clear action verb OR no clear subject
+
+**Skip when:**
+- Description is detailed (> 200 characters with clear intent)
+- User says "proceed" or "skip refinement"
+- Bug fix with reproduction steps
+
+**If triggered:**
+
+```
+AskUserQuestion:
+  question: "Quick check - what's the primary goal?"
+  header: "Goal"
+  options:
+    - label: "Add new capability"
+      description: "Feature that doesn't exist yet"
+    - label: "Fix broken behavior"
+      description: "Something that should work but doesn't"
+    - label: "Improve existing feature"
+      description: "Enhancement to current functionality"
+    - label: "Refactor/cleanup"
+      description: "Better code without behavior change"
+```
+
+**Follow-up (if answer reveals gaps):**
+
+```
+If goal == "Add new capability":
+  AskUserQuestion:
+    question: "Who will use this and when?"
+    header: "Context"
+    options:
+      - label: "End users in the app"
+      - label: "Admins/internal team"
+      - label: "Developers/API consumers"
+      - label: "Automated systems"
+
+If goal == "Fix broken behavior":
+  AskUserQuestion:
+    question: "How does it fail?"
+    header: "Symptom"
+    options:
+      - label: "Error/crash"
+      - label: "Wrong output"
+      - label: "Missing data"
+      - label: "Performance issue"
+```
+
+**Max 3 questions total.** After refinement:
+
+```
+refined_description = original + goal + context/symptom (if asked)
+```
+
+**Output skip offer:**
+> "Got it: {refined_description}. Ready to proceed, or clarify further?"
+
+## 2. Interview Decision
 
 **Suggest interview when:**
 - Feature description < 2 sentences
@@ -35,7 +99,7 @@ AskUserQuestion:
     - "No, proceed to planning" → Continue
 ```
 
-## 2. Acceptance Criteria
+## 3. Acceptance Criteria
 
 **MANDATORY: Ask what "done" means.**
 
@@ -75,7 +139,7 @@ AskUserQuestion:
 | Form validates | `rspec spec/features/signup_spec.rb` |
 | API returns 404 | `curl /api/nonexistent` |
 
-## 3. Feature Classification
+## 4. Feature Classification
 
 | Type | Detection Keywords | Action |
 |------|-------------------|--------|
@@ -98,6 +162,8 @@ Skill(skill: "majestic-devops:devops-plan")
 
 ```yaml
 discovery_result:
+  refined_description: string  # Original + refinement context
+  refinement_skipped: boolean
   interview_conducted: boolean
   interview_output: string | null  # If interview was run
   acceptance_criteria:
