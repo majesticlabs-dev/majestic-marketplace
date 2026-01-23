@@ -207,13 +207,13 @@ Mark assumptions as `UNCONFIRMED` when:
 
 **Guideline**: After 2-3 compactions in a session, checkpoint to ledger and `/clear` for fresh context with preserved state.
 
-## Ledger vs Handoff vs TodoWrite
+## Ledger vs Handoff vs Tasks
 
 | Tool | Purpose | Persistence | Trigger |
 |------|---------|-------------|---------|
 | `session-checkpoint` | Crash recovery, quick state save | File (`.agents-os/session_ledger.md`) | Agent-triggered |
 | `/session:handoff` | Cross-session continuity | File (main worktree `.agents-os/handoffs/`) | User/ship-triggered |
-| `TodoWrite` | In-session task tracking | In-context only | Agent-triggered |
+| `Tasks` | Session task tracking | File (`~/.claude/tasks/`) | Agent-triggered |
 
 Use `session-checkpoint` for:
 - Automated state preservation during workflows

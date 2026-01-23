@@ -26,6 +26,21 @@ If not exists(".agents-os/relay/attempt-ledger.yml"):
 Execute: "${CLAUDE_PLUGIN_ROOT}/scripts/relay-work.sh" $ARGUMENTS
 ```
 
+## Task Coordination
+
+Workers share a TaskList via environment variable:
+
+```bash
+export CLAUDE_CODE_TASK_LIST_ID="relay-${EPIC_ID}"
+```
+
+Workers can discover and log additional work:
+- Use `TaskCreate` for discovered work outside current task scope
+- Continue with current task - do NOT block on discoveries
+- Orchestrator sees discovered tasks after worker completes
+
+**Note:** Ledger tracks detailed attempt receipts. Tasks enable worker-to-orchestrator communication.
+
 ## Error Handling
 
 | Scenario | Action |

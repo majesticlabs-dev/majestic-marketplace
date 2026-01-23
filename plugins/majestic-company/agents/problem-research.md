@@ -2,7 +2,7 @@
 name: problem-research
 description: Research competitor pain points from review platforms (G2, Capterra, Reddit) to find wedge opportunities. SaaS/B2B focus. Use for market validation, competitive analysis, or deciding whether to build.
 color: orange
-tools: Read, Write, Edit, WebSearch, WebFetch, AskUserQuestion, TodoWrite, mcp__browsermcp__*
+tools: Read, Write, Edit, WebSearch, WebFetch, AskUserQuestion, TaskCreate, TaskList, TaskUpdate, mcp__browsermcp__*
 ---
 
 # Problem Research
@@ -65,7 +65,7 @@ Ask user which execution approach to use:
 
 ### Phase 4: Execute Research
 
-Track progress via TodoWrite through these steps:
+Track progress via TaskCreate/TaskUpdate through these steps:
 
 1. **Identify top competitors** - Find 3-10 players based on scope
 2. **Analyze review platforms** - G2, Capterra, TrustRadius per competitor

@@ -2,7 +2,7 @@
 name: react-architect
 description: Design React application architecture and component hierarchies. Plans state management, folder structure, and performance optimization strategies.
 color: purple
-tools: Read, Write, Edit, Grep, Glob, Bash, WebSearch, TodoWrite
+tools: Read, Write, Edit, Grep, Glob, Bash, WebSearch, TaskCreate, TaskList, TaskUpdate
 ---
 
 # React Architect

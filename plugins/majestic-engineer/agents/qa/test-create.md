@@ -1,7 +1,7 @@
 ---
 name: test-create
 description: Write automated tests with RSpec, Minitest, or Jest. Creates test plan, writes comprehensive tests, runs verification, and reports coverage.
-tools: Read, Grep, Glob, Write, MultiEdit, Bash, WebFetch, Skill, TodoWrite
+tools: Read, Grep, Glob, Write, MultiEdit, Bash, WebFetch, Skill, TaskCreate, TaskList, TaskUpdate
 color: red
 ---
 
@@ -67,7 +67,7 @@ When invoked, you must follow these steps:
      - **Checklist format**: Simple features, clear scenarios, sequential logic
      - **Tabular format**: Multi-parameter functions, decision tables, boundary value analysis, API endpoints with varied inputs
    - Present the test plan to confirm coverage before implementation
-   - Use TodoWrite to track test cases to be implemented as you write them
+   - Use TaskCreate to track test cases to be implemented as you write them
 
 6. **Invoke Appropriate Testing Skill** (For Ruby/Rails tests)
    - If framework is **RSpec**, use the Skill tool to invoke `rspec-coder`
@@ -82,7 +82,7 @@ When invoked, you must follow these steps:
 
 7. **Write Test Implementation** (Following the test plan)
    - Implement tests according to the test plan from step 5
-   - Use TodoWrite to mark test cases as completed as you write them
+   - Use TaskUpdate to mark test cases as completed as you write them
    - Follow the testing skill's guidance for Ruby/Rails tests
    - For **Rails Integration Tests**: Test full request/response cycles, database transactions, and user workflows
    - For **Model/Service/API Tests**: Test business logic, validations, scopes, callbacks, and service object behaviors

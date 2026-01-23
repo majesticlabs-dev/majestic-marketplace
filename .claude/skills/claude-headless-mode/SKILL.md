@@ -206,6 +206,56 @@ claude -p "Task 2: Add model" --output-format json
 claude -p "Task 3: Write tests" --output-format json
 ```
 
+## Task Coordination
+
+Share TaskList across headless invocations using `CLAUDE_CODE_TASK_LIST_ID`.
+
+### Environment Variable
+
+```bash
+# All invocations share the same TaskList
+export CLAUDE_CODE_TASK_LIST_ID="my-project"
+claude -p "Use TaskCreate to add: Setup database"
+claude -p "Use TaskCreate to add: Write migrations"
+claude -p "Use TaskList to show all tasks"  # Shows both tasks
+```
+
+### Pattern: Orchestrator + Workers
+
+```bash
+TASK_LIST_ID="epic-$(date +%Y%m%d)"
+export CLAUDE_CODE_TASK_LIST_ID="$TASK_LIST_ID"
+
+# Orchestrator creates tasks
+claude -p "Use TaskCreate for each: Task 1, Task 2, Task 3"
+
+# Workers execute (each sees shared TaskList)
+for task_id in 1 2 3; do
+  claude -p "Use TaskUpdate to mark task #$task_id as in_progress, implement it, then mark completed"
+done
+
+# Check final state
+claude -p "Use TaskList to show status"
+```
+
+### Task Tools
+
+| Tool | Purpose |
+|------|---------|
+| `TaskCreate` | Create new task with subject, description |
+| `TaskList` | List all tasks with status |
+| `TaskUpdate` | Update task status (in_progress, completed) or add blockedBy |
+| `TaskGet` | Get full details of a specific task |
+
+### Dependencies
+
+```bash
+# Task 2 depends on Task 1
+claude -p "Use TaskUpdate on task #2 to set blockedBy: [1]"
+```
+
+Tasks persist to `~/.claude/tasks/` and survive session restarts.
+
 ## Notes
 
 - Each `-p` invocation starts fresh (no context from previous runs)

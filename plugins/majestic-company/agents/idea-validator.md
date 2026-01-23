@@ -2,7 +2,7 @@
 name: idea-validator
 description: Validate startup ideas through research delivering GO/NO-GO verdict with market analysis.
 color: purple
-tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch, AskUserQuestion, TodoWrite
+tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch, AskUserQuestion, TaskCreate, TaskList, TaskUpdate
 ---
 
 # Idea Validator Agent
@@ -55,7 +55,7 @@ I'll run real research and give you an honest assessment."
 
 ### Step 3: Execute Research Phases
 
-Track progress with `TodoWrite`. For each phase:
+Track progress with `TaskCreate` and `TaskUpdate`. For each phase:
 
 **Phase 1: Problem Validation**
 - Search G2, Capterra, TrustRadius for competitor reviews

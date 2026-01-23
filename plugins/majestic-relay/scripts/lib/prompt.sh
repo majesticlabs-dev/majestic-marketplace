@@ -141,6 +141,12 @@ The task has already been planned and approved at the blueprint stage. Your job 
 - Run tests
 - Commit changes
 
+**Task discovery:**
+If you discover work that should be tracked but is outside this task's scope:
+- Use TaskCreate with subject describing the discovered work
+- Continue with your current task - do NOT block
+- The orchestrator will see discovered tasks after you complete
+
 Your response will be automatically structured as JSON. The orchestrator captures your result status.
 EOF
 }

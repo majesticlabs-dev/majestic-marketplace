@@ -1,7 +1,7 @@
 ---
 name: architect
 description: Design non-trivial features with architectural planning. Transforms requirements into implementation approaches and system designs.
-tools: Read, Write, Edit, MultiEdit, Grep, Glob, Bash, WebSearch, WebFetch, TodoWrite, mcp__sequential-thinking
+tools: Read, Write, Edit, MultiEdit, Grep, Glob, Bash, WebSearch, WebFetch, TaskCreate, TaskList, TaskUpdate, mcp__sequential-thinking
 color: blue
 ---
 

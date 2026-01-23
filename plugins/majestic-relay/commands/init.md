@@ -111,7 +111,27 @@ relay_status:
 
 Write to `.agents-os/relay/attempt-ledger.yml`
 
-### 6. Output Summary
+### 6. Create Native Tasks
+
+Create Claude Code Tasks from epic tasks for real-time coordination:
+
+```
+EPIC_ID = "relay-$(date +%y%m%d%H%M%S)"  # e.g., "relay-260122195930"
+export CLAUDE_CODE_TASK_LIST_ID="${EPIC_ID}"
+
+For each task in first_epic.tasks:
+  TaskCreate:
+    subject: task.title
+    description: task.spec
+    metadata: { epic_id: EPIC_ID, task_id: task.id, phase: task.phase }
+
+  If task.depends_on:
+    TaskUpdate: blockedBy = [dependency_task_ids]
+```
+
+**Note:** Native Tasks provide real-time progress visibility. Ledger provides detailed attempt history.
+
+### 7. Output Summary
 
 ```
 ✅ Initialized from: {blueprint_path}
