@@ -12,7 +12,7 @@
     {
       "name": "majestic-engineer",
       "description": "Language-agnostic engineering workflows. Includes 35 specialized agents, 26 commands, 26 skills, and 5 toolbox presets.",
-      "version": "3.54.0",
+      "version": "3.55.0",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -33,7 +33,7 @@
     {
       "name": "majestic-rails",
       "description": "Ruby on Rails development tools. Includes 15 specialized agents, 3 commands, 30 skills, enhanced toolbox with 6 research hooks, and LSP support.",
-      "version": "3.15.1",
+      "version": "3.16.0",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -227,7 +227,7 @@
     {
       "name": "majestic-company",
       "description": "Business operations tools. Includes 17 specialized agents and 16 skills.",
-      "version": "3.5.1",
+      "version": "3.6.0",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -297,7 +297,7 @@
     {
       "name": "majestic-react",
       "description": "Modern React development toolkit for TypeScript/React stacks. Includes 2 specialized agents and 4 skills.",
-      "version": "3.1.2",
+      "version": "3.2.0",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -441,7 +441,7 @@
     {
       "name": "majestic-relay",
       "description": "Fresh-context task execution with quality-gate verification, fix loop with session resume, and compound learning. Shell-orchestrated epic workflow with re-anchoring, gating, automatic knowledge extraction, and multi-epic playlist orchestration. Includes 6 commands, 1 agent, and 1 skill.",
-      "version": "1.6.3",
+      "version": "1.7.0",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",

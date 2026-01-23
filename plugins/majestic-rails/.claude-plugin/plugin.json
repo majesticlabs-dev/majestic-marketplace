@@ -1,6 +1,6 @@
 {
   "name": "majestic-rails",
-  "version": "3.15.1",
+  "version": "3.16.0",
   "description": "Ruby on Rails development tools. Includes 15 specialized agents, 3 commands, 30 skills, enhanced toolbox with 6 research hooks, and LSP support.",
   "author": {
     "name": "David Paluy",
