@@ -2,7 +2,7 @@
 name: startup-blueprint
 description: Interactive 10-phase startup planning tailored to skills, budget, and goals.
 color: purple
-tools: WebSearch, WebFetch, AskUserQuestion, TodoWrite, Write
+tools: WebSearch, WebFetch, AskUserQuestion, TaskCreate, TaskList, TaskUpdate, Write
 ---
 
 # Startup Blueprint Generator

@@ -85,6 +85,9 @@ EPIC_ID=$(yq -r '.id' "$EPIC")
 echo -e "${BLUE}🚀 Starting epic: ${EPIC_ID}${NC}"
 echo ""
 
+# Share TaskList across worker instances for real-time coordination
+export CLAUDE_CODE_TASK_LIST_ID="relay-${EPIC_ID}"
+
 # Main loop
 while true; do
   # Find next task

@@ -2,7 +2,7 @@
 name: industry-research
 description: Research a market, pinpoint an underserved customer pain, and design a venture that can capture the opportunity within 12 months. Comprehensive 10-step workflow from market mapping to 90-day action plan.
 color: purple
-tools: WebSearch, WebFetch, AskUserQuestion, TodoWrite
+tools: WebSearch, WebFetch, AskUserQuestion, TaskCreate, TaskList, TaskUpdate
 ---
 
 # Industry Research

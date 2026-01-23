@@ -2,7 +2,7 @@
 name: rails:build
 description: Execute work plans efficiently while maintaining quality and finishing Rails features
 argument-hint: "[plan file] [optional: branch-name]"
-allowed-tools: Read, Write, Edit, Bash, Grep, Glob, TodoWrite, Task
+allowed-tools: Read, Write, Edit, Bash, Grep, Glob, TaskCreate, TaskList, TaskUpdate, Task
 ---
 
 # Work Plan Execution Command
@@ -70,8 +70,8 @@ Parse the arguments to extract:
    - You're working on a single feature
    - You prefer staying in the main repository
 
-3. **Create Todo List**
-   - Use TodoWrite to break plan into actionable tasks
+3. **Create Task List**
+   - Use TaskCreate to break plan into actionable tasks
    - Include dependencies between tasks
    - Prioritize based on what needs to be done first
    - Include testing and quality check tasks
@@ -85,7 +85,7 @@ Parse the arguments to extract:
 
    ```
    while (tasks remain):
-     - Mark task as in_progress in TodoWrite
+     - Use TaskUpdate to mark task as in_progress
      - Read any referenced files from the plan
      - Look for similar patterns in codebase
      - Implement following existing conventions
@@ -119,7 +119,7 @@ Parse the arguments to extract:
    - Repeat until implementation meets expectations
 
 5. **Track Progress**
-   - Keep TodoWrite updated as you complete tasks
+   - Use TaskUpdate to mark tasks completed as you finish them
    - Note any blockers or unexpected discoveries
    - Create new tasks if scope expands
    - Keep user informed of major milestones
@@ -158,7 +158,7 @@ Parse the arguments to extract:
    Present findings to user and address critical issues.
 
 3. **Final Validation**
-   - All TodoWrite tasks marked completed
+   - All tasks marked completed via TaskUpdate
    - All tests pass
    - Linting passes
    - Code follows existing patterns
@@ -222,7 +222,7 @@ After shipping, notify the user:
 Before creating PR, verify:
 
 - [ ] All clarifying questions asked and answered
-- [ ] All TodoWrite tasks marked completed
+- [ ] All tasks marked completed via TaskUpdate
 - [ ] Tests pass (run `bin/rails test`)
 - [ ] Linting passes (use `lint` agent)
 - [ ] Code follows existing patterns
@@ -248,6 +248,6 @@ For most features: tests + linting + following patterns is sufficient.
 - **Skipping clarifying questions** - Ask now, not after building wrong thing
 - **Ignoring plan references** - The plan has links for a reason
 - **Testing at the end** - Test continuously or suffer later
-- **Forgetting TodoWrite** - Track progress or lose track of what's done
+- **Forgetting task tracking** - Use TaskUpdate or lose track of what's done
 - **80% done syndrome** - Finish the feature, don't move on early
 - **Over-reviewing simple changes** - Save reviewer agents for complex work

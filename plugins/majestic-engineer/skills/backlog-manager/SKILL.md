@@ -1,6 +1,6 @@
 ---
 name: backlog-manager
-description: Manage backlog items across multiple backends (files, GitHub Issues, Linear, Beads). Configure task_management in .agents.yml.
+description: Manage backlog items across multiple backends (GitHub Issues, Linear, Beads). Configure task_management in .agents.yml.
 ---
 
 # Backlog Manager Skill
@@ -13,17 +13,18 @@ The backlog manager provides a unified interface for tracking work items across 
 
 | Backend | Integration | Best For |
 |---------|-------------|----------|
-| **Files** | Local markdown in `docs/todos/` | Solo developers, simple projects |
 | **GitHub** | `gh` CLI | Teams using GitHub Issues |
 | **Linear** | MCP server | Teams using Linear |
 | **Beads** | `bd` CLI | Dependency-aware workflows, AI agents |
+
+**For simple/solo projects:** Use native Tasks (`TaskCreate`, `TaskList`, `TaskUpdate`) instead of backlog-manager.
 
 ## Configuration
 
 Configure your preferred backend in your project's `.agents.yml`:
 
 ```yaml
-task_management: github  # Options: file, github, linear, beads
+task_management: github  # Options: github, linear, beads
 
 # Workflow labels (for github/linear backends)
 workflow_labels:
@@ -36,7 +37,7 @@ workflow_labels:
 # beads_prefix: myapp               # Optional: custom issue prefix
 ```
 
-**Default:** If no configuration is found, uses file-based backend.
+**Default:** If no configuration is found, use native Tasks (`TaskCreate`, `TaskList`, `TaskUpdate`) for simple tracking.
 
 ## When to Use This Skill
 
@@ -96,7 +97,6 @@ When this skill is invoked:
 
 1. **Read configuration** from project CLAUDE.md
 2. **Load appropriate reference** based on `backend` setting:
-   - `files` → `references/file-backend.md`
    - `github` → `references/github-backend.md`
    - `linear` → `references/linear-backend.md`
    - `beads` → `references/beads-backend.md`
@@ -105,9 +105,9 @@ When this skill is invoked:
 ### Fallback Behavior
 
 If the configured backend is unavailable:
-- **GitHub unavailable** (gh not authenticated): Fall back to files
-- **Linear unavailable** (MCP not configured): Fall back to files
-- **Beads unavailable** (bd not installed or not initialized): Fall back to files
+- **GitHub unavailable** (gh not authenticated): Fall back to native Tasks
+- **Linear unavailable** (MCP not configured): Fall back to native Tasks
+- **Beads unavailable** (bd not installed or not initialized): Fall back to native Tasks
 - **Warn user** about the fallback
 
 ## Integration with Development Workflows
@@ -128,8 +128,9 @@ If the configured backend is unavailable:
 - Team collaboration
 - Project/sprint planning
 
-**TodoWrite tool:**
-- In-memory task tracking during single session
-- Temporary progress tracking
-- Not persisted to disk
-- Different purpose from backlog management
+**Native Tasks (TaskCreate, TaskList, TaskUpdate):**
+- Session task tracking with file persistence (`~/.claude/tasks/`)
+- Supports dependencies (`blockedBy`, `blocks`)
+- Can be shared across sessions via `CLAUDE_CODE_TASK_LIST_ID` env var
+- Use for: in-session progress tracking, subagent coordination, simple task lists
+- Different from backlog manager: Tasks are ephemeral coordination, backlog is project planning

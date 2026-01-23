@@ -31,7 +31,7 @@ Execute plan by dispatching fresh subagent per task, with code review after each
 
 ### 1. Load Plan
 
-Read plan file, create TodoWrite with all tasks.
+Read plan file, use TaskCreate to create all tasks.
 
 ### 2. Execute Task with Subagent
 
@@ -88,7 +88,7 @@ Task tool (superpowers:code-reviewer):
 
 ### 5. Mark Complete, Next Task
 
-- Mark task as completed in TodoWrite
+- Use TaskUpdate to mark task as completed
 - Move to next task
 - Repeat steps 2-5
 
@@ -111,7 +111,7 @@ After final review passes:
 ```
 You: I'm using Subagent-Driven Development to execute this plan.
 
-[Load plan, create TodoWrite]
+[Load plan, create tasks via TaskCreate]
 
 Task 1: Hook installation script
 

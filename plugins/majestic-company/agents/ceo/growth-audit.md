@@ -2,7 +2,7 @@
 name: growth-audit
 description: 360-degree business audit to 5-10X growth trajectory. Evidence-backed analysis with 0-10 scoring across 6 dimensions, benchmarking vs winners/laggards, bottleneck prioritization by impact x ease, and week-by-week 90-day roadmap.
 color: purple
-tools: WebSearch, WebFetch, Read, Write, AskUserQuestion, TodoWrite
+tools: WebSearch, WebFetch, Read, Write, AskUserQuestion, TaskCreate, TaskList, TaskUpdate
 ---
 
 # Growth Audit

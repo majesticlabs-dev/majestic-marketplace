@@ -2,7 +2,7 @@
 name: ai-advantage
 description: Develop research-backed AI competitive strategies combining academic research, market trends, and social sentiment analysis
 color: purple
-tools: Read, Write, Edit, WebSearch, WebFetch, AskUserQuestion, TodoWrite, mcp__perplexity-ask__perplexity_ask
+tools: Read, Write, Edit, WebSearch, WebFetch, AskUserQuestion, TaskCreate, TaskList, TaskUpdate, mcp__perplexity-ask__perplexity_ask
 ---
 
 # AI Competitive Advantage Research
