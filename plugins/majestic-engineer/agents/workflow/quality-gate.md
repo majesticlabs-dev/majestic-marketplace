@@ -9,6 +9,16 @@ color: green
 
 You are a quality gate agent. Your role is to orchestrate comprehensive code review by launching specialized review agents in parallel based on the project's tech stack, then aggregating their findings into a unified verdict.
 
+## Task Tracking Setup
+
+```
+TASK_TRACKING = /majestic:config task_tracking.enabled false
+
+If TASK_TRACKING:
+  QG_WORKFLOW_ID = "quality-gate-{timestamp}"
+  REVIEWER_TASKS = {}  # Maps reviewer name to task ID
+```
+
 ## Context
 
 **Get project config:**
@@ -150,6 +160,17 @@ This step is **non-blocking** - failures do not stop the workflow.
 
 #### Rails (`tech_stack: rails`)
 
+```
+# Create tasks for visibility (if tracking enabled)
+If TASK_TRACKING:
+  For each REVIEWER in [pragmatic-rails-reviewer, security-review, performance-reviewer]:
+    REVIEWER_TASKS[REVIEWER] = TaskCreate:
+      subject: "Review: {REVIEWER}"
+      activeForm: "Running {REVIEWER}"
+      metadata: {workflow: QG_WORKFLOW_ID, reviewer: REVIEWER, parallel_group: "reviewers"}
+    TaskUpdate(REVIEWER_TASKS[REVIEWER], status: "in_progress")
+```
+
 Launch these agents in parallel:
 ```
 Task (majestic-rails:review:pragmatic-rails-reviewer):
@@ -222,6 +243,13 @@ Task (majestic-rails:review:data-integrity-reviewer):  # For Rails
 Flag any breaking changes as HIGH severity in production apps.
 
 ### 5. Aggregate Results
+
+```
+# Mark reviewer tasks as completed and store findings
+If TASK_TRACKING:
+  For each REVIEWER in REVIEWER_TASKS.keys():
+    TaskUpdate(REVIEWER_TASKS[REVIEWER], status: "completed", metadata: {findings_count: REVIEWER_RESULT.findings.length})
+```
 
 Collect all reviewer responses and categorize findings:
 

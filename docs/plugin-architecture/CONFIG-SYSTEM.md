@@ -12,6 +12,7 @@ The config file has **core fields** plus **stack-specific fields** based on tech
 
 | Version | Changes |
 |---------|---------|
+| 1.9 | Added `task_tracking` section for native Task system integration |
 | 1.8 | Added `quality_gate.strictness` for controlling fix loop threshold |
 | 1.7 | Migrated project knowledge from `.claude/` to `.agents-os/` (lessons, handoffs, session ledger) |
 | 1.6 | Added `owner.level` for experience-based skill tailoring |
@@ -42,6 +43,30 @@ Project knowledge storage moves from `.claude/` to `.agents-os/`:
 3. Update `.gitignore` if you have custom entries for these paths
 
 **Note:** `.claude/` remains for Claude Code tool configuration (settings.json, hooks, commands).
+
+### Migration from 1.8 to 1.9
+
+**Backwards compatible:** New optional section for Task system integration.
+
+New format (1.9) adds task tracking configuration:
+```yaml
+# Task Tracking - Native Claude Code Task system integration
+task_tracking:
+  enabled: true                               # Master switch
+  ledger: true                                # YAML ledger for crash recovery
+  ledger_path: .agents-os/workflow-ledger.yml # Checkpoint file location
+  auto_cleanup: true                          # Remove tasks after workflow completion
+```
+
+**What it does:**
+- `enabled: true` - Workflows create Tasks for visibility (ctrl+t shows progress)
+- `ledger: true` - Checkpoints written to YAML for crash recovery
+- `ledger_path` - Where checkpoints are stored (gitignored by default)
+- `auto_cleanup: true` - Completed workflow tasks are removed to prevent pollution
+
+**Why the change:** Leverages Claude Code's native Task system for dependency tracking, parallel execution coordination, and cross-session persistence. The YAML ledger provides detailed receipts for crash recovery.
+
+**No action required** - existing configs continue to work. Task tracking is opt-in (default: disabled).
 
 ### Migration from 1.7 to 1.8
 
@@ -129,7 +154,7 @@ plan:
 
 ```yaml
 # .agents.yml - Project configuration for Claude Code commands
-config_version: 1.5
+config_version: 1.9
 app_status: development
 
 # Tech Stack
@@ -164,6 +189,13 @@ auto_preview: true
 plan:
   auto_create_task: true # Auto-create task when /majestic:plan completes
 
+# Task Tracking - Native Claude Code Task system integration
+# task_tracking:
+#   enabled: true                               # Workflows create Tasks for visibility
+#   ledger: true                                # YAML checkpoints for crash recovery
+#   ledger_path: .agents-os/workflow-ledger.yml
+#   auto_cleanup: true                          # Remove tasks after workflow completion
+
 # Toolbox customization (optional - overrides plugin defaults)
 toolbox:
   build_task:
@@ -179,7 +211,7 @@ toolbox:
 ### Python Project
 
 ```yaml
-config_version: 1.5
+config_version: 1.9
 app_status: development
 
 tech_stack: python
@@ -201,7 +233,7 @@ plan:
 ### Node Project
 
 ```yaml
-config_version: 1.5
+config_version: 1.9
 app_status: development
 
 tech_stack: node
@@ -242,6 +274,10 @@ plan:
 | `session.ledger_path` | Path to session ledger file | file path | `.session_ledger.md` |
 | `workspace_setup.post_create` | Script to run after creating workspace | script path | (none) |
 | `quality_gate.strictness` | Minimum severity that triggers fix loop | `pedantic` \| `strict` \| `standard` | `pedantic` |
+| `task_tracking.enabled` | Enable native Task system for workflow visibility | `true` \| `false` | `false` |
+| `task_tracking.ledger` | Enable YAML ledger for crash recovery | `true` \| `false` | `false` |
+| `task_tracking.ledger_path` | Path to workflow ledger file | file path | `.agents-os/workflow-ledger.yml` |
+| `task_tracking.auto_cleanup` | Remove tasks after workflow completion | `true` \| `false` | `true` |
 
 ### Rails-Specific Fields
 

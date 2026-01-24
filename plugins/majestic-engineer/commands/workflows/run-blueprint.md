@@ -14,6 +14,16 @@ Execute all tasks in a blueprint plan sequentially, respecting dependencies.
 plan_path: $ARGUMENTS (required)
 ```
 
+## Task Tracking Setup
+
+```
+TASK_TRACKING = /majestic:config task_tracking.enabled false
+
+If TASK_TRACKING:
+  BLUEPRINT_ID = "run-blueprint-{timestamp}"
+  TASK_MAP = {}  # Maps T1, T2 etc to Claude Task IDs
+```
+
 ## Workflow
 
 ### 1. Start Ralph Loop
@@ -41,14 +51,43 @@ Parse the `## Implementation Tasks` section:
 - ✅ Completed
 - 🔴 Failed
 
+### 2.5. Create Tasks from Table (if tracking enabled)
+
+```
+If TASK_TRACKING:
+  For each ROW in implementation_tasks:
+    TASK = TaskCreate:
+      subject: "{ROW.id}: {ROW.task}"
+      activeForm: "Building {ROW.task}"
+      metadata: {
+        blueprint_id: BLUEPRINT_ID,
+        task_id: ROW.id,
+        points: ROW.points,
+        source: plan_path
+      }
+    TASK_MAP[ROW.id] = TASK.id
+
+  # Set up dependencies
+  For each ROW in implementation_tasks where ROW.dependencies != "-":
+    BLOCKED_BY = [TASK_MAP[dep] for dep in ROW.dependencies.split(",")]
+    TaskUpdate(TASK_MAP[ROW.id], addBlockedBy: BLOCKED_BY)
+```
+
 ### 3. Find Next Task
 
 ```
-For each task in Implementation Tasks:
-  If task.status == ⏳:
-    If task.dependencies all ✅:
-      NEXT_TASK = task
-      Break
+If TASK_TRACKING:
+  # Use TaskList to find next available task
+  TASKS = TaskList()
+  BLUEPRINT_TASKS = filter(TASKS, task.metadata.blueprint_id == BLUEPRINT_ID)
+  NEXT_TASK = first(BLUEPRINT_TASKS where status == "pending" AND blockedBy.length == 0)
+Else:
+  # Fallback to markdown parsing
+  For each task in Implementation Tasks:
+    If task.status == ⏳:
+      If task.dependencies all ✅:
+        NEXT_TASK = task
+        Break
 ```
 
 If no task found (all ✅ or 🔴): Go to Step 6.
@@ -62,6 +101,17 @@ If no task found (all ✅ or 🔴): Go to Step 6.
 ### 5. Update Status
 
 ```
+If TASK_TRACKING:
+  CLAUDE_TASK_ID = TASK_MAP[NEXT_TASK.id]
+  TaskUpdate(CLAUDE_TASK_ID, status: "in_progress")
+
+  # After build completes
+  If build succeeded:
+    TaskUpdate(CLAUDE_TASK_ID, status: "completed")
+  If build failed:
+    TaskUpdate(CLAUDE_TASK_ID, status: "completed", metadata: {result: "failed"})
+
+# Always update markdown (for visibility in file)
 Edit(file_path: plan_path):
   If build succeeded: task.status = ✅
   If build failed: task.status = 🔴

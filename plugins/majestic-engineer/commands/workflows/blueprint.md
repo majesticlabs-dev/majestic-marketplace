@@ -9,6 +9,43 @@ argument-hint: "[feature description, bug report, or improvement idea]"
 **CRITICAL: This is a WORKFLOW COMMAND, not Claude's built-in plan mode.**
 Do NOT use EnterPlanMode or ExitPlanMode tools.
 
+## Task Tracking Setup
+
+```
+TASK_TRACKING = /majestic:config task_tracking.enabled false
+
+If TASK_TRACKING:
+  BLUEPRINT_WORKFLOW_ID = "blueprint-{timestamp}"
+  PHASE_TASKS = {}  # Maps phase number to task ID
+
+  # Create tasks for all phases at start
+  PHASES = [
+    {num: 1, name: "Discovery", active: "Running discovery"},
+    {num: 2, name: "Research", active: "Researching codebase"},
+    {num: 3, name: "Research Validation", active: "Validating research"},
+    {num: 4, name: "Architecture", active: "Designing architecture"},
+    {num: 5, name: "Capture Learnings", active: "Capturing learnings"},
+    {num: 6, name: "Write Plan", active: "Writing plan"},
+    {num: 7, name: "Review Plan", active: "Reviewing plan"},
+    {num: 8, name: "User Decision", active: "Awaiting user decision"},
+    {num: 9, name: "Execution", active: "Executing plan"}
+  ]
+
+  For each P in PHASES:
+    PHASE_TASKS[P.num] = TaskCreate:
+      subject: "Phase {P.num}: {P.name}"
+      activeForm: P.active
+      metadata: {workflow: BLUEPRINT_WORKFLOW_ID, phase: P.num}
+
+  # Set up phase dependencies (4 blocked by 1-3, etc.)
+  TaskUpdate(PHASE_TASKS[4], addBlockedBy: [PHASE_TASKS[1], PHASE_TASKS[2], PHASE_TASKS[3]])
+  TaskUpdate(PHASE_TASKS[5], addBlockedBy: [PHASE_TASKS[4]])
+  TaskUpdate(PHASE_TASKS[6], addBlockedBy: [PHASE_TASKS[5]])
+  TaskUpdate(PHASE_TASKS[7], addBlockedBy: [PHASE_TASKS[6]])
+  TaskUpdate(PHASE_TASKS[8], addBlockedBy: [PHASE_TASKS[7]])
+  TaskUpdate(PHASE_TASKS[9], addBlockedBy: [PHASE_TASKS[8]])
+```
+
 ## Feature Description
 
 <feature_description> $ARGUMENTS </feature_description>
@@ -20,7 +57,11 @@ Do NOT use EnterPlanMode or ExitPlanMode tools.
 ### Phase 1: Discovery
 
 ```
+If TASK_TRACKING: TaskUpdate(PHASE_TASKS[1], status: "in_progress")
+
 /majestic-engineer:blueprint-discovery
+
+If TASK_TRACKING: TaskUpdate(PHASE_TASKS[1], status: "completed")
 ```
 
 Handles: Idea Refinement, Interview decision, Acceptance Criteria, Feature Classification.
