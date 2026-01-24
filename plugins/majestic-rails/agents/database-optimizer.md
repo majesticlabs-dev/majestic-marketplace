@@ -67,6 +67,59 @@ add_index :products, :metadata, using: :gin
 add_index :products, :metadata, using: :gin, opclass: :jsonb_path_ops
 ```
 
+### GiST Indexes for Range/Geometric Data
+
+```ruby
+# Range types (date ranges, numeric ranges)
+add_index :reservations, :date_range, using: :gist
+
+# Geometric data (PostGIS)
+add_index :locations, :coordinates, using: :gist
+
+# Exclusion constraints (no overlapping reservations)
+execute <<-SQL
+  ALTER TABLE reservations
+  ADD CONSTRAINT no_overlap
+  EXCLUDE USING gist (room_id WITH =, date_range WITH &&);
+SQL
+```
+
+Use GiST when: range queries, geometric/spatial data, nearest-neighbor searches, exclusion constraints.
+
+### BRIN Indexes for Large Correlated Tables
+
+```ruby
+# Ideal for time-series data where values correlate with physical storage
+add_index :events, :created_at, using: :brin
+add_index :logs, :timestamp, using: :brin, with: { pages_per_range: 32 }
+```
+
+BRIN tradeoffs:
+- **Pro**: Tiny index size (100x smaller than B-tree), fast writes
+- **Con**: Less precise, works only when data is physically ordered
+- **Best for**: Append-only tables >10M rows, time-series, audit logs
+
+## Query Hints (PostgreSQL)
+
+Force execution paths when planner makes poor choices:
+
+```sql
+-- Disable sequential scan to force index usage
+SET LOCAL enable_seqscan = off;
+SELECT * FROM large_table WHERE indexed_col = 'value';
+RESET enable_seqscan;
+
+-- Force parallel execution
+SET LOCAL parallel_tuple_cost = 0;
+SET LOCAL parallel_setup_cost = 0;
+SET LOCAL min_parallel_table_scan_size = 0;
+
+-- In Rails (transaction-scoped)
+ActiveRecord::Base.connection.execute("SET LOCAL enable_seqscan = off")
+```
+
+**Warning**: Use sparingly. If you need hints regularly, statistics are likely stale or indexes are missing.
+
 ## ActiveRecord Optimization
 
 ### Eager Loading Strategy
