@@ -21,7 +21,7 @@ if [ -f AGENTS.md ]; then
   fi
 else
   echo "✗ missing"
-  ((errors++))
+  ((++errors))
 fi
 
 # Check sub-folder AGENTS.md files
@@ -42,7 +42,7 @@ if [ -f .agents.yml ]; then
   echo "✓ exists"
 else
   echo "✗ missing"
-  ((errors++))
+  ((++errors))
 fi
 
 # Check CLAUDE.md symlink
@@ -58,7 +58,7 @@ elif [ -f CLAUDE.md ]; then
   echo "⚠ exists but not a symlink"
 else
   echo "✗ missing"
-  ((errors++))
+  ((++errors))
 fi
 
 # Check .gitignore entries
