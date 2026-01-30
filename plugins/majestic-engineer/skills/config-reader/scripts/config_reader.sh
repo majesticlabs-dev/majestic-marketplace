@@ -1,10 +1,15 @@
 #!/usr/bin/env bash
 # config_reader.sh - Read and merge .agents.yml with .agents.local.yml using yq
 #
-# Usage:
+# Standalone Usage:
 #   config_reader.sh                    # Returns full merged config
 #   config_reader.sh <field>            # Returns specific field value
 #   config_reader.sh <field> <default>  # Returns field or default if not found
+#
+# Sourced Usage:
+#   source config_reader.sh
+#   config_get "tech_stack" "generic"           # Get scalar field
+#   config_get_array "quality_gate.reviewers"   # Get array as newline-separated list
 #
 # Examples:
 #   config_reader.sh                              # Show merged config
@@ -78,6 +83,30 @@ get_field() {
   echo "${value:-$default}"
 }
 
+# Alias for get_field (for scripts that source this file)
+config_get() {
+  get_field "$@"
+}
+
+# Read array config as newline-separated list
+# Usage: config_get_array "quality_gate.reviewers"
+config_get_array() {
+  local field="$1"
+  local value=""
+
+  # Try local first (yq v4 compatible: .field[] expands arrays)
+  if [[ -f "$LOCAL_CONFIG" ]]; then
+    value=$(yq -r ".${field}[]" "$LOCAL_CONFIG" 2>/dev/null || echo "")
+  fi
+
+  # Fall back to base
+  if [[ -z "$value" && -f "$BASE_CONFIG" ]]; then
+    value=$(yq -r ".${field}[]" "$BASE_CONFIG" 2>/dev/null || echo "")
+  fi
+
+  echo "$value"
+}
+
 # Show full merged config
 show_full_config() {
   local has_base=false
@@ -126,4 +155,7 @@ main() {
   fi
 }
 
-main "$@"
+# Only run main if executed directly (not sourced)
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+  main "$@"
+fi

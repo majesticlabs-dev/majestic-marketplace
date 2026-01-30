@@ -3,6 +3,9 @@
 # quality-gate.sh - Quality gate with fix loop
 #
 
+# Source config reader (SCRIPT_DIR set by parent relay-work.sh)
+source "$SCRIPT_DIR/lib/config.sh"
+
 DEFERRED_LOG=".agents-os/relay/deferred-findings.log"
 
 # Extract and log deferred findings from quality gate output
@@ -40,9 +43,34 @@ run_quality_gate() {
   local task_title="$3"
   local epic="$4"
   local branch qg_prompt fix_attempt qg_temp qg_output qg_verdict findings
+  local reviewers strictness tech_stack app_status reviewers_yaml
+
+  # Pre-read config (eliminates LLM skill invocation in headless mode)
+  reviewers=$(config_get_array "quality_gate.reviewers")
+
+  if [[ -z "$reviewers" ]]; then
+    echo -e "     ${YELLOW}**Verdict: SKIPPED**${NC}"
+    echo "     No reviewers configured in quality_gate.reviewers"
+    echo "     Configure in .agents.yml or .agents.local.yml"
+    return 0
+  fi
+
+  strictness=$(config_get "quality_gate.strictness" "pedantic")
+  tech_stack=$(config_get "tech_stack" "generic")
+  app_status=$(config_get "app_status" "development")
+
+  # Format reviewers as YAML list
+  reviewers_yaml=$(echo "$reviewers" | sed 's/^/    - /')
 
   branch=$(git branch --show-current 2>/dev/null || echo 'unknown')
   qg_prompt="You are running quality-gate verification for a relay task.
+
+Config (pre-loaded - DO NOT invoke /majestic:config):
+  reviewers:
+${reviewers_yaml}
+  strictness: ${strictness}
+  tech_stack: ${tech_stack}
+  app_status: ${app_status}
 
 Use the Task tool to invoke the quality-gate agent:
 
