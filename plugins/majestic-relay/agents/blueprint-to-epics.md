@@ -1,5 +1,5 @@
 ---
-name: majestic-relay:blueprint-to-epics
+name: blueprint-to-epics
 description: Split blueprint into multiple epics by logical phase (foundation, core, integration, polish)
 color: cyan
 allowed-tools:

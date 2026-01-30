@@ -1,5 +1,5 @@
 ---
-name: majestic-relay:learning-processor
+name: learning-processor
 description: Aggregate learnings from relay epic, apply frequency thresholds, write to .agents-os/lessons/ or AGENTS.md
 color: yellow
 allowed-tools:
