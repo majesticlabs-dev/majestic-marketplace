@@ -62,7 +62,7 @@ process_epic_learnings() {
     echo -e "${BLUE}📚 Processing $total_learnings learnings from epic...${NC}"
 
     epic_id=$(yq -r '.id' "$epic")
-    local prompt="You are the majestic-relay:learning-processor agent.
+    local prompt="You are the majestic-engineer:relay:learning-processor agent.
 
 Use the workflow defined in your agent spec to:
 1. Read learnings from: $ledger

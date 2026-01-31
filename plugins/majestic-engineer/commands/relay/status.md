@@ -1,5 +1,5 @@
 ---
-name: majestic-relay:status
+name: majestic-engineer:relay:status
 description: Show current epic progress and task status
 argument-hint: "[--verbose]"
 ---
@@ -14,7 +14,7 @@ Display the current epic progress, task status, and any gated tasks.
 
 ```
 If not exists(".agents-os/relay/epic.yml"):
-  Error: "No epic found. Run `/relay:init <blueprint.md>` first."
+  Error: "No epic found. Run `/majestic-engineer:relay:init <blueprint.md>` first."
   Exit
 ```
 
@@ -143,6 +143,6 @@ Timeout: {LEDGER.settings.timeout_minutes} minutes
 
 | Scenario | Action |
 |----------|--------|
-| No epic found | Suggest running /relay:init |
+| No epic found | Suggest running /majestic-engineer:relay:init |
 | Malformed YAML | Error with parse details |
-| Missing ledger | Suggest re-running /relay:init |
+| Missing ledger | Suggest re-running /majestic-engineer:relay:init |

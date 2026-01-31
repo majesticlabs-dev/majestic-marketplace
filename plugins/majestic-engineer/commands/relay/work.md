@@ -1,8 +1,8 @@
 ---
-name: majestic-relay:work
+name: majestic-engineer:relay:work
 description: Execute epic tasks with fresh-context Claude instances and quality gate verification
 argument-hint: "[task_id] [--max-attempts N]"
-allowed-tools: Bash(${CLAUDE_PLUGIN_ROOT}/scripts/relay-work.sh:*)
+allowed-tools: Bash(${CLAUDE_PLUGIN_ROOT}/scripts/relay/relay-work.sh:*)
 ---
 
 # Execute Epic Tasks
@@ -18,12 +18,12 @@ max_attempts: int  # Optional: Override default (3)
 
 ```
 If not exists(".agents-os/relay/epic.yml"):
-  Error: "No epic found. Run `/relay:init <blueprint.md>` first."
+  Error: "No epic found. Run `/majestic-engineer:relay:init <blueprint.md>` first."
 
 If not exists(".agents-os/relay/attempt-ledger.yml"):
-  Error: "Ledger missing. Run `/relay:init <blueprint.md>` to reinitialize."
+  Error: "Ledger missing. Run `/majestic-engineer:relay:init <blueprint.md>` to reinitialize."
 
-Execute: "${CLAUDE_PLUGIN_ROOT}/scripts/relay-work.sh" $ARGUMENTS
+Execute: "${CLAUDE_PLUGIN_ROOT}/scripts/relay/relay-work.sh" $ARGUMENTS
 ```
 
 ## Task Coordination

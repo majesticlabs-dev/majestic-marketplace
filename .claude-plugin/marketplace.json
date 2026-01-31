@@ -11,8 +11,8 @@
   "plugins": [
     {
       "name": "majestic-engineer",
-      "description": "Language-agnostic engineering workflows. Includes 35 specialized agents, 26 commands, 27 skills, and 5 toolbox presets.",
-      "version": "3.57.0",
+      "description": "Language-agnostic engineering workflows. Includes 38 specialized agents, 31 commands, 28 skills, and 5 toolbox presets. Now includes relay orchestration for fresh-context task execution with quality gates and compound learning.",
+      "version": "3.58.0",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -438,34 +438,6 @@
         "compound"
       ],
       "source": "./plugins/majestic-ralph"
-    },
-    {
-      "name": "majestic-relay",
-      "description": "Fresh-context task execution with quality-gate verification, fix loop with session resume, and compound learning. Shell-orchestrated epic workflow with re-anchoring, gating, automatic knowledge extraction, and multi-epic playlist orchestration. Includes 6 commands, 3 agents, and 1 skill.",
-      "version": "1.7.1",
-      "author": {
-        "name": "David Paluy",
-        "url": "https://github.com/dpaluy",
-        "email": "marketplace@it.majesticlabs.dev"
-      },
-      "homepage": "https://github.com/majesticlabs-dev/majestic-marketplace/tree/master/plugins/majestic-relay",
-      "tags": [
-        "relay",
-        "fresh-context",
-        "epic",
-        "tasks",
-        "orchestration",
-        "attempt-ledger",
-        "gating",
-        "sequential",
-        "shell-driven",
-        "re-anchoring",
-        "compound-learning",
-        "knowledge-extraction",
-        "playlist",
-        "multi-epic"
-      ],
-      "source": "./plugins/majestic-relay"
     }
   ]
 }
