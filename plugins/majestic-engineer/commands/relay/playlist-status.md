@@ -17,7 +17,7 @@ RELAY_DIR = ".agents-os/relay"
 PLAYLIST_PATH = "{RELAY_DIR}/playlist.yml"
 
 If not exists(PLAYLIST_PATH):
-  Error: "No playlist found. Run `/relay:init-playlist` to create one."
+  Error: "No playlist found. Run `/majestic-relay:init-playlist` to create one."
   Exit
 
 PLAYLIST = Read(PLAYLIST_PATH) → parse YAML
@@ -81,7 +81,7 @@ If STATUS == "in_progress":
     ───────────────────────────────────
     Current Epic Details:
 
-  /relay:status  # Delegate to existing status command
+  /majestic-relay:status  # Delegate to existing status command
 ```
 
 ### 6. Show Failure Details (if failed)
@@ -97,8 +97,8 @@ If STATUS == "failed":
        Failed at: {FAILED_EPIC.failed_at}
 
     To resume:
-    1. Fix the failing epic manually or run `/relay:work` to retry
-    2. Run `/relay:run-playlist` to continue from failed epic
+    1. Fix the failing epic manually or run `/majestic-relay:work` to retry
+    2. Run `/majestic-relay:run-playlist` to continue from failed epic
 ```
 
 ## Error Handling

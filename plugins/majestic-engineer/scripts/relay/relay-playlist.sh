@@ -23,7 +23,7 @@ EPIC_SYMLINK="$RELAY_DIR/epic.yml"
 # Check prerequisites
 if [[ ! -f "$PLAYLIST" ]]; then
   echo -e "${PLAYLIST_RED}Error: Playlist not found at $PLAYLIST${PLAYLIST_NC}" >&2
-  echo "Run '/relay:init-playlist' to create one." >&2
+  echo "Run '/majestic-relay:init-playlist' to create one." >&2
   exit 1
 fi
 
@@ -115,8 +115,8 @@ for ((i=CURRENT; i<EPIC_COUNT; i++)); do
     echo -e "${PLAYLIST_RED}Playlist stopped. Completed: ${i}/${EPIC_COUNT}${PLAYLIST_NC}"
     echo ""
     echo "To resume after fixing:"
-    echo "  1. Fix the failing epic or run '/relay:work' to retry"
-    echo "  2. Run '/relay:run-playlist' to continue"
+    echo "  1. Fix the failing epic or run '/majestic-relay:work' to retry"
+    echo "  2. Run '/majestic-relay:run-playlist' to continue"
     exit 1
   fi
 done
