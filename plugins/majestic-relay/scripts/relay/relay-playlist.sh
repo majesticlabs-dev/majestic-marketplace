@@ -59,7 +59,7 @@ if [[ "$STATUS" == "pending" ]]; then
   playlist_mark_started
 fi
 
-echo -e "${PLAYLIST_BLUE}🚀 Starting playlist: ${PLAYLIST_NAME}${PLAYLIST_NC}"
+echo -e "${PLAYLIST_BLUE}Starting playlist: ${PLAYLIST_NAME}${PLAYLIST_NC}"
 echo -e "   Epics: ${EPIC_COUNT}"
 echo -e "   Starting at: $((CURRENT + 1))"
 echo ""
@@ -79,7 +79,7 @@ for ((i=CURRENT; i<EPIC_COUNT; i++)); do
   epic_path="$EPICS_DIR/$epic_file"
 
   # Announce: Epic Starting
-  playlist_announce "🎬 EPIC STARTED" "$((i + 1))/${EPIC_COUNT}: $epic_file"
+  playlist_announce "EPIC STARTED" "$((i + 1))/${EPIC_COUNT}: $epic_file"
 
   # Create/update symlink to current epic
   ln -sf "epics/$epic_file" "$EPIC_SYMLINK"
@@ -98,7 +98,7 @@ for ((i=CURRENT; i<EPIC_COUNT; i++)); do
 
   if [[ $EPIC_RESULT -eq 0 ]]; then
     # Announce: Epic Completed
-    playlist_announce "✅ EPIC COMPLETED" "$((i + 1))/${EPIC_COUNT}: $epic_file"
+    playlist_announce "EPIC COMPLETED" "$((i + 1))/${EPIC_COUNT}: $epic_file"
 
     playlist_set_epic_status "$i" "completed"
     playlist_set_epic_timestamp "$i" "completed_at" "$(date -Iseconds)"
@@ -106,7 +106,7 @@ for ((i=CURRENT; i<EPIC_COUNT; i++)); do
 
   else
     # Announce: Epic Failed
-    playlist_announce "❌ EPIC FAILED" "$((i + 1))/${EPIC_COUNT}: $epic_file"
+    playlist_announce "EPIC FAILED" "$((i + 1))/${EPIC_COUNT}: $epic_file"
 
     playlist_set_epic_status "$i" "failed"
     playlist_set_epic_timestamp "$i" "failed_at" "$(date -Iseconds)"
@@ -125,9 +125,9 @@ done
 playlist_mark_completed
 DURATION=$(playlist_get "duration_minutes" "?")
 
-playlist_announce "🎉 PLAYLIST COMPLETED" "$PLAYLIST_NAME"
+playlist_announce "PLAYLIST COMPLETED" "$PLAYLIST_NAME"
 
-echo -e "${PLAYLIST_GREEN}📊 Summary:${PLAYLIST_NC}"
+echo -e "${PLAYLIST_GREEN}Summary:${PLAYLIST_NC}"
 echo -e "   Epics completed: ${EPIC_COUNT}"
 echo -e "   Duration: ${DURATION} minutes"
 echo ""

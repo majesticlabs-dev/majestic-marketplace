@@ -2,6 +2,8 @@
 #
 # quality-gate.sh - Quality gate with fix loop
 #
+# Reads quality gate agent from config for domain-agnostic execution.
+#
 
 # Source config reader (SCRIPT_DIR set by parent relay-work.sh)
 source "$SCRIPT_DIR/lib/config.sh"
@@ -29,7 +31,7 @@ log_deferred_findings() {
 
     local count
     count=$(echo "$deferred" | grep -c "^severity:" || echo "0")
-    echo -e "     ${YELLOW}📋 Deferred $count finding(s) to log${NC}"
+    echo -e "     ${YELLOW}Deferred $count finding(s) to log${NC}"
   fi
 }
 
@@ -44,6 +46,12 @@ run_quality_gate() {
   local epic="$4"
   local branch qg_prompt fix_attempt qg_temp qg_output qg_verdict findings
   local reviewers strictness tech_stack app_status reviewers_yaml
+  local qg_agent lessons_agent skip_lessons
+
+  # Read quality gate agent from config (with default)
+  qg_agent=$(config_get "relay.quality_gate_agent" "majestic-engineer:workflow:quality-gate")
+  lessons_agent=$(config_get "relay.lessons_agent" "majestic-engineer:workflow:lessons-discoverer")
+  skip_lessons=$(config_get "relay.skip_lessons" "false")
 
   # Pre-read config (eliminates LLM skill invocation in headless mode)
   reviewers=$(config_get_array "quality_gate.reviewers")
@@ -71,21 +79,25 @@ ${reviewers_yaml}
   strictness: ${strictness}
   tech_stack: ${tech_stack}
   app_status: ${app_status}
+  lessons_agent: ${lessons_agent}
+  skip_lessons: ${skip_lessons}
 
 Use the Task tool to invoke the quality-gate agent:
 
-Task(majestic-engineer:workflow:quality-gate):
+Task(${qg_agent}):
   prompt: |
     Context: ${task_id} - ${task_title}
     Branch: ${branch}
     AC Path: ${epic}
     Task ID: ${task_id}
+    Lessons Agent: ${lessons_agent}
+    Skip Lessons: ${skip_lessons}
 
 Return the verdict exactly as: Verdict: APPROVED or Verdict: NEEDS CHANGES or Verdict: BLOCKED"
 
   fix_attempt=0
   while [[ $fix_attempt -lt 3 ]]; do
-    echo -e "     ${BLUE}🔍 Running quality gate...${NC}"
+    echo -e "     ${BLUE}Running quality gate...${NC}"
     qg_temp=$(mktemp)
     claude -p "$qg_prompt" --permission-mode bypassPermissions 2>&1 | tee "$qg_temp" || true
     qg_output=$(cat "$qg_temp")
@@ -94,33 +106,33 @@ Return the verdict exactly as: Verdict: APPROVED or Verdict: NEEDS CHANGES or Ve
     qg_verdict=$(echo "$qg_output" | grep -oE 'Verdict: (APPROVED|NEEDS CHANGES|BLOCKED)' | tail -1 | cut -d' ' -f2- || true)
 
     if [[ "$qg_verdict" == "APPROVED" ]]; then
-      echo -e "     ${GREEN}✅ Quality gate: APPROVED${NC}"
+      echo -e "     ${GREEN}Quality gate: APPROVED${NC}"
       log_deferred_findings "$qg_output" "$task_id"
       return 0
     elif [[ "$qg_verdict" == "BLOCKED" ]]; then
-      echo -e "     ${RED}🛑 Quality gate: BLOCKED${NC}"
+      echo -e "     ${RED}Quality gate: BLOCKED${NC}"
       return 2
     elif [[ "$qg_verdict" == "NEEDS CHANGES" ]]; then
       fix_attempt=$((fix_attempt + 1))
       if [[ $fix_attempt -ge 3 ]]; then
-        echo -e "     ${RED}❌ Fix attempts exhausted${NC}"
+        echo -e "     ${RED}Fix attempts exhausted${NC}"
         RESULT_STATUS="failure"
         RESULT_MESSAGE="Quality gate failed after 2 fix attempts"
         RESULT_ERROR_CAT="fix_loop_exhausted"
         return 1
       fi
 
-      echo -e "     ${YELLOW}🔧 Fix attempt $fix_attempt/2...${NC}"
+      echo -e "     ${YELLOW}Fix attempt $fix_attempt/2...${NC}"
       findings=$(echo "$qg_output" | grep -A 50 "## Finding" || echo "$qg_output" | tail -30)
 
       if [[ -n "$session_id" ]]; then
-        echo -e "     ${BLUE}↻ Resuming session ${session_id:0:8}...${NC}"
+        echo -e "     ${BLUE}Resuming session ${session_id:0:8}...${NC}"
         claude --resume "$session_id" -p "Fix these quality gate issues:\n\n$findings\n\nMake minimal changes. Run tests. Commit as: fix: address quality gate findings" --permission-mode bypassPermissions 2>&1 || true
       else
         claude -p "Fix these quality gate issues:\n\n$findings\n\nMake minimal changes. Run tests. Commit as: fix: address quality gate findings" --permission-mode bypassPermissions 2>&1 || true
       fi
     else
-      echo -e "     ${YELLOW}⚠️ Quality gate: unclear verdict${NC}"
+      echo -e "     ${YELLOW}Quality gate: unclear verdict${NC}"
       RESULT_STATUS="failure"
       RESULT_MESSAGE="Quality gate returned unclear verdict"
       RESULT_ERROR_CAT="quality_gate"

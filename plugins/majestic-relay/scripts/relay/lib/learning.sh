@@ -2,6 +2,11 @@
 #
 # learning.sh - Learning extraction from task attempts
 #
+# Reads lessons agent path from config for domain-agnostic execution.
+#
+
+# Source config reader
+source "$SCRIPT_DIR/lib/config.sh"
 
 # Extract learning from task attempt
 # Usage: extract_learning "$TASK_ID" "$ATTEMPT_ID" "$TASK_TITLE" "$RESULT_STATUS" "$RESULT_MESSAGE" "$RESULT_ERROR_CAT" "$RESULT_SUGGESTION"
@@ -14,7 +19,15 @@ extract_learning() {
   local result_error_cat="${6:-}"
   local result_suggestion="${7:-}"
 
-  echo -e "     ${BLUE}📚 Extracting learning...${NC}"
+  # Check if lessons should be skipped
+  local skip_lessons
+  skip_lessons=$(config_get "relay.skip_lessons" "false")
+
+  if [[ "$skip_lessons" == "true" ]]; then
+    return 0
+  fi
+
+  echo -e "     ${BLUE}Extracting learning...${NC}"
 
   local context="Task: $task_title
 Result: $result_status
@@ -41,7 +54,7 @@ Or output 'none' if nothing generalizable."
 
       if [[ -n "$learning_text" ]]; then
         ledger_record_learning "$task_id" "$attempt_id" "$learning_text" "$learning_tags"
-        echo -e "     ${GREEN}📝 Learned: ${learning_text:0:60}...${NC}"
+        echo -e "     ${GREEN}Learned: ${learning_text:0:60}...${NC}"
       fi
     fi
   fi
@@ -53,15 +66,29 @@ process_epic_learnings() {
   local epic="$1"
   local ledger="$2"
 
+  # Check if lessons should be skipped
+  local skip_lessons
+  skip_lessons=$(config_get "relay.skip_lessons" "false")
+
+  if [[ "$skip_lessons" == "true" ]]; then
+    echo -e "${YELLOW}Lessons processing skipped (relay.skip_lessons=true)${NC}"
+    return 0
+  fi
+
   local stats total_learnings epic_id
   stats=$(ledger_get_learning_stats)
   total_learnings=$(echo "$stats" | jq -r '.total_learnings // 0')
 
   if [[ "$total_learnings" -gt 0 ]]; then
     echo ""
-    echo -e "${BLUE}📚 Processing $total_learnings learnings from epic...${NC}"
+    echo -e "${BLUE}Processing $total_learnings learnings from epic...${NC}"
 
     epic_id=$(yq -r '.id' "$epic")
+
+    # Get configurable lessons agent
+    local lessons_agent
+    lessons_agent=$(config_get "relay.lessons_agent" "majestic-engineer:workflow:lessons-discoverer")
+
     local prompt="You are the majestic-relay:learning-processor agent.
 
 Use the workflow defined in your agent spec to:
@@ -73,13 +100,14 @@ Use the workflow defined in your agent spec to:
 
 Epic: $epic_id
 Ledger: $ledger
+Lessons Agent: $lessons_agent
 
 Read the ledger and process all learnings. Use AskUserQuestion before making any file changes."
 
     claude -p "$prompt" --allowedTools 'Read,Write,Edit,Grep,Glob,Bash(yq:*),Bash(grep:*),AskUserQuestion' 2>/dev/null || {
-      echo -e "${YELLOW}⚠️  Learning processor skipped (non-critical)${NC}"
+      echo -e "${YELLOW}Learning processor skipped (non-critical)${NC}"
     }
   else
-    echo -e "${YELLOW}📝 No learnings captured during epic${NC}"
+    echo -e "${YELLOW}No learnings captured during epic${NC}"
   fi
 }

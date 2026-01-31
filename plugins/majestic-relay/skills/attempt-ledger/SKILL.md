@@ -164,11 +164,11 @@ When epic completes, the `learning-processor` agent:
 ## Task Status Flow
 
 ```
-pending → in_progress → completed
-                ↓
-            failure → pending (retry)
-                ↓
-            max_attempts → gated
+pending -> in_progress -> completed
+                |
+            failure -> pending (retry)
+                |
+            max_attempts -> gated
 ```
 
 ## Integration with Re-anchoring
@@ -198,3 +198,15 @@ Settings are stored in `attempt-ledger.yml` at init time:
 - `timeout_minutes: 15` - Max execution time per task
 
 Override at runtime with `--max-attempts N` flag.
+
+## Domain-Agnostic Configuration
+
+Relay can work with any domain (engineering, marketing, etc.) by configuring:
+
+```yaml
+# .agents.yml
+relay:
+  quality_gate_agent: majestic-engineer:workflow:quality-gate  # default
+  lessons_agent: majestic-engineer:workflow:lessons-discoverer  # optional
+  skip_lessons: false  # set true for non-engineering domains
+```

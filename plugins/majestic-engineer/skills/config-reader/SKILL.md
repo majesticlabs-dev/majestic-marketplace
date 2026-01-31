@@ -1,56 +1,33 @@
 ---
 name: config-reader
-description: Read project config from .agents.yml and .agents.local.yml with local overrides. Supports dot notation for nested fields. Invoke with args "<field> <default>".
+description: "[DEPRECATED] Use majestic-tools:config-reader instead. This skill redirects to the canonical location."
 argument-hint: "<field> [default]"
 ---
 
-# Config Reader
+# Config Reader (DEPRECATED)
 
-Read and merge `.agents.yml` and `.agents.local.yml` configuration files. Local config overrides base config.
+**This skill has moved to majestic-tools:config-reader.**
 
-**Requires:** yq (`brew install yq` or `snap install yq`)
+The config reader is domain-agnostic infrastructure and now lives in the tools plugin.
 
-## Arguments
+## Migration
 
-`$ARGUMENTS` format: `<field> [default]`
+Use the canonical skill:
 
-Examples:
-- `auto_preview false` - get top-level field, default to "false"
-- `plan.auto_create_task false` - get nested field, default to "false"
-- `tech_stack generic` - get top-level field, default to "generic"
-- `browser.type chrome` - get nested browser type
-- `toolbox.build_task.design_system_path` - get deeply nested field
-
-## Execution
-
-Run the config reader script with parsed arguments:
-
-```bash
-bash {baseDir}/scripts/config_reader.sh FIELD DEFAULT
+```
+Skill(skill="majestic-tools:config-reader")
 ```
 
-Replace `FIELD` and `DEFAULT` with the parsed arguments from `$ARGUMENTS`.
+Or use the command which handles this automatically:
 
-## Return Value
+```
+/majestic:config <field> [default]
+```
 
-Return ONLY the config value (single line):
-- `true`
-- `rails`
-- `github`
+## Temporary Redirect
 
-## Merge Logic
+For backwards compatibility, this skill will invoke the tools version:
 
-1. **Local checked first** - `.agents.local.yml` wins if key exists
-2. **Fall back to base** - `.agents.yml` if not in local
-3. **Default** - provided default if neither has the key
-
-## Common Fields
-
-| Field | Description | Typical Default |
-|-------|-------------|-----------------|
-| `auto_preview` | Auto-open markdown files | `false` |
-| `plan.auto_create_task` | Auto-create tasks from plans | `false` |
-| `tech_stack` | Primary tech stack | `generic` |
-| `task_management` | Task tracking backend | `none` |
-| `workflow` | Git workflow style | `branches` |
-| `toolbox.build_task.design_system_path` | Design system location | (none) |
+```
+Skill(skill="majestic-tools:config-reader", args="$ARGUMENTS")
+```

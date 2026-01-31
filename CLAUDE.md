@@ -17,7 +17,7 @@ NEVER modify `~/.claude/`. All plugin work goes in `majestic-marketplace/plugins
 ## Structure
 
 ```
-plugins/{engineer,rails,python,react,marketing,sales,company,llm,tools,agent-sdk,devops,experts,ralph}/
+plugins/{engineer,rails,python,react,marketing,sales,company,llm,tools,agent-sdk,devops,experts,ralph,relay}/
 ```
 
 **Wiki repo**: `../majestic-marketplace.wiki/` (separate git repo, requires separate commit/push)
@@ -26,8 +26,9 @@ plugins/{engineer,rails,python,react,marketing,sales,company,llm,tools,agent-sdk
 
 | Plugin | Can Reference |
 |--------|--------------|
-| `engineer` | rails, python, react, llm, tools, ralph |
+| `engineer` | rails, python, react, llm, tools, ralph, relay |
 | `rails`, `python`, `react` | engineer |
+| `relay` | tools |
 | `ralph` | (none) |
 | `marketing`, `sales`, `company`, `llm`, `tools`, `agent-sdk`, `devops`, `experts` | (none) |
 

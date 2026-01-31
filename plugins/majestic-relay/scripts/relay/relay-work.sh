@@ -58,7 +58,7 @@ MAX_ATTEMPTS=$(ledger_get_setting "max_attempts_per_task" "3")
 if ! ledger_relay_is_running; then
   STUCK=$(yq -r '.task_status | to_entries | .[] | select(.value == "in_progress") | .key' "$LEDGER" 2>/dev/null)
   if [[ -n "$STUCK" ]]; then
-    echo -e "${YELLOW}⚠️  Recovering from crashed state...${NC}"
+    echo -e "${YELLOW}Recovering from crashed state...${NC}"
     for task_id in $STUCK; do
       yq -i ".task_status.${task_id} = \"pending\"" "$LEDGER"
     done
@@ -82,7 +82,7 @@ cleanup() {
 trap cleanup EXIT INT TERM PIPE
 
 EPIC_ID=$(yq -r '.id' "$EPIC")
-echo -e "${BLUE}🚀 Starting epic: ${EPIC_ID}${NC}"
+echo -e "${BLUE}Starting epic: ${EPIC_ID}${NC}"
 echo ""
 
 # Share TaskList across worker instances for real-time coordination
@@ -106,13 +106,13 @@ while true; do
     if [[ "$COMPLETED" -eq "$TOTAL" ]]; then
       ledger_epic_complete
       DURATION=$(yq -r '.duration_minutes // 0' "$LEDGER")
-      echo -e "${GREEN}✅ Epic complete! ($COMPLETED/$TOTAL tasks in ${DURATION} min)${NC}"
+      echo -e "${GREEN}Epic complete! ($COMPLETED/$TOTAL tasks in ${DURATION} min)${NC}"
       process_epic_learnings "$EPIC" "$LEDGER"
       ledger_relay_stop 0 "epic_complete"
       exit 0
     else
       GATED=$(yq -r '.gated_tasks | keys | length' "$LEDGER")
-      echo -e "${YELLOW}⏸️  No executable tasks remaining${NC}"
+      echo -e "${YELLOW}No executable tasks remaining${NC}"
       echo "  Completed: $COMPLETED/$TOTAL"
       [[ "$GATED" -gt 0 ]] && echo -e "  ${RED}Gated: $GATED tasks${NC}"
       ledger_relay_stop 1 "no_runnable_tasks"
@@ -125,7 +125,7 @@ while true; do
 
   # Check attempt limit
   if [[ "$ATTEMPTS" -ge "$MAX_ATTEMPTS" ]]; then
-    echo -e "${RED}🚫 Gating $NEXT_TASK: max attempts exceeded${NC}"
+    echo -e "${RED}Gating $NEXT_TASK: max attempts exceeded${NC}"
     ledger_gate_task "$NEXT_TASK" "max_attempts_exceeded"
     continue
   fi
@@ -152,10 +152,10 @@ while true; do
 
   # Record result
   if [[ "$RESULT_STATUS" == "success" ]]; then
-    echo -e "     ${GREEN}✅ Task complete${NC}"
+    echo -e "     ${GREEN}Task complete${NC}"
     ledger_record_attempt_success "$NEXT_TASK" "$ATTEMPT_ID" "$RESULT_MESSAGE" "$RESULT_FILES"
   else
-    echo -e "     ${RED}❌ Failed: $RESULT_MESSAGE${NC}"
+    echo -e "     ${RED}Failed: $RESULT_MESSAGE${NC}"
     ledger_record_attempt_failure "$NEXT_TASK" "$ATTEMPT_ID" "$RESULT_MESSAGE" "$RESULT_ERROR_CAT" "$RESULT_SUGGESTION"
   fi
 

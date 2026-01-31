@@ -55,3 +55,10 @@ quality_gate:
     # Optional - uncomment to enable:
     # - codex-reviewer          # External LLM (requires Codex CLI)
     # - gemini-reviewer         # External LLM (requires Gemini API)
+
+# Relay Orchestration (optional - configure for non-engineer domains)
+# Uncomment and customize if using relay with different quality gate agent
+# relay:
+#   quality_gate_agent: majestic-engineer:workflow:quality-gate
+#   lessons_agent: majestic-engineer:workflow:lessons-discoverer
+#   skip_lessons: false

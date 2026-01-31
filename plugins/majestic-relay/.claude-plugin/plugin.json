@@ -1,0 +1,19 @@
+{
+  "name": "majestic-relay",
+  "version": "1.0.0",
+  "description": "Domain-agnostic epic orchestration. Execute multi-task blueprints with quality gates and retry loops.",
+  "author": {
+    "name": "David Paluy",
+    "url": "https://github.com/dpaluy",
+    "email": "marketplace@it.majesticlabs.dev"
+  },
+  "keywords": [
+    "claude-code",
+    "orchestration",
+    "epic",
+    "tasks",
+    "automation",
+    "quality-gate",
+    "relay"
+  ]
+}

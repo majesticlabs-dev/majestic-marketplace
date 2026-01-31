@@ -20,7 +20,7 @@ If not exists(PLAYLIST_PATH):
   Error: "No playlist found. Run `/majestic-relay:init-playlist` to create one."
   Exit
 
-PLAYLIST = Read(PLAYLIST_PATH) → parse YAML
+PLAYLIST = Read(PLAYLIST_PATH) -> parse YAML
 ```
 
 ### 2. Calculate Stats
@@ -36,10 +36,10 @@ CURRENT = PLAYLIST.current or 0
 
 ```
 STATUS_ICON = {
-  "pending": "⚪",
-  "in_progress": "🔄",
-  "completed": "✅",
-  "failed": "❌"
+  "pending": "[pending]",
+  "in_progress": "[working]",
+  "completed": "[done]",
+  "failed": "[failed]"
 }
 
 Print:
@@ -61,16 +61,16 @@ For INDEX, EPIC in enumerate(PLAYLIST.epics):
   EPIC_STATUS = EPIC.status or "pending"
 
   If EPIC_STATUS == "completed":
-    Print: "✅ {INDEX + 1}. {EPIC.file}"
+    Print: "[done] {INDEX + 1}. {EPIC.file}"
 
   Else If EPIC_STATUS == "in_progress":
-    Print: "🔄 {INDEX + 1}. {EPIC.file} ← current"
+    Print: "[working] {INDEX + 1}. {EPIC.file} <- current"
 
   Else If EPIC_STATUS == "failed":
-    Print: "❌ {INDEX + 1}. {EPIC.file} ← failed"
+    Print: "[failed] {INDEX + 1}. {EPIC.file} <- failed"
 
   Else:
-    Print: "⏳ {INDEX + 1}. {EPIC.file}"
+    Print: "[pending] {INDEX + 1}. {EPIC.file}"
 ```
 
 ### 5. Show Current Epic Details (if running)
@@ -78,7 +78,7 @@ For INDEX, EPIC in enumerate(PLAYLIST.epics):
 ```
 If STATUS == "in_progress":
   Print:
-    ───────────────────────────────────
+    -----------------------------------
     Current Epic Details:
 
   /majestic-relay:status  # Delegate to existing status command
@@ -91,8 +91,8 @@ If STATUS == "failed":
   FAILED_EPIC = find in PLAYLIST.epics where status == "failed"
 
   Print:
-    ───────────────────────────────────
-    ❌ Failure Details:
+    -----------------------------------
+    Failure Details:
        Epic: {FAILED_EPIC.file}
        Failed at: {FAILED_EPIC.failed_at}
 

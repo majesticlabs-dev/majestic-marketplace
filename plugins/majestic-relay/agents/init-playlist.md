@@ -40,7 +40,7 @@ playlist:
 RELAY_DIR = ".agents-os/relay"
 EPICS_DIR = "{RELAY_DIR}/epics"
 
-EPIC_FILES = Glob("{EPICS_DIR}/*.yml") → sort alphabetically
+EPIC_FILES = Glob("{EPICS_DIR}/*.yml") -> sort alphabetically
 ```
 
 ### 2. Validate

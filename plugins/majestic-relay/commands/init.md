@@ -134,20 +134,20 @@ For each task in first_epic.tasks:
 ### 7. Output Summary
 
 ```
-✅ Initialized from: {blueprint_path}
+Initialized from: {blueprint_path}
 
-📋 Created {n} epics:
+Created {n} epics:
    1. {epic_id_1} ({task_count} tasks) - {phase}
    2. {epic_id_2} ({task_count} tasks) - {phase}
    3. {epic_id_3} ({task_count} tasks) - {phase}
 
-📁 Files created:
+Files created:
    - .agents-os/relay/epics/{epic_id_1}.yml
    - .agents-os/relay/epics/{epic_id_2}.yml
    - .agents-os/relay/playlist.yml
    - .agents-os/relay/attempt-ledger.yml
 
-🚀 Next steps:
+Next steps:
    - `/majestic-relay:work` - run tasks interactively (single epic)
    - `/majestic-relay:run-playlist` - get command for background execution (all epics)
 ```

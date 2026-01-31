@@ -21,8 +21,8 @@ If not exists(".agents-os/relay/epic.yml"):
 ### 2. Load State
 
 ```
-EPIC = Read(".agents-os/relay/epic.yml") → parse YAML
-LEDGER = Read(".agents-os/relay/attempt-ledger.yml") → parse YAML
+EPIC = Read(".agents-os/relay/epic.yml") -> parse YAML
+LEDGER = Read(".agents-os/relay/attempt-ledger.yml") -> parse YAML
 ```
 
 ### 3. Calculate Progress
@@ -46,10 +46,10 @@ Started: {LEDGER.started_at}
 If LEDGER.ended_at exists:
   Print: "Completed: {LEDGER.ended_at} ({LEDGER.duration_minutes} min)"
 
-Progress: [████████░░░░░░░░░░░░] {percentage}%
+Progress: [================....] {percentage}%
 ```
 
-### 4.5. Display Relay Status
+### 4.1. Display Relay Status
 
 ```
 RELAY_STATE = LEDGER.relay_status.state // "unknown"
@@ -58,23 +58,23 @@ RELAY_EXIT_REASON = LEDGER.relay_status.last_exit_reason
 
 If RELAY_STATE == "running":
   PID = LEDGER.relay_status.pid
-  Print: "Relay: 🟢 running (PID {PID})"
+  Print: "Relay: running (PID {PID})"
 
 Else If RELAY_STATE == "idle":
   TIME_AGO = humanize(now - RELAY_STOPPED_AT)
 
   REASON_ICON = {
-    epic_complete: "✅",
-    no_runnable_tasks: "⏸️",
-    interrupted: "⚠️",
-    crashed: "💥",
-    error: "❌"
+    epic_complete: "complete",
+    no_runnable_tasks: "paused",
+    interrupted: "interrupted",
+    crashed: "crashed",
+    error: "error"
   }
 
   Print: "Relay: {REASON_ICON} {RELAY_EXIT_REASON} ({TIME_AGO} ago)"
 
 Else:
-  Print: "Relay: ⚪ never run"
+  Print: "Relay: never run"
 ```
 
 ### 5. Display Task List
@@ -83,11 +83,11 @@ For each task in dependency order:
 
 ```
 STATUS_ICON = {
-  completed: "✅",
-  in_progress: "🔄",
-  pending: "⏳",
-  blocked: "⏸️",
-  gated: "🚫"
+  completed: "[done]",
+  in_progress: "[working]",
+  pending: "[pending]",
+  blocked: "[blocked]",
+  gated: "[gated]"
 }
 
 For each TASK_ID in EPIC.tasks:
@@ -105,7 +105,7 @@ For each TASK_ID in EPIC.tasks:
 
   Else If TASK_ID in LEDGER.gated_tasks:
     REASON = LEDGER.gated_tasks[TASK_ID].reason
-    Print: "🚫 {TASK_ID}: {TITLE} (gated: {REASON})"
+    Print: "[gated] {TASK_ID}: {TITLE} (gated: {REASON})"
 
   Else:
     Print: "{ICON} {TASK_ID}: {TITLE}"
