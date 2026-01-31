@@ -186,9 +186,9 @@ This prevents context drift and ensures each attempt builds on prior learnings.
 
 | Command | Purpose |
 |---------|---------|
-| `/majestic-engineer:relay:init` | Create epic and ledger from blueprint |
-| `/majestic-engineer:relay:status` | Show progress and gated tasks |
-| `/majestic-engineer:relay:work` | Execute tasks with attempt tracking |
+| `/majestic-relay:init` | Create epic and ledger from blueprint |
+| `/majestic-relay:status` | Show progress and gated tasks |
+| `/majestic-relay:work` | Execute tasks with attempt tracking |
 
 ## Defaults
 

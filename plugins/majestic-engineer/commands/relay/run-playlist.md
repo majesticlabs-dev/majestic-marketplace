@@ -1,5 +1,5 @@
 ---
-name: majestic-engineer:relay:run-playlist
+name: majestic-relay:run-playlist
 description: Output terminal command to execute playlist
 argument-hint: "[playlist.yml]"
 ---
@@ -21,7 +21,7 @@ PLAYLIST_PATH = $ARGUMENTS or ".agents-os/relay/playlist.yml"
 
 If not exists(PLAYLIST_PATH):
   Error: "No playlist found at {PLAYLIST_PATH}"
-  Suggest: "Run `/majestic-engineer:relay:init-playlist` first"
+  Suggest: "Run `/majestic-relay:init-playlist` first"
   Exit
 
 SCRIPT_PATH = "${CLAUDE_PLUGIN_ROOT}/scripts/relay/relay-playlist.sh"
@@ -42,7 +42,7 @@ Print:
   Monitor progress:
 
   ```bash
-  /majestic-engineer:relay:playlist-status
+  /majestic-relay:playlist-status
   ```
 ```
 
