@@ -1,6 +1,6 @@
 # Majestic Company
 
-Business operations tools. Includes 17 specialized agents and 8 skills.
+Business operations tools. Includes 17 specialized agents and 9 skills.
 
 ## Installation
 
@@ -22,6 +22,7 @@ claude /plugin install majestic-company
 | Launch in 30 days | `agent ceo:thirty-day-launch` |
 | Create elevator pitch | `agent fundraising:elevator-pitch` |
 | Calculate TAM/SAM/SOM | `agent fundraising:tam-calculator` |
+| Get bootstrapped finance guidance | `skill ceo:bootstrapped-cfo` |
 | Make a business decision | `skill ceo:decision-framework` |
 | Strategic problem analysis | `skill first-principles` |
 | Review legal document | `skill legal:document-review` |
@@ -74,6 +75,7 @@ Invoke with: `skill majestic-company:ceo:<name>`
 
 | Skill | Description |
 |-------|-------------|
+| `bootstrapped-cfo` | Financial frameworks for self-funded companies (unit economics, runway, hiring ROI) |
 | `decision-framework` | First-principles, cost/benefit, and second-order effects analysis |
 | `industry-pulse` | Real-time pulse check on any industry for operators/investors |
 | `omtm-growth` | One Metric That Matters growth framework |

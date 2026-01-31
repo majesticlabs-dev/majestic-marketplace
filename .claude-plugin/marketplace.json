@@ -227,8 +227,8 @@
     },
     {
       "name": "majestic-company",
-      "description": "Business operations tools. Includes 17 specialized agents and 16 skills.",
-      "version": "3.6.0",
+      "description": "Business operations tools. Includes 17 specialized agents and 9 skills.",
+      "version": "3.7.0",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -267,7 +267,12 @@
         "elevator-pitch",
         "tam",
         "market-sizing",
-        "fundraising"
+        "fundraising",
+        "bootstrapped",
+        "cfo",
+        "unit-economics",
+        "runway",
+        "burn-rate"
       ],
       "source": "./plugins/majestic-company"
     },
