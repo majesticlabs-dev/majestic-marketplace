@@ -2,6 +2,17 @@
 
 All notable changes to majestic-tools will be documented in this file.
 
+## [3.13.0] - 2026-01-30
+
+### Added
+
+- **`multi-agent-architecture` skill** - Patterns for designing multi-agent systems
+  - Job description method: treat agent design like human hiring
+  - Shared folder pattern: sub-agents write to temp folder, downstream reads directly (avoids context overflow)
+  - Handbook consolidation: replace fragmented skills with chapters (foundation + domain)
+  - Context budget strategies and architecture decision tree
+  - Anti-patterns and iteration path for evolving systems
+
 ## [3.10.0] - 2026-01-05
 
 ### Added
