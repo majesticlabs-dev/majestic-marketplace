@@ -147,7 +147,9 @@ For each task in first_epic.tasks:
    - .agents-os/relay/playlist.yml
    - .agents-os/relay/attempt-ledger.yml
 
-🚀 Next: Run `/majestic-relay:work` to start execution
+🚀 Next steps:
+   - `/majestic-relay:work` - run tasks interactively (single epic)
+   - `/majestic-relay:run-playlist` - get command for background execution (all epics)
 ```
 
 ## Error Handling
