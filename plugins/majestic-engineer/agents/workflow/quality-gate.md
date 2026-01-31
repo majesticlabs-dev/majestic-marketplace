@@ -45,11 +45,21 @@ Else: DIFF = git diff HEAD
 
 If DIFF is empty → return APPROVED (nothing to review).
 
-### 3. Discover Critical Patterns
+### 3. Discover Critical Patterns (Optional)
 
 ```
-Task(majestic-engineer:workflow:lessons-discoverer):
-  prompt: workflow_phase: review | tech_stack: [tech_stack] | filter: antipattern,critical,high
+SKIP_LESSONS = input.skip_lessons OR "false"
+LESSONS_AGENT = input.lessons_agent OR "majestic-engineer:workflow:lessons-discoverer"
+
+If SKIP_LESSONS == "true":
+  LESSONS = []
+  Skip to Step 4
+Else:
+  Task(${LESSONS_AGENT}):
+    prompt: workflow_phase: review | tech_stack: [tech_stack] | filter: antipattern,critical,high
+
+  If Task fails:
+    LESSONS = []  # Non-blocking, continue without lessons
 ```
 
 If patterns found, include in reviewer prompts. Non-blocking on failure.

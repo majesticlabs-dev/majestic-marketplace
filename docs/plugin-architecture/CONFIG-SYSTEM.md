@@ -12,6 +12,7 @@ The config file has **core fields** plus **stack-specific fields** based on tech
 
 | Version | Changes |
 |---------|---------|
+| 1.9 | Added `relay` section for domain-agnostic orchestration |
 | 1.8 | Added `quality_gate.strictness` for controlling fix loop threshold |
 | 1.7 | Migrated project knowledge from `.claude/` to `.agents-os/` (lessons, handoffs, session ledger) |
 | 1.6 | Added `owner.level` for experience-based skill tailoring |
@@ -21,6 +22,22 @@ The config file has **core fields** plus **stack-specific fields** based on tech
 | 1.2 | Moved `auto_create_task` under `plan:` namespace |
 | 1.1 | Added `workflow_labels`, `workspace_setup.post_create` |
 | 1.0 | Initial release |
+
+### Migration from 1.8 to 1.9
+
+**Backwards compatible:** New optional fields with sensible defaults.
+
+New format (1.9) adds relay orchestration configuration:
+```yaml
+relay:
+  quality_gate_agent: majestic-engineer:workflow:quality-gate
+  lessons_agent: majestic-engineer:workflow:lessons-discoverer
+  skip_lessons: false
+```
+
+**Why the change:** Relay orchestration is now domain-agnostic. Non-engineering plugins can specify their own quality gate and lessons agents, or skip lessons entirely.
+
+**No action required** - existing configs work with defaults.
 
 ### Migration from 1.6 to 1.7
 

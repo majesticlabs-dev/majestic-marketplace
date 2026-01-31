@@ -17,10 +17,10 @@ Supports dot notation for nested fields: `plan.auto_create_task`, `toolbox.build
 
 ## Execute
 
-Invoke the config-reader skill which provides the script and merge logic:
+Invoke the config-reader skill from majestic-tools (canonical location):
 
 ```
-Skill(skill="config-reader")
+Skill(skill="majestic-tools:config-reader")
 ```
 
 Follow the skill's instructions to run the config reader script with `$ARGUMENTS`.

@@ -53,7 +53,7 @@ build_task_prompt() {
       dep_title=$(yq -r ".tasks.${dep}.title" "$epic")
       local dep_status
       dep_status=$(yq -r ".task_status.${dep}" "$ledger")
-      deps_status+="- ${dep}: ${dep_title} ✅
+      deps_status+="- ${dep}: ${dep_title}
 "
     done
   fi

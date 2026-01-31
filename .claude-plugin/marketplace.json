@@ -11,8 +11,8 @@
   "plugins": [
     {
       "name": "majestic-engineer",
-      "description": "Language-agnostic engineering workflows. Includes 38 specialized agents, 31 commands, 28 skills, and 5 toolbox presets. Now includes relay orchestration for fresh-context task execution with quality gates and compound learning.",
-      "version": "3.58.0",
+      "description": "Language-agnostic engineering workflows. Includes 35 specialized agents, 26 commands, 27 skills, and 5 toolbox presets. Relay orchestration moved to majestic-relay plugin.",
+      "version": "3.59.0",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -125,8 +125,8 @@
     },
     {
       "name": "majestic-tools",
-      "description": "Claude Code customization tools. Includes 1 agent, 11 commands, and 8 skills.",
-      "version": "3.12.1",
+      "description": "Claude Code customization tools. Includes 1 agent, 11 commands, and 9 skills.",
+      "version": "3.13.0",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -438,6 +438,27 @@
         "compound"
       ],
       "source": "./plugins/majestic-ralph"
+    },
+    {
+      "name": "majestic-relay",
+      "description": "Domain-agnostic epic orchestration. Execute multi-task blueprints with quality gates and retry loops.",
+      "version": "1.0.0",
+      "author": {
+        "name": "David Paluy",
+        "url": "https://github.com/dpaluy",
+        "email": "marketplace@it.majesticlabs.dev"
+      },
+      "homepage": "https://github.com/majesticlabs-dev/majestic-marketplace/tree/master/plugins/majestic-relay",
+      "tags": [
+        "orchestration",
+        "epic",
+        "tasks",
+        "automation",
+        "quality-gate",
+        "relay",
+        "fresh-context"
+      ],
+      "source": "./plugins/majestic-relay"
     }
   ]
 }

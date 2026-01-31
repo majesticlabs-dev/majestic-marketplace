@@ -22,6 +22,7 @@ Aggregate learnings from relay epic, apply compound-learning methodology, write 
 ```yaml
 ledger_path: string  # Path to attempt-ledger.yml
 epic_path: string    # Path to epic.yml (optional)
+lessons_agent: string  # Configurable lessons agent path (optional)
 ```
 
 ## Output Destinations
@@ -92,13 +93,13 @@ For each pattern in STRONG + RECOMMEND:
 ```
 DESTINATION = categorize(pattern, tags):
   If tags contain tech-specific (rails, python, react, node):
-    → .agents-os/lessons/ (with tech_stack from tags)
+    -> .agents-os/lessons/ (with tech_stack from tags)
   If pattern matches "check/verify/validate X":
-    → .agents.yml review_topics
+    -> .agents.yml review_topics
   If pattern is project convention:
-    → AGENTS.md Key Learnings
+    -> AGENTS.md Key Learnings
   Default:
-    → .agents-os/lessons/ (tech_stack: generic)
+    -> .agents-os/lessons/ (tech_stack: generic)
 ```
 
 ### Phase 5: Present Findings
@@ -154,15 +155,15 @@ If CONFIRM includes "Apply":
   # Group learnings by affected directory from task files
   For each PATTERN in STRONG + RECOMMEND:
     DIRS = extract_directories(PATTERN.source_tasks, epic)
-    # e.g., T1 touched app/models/user.rb → app/models/
+    # e.g., T1 touched app/models/user.rb -> app/models/
 
   # Find closest AGENTS.md for each directory
   For each DIR in unique(DIRS):
     AGENTS_PATH = find_closest_agents_md(DIR):
       # Walk up from DIR until AGENTS.md found
-      # e.g., app/models/ → app/models/AGENTS.md
-      #       app/models/ → app/AGENTS.md (if no models-level)
-      #       app/models/ → AGENTS.md (root fallback)
+      # e.g., app/models/ -> app/models/AGENTS.md
+      #       app/models/ -> app/AGENTS.md (if no models-level)
+      #       app/models/ -> AGENTS.md (root fallback)
 
     If AGENTS_PATH not exists:
       # Create at directory level if multiple learnings for that area
@@ -219,8 +220,8 @@ Task T2 touched: app/models/account.rb
 Learning: "Validate email format at model level"
 
 Resolution:
-1. Check app/models/AGENTS.md → EXISTS → Write here
-2. Else check app/AGENTS.md → EXISTS → Write here
+1. Check app/models/AGENTS.md -> EXISTS -> Write here
+2. Else check app/AGENTS.md -> EXISTS -> Write here
 3. Else fallback to AGENTS.md (root)
 ```
 
@@ -268,7 +269,7 @@ Only create lesson files for patterns that need:
 - Multiple related sub-patterns
 - Tech-stack specific discovery via `lessons-discoverer`
 
-Most relay learnings → AGENTS.md (simpler, always loaded)
+Most relay learnings -> AGENTS.md (simpler, always loaded)
 
 ## Output Schema
 
@@ -301,14 +302,12 @@ changes_applied:
 
 ## Integration with lessons-discoverer
 
-Created lessons are automatically discoverable:
+Created lessons are automatically discoverable. The lessons agent path is configurable via `relay.lessons_agent` in `.agents.yml`:
 
-```
-Task(majestic-engineer:workflow:lessons-discoverer):
-  prompt: |
-    workflow_phase: implementation
-    tech_stack: [rails]
-    task: {next_task_description}
+```yaml
+# Default
+relay:
+  lessons_agent: majestic-engineer:workflow:lessons-discoverer
 ```
 
-The `workflow_phase` and `tech_stack` in frontmatter enable semantic discovery.
+If the configured lessons agent is not available, processing continues without error (graceful degradation).

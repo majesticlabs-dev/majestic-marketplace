@@ -26,12 +26,12 @@ playlist_announce() {
   local width=65
 
   echo ""
-  echo -e "${PLAYLIST_CYAN}╔$(printf '%*s' "$width" | tr ' ' '═')╗${PLAYLIST_NC}"
-  printf "${PLAYLIST_CYAN}║${PLAYLIST_NC}  ${PLAYLIST_BOLD}%s %-$((width - 4))s${PLAYLIST_NC}${PLAYLIST_CYAN}║${PLAYLIST_NC}\n" "$icon" "$title"
+  echo -e "${PLAYLIST_CYAN}+$(printf '%*s' "$width" | tr ' ' '=')${PLAYLIST_NC}"
+  printf "${PLAYLIST_CYAN}|${PLAYLIST_NC}  ${PLAYLIST_BOLD}%s %-$((width - 4))s${PLAYLIST_NC}${PLAYLIST_CYAN}|${PLAYLIST_NC}\n" "$icon" "$title"
   if [[ -n "$subtitle" ]]; then
-    printf "${PLAYLIST_CYAN}║${PLAYLIST_NC}  %-$((width - 2))s${PLAYLIST_CYAN}║${PLAYLIST_NC}\n" "$subtitle"
+    printf "${PLAYLIST_CYAN}|${PLAYLIST_NC}  %-$((width - 2))s${PLAYLIST_CYAN}|${PLAYLIST_NC}\n" "$subtitle"
   fi
-  echo -e "${PLAYLIST_CYAN}╚$(printf '%*s' "$width" | tr ' ' '═')╝${PLAYLIST_NC}"
+  echo -e "${PLAYLIST_CYAN}+$(printf '%*s' "$width" | tr ' ' '=')${PLAYLIST_NC}"
   echo ""
 }
 
