@@ -108,16 +108,24 @@ Create lightweight root file with these sections:
    - Version verification for external dependencies (see example below)
    - Never trust training data for version numbers
 
-5. **Security & Secrets** (3-5 lines)
+5. **Development Workflow** (5-7 lines)
+   - Plan before code: describe approach, wait for approval
+   - Ambiguous requirements? Ask before coding
+   - >3 files affected? Decompose into smaller tasks
+   - After coding: list breakage risks, suggest tests
+   - Bug fix: write failing test first, fix until green
+   - When corrected: add lesson to .agents-os/lessons/
+
+6. **Security & Secrets** (3-5 lines)
    - Never commit tokens
    - Where secrets go (.env patterns)
    - PII handling
 
-6. **JIT Index - Directory Map** (10-20 lines)
+7. **JIT Index - Directory Map** (10-20 lines)
    - Links to sub-AGENTS.md files
    - Quick find commands
 
-7. **Acceptance Criteria** (3-5 lines)
+8. **Acceptance Criteria** (3-5 lines)
    - Pre-PR checklist
    - What must pass
 
@@ -143,6 +151,18 @@ Create lightweight root file with these sections:
 Before adding ANY external dependency (gems, npm packages, GitHub Actions, Docker images, APIs, CDN links):
 - Use WebSearch to verify the latest stable version BEFORE implementation
 - Never trust training data for version numbers
+```
+
+**Example Development Workflow**:
+```markdown
+## Development Workflow
+
+- Before coding → describe approach → wait for approval
+- Ambiguous requirements → ask first
+- If task touches >3 files → decompose first
+- After coding → list breakage risks + suggest tests
+- Bug fix → write failing test → fix until green
+- When corrected → add lesson to .agents-os/lessons/
 ```
 
 ### Phase 3: Generate Sub-Folder AGENTS.md Files
