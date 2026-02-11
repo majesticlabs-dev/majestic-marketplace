@@ -212,3 +212,4 @@ agent majestic-rails:review:simplicity-reviewer "Simplify this implementation"
 ## Credits
 
 - **dhh-coder skill**: Based on the Unofficial 37signals Coding Style Guide (see main [README References](../../README.md#references))
+- **layered-rails skill**: Inspired by [palkan/skills/layered-rails](https://github.com/palkan/skills/tree/master/layered-rails/) and the book "Layered Design for Ruby on Rails Applications" by Vladimir Dementyev

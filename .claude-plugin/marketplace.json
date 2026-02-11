@@ -32,8 +32,8 @@
     },
     {
       "name": "majestic-rails",
-      "description": "Ruby on Rails development tools. Includes 15 specialized agents, 3 commands, 30 skills, enhanced toolbox with 6 research hooks, and LSP support.",
-      "version": "3.18.0",
+      "description": "Ruby on Rails development tools. Includes 15 specialized agents, 3 commands, 31 skills, enhanced toolbox with 6 research hooks, and LSP support.",
+      "version": "3.19.0",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
