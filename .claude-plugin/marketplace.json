@@ -6,13 +6,13 @@
   },
   "metadata": {
     "description": "Majestic Labs plugin marketplace for Claude Code extensions",
-    "version": "3.5.0"
+    "version": "3.5.1"
   },
   "plugins": [
     {
       "name": "majestic-engineer",
       "description": "Language-agnostic engineering workflows. Includes 38 specialized agents, 31 commands, 29 skills, and 5 toolbox presets. Now includes relay orchestration for fresh-context task execution with quality gates and compound learning.",
-      "version": "3.60.0",
+      "version": "3.60.1",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -33,7 +33,7 @@
     {
       "name": "majestic-rails",
       "description": "Ruby on Rails development tools. Includes 15 specialized agents, 3 commands, 30 skills, enhanced toolbox with 6 research hooks, and LSP support.",
-      "version": "3.17.0",
+      "version": "3.17.1",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -84,7 +84,7 @@
     {
       "name": "majestic-llm",
       "description": "External LLM integration tools. Get second opinions from Codex and Gemini on architecture and code review. Includes 5 agents and 2 commands.",
-      "version": "1.1.0",
+      "version": "1.1.1",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -126,7 +126,7 @@
     {
       "name": "majestic-tools",
       "description": "Claude Code customization tools. Includes 1 agent, 11 commands, and 9 skills.",
-      "version": "3.13.0",
+      "version": "3.13.1",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -145,7 +145,7 @@
     {
       "name": "majestic-python",
       "description": "Python development tools. Includes 6 specialized agents and 5 skills.",
-      "version": "3.4.0",
+      "version": "3.4.1",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
