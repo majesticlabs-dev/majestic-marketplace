@@ -2,10 +2,10 @@
 #
 # playlist.sh - Playlist helper functions
 #
-# Functions for reading/writing .agents-os/relay/playlist.yml
+# Functions for reading/writing .agents/relay/playlist.yml
 #
 
-PLAYLIST="${PLAYLIST:-.agents-os/relay/playlist.yml}"
+PLAYLIST="${PLAYLIST:-.agents/relay/playlist.yml}"
 
 # Colors
 PLAYLIST_RED='\033[0;31m'
@@ -161,7 +161,7 @@ playlist_mark_failed() {
 # Usage: init_fresh_ledger "epic_path"
 init_fresh_ledger() {
   local epic_path="$1"
-  local ledger=".agents-os/relay/attempt-ledger.yml"
+  local ledger=".agents/relay/attempt-ledger.yml"
 
   # Get epic info
   local epic_id

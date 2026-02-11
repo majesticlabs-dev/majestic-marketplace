@@ -69,7 +69,7 @@ When invoked, you must follow these steps in sequence:
    - Execute the `/session:handoff` slash command using SlashCommand tool
    - Pass the PR URL and branch name as context: `"Shipped PR #<number>: <title>"`
    - This captures learnings for future `/learn` analysis
-   - Handoff is saved to main worktree's `.agents-os/handoffs/` for centralized access
+   - Handoff is saved to main worktree's `.agents/handoffs/` for centralized access
 
 **Best Practices:**
 - Always run steps sequentially - do not skip ahead if a step fails

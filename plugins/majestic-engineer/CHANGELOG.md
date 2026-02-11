@@ -6,9 +6,9 @@ All notable changes to majestic-engineer will be documented in this file.
 
 ### Changed
 
-- **Project knowledge storage migrated from `.claude/` to `.agents-os/`**
+- **Project knowledge storage migrated from `.claude/` to `.agents/`**
   - Separates tool configuration from project knowledge
-  - New paths: `.agents-os/lessons/`, `.agents-os/handoffs/`, `.agents-os/session_ledger.md`
+  - New paths: `.agents/lessons/`, `.agents/handoffs/`, `.agents/session_ledger.md`
   - Old paths in `.claude/` remain for tool config (settings, hooks, commands)
   - Config schema bumped to 1.7
 
@@ -16,15 +16,15 @@ All notable changes to majestic-engineer will be documented in this file.
 
 If you have existing lessons or handoffs:
 ```bash
-mkdir -p .agents-os
-mv .claude/lessons .agents-os/lessons 2>/dev/null
-mv .claude/handoffs .agents-os/handoffs 2>/dev/null
+mkdir -p .agents
+mv .claude/lessons .agents/lessons 2>/dev/null
+mv .claude/handoffs .agents/handoffs 2>/dev/null
 ```
 
 Update `.agents.yml`:
 ```yaml
 config_version: 1.7
-lessons_path: .agents-os/lessons/  # New default
+lessons_path: .agents/lessons/  # New default
 ```
 
 ## [3.39.0] - 2026-01-08

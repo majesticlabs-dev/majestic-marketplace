@@ -6,7 +6,7 @@
 # Source config reader (SCRIPT_DIR set by parent relay-work.sh)
 source "$SCRIPT_DIR/lib/config.sh"
 
-DEFERRED_LOG=".agents-os/relay/deferred-findings.log"
+DEFERRED_LOG=".agents/relay/deferred-findings.log"
 
 # Extract and log deferred findings from quality gate output
 # Usage: log_deferred_findings "$qg_output" "$task_id"

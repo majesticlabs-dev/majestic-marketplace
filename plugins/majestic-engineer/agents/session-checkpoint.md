@@ -25,7 +25,7 @@ Requires `session.ledger: true` in `.agents.yml`:
 ```yaml
 session:
   ledger: true
-  ledger_path: .agents-os/session_ledger.md  # optional, defaults to .agents-os/session_ledger.md
+  ledger_path: .agents/session_ledger.md  # optional, defaults to .agents/session_ledger.md
 ```
 
 **Note:** The ledger is per-worktree (ephemeral session state). Handoffs go to main worktree (permanent, for `/learn`).
@@ -43,11 +43,11 @@ Read session config:
 
 ### Step 2: Determine Ledger Path
 
-Use `session.ledger_path` from config, or default to `.agents-os/session_ledger.md`.
+Use `session.ledger_path` from config, or default to `.agents/session_ledger.md`.
 
 Ensure the directory exists:
 ```bash
-mkdir -p .agents-os
+mkdir -p .agents
 ```
 
 ### Step 3: Gather State
@@ -111,7 +111,7 @@ _Last updated: <timestamp>_
 Return a brief confirmation:
 
 ```
-Checkpoint saved to .agents-os/session_ledger.md
+Checkpoint saved to .agents/session_ledger.md
 - Goal: <brief goal>
 - State: <done count> done, now: <current>, next: <next>
 ```
@@ -211,8 +211,8 @@ Mark assumptions as `UNCONFIRMED` when:
 
 | Tool | Purpose | Persistence | Trigger |
 |------|---------|-------------|---------|
-| `session-checkpoint` | Crash recovery, quick state save | File (`.agents-os/session_ledger.md`) | Agent-triggered |
-| `/session:handoff` | Cross-session continuity | File (main worktree `.agents-os/handoffs/`) | User/ship-triggered |
+| `session-checkpoint` | Crash recovery, quick state save | File (`.agents/session_ledger.md`) | Agent-triggered |
+| `/session:handoff` | Cross-session continuity | File (main worktree `.agents/handoffs/`) | User/ship-triggered |
 | `Tasks` | Session task tracking | File (`~/.claude/tasks/`) | Agent-triggered |
 
 Use `session-checkpoint` for:

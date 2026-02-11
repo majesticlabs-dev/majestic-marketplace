@@ -12,7 +12,7 @@ model: haiku
 
 # Init Playlist Agent
 
-Generate playlist.yml from epics in `.agents-os/relay/epics/`.
+Generate playlist.yml from epics in `.agents/relay/epics/`.
 
 ## Input Schema
 
@@ -37,7 +37,7 @@ playlist:
 ### 1. Discover Epics
 
 ```
-RELAY_DIR = ".agents-os/relay"
+RELAY_DIR = ".agents/relay"
 EPICS_DIR = "{RELAY_DIR}/epics"
 
 EPIC_FILES = Glob("{EPICS_DIR}/*.yml") → sort alphabetically
@@ -96,7 +96,7 @@ Write(PLAYLIST_PATH, playlist_content)
 status: success
 playlist:
   name: "260120-playlist"
-  path: ".agents-os/relay/playlist.yml"
+  path: ".agents/relay/playlist.yml"
   epic_count: 3
   epics:
     - "260120-01-foundation.yml"

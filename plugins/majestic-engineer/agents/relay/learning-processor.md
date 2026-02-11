@@ -1,6 +1,6 @@
 ---
 name: learning-processor
-description: Aggregate learnings from relay epic, apply frequency thresholds, write to .agents-os/lessons/ or AGENTS.md
+description: Aggregate learnings from relay epic, apply frequency thresholds, write to .agents/lessons/ or AGENTS.md
 color: yellow
 allowed-tools:
   - Read
@@ -30,7 +30,7 @@ epic_path: string    # Path to epic.yml (optional)
 |-------------|------|--------|
 | `AGENTS.md` Key Learnings | **Primary** - all patterns 3+ | Bullet point in section |
 | `.agents.yml` review_topics | Quality/validation rules | Array entry |
-| `.agents-os/lessons/` | Complex patterns needing context | Lesson file (rare) |
+| `.agents/lessons/` | Complex patterns needing context | Lesson file (rare) |
 
 **Key principle:** Ledger learnings are temporary. After epic completion, promote to AGENTS.md and clear from ledger.
 
@@ -92,13 +92,13 @@ For each pattern in STRONG + RECOMMEND:
 ```
 DESTINATION = categorize(pattern, tags):
   If tags contain tech-specific (rails, python, react, node):
-    → .agents-os/lessons/ (with tech_stack from tags)
+    → .agents/lessons/ (with tech_stack from tags)
   If pattern matches "check/verify/validate X":
     → .agents.yml review_topics
   If pattern is project convention:
     → AGENTS.md Key Learnings
   Default:
-    → .agents-os/lessons/ (tech_stack: generic)
+    → .agents/lessons/ (tech_stack: generic)
 ```
 
 ### Phase 5: Present Findings
@@ -114,7 +114,7 @@ DESTINATION = categorize(pattern, tags):
 
 | Pattern | Count | Destination |
 |---------|-------|-------------|
-| {pattern} | {count} | .agents-os/lessons/{filename}.md |
+| {pattern} | {count} | .agents/lessons/{filename}.md |
 
 ### Recommended (3)
 
@@ -131,7 +131,7 @@ DESTINATION = categorize(pattern, tags):
 ### Proposed Changes
 
 **Files to create:**
-- .agents-os/lessons/relay-{date}-{slug}.md
+- .agents/lessons/relay-{date}-{slug}.md
 
 **Sections to update:**
 - AGENTS.md: Add to Key Learnings
@@ -261,7 +261,7 @@ Patterns are added as bullets under `## Key Learnings`:
 - Actionable
 - Context-free (should make sense standalone)
 
-## When to Use .agents-os/lessons/ Instead
+## When to Use .agents/lessons/ Instead
 
 Only create lesson files for patterns that need:
 - Extended context or examples
@@ -294,7 +294,7 @@ changes_applied:
 |-----------|--------|
 | Ledger not found | Return error |
 | No learnings | Return skipped |
-| .agents-os/ missing | Create directory |
+| .agents/ missing | Create directory |
 | AGENTS.md not found | Skip AGENTS.md, report |
 | .agents.yml not found | Skip review_topics, report |
 | User declines | Return skipped |

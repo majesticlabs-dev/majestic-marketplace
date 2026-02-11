@@ -19,7 +19,7 @@ The learnings discovery system surfaces relevant knowledge at the right moment d
 │                                                                  │
 │  /blueprint  ──┐                                                │
 │                │   ┌─────────────────────┐   ┌──────────────────┐ │
-│  /debug     ───┼──►│ lessons-discoverer  │──►│ .agents-os/lessons/ │ │
+│  /debug     ───┼──►│ lessons-discoverer  │──►│ .agents/lessons/ │ │
 │                │   │ (Claude headless)   │   │                  │ │
 │  quality-gate ─┘   └─────────────────────┘   │ ├─ antipatterns/ │ │
 │                            │                  │ ├─ gotchas/      │ │
@@ -41,7 +41,7 @@ Add to `.agents.yml`:
 
 ```yaml
 # Default location (recommended)
-lessons_path: .agents-os/lessons/
+lessons_path: .agents/lessons/
 
 # Or custom location
 lessons_path: docs/learnings/
@@ -50,7 +50,7 @@ lessons_path: docs/learnings/
 ## Directory Structure
 
 ```
-.agents-os/lessons/
+.agents/lessons/
 ├── performance-issues/
 │   └── n-plus-one-20251110.md
 ├── security-issues/
@@ -114,7 +114,7 @@ Use `/report-fix` after solving a non-trivial problem:
 ```
 User: "That worked! The N+1 query is fixed."
 Claude: [Detects confirmation, invokes fix-reporter skill]
-Claude: [Creates lesson in .agents-os/lessons/performance-issues/]
+Claude: [Creates lesson in .agents/lessons/performance-issues/]
 Claude: "Solution documented. Enable discovery for workflows?"
 ```
 
@@ -195,7 +195,7 @@ Benefits:
 
 ### Lessons not being discovered
 
-1. Check directory exists: `ls .agents-os/lessons/`
+1. Check directory exists: `ls .agents/lessons/`
 2. Verify frontmatter includes `workflow_phase` for desired workflows
 3. Check `tech_stack` matches project config
 4. Ensure lesson has required frontmatter fields

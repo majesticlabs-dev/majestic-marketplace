@@ -11,13 +11,13 @@ Output the terminal command to execute the playlist script. User runs it in a se
 ## Input
 
 ```yaml
-playlist_path: string  # Path to playlist.yml (default: .agents-os/relay/playlist.yml)
+playlist_path: string  # Path to playlist.yml (default: .agents/relay/playlist.yml)
 ```
 
 ## Workflow
 
 ```
-PLAYLIST_PATH = $ARGUMENTS or ".agents-os/relay/playlist.yml"
+PLAYLIST_PATH = $ARGUMENTS or ".agents/relay/playlist.yml"
 
 If not exists(PLAYLIST_PATH):
   Error: "No playlist found at {PLAYLIST_PATH}"

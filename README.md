@@ -207,7 +207,7 @@ app_status: development        # development | production
 task_management: github        # github | linear | beads | file | none
 workflow: worktrees            # worktrees | branches
 branch_naming: type/issue-desc # feature/desc | issue-desc | type/issue-desc | user/desc
-lessons_path: .agents-os/lessons/
+lessons_path: .agents/lessons/
 ```
 
 Commands like `/majestic:code-review`, `/git:create-pr`, and `/majestic:build-task` read this config automatically.

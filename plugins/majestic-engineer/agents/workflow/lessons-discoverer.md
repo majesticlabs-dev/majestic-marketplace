@@ -8,7 +8,7 @@ color: cyan
 
 # Lessons Discoverer Agent
 
-Discover and rank relevant lessons from `.agents-os/lessons/` (configurable) using Claude headless mode for semantic scoring.
+Discover and rank relevant lessons from `.agents/lessons/` (configurable) using Claude headless mode for semantic scoring.
 
 ## Purpose
 
@@ -32,7 +32,7 @@ filter: <optional: antipattern, critical, high>
 ### 1. Read Lessons Path from Config
 
 ```
-Skill(skill: "config-reader", args: "lessons_path .agents-os/lessons/")
+Skill(skill: "config-reader", args: "lessons_path .agents/lessons/")
 ```
 
 Store as `LESSONS_PATH`.

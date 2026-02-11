@@ -69,18 +69,18 @@ tags: [n-plus-one, eager-loading, performance]
 
 ## Category Mapping
 
-Based on `problem_type`, documentation is filed in `.agents-os/lessons/`:
+Based on `problem_type`, documentation is filed in `.agents/lessons/`:
 
-- **build_error** → `.agents-os/lessons/build-errors/`
-- **test_failure** → `.agents-os/lessons/test-failures/`
-- **runtime_error** → `.agents-os/lessons/runtime-errors/`
-- **performance_issue** → `.agents-os/lessons/performance-issues/`
-- **database_issue** → `.agents-os/lessons/database-issues/`
-- **security_issue** → `.agents-os/lessons/security-issues/`
-- **ui_bug** → `.agents-os/lessons/ui-bugs/`
-- **integration_issue** → `.agents-os/lessons/integration-issues/`
-- **logic_error** → `.agents-os/lessons/logic-errors/`
-- **developer_experience** → `.agents-os/lessons/developer-experience/`
-- **workflow_issue** → `.agents-os/lessons/workflow-issues/`
-- **best_practice** → `.agents-os/lessons/best-practices/`
-- **documentation_gap** → `.agents-os/lessons/documentation-gaps/`
+- **build_error** → `.agents/lessons/build-errors/`
+- **test_failure** → `.agents/lessons/test-failures/`
+- **runtime_error** → `.agents/lessons/runtime-errors/`
+- **performance_issue** → `.agents/lessons/performance-issues/`
+- **database_issue** → `.agents/lessons/database-issues/`
+- **security_issue** → `.agents/lessons/security-issues/`
+- **ui_bug** → `.agents/lessons/ui-bugs/`
+- **integration_issue** → `.agents/lessons/integration-issues/`
+- **logic_error** → `.agents/lessons/logic-errors/`
+- **developer_experience** → `.agents/lessons/developer-experience/`
+- **workflow_issue** → `.agents/lessons/workflow-issues/`
+- **best_practice** → `.agents/lessons/best-practices/`
+- **documentation_gap** → `.agents/lessons/documentation-gaps/`

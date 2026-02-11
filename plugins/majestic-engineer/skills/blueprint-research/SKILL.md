@@ -24,7 +24,7 @@ discovery_result:
 **Read config (parallel):**
 ```
 /majestic:config tech_stack generic
-/majestic:config lessons_path .agents-os/lessons/
+/majestic:config lessons_path .agents/lessons/
 ```
 
 **Spawn agents (parallel):**

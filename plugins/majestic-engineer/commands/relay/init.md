@@ -35,12 +35,12 @@ If file doesn't exist:
 ```
 GITIGNORE = Read(".gitignore") or ""
 
-If ".agents-os/" not in GITIGNORE:
+If ".agents/" not in GITIGNORE:
   Append to .gitignore:
     # Agent state (ephemeral)
-    .agents-os/
+    .agents/
 
-Bash: mkdir -p .agents-os/relay/epics/
+Bash: mkdir -p .agents/relay/epics/
 ```
 
 ### 3. Call blueprint-to-epics Agent
@@ -55,7 +55,7 @@ RESULT = Task(subagent_type="majestic-relay:blueprint-to-epics"):
     Read the blueprint and:
     1. Parse all tasks from "## Implementation Tasks"
     2. Classify into phases: foundation, core, integration, polish
-    3. Generate epic files in .agents-os/relay/epics/
+    3. Generate epic files in .agents/relay/epics/
     4. Return summary of epics created
 
 If RESULT.status == "error":
@@ -109,7 +109,7 @@ relay_status:
   last_exit_reason: null
 ```
 
-Write to `.agents-os/relay/attempt-ledger.yml`
+Write to `.agents/relay/attempt-ledger.yml`
 
 ### 6. Create Native Tasks
 
@@ -142,10 +142,10 @@ For each task in first_epic.tasks:
    3. {epic_id_3} ({task_count} tasks) - {phase}
 
 📁 Files created:
-   - .agents-os/relay/epics/{epic_id_1}.yml
-   - .agents-os/relay/epics/{epic_id_2}.yml
-   - .agents-os/relay/playlist.yml
-   - .agents-os/relay/attempt-ledger.yml
+   - .agents/relay/epics/{epic_id_1}.yml
+   - .agents/relay/epics/{epic_id_2}.yml
+   - .agents/relay/playlist.yml
+   - .agents/relay/attempt-ledger.yml
 
 🚀 Next steps:
    - `/majestic-relay:work` - run tasks interactively (single epic)
@@ -161,4 +161,4 @@ For each task in first_epic.tasks:
 | No tasks parsed | Error with details |
 | blueprint-to-epics fails | Report error, exit |
 | init-playlist fails | Report error, exit |
-| .agents-os/relay/ exists | Warn and ask to overwrite or abort |
+| .agents/relay/ exists | Warn and ask to overwrite or abort |

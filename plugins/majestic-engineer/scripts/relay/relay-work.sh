@@ -14,8 +14,8 @@ source "$SCRIPT_DIR/lib/task-exec.sh"
 source "$SCRIPT_DIR/lib/quality-gate.sh"
 source "$SCRIPT_DIR/lib/learning.sh"
 
-EPIC=".agents-os/relay/epic.yml"
-LEDGER=".agents-os/relay/attempt-ledger.yml"
+EPIC=".agents/relay/epic.yml"
+LEDGER=".agents/relay/attempt-ledger.yml"
 
 RED='\033[0;31m'
 GREEN='\033[0;32m'

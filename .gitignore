@@ -1,6 +1,6 @@
 .DS_Store
 .claude/settings.local.json
-.agents-os/handoffs
+.agents/handoffs
 .beads/
 docs/graveyard/
 docs/plans/

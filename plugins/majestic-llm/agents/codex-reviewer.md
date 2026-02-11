@@ -53,8 +53,8 @@ Collect context that will inform the review:
 cat CLAUDE.md 2>/dev/null | head -200
 
 # Check for lessons (institutional memory)
-ls .agents-os/lessons/*.md 2>/dev/null && \
-  head -50 .agents-os/lessons/*.md
+ls .agents/lessons/*.md 2>/dev/null && \
+  head -50 .agents/lessons/*.md
 ```
 
 Lessons provide project-specific patterns and anti-patterns discovered during development.
@@ -90,7 +90,7 @@ You are reviewing code changes for a project.
 
 ## Project Lessons
 
-<Insert relevant lessons from .agents-os/lessons/ if available>
+<Insert relevant lessons from .agents/lessons/ if available>
 
 ## Focus Areas
 
@@ -250,7 +250,7 @@ Consider:
 
 Proceeding with generic review. For better results, ensure:
 - CLAUDE.md exists in project root
-- Lessons are defined in .agents-os/lessons/
+- Lessons are defined in .agents/lessons/
 ```
 
 ## Comparison with Claude Review

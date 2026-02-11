@@ -114,7 +114,7 @@ Create lightweight root file with these sections:
    - >3 files affected? Decompose into smaller tasks
    - After coding: list breakage risks, suggest tests
    - Bug fix: write failing test first, fix until green
-   - When corrected: add lesson to .agents-os/lessons/
+   - When corrected: add lesson to .agents/lessons/
 
 6. **Security & Secrets** (3-5 lines)
    - Never commit tokens
@@ -162,7 +162,7 @@ Before adding ANY external dependency (gems, npm packages, GitHub Actions, Docke
 - If task touches >3 files → decompose first
 - After coding → list breakage risks + suggest tests
 - Bug fix → write failing test → fix until green
-- When corrected → add lesson to .agents-os/lessons/
+- When corrected → add lesson to .agents/lessons/
 ```
 
 ### Phase 3: Generate Sub-Folder AGENTS.md Files

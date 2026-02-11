@@ -15,7 +15,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "$SCRIPT_DIR/lib/playlist.sh"
 
 # File paths
-PLAYLIST="${1:-.agents-os/relay/playlist.yml}"
+PLAYLIST="${1:-.agents/relay/playlist.yml}"
 RELAY_DIR=$(dirname "$PLAYLIST")
 EPICS_DIR="$RELAY_DIR/epics"
 EPIC_SYMLINK="$RELAY_DIR/epic.yml"

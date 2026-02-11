@@ -17,10 +17,10 @@ max_attempts: int  # Optional: Override default (3)
 ## Workflow
 
 ```
-If not exists(".agents-os/relay/epic.yml"):
+If not exists(".agents/relay/epic.yml"):
   Error: "No epic found. Run `/majestic-relay:init <blueprint.md>` first."
 
-If not exists(".agents-os/relay/attempt-ledger.yml"):
+If not exists(".agents/relay/attempt-ledger.yml"):
   Error: "Ledger missing. Run `/majestic-relay:init <blueprint.md>` to reinitialize."
 
 Execute: "${CLAUDE_PLUGIN_ROOT}/scripts/relay/relay-work.sh" $ARGUMENTS

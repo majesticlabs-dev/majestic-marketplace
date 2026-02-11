@@ -162,7 +162,7 @@ For each PHASE in [foundation, core, integration, polish]:
       parallelization: PHASE_PARALLELIZATION
     )
 
-    EPIC_PATH = f".agents-os/relay/epics/{EPIC_ID}.yml"
+    EPIC_PATH = f".agents/relay/epics/{EPIC_ID}.yml"
     Write(EPIC_PATH, EPIC_CONTENT)
 
     EPICS_CREATED.append({
@@ -212,11 +212,11 @@ epics_created:
   - id: "260120-01-foundation"
     phase: foundation
     tasks: [T1, T2]
-    file: ".agents-os/relay/epics/260120-01-foundation.yml"
+    file: ".agents/relay/epics/260120-01-foundation.yml"
   - id: "260120-02-core"
     phase: core
     tasks: [T3, T4, T5]
-    file: ".agents-os/relay/epics/260120-02-core.yml"
+    file: ".agents/relay/epics/260120-02-core.yml"
 summary:
   total_tasks: 5
   phases_created: 2

@@ -13,7 +13,7 @@ Display the current epic progress, task status, and any gated tasks.
 ### 1. Check for Epic
 
 ```
-If not exists(".agents-os/relay/epic.yml"):
+If not exists(".agents/relay/epic.yml"):
   Error: "No epic found. Run `/majestic-relay:init <blueprint.md>` first."
   Exit
 ```
@@ -21,8 +21,8 @@ If not exists(".agents-os/relay/epic.yml"):
 ### 2. Load State
 
 ```
-EPIC = Read(".agents-os/relay/epic.yml") → parse YAML
-LEDGER = Read(".agents-os/relay/attempt-ledger.yml") → parse YAML
+EPIC = Read(".agents/relay/epic.yml") → parse YAML
+LEDGER = Read(".agents/relay/attempt-ledger.yml") → parse YAML
 ```
 
 ### 3. Calculate Progress

@@ -20,7 +20,7 @@ You orchestrate comprehensive code reviews for Rails projects by:
 
 Config values needed:
 - `app_status` (default: development)
-- `lessons_path` (default: .agents-os/lessons/)
+- `lessons_path` (default: .agents/lessons/)
 
 **Get default branch:** Run `git remote show origin | grep 'HEAD branch' | awk '{print $NF}'`
 

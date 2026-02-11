@@ -25,7 +25,7 @@ Present after successful documentation:
 Solution documented
 
 File created:
-- .agents-os/lessons/[category]/[filename].md
+- .agents/lessons/[category]/[filename].md
 
 What's next?
 1. Continue workflow (recommended)
@@ -51,7 +51,7 @@ What's next?
 ```
 1. Extract pattern from the documentation
 2. Format as WRONG vs CORRECT (use template below)
-3. Append to .agents-os/lessons/patterns/critical-patterns.md
+3. Append to .agents/lessons/patterns/critical-patterns.md
 4. Add cross-reference back to source doc
 5. Confirm: "Added to Critical Patterns"
 ```
@@ -72,14 +72,14 @@ What's next?
 
 **Why:** [Technical explanation]
 **Context:** [When this applies]
-**Source:** `.agents-os/lessons/[category]/[filename].md`
+**Source:** `.agents/lessons/[category]/[filename].md`
 ```
 
 ### Option 3: Link related issues
 
 ```
 1. Prompt: "Which doc to link? (filename or describe)"
-2. Search .agents-os/lessons/ for matching doc
+2. Search .agents/lessons/ for matching doc
 3. Add cross-reference to both docs under "## Related Issues"
 4. Confirm: "Cross-reference added to both files"
 ```

@@ -110,7 +110,7 @@ After providing your analysis and summary:
 
 ```bash
 MAIN_WORKTREE=$(git worktree list --porcelain | grep "^worktree" | head -1 | cut -d' ' -f2)
-HANDOFF_DIR="$MAIN_WORKTREE/.agents-os/handoffs"
+HANDOFF_DIR="$MAIN_WORKTREE/.agents/handoffs"
 mkdir -p "$HANDOFF_DIR"
 ```
 

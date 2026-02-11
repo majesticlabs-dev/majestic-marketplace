@@ -13,7 +13,7 @@ The config file has **core fields** plus **stack-specific fields** based on tech
 | Version | Changes |
 |---------|---------|
 | 1.8 | Added `quality_gate.strictness` for controlling fix loop threshold |
-| 1.7 | Migrated project knowledge from `.claude/` to `.agents-os/` (lessons, handoffs, session ledger) |
+| 1.7 | Migrated project knowledge from `.claude/` to `.agents/` (lessons, handoffs, session ledger) |
 | 1.6 | Added `owner.level` for experience-based skill tailoring |
 | 1.5 | Added `lessons_path` for learnings discovery |
 | 1.4 | Multi-stack `tech_stack` (array support), built-in toolbox presets |
@@ -26,19 +26,19 @@ The config file has **core fields** plus **stack-specific fields** based on tech
 
 **Backwards compatible:** Path change with optional migration.
 
-Project knowledge storage moves from `.claude/` to `.agents-os/`:
+Project knowledge storage moves from `.claude/` to `.agents/`:
 
 | Old Path | New Path |
 |----------|----------|
-| `.claude/lessons/` | `.agents-os/lessons/` |
-| `.claude/handoffs/` | `.agents-os/handoffs/` |
-| `.claude/session_ledger.md` | `.agents-os/session_ledger.md` |
+| `.claude/lessons/` | `.agents/lessons/` |
+| `.claude/handoffs/` | `.agents/handoffs/` |
+| `.claude/session_ledger.md` | `.agents/session_ledger.md` |
 
-**Why the change:** Separates tool configuration (`.claude/` - settings, hooks, commands) from project knowledge (`.agents-os/` - lessons, handoffs, context). This makes project knowledge portable and tool-agnostic.
+**Why the change:** Separates tool configuration (`.claude/` - settings, hooks, commands) from project knowledge (`.agents/` - lessons, handoffs, context). This makes project knowledge portable and tool-agnostic.
 
 **Migration steps:**
 1. Update `config_version: 1.7` in `.agents.yml`
-2. Move existing directories: `mv .claude/lessons .agents-os/lessons && mv .claude/handoffs .agents-os/handoffs`
+2. Move existing directories: `mv .claude/lessons .agents/lessons && mv .claude/handoffs .agents/handoffs`
 3. Update `.gitignore` if you have custom entries for these paths
 
 **Note:** `.claude/` remains for Claude Code tool configuration (settings.json, hooks, commands).
@@ -61,7 +61,7 @@ quality_gate:
 - `strict` - Fix MEDIUM+ issues, defer LOW to log
 - `standard` - Fix HIGH+ issues, defer MEDIUM/LOW to log
 
-**Why the change:** Previously, MEDIUM/LOW findings were "approved with notes" but never addressed. With `pedantic` default, all issues are fixed while the session has context. Lower strictness defers findings to `.agents-os/relay/deferred-findings.log`.
+**Why the change:** Previously, MEDIUM/LOW findings were "approved with notes" but never addressed. With `pedantic` default, all issues are fixed while the session has context. Lower strictness defers findings to `.agents/relay/deferred-findings.log`.
 
 **No action required** - existing configs continue to work with `pedantic` default.
 
@@ -151,7 +151,7 @@ extras:
 task_management: github
 workflow: worktrees
 branch_naming: type/issue-desc
-lessons_path: .agents-os/lessons/
+lessons_path: .agents/lessons/
 
 # Workspace setup hooks
 # workspace_setup:
@@ -191,7 +191,7 @@ database: postgres
 task_management: github
 workflow: worktrees
 branch_naming: type/issue-desc
-lessons_path: .agents-os/lessons/
+lessons_path: .agents/lessons/
 
 auto_preview: true
 plan:
@@ -216,7 +216,7 @@ deployment: vercel
 task_management: github
 workflow: worktrees
 branch_naming: type/issue-desc
-lessons_path: .agents-os/lessons/
+lessons_path: .agents/lessons/
 
 auto_preview: true
 plan:
@@ -235,7 +235,7 @@ plan:
 | `task_management` | Task tracking system | `github` \| `linear` \| `beads` \| `file` \| `none` | `none` |
 | `workflow` | Feature development workflow | `worktrees` \| `branches` | `branches` |
 | `branch_naming` | Branch naming convention | `feature/desc` \| `issue-desc` \| `type/issue-desc` \| `user/desc` | `feature/desc` |
-| `lessons_path` | Path to lessons directory for discovery | directory path | `.agents-os/lessons/` |
+| `lessons_path` | Path to lessons directory for discovery | directory path | `.agents/lessons/` |
 | `auto_preview` | Auto-open markdown files (plans, PRDs, briefs, handoffs) | `true` \| `false` | `false` |
 | `plan.auto_create_task` | Auto-create task when `/majestic:plan` completes | `true` \| `false` | `false` |
 | `session.ledger` | Enable session state checkpointing to file | `true` \| `false` | `false` |
@@ -450,7 +450,7 @@ Controls the minimum severity that triggers the fix loop:
 
 **Why pedantic is default:** Fix issues while context is fresh. Deferring loses context and accumulates tech debt.
 
-**Deferred findings log:** When strictness is not `pedantic`, findings below threshold are logged to `.agents-os/relay/deferred-findings.log` for later review.
+**Deferred findings log:** When strictness is not `pedantic`, findings below threshold are logged to `.agents/relay/deferred-findings.log` for later review.
 
 ```yaml
 # .agents.yml
@@ -540,4 +540,4 @@ When commands create markdown files (plans, PRDs, briefs, handoffs), they follow
 - `/majestic:plan` → `docs/plans/<title>.md`
 - `/majestic:prd` → `docs/prd/prd-<name>.md`
 - `/majestic:ux-brief` → `docs/design/<name>-brief.md`
-- `/majestic:handoff` → `.agents-os/handoffs/<timestamp>-<slug>.md`
+- `/majestic:handoff` → `.agents/handoffs/<timestamp>-<slug>.md`

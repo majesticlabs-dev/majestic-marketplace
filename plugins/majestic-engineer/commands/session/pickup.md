@@ -1,14 +1,14 @@
 ---
 name: session:pickup
-description: Resume work from a previous handoff session stored in .agents-os/handoffs
+description: Resume work from a previous handoff session stored in .agents/handoffs
 allowed-tools: Bash, Read, AskUserQuestion, Glob, Grep
 model: haiku
 argument-hint: "[optional: handoff-file]"
 ---
 
-Resumes work from a previous handoff session which are stored in `.agents-os/handoffs`.
+Resumes work from a previous handoff session which are stored in `.agents/handoffs`.
 
-**IMPORTANT**: This command must be run from within a project directory, not from `~/.claude`. It looks for handoffs in the project's `.agents-os/handoffs/` directory.
+**IMPORTANT**: This command must be run from within a project directory, not from `~/.claude`. It looks for handoffs in the project's `.agents/handoffs/` directory.
 
 The handoff folder might not exist if there are none.
 
@@ -30,10 +30,10 @@ If no handoff file was provided in `$ARGUMENTS`, list all available handoffs and
 To list handoffs, use this bash command:
 
 ```bash
-if [ -d ".agents-os/handoffs" ]; then
+if [ -d ".agents/handoffs" ]; then
   echo "## Available Handoffs"
   echo ""
-  for file in .agents-os/handoffs/*.md; do
+  for file in .agents/handoffs/*.md; do
     if [ -f "$file" ]; then
       title=$(grep -m 1 "^# " "$file" | sed 's/^# //')
       basename=$(basename "$file")
@@ -43,7 +43,7 @@ if [ -d ".agents-os/handoffs" ]; then
   echo ""
   echo "To pickup a handoff, use: /pickup <filename>"
 else
-  echo "No handoffs directory found at .agents-os/handoffs"
+  echo "No handoffs directory found at .agents/handoffs"
   echo "Create a handoff first using: /handoff <purpose>"
 fi
 ```
@@ -52,7 +52,7 @@ fi
 
 If a handoff file was provided in `$ARGUMENTS`:
 
-1. **Search for matches**: Look in `.agents-os/handoffs/` for files matching the provided name. The user might have:
+1. **Search for matches**: Look in `.agents/handoffs/` for files matching the provided name. The user might have:
    - Provided the exact filename (e.g., `2025-11-04-implement-auth.md`)
    - Provided just the slug (e.g., `implement-auth`)
    - Provided a partial match (e.g., `auth`)

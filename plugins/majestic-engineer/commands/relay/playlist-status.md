@@ -13,7 +13,7 @@ Display progress across all epics in a playlist.
 ### 1. Load Playlist
 
 ```
-RELAY_DIR = ".agents-os/relay"
+RELAY_DIR = ".agents/relay"
 PLAYLIST_PATH = "{RELAY_DIR}/playlist.yml"
 
 If not exists(PLAYLIST_PATH):

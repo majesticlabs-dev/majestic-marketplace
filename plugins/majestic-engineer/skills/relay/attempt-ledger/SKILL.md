@@ -24,7 +24,7 @@ The attempt ledger tracks execution attempts for tasks, enabling:
 ## Epic Schema
 
 ```yaml
-# .agents-os/relay/epic.yml
+# .agents/relay/epic.yml
 version: 2
 id: "20260111-feature-name"
 source: "docs/plans/xxx.md"
@@ -51,7 +51,7 @@ tasks:
 ## Ledger Schema
 
 ```yaml
-# .agents-os/relay/attempt-ledger.yml
+# .agents/relay/attempt-ledger.yml
 version: 1
 epic_id: "20260111-feature-name"
 started_at: "2026-01-11T17:30:00Z"

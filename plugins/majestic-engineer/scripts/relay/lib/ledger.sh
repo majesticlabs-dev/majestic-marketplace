@@ -2,10 +2,10 @@
 #
 # ledger.sh - Attempt ledger helper functions
 #
-# Functions for reading/writing .agents-os/relay/attempt-ledger.yml
+# Functions for reading/writing .agents/relay/attempt-ledger.yml
 #
 
-LEDGER="${LEDGER:-.agents-os/relay/attempt-ledger.yml}"
+LEDGER="${LEDGER:-.agents/relay/attempt-ledger.yml}"
 
 # Get a setting from the ledger
 # Usage: ledger_get_setting "key.path" "default"
@@ -172,7 +172,7 @@ ledger_gate_task() {
 # Usage: update_blocked_tasks "T1"
 update_blocked_tasks() {
   local completed_task="$1"
-  local epic="${EPIC:-.agents-os/relay/epic.yml}"
+  local epic="${EPIC:-.agents/relay/epic.yml}"
 
   # Get all task IDs
   local task_ids
