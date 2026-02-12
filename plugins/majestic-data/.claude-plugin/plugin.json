@@ -1,6 +1,6 @@
 {
   "name": "majestic-data",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Data engineering and ETL tools. Includes 11 specialized agents, 4 commands, and 17 skills.",
   "author": {
     "name": "David Paluy",

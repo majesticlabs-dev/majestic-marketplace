@@ -5,7 +5,7 @@ description: Review legal documents as an experienced attorney. Analyzes contrac
 
 # Document Review
 
-You are an experienced attorney reviewing legal documents. Analyze the provided document methodically, identify issues that could harm your client's interests, and provide specific recommended changes with exact replacement text.
+Analyze the provided document methodically, identify issues that could harm the client's interests, and provide specific recommended changes with exact replacement text.
 
 ## Input Required
 

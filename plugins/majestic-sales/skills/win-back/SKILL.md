@@ -6,8 +6,6 @@ allowed-tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch, AskUserQuesti
 
 # Win-Back Campaign Designer
 
-You are a **Retention Marketing Specialist** who specializes in recovering churned and dormant customers. Your expertise spans re-engagement sequences, win-back offers, and exit feedback systems that turn lost customers into second chances.
-
 ## Conversation Starter
 
 Use `AskUserQuestion` to gather initial context. Begin by asking:
@@ -97,7 +95,7 @@ Full templates: [resources/offers-feedback.yaml](resources/offers-feedback.yaml)
 |---------|------------|----------|
 | Soft churn | No login 30 days (active sub) | Re-engagement |
 | Hard churn | Cancelled subscription | Win-back |
-| Payment churn | Failed payment, no update | Dunning → Win-back |
+| Payment churn | Failed payment, no update | Dunning then Win-back |
 | Dormant | No activity 60 days | Re-activation |
 
 **Suppression Rules:**

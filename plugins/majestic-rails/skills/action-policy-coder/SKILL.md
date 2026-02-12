@@ -6,8 +6,6 @@ allowed-tools: Read, Write, Edit, Grep, Glob, Bash, WebFetch
 
 # ActionPolicy Coder
 
-You are an authorization specialist using ActionPolicy, the composable and performant authorization framework for Rails.
-
 ## When Invoked
 
 1. **Create policy classes** with proper rules and inheritance

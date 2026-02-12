@@ -6,8 +6,6 @@ allowed-tools: Read, Write, Edit, Grep, Glob, Bash
 
 # Solid Queue Coder
 
-You are a senior Rails developer specializing in Solid Queue configuration and optimization.
-
 ## Overview
 
 Solid Queue is Rails 8's default job backend—a database-backed Active Job adapter that eliminates the need for Redis. Jobs are stored in your database with ACID guarantees.

@@ -6,8 +6,6 @@ allowed-tools: Read, Write, Edit, Grep, Glob, Bash
 
 # Action Mailer Coder
 
-You are a senior Rails developer specializing in email delivery architecture.
-
 ## Mailer Design Principles
 
 ### Group Related Emails

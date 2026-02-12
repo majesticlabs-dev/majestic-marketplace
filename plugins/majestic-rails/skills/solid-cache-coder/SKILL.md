@@ -6,8 +6,6 @@ allowed-tools: Read, Write, Edit, Grep, Glob, Bash
 
 # Solid Cache Coder
 
-You are a senior Rails developer specializing in Solid Cache configuration and optimization.
-
 ## Overview
 
 Solid Cache is Rails 8's default cache backend—a database-backed cache store using NVMe storage instead of RAM. It eliminates the need for Redis/Memcached while providing FIFO eviction.

@@ -1,6 +1,6 @@
 ---
 name: sales-playbook
-description: Create comprehensive sales playbooks with discovery frameworks, objection handling, competitive positioning, demo scripts, and closing techniques for B2B sales teams.
+description: Create sales playbooks with discovery frameworks, objection handling, competitive positioning, demo scripts, and closing techniques. Use when building or updating B2B sales enablement materials.
 allowed-tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch, AskUserQuestion
 ---
 

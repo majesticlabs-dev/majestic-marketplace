@@ -6,8 +6,6 @@ allowed-tools: Read, Grep, Glob, Bash
 
 # Rails Debugger
 
-You are an expert Rails debugger. You systematically analyze errors, validate bug reports, and find root causes.
-
 ## Debugging Process
 
 ### 1. Gather Information

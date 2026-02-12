@@ -75,6 +75,35 @@ Your role is to analyze code and generate thorough test coverage.
 
 Files matching this pattern should be flagged for review.
 
+### Description Routing Quality (WARN)
+
+Skill descriptions are routing logic, not documentation. They answer:
+- **When** to use this skill (trigger conditions)
+- **When NOT** to use (negative routing)
+- **What outputs** to expect (success criteria)
+
+| Quality Level | Example |
+|---------------|---------|
+| Good | "Use when implementing Stimulus controllers. Not for React components. Outputs controller with targets and actions." |
+| Adequate | "Use when working with Stimulus controllers in Rails applications." |
+| Poor | "Stimulus controller development skill." |
+| Anti-pattern | "Comprehensive, powerful toolkit for building cutting-edge Stimulus controllers." |
+
+Templates inside skills are encouraged — loaded only on trigger, essentially free tokens.
+
+### Skill Disambiguation (INFO)
+
+When multiple skills cover similar domains, include negative routing:
+
+**Example (minitest vs rspec):**
+
+| Skill | Description Routing |
+|-------|-------------------|
+| `minitest-coder` | "Use when writing Minitest tests. Not for RSpec — use rspec-coder instead." |
+| `rspec-coder` | "Use when writing RSpec tests. Not for Minitest — use minitest-coder instead." |
+
+"Don't use when..." is as important as "Use when..." for routing accuracy.
+
 ### Name Pattern
 
 ```regex
@@ -148,7 +177,10 @@ The linter script at `scripts/validate-skill.sh` performs these checks:
 5. **Optional fields valid** - if present, match constraints
 6. **Line count** - under 500 lines
 7. **Subdirectory names** - only allowed directories
-8. **No ASCII art** - detects box-drawing characters and decorative diagrams
+8. **No ASCII art** - box-drawing characters outside fenced code blocks (WARN)
+9. **No persona statements** - "You are a/an/the" outside fenced code blocks (FAIL)
+10. **Description routing quality** - routing keywords present (WARN)
+11. **Marketing copy detection** - buzzwords in description (WARN)
 
 ## Error Codes
 
@@ -163,6 +195,9 @@ The linter script at `scripts/validate-skill.sh` performs these checks:
 | 6 | Line limit exceeded |
 | 7 | Invalid subdirectory |
 | 8 | ASCII art detected (warning) |
+| 9 | Persona statement detected |
+| 10 | Description routing quality (warning) |
+| 11 | Marketing copy detected (warning) |
 
 ## Example Output
 
@@ -176,6 +211,10 @@ Validating: plugins/majestic-tools/skills/brainstorming
 [PASS] Description valid (156 chars)
 [PASS] Line count: 87/500
 [PASS] Subdirectories valid
+[PASS] No ASCII art outside code blocks
+[PASS] No persona statements
+[PASS] Description has routing keywords
+[PASS] No marketing copy in description
 
 Result: ALL CHECKS PASSED
 ```

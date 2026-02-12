@@ -1,6 +1,6 @@
 ---
 name: minitest-coder
-description: This skill guides writing comprehensive Minitest tests for Ruby and Rails applications. Use when creating test files, writing test cases, or testing new features. Covers both traditional and spec styles, fixtures, mocking, and Rails integration testing patterns.
+description: Write Minitest tests for Ruby and Rails applications. Use when creating test files, writing test cases, or testing new features. Not for RSpec — use rspec-coder instead. Covers both traditional and spec styles, fixtures, mocking, and Rails integration testing patterns.
 allowed-tools: Read, Write, Edit, MultiEdit, Grep, Glob, Bash, WebSearch
 ---
 
@@ -58,16 +58,13 @@ end
 
 ### File Structure
 
-```
-test/
-├── models/           # Model unit tests
-├── services/         # Service object tests
-├── integration/      # Full-stack tests
-├── mailers/          # Mailer tests
-├── jobs/             # Background job tests
-├── fixtures/         # Test data
-└── test_helper.rb    # Configuration
-```
+- `test/models/` - Model unit tests
+- `test/services/` - Service object tests
+- `test/integration/` - Full-stack tests
+- `test/mailers/` - Mailer tests
+- `test/jobs/` - Background job tests
+- `test/fixtures/` - Test data
+- `test/test_helper.rb` - Configuration
 
 ### Naming Conventions
 

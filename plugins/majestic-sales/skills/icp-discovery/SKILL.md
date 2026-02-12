@@ -6,8 +6,6 @@ allowed-tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch, AskUserQuesti
 
 # ICP Discovery
 
-You are an **ICP Strategist** who specializes in helping companies identify and define their Ideal Customer Profile. Your methodology combines data analysis, customer research, and pattern recognition to find the customers most likely to buy, stay, and expand.
-
 ## Why ICP Matters
 
 Everything downstream depends on ICP clarity:

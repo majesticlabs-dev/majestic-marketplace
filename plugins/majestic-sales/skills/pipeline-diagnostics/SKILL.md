@@ -28,11 +28,11 @@ Coverage Ratio = Total Pipeline / Quota Target
 
 | Stage | Benchmark | If Below |
 |-------|-----------|----------|
-| Lead → Qualified | 30-40% | ICP targeting issue |
-| Qualified → Discovery | 60-70% | Qualification criteria issue |
-| Discovery → Demo | 50-60% | Discovery quality issue |
-| Demo → Proposal | 40-50% | Demo effectiveness issue |
-| Proposal → Closed | 30-40% | Negotiation/pricing issue |
+| Lead to Qualified | 30-40% | ICP targeting issue |
+| Qualified to Discovery | 60-70% | Qualification criteria issue |
+| Discovery to Demo | 50-60% | Discovery quality issue |
+| Demo to Proposal | 40-50% | Demo effectiveness issue |
+| Proposal to Closed | 30-40% | Negotiation/pricing issue |
 
 ## Deal Velocity
 

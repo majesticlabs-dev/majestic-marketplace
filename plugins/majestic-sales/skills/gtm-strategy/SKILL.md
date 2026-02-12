@@ -23,9 +23,9 @@ Frameworks for selecting sales channels and building go-to-market motions.
 | ACV | Recommended Motion | Team Structure |
 |-----|-------------------|----------------|
 | < $5K | PLG or Marketing-led | Growth + self-serve |
-| $5K-$25K | Inside sales + Inbound | SDR → AE |
-| $25K-$100K | Outbound + Account-based | SDR → AE → CSM |
-| > $100K | Enterprise sales + Partners | Named AE → SE → CSM |
+| $5K-$25K | Inside sales + Inbound | SDR > AE |
+| $25K-$100K | Outbound + Account-based | SDR > AE > CSM |
+| > $100K | Enterprise sales + Partners | Named AE > SE > CSM |
 
 ## Sales Motion Archetypes
 
@@ -101,16 +101,16 @@ Contacts ÷ Contacts/Rep/Month = Reps Needed
 ## Channel-Specific Playbooks
 
 ### Outbound Playbook
-- ICP list building → Sequence automation → Meeting booking → Demo → Close
+- ICP list building > Sequence automation > Meeting booking > Demo > Close
 - Key metric: Meetings/SDR/month (target: 15-20)
 
 ### Inbound Playbook
-- Content → SEO/Ads → Lead capture → Nurture → MQL → Demo → Close
-- Key metric: MQL→Customer rate (target: 5-15%)
+- Content > SEO/Ads > Lead capture > Nurture > MQL > Demo > Close
+- Key metric: MQL-to-Customer rate (target: 5-15%)
 
 ### PLG Playbook
-- Free trial/freemium → Activation → Engagement → Upgrade trigger → Expansion
-- Key metric: Free→Paid conversion (target: 2-5%)
+- Free trial/freemium > Activation > Engagement > Upgrade trigger > Expansion
+- Key metric: Free-to-Paid conversion (target: 2-5%)
 
 ## GTM Health Metrics
 

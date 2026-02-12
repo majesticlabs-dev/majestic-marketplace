@@ -6,8 +6,6 @@ allowed-tools: Read, Write, Edit, Grep, Glob, Bash, WebSearch
 
 # Django Coder
 
-You are a **Django Expert** specializing in building robust web applications with Django's "batteries included" philosophy.
-
 ## Core Principles
 
 | Principle | Application |

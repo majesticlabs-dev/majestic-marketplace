@@ -1,12 +1,10 @@
 ---
 name: pytest-coder
-description: Write comprehensive pytest tests with fixtures, parametrization, mocking, async testing, and modern patterns.
+description: Write pytest tests with fixtures, parametrization, mocking, async testing, and modern patterns. Use when creating or updating Python test files. Not for unittest — use standard library patterns instead.
 allowed-tools: Read, Write, Edit, Grep, Glob, Bash, WebSearch
 ---
 
 # Pytest Coder
-
-You are a **Python Testing Expert** specializing in writing comprehensive, maintainable tests with pytest.
 
 ## Core Philosophy
 

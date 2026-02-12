@@ -196,6 +196,37 @@ else
   pass "Subdirectories valid"
 fi
 
+# 10. Content analysis - strip fenced code blocks for checks that need prose-only content
+CONTENT_NO_FENCES=$(awk '/^```/{skip=!skip; next} !skip{print}' "$SKILL_FILE")
+
+# 10a. Check for ASCII art outside fenced code blocks (WARN)
+if echo "$CONTENT_NO_FENCES" | grep -qE '[─│┌┐└┘├┤┬┴┼╭╮╯╰═║╔╗╚╝╠╣╦╩╬↑↓←→↔⇒⇐⇔▲▼◄►]{3,}'; then
+  warn "ASCII art detected outside code blocks - use plain lists or tables"
+else
+  pass "No ASCII art outside code blocks"
+fi
+
+# 10b. Check for persona statements outside fenced code blocks (FAIL)
+if echo "$CONTENT_NO_FENCES" | grep -qiE '^[[:space:]]*You are (a|an|the) '; then
+  fail "Persona statement detected ('You are a/an/the...') - use Audience/Goal framing"
+else
+  pass "No persona statements"
+fi
+
+# 11. Check description routing quality (WARN)
+if ! echo "$DESCRIPTION" | grep -qiE "(use when|don't use|not for|triggers on)"; then
+  warn "Description lacks routing keywords (use when, don't use, not for, triggers on)"
+else
+  pass "Description has routing keywords"
+fi
+
+# 12. Check for marketing copy in description (WARN)
+if echo "$DESCRIPTION" | grep -qiE "(comprehensive|powerful|robust|cutting-edge|world-class|state-of-the-art|best-in-class|game-changing)"; then
+  warn "Description contains marketing buzzwords - use precise, functional language"
+else
+  pass "No marketing copy in description"
+fi
+
 # Summary
 echo "-------------------------------------------"
 echo -e "Result: ${GREEN}$PASS passed${NC}, ${RED}$FAIL failed${NC}, ${YELLOW}$WARN warnings${NC}"

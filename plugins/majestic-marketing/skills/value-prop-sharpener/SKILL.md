@@ -1,6 +1,6 @@
 ---
 name: value-prop-sharpener
-description: Refine value propositions from emotional, logical, and status angles, then synthesize into a powerful 15-word statement with evolution process.
+description: Refine value propositions from emotional, logical, and status angles, then synthesize into a sharp 15-word statement. Use when messaging feels generic or weak.
 allowed-tools: AskUserQuestion
 ---
 

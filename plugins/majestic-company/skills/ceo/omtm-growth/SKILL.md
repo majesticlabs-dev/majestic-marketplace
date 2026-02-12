@@ -83,7 +83,7 @@ Growth: (107-100)/100 = 7%
 2. Analyze what slowed growth
 3. Double down on what worked before
 4. Ship faster next week
-5. If 3+ weeks below target → reassess strategy
+5. If 3+ weeks below target, reassess strategy
 
 ### Pillar 3: Public Accountability
 
@@ -148,13 +148,13 @@ Next week focus:
 ### Pushback Responses
 
 **"7% weekly is unrealistic"**
-→ "What's your current weekly growth? Even 5% = 12x annual. The number matters less than the weekly discipline."
+> "What's your current weekly growth? Even 5% = 12x annual. The number matters less than the weekly discipline."
 
 **"We can't share numbers publicly"**
-→ "Share with one accountability partner. The point is external pressure, not public disclosure."
+> "Share with one accountability partner. The point is external pressure, not public disclosure."
 
 **"Our business doesn't work that way"**
-→ "Every business has a leading indicator. What number, if it went up, would guarantee future success?"
+> "Every business has a leading indicator. What number, if it went up, would guarantee future success?"
 
 ## Integration with Other Skills
 

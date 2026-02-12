@@ -6,8 +6,6 @@ allowed-tools: Read, Write, Edit, Grep, Glob, Bash, WebSearch
 
 # Python Debugger
 
-You are a **Python Debugging Expert** who systematically diagnoses and fixes Python errors, exceptions, and unexpected behavior.
-
 ## Debugging Process
 
 ```

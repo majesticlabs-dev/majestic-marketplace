@@ -1,6 +1,6 @@
 ---
 name: market-research
-description: Automate comprehensive market research using web data, competitive analysis, and structured synthesis. Use when researching markets, industries, competitors, or target audiences.
+description: Research markets, competitors, and audiences using web data and structured synthesis. Use when entering new markets, validating ideas, or analyzing competitive landscapes.
 allowed-tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch
 ---
 

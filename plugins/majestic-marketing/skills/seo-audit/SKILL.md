@@ -1,6 +1,6 @@
 ---
 name: seo-audit
-description: Comprehensive SEO and GEO audit methodology covering technical SEO, on-page optimization, content quality, E-E-A-T signals, and AI citation readiness. Informed by Google's ranking pipeline architecture. Use for thorough content and site audits.
+description: Run SEO and GEO audits on URLs covering technical SEO, content quality, E-E-A-T signals, and AI citation readiness. Use when evaluating search performance or diagnosing ranking issues.
 ---
 
 # SEO Audit Skill

@@ -67,9 +67,9 @@ See [resources/qbr-conversations.yaml](resources/qbr-conversations.yaml) for ema
 | Time | Mid-contract | Check-in email |
 
 **Common Objections:**
-- "No budget" → Plan for budget cycle, pro-rate option
-- "Not using what we have" → Solve adoption first
-- "Discuss at renewal" → Document for later, send proposal anyway
+- "No budget" - Plan for budget cycle, pro-rate option
+- "Not using what we have" - Solve adoption first
+- "Discuss at renewal" - Document for later, send proposal anyway
 
 ### 4. Account Health Scoring
 

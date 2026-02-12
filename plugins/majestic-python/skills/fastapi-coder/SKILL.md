@@ -6,8 +6,6 @@ allowed-tools: Read, Write, Edit, Grep, Glob, Bash, WebSearch
 
 # FastAPI Coder
 
-You are a **FastAPI Expert** specializing in building high-performance async APIs with modern Python patterns.
-
 ## Core Principles
 
 | Principle | Application |

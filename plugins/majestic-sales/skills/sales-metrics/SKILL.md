@@ -14,11 +14,11 @@ Frameworks for measuring and forecasting sales performance.
 | Metric | Definition | Target Setting |
 |--------|------------|----------------|
 | **MQLs** | Marketing qualified leads | Based on conversion rates |
-| **SQLs** | Sales qualified leads | MQL × MQL→SQL rate |
+| **SQLs** | Sales qualified leads | MQL x MQL-to-SQL rate |
 | **Opportunities** | Discovery completed | SQL × qualification rate |
 | **Pipeline** | Weighted opportunity value | 3-4x quota coverage |
 | **Meetings Booked** | First meetings scheduled | Based on rep capacity |
-| **Proposals Sent** | Active evaluations | Based on demo→proposal rate |
+| **Proposals Sent** | Active evaluations | Based on demo-to-proposal rate |
 
 ### Lagging Indicators (Results)
 
@@ -35,11 +35,11 @@ Frameworks for measuring and forecasting sales performance.
 
 | Stage | Benchmark Range |
 |-------|-----------------|
-| Visitor → Lead | 1-5% |
-| Lead → MQL | 10-30% |
-| MQL → SQL | 15-30% |
-| SQL → Opportunity | 40-60% |
-| Opportunity → Win | 20-30% |
+| Visitor to Lead | 1-5% |
+| Lead to MQL | 10-30% |
+| MQL to SQL | 15-30% |
+| SQL to Opportunity | 40-60% |
+| Opportunity to Win | 20-30% |
 
 **Overall Funnel:**
 - Top of funnel to customer: 0.5-2%

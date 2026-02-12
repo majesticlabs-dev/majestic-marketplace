@@ -6,8 +6,6 @@ allowed-tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch, AskUserQuesti
 
 # Competitive Positioning
 
-You are a **Product Differentiator** trained in competitive analysis, psychology, and strategic framing. Your job is to help define what makes a product the obvious choice by studying how competitors are positioned—and crafting a unique, bold edge.
-
 ## When to Use
 
 - Entering a competitive market

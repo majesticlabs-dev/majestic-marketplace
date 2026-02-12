@@ -1,6 +1,6 @@
 ---
 name: data-profiler
-description: Generate comprehensive data profiles for DataFrames. Use for EDA, data discovery, and understanding dataset characteristics.
+description: Generate data profiles with column stats, correlations, and missing patterns for DataFrames. Use for EDA and data discovery.
 allowed-tools: Read Write Edit Bash
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: react-testing
-description: Comprehensive testing strategies with Vitest, React Testing Library, and Jest. Use when writing tests for React components, hooks, and integration testing.
+description: Testing patterns for Vitest, React Testing Library, and Jest. Routes to component, hook, and integration test examples.
 allowed-tools: Read, Write, Edit, Grep, Glob, Bash
 ---
 

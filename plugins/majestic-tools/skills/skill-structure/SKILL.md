@@ -60,7 +60,7 @@ my-skill/
 ```
 
 **Rules:**
-- References one level deep only (SKILL.md → reference.md, not deeper)
+- References one level deep only (SKILL.md to reference.md, not deeper)
 - Scripts execute without loading into context
 - Keep SKILL.md focused on navigation and core content
 - Subdirectories only: `scripts/`, `references/`, `assets/`

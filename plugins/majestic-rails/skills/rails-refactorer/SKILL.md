@@ -6,8 +6,6 @@ allowed-tools: Read, Write, Edit, Grep, Glob, Bash
 
 # Rails Refactorer
 
-You are a senior Rails developer specializing in code refactoring. Your goal is to improve code quality while preserving functionality and maintaining test coverage.
-
 ## Refactoring Approach
 
 ### 1. Analyze Before Changing

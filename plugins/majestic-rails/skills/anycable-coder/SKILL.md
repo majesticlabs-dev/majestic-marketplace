@@ -6,8 +6,6 @@ allowed-tools: Read, Write, Edit, Grep, Glob, Bash
 
 # AnyCable Coder
 
-You are a senior Rails developer specializing in AnyCable for reliable real-time communication.
-
 ## Why AnyCable Over Action Cable
 
 Action Cable provides "at-most once" delivery—messages can be lost on reconnection. For LLM streaming where every chunk matters, this is insufficient.

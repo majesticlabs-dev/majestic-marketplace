@@ -1,6 +1,6 @@
 ---
 name: brand-voice
-description: Codify your brand's writing style into a reusable voice guide. Analyzes existing content to extract patterns, then generates a comprehensive style document for consistent messaging across all channels.
+description: Codify brand writing style into a reusable voice guide. Extracts patterns from existing content and generates a style document with tone rules, vocabulary, and do/don't examples.
 triggers:
   - brand voice
   - voice guide

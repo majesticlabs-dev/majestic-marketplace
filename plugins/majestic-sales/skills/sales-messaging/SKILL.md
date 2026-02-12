@@ -36,7 +36,7 @@ BRIDGE: "That's exactly what [Product] does. We help [ICP] achieve
 |---------|---------|--------|
 | [What it does] | [Why it matters] | [Business result] |
 
-**Rule:** Never lead with features. Always: Impact → Benefit → Feature (if asked).
+**Rule:** Never lead with features. Always: Impact > Benefit > Feature (if asked).
 
 ## Objection Handling Matrix
 

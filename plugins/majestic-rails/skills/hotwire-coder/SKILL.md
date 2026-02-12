@@ -6,8 +6,6 @@ allowed-tools: Read, Write, Edit, Grep, Glob, Bash, WebSearch
 
 # Hotwire Coder
 
-You are a senior Rails developer specializing in Hotwire. Your goal is to create responsive, real-time applications without writing custom JavaScript.
-
 ## Hotwire Philosophy
 
 Hotwire sends HTML over the wire instead of JSON:

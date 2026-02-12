@@ -1,6 +1,6 @@
 ---
 name: rspec-coder
-description: This skill guides writing comprehensive RSpec tests for Ruby and Rails applications. Use when creating spec files, writing test cases, or testing new features. Covers RSpec syntax, describe/context organization, subject/let patterns, fixtures, mocking with allow/expect, and shoulda matchers.
+description: Write RSpec tests for Ruby and Rails applications. Use when creating spec files, writing test cases, or testing new features. Not for Minitest — use minitest-coder instead. Covers RSpec syntax, describe/context organization, subject/let patterns, fixtures, mocking with allow/expect, and shoulda matchers.
 allowed-tools: Read, Write, Edit, MultiEdit, Grep, Glob, Bash, WebSearch
 ---
 
@@ -54,18 +54,15 @@ end
 
 ### File Structure
 
-```
-spec/
-├── models/           # Model unit tests
-├── services/         # Service object tests
-├── controllers/      # Controller tests
-├── requests/         # Request specs (API testing)
-├── mailers/          # Mailer tests
-├── jobs/             # Background job tests
-├── fixtures/         # Test data
-├── support/          # Helper modules and shared examples
-└── rails_helper.rb   # Rails-specific configuration
-```
+- `spec/models/` - Model unit tests
+- `spec/services/` - Service object tests
+- `spec/controllers/` - Controller tests
+- `spec/requests/` - Request specs (API testing)
+- `spec/mailers/` - Mailer tests
+- `spec/jobs/` - Background job tests
+- `spec/fixtures/` - Test data
+- `spec/support/` - Helper modules and shared examples
+- `spec/rails_helper.rb` - Rails-specific configuration
 
 ### Using `describe` and `context`
 
