@@ -32,27 +32,35 @@ Store all responses as `USER_CONTEXT`.
 ## Task Tracking Setup
 
 ```
-TASKS = [
-  {id: T1, subject: "Idea Discovery", activeForm: "Discovering startup ideas"},
-  {id: T2, subject: "Validation & Business Model", activeForm: "Validating idea and model"},
-  {id: T3, subject: "Competitive & Market Intel", activeForm: "Analyzing competitive landscape"},
-  {id: T4, subject: "Go-to-Market Strategy", activeForm: "Building go-to-market plan"},
-  {id: T5, subject: "Operations & Growth", activeForm: "Planning operations and growth"},
-  {id: T6, subject: "Financial Model", activeForm: "Building financial projections"},
-  {id: T7, subject: "Implementation Blueprint", activeForm: "Creating implementation blueprint"}
-]
+TASK_TRACKING = /majestic:config task_tracking.enabled false
+LEDGER_ENABLED = /majestic:config task_tracking.ledger false
+LEDGER_PATH = /majestic:config task_tracking.ledger_path .agents/workflow-ledger.yml
 
-For each TASK in TASKS:
-  TaskCreate(subject: TASK.subject, activeForm: TASK.activeForm)
-
-Set dependencies: T2.blockedBy=[T1], T3.blockedBy=[T2], T4.blockedBy=[T3],
-  T5.blockedBy=[T4], T6.blockedBy=[T5], T7.blockedBy=[T6]
+If TASK_TRACKING:
+  WORKFLOW_ID = "startup-blueprint-{timestamp}"
+  PHASE_TASKS = {}
+  PHASES = [
+    {num: 1, name: "Idea Discovery", active: "Discovering startup ideas"},
+    {num: 2, name: "Validation & Business Model", active: "Validating idea and model"},
+    {num: 3, name: "Competitive & Market Intel", active: "Analyzing competitive landscape"},
+    {num: 4, name: "Go-to-Market Strategy", active: "Building go-to-market plan"},
+    {num: 5, name: "Operations & Growth", active: "Planning operations and growth"},
+    {num: 6, name: "Financial Model", active: "Building financial projections"},
+    {num: 7, name: "Implementation Blueprint", active: "Creating implementation blueprint"}
+  ]
+  For each P in PHASES:
+    PHASE_TASKS[P.num] = TaskCreate(
+      subject: "Phase {P.num}: {P.name}", activeForm: P.active,
+      metadata: {workflow: WORKFLOW_ID, phase: P.num}
+    )
+  Set dependencies: T2.blockedBy=[T1], T3.blockedBy=[T2], T4.blockedBy=[T3],
+    T5.blockedBy=[T4], T6.blockedBy=[T5], T7.blockedBy=[T6]
 ```
 
 ## Phase 1: Idea Discovery
 
 ```
-TaskUpdate(T1, status: in_progress)
+If TASK_TRACKING: TaskUpdate(PHASE_TASKS[1], status: in_progress)
 
 Apply `idea-generation` skill with USER_CONTEXT:
   - Generate 5 tailored concepts via skill-market mapping
@@ -66,13 +74,13 @@ While SELECTED.type == "refine":
   SELECTED = AskUserQuestion("Which idea resonates now?")
 
 CHOSEN_IDEA = SELECTED.value
-TaskUpdate(T1, status: completed)
+If TASK_TRACKING: TaskUpdate(PHASE_TASKS[1], status: completed)
 ```
 
 ## Phase 2: Validation & Business Model
 
 ```
-TaskUpdate(T2, status: in_progress)
+If TASK_TRACKING: TaskUpdate(PHASE_TASKS[2], status: in_progress)
 
 # 2.1 Product-Market Fit
 Apply `pmf-validation` skill with CHOSEN_IDEA + USER_CONTEXT:
@@ -99,13 +107,13 @@ Apply `pm-jobs-to-be-done` skill with CHOSEN_IDEA + PMF_RESULT:
   - Break-even analysis
 
 PHASE_2_OUTPUT = {pmf: PMF_RESULT, value_prop, revenue_model, unit_economics}
-TaskUpdate(T2, status: completed)
+If TASK_TRACKING: TaskUpdate(PHASE_TASKS[2], status: completed)
 ```
 
 ## Phase 3: Competitive & Market Intel
 
 ```
-TaskUpdate(T3, status: in_progress)
+If TASK_TRACKING: TaskUpdate(PHASE_TASKS[3], status: in_progress)
 
 WebSearch for competitors in CHOSEN_IDEA space:
   - Identify top 5 direct competitors
@@ -129,13 +137,13 @@ If LANDSCAPE.crowded AND LANDSCAPE.market_gaps.length == 0:
   ])
   If WARN == "Return": goto Phase 1
 
-TaskUpdate(T3, status: completed)
+If TASK_TRACKING: TaskUpdate(PHASE_TASKS[3], status: completed)
 ```
 
 ## Phase 4: Go-to-Market
 
 ```
-TaskUpdate(T4, status: in_progress)
+If TASK_TRACKING: TaskUpdate(PHASE_TASKS[4], status: in_progress)
 
 # 4.1 Marketing Strategy
 Invoke `/majestic-marketing:start` with:
@@ -153,13 +161,13 @@ Invoke `/sales:funnel-builder` with:
 GTM_FUNNEL = {funnel_stages, conversion_targets, tools_needed}
 
 PHASE_4_OUTPUT = {marketing: GTM_MARKETING, funnel: GTM_FUNNEL}
-TaskUpdate(T4, status: completed)
+If TASK_TRACKING: TaskUpdate(PHASE_TASKS[4], status: completed)
 ```
 
 ## Phase 5: Operations & Growth
 
 ```
-TaskUpdate(T5, status: in_progress)
+If TASK_TRACKING: TaskUpdate(PHASE_TASKS[5], status: in_progress)
 
 # 5.1 Operations Roadmap
 Apply `strategic-planning` skill with:
@@ -178,13 +186,13 @@ Generate: OMTM, growth target + timeline, accountability framework,
   growth experiment backlog (3-5 experiments)
 
 PHASE_5_OUTPUT = {ops_plan, milestones, risks, omtm, growth_experiments}
-TaskUpdate(T5, status: completed)
+If TASK_TRACKING: TaskUpdate(PHASE_TASKS[5], status: completed)
 ```
 
 ## Phase 6: Financial Model
 
 ```
-TaskUpdate(T6, status: in_progress)
+If TASK_TRACKING: TaskUpdate(PHASE_TASKS[6], status: in_progress)
 
 FINANCIAL_INPUT = {
   revenue_model: PHASE_2_OUTPUT.revenue_model,
@@ -207,13 +215,13 @@ If PHASE_6_OUTPUT.runway_months < 6:
     "Proceed with accelerated timeline"
   ])
 
-TaskUpdate(T6, status: completed)
+If TASK_TRACKING: TaskUpdate(PHASE_TASKS[6], status: completed)
 ```
 
 ## Phase 7: Implementation Blueprint
 
 ```
-TaskUpdate(T7, status: in_progress)
+If TASK_TRACKING: TaskUpdate(PHASE_TASKS[7], status: in_progress)
 
 Synthesize ALL phase outputs into blueprint document:
 
@@ -245,7 +253,21 @@ DELIVERY = AskUserQuestion("How to deliver the blueprint?", [
 If DELIVERY == "Save to file":
   Write(docs/blueprints/{current_date}-{CHOSEN_IDEA.slug}-blueprint.md, BLUEPRINT)
 
-TaskUpdate(T7, status: completed)
+If TASK_TRACKING: TaskUpdate(PHASE_TASKS[7], status: completed,
+  metadata: {deliverable_path: FILENAME or "displayed"})
+```
+
+## Workflow Completion
+
+```
+If TASK_TRACKING:
+  AUTO_CLEANUP = /majestic:config task_tracking.auto_cleanup true
+  If AUTO_CLEANUP:
+    For each TASK in PHASE_TASKS.values():
+      If TASK.status != "completed": TaskUpdate(TASK, status: completed)
+
+If LEDGER_ENABLED:
+  Update LEDGER_PATH: status: "completed", completed_at: NOW
 ```
 
 ## Output Schema
