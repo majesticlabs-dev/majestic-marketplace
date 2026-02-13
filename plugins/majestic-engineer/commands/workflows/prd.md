@@ -2,7 +2,7 @@
 name: majestic:prd
 description: Create a Product Requirements Document (PRD) for a new product or feature
 argument-hint: "[--guided] [product or feature description]"
-allowed-tools: Read, Write, Edit, WebSearch, WebFetch, AskUserQuestion
+allowed-tools: Read, Write, Edit, WebSearch, WebFetch, AskUserQuestion, TaskCreate, TaskUpdate, TaskList, TaskGet
 ---
 
 # Create a Product Requirements Document (PRD)
@@ -16,9 +16,42 @@ Generate a comprehensive PRD that defines WHAT to build and WHY.
 - If `--guided`: Enable guided discovery (one question at a time)
 - Otherwise: Batch 3-5 questions upfront
 
+## Task Tracking Setup
+
+```
+TASK_TRACKING = /majestic:config task_tracking.enabled false
+
+If TASK_TRACKING:
+  PRD_WORKFLOW_ID = "prd-{timestamp}"
+  PHASE_TASKS = {}
+
+  PHASES = [
+    {num: 1, name: "Clarifying Questions", active: "Gathering requirements"},
+    {num: 2, name: "Generate PRD", active: "Generating PRD"},
+    {num: 3, name: "Review & Options", active: "Reviewing PRD"},
+    {num: 4, name: "Technical Expansion", active: "Expanding technical depth"},
+    {num: 5, name: "Create Backlog Items", active: "Creating backlog items"}
+  ]
+
+  For each P in PHASES:
+    PHASE_TASKS[P.num] = TaskCreate(
+      subject: "Phase {P.num}: {P.name}",
+      activeForm: P.active,
+      metadata: {workflow: PRD_WORKFLOW_ID, phase: P.num}
+    )
+
+  # Sequential dependencies; phases 4 and 5 both depend on 3 (independent of each other)
+  TaskUpdate(PHASE_TASKS[2], addBlockedBy: [PHASE_TASKS[1]])
+  TaskUpdate(PHASE_TASKS[3], addBlockedBy: [PHASE_TASKS[2]])
+  TaskUpdate(PHASE_TASKS[4], addBlockedBy: [PHASE_TASKS[3]])
+  TaskUpdate(PHASE_TASKS[5], addBlockedBy: [PHASE_TASKS[3]])
+```
+
 ---
 
 ## Phase 1: Clarifying Questions
+
+If TASK_TRACKING: TaskUpdate(PHASE_TASKS[1], status: "in_progress")
 
 ### Default Mode
 
@@ -43,9 +76,13 @@ Ask questions **ONE AT A TIME**:
 
 After sufficient info, synthesize and confirm before PRD generation.
 
+If TASK_TRACKING: TaskUpdate(PHASE_TASKS[1], status: "completed")
+
 ---
 
 ## Phase 2: Generate PRD
+
+If TASK_TRACKING: TaskUpdate(PHASE_TASKS[2], status: "in_progress")
 
 Read the PRD template from `resources/prd/prd-template.txt` (relative to this command file).
 
@@ -55,9 +92,13 @@ Customize with user's answers:
 - Prioritize features using MoSCoW
 - Set success metrics
 
+If TASK_TRACKING: TaskUpdate(PHASE_TASKS[2], status: "completed")
+
 ---
 
 ## Phase 3: Review & Options
+
+If TASK_TRACKING: TaskUpdate(PHASE_TASKS[3], status: "in_progress")
 
 1. **Save** to `docs/prd/prd-[feature-name].md`
 
@@ -71,9 +112,19 @@ Customize with user's answers:
    - **Revise sections** - Provide feedback on specific sections
    - **Preview in editor** (if not auto-previewed)
 
+**If "Revise sections":** Loop back to Phase 3 without completing (keep in_progress).
+
+If TASK_TRACKING: TaskUpdate(PHASE_TASKS[3], status: "completed")
+
 ---
 
 ## Phase 4: Technical Expansion (If Requested)
+
+If user selected "Expand with technical depth":
+  If TASK_TRACKING: TaskUpdate(PHASE_TASKS[4], status: "in_progress")
+Else:
+  If TASK_TRACKING: TaskUpdate(PHASE_TASKS[4], status: "completed")
+  Skip to Phase 5
 
 Add sections from `resources/prd/technical-expansion.txt`:
 - API Specifications (endpoints, schemas, auth)
@@ -81,9 +132,17 @@ Add sections from `resources/prd/technical-expansion.txt`:
 - Security Considerations (AuthN/AuthZ, OWASP)
 - Performance & Scalability (SLOs, scaling strategy)
 
+If TASK_TRACKING: TaskUpdate(PHASE_TASKS[4], status: "completed")
+
 ---
 
 ## Phase 5: Create Backlog Items (Optional)
+
+If user accepted backlog creation:
+  If TASK_TRACKING: TaskUpdate(PHASE_TASKS[5], status: "in_progress")
+Else:
+  If TASK_TRACKING: TaskUpdate(PHASE_TASKS[5], status: "completed")
+  Skip to Output
 
 Offer backlog creation:
 - **Create Must Have items** - From Must Have features only
@@ -96,6 +155,19 @@ If accepted:
    - Extract title and acceptance criteria
    - Set priority (Must=p1, Should=p2, Could=p3)
    - Create item using configured backend
+
+If TASK_TRACKING: TaskUpdate(PHASE_TASKS[5], status: "completed")
+
+## Cleanup
+
+```
+If TASK_TRACKING:
+  AUTO_CLEANUP = /majestic:config task_tracking.auto_cleanup true
+  If AUTO_CLEANUP:
+    For each TASK in PHASE_TASKS.values():
+      If TASK.status != "completed":
+        TaskUpdate(TASK, status: "completed")
+```
 
 ---
 
