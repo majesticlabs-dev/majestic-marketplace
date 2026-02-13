@@ -12,6 +12,7 @@ The config file has **core fields** plus **stack-specific fields** based on tech
 
 | Version | Changes |
 |---------|---------|
+| 1.9 | Added `task_tracking` section for native Task system integration |
 | 1.8 | Added `quality_gate.strictness` for controlling fix loop threshold |
 | 1.7 | Migrated project knowledge from `.claude/` to `.agents/` (lessons, handoffs, session ledger) |
 | 1.6 | Added `owner.level` for experience-based skill tailoring |
@@ -21,6 +22,27 @@ The config file has **core fields** plus **stack-specific fields** based on tech
 | 1.2 | Moved `auto_create_task` under `plan:` namespace |
 | 1.1 | Added `workflow_labels`, `workspace_setup.post_create` |
 | 1.0 | Initial release |
+
+### Migration from 1.8 to 1.9
+
+**Backwards compatible:** New optional section with sensible defaults.
+
+New format (1.9) adds task tracking integration with Claude Code's native Task system:
+```yaml
+task_tracking:
+  enabled: true                               # Workflows create Tasks for visibility (ctrl+t)
+  ledger: true                                # YAML checkpoints for crash recovery
+  ledger_path: .agents/workflow-ledger.yml
+  auto_cleanup: true                          # Remove tasks after workflow completion
+```
+
+**Fields:**
+- `enabled` - When true, workflows create Tasks visible via ctrl+t for progress tracking
+- `ledger` - When true, workflow state is checkpointed to YAML for crash recovery
+- `ledger_path` - Path to the workflow ledger file (default: `.agents/workflow-ledger.yml`)
+- `auto_cleanup` - When true, tasks are automatically removed after workflow completion
+
+**No action required** - existing configs continue to work. Task tracking is disabled by default and must be explicitly opted into.
 
 ### Migration from 1.6 to 1.7
 
@@ -129,7 +151,7 @@ plan:
 
 ```yaml
 # .agents.yml - Project configuration for Claude Code commands
-config_version: 1.5
+config_version: 1.9
 app_status: development
 
 # Tech Stack
@@ -179,7 +201,7 @@ toolbox:
 ### Python Project
 
 ```yaml
-config_version: 1.5
+config_version: 1.9
 app_status: development
 
 tech_stack: python
@@ -201,7 +223,7 @@ plan:
 ### Node Project
 
 ```yaml
-config_version: 1.5
+config_version: 1.9
 app_status: development
 
 tech_stack: node
@@ -241,6 +263,10 @@ plan:
 | `session.ledger` | Enable session state checkpointing to file | `true` \| `false` | `false` |
 | `session.ledger_path` | Path to session ledger file | file path | `.session_ledger.md` |
 | `workspace_setup.post_create` | Script to run after creating workspace | script path | (none) |
+| `task_tracking.enabled` | Workflows create Tasks for visibility (ctrl+t) | `true` \| `false` | `false` |
+| `task_tracking.ledger` | YAML checkpoints for crash recovery | `true` \| `false` | `false` |
+| `task_tracking.ledger_path` | Path to workflow ledger file | file path | `.agents/workflow-ledger.yml` |
+| `task_tracking.auto_cleanup` | Remove tasks after workflow completion | `true` \| `false` | `true` |
 | `quality_gate.strictness` | Minimum severity that triggers fix loop | `pedantic` \| `strict` \| `standard` | `pedantic` |
 
 ### Rails-Specific Fields

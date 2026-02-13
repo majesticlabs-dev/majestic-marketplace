@@ -6,13 +6,13 @@
   },
   "metadata": {
     "description": "Majestic Labs plugin marketplace for Claude Code extensions",
-    "version": "3.5.1"
+    "version": "3.5.2"
   },
   "plugins": [
     {
       "name": "majestic-engineer",
-      "description": "Language-agnostic engineering workflows. Includes 38 specialized agents, 31 commands, 29 skills, and 5 toolbox presets. Now includes relay orchestration for fresh-context task execution with quality gates and compound learning.",
-      "version": "3.60.2",
+      "description": "Language-agnostic engineering workflows. Includes 38 specialized agents, 31 commands, 30 skills, and 5 toolbox presets. Now includes relay orchestration for fresh-context task execution with quality gates and compound learning.",
+      "version": "3.61.0",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -196,7 +196,7 @@
     {
       "name": "majestic-marketing",
       "description": "Marketing and SEO tools for Claude Code. Includes 16 specialized agents, 6 commands, and 54 skills.",
-      "version": "3.21.1",
+      "version": "3.21.2",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",

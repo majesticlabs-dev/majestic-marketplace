@@ -9,34 +9,141 @@ color: green
 
 Orchestrate comprehensive code review by launching specialized review agents in parallel, then aggregating findings into a unified verdict.
 
+## Task Tracking Setup
+
+```
+TASK_TRACKING = /majestic:config task_tracking.enabled false
+If TASK_TRACKING:
+  QG_WORKFLOW_ID = "quality-gate-{timestamp}"
+  REVIEWER_TASKS = {}
+```
+
 ## Context
 
-Read these config values using `/majestic:config`:
-- `tech_stack` (default: generic)
-- `app_status` (default: development)
-- `quality_gate.strictness` (default: pedantic)
-- `quality_gate.reviewers` (default: [])
+```
+TECH_STACK = /majestic:config tech_stack generic
+APP_STATUS = /majestic:config app_status development
+LESSONS_PATH = /majestic:config lessons_path .agents/lessons/
+STRICTNESS = /majestic:config quality_gate.strictness pedantic
+```
 
 ## Input Format
 
-```yaml
-context: string    # Issue title or change description
-branch: string     # Branch name or --staged
-ac_path: string    # Path to plan/task file (optional)
+```
+Context: Issue title or change description
+Branch: branch name or --staged
+AC Path: path to plan/task file (optional)
+Verifier Result: pre-computed AC verifier output (optional)
 ```
 
 ## Instructions
 
-### 1. Resolve Reviewers
+### 1. Read Configuration
 
-If `quality_gate.reviewers` is empty:
-```yaml
-verdict: SKIPPED
-reason: "No reviewers configured in quality_gate.reviewers"
+Use values from Context section above.
+
+### 2. Check for Custom Reviewers
+
 ```
-EXIT early - do not proceed.
+CUSTOM_REVIEWERS = /majestic:config quality_gate.reviewers []
+```
 
-### 2. Get Diff
+### 2.1. Reviewer Name Shorthand Table
+
+If reviewer name does NOT contain `:`, resolve via this table:
+
+| Shorthand | Full Agent Path |
+|-----------|----------------|
+| `security-review` | `majestic-engineer:qa:security-review` |
+| `test-reviewer` | `majestic-engineer:qa:test-reviewer` |
+| `simplicity-reviewer` | `majestic-engineer:review:simplicity-reviewer` |
+| `pragmatic-rails-reviewer` | `majestic-rails:review:pragmatic-rails-reviewer` |
+| `performance-reviewer` | `majestic-rails:review:performance-reviewer` |
+| `data-integrity-reviewer` | `majestic-rails:review:data-integrity-reviewer` |
+| `dhh-code-reviewer` | `majestic-rails:review:dhh-code-reviewer` |
+| `python-reviewer` | `majestic-python:python-reviewer` |
+| `react-reviewer` | `majestic-react:review:react-reviewer` |
+| `codex-reviewer` | `majestic-llm:codex-reviewer` |
+| `gemini-reviewer` | `majestic-llm:gemini-reviewer` |
+| `ui-code-auditor` | `majestic-engineer:qa:ui-code-auditor` |
+
+**Rule:** If name already contains `:`, use as-is (already fully qualified).
+
+### 2.5. Check Toolbox Reviewers
+
+If CUSTOM_REVIEWERS is empty:
+
+```
+TOOLBOX_RESULT = Task(majestic-engineer:workflow:toolbox-resolver)
+If TOOLBOX_RESULT has quality_gate.reviewers:
+  RESOLVED_REVIEWERS = TOOLBOX_RESULT.quality_gate.reviewers
+```
+
+### 2.6. Discover Critical Patterns
+
+```
+Task(majestic-engineer:workflow:lessons-discoverer):
+  prompt: workflow_phase: review | tech_stack: [TECH_STACK] | filter: antipattern,critical,high
+```
+
+If patterns found → include in reviewer prompts. Non-blocking on failure.
+
+### Reviewer Precedence
+
+```
+1. CUSTOM_REVIEWERS from .agents.yml (user override)     → use directly
+2. TOOLBOX_RESULT.quality_gate.reviewers (toolbox manifest) → use if #1 empty
+3. Hardcoded defaults by tech stack (below)              → use if #1 and #2 empty
+```
+
+**Never SKIP.** Always fall through to hardcoded defaults.
+
+### 3. Determine Review Agents
+
+If no reviewers resolved from steps 2/2.5, use tech-stack defaults:
+
+| Tech Stack | Default Reviewers |
+|------------|-------------------|
+| `rails` | `pragmatic-rails-reviewer`, `security-review`, `performance-reviewer` |
+| `python` | `python-reviewer`, `security-review` |
+| `node` | `simplicity-reviewer`, `security-review` |
+| `react` | `react-reviewer`, `security-review` |
+| `generic` | `simplicity-reviewer`, `security-review` |
+
+Resolve all shorthand names via the table in Step 2.1.
+
+```
+If TASK_TRACKING:
+  GROUP_ID = "reviewers-{QG_WORKFLOW_ID}"
+  For each R in FINAL_REVIEWERS:
+    REVIEWER_TASKS[R] = TaskCreate(
+      subject: "Run {R}",
+      activeForm: "Running {R}",
+      metadata: {workflow: QG_WORKFLOW_ID, parallel_group: GROUP_ID, reviewer: R}
+    )
+    TaskUpdate(REVIEWER_TASKS[R].id, status: "in_progress")
+```
+
+### 3.5. AC Verification
+
+If AC Path provided AND no Verifier Result passed in:
+
+Add `majestic-engineer:qa:acceptance-criteria-verifier` to the parallel reviewer set.
+
+- `PASS` → No findings
+- `FAIL` → Add failed items as HIGH severity
+
+### 4. Production Strictness
+
+```
+If APP_STATUS == "production" AND TECH_STACK contains "rails":
+  Add data-integrity-reviewer to FINAL_REVIEWERS (if not already present)
+  Flag breaking changes as HIGH severity
+```
+
+## Parallel Execution
+
+Get the diff first:
 
 ```
 If branch == "--staged": DIFF = git diff --staged
@@ -45,65 +152,29 @@ Else: DIFF = git diff HEAD
 
 If DIFF is empty → return APPROVED (nothing to review).
 
-### 3. Discover Critical Patterns
+Launch ALL reviewers in a **single message** using Task() calls:
 
 ```
-Task(majestic-engineer:workflow:lessons-discoverer):
-  prompt: workflow_phase: review | tech_stack: [tech_stack] | filter: antipattern,critical,high
+For each REVIEWER in FINAL_REVIEWERS:  # ALL in ONE message
+  Task(
+    subagent_type: REVIEWER,
+    prompt: "Review this diff:\n{DIFF}\n\nContext: {CONTEXT}\nAC: {AC_CONTENT}\nCritical patterns: {LESSONS}",
+    name: REVIEWER,
+    run_in_background: true
+  )
 ```
 
-If patterns found, include in reviewer prompts. Non-blocking on failure.
+**Key rule:** All `Task()` calls MUST be in the same response message. Splitting across messages forces sequential execution.
 
-### 4. Launch Parallel Reviewers
+### 5. Aggregate Results
 
-```bash
-WORK_DIR=$(mktemp -d)
+Collect results as reviewers complete:
+
 ```
-
-For each REVIEWER in `quality_gate.reviewers`:
-
-```bash
-claude -p "@$REVIEWER Review this diff:
-$DIFF
-
-Context: $CONTEXT
-AC: $AC_CONTENT
-Critical patterns: $LESSONS" \
-  --output-format json \
-  --permission-mode plan \
-  > "$WORK_DIR/${REVIEWER}.json" 2>&1 &
-```
-
-Wait for all: `wait`
-
-### 5. Acceptance Criteria Verification
-
-**If AC path provided**, include in parallel set (Step 4):
-
-```bash
-claude -p "@majestic-engineer:qa:acceptance-criteria-verifier
-AC: $AC_CONTENT
-Diff: $DIFF" \
-  --output-format json \
-  --permission-mode plan \
-  > "$WORK_DIR/ac-verifier.json" 2>&1 &
-```
-
-- `PASS` → No findings
-- `FAIL` → Add failed items as HIGH severity
-
-### 6. Production Strictness
-
-If `app_status: production`, add data-integrity-reviewer for Rails. Flag breaking changes as HIGH.
-
-### 7. Aggregate Results
-
-Read all JSON files from `$WORK_DIR`:
-
-```bash
-for f in "$WORK_DIR"/*.json; do
-  # Parse JSON, collect findings, track any failures
-done
+If TASK_TRACKING:
+  For each R in FINAL_REVIEWERS:
+    RESULT = wait for agent completion
+    TaskUpdate(REVIEWER_TASKS[R].id, status: "completed")
 ```
 
 **Aggregate logic:**
@@ -133,7 +204,7 @@ done
 | Only below threshold | APPROVED (deferred logged) |
 | None | APPROVED |
 
-### 8. Structure Findings
+### 6. Structure Findings
 
 ```markdown
 ## Finding 1: <title>
@@ -144,7 +215,7 @@ done
 **Fix:** <suggestion>
 ```
 
-### 8.1 Deferred Findings (Non-Pedantic)
+### 6.1. Deferred Findings (Non-Pedantic)
 
 Output for shell parsing:
 
@@ -155,27 +226,34 @@ file: app/models/user.rb:45
 issue: Magic number should be constant
 reviewer: simplicity-reviewer
 ---
+severity: MEDIUM
+file: app/controllers/users_controller.rb:12
+issue: N+1 query potential
+reviewer: performance-reviewer
+---
 DEFERRED_FINDINGS_END
 ```
 
-### 9. Cleanup
-
-```bash
-rm -rf "$WORK_DIR"
-```
-
 ## Report Format
+
+All reports use this header table:
+
+```
+| Field | Value |
+|-------|-------|
+| **Tech Stack** | <stack> |
+| **Strictness** | <level> |
+| **Reviewers** | <list> |
+| **Findings** | <count by severity> |
+| **Deferred** | <count> |
+```
 
 ### APPROVED
 
 ```
 ## Quality Gate: APPROVED ✅
-**Tech Stack:** <stack> | **Strictness:** <level>
-**Reviewers:** <list>
-**Findings:** <count by severity>
-
+<header table>
 All quality checks passed.
-
 Verdict: APPROVED
 ```
 
@@ -183,35 +261,30 @@ Verdict: APPROVED
 
 ```
 ## Quality Gate: NEEDS CHANGES ⚠️
-**Tech Stack:** <stack> | **Strictness:** <level>
-**Reviewers:** <list>
-
+<header table>
 ### Required Fixes
 <findings above threshold>
-
-Verdict: NEEDS CHANGES
-Fix Count: <n>
+### Deferred (below threshold)
+<deferred findings if any>
+Verdict: NEEDS CHANGES | Fix Count: <n>
 ```
 
 ### BLOCKED
 
 ```
 ## Quality Gate: BLOCKED 🛑
-**Reason:** <critical issue>
-
+<header table with Reason field added>
 ### Critical Issues
 <findings>
-
-Verdict: BLOCKED
-Requires: Human review
+Verdict: BLOCKED | Requires: Human review
 ```
 
 ## Error Handling
 
 | Scenario | Action |
 |----------|--------|
-| No reviewers configured | SKIPPED |
+| Config missing | Use generic stack with default reviewers |
 | Reviewer fails | Log, continue with others |
 | All reviewers fail | BLOCKED, suggest manual review |
 | No changes | APPROVED (nothing to review) |
-| JSON parse fails | Log raw output, mark errored |
+| Task tracking fails | Log warning, continue without tracking |

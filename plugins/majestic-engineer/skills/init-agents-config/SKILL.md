@@ -45,6 +45,13 @@ Assemble `.agents.yml` from collected user answers during `/majestic:init`.
 
 ## Conditional Sections
 
+### Task Tracking
+Commented out by default (opt-in). Uncomment only if user explicitly enables task tracking:
+- `task_tracking.enabled` - Create Tasks during workflows for visibility
+- `task_tracking.ledger` - YAML checkpoints for crash recovery
+- `task_tracking.ledger_path` - Path to workflow ledger file
+- `task_tracking.auto_cleanup` - Remove tasks after workflow completion
+
 ### Quality Gate Reviewers
 Each stack has default reviewers. Include optional reviewers only if user enables them:
 - `dhh-code-reviewer` - Rails strict style
