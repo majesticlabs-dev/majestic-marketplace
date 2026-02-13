@@ -8,6 +8,34 @@ description: Complete AEO (Answer Engine Optimization) workflow - from strategy 
 
 Execute the complete Answer Engine Optimization workflow based on HubSpot's proven strategy.
 
+## Task Tracking Setup
+
+```
+TASK_TRACKING = /majestic:config task_tracking.enabled false
+LEDGER_ENABLED = /majestic:config task_tracking.ledger false
+LEDGER_PATH = /majestic:config task_tracking.ledger_path .agents/workflow-ledger.yml
+
+If TASK_TRACKING:
+  AEO_WORKFLOW_ID = "aeo-workflow-{timestamp}"
+  PHASE_TASKS = {}
+
+  PHASES = [
+    {num: 1, name: "Strategy", active: "Building persona grid", deliverable: "persona-grid.md"},
+    {num: 2, name: "Research", active: "Sourcing queries", deliverable: "query-list.md"},
+    {num: 3, name: "Visibility Gaps", active: "Analyzing gaps", deliverable: "visibility-gaps.md"},
+    {num: 4, name: "Query Fan-Out", active: "Expanding queries", deliverable: null},
+    {num: 5, name: "Content Optimization", active: "Applying 7-step checklist", deliverable: null},
+    {num: 6, name: "Authority Building", active: "Planning authority", deliverable: "authority-plan.md"},
+    {num: 7, name: "Measurement", active: "Setting up scorecard", deliverable: "scorecard.md"}
+  ]
+
+  For each P in PHASES:
+    PHASE_TASKS[P.num] = TaskCreate:
+      subject: "Phase {P.num}: {P.name}"
+      activeForm: P.active
+      metadata: {workflow: AEO_WORKFLOW_ID, phase: P.num, deliverable: P.deliverable}
+```
+
 ## Input
 
 $ARGUMENTS
@@ -35,6 +63,10 @@ Use `AskUserQuestion` to determine starting point:
 
 ## Phase 1: Strategy - Buyer Persona × Journey Grid
 
+```
+If TASK_TRACKING: TaskUpdate(PHASE_TASKS[1], status: "in_progress")
+```
+
 ### Gather Context
 
 Ask:
@@ -59,7 +91,15 @@ Create a 3×4 grid:
 
 **Output:** Save grid to `docs/aeo/[product]-persona-grid.md`
 
+```
+If TASK_TRACKING: TaskUpdate(PHASE_TASKS[1], status: "completed", metadata: {deliverable_path: "docs/aeo/[product]-persona-grid.md"})
+```
+
 ## Phase 2: Research - Three-Pronged Query Sourcing
+
+```
+If TASK_TRACKING: TaskUpdate(PHASE_TASKS[2], status: "in_progress")
+```
 
 ### Method 1: Keyword Data
 - "Do you have keyword data exports from Ahrefs/SEMrush? If so, provide the file path."
@@ -88,7 +128,15 @@ For each query, tag by funnel stage:
 
 **Output:** Save to `docs/aeo/[product]-query-list.md`
 
+```
+If TASK_TRACKING: TaskUpdate(PHASE_TASKS[2], status: "completed", metadata: {deliverable_path: "docs/aeo/[product]-query-list.md"})
+```
+
 ## Phase 3: Identify Visibility Gaps
+
+```
+If TASK_TRACKING: TaskUpdate(PHASE_TASKS[3], status: "in_progress")
+```
 
 ### Test Priority Queries
 
@@ -111,7 +159,15 @@ For top 10-20 queries:
 
 **Output:** Save to `docs/aeo/[product]-visibility-gaps.md`
 
+```
+If TASK_TRACKING: TaskUpdate(PHASE_TASKS[3], status: "completed", metadata: {deliverable_path: "docs/aeo/[product]-visibility-gaps.md"})
+```
+
 ## Phase 4: Query Fan-Out Analysis
+
+```
+If TASK_TRACKING: TaskUpdate(PHASE_TASKS[4], status: "in_progress")
+```
 
 For each visibility gap, identify sub-questions AI breaks it into:
 
@@ -129,7 +185,15 @@ Sub-questions:
 
 **Action:** Ensure content addresses ALL sub-questions.
 
+```
+If TASK_TRACKING: TaskUpdate(PHASE_TASKS[4], status: "completed")
+```
+
 ## Phase 5: Content Optimization - 7-Step AEO Checklist
+
+```
+If TASK_TRACKING: TaskUpdate(PHASE_TASKS[5], status: "in_progress")
+```
 
 For each piece of content targeting a visibility gap:
 
@@ -161,7 +225,15 @@ Fan-Out Queries Covered: X/Y
 
 **Implementation:** If content file is provided, apply fixes directly using Edit tool.
 
+```
+If TASK_TRACKING: TaskUpdate(PHASE_TASKS[5], status: "completed")
+```
+
 ## Phase 6: Authority Building - Off-Site Strategy
+
+```
+If TASK_TRACKING: TaskUpdate(PHASE_TASKS[6], status: "in_progress")
+```
 
 ### Identify Citation Sources
 
@@ -193,7 +265,15 @@ Fan-Out Queries Covered: X/Y
 
 **Output:** Save to `docs/aeo/[product]-authority-plan.md`
 
+```
+If TASK_TRACKING: TaskUpdate(PHASE_TASKS[6], status: "completed", metadata: {deliverable_path: "docs/aeo/[product]-authority-plan.md"})
+```
+
 ## Phase 7: Measurement Setup
+
+```
+If TASK_TRACKING: TaskUpdate(PHASE_TASKS[7], status: "in_progress")
+```
 
 ### AEO Scorecard Template
 
@@ -235,7 +315,23 @@ Fan-Out Queries Covered: X/Y
 
 **Output:** Save to `docs/aeo/[product]-scorecard.md`
 
+```
+If TASK_TRACKING: TaskUpdate(PHASE_TASKS[7], status: "completed", metadata: {deliverable_path: "docs/aeo/[product]-scorecard.md"})
+```
+
 ## Workflow Completion
+
+```
+If TASK_TRACKING:
+  AUTO_CLEANUP = /majestic:config task_tracking.auto_cleanup true
+  If AUTO_CLEANUP:
+    For each TASK in PHASE_TASKS.values():
+      If TASK.status != "completed":
+        TaskUpdate(TASK, status: "completed")
+
+If LEDGER_ENABLED:
+  Update ledger: status: "completed", completed_at: NOW
+```
 
 After completing phases, summarize:
 

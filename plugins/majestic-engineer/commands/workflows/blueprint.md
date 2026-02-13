@@ -9,6 +9,43 @@ argument-hint: "[feature description, bug report, or improvement idea]"
 **CRITICAL: This is a WORKFLOW COMMAND, not Claude's built-in plan mode.**
 Do NOT use EnterPlanMode or ExitPlanMode tools.
 
+## Task Tracking Setup
+
+```
+TASK_TRACKING = /majestic:config task_tracking.enabled false
+
+If TASK_TRACKING:
+  BLUEPRINT_WORKFLOW_ID = "blueprint-{timestamp}"
+  PHASE_TASKS = {}
+
+  PHASES = [
+    {num: 1, name: "Discovery", active: "Running discovery"},
+    {num: 2, name: "Research", active: "Researching codebase"},
+    {num: 3, name: "Research Validation", active: "Validating research"},
+    {num: 4, name: "Architecture", active: "Designing architecture"},
+    {num: 5, name: "Capture Learnings", active: "Capturing learnings"},
+    {num: 6, name: "Write Plan", active: "Writing plan"},
+    {num: 7, name: "Review Plan", active: "Reviewing plan"},
+    {num: 8, name: "User Decision", active: "Awaiting user decision"},
+    {num: 9, name: "Execution", active: "Executing plan"}
+  ]
+
+  For each P in PHASES:
+    PHASE_TASKS[P.num] = TaskCreate(
+      subject: "Phase {P.num}: {P.name}",
+      activeForm: P.active,
+      metadata: {workflow: BLUEPRINT_WORKFLOW_ID, phase: P.num}
+    )
+
+  # Dependencies: phase 4 blocked by 1-3, then sequential 5→6→7→8→9
+  TaskUpdate(PHASE_TASKS[4], addBlockedBy: [PHASE_TASKS[1], PHASE_TASKS[2], PHASE_TASKS[3]])
+  TaskUpdate(PHASE_TASKS[5], addBlockedBy: [PHASE_TASKS[4]])
+  TaskUpdate(PHASE_TASKS[6], addBlockedBy: [PHASE_TASKS[5]])
+  TaskUpdate(PHASE_TASKS[7], addBlockedBy: [PHASE_TASKS[6]])
+  TaskUpdate(PHASE_TASKS[8], addBlockedBy: [PHASE_TASKS[7]])
+  TaskUpdate(PHASE_TASKS[9], addBlockedBy: [PHASE_TASKS[8]])
+```
+
 ## Feature Description
 
 <feature_description> $ARGUMENTS </feature_description>
@@ -19,6 +56,8 @@ Do NOT use EnterPlanMode or ExitPlanMode tools.
 
 ### Phase 1: Discovery
 
+If TASK_TRACKING: TaskUpdate(PHASE_TASKS[1], status: "in_progress")
+
 ```
 /majestic-engineer:blueprint-discovery
 ```
@@ -27,7 +66,11 @@ Handles: Idea Refinement, Interview decision, Acceptance Criteria, Feature Class
 
 **Wait for output:** `discovery_result`
 
+If TASK_TRACKING: TaskUpdate(PHASE_TASKS[1], status: "completed")
+
 ### Phase 2: Research
+
+If TASK_TRACKING: TaskUpdate(PHASE_TASKS[2], status: "in_progress")
 
 ```
 /majestic-engineer:blueprint-research feature_description, discovery_result
@@ -37,7 +80,11 @@ Handles: Toolbox resolution, lessons discovery, parallel research agents, spec r
 
 **Wait for output:** `research_result`
 
+If TASK_TRACKING: TaskUpdate(PHASE_TASKS[2], status: "completed")
+
 ### Phase 3: Research Validation
+
+If TASK_TRACKING: TaskUpdate(PHASE_TASKS[3], status: "in_progress")
 
 Quick checkpoint before architecture. Catches misalignment early.
 
@@ -72,7 +119,11 @@ AskUserQuestion: "What should I dig into?"
 → Return to Phase 1 (Discovery)
 ```
 
+If TASK_TRACKING: TaskUpdate(PHASE_TASKS[3], status: "completed")
+
 ### Phase 4: Architecture
+
+If TASK_TRACKING: TaskUpdate(PHASE_TASKS[4], status: "in_progress")
 
 ```
 Task(majestic-engineer:plan:architect):
@@ -86,7 +137,11 @@ Task(majestic-engineer:plan:architect):
 
 **Wait for output:** `architect_output`
 
+If TASK_TRACKING: TaskUpdate(PHASE_TASKS[4], status: "completed")
+
 ### Phase 5: Capture Learnings
+
+If TASK_TRACKING: TaskUpdate(PHASE_TASKS[5], status: "in_progress")
 
 ```
 PRIMARY_DIR = extract main folder from architect_output.file_recommendations
@@ -96,7 +151,11 @@ If new patterns or decisions discovered:
   Edit(AGENTS_MD, append patterns/decisions)
 ```
 
+If TASK_TRACKING: TaskUpdate(PHASE_TASKS[5], status: "completed")
+
 ### Phase 6: Write Plan
+
+If TASK_TRACKING: TaskUpdate(PHASE_TASKS[6], status: "in_progress")
 
 ```
 /majestic-engineer:plan-builder
@@ -109,7 +168,11 @@ Select template based on complexity:
 
 **Output:** Write to `docs/plans/[YYYYMMDDHHMMSS]_<title>.md`
 
+If TASK_TRACKING: TaskUpdate(PHASE_TASKS[6], status: "completed")
+
 ### Phase 7: Review Plan
+
+If TASK_TRACKING: TaskUpdate(PHASE_TASKS[7], status: "in_progress")
 
 ```
 Task(majestic-engineer:plan:plan-review):
@@ -118,7 +181,11 @@ Task(majestic-engineer:plan:plan-review):
 
 Incorporate feedback and update plan file.
 
+If TASK_TRACKING: TaskUpdate(PHASE_TASKS[7], status: "completed")
+
 ### Phase 8: User Decision
+
+If TASK_TRACKING: TaskUpdate(PHASE_TASKS[8], status: "in_progress")
 
 Check auto_preview: `/majestic:config auto_preview false`
 
@@ -138,6 +205,8 @@ AskUserQuestion:
 
 **IMPORTANT:** After user selects, EXECUTE that action.
 
+If TASK_TRACKING: TaskUpdate(PHASE_TASKS[8], status: "completed")
+
 ### Phase 8.1: Deep Dive
 
 ```
@@ -156,11 +225,15 @@ Update plan with findings, return to Phase 8.
 
 ### Phase 9: Execution
 
+If TASK_TRACKING: TaskUpdate(PHASE_TASKS[9], status: "in_progress")
+
 ```
 /majestic-engineer:blueprint-execution plan_path, user_choice
 ```
 
 Handles: Task breakdown, task creation, build offering.
+
+If TASK_TRACKING: TaskUpdate(PHASE_TASKS[9], status: "completed")
 
 ## Error Handling
 
