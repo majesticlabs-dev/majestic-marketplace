@@ -1,0 +1,56 @@
+blueprint:
+  metadata:
+    date: string                        # YYYY-MM-DD
+    founder_skills: string
+    budget: number
+    time_commitment: string
+    risk_tolerance: string
+  idea:
+    name: string
+    description: string
+    validation: go | no_go | conditional
+    high_risk: bool
+  business_model:
+    value_proposition: string
+    revenue_model: string
+    unit_economics:
+      cac: number
+      ltv: number
+      margins: string
+    break_even: string
+  competitive_landscape:
+    direct_competitors: [{name, pricing, strengths, gaps}]
+    indirect_competitors: [{name, relevance}]
+    differentiation: string
+    market_gaps: [string]
+  gtm:
+    channels: [string]
+    funnel_stages: [string]
+    conversion_targets: {stage: percentage}
+    budget_allocation: {channel: amount}
+  operations:
+    milestones:
+      day_30: [string]
+      day_60: [string]
+      day_90: [string]
+    omtm: string
+    growth_target: string
+    experiments: [{name, hypothesis, metric}]
+  financials:
+    monthly_projections: [{month, revenue, expenses, net}]
+    burn_rate: number
+    runway_months: number
+    break_even_month: number
+    scenarios:
+      conservative: number
+      moderate: number
+      optimistic: number
+  action_plan:
+    weeks_1_4: [string]
+    weeks_5_8: [string]
+    weeks_9_12: [string]
+  budget_allocation:
+    product: number
+    marketing: number
+    operations: number
+    reserve: number
