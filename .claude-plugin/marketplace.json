@@ -11,8 +11,8 @@
   "plugins": [
     {
       "name": "majestic-engineer",
-      "description": "Language-agnostic engineering workflows. Includes 38 specialized agents, 31 commands, 30 skills, and 5 toolbox presets. Now includes relay orchestration for fresh-context task execution with quality gates and compound learning.",
-      "version": "3.62.0",
+      "description": "Language-agnostic engineering workflows. Includes 38 specialized agents, 32 commands, 30 skills, and 5 toolbox presets. Now includes relay orchestration for fresh-context task execution with quality gates and compound learning.",
+      "version": "3.63.0",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -126,7 +126,7 @@
     {
       "name": "majestic-tools",
       "description": "Claude Code customization tools. Includes 1 agent, 11 commands, and 9 skills.",
-      "version": "3.13.2",
+      "version": "3.14.0",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
