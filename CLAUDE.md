@@ -2,7 +2,7 @@
 
 Claude Code plugin marketplace. **Work in `plugins/*/` only.**
 
-**Quick Nav:** [Forbidden](#forbidden) · [Structure](#structure) · [Dependencies](#dependencies) · [Docs](#documentation) · [Rules](#key-rules) · [Release](#plugin-release-checklist)
+**Quick Nav:** [Forbidden](#forbidden) · [Structure](#structure) · [Dependencies](#dependencies) · [Docs](#documentation) · [Search](#codebase-search-qmd) · [Rules](#key-rules) · [Release](#plugin-release-checklist)
 
 ## FORBIDDEN
 
@@ -37,6 +37,23 @@ plugins/{engineer,rails,python,react,marketing,sales,company,llm,tools,agent-sdk
 - [Operations](docs/plugin-architecture/PLUGIN-OPERATIONS.md)
 - [Schemas](docs/plugin-architecture/JSON-SCHEMAS.md)
 - [Config](docs/plugin-architecture/CONFIG-SYSTEM.md)
+
+## Codebase Search (qmd)
+
+Use `qmd` to search indexed plugin docs, skills, agents, and architecture files (622 markdown files). Always add `--json` for structured output.
+
+| Need | Command |
+|------|---------|
+| Exact keyword | `qmd search "blueprint workflow" --json` |
+| Conceptual/semantic | `qmd vsearch "how does task tracking work" --json` |
+| Complex question | `qmd query "agent vs skill pattern" --json` |
+| Read a doc | `qmd get path/to/file.md --json` |
+| Batch read | `qmd multi-get "plugins/engineer/agents/**/*.md" --json` |
+
+- Collection: `majestic-marketplace` (restrict with `-c majestic-marketplace`)
+- Prefer `search` for known terms, `vsearch` for fuzzy/conceptual, `query` for best quality
+- Use before Glob/Grep when searching across plugin documentation or skill content
+- Re-index after major changes: `qmd collection remove majestic-marketplace && qmd collection add . --name majestic-marketplace && qmd embed`
 
 ## Config Access
 
