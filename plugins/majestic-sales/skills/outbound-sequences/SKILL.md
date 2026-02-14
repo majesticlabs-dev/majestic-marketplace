@@ -2,6 +2,7 @@
 name: outbound-sequences
 description: Templates and frameworks for cold outreach sequences. Email templates, cold call scripts, LinkedIn messages, subject lines, and response handling.
 allowed-tools: Read, Write, Edit, WebSearch
+disable-model-invocation: true
 ---
 
 # Outbound Sequences

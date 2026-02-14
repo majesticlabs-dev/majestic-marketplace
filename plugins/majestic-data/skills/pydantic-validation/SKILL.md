@@ -2,6 +2,7 @@
 name: pydantic-validation
 description: Record-level data validation using Pydantic models. Field validators, model validators, and batch validation patterns.
 allowed-tools: Read Write Edit Bash
+disable-model-invocation: true
 ---
 
 # Pydantic Validation

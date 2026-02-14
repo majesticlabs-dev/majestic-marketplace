@@ -1,6 +1,7 @@
 ---
 name: blueprint-discovery
 description: Discovery phase for blueprint workflow - interview triggers, acceptance criteria, and feature classification
+disable-model-invocation: true
 ---
 
 # Blueprint Discovery

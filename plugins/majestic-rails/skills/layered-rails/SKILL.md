@@ -1,6 +1,7 @@
 ---
 name: layered-rails
 description: Design Rails applications using layered architecture. Use when analyzing codebases for architecture violations, planning feature implementations, deciding where code belongs, or extracting abstractions from fat models/controllers. Complements dhh-coder (which keeps things simple) with guidance for when complexity demands structure.
+disable-model-invocation: true
 ---
 
 # Layered Rails Architecture

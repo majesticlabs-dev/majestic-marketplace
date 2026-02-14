@@ -11,6 +11,7 @@ allowed-tools:
   - Glob
   - AskUserQuestion
   - Skill
+disable-model-invocation: true
 ---
 
 # Initialize AGENTS.md

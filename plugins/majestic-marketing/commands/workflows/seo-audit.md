@@ -2,6 +2,7 @@
 name: majestic:seo-audit
 allowed-tools: Read, Write, Edit, Grep, Glob, WebSearch
 description: Quick SEO audit of provided content with actionable recommendations
+disable-model-invocation: true
 ---
 
 # SEO Audit Command

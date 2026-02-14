@@ -1,6 +1,7 @@
 ---
 name: viewcomponent-coder
 description: Build component-based UIs with ViewComponent and view_component-contrib. Use when creating reusable UI components, implementing slots and style variants, or building component previews. Triggers on ViewComponent creation, component patterns, Lookbook previews, or UI component architecture.
+disable-model-invocation: true
 ---
 
 # ViewComponent Patterns

@@ -2,6 +2,7 @@
 name: pandera-validation
 description: DataFrame schema validation using pandera. Schema definitions, column checks, and decorator-based validation.
 allowed-tools: Read Write Edit Bash
+disable-model-invocation: true
 ---
 
 # Pandera Validation

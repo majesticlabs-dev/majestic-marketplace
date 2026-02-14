@@ -1,6 +1,7 @@
 ---
 name: skill-archetypes
 description: Four common skill archetypes with structure templates - CLI reference, methodology, safety/security, and orchestration. Use when creating new skills to select appropriate structure.
+disable-model-invocation: true
 ---
 
 # Skill Archetypes

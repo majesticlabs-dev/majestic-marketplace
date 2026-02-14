@@ -1,6 +1,7 @@
 ---
 name: command-patterns
 description: Advanced patterns for generating high-quality Claude Code commands. Used by /new-command.
+disable-model-invocation: true
 ---
 
 # Command Patterns Skill

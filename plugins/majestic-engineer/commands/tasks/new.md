@@ -2,6 +2,7 @@
 name: tasks:new
 description: Manage backlog items across files, GitHub Issues, Linear, or Beads
 argument-hint: "[action] [details] - Actions: add, list, update, complete"
+disable-model-invocation: true
 ---
 
 # Backlog Manager

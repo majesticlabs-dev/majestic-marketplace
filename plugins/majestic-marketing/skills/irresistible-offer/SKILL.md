@@ -2,6 +2,7 @@
 name: irresistible-offer
 description: Craft irresistible offers using direct response marketing principles. Includes 7-part offer formula, psychological triggers, value stacking, and risk reversal strategies.
 allowed-tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch, AskUserQuestion
+disable-model-invocation: true
 ---
 
 # Irresistible Offer Creator

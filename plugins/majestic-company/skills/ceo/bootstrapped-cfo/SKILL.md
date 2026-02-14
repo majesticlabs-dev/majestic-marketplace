@@ -1,6 +1,7 @@
 ---
 name: bootstrapped-cfo
 description: Financial frameworks for bootstrapped startups. Triggers on cash management, runway, unit economics, hiring ROI, and capital allocation questions. Emphasizes profit as constraint, not goal.
+disable-model-invocation: true
 ---
 
 # Bootstrapped CFO

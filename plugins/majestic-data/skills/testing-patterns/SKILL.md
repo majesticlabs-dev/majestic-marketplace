@@ -1,6 +1,7 @@
 ---
 name: testing-patterns
 description: Pytest templates and patterns for ETL pipeline testing - unit, integration, data quality.
+disable-model-invocation: true
 ---
 
 # Testing Patterns

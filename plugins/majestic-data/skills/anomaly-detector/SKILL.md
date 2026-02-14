@@ -2,6 +2,7 @@
 name: anomaly-detector
 description: Detect anomalies in data using statistical and ML methods. Z-score, IQR, Isolation Forest, and time-series anomalies.
 allowed-tools: Read Write Edit Bash
+disable-model-invocation: true
 ---
 
 # Anomaly Detector

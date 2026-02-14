@@ -2,6 +2,7 @@
 description: Get external LLM perspectives on architecture/design decisions from Codex and Gemini
 allowed-tools: Bash, Read, Grep, Glob, Task
 argument-hint: "<question> [--llm codex|gemini|all] [--codex-model <model>] [--gemini-model <model>]"
+disable-model-invocation: true
 ---
 
 # External Consult

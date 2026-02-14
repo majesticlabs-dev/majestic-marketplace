@@ -2,6 +2,7 @@
 name: pandas-coder
 description: DataFrame manipulation with chunked processing, memory optimization, and vectorized operations.
 allowed-tools: Read, Write, Edit, Grep, Glob, Bash
+disable-model-invocation: true
 ---
 
 # Pandas-Coder

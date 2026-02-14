@@ -3,6 +3,7 @@ name: rails:build
 description: Execute work plans efficiently while maintaining quality and finishing Rails features
 argument-hint: "[plan file] [optional: branch-name]"
 allowed-tools: Read, Write, Edit, Bash, Grep, Glob, TaskCreate, TaskList, TaskUpdate, Task
+disable-model-invocation: true
 ---
 
 # Work Plan Execution Command

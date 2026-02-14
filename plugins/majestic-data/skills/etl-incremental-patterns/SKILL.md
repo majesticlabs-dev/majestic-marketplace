@@ -2,6 +2,7 @@
 name: etl-incremental-patterns
 description: Incremental data loading patterns including backfill strategies, CDC, timestamp-based loads, and pipeline orchestration.
 allowed-tools: Read, Write, Edit, Grep, Glob, Bash
+disable-model-invocation: true
 ---
 
 # ETL Incremental Patterns

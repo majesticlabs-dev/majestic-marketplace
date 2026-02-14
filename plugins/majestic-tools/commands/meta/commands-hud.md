@@ -4,6 +4,7 @@ description: Display all available commands in a formatted HUD grouped by plugin
 argument-hint: "[--plugin PLUGIN] [--group plugin|category|flat]"
 model: haiku
 allowed-tools: Glob, Read, Bash
+disable-model-invocation: true
 ---
 
 # Commands HUD

@@ -2,6 +2,7 @@
 name: majestic-data:profile
 description: Generate comprehensive data profile for a file or table.
 argument-hint: "<file-path-or-table>"
+disable-model-invocation: true
 ---
 
 # Data Profile Command

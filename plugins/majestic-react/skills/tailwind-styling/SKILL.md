@@ -2,6 +2,7 @@
 name: tailwind-styling
 description: Generate responsive, performant Tailwind CSS styles for React components. Use when styling components, building design systems, or implementing responsive layouts.
 allowed-tools: Read, Write, Edit, Grep, Glob, WebSearch
+disable-model-invocation: true
 ---
 
 # Tailwind CSS for React

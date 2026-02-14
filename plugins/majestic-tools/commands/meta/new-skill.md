@@ -3,6 +3,7 @@ name: majestic:new-skill
 description: Generate Claude Code skills following best practices. Creates skill files with proper structure, naming, and content.
 allowed-tools: Read, Write, Edit, WebFetch, AskUserQuestion, Bash, Glob
 argument-hint: "[skill-description]"
+disable-model-invocation: true
 ---
 
 # New Skill Builder

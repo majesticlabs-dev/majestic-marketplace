@@ -2,6 +2,7 @@
 name: retention-system
 description: Design customer retention systems with health scoring, churn prediction, and proactive engagement workflows. Use when reducing churn or maximizing LTV.
 allowed-tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch, AskUserQuestion
+disable-model-invocation: true
 ---
 
 # Customer Retention System Designer

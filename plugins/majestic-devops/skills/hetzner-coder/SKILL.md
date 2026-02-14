@@ -2,6 +2,7 @@
 name: hetzner-coder
 description: This skill guides provisioning Hetzner Cloud infrastructure with OpenTofu/Terraform. Use when creating servers, networks, firewalls, load balancers, or volumes on Hetzner Cloud.
 allowed-tools: Read, Write, Edit, Grep, Glob, Bash
+disable-model-invocation: true
 ---
 
 # Hetzner Coder

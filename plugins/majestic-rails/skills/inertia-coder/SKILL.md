@@ -1,6 +1,7 @@
 ---
 name: inertia-coder
 description: Build modern SPAs with Inertia.js and Rails using React, Vue, or Svelte. Use when creating Inertia pages, handling forms with useForm, managing shared props, or implementing client-side routing. Triggers on Inertia.js setup, SPA development, or React/Vue/Svelte with Rails.
+disable-model-invocation: true
 ---
 
 # Inertia.js + Rails

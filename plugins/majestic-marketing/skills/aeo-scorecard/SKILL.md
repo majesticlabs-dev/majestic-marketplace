@@ -8,6 +8,7 @@ triggers:
   - GEO scorecard
   - AI share of voice
   - citation tracking
+disable-model-invocation: true
 ---
 
 # AEO Scorecard: Measuring AI Visibility

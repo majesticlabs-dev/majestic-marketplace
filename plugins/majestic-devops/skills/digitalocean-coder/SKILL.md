@@ -2,6 +2,7 @@
 name: digitalocean-coder
 description: This skill guides writing DigitalOcean infrastructure with OpenTofu/Terraform. Use when provisioning Droplets, VPCs, Managed Databases, Firewalls, or other DO resources.
 allowed-tools: Read, Write, Edit, Grep, Glob, Bash
+disable-model-invocation: true
 ---
 
 # DigitalOcean Coder

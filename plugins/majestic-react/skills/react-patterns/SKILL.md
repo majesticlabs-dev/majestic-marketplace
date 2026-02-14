@@ -2,6 +2,7 @@
 name: react-patterns
 description: Expert guidance on modern React patterns including hooks, composition, state management, and concurrent features. Use when implementing React components or refactoring existing code.
 allowed-tools: Read, Write, Edit, Grep, Glob, Bash, WebSearch
+disable-model-invocation: true
 ---
 
 # React Patterns

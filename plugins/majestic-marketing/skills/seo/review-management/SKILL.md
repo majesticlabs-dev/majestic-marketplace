@@ -1,6 +1,7 @@
 ---
 name: review-management
 description: Optimize review scores and leverage user-generated content for AI visibility and brand trust.
+disable-model-invocation: true
 ---
 
 # Review Management

@@ -1,6 +1,7 @@
 ---
 name: skill-first
 description: Check for relevant skills before starting any task. Triggers on task start, new requests, beginning work, or implementation.
+disable-model-invocation: true
 ---
 
 # Skill-First Discipline

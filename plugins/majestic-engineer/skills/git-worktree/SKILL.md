@@ -1,6 +1,7 @@
 ---
 name: git-worktree
 description: Manage git worktrees for parallel development. Use when the user wants to work on multiple branches simultaneously, create isolated environments for features/fixes, or clean up completed worktrees.
+disable-model-invocation: true
 ---
 
 # Git Worktree Manager

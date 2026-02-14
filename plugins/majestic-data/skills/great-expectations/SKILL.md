@@ -2,6 +2,7 @@
 name: great-expectations
 description: Data validation using Great Expectations. Expectation suites, checkpoints, and data docs for pipeline monitoring.
 allowed-tools: Read Write Edit Bash
+disable-model-invocation: true
 ---
 
 # Great Expectations

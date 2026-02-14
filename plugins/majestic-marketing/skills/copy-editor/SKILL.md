@@ -2,6 +2,7 @@
 name: copy-editor
 description: Review and edit copy for grammar, style, and clarity. Works with project style guides or uses sensible defaults. Use when reviewing marketing copy, blog posts, documentation, emails, or any business writing that needs polish.
 allowed-tools: Read, Write, Edit, Glob, Grep
+disable-model-invocation: true
 ---
 
 # Copy Editor

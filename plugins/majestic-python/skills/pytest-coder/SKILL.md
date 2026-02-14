@@ -2,6 +2,7 @@
 name: pytest-coder
 description: Write pytest tests with fixtures, parametrization, mocking, async testing, and modern patterns. Use when creating or updating Python test files. Not for unittest — use standard library patterns instead.
 allowed-tools: Read, Write, Edit, Grep, Glob, Bash, WebSearch
+disable-model-invocation: true
 ---
 
 # Pytest Coder

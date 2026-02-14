@@ -1,6 +1,7 @@
 ---
 name: entity-triplets
 description: Build entity triplets and brand associations that LLMs recognize and cite consistently.
+disable-model-invocation: true
 ---
 
 # Entity Triplets

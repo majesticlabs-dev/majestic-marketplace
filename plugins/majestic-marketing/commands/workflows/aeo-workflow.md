@@ -2,6 +2,7 @@
 name: majestic:aeo-workflow
 allowed-tools: Read, Write, Edit, Grep, Glob, WebSearch, AskUserQuestion, Task
 description: Complete AEO (Answer Engine Optimization) workflow - from strategy to measurement
+disable-model-invocation: true
 ---
 
 # AEO Workflow Command

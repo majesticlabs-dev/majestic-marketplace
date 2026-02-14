@@ -2,6 +2,7 @@
 name: data-validation
 description: Data validation patterns and pipeline helpers. Custom validation functions, schema evolution, and test assertions.
 allowed-tools: Read Write Edit Bash
+disable-model-invocation: true
 ---
 
 # Data Validation

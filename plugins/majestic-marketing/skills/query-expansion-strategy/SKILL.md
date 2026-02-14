@@ -2,6 +2,7 @@
 name: query-expansion-strategy
 description: Query fan-out coverage for AI visibility. Covers semantic variation analysis and sub-question targeting.
 allowed-tools: WebSearch
+disable-model-invocation: true
 ---
 
 # Query Expansion Strategy

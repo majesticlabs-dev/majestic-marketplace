@@ -1,6 +1,7 @@
 ---
 name: test-fixture-generator
 description: Generate synthetic test data with edge cases for ETL pipeline testing.
+disable-model-invocation: true
 ---
 
 # Test Fixture Generator

@@ -1,6 +1,7 @@
 ---
 name: store-model-coder
 description: Wrap JSON-backed database columns with ActiveModel-like classes using store_model. Use when creating configuration objects, managing nested JSON attributes, or adding validations to JSON data. Triggers on JSON columns, store_model, typed JSON, configuration objects, or nested attributes.
+disable-model-invocation: true
 ---
 
 # StoreModel: JSON-Backed ActiveRecord Attributes
