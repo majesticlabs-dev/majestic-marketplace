@@ -1,0 +1,75 @@
+# Agent Teams Hook Configurations
+# Place in .claude/settings.json or .claude/settings.local.json
+
+# --- TeammateIdle Hook ---
+# Fires when teammate is about to go idle after finishing its turn
+# Exit 0 = allow idle | Exit 2 = keep working (stderr → feedback)
+# No matcher support — fires on every occurrence
+teammate_idle_lint_check:
+  config:
+    hooks:
+      TeammateIdle:
+        - hooks:
+            - type: command
+              command: "$CLAUDE_PROJECT_DIR/.claude/hooks/teammate-idle-check.sh"
+  script: |
+    #!/bin/bash
+    # teammate-idle-check.sh
+    INPUT=$(cat)
+    TEAMMATE=$(echo "$INPUT" | jq -r '.teammate_name')
+    # Run lint check before allowing idle
+    if ! npm run lint --silent 2>&1; then
+      echo "Lint errors found. Fix before going idle." >&2
+      exit 2  # prevents idle, sends stderr as feedback
+    fi
+    exit 0  # allows teammate to go idle
+
+# --- TaskCompleted Hook ---
+# Fires when any agent marks a task as completed via TaskUpdate
+# Also fires when teammate finishes turn with in-progress tasks
+# Exit 0 = allow completion | Exit 2 = prevent (stderr → feedback)
+# No matcher support — fires on every occurrence
+task_completed_test_gate:
+  config:
+    hooks:
+      TaskCompleted:
+        - hooks:
+            - type: command
+              command: "$CLAUDE_PROJECT_DIR/.claude/hooks/task-complete-check.sh"
+  script: |
+    #!/bin/bash
+    # task-complete-check.sh
+    INPUT=$(cat)
+    TASK_SUBJECT=$(echo "$INPUT" | jq -r '.task_subject')
+    TASK_ID=$(echo "$INPUT" | jq -r '.task_id')
+    # Run tests before allowing task completion
+    if ! npm test 2>&1; then
+      echo "Tests failing. Fix before completing: $TASK_SUBJECT" >&2
+      exit 2  # prevents completion
+    fi
+    exit 0
+
+# --- Exit Code Reference ---
+exit_codes:
+  0: "Success — action proceeds"
+  2: "Blocking error — action prevented, stderr fed back as feedback"
+  other: "Non-blocking error — stderr shown in verbose mode, execution continues"
+
+# --- Hook Input Fields (both events) ---
+common_input:
+  session_id: string
+  transcript_path: string
+  cwd: string
+  permission_mode: string
+  hook_event_name: string
+
+teammate_idle_input:
+  teammate_name: string   # name of idle teammate
+  team_name: string       # team identifier
+
+task_completed_input:
+  task_id: string         # task being completed
+  task_subject: string    # task title
+  task_description: string  # optional
+  teammate_name: string     # optional
+  team_name: string         # optional

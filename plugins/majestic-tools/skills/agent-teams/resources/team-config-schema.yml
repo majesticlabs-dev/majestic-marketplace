@@ -1,0 +1,50 @@
+# Agent Teams Configuration Schema
+# Stored at ~/.claude/teams/{team-name}/config.json
+
+team_config:
+  name: string           # team identifier
+  description: string    # team purpose
+  leadAgentId: string    # "lead@team-name" format
+  createdAt: number      # unix timestamp (ms)
+  members:
+    - agentId: string            # "worker-1@team-name" format
+      name: string               # display name
+      agentType: string          # general-purpose, Explore, Plan, Bash, etc.
+      color: string              # hex color for UI display
+      joinedAt: number           # unix timestamp (ms)
+      backendType: string        # in-process | tmux | iterm2
+      tmuxPaneId: string         # pane ID or "in-process"
+      cwd: string                # working directory path
+      model: string              # haiku | sonnet | opus
+      prompt: string             # spawn instructions
+      planModeRequired: boolean  # requires plan approval before implementation
+
+# --- File System Layout ---
+file_structure:
+  teams: "~/.claude/teams/{team-name}/config.json"
+  inboxes: "~/.claude/teams/{team-name}/inboxes/{agent}.json"
+  tasks: "~/.claude/tasks/{team-name}/"
+  task_file: "~/.claude/tasks/{team-name}/{N}.json"
+
+# --- Task File Schema ---
+task_file:
+  id: string             # auto-incremented
+  subject: string        # brief title
+  description: string    # detailed description
+  status: string         # pending | in_progress | completed
+  owner: string          # agent name (empty if unclaimed)
+  activeForm: string     # spinner text for in-progress display
+  blockedBy: [string]    # task IDs that must complete first
+  blocks: [string]       # task IDs waiting on this task
+  createdAt: number      # unix timestamp (ms)
+  updatedAt: number      # unix timestamp (ms)
+
+# --- Environment Variables (auto-set on spawned teammates) ---
+teammate_env_vars:
+  CLAUDE_CODE_TEAM_NAME: string
+  CLAUDE_CODE_AGENT_ID: string     # "name@team" format
+  CLAUDE_CODE_AGENT_NAME: string
+  CLAUDE_CODE_AGENT_TYPE: string
+  CLAUDE_CODE_AGENT_COLOR: string
+  CLAUDE_CODE_PLAN_MODE_REQUIRED: string  # "true" or "false"
+  CLAUDE_CODE_PARENT_SESSION_ID: string
