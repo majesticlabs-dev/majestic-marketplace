@@ -6,6 +6,7 @@ triggers:
   - user interview
   - interview synthesis
   - interview questions
+disable-model-invocation: true
 ---
 
 # Customer Interview Synthesis

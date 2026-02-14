@@ -7,6 +7,7 @@ triggers:
   - where do customers hang out
   - customer communities
   - voice of customer
+disable-model-invocation: true
 ---
 
 # Customer Discovery

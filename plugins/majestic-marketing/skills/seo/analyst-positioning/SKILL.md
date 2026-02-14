@@ -1,6 +1,7 @@
 ---
 name: analyst-positioning
 description: Position team members as industry analysts and experts for AI credibility and citation authority.
+disable-model-invocation: true
 ---
 
 # Analyst Positioning

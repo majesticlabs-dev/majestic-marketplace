@@ -1,7 +1,8 @@
 ---
+name: learn
 allowed-tools: Bash, Read, Write, Edit, Glob, Grep, AskUserQuestion
 description: Extract cross-session patterns from git history and handoffs, recommend artifacts (skill/rule/hook/agent) based on frequency.
-model: haiku
+disable-model-invocation: true
 ---
 
 # Learn

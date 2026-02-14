@@ -1,6 +1,6 @@
 # Majestic Company
 
-Business operations tools. Includes 17 specialized agents and 9 skills.
+Business operations tools. Includes 17 specialized agents and 16 skills.
 
 ## Installation
 
@@ -8,10 +8,15 @@ Business operations tools. Includes 17 specialized agents and 9 skills.
 claude /plugin install majestic-company
 ```
 
+## Getting Started
+
+Run `/majestic-company:start` — the orchestrator asks qualifying questions and routes you to the right skill or agent.
+
 ## Quick Reference
 
 | I want to... | Use this |
 |--------------|----------|
+| Don't know where to start | `/majestic-company:start` |
 | Identify my blind spots | `agent blind-spot-analyzer` |
 | Validate a business idea | `agent idea-validator` |
 | Research competitor pain points | `agent problem-research` |
@@ -22,10 +27,11 @@ claude /plugin install majestic-company
 | Launch in 30 days | `agent ceo:thirty-day-launch` |
 | Create elevator pitch | `agent fundraising:elevator-pitch` |
 | Calculate TAM/SAM/SOM | `agent fundraising:tam-calculator` |
-| Get bootstrapped finance guidance | `skill ceo:bootstrapped-cfo` |
-| Make a business decision | `skill ceo:decision-framework` |
+| Get bootstrapped finance guidance | `skill bootstrapped-cfo` |
+| Make a business decision | `skill decision-framework` |
 | Strategic problem analysis | `skill first-principles` |
-| Review legal document | `skill legal:document-review` |
+| Validate product-market fit | `skill pmf-validation` |
+| Review legal document | `skill document-review` |
 
 ## Agents
 
@@ -69,26 +75,26 @@ Invoke with: `agent majestic-company:fundraising:<name>`
 
 ## Skills
 
-### CEO Skills
+Invoke with: `skill majestic-company:<name>`
 
-Invoke with: `skill majestic-company:ceo:<name>`
-
-| Skill | Description |
-|-------|-------------|
-| `bootstrapped-cfo` | Financial frameworks for self-funded companies (unit economics, runway, hiring ROI) |
-| `decision-framework` | First-principles, cost/benefit, and second-order effects analysis |
-| `industry-pulse` | Real-time pulse check on any industry for operators/investors |
-| `omtm-growth` | One Metric That Matters growth framework |
-| `strategic-planning` | One-page strategic briefs with objective, milestones, and risks |
-
-### Other Skills
-
-| Skill | Invoke with | Description |
-|-------|-------------|-------------|
-| `first-principles` | `skill majestic-company:first-principles` | 15 strategic prompts for first-principles thinking |
-| `pm-discovery` | `skill majestic-company:pm-discovery` | Product management discovery techniques |
-| `document-review` | `skill majestic-company:legal:document-review` | Legal document analysis with specific replacement text |
-| `objection-destroyer` | `skill majestic-company:fundraising:objection-destroyer` | 45-second pitch closings with FOMO triggers |
+| Skill | Category | Description |
+|-------|----------|-------------|
+| `first-principles` | Thinking | 15 strategic prompts for first-principles thinking |
+| `decision-framework` | Thinking | First-principles, cost/benefit, and second-order effects analysis |
+| `pm-discovery` | Product | Product management discovery techniques |
+| `pm-prioritization` | Product | RICE/ICE scoring, opportunity solution trees |
+| `pm-jobs-to-be-done` | Product | Understand why customers "hire" your solution |
+| `pm-customer-interviews` | Product | Interview question banks and synthesis templates |
+| `pm-assumption-mapping` | Product | Validate product hypotheses systematically |
+| `pmf-validation` | Product | Validate product-market fit through assumption testing and MVP |
+| `idea-generation` | Strategy | Generate and validate startup ideas through market research |
+| `industry-pulse` | Strategy | Real-time pulse check on any industry for operators/investors |
+| `strategic-planning` | Strategy | One-page strategic briefs with objective, milestones, and risks |
+| `omtm-growth` | Growth | One Metric That Matters growth framework |
+| `bootstrapped-cfo` | Finance | Financial frameworks for self-funded companies (unit economics, runway, hiring ROI) |
+| `objection-destroyer` | Fundraising | 45-second pitch closings with FOMO triggers |
+| `launch-legal` | Legal | Minimum viable legal setup for business launches |
+| `document-review` | Legal | Legal document analysis with specific replacement text |
 
 ## Choosing Between startup-blueprint and thirty-day-launch
 
@@ -168,14 +174,17 @@ agent majestic-company:fundraising:funding-ask-optimizer
 ### Skills
 
 ```bash
-# Walk through a decision (skill)
-skill majestic-company:ceo:decision-framework
+# Walk through a decision
+skill majestic-company:decision-framework
 
-# First-principles thinking (skill)
+# First-principles thinking
 skill majestic-company:first-principles
 
 # Review a legal document
-skill majestic-company:legal:document-review
+skill majestic-company:document-review
+
+# Validate product-market fit
+skill majestic-company:pmf-validation
 ```
 
 ## Key Capabilities

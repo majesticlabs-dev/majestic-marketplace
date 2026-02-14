@@ -2,6 +2,7 @@
 name: llms-txt-builder
 description: Create llms.txt files that help AI systems navigate and understand your site structure for better citations.
 allowed-tools: Read, Write, Edit, Glob
+disable-model-invocation: true
 ---
 
 # llms.txt Builder

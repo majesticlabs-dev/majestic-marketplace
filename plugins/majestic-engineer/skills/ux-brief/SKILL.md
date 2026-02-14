@@ -1,6 +1,7 @@
 ---
 name: ux-brief
 description: Design system templates and patterns for UI/UX briefs. Used by /majestic:ux-brief command.
+disable-model-invocation: true
 ---
 
 # UX Brief Skill

@@ -2,6 +2,7 @@
 name: pareto
 description: Identify the vital 20% of activities that produce 80% of results using real case studies and proven patterns. Use when optimizing business, learning, productivity, or any area where focus matters.
 allowed-tools: AskUserQuestion
+disable-model-invocation: true
 ---
 
 # Pareto Principle Analyzer

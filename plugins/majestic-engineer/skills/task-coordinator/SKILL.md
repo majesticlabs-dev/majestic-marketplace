@@ -8,6 +8,7 @@ triggers:
   - task dependencies
   - parallel execution
   - crash recovery
+disable-model-invocation: true
 ---
 
 # Task Coordinator

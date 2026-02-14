@@ -2,6 +2,7 @@
 name: content-calendar
 description: Generate a complete 30-day content calendar with viral content ideas, format variety, hooks, and CTAs tailored to your niche and platform. Includes content pillars, weekly themes, and batch creation workflow.
 allowed-tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch, AskUserQuestion
+disable-model-invocation: true
 ---
 
 # 30-Day Content Calendar Builder

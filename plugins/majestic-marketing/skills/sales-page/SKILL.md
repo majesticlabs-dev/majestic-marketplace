@@ -2,6 +2,7 @@
 name: sales-page
 description: Create high-converting sales pages by orchestrating competitive research, positioning, copywriting, and offer skills. Assembles components into a complete sales page blueprint.
 allowed-tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch, AskUserQuestion
+disable-model-invocation: true
 ---
 
 # Sales Page Blueprint

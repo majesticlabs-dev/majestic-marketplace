@@ -2,6 +2,7 @@
 name: community-strategy
 description: Community infiltration strategies for Reddit, Discord, and Facebook that won't get you banned. Value-first engagement plans.
 allowed-tools: WebSearch
+disable-model-invocation: true
 ---
 
 # Community Strategy

@@ -1,6 +1,7 @@
 ---
 name: rookie-mistakes
 description: Industry-specific pitfalls that kill new businesses, with prevention strategies.
+disable-model-invocation: true
 ---
 
 # Rookie Mistakes

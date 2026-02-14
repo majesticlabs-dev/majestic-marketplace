@@ -1,6 +1,7 @@
 ---
 name: press-release-aeo
 description: Frame press releases for AI/LLM citation and authority building using research-based positioning.
+disable-model-invocation: true
 ---
 
 # Press Release AEO Strategy

@@ -10,6 +10,7 @@ triggers:
   - content planning without tools
   - 6 circles method
 allowed-tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch, mcp__perplexity-ask__perplexity_ask, AskUserQuestion
+disable-model-invocation: true
 ---
 
 # Keyword Research Without Expensive Tools

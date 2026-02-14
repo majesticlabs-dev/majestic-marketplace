@@ -7,6 +7,7 @@ triggers:
   - hypothesis testing
   - riskiest assumption
   - validate assumption
+disable-model-invocation: true
 ---
 
 # Assumption Mapping & Hypothesis Testing

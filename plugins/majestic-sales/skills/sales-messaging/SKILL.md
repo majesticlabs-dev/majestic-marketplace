@@ -1,6 +1,7 @@
 ---
 name: sales-messaging
 description: Build sales messaging frameworks with value propositions, persona-specific talk tracks, and objection handling matrices.
+disable-model-invocation: true
 ---
 
 # Sales Messaging

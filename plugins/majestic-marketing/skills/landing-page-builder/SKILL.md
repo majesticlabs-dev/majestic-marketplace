@@ -13,6 +13,7 @@ triggers:
   - improve conversion
   - cro audit
 allowed-tools: Read, Write, Edit, AskUserQuestion, WebFetch
+disable-model-invocation: true
 ---
 
 # Landing Page Builder

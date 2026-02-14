@@ -16,7 +16,7 @@ tools: AskUserQuestion, WebSearch
 | Section | Skill | Purpose |
 |---------|-------|---------|
 | Legal setup | `launch-legal` | Minimum viable compliance |
-| Mistakes | `rookie-mistakes` | Industry-specific pitfalls |
+| Mistakes | `majestic-founder:rookie-mistakes` | Industry-specific pitfalls |
 | Outreach | `majestic-sales:outbound-sequences` | Customer acquisition templates |
 | Revenue | `majestic-company:financial-model` | Forecast and metrics |
 
@@ -91,7 +91,7 @@ Based on user's hours/budget:
 
 ### 6. Rookie Mistakes
 
-Apply `rookie-mistakes` patterns:
+Apply `majestic-founder:rookie-mistakes` patterns:
 - Fatal mistakes for this business type
 - Expensive mistakes to avoid
 - Time wasters that delay revenue

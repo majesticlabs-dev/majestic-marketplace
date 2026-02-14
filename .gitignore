@@ -12,6 +12,3 @@ docs/audits/
 # Relay epic state (ephemeral)
 .majestic/
 docs/granularity-audit.md
-
-# claude-mem auto-generated context files
-plugins/**/CLAUDE.md

@@ -1,6 +1,6 @@
 # Majestic Founder
 
-Personal effectiveness tools for founders, solopreneurs, and business builders. Includes 4 skills.
+Personal effectiveness tools for founders, solopreneurs, and business builders. Includes 5 skills.
 
 ## Installation
 
@@ -27,6 +27,7 @@ Invoke with: `skill majestic-founder:<name>`
 | `calendar-optimization` | Balance 4 types of professional time (Management, Creation, Consumption, Ideation) |
 | `founder-mode` | Contrarian principles that break conventional management wisdom |
 | `pareto` | Identify the vital 20% of activities that produce 80% of results |
+| `rookie-mistakes` | Industry-specific pitfalls that kill new businesses |
 
 ## Philosophy
 

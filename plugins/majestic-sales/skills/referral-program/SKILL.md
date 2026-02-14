@@ -2,6 +2,7 @@
 name: referral-program
 description: Design viral referral programs with incentive structures, sharing mechanics, tracking systems, and optimization strategies to turn customers into advocates who drive new customer acquisition.
 allowed-tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch, AskUserQuestion
+disable-model-invocation: true
 ---
 
 # Referral Program Architect

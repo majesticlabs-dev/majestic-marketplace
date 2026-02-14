@@ -1,7 +1,8 @@
 ---
-name: majestic:new-command
+name: new-command
 description: Generate any Claude Code command with production-quality patterns
 allowed-tools: Read, Write, Edit, WebFetch, AskUserQuestion, Skill
+disable-model-invocation: true
 ---
 
 # New Command Builder `/new-command`
@@ -25,17 +26,9 @@ If style, complexity, or location not provided, use `AskUserQuestion`:
 - **Complexity**: simple, standard, advanced
 - **Location**: project (.claude/commands/) or user (~/.claude/commands/)
 
-### Step 2: Load Patterns
+### Step 2: Generate Command
 
-Invoke command-patterns skill for best practices:
-
-```
-Skill(skill="command-patterns")
-```
-
-### Step 3: Generate Command
-
-Apply patterns from skill:
+Apply these patterns:
 
 1. **Understand the Domain** - What tools do experts use? Common pain points?
 2. **Design Multiple Modes** - analyze, fix, monitor, report
@@ -43,7 +36,7 @@ Apply patterns from skill:
 4. **Build Intelligence** - Pattern recognition, correlation, predictions
 5. **Ensure Safety** - Rollbacks, confirmations, audit trails
 
-### Step 4: Required Sections
+### Step 3: Required Sections
 
 Every generated command must have:
 
@@ -58,7 +51,7 @@ Every generated command must have:
 3. **Multiple Output Formats** (human, JSON, HTML)
 4. **Configuration** (behavioral settings, integrations, safety)
 
-### Step 5: Frontmatter
+### Step 4: Frontmatter
 
 ```yaml
 ---

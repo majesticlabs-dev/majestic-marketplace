@@ -8,6 +8,7 @@ triggers:
   - buyer keywords
   - conversion keywords
 allowed-tools: Read, Write, Edit, Grep, Glob, mcp__perplexity-ask__perplexity_ask
+disable-model-invocation: true
 ---
 
 # Bottom-of-Funnel Keyword Finder

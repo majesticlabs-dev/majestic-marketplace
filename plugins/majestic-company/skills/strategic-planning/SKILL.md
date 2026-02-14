@@ -1,6 +1,7 @@
 ---
 name: strategic-planning
 description: Build strategic plans for business goals. Creates one-page briefs with core objective, key milestones, leverage points, and risks. Use when setting direction, pitching initiatives, or aligning teams around a goal.
+disable-model-invocation: true
 ---
 
 # Strategic Planning

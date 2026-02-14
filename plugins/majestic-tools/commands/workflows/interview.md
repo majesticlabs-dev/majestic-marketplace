@@ -1,5 +1,5 @@
 ---
-name: majestic-tools:interview
+name: interview
 description: Deep discovery interview for any domain - engineering, brand, product, marketing, sales
 argument-hint: "[topic or domain to explore]"
 allowed-tools: Read, Glob, Grep, AskUserQuestion, Write, Edit, Task

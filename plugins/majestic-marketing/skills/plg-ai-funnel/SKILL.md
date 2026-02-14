@@ -9,6 +9,7 @@ triggers:
   - self-service activation
   - how AI agents find products
   - AI recommendation optimization
+disable-model-invocation: true
 ---
 
 # PLG AI Funnel: Product-Led Growth in the Agent Era

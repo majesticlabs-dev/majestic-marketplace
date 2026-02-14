@@ -1,6 +1,7 @@
 ---
 name: document-refinement
 description: Use when reviewing brainstorms, plans, or PRDs for clarity and readiness before next workflow phase. Assesses documents for vagueness, gaps, and YAGNI violations.
+disable-model-invocation: true
 ---
 
 # Document Refinement

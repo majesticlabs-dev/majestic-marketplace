@@ -157,9 +157,7 @@ If TASK_TRACKING: TaskUpdate(PHASE_TASKS[5], status: "completed")
 
 If TASK_TRACKING: TaskUpdate(PHASE_TASKS[6], status: "in_progress")
 
-```
-/majestic-engineer:plan-builder
-```
+Apply `plan-builder` skill.
 
 Select template based on complexity:
 - **Minimal:** Single file changes, simple bugs
