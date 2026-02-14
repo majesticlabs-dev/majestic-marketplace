@@ -2,6 +2,7 @@
 name: majestic:run-blueprint
 description: Execute all tasks in a blueprint using build-task workflow
 argument-hint: "<blueprint-file.md>"
+disable-model-invocation: true
 ---
 
 # Run Blueprint

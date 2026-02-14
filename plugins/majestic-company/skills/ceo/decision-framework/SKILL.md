@@ -1,6 +1,7 @@
 ---
 name: decision-framework
 description: Walk through decisions using a 3-part framework (first-principles, cost/benefit, second-order effects). Use when choosing between options, evaluating trade-offs, or making high-stakes decisions.
+disable-model-invocation: true
 ---
 
 # Decision Framework

@@ -1,6 +1,7 @@
 ---
 name: agent-sdk
 description: Guide for Claude Agent SDK - build custom AI agents powered by Claude. Covers installation, authentication providers, tool permissions, file-based configuration, TypeScript/Python code examples, and project scaffolding templates.
+disable-model-invocation: true
 ---
 
 # Claude Agent SDK Guide

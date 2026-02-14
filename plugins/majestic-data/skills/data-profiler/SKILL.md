@@ -2,6 +2,7 @@
 name: data-profiler
 description: Generate data profiles with column stats, correlations, and missing patterns for DataFrames. Use for EDA and data discovery.
 allowed-tools: Read Write Edit Bash
+disable-model-invocation: true
 ---
 
 # Data Profiler

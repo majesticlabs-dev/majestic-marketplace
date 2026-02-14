@@ -1,6 +1,7 @@
 ---
 name: pr-screenshot-docs
 description: Capture and document UI changes with before/after screenshots for pull requests. Use when creating PRs that include visual changes to ensure reviewers can assess design modifications.
+disable-model-invocation: true
 ---
 
 # PR Screenshot Documentation

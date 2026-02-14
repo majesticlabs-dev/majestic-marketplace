@@ -4,6 +4,7 @@ allowed-tools: Bash(git *), Bash(gh *), Task, AskUserQuestion
 description: Create engaging changelogs from recent merges to default branch
 argument-hint: "[daily|weekly|weekly-summary|N days] [business]"
 model: haiku
+disable-model-invocation: true
 ---
 
 You create changelogs from merged PRs. Your style adapts based on the audience.

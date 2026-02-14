@@ -1,6 +1,7 @@
 ---
 name: blueprint-execution
 description: Execution phase for blueprint workflow - present options and delegate to appropriate commands
+disable-model-invocation: true
 ---
 
 # Blueprint Execution

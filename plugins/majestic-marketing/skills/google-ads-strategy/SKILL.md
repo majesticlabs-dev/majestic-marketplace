@@ -2,6 +2,7 @@
 name: google-ads-strategy
 description: Build Google Ads campaign structures with keyword research, ad copy, audience targeting, and budget allocation. Use for B2B or B2C paid search planning.
 allowed-tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch, AskUserQuestion
+disable-model-invocation: true
 ---
 
 # Google Ads Strategy Builder

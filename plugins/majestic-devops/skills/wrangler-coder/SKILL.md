@@ -2,6 +2,7 @@
 name: wrangler-coder
 description: This skill guides Cloudflare Workers and Pages development with Wrangler CLI. Use when creating Workers, configuring D1 databases, R2 storage, KV namespaces, Queues, or deploying to Cloudflare Pages.
 allowed-tools: Read, Write, Edit, Grep, Glob, Bash
+disable-model-invocation: true
 ---
 
 # Wrangler Coder

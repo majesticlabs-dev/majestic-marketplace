@@ -2,6 +2,7 @@
 name: etl-patterns
 description: Production ETL patterns orchestrator. Routes to core reliability patterns and incremental load strategies.
 allowed-tools: Read, Write, Edit, Grep, Glob, Bash
+disable-model-invocation: true
 ---
 
 # ETL Patterns

@@ -1,6 +1,7 @@
 ---
 name: anyway-config-coder
 description: Implement type-safe configuration with anyway_config gem. Use when creating configuration classes, replacing ENV access, or managing application settings. Triggers on configuration, environment variables, settings, secrets, or ENV patterns.
+disable-model-invocation: true
 ---
 
 # Anyway Config Coder

@@ -2,6 +2,7 @@
 name: objection-destroyer
 description: Create powerful pitch closings with market insights, proprietary advantages, founder mission, and subtle FOMO triggers in under 45 seconds.
 allowed-tools: AskUserQuestion
+disable-model-invocation: true
 ---
 
 # Objection Destroyer
@@ -86,6 +87,7 @@ Adapt for different investor responses:
 | Founder Mission | [Your authentic why] |
 | FOMO Trigger | [The urgency factor] |
 
+disable-model-invocation: true
 ---
 
 ### Primary Closing Script (45 seconds)
@@ -109,6 +111,7 @@ Adapt for different investor responses:
 **Word count**: [X] words
 **Estimated time**: [X] seconds
 
+disable-model-invocation: true
 ---
 
 ### Pacing Guidance
@@ -123,6 +126,7 @@ Adapt for different investor responses:
 **Key moments to pause**: [Specific phrases]
 **Emphasis words**: [Words to stress]
 
+disable-model-invocation: true
 ---
 
 ### Variant: Skeptical Investor
@@ -137,6 +141,7 @@ Adapt for different investor responses:
 >
 > [Softer FOMO - process-focused]"
 
+disable-model-invocation: true
 ---
 
 ### Variant: Excited Investor
@@ -151,6 +156,7 @@ Adapt for different investor responses:
 >
 > [Direct FOMO - limited allocation]"
 
+disable-model-invocation: true
 ---
 
 ### Variant: Analytical Investor
@@ -165,6 +171,7 @@ Adapt for different investor responses:
 >
 > [Timeline-based urgency]"
 
+disable-model-invocation: true
 ---
 
 ### Objection Responses (Quick Pivots)
@@ -176,6 +183,7 @@ If they say... | Pivot to...
 "Team is small" | [Mission + hiring plan]
 "Need more traction" | [Momentum FOMO + milestone]
 
+disable-model-invocation: true
 ---
 
 ### Practice Notes

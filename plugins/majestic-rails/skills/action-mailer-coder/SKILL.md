@@ -2,6 +2,7 @@
 name: action-mailer-coder
 description: Use when creating or refactoring Action Mailer emails. Applies Rails 7.1+ conventions, parameterized mailers, preview workflows, background delivery, and email design best practices.
 allowed-tools: Read, Write, Edit, Grep, Glob, Bash
+disable-model-invocation: true
 ---
 
 # Action Mailer Coder

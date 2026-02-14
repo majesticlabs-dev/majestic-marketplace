@@ -3,6 +3,7 @@ name: majestic:ux-brief
 description: Create junior-dev-ready design systems through guided discovery before implementation
 allowed-tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch, AskUserQuestion, Task, Skill
 argument-hint: "[component, page, or feature to design]"
+disable-model-invocation: true
 ---
 
 # Design System Generator

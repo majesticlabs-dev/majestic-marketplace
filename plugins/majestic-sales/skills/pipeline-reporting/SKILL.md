@@ -2,6 +2,7 @@
 name: pipeline-reporting
 description: Pipeline report templates for weekly reviews, monthly analysis, and quality checklists.
 allowed-tools: []
+disable-model-invocation: true
 ---
 
 # Pipeline Reporting

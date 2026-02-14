@@ -2,6 +2,7 @@
 name: ansible-coder
 description: This skill guides writing Ansible playbooks for server configuration. Use when hardening servers, installing packages, or automating post-provisioning tasks that cloud-init cannot handle.
 allowed-tools: Read, Write, Edit, Grep, Glob, Bash
+disable-model-invocation: true
 ---
 
 # Ansible Coder

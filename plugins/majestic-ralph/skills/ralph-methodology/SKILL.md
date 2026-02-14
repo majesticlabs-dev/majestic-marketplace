@@ -5,6 +5,7 @@ triggers:
   - ralph
   - autonomous loop
   - iteration loop
+disable-model-invocation: true
 ---
 
 # Ralph Loop Mechanics

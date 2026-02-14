@@ -2,6 +2,7 @@
 name: active-job-coder
 description: Use when creating or refactoring Active Job background jobs. Applies Rails 8 conventions, Solid Queue patterns, error handling, retry strategies, and job design best practices.
 allowed-tools: Read, Write, Edit, Grep, Glob, Bash
+disable-model-invocation: true
 ---
 
 # Active Job Coder

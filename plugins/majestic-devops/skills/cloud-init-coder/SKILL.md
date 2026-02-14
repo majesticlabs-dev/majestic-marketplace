@@ -2,6 +2,7 @@
 name: cloud-init-coder
 description: This skill guides writing cloud-init configurations for VM provisioning. Use when creating user_data blocks in Terraform/OpenTofu, or cloud-init YAML for AWS, DigitalOcean, GCP, or Azure instances.
 allowed-tools: Read, Write, Edit, Grep, Glob
+disable-model-invocation: true
 ---
 
 # Cloud-Init Coder

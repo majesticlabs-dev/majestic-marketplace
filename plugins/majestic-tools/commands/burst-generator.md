@@ -1,6 +1,7 @@
 ---
 description: Generate multiple response variants with probability scores for any request
 argument-hint: "[count:N] <request>"
+disable-model-invocation: true
 ---
 
 # Burst Generator

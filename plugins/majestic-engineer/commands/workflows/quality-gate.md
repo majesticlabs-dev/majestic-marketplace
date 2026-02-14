@@ -3,6 +3,7 @@ name: majestic:quality-gate
 description: Run quality gate checks on code changes with tech stack-aware reviewers
 argument-hint: "[PR #/URL | --staged | --branch | files...]"
 allowed-tools: Bash, Read, Grep, Glob, Task
+disable-model-invocation: true
 ---
 
 # Quality Gate

@@ -3,6 +3,7 @@ name: majestic:config
 description: Get a config value from .agents.yml (with local overrides)
 argument-hint: "<field> [default]"
 allowed-tools: Bash, Skill
+disable-model-invocation: true
 ---
 
 # Config Reader

@@ -1,6 +1,7 @@
 ---
 name: business-logic-coder
 description: Implement business logic with ActiveInteraction and AASM state machines. Routes to specialized skills for typed operations and state management.
+disable-model-invocation: true
 ---
 
 # Business Logic Patterns

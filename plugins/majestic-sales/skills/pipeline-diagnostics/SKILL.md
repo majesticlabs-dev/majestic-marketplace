@@ -2,6 +2,7 @@
 name: pipeline-diagnostics
 description: Pipeline health assessment with coverage ratios, conversion benchmarks, velocity analysis, and problem diagnosis frameworks.
 allowed-tools: []
+disable-model-invocation: true
 ---
 
 # Pipeline Diagnostics

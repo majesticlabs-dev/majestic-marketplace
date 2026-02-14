@@ -2,6 +2,7 @@
 name: python-debugger
 description: Debug Python errors, exceptions, and unexpected behavior. Analyzes tracebacks, reproduces issues, identifies root causes, and provides fixes.
 allowed-tools: Read, Write, Edit, Grep, Glob, Bash, WebSearch
+disable-model-invocation: true
 ---
 
 # Python Debugger

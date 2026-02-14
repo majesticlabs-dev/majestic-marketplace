@@ -2,6 +2,7 @@
 name: majestic:content-check
 allowed-tools: Read, Write, Edit, Grep, Glob
 description: Comprehensive content check covering SEO, readability, and AI citation potential
+disable-model-invocation: true
 ---
 
 # Content Check Command

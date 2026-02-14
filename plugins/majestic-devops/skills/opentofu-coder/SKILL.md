@@ -2,6 +2,7 @@
 name: opentofu-coder
 description: This skill guides writing Infrastructure as Code using OpenTofu (open-source Terraform fork). Use when creating .tf files, managing cloud infrastructure, configuring providers, or designing reusable modules.
 allowed-tools: Read, Write, Edit, MultiEdit, Grep, Glob, Bash, WebSearch
+disable-model-invocation: true
 ---
 
 # OpenTofu Coder

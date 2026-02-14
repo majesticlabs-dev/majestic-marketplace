@@ -1,6 +1,7 @@
 ---
 name: multi-agent-architecture
 description: Patterns for designing multi-agent systems with Claude Code - job description method, shared folder communication, handbook consolidation, context management. Use when building complex agent orchestrations.
+disable-model-invocation: true
 ---
 
 # Multi-Agent Architecture

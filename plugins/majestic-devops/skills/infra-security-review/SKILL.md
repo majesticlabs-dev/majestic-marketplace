@@ -1,6 +1,7 @@
 ---
 name: infra-security-review
 description: Security patterns and checklists for reviewing Infrastructure-as-Code. Covers Terraform/OpenTofu state, secrets, network, compute, database, and storage security.
+disable-model-invocation: true
 ---
 
 # Infrastructure Security Review Patterns

@@ -2,6 +2,7 @@
 name: backblaze-coder
 description: This skill guides Backblaze B2 Cloud Storage integration with OpenTofu/Terraform and B2 CLI. Use when managing B2 buckets, application keys, file uploads, lifecycle rules, or S3-compatible storage.
 allowed-tools: Read, Write, Edit, Grep, Glob, Bash
+disable-model-invocation: true
 ---
 
 # Backblaze Coder

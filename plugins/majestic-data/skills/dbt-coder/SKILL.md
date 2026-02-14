@@ -2,6 +2,7 @@
 name: dbt-coder
 description: dbt (data build tool) patterns for model organization, incremental strategies, and testing.
 allowed-tools: Read, Write, Edit, Grep, Glob, Bash
+disable-model-invocation: true
 ---
 
 # dbt-Coder

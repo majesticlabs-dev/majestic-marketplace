@@ -1,6 +1,7 @@
 ---
 name: aasm-coder
 description: Implement state machines with AASM for workflow management. Covers state transitions, guards, callbacks, and testing.
+disable-model-invocation: true
 ---
 
 # AASM Coder

@@ -2,6 +2,7 @@
 name: devops-platform-patterns
 description: Platform-specific IaC checklists for DigitalOcean, Hetzner, AWS, and Cloudflare.
 allowed-tools: []
+disable-model-invocation: true
 ---
 
 # DevOps Platform Patterns

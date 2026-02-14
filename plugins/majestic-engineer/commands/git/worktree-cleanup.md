@@ -3,6 +3,7 @@ name: git:worktree-cleanup
 description: Clean up merged and stale git worktrees
 allowed-tools: Bash
 model: haiku
+disable-model-invocation: true
 ---
 
 # Worktree Cleanup

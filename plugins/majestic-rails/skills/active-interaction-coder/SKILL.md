@@ -1,6 +1,7 @@
 ---
 name: active-interaction-coder
 description: Implement typed business operations with ActiveInteraction. Covers input types, composition, controller patterns, and testing.
+disable-model-invocation: true
 ---
 
 # ActiveInteraction Coder
