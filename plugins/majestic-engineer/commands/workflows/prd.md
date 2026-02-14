@@ -110,9 +110,18 @@ If TASK_TRACKING: TaskUpdate(PHASE_TASKS[3], status: "in_progress")
    - **Done (Recommended)** - Balanced PRD is sufficient
    - **Expand with technical depth** - Add API, Data Model, Security, Performance sections
    - **Revise sections** - Provide feedback on specific sections
+   - **Review and refine** - Apply document-refinement skill, loop to Phase 3
    - **Preview in editor** (if not auto-previewed)
 
 **If "Revise sections":** Loop back to Phase 3 without completing (keep in_progress).
+
+**If "Review and refine":**
+```
+Apply document-refinement skill to docs/prd/prd-[feature-name].md
+→ Auto-fix minor issues in PRD file
+→ Present refinement report to user
+→ Loop to Phase 3
+```
 
 If TASK_TRACKING: TaskUpdate(PHASE_TASKS[3], status: "completed")
 

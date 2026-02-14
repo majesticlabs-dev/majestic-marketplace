@@ -201,11 +201,20 @@ AskUserQuestion:
     - "Deep dive into specifics" → Phase 8.1
     - "Preview plan" → Read and display, return to Phase 8
     - "Revise" → Ask what to change, return to Phase 6
+    - "Review and refine" → Apply document-refinement skill, return to Phase 8
 ```
 
 **IMPORTANT:** After user selects, EXECUTE that action.
 
 If TASK_TRACKING: TaskUpdate(PHASE_TASKS[8], status: "completed")
+
+**If "Review and refine":**
+```
+Apply document-refinement skill to {plan_path}
+→ Auto-fix minor issues in plan file
+→ Present refinement report to user
+→ Return to Phase 8
+```
 
 ### Phase 8.1: Deep Dive
 
