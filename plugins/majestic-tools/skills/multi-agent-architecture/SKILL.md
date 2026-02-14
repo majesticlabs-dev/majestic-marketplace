@@ -111,6 +111,12 @@ How many sub-agents?
 ├── 4-10 → Shared folder pattern
 └── 10+ → Phased execution with manifest
 
+Do teammates need direct communication?
+├── No → Sub-agents (Task tool) — report results back only
+└── Yes → Agent Teams — shared task list, inter-agent messaging
+    ├── See agent-teams skill for full guide
+    └── Best for: parallel review, competing hypotheses, multi-module features
+
 Do sub-agents need each other's output?
 ├── No → Parallel execution, merge results
 └── Yes → Shared folder, dependency ordering
@@ -139,3 +145,19 @@ Most multi-agent systems evolve through:
 4. **Handbook consolidation** — Unified knowledge, maintainable
 
 Skip earlier stages when building new systems.
+
+## Agent Teams
+
+When workers need to communicate directly with each other — not just report back to an orchestrator — use Agent Teams instead of sub-agents. Agent Teams provide shared task lists, inter-agent messaging, and independent context windows.
+
+**Key differences from sub-agent patterns above:**
+- Teammates message each other directly (not just back to caller)
+- Shared task list with self-claiming and dependency auto-unblock
+- Each teammate is a full Claude Code session with own context
+
+**When to upgrade from sub-agents to Agent Teams:**
+- Sub-agents need to share findings mid-task
+- You need adversarial debate or competing hypotheses
+- 3+ workers need self-organizing coordination
+
+For full setup, operations reference, and orchestration patterns, apply the `agent-teams` skill.

@@ -1,0 +1,89 @@
+# Agent Teams Message & Inbox Schemas
+# Messages stored in ~/.claude/teams/{team}/inboxes/{agent}.json
+# Lock files at ~/.claude/teams/{team}/inboxes/{agent}.json.lock
+
+# --- SendMessage Tool Parameters ---
+# All communication goes through SendMessage with a `type` field
+
+send_message_direct:
+  type: message               # direct to one teammate
+  recipient: string           # teammate name
+  content: string             # message body
+  summary: string             # 5-10 word preview
+
+send_message_broadcast:
+  type: broadcast             # to all teammates
+  content: string
+  summary: string
+  # Creates N separate inbox entries for N teammates (expensive)
+
+send_message_shutdown_request:
+  type: shutdown_request      # lead → teammate
+  recipient: string
+  content: string             # optional reason
+
+send_message_shutdown_response:
+  type: shutdown_response     # teammate → lead
+  request_id: string
+  approve: boolean
+  content: string             # optional rejection reason
+
+send_message_plan_approval:
+  type: plan_approval_response  # lead → teammate
+  request_id: string
+  approve: boolean
+  recipient: string
+  content: string             # optional feedback on rejection
+
+# --- Inbox Message Objects ---
+# How messages appear in the inbox JSON array
+
+inbox_message:
+  from: string                # sender agent name
+  text: string                # content (or JSON-encoded protocol message)
+  summary: string             # optional preview
+  timestamp: ISO-8601
+  color: string               # optional display color
+  read: boolean               # marks unread on delivery
+
+# --- Protocol Messages (JSON-encoded within `text` field) ---
+
+shutdown_request_protocol:
+  type: shutdown_request
+  requestId: "shutdown-{id}@{agent}"
+  from: string
+  reason: string
+  timestamp: ISO-8601
+
+shutdown_approved_protocol:
+  type: shutdown_approved
+  requestId: "shutdown-{id}@{agent}"
+  from: string
+  paneId: string              # "%5" for tmux, "in-process" otherwise
+  backendType: "in-process|tmux|iterm2"
+  timestamp: ISO-8601
+
+idle_notification_protocol:
+  type: idle_notification
+  from: string
+  timestamp: ISO-8601
+  idleReason: string
+  summary: string
+  completedTaskId: string     # last task completed (if any)
+  completedStatus: completed
+  failureReason: string       # optional
+
+plan_approval_response_protocol:
+  type: plan_approval_response
+  requestId: string
+  approved: boolean
+  feedback: string            # optional
+  timestamp: ISO-8601
+  permissionMode: string
+
+# --- Message Rendering in Conversation ---
+# Messages appear as XML tags in teammate context:
+#
+# <teammate_message teammate_id="{sender}" color="{color}" summary="{preview}">
+# {message_text}
+# </teammate_message>
