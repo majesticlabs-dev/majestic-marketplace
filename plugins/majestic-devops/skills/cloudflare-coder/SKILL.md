@@ -1,7 +1,7 @@
 ---
 name: cloudflare-coder
 description: This skill guides provisioning Cloudflare infrastructure with OpenTofu/Terraform. Use when managing zones, DNS records, WAF rules, SSL settings, Page Rules, or cache configuration.
-allowed-tools: Read, Write, Edit, Grep, Glob, Bash
+allowed-tools: Read Write Edit Grep Glob Bash
 ---
 
 # Cloudflare Coder
@@ -235,7 +235,7 @@ output "origin_certificate" {
 
 ## Firewall & WAF
 
-See [resources/waf.md](resources/waf.md) for IP access rules, WAF custom rules with rate limiting, and managed rulesets (Cloudflare + OWASP).
+See [references/waf.md](references/waf.md) for IP access rules, WAF custom rules with rate limiting, and managed rulesets (Cloudflare + OWASP).
 
 ## Cache Rules
 
@@ -454,7 +454,7 @@ resource "cloudflare_zone_settings_override" "security" {
 
 ## Argo & Load Balancing
 
-See [resources/load-balancer.md](resources/load-balancer.md) for Argo Smart Routing and Load Balancer configuration with origin pools, health checks, and session affinity.
+See [references/load-balancer.md](references/load-balancer.md) for Argo Smart Routing and Load Balancer configuration with origin pools, health checks, and session affinity.
 
 ## Workers Routes
 
@@ -486,7 +486,7 @@ resource "cloudflare_worker_script" "api" {
 
 ## Complete Production Zone
 
-See [resources/production-zone.md](resources/production-zone.md) for a complete Terraform configuration with DNS, SSL/TLS, WAF, caching, redirects, and variables template.
+See [references/production-zone.md](references/production-zone.md) for a complete Terraform configuration with DNS, SSL/TLS, WAF, caching, redirects, and variables template.
 
 ## Best Practices
 

@@ -1,13 +1,7 @@
 ---
 name: fix-decision-router
 description: Post-documentation decision menu for fix-reporter. Routes to critical patterns, skill updates, cross-references, or discovery enablement.
-allowed-tools:
-  - Read
-  - Write
-  - Edit
-  - Bash
-  - Grep
-  - AskUserQuestion
+allowed-tools: Read Write Edit Bash Grep AskUserQuestion
 preconditions:
   - fix-reporter has created documentation
   - File path known from fix-reporter output
@@ -101,7 +95,7 @@ What's next?
 1. Prompt: "Skill name?"
 2. Create directory: plugins/majestic-engineer/skills/[name]/
 3. Create SKILL.md with basic structure
-4. Add solution as first example in resources/
+4. Add solution as first example in references/
 5. Confirm: "Created [skill-name] skill"
 ```
 

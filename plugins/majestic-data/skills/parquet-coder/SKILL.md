@@ -1,7 +1,7 @@
 ---
 name: parquet-coder
 description: Columnar file patterns including partitioning, predicate pushdown, and schema evolution.
-allowed-tools: Read, Write, Edit, Grep, Glob, Bash
+allowed-tools: Read Write Edit Grep Glob Bash
 ---
 
 # Parquet-Coder

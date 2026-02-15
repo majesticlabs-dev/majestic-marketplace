@@ -1,7 +1,7 @@
 ---
 name: viral-content
 description: Create viral content frameworks with platform-specific patterns, psychological hooks, and daily schedules that maximize organic reach without paid promotion.
-allowed-tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch, AskUserQuestion
+allowed-tools: Read Write Edit Grep Glob WebSearch WebFetch AskUserQuestion
 disable-model-invocation: true
 ---
 

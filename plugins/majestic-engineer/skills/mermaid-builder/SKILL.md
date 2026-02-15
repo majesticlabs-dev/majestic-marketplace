@@ -1,7 +1,7 @@
 ---
 name: mermaid-builder
 description: Expert guidance for creating syntactically correct Mermaid diagrams. Use when creating flowcharts, sequence diagrams, class diagrams, state diagrams, Gantt charts, ER diagrams, or data lineage visualizations.
-allowed-tools: Read, Write, Edit, MultiEdit, Grep, Glob, Bash, WebSearch, WebFetch
+allowed-tools: Read Write Edit MultiEdit Grep Glob Bash WebSearch WebFetch
 ---
 
 # Mermaid Builder
@@ -69,7 +69,7 @@ flowchart LR
 
 **Directions:** `TB`/`TD` (top-down), `BT` (bottom-up), `LR` (left-right), `RL` (right-left)
 
-See [resources/diagram-examples.md](resources/diagram-examples.md) for complete examples of each diagram type.
+See [references/diagram-examples.md](references/diagram-examples.md) for complete examples of each diagram type.
 
 ## Minimal Examples
 
@@ -148,7 +148,7 @@ flowchart TD
 
 ## Data Lineage Patterns
 
-See [resources/data-lineage.md](resources/data-lineage.md) for:
+See [references/data-lineage.md](references/data-lineage.md) for:
 - ETL pipeline patterns
 - Multi-layer data architecture
 - Cross-system data flows

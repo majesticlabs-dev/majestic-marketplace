@@ -7,7 +7,7 @@ triggers:
   - thread structure
   - write a thread
   - turn into thread
-allowed-tools: Read, Write, Edit, AskUserQuestion
+allowed-tools: Read Write Edit AskUserQuestion
 disable-model-invocation: true
 ---
 

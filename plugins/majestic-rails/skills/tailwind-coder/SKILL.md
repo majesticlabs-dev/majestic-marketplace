@@ -1,7 +1,7 @@
 ---
 name: tailwind-coder
 description: Use when applying Tailwind CSS styling to Rails views. Uses utility classes, responsive design patterns, and integrates with Rails view helpers.
-allowed-tools: Read, Write, Edit, Grep, Glob, WebSearch
+allowed-tools: Read Write Edit Grep Glob WebSearch
 ---
 
 # Tailwind Coder

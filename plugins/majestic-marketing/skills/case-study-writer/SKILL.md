@@ -7,7 +7,7 @@ triggers:
   - customer story
   - success story
   - customer case study
-allowed-tools: Read, Write, Edit, Grep, Glob, AskUserQuestion
+allowed-tools: Read Write Edit Grep Glob AskUserQuestion
 disable-model-invocation: true
 ---
 

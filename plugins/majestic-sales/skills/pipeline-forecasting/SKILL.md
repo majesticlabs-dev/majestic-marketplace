@@ -1,7 +1,6 @@
 ---
 name: pipeline-forecasting
 description: Forecast categories, weighted pipeline calculations, deal scoring models, and forecast accuracy metrics.
-allowed-tools: []
 disable-model-invocation: true
 ---
 

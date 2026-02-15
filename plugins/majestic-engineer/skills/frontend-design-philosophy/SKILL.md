@@ -1,7 +1,6 @@
 ---
 name: frontend-design-philosophy
 description: Design thinking principles for distinctive interfaces. Covers aesthetic direction, anti-patterns, and avoiding generic AI-generated aesthetics.
-allowed-tools: []
 ---
 
 # Frontend Design Philosophy

@@ -1,7 +1,7 @@
 ---
 name: win-back
 description: Design win-back campaigns to re-engage dormant customers and recover churned users with targeted messaging, special offers, and feedback collection to understand and address churn reasons.
-allowed-tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch, AskUserQuestion
+allowed-tools: Read Write Edit Grep Glob WebSearch WebFetch AskUserQuestion
 disable-model-invocation: true
 ---
 
@@ -68,7 +68,7 @@ Use WebSearch extensively to find:
 | Last Chance | 30 | Final push with urgency |
 | Goodbye | 45 | Close loop, leave door open |
 
-Full email copy: [resources/email-sequence.yaml](resources/email-sequence.yaml)
+Full email copy: [assets/email-sequence.yaml](assets/email-sequence.yaml)
 
 ### 3. Win-Back Offer Framework
 
@@ -79,7 +79,7 @@ Full email copy: [resources/email-sequence.yaml](resources/email-sequence.yaml)
 | Non-usage | Free training, onboarding call |
 | Poor experience | Apology + credit, priority support |
 
-Discount tiers by customer value and non-discount alternatives: [resources/offers-feedback.yaml](resources/offers-feedback.yaml)
+Discount tiers by customer value and non-discount alternatives: [assets/offers-feedback.yaml](assets/offers-feedback.yaml)
 
 ### 4. Exit Survey & Feedback Collection
 
@@ -88,7 +88,7 @@ Discount tiers by customer value and non-discount alternatives: [resources/offer
 - Post-loss referral email template
 - Feedback analysis template
 
-Full templates: [resources/offers-feedback.yaml](resources/offers-feedback.yaml)
+Full templates: [assets/offers-feedback.yaml](assets/offers-feedback.yaml)
 
 ### 5. Automation Triggers
 

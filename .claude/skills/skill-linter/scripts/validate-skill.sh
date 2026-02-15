@@ -146,12 +146,6 @@ pass "Description valid ($DESC_LEN chars)"
 
 # 7. Validate optional fields if present
 
-# Check license (if present)
-LICENSE=$(echo "$FRONTMATTER" | grep '^license:' | sed 's/^license:[[:space:]]*//' || true)
-if [ -n "$LICENSE" ]; then
-  pass "License field present"
-fi
-
 # Check compatibility (if present, max 500 chars)
 COMPAT=$(echo "$FRONTMATTER" | grep '^compatibility:' | sed 's/^compatibility:[[:space:]]*//' || true)
 if [ -n "$COMPAT" ]; then
@@ -166,7 +160,22 @@ fi
 # Check allowed-tools (if present)
 TOOLS=$(echo "$FRONTMATTER" | grep '^allowed-tools:' | sed 's/^allowed-tools:[[:space:]]*//' || true)
 if [ -n "$TOOLS" ]; then
-  pass "Allowed-tools field present"
+  # FAIL if commas found (must be space-delimited)
+  if echo "$TOOLS" | grep -qE ','; then
+    fail "allowed-tools must be space-delimited, not comma-separated: $TOOLS"
+  # FAIL if bracket array syntax found
+  elif echo "$TOOLS" | grep -qE '[\[\]]'; then
+    fail "allowed-tools must be space-delimited, not array syntax: $TOOLS"
+  else
+    pass "Allowed-tools field valid"
+  fi
+fi
+# FAIL if YAML multi-line array detected (allowed-tools:\n  - item)
+if echo "$FRONTMATTER" | grep -q '^allowed-tools:$'; then
+  NEXT_LINE=$(echo "$FRONTMATTER" | grep -A1 '^allowed-tools:$' | tail -1)
+  if echo "$NEXT_LINE" | grep -qE '^[[:space:]]*-[[:space:]]'; then
+    fail "allowed-tools must be space-delimited, not YAML array"
+  fi
 fi
 
 # 8. Check line count (max 500)
@@ -178,13 +187,16 @@ fi
 pass "Line count: $LINE_COUNT/500"
 
 # 9. Check subdirectories (only scripts/, references/, assets/ allowed)
-ALLOWED_DIRS="scripts references assets resources" # Including 'resources' for backwards compat
+ALLOWED_DIRS="scripts references assets"
 INVALID_DIRS=""
+HAS_RESOURCES=false
 
 for subdir in "$SKILL_DIR"/*/; do
   if [ -d "$subdir" ]; then
     subdir_name=$(basename "$subdir")
-    if ! echo "$ALLOWED_DIRS" | grep -qw "$subdir_name"; then
+    if [ "$subdir_name" = "resources" ]; then
+      HAS_RESOURCES=true
+    elif ! echo "$ALLOWED_DIRS" | grep -qw "$subdir_name"; then
       INVALID_DIRS="$INVALID_DIRS $subdir_name"
     fi
   fi
@@ -194,6 +206,10 @@ if [ -n "$INVALID_DIRS" ]; then
   warn "Non-standard subdirectories found:$INVALID_DIRS (allowed: scripts, references, assets)"
 else
   pass "Subdirectories valid"
+fi
+
+if [ "$HAS_RESOURCES" = true ]; then
+  warn "resources/ is deprecated — use references/, assets/, scripts/ instead"
 fi
 
 # 10. Content analysis - strip fenced code blocks for checks that need prose-only content

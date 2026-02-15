@@ -1,7 +1,7 @@
 ---
 name: anycable-coder
 description: Use when implementing real-time features requiring reliability, especially LLM streaming. Applies AnyCable patterns for message delivery guarantees, presence tracking, and Action Cable migration.
-allowed-tools: Read, Write, Edit, Grep, Glob, Bash
+allowed-tools: Read Write Edit Grep Glob Bash
 ---
 
 # AnyCable Coder

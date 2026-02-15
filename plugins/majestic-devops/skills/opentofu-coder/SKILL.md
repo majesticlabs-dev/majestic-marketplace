@@ -1,7 +1,7 @@
 ---
 name: opentofu-coder
 description: This skill guides writing Infrastructure as Code using OpenTofu (open-source Terraform fork). Use when creating .tf files, managing cloud infrastructure, configuring providers, or designing reusable modules.
-allowed-tools: Read, Write, Edit, MultiEdit, Grep, Glob, Bash, WebSearch
+allowed-tools: Read Write Edit MultiEdit Grep Glob Bash WebSearch
 ---
 
 # OpenTofu Coder
@@ -340,9 +340,9 @@ tofu state rm aws_instance.imported
 tofu import aws_instance.web i-1234567890abcdef0
 ```
 
-See [Provider Configuration](resources/provider-config.md) for AWS provider setup, authentication methods, and multi-provider patterns.
+See [Provider Configuration](references/provider-config.md) for AWS provider setup, authentication methods, and multi-provider patterns.
 
-See [Environment Strategies](resources/environment-strategies.md) for workspaces and directory-based environment management.
+See [Environment Strategies](references/environment-strategies.md) for workspaces and directory-based environment management.
 
 ## CLI Workflow
 
@@ -421,9 +421,9 @@ resource "aws_security_group" "main" {
 ## References
 
 For detailed patterns and examples:
-- [resources/hcl-patterns.md](resources/hcl-patterns.md) - Advanced HCL patterns
-- [resources/project-scaffolding.md](resources/project-scaffolding.md) - Directory structure, .gitignore, next_steps output, security-first variables
-- [resources/post-provisioning.md](resources/post-provisioning.md) - bin/setup-server scripts for post-infra, pre-deployment setup
-- [resources/state-management.md](resources/state-management.md) - State operations and encryption
-- [resources/provider-examples.md](resources/provider-examples.md) - Multi-cloud provider configs
-- [resources/makefile-automation.md](resources/makefile-automation.md) - Makefile workflows for plan/apply/destroy
+- [references/hcl-patterns.md](references/hcl-patterns.md) - Advanced HCL patterns
+- [references/project-scaffolding.md](references/project-scaffolding.md) - Directory structure, .gitignore, next_steps output, security-first variables
+- [references/post-provisioning.md](references/post-provisioning.md) - bin/setup-server scripts for post-infra, pre-deployment setup
+- [references/state-management.md](references/state-management.md) - State operations and encryption
+- [references/provider-examples.md](references/provider-examples.md) - Multi-cloud provider configs
+- [references/makefile-automation.md](references/makefile-automation.md) - Makefile workflows for plan/apply/destroy

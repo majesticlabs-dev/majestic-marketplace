@@ -1,7 +1,7 @@
 ---
 name: hetzner-coder
 description: This skill guides provisioning Hetzner Cloud infrastructure with OpenTofu/Terraform. Use when creating servers, networks, firewalls, load balancers, or volumes on Hetzner Cloud.
-allowed-tools: Read, Write, Edit, Grep, Glob, Bash
+allowed-tools: Read Write Edit Grep Glob Bash
 ---
 
 # Hetzner Coder
@@ -464,10 +464,10 @@ resource "hcloud_ssh_key" "deploy" {
 }
 ```
 
-See [Ansible Integration](resources/ansible-integration.md) for Hetzner+Ansible patterns, Kamal-ready playbooks, and provisioning scripts.
+See [Ansible Integration](references/ansible-integration.md) for Hetzner+Ansible patterns, Kamal-ready playbooks, and provisioning scripts.
 
 ## Additional Resources
 
-- [resources/best-practices.md](resources/best-practices.md) - Labels, cost optimization, placement groups, snapshots
-- [resources/object-storage.md](resources/object-storage.md) - S3-compatible Object Storage with AWS provider configuration
-- [resources/production-stack.md](resources/production-stack.md) - Complete production setup with app servers, database, load balancer, firewalls, volumes, and networking
+- [references/best-practices.md](references/best-practices.md) - Labels, cost optimization, placement groups, snapshots
+- [references/object-storage.md](references/object-storage.md) - S3-compatible Object Storage with AWS provider configuration
+- [references/production-stack.md](references/production-stack.md) - Complete production setup with app servers, database, load balancer, firewalls, volumes, and networking

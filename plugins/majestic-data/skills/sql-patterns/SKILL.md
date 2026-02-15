@@ -1,7 +1,7 @@
 ---
 name: sql-patterns
 description: Advanced SQL patterns including window functions, CTEs, recursive queries, and optimization techniques.
-allowed-tools: Read, Write, Edit, Grep, Glob, Bash
+allowed-tools: Read Write Edit Grep Glob Bash
 ---
 
 # SQL-Patterns

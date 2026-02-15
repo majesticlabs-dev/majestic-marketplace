@@ -2,6 +2,7 @@
 name: majestic-data:validate
 description: Run data validation suite against a dataset.
 argument-hint: "<file-path> [--suite <suite-file>]"
+disable-model-invocation: true
 ---
 
 # Data Validate Command

@@ -1,7 +1,7 @@
 ---
 name: rspec-coder
 description: Write RSpec tests for Ruby and Rails applications. Use when creating spec files, writing test cases, or testing new features. Not for Minitest — use minitest-coder instead. Covers RSpec syntax, describe/context organization, subject/let patterns, fixtures, mocking with allow/expect, and shoulda matchers.
-allowed-tools: Read, Write, Edit, MultiEdit, Grep, Glob, Bash, WebSearch
+allowed-tools: Read Write Edit MultiEdit Grep Glob Bash WebSearch
 ---
 
 # RSpec Coder
@@ -87,7 +87,7 @@ end
 
 ## Subject and Let
 
-See [resources/patterns.md](resources/patterns.md) for detailed examples.
+See [references/patterns.md](references/patterns.md) for detailed examples.
 
 | Pattern | Use Case |
 |---------|----------|
@@ -108,7 +108,7 @@ end
 
 ## Fixtures
 
-See [resources/patterns.md](resources/patterns.md) for detailed examples.
+See [references/patterns.md](references/patterns.md) for detailed examples.
 
 ```yaml
 # spec/fixtures/users.yml
@@ -130,7 +130,7 @@ end
 
 ## Mocking and Stubbing
 
-See [resources/patterns.md](resources/patterns.md) for detailed examples.
+See [references/patterns.md](references/patterns.md) for detailed examples.
 
 | Method | Purpose |
 |--------|---------|
@@ -147,7 +147,7 @@ expect(UserMailer).to receive(:welcome_email).with(user)
 
 ## Matchers Quick Reference
 
-See [resources/matchers.md](resources/matchers.md) for complete reference.
+See [references/matchers.md](references/matchers.md) for complete reference.
 
 ### Essential Matchers
 
@@ -252,7 +252,7 @@ end
 
 ## Anti-Patterns
 
-See [resources/anti-patterns.md](resources/anti-patterns.md) for detailed examples.
+See [references/anti-patterns.md](references/anti-patterns.md) for detailed examples.
 
 | Anti-Pattern | Why Bad |
 |--------------|---------|

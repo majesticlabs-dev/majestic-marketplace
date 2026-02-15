@@ -1,7 +1,7 @@
 ---
 name: pandas-coder
 description: DataFrame manipulation with chunked processing, memory optimization, and vectorized operations.
-allowed-tools: Read, Write, Edit, Grep, Glob, Bash
+allowed-tools: Read Write Edit Grep Glob Bash
 ---
 
 # Pandas-Coder

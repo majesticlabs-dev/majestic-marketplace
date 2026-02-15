@@ -1,7 +1,7 @@
 ---
 name: init-agents-config
 description: Generate .agents.yml config from user answers. Provides tech stack templates for Rails, Python, Node, and Generic projects.
-allowed-tools: Read, Write
+allowed-tools: Read Write
 disable-model-invocation: true
 ---
 
@@ -14,21 +14,21 @@ Assemble `.agents.yml` from collected user answers during `/majestic:init`.
 | Resource | Purpose |
 |----------|---------|
 | `CONFIG_VERSION` | Current .agents.yml schema version |
-| `resources/rails.yaml` | Rails config template |
-| `resources/python.yaml` | Python config template |
-| `resources/node.yaml` | Node config template |
-| `resources/generic.yaml` | Generic config template |
-| `resources/agents-md-template.md` | AGENTS.md best practices |
-| `resources/local-config-template.yaml` | Local overrides template |
+| `assets/rails.yaml` | Rails config template |
+| `assets/python.yaml` | Python config template |
+| `assets/node.yaml` | Node config template |
+| `assets/generic.yaml` | Generic config template |
+| `references/agents-md-template.md` | AGENTS.md best practices |
+| `assets/local-config-template.yaml` | Local overrides template |
 
 ## Template Selection by Tech Stack
 
 | Tech Stack | Template |
 |------------|----------|
-| Rails | `resources/rails.yaml` |
-| Python | `resources/python.yaml` |
-| Node | `resources/node.yaml` |
-| Generic | `resources/generic.yaml` |
+| Rails | `assets/rails.yaml` |
+| Python | `assets/python.yaml` |
+| Node | `assets/node.yaml` |
+| Generic | `assets/generic.yaml` |
 
 ## Assembly Instructions
 

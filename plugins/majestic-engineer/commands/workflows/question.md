@@ -2,6 +2,7 @@
 name: majestic:question
 allowed-tools: Bash(git ls-files:*), Read, Grep, Glob, WebSearch, WebFetch
 description: Answer questions about the project structure, documentation, or external topics without coding
+disable-model-invocation: true
 ---
 
 # Question

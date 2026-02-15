@@ -1,7 +1,7 @@
 ---
 name: devops-plan
 description: Gather DevOps context for infrastructure planning. Detects IaC tools, providers, and recommends skills. Use when /majestic:plan detects infrastructure work.
-allowed-tools: Read, Grep, Glob, Bash, Task
+allowed-tools: Read Grep Glob Bash Task
 ---
 
 # DevOps Plan Context

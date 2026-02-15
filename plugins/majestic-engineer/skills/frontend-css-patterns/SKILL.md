@@ -1,7 +1,6 @@
 ---
 name: frontend-css-patterns
 description: Framework-agnostic CSS patterns for typography, color, motion, and spatial composition.
-allowed-tools: []
 ---
 
 # Frontend CSS Patterns

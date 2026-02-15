@@ -1,7 +1,7 @@
 ---
 name: sales-page
 description: Create high-converting sales pages by orchestrating competitive research, positioning, copywriting, and offer skills. Assembles components into a complete sales page blueprint.
-allowed-tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch, AskUserQuestion
+allowed-tools: Read Write Edit Grep Glob WebSearch WebFetch AskUserQuestion
 disable-model-invocation: true
 ---
 
@@ -68,8 +68,8 @@ I'll research winning pages in your niche and build a conversion-optimized bluep
 ### Phase 5: Assemble & Optimize
 
 **Reference local resources:**
-- [resources/bullet-frameworks.md](resources/bullet-frameworks.md) - Bullet point patterns
-- [resources/ab-test-insights.md](resources/ab-test-insights.md) - Data-backed optimization
+- [references/bullet-frameworks.md](references/bullet-frameworks.md) - Bullet point patterns
+- [references/ab-test-insights.md](references/ab-test-insights.md) - Data-backed optimization
 
 ## Sales Page Structure
 
@@ -89,7 +89,7 @@ I'll research winning pages in your niche and build a conversion-optimized bluep
    - Founder story (if applicable)
 
 4. Features/Benefits
-   - Bullets using frameworks (resources/bullet-frameworks.md)
+   - Bullets using frameworks (references/bullet-frameworks.md)
    - Feature → Benefit → Emotion chain
 
 5. Social Proof
@@ -151,7 +151,7 @@ I'll research winning pages in your niche and build a conversion-optimized bluep
 [Closing copy with urgency]
 
 ## A/B Test Recommendations
-[From resources/ab-test-insights.md]
+[From references/ab-test-insights.md]
 
 ## Implementation Checklist
 [ ] Headline tested with 3 variations

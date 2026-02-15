@@ -1,7 +1,7 @@
 ---
 name: python-coder
 description: Modern Python 3.12+ development with uv, ruff, and production-ready practices. Routes to specialized skills for frameworks and testing.
-allowed-tools: Read, Write, Edit, Grep, Glob, Bash
+allowed-tools: Read Write Edit Grep Glob Bash
 ---
 
 # Python-Coder

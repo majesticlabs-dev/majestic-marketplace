@@ -1,7 +1,7 @@
 ---
 name: sales-playbook
 description: Create sales playbooks with discovery frameworks, objection handling, competitive positioning, demo scripts, and closing techniques. Use when building or updating B2B sales enablement materials.
-allowed-tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch, AskUserQuestion
+allowed-tools: Read Write Edit Grep Glob WebSearch WebFetch AskUserQuestion
 ---
 
 # Sales Playbook Builder
@@ -34,14 +34,14 @@ Build each section using resource templates:
 
 | Component | Resource |
 |-----------|----------|
-| Sales Process Map | [resources/sales-process.yaml](resources/sales-process.yaml) |
-| Qualification (BANT+) | [resources/qualification-framework.yaml](resources/qualification-framework.yaml) |
-| Discovery Calls | [resources/discovery-framework.yaml](resources/discovery-framework.yaml) |
-| Demo Framework | [resources/demo-framework.yaml](resources/demo-framework.yaml) |
-| Objection Handling | [resources/objection-handling.yaml](resources/objection-handling.yaml) |
-| Battle Cards | [resources/battle-cards.yaml](resources/battle-cards.yaml) |
-| Closing Techniques | [resources/closing-techniques.yaml](resources/closing-techniques.yaml) |
-| Follow-up Templates | [resources/follow-up-templates.yaml](resources/follow-up-templates.yaml) |
+| Sales Process Map | [assets/sales-process.yaml](assets/sales-process.yaml) |
+| Qualification (BANT+) | [assets/qualification-framework.yaml](assets/qualification-framework.yaml) |
+| Discovery Calls | [assets/discovery-framework.yaml](assets/discovery-framework.yaml) |
+| Demo Framework | [assets/demo-framework.yaml](assets/demo-framework.yaml) |
+| Objection Handling | [assets/objection-handling.yaml](assets/objection-handling.yaml) |
+| Battle Cards | [assets/battle-cards.yaml](assets/battle-cards.yaml) |
+| Closing Techniques | [assets/closing-techniques.yaml](assets/closing-techniques.yaml) |
+| Follow-up Templates | [assets/follow-up-templates.yaml](assets/follow-up-templates.yaml) |
 
 ## Output Format
 

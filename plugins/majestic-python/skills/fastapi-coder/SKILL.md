@@ -1,7 +1,7 @@
 ---
 name: fastapi-coder
 description: Build FastAPI applications with async patterns, Pydantic validation, dependency injection, and modern Python API practices.
-allowed-tools: Read, Write, Edit, Grep, Glob, Bash, WebSearch
+allowed-tools: Read Write Edit Grep Glob Bash WebSearch
 ---
 
 # FastAPI Coder

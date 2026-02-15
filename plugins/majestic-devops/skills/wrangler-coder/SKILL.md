@@ -1,7 +1,7 @@
 ---
 name: wrangler-coder
 description: This skill guides Cloudflare Workers and Pages development with Wrangler CLI. Use when creating Workers, configuring D1 databases, R2 storage, KV namespaces, Queues, or deploying to Cloudflare Pages.
-allowed-tools: Read, Write, Edit, Grep, Glob, Bash
+allowed-tools: Read Write Edit Grep Glob Bash
 ---
 
 # Wrangler Coder
@@ -123,11 +123,11 @@ vars = { ENVIRONMENT = "production" }
 
 | Product | Resource |
 |---------|----------|
-| KV Namespaces | [resources/kv-namespaces.md](resources/kv-namespaces.md) |
-| D1 Database & R2 Storage | [resources/d1-r2.md](resources/d1-r2.md) |
-| Queues & Durable Objects | [resources/queues-durable-objects.md](resources/queues-durable-objects.md) |
-| Workers AI | [resources/workers-ai.md](resources/workers-ai.md) |
-| Cloudflare Pages | [resources/pages.md](resources/pages.md) |
+| KV Namespaces | [references/kv-namespaces.md](references/kv-namespaces.md) |
+| D1 Database & R2 Storage | [references/d1-r2.md](references/d1-r2.md) |
+| Queues & Durable Objects | [references/queues-durable-objects.md](references/queues-durable-objects.md) |
+| Workers AI | [references/workers-ai.md](references/workers-ai.md) |
+| Cloudflare Pages | [references/pages.md](references/pages.md) |
 
 ## Secrets Management
 
@@ -239,7 +239,7 @@ wrangler rollback
 
 ## Complete Worker Example
 
-See [resources/worker-example.md](resources/worker-example.md) for a production-ready Worker with D1, KV, R2 bindings, multi-environment config, and CORS handling.
+See [references/worker-example.md](references/worker-example.md) for a production-ready Worker with D1, KV, R2 bindings, multi-environment config, and CORS handling.
 
 ## Best Practices
 

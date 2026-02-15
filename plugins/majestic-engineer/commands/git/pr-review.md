@@ -3,6 +3,7 @@ name: pr-review
 allowed-tools: Bash(gh *), Bash(git *), Read, Edit, MultiEdit, Write
 description: Review and address Pull Request comments from GitHub
 argument-hint: "[PR #/URL]"
+disable-model-invocation: true
 ---
 
 ## Context

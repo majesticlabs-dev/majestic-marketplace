@@ -1,7 +1,7 @@
 ---
 name: devops-maintainability-checker
 description: Infrastructure maintainability verification covering naming conventions, formatting, DRY patterns, and version constraints.
-allowed-tools: Bash, Glob, Grep, Read
+allowed-tools: Bash Glob Grep Read
 ---
 
 # DevOps Maintainability Checker

@@ -1,7 +1,7 @@
 ---
 name: market-research
 description: Research markets, competitors, and audiences using web data and structured synthesis. Use when entering new markets, validating ideas, or analyzing competitive landscapes.
-allowed-tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch
+allowed-tools: Read Write Edit Grep Glob WebSearch WebFetch
 disable-model-invocation: true
 ---
 

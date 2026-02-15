@@ -1,7 +1,7 @@
 ---
 name: react-coder
 description: Write modern React components with TypeScript, hooks, and best practices. Creates functional components, custom hooks, and follows composition patterns.
-allowed-tools: Read, Write, Edit, Grep, Glob, Bash, WebSearch
+allowed-tools: Read Write Edit Grep Glob Bash WebSearch
 ---
 
 # React Coder
@@ -86,8 +86,6 @@ export const Card: FC<CardProps> = ({ title, children, footer }) => {
 };
 ```
 
-See [resources/patterns.md](resources/patterns.md) for compound components, custom hooks, and advanced patterns.
-
 ## TypeScript Patterns
 
 ### Props with Generics
@@ -158,8 +156,6 @@ src/
 | `useCallback` | Functions passed to memoized children |
 | `memo` | Pure components that re-render often with same props |
 | `lazy` + `Suspense` | Code splitting routes and heavy components |
-
-See [resources/patterns.md](resources/patterns.md) for memoization and code splitting examples.
 
 ## Output Format
 

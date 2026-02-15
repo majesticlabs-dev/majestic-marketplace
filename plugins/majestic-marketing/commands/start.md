@@ -2,6 +2,7 @@
 name: majestic-marketing:start
 allowed-tools: Read, Write, Edit, Grep, Glob, AskUserQuestion
 description: Marketing strategist that routes you to the right skill(s). Use when you don't know where to start, have a vague goal, or need a multi-step workflow.
+disable-model-invocation: true
 ---
 
 # Marketing Orchestrator

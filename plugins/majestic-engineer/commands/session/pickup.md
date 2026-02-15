@@ -4,6 +4,7 @@ description: Resume work from a previous handoff session stored in .agents/hando
 allowed-tools: Bash, Read, AskUserQuestion, Glob, Grep
 model: haiku
 argument-hint: "[optional: handoff-file]"
+disable-model-invocation: true
 ---
 
 Resumes work from a previous handoff session which are stored in `.agents/handoffs`.

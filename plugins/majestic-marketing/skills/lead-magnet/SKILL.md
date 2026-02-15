@@ -8,7 +8,7 @@ triggers:
   - opt-in
   - email opt-in
   - gated content
-allowed-tools: Read, Write, Edit, Grep, Glob, WebSearch, AskUserQuestion
+allowed-tools: Read Write Edit Grep Glob WebSearch AskUserQuestion
 disable-model-invocation: true
 ---
 
@@ -91,7 +91,7 @@ I'll create the content plus landing page copy."
 
 ## Lead Magnet Types
 
-For detailed templates and structures, see [resources/templates.md](resources/templates.md).
+For detailed templates and structures, see [references/templates.md](references/templates.md).
 
 | Type | Best For | Title Formula Example |
 |------|----------|----------------------|

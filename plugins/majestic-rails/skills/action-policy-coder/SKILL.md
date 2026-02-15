@@ -1,7 +1,7 @@
 ---
 name: action-policy-coder
 description: Use proactively for authorization with ActionPolicy. Creates policies, scopes, and integrates with GraphQL/ActionCable. Preferred over Pundit for composable, cacheable authorization.
-allowed-tools: Read, Write, Edit, Grep, Glob, Bash, WebFetch
+allowed-tools: Read Write Edit Grep Glob Bash WebFetch
 ---
 
 # ActionPolicy Coder
@@ -15,8 +15,6 @@ allowed-tools: Read, Write, Edit, Grep, Glob, Bash, WebFetch
 5. **Add I18n** for localized failure messages
 6. **Write tests** using ActionPolicy RSpec matchers
 7. **Integrate** with GraphQL and ActionCable
-
-See [resources/action-policy/patterns.md](resources/action-policy/patterns.md) for detailed testing, GraphQL, ActionCable, and caching patterns.
 
 ## Installation
 

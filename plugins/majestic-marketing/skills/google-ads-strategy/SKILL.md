@@ -1,7 +1,7 @@
 ---
 name: google-ads-strategy
 description: Build Google Ads campaign structures with keyword research, ad copy, audience targeting, and budget allocation. Use for B2B or B2C paid search planning.
-allowed-tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch, AskUserQuestion
+allowed-tools: Read Write Edit Grep Glob WebSearch WebFetch AskUserQuestion
 disable-model-invocation: true
 ---
 
@@ -41,7 +41,7 @@ Use WebSearch extensively to find:
 | Retargeting | 15-20% | Conversion lift |
 | Awareness | 0-10% | Scale phase only |
 
-See [resources/templates.md](resources/templates.md) for detailed architecture diagram.
+See [references/templates.md](references/templates.md) for detailed architecture diagram.
 
 ### 2. Keyword Strategy
 
@@ -70,7 +70,7 @@ Google has broadened match behaviors—exact match now triggers close variants a
 - Maximum 20 keywords per ad group
 - Build negative keywords aggressively (block: "DIY", "repair", "free", "job")
 
-See [resources/templates.md](resources/templates.md) for keyword tables and negative keyword list.
+See [references/templates.md](references/templates.md) for keyword tables and negative keyword list.
 
 ### 3. Ad Copy Framework
 
@@ -88,7 +88,7 @@ See [resources/templates.md](resources/templates.md) for keyword tables and nega
 - Callouts: Free Trial, No Credit Card, 24/7 Support
 - Structured snippets: Types, Services
 
-See [resources/templates.md](resources/templates.md) for complete ad copy library.
+See [references/templates.md](references/templates.md) for complete ad copy library.
 
 ### 4. Audience Strategy
 

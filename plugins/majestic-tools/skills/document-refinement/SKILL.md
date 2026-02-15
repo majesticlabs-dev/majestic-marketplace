@@ -28,8 +28,8 @@ Score each 1-5:
 ```
 DOCUMENT = read target document
 DOC_TYPE = classify(DOCUMENT) → brainstorm | plan | prd | other
-REQUIREMENTS = load resources/document-type-requirements.md[DOC_TYPE]
-VAGUE_PATTERNS = load resources/vague-language-patterns.md
+REQUIREMENTS = load references/document-type-requirements.md[DOC_TYPE]
+VAGUE_PATTERNS = load references/vague-language-patterns.md
 
 Step 1: Structural Check
   For each REQUIRED_SECTION in REQUIREMENTS[DOC_TYPE].sections:

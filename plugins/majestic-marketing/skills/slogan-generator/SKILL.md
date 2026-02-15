@@ -7,7 +7,7 @@ triggers:
   - marketing slogan
   - brand slogan
   - company tagline
-allowed-tools: Read, Write, Edit, Grep, Glob
+allowed-tools: Read Write Edit Grep Glob
 disable-model-invocation: true
 ---
 

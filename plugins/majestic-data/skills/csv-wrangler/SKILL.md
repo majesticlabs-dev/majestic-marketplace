@@ -1,7 +1,7 @@
 ---
 name: csv-wrangler
 description: Handle messy CSVs with encoding detection, delimiter inference, and malformed row recovery.
-allowed-tools: Read, Write, Edit, Grep, Glob, Bash
+allowed-tools: Read Write Edit Grep Glob Bash
 ---
 
 # CSV-Wrangler

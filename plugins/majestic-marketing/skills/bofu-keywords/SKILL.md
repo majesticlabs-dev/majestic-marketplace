@@ -7,7 +7,7 @@ triggers:
   - high intent keywords
   - buyer keywords
   - conversion keywords
-allowed-tools: Read, Write, Edit, Grep, Glob, mcp__perplexity-ask__perplexity_ask
+allowed-tools: Read Write Edit Grep Glob mcp__perplexity-ask__perplexity_ask
 disable-model-invocation: true
 ---
 

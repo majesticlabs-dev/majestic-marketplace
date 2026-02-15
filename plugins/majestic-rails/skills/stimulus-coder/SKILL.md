@@ -1,7 +1,7 @@
 ---
 name: stimulus-coder
 description: Use when creating or refactoring Stimulus controllers. Applies Hotwire conventions, controller design patterns, targets/values usage, action handling, and JavaScript best practices.
-allowed-tools: Read, Write, Edit, Grep, Glob, Bash
+allowed-tools: Read Write Edit Grep Glob Bash
 ---
 
 # Stimulus Coder
@@ -227,7 +227,7 @@ get chartOptions() {
 }
 ```
 
-See [architecture-patterns.md](resources/architecture-patterns.md) for SOLID principles applied to Stimulus.
+See [architecture-patterns.md](references/architecture-patterns.md) for SOLID principles applied to Stimulus.
 
 ## Controller Communication
 
@@ -341,7 +341,7 @@ disconnect() {
 
 Global events use `@window` or `@document` suffix in `data-action`.
 
-See [lifecycle-and-events.md](resources/lifecycle-and-events.md) for complete patterns.
+See [lifecycle-and-events.md](references/lifecycle-and-events.md) for complete patterns.
 
 ## Anti-Patterns
 

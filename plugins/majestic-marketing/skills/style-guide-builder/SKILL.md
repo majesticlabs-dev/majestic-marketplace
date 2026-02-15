@@ -14,7 +14,7 @@ Automatically invoked by `/majestic:style-guide:new` command.
 
 ## Template
 
-- [resources/style-guide-template.md](resources/style-guide-template.md) - Complete style guide output format
+- [references/style-guide-template.md](references/style-guide-template.md) - Complete style guide output format
 
 ## Integration
 

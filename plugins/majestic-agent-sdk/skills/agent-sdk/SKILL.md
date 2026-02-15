@@ -252,12 +252,12 @@ Use `/agent-sdk:agent-scaffold` command to generate a new project.
 
 | Template | Purpose |
 |----------|---------|
-| `resources/typescript/package.json` | Node.js package config |
-| `resources/typescript/agent.ts` | TypeScript agent entry |
-| `resources/python/pyproject.toml` | Python package config |
-| `resources/python/agent.py` | Python agent entry |
-| `resources/env-*.example` | Provider config templates |
-| `resources/claude/*.md` | Subagent/skill/command templates |
+| `assets/typescript/package.json` | Node.js package config |
+| `scripts/typescript/agent.ts` | TypeScript agent entry |
+| `assets/python/pyproject.toml` | Python package config |
+| `scripts/python/agent.py` | Python agent entry |
+| `assets/env-*.example` | Provider config templates |
+| `references/claude/*.md` | Subagent/skill/command templates |
 
 ### Tool Mapping
 

@@ -1,7 +1,7 @@
 ---
 name: gem-builder
 description: Build production-quality Ruby gems. Use when creating new gems, structuring gem architecture, implementing configuration patterns, setting up testing, or preparing for publishing. Covers all gem types - libraries, CLI tools, Rails engines, and API clients.
-allowed-tools: Read, Write, Edit, MultiEdit, Grep, Glob, Bash, WebSearch
+allowed-tools: Read Write Edit MultiEdit Grep Glob Bash WebSearch
 ---
 
 # Gem Builder

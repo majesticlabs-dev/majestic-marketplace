@@ -1,6 +1,6 @@
 {
   "name": "majestic-llm",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "External LLM integration tools for Claude Code. Get second opinions from Codex (OpenAI) and Gemini (Google) on architecture, design, and code review.",
   "author": {
     "name": "David Paluy",

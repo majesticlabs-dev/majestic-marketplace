@@ -3,6 +3,7 @@ name: majestic:expert-panel
 description: Lead a panel of experts to address difficult questions from multiple perspectives
 allowed-tools: Read, Grep, Glob, AskUserQuestion, Task, Write
 argument-hint: "[topic or question]"
+disable-model-invocation: true
 ---
 
 # Expert Panel Discussion Command

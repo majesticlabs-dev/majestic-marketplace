@@ -2,6 +2,7 @@
 description: Generate complete favicon set from source image and update project HTML
 allowed-tools: Bash, Read, Write, Edit, Glob, AskUserQuestion
 argument-hint: "<source-image>"
+disable-model-invocation: true
 ---
 
 # Favicon Generator

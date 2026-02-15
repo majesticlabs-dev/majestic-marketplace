@@ -27,7 +27,7 @@ Build accessible, modern dialog UIs using the native HTML `<dialog>` element wit
 
 ## Zero-JavaScript Confirmation Dialogs (Recommended)
 
-Modern browsers support the **Invoker Commands API** for declarative dialog control—no JavaScript required. See [resources/zero-js-patterns.md](resources/zero-js-patterns.md) for complete examples.
+Modern browsers support the **Invoker Commands API** for declarative dialog control—no JavaScript required. See [references/zero-js-patterns.md](references/zero-js-patterns.md) for complete examples.
 
 ### Quick Reference
 
@@ -59,7 +59,7 @@ Modern browsers support the **Invoker Commands API** for declarative dialog cont
 | Complex multi-step dialogs | Stimulus controller |
 | Animations | CSS `@starting-style` |
 
-### Additional Patterns (see resources/)
+### Additional Patterns (see references/)
 
 - **CSS animations** with `@starting-style` for enter/exit transitions
 - **Turbo.config.forms.confirm** to replace ugly browser dialogs
@@ -329,7 +329,7 @@ end
 
 ## Alert/Toast Pattern
 
-For flash messages and notifications. Use `show()` instead of `showModal()` for non-modal presentation. See [resources/toast-slideover-patterns.md](resources/toast-slideover-patterns.md) for complete implementation.
+For flash messages and notifications. Use `show()` instead of `showModal()` for non-modal presentation. See [references/toast-slideover-patterns.md](references/toast-slideover-patterns.md) for complete implementation.
 
 ```erb
 <dialog class="toast" data-controller="toast" data-toast-duration-value="5000">
@@ -341,7 +341,7 @@ Key difference: `show()` opens without backdrop or focus trap (toasts), `showMod
 
 ## Slideover Panel Pattern
 
-For side panels (settings, filters, details). See [resources/toast-slideover-patterns.md](resources/toast-slideover-patterns.md) for styling and animations.
+For side panels (settings, filters, details). See [references/toast-slideover-patterns.md](references/toast-slideover-patterns.md) for styling and animations.
 
 ```erb
 <dialog class="slideover" data-controller="dialog" data-action="click->dialog#clickOutside">
@@ -430,4 +430,4 @@ expect(page).not_to have_selector("dialog[open]")  # Modal closed
 | Invoker Commands | 135+ | 144+ | 26.2+ |
 | `@starting-style` | 117+ | 129+ | 17.5+ |
 
-For older browsers: [dialog polyfill](https://github.com/GoogleChrome/dialog-polyfill), [invokers polyfill](https://github.com/nickshanks/invokers). See [resources/zero-js-patterns.md](resources/zero-js-patterns.md) for progressive enhancement strategies.
+For older browsers: [dialog polyfill](https://github.com/GoogleChrome/dialog-polyfill), [invokers polyfill](https://github.com/nickshanks/invokers). See [references/zero-js-patterns.md](references/zero-js-patterns.md) for progressive enhancement strategies.

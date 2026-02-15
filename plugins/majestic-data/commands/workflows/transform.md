@@ -2,6 +2,7 @@
 name: majestic-data:transform
 description: Transform data files between formats or apply transformations.
 argument-hint: "<source> --to <target> [--flatten] [--schema]"
+disable-model-invocation: true
 ---
 
 # Data Transform Command

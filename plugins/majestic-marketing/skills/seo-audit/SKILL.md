@@ -36,7 +36,7 @@ Mustang → Topicality (T*) → NavBoost → Twiddlers
 - Two foundational pillars: Q* (site quality) and P* (popularity via Chrome data)
 - Page potential is capped by domain's `siteAuthority` score
 
-See `resources/google-ranking-signals.yaml` for complete signal reference.
+See `assets/google-ranking-signals.yaml` for complete signal reference.
 
 ## Audit Framework
 
@@ -321,7 +321,7 @@ Deliver top 5 issues with affected signals and fixes.
 ## Signal Reference
 
 For detailed signal documentation, see:
-`resources/google-ranking-signals.yaml`
+`assets/google-ranking-signals.yaml`
 
 Key signals to remember:
 - `titlematchScore` - Title relevance to query

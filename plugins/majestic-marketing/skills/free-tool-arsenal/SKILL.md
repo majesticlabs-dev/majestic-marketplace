@@ -1,7 +1,7 @@
 ---
 name: free-tool-arsenal
 description: Build a complete business tech stack with 100% free tools. Find proven zero-cost alternatives, automation workflows, and workarounds for free plan limitations.
-allowed-tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch, AskUserQuestion
+allowed-tools: Read Write Edit Grep Glob WebSearch WebFetch AskUserQuestion
 disable-model-invocation: true
 ---
 

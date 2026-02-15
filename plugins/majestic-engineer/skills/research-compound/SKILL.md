@@ -1,7 +1,7 @@
 ---
 name: research-compound
 description: Automatically check and update folder-specific AGENTS.md during research. Before investigating a domain, read nearest AGENTS.md for existing context. After discovering valuable patterns, append learnings to that file.
-allowed-tools: [Read, Edit, Glob]
+allowed-tools: Read Edit Glob
 ---
 
 # Research Compound

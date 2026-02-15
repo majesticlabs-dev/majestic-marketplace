@@ -1,7 +1,7 @@
 ---
 name: devops-simplicity-checker
 description: Infrastructure simplicity scoring. Detects overengineering in Terraform/OpenTofu and Ansible configurations.
-allowed-tools: Bash, Glob, Grep
+allowed-tools: Bash Glob Grep
 ---
 
 # DevOps Simplicity Checker

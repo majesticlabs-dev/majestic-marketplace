@@ -169,7 +169,7 @@ claude --teammate-mode in-process
 
 **Idle notifications:** When a teammate finishes and stops, it automatically notifies the lead.
 
-**Message type schemas:** See [resources/message-formats.yml](resources/message-formats.yml)
+**Message type schemas:** See [assets/message-formats.yml](assets/message-formats.yml)
 
 ## Task Coordination
 
@@ -280,7 +280,7 @@ Fires when a task is being marked as completed (via TaskUpdate or when teammate 
 
 **TeammateIdle:** command hooks only (no prompt/agent hooks). **TaskCompleted:** supports command, prompt, and agent handler types.
 
-See [resources/hook-examples.yml](resources/hook-examples.yml) for configuration examples.
+See [assets/hook-examples.yml](assets/hook-examples.yml) for configuration examples.
 
 ## Graceful Shutdown
 
@@ -326,7 +326,7 @@ See [resources/hook-examples.yml](resources/hook-examples.yml) for configuration
         └── N.json
 ```
 
-See [resources/team-config-schema.yml](resources/team-config-schema.yml) for full schemas.
+See [assets/team-config-schema.yml](assets/team-config-schema.yml) for full schemas.
 
 ## Known Limitations
 
@@ -358,7 +358,7 @@ See [resources/team-config-schema.yml](resources/team-config-schema.yml) for ful
 
 ## Orchestration Patterns
 
-See [resources/orchestration-patterns.md](resources/orchestration-patterns.md) for 4 detailed patterns:
+See [references/orchestration-patterns.md](references/orchestration-patterns.md) for 4 detailed patterns:
 
 1. **Parallel Review** — Multiple specialists review simultaneously with distinct lenses
 2. **Competing Hypotheses** — Adversarial investigation prevents anchoring bias

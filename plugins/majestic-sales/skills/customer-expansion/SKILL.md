@@ -1,7 +1,7 @@
 ---
 name: customer-expansion
 description: Create expansion roadmaps, QBR templates, and upsell playbooks to grow existing customer revenue through strategic account development.
-allowed-tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch, AskUserQuestion
+allowed-tools: Read Write Edit Grep Glob WebSearch WebFetch AskUserQuestion
 disable-model-invocation: true
 ---
 
@@ -44,7 +44,7 @@ I'll create expansion roadmaps and playbooks tailored to your model."
 
 ### 2. QBR Template with Expansion Hooks
 
-See [resources/qbr-conversations.yaml](resources/qbr-conversations.yaml) for complete template.
+See [assets/qbr-conversations.yaml](assets/qbr-conversations.yaml) for complete template.
 
 **QBR Agenda (45-60 min):**
 
@@ -57,7 +57,7 @@ See [resources/qbr-conversations.yaml](resources/qbr-conversations.yaml) for com
 
 ### 3. Expansion Conversation Framework
 
-See [resources/qbr-conversations.yaml](resources/qbr-conversations.yaml) for email templates and objection handling.
+See [assets/qbr-conversations.yaml](assets/qbr-conversations.yaml) for email templates and objection handling.
 
 **Trigger Types:**
 

@@ -1,6 +1,7 @@
 ---
 name: majestic-ralph:help
 description: Explain Ralph Loop plugin and available commands
+disable-model-invocation: true
 ---
 
 # Ralph Loop Help

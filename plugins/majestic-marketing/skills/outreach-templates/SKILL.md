@@ -1,7 +1,6 @@
 ---
 name: outreach-templates
 description: Copy-paste templates for cold outreach, guest posts, podcast pitches, and link building with follow-up sequences.
-allowed-tools: []
 disable-model-invocation: true
 ---
 

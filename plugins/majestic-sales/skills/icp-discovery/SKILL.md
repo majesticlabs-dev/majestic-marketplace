@@ -1,7 +1,7 @@
 ---
 name: icp-discovery
 description: Systematically discover and define your Ideal Customer Profile with firmographic criteria, buyer personas, scoring matrices, anti-ICP signals, and validation methodology.
-allowed-tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch, AskUserQuestion
+allowed-tools: Read Write Edit Grep Glob WebSearch WebFetch AskUserQuestion
 ---
 
 # ICP Discovery
@@ -53,7 +53,7 @@ Analyze best vs. worst customers to find patterns:
 - Worst customers: Why they churned, warning signs
 - Hypothesis vs. reality gaps
 
-Full template: [resources/icp-templates.yaml](resources/icp-templates.yaml)
+Full template: [assets/icp-templates.yaml](assets/icp-templates.yaml)
 
 ### 2. Firmographic Criteria
 
@@ -73,7 +73,7 @@ Plus: Technographic signals (CRM, marketing tools, engineering stack) and organi
 - **Buying behavior**: Research style, decision speed, risk tolerance
 - **Mindset & values**: Growth orientation, tech adoption
 
-Full template: [resources/icp-templates.yaml](resources/icp-templates.yaml)
+Full template: [assets/icp-templates.yaml](assets/icp-templates.yaml)
 
 ### 4. Buyer Personas (Within ICP)
 
@@ -84,7 +84,7 @@ Full template: [resources/icp-templates.yaml](resources/icp-templates.yaml)
 | **User** | Daily workflow, frustrations, adoption drivers |
 | **Blocker** | Why they block, how to neutralize |
 
-Full persona templates: [resources/icp-templates.yaml](resources/icp-templates.yaml)
+Full persona templates: [assets/icp-templates.yaml](assets/icp-templates.yaml)
 
 ### 5. Anti-ICP Definition
 
@@ -123,13 +123,13 @@ For each segment:
 - Monitor for ICP drift
 - Quarterly review cadence
 
-Full framework: [resources/validation-activation.yaml](resources/validation-activation.yaml)
+Full framework: [assets/validation-activation.yaml](assets/validation-activation.yaml)
 
 ### 9. Activation Checklist
 
 Update: Outbound targeting, ad audiences, lead scoring, website copy, sales playbook, content calendar, case studies, SDR training.
 
-Full checklist: [resources/validation-activation.yaml](resources/validation-activation.yaml)
+Full checklist: [assets/validation-activation.yaml](assets/validation-activation.yaml)
 
 ## Output Format
 
@@ -165,7 +165,7 @@ Full checklist: [resources/validation-activation.yaml](resources/validation-acti
 
 ---
 
-[Full sections using templates from resources/]
+[Full sections using templates from assets/]
 ```
 
 ## Quality Standards

@@ -19,7 +19,7 @@ This skill is automatically invoked by the `/majestic:ux-brief` command. It prov
 
 ## Template
 
-Read the design system template: [resources/design-system-template.md](resources/design-system-template.md)
+Read the design system template: [references/design-system-template.md](references/design-system-template.md)
 
 ## Key Principles
 

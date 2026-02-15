@@ -1,7 +1,7 @@
 ---
 name: competitive-positioning
 description: Analyze competitors, identify positioning weaknesses, and craft sharp differentiators with taglines and tweet-length pitches. Use when entering competitive markets or refining product positioning.
-allowed-tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch, AskUserQuestion
+allowed-tools: Read Write Edit Grep Glob WebSearch WebFetch AskUserQuestion
 disable-model-invocation: true
 ---
 

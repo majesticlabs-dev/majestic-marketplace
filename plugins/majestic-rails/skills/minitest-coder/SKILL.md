@@ -1,7 +1,7 @@
 ---
 name: minitest-coder
 description: Write Minitest tests for Ruby and Rails applications. Use when creating test files, writing test cases, or testing new features. Not for RSpec — use rspec-coder instead. Covers both traditional and spec styles, fixtures, mocking, and Rails integration testing patterns.
-allowed-tools: Read, Write, Edit, MultiEdit, Grep, Glob, Bash, WebSearch
+allowed-tools: Read Write Edit MultiEdit Grep Glob Bash WebSearch
 ---
 
 # Minitest Coder
@@ -74,7 +74,7 @@ end
 
 ## Spec Style Patterns
 
-See [resources/spec-patterns.md](resources/spec-patterns.md) for detailed examples.
+See [references/spec-patterns.md](references/spec-patterns.md) for detailed examples.
 
 | Pattern | Use Case |
 |---------|----------|
@@ -118,7 +118,7 @@ end
 
 ## Mocking and Stubbing
 
-See [resources/spec-patterns.md](resources/spec-patterns.md) for detailed examples.
+See [references/spec-patterns.md](references/spec-patterns.md) for detailed examples.
 
 | Method | Purpose |
 |--------|---------|
@@ -252,7 +252,7 @@ end
 
 ## Advanced Patterns
 
-See [resources/advanced-patterns.md](resources/advanced-patterns.md) for production-tested patterns from 37signals.
+See [references/advanced-patterns.md](references/advanced-patterns.md) for production-tested patterns from 37signals.
 
 | Pattern | Problem Solved |
 |---------|----------------|
@@ -265,7 +265,7 @@ See [resources/advanced-patterns.md](resources/advanced-patterns.md) for product
 
 ## Anti-Patterns
 
-See [resources/anti-patterns.md](resources/anti-patterns.md) for detailed examples.
+See [references/anti-patterns.md](references/anti-patterns.md) for detailed examples.
 
 | Anti-Pattern | Why Bad |
 |--------------|---------|
