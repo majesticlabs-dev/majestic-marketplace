@@ -7,7 +7,7 @@ triggers:
   - write content
   - article outline
   - blog post
-allowed-tools: Read, Write, Edit, Grep, Glob, WebSearch, mcp__perplexity-ask__perplexity_ask
+allowed-tools: Read Write Edit Grep Glob WebSearch mcp__perplexity-ask__perplexity_ask
 ---
 
 # Content Writer

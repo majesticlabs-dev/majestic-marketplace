@@ -1,7 +1,7 @@
 ---
 name: ruby-coder
 description: This skill guides writing of new Ruby code following modern Ruby 3.x syntax, Sandi Metz's 4 Rules for Developers, and idiomatic Ruby best practices. Use when creating new Ruby files, writing Ruby methods, or refactoring Ruby code to ensure adherence to clarity, simplicity, and maintainability standards.
-allowed-tools: Read, Write, Edit, MultiEdit, Grep, Glob, Bash, WebSearch
+allowed-tools: Read Write Edit MultiEdit Grep Glob Bash WebSearch
 ---
 
 # Ruby Coder

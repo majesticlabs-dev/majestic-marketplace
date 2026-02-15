@@ -86,7 +86,7 @@ my-skill/
 ---
 name: skill-name              # Matches directory, defaults to dir name if omitted
 description: What it does...  # Recommended, max 1024 chars
-allowed-tools: Read, Bash     # Optional, space-delimited
+allowed-tools: Read Bash      # Optional, space-delimited
 ---
 ```
 

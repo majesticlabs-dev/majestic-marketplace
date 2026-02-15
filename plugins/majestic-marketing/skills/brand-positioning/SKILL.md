@@ -8,7 +8,7 @@ triggers:
   - brand purpose
   - brand values
   - positioning statement
-allowed-tools: Read, Write, Edit, Grep, Glob, WebSearch, AskUserQuestion
+allowed-tools: Read Write Edit Grep Glob WebSearch AskUserQuestion
 ---
 
 # Brand Positioning Architect

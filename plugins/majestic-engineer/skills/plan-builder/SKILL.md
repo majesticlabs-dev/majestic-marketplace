@@ -1,7 +1,7 @@
 ---
 name: plan-builder
 description: Write implementation plans with appropriate templates based on complexity. Use when planning features or changes. Provides minimal, standard, and full templates for different scope levels.
-allowed-tools: Read, Write, Edit
+allowed-tools: Read Write Edit
 disable-model-invocation: true
 ---
 
@@ -13,9 +13,9 @@ Write implementation plans using the appropriate template based on complexity.
 
 | Complexity | When to Use | Template |
 |------------|-------------|----------|
-| **Minimal** | Simple bugs, small improvements, clear single-file changes | `resources/minimal.md` |
-| **Standard** | Most features, complex bugs, team collaboration | `resources/standard.md` |
-| **Comprehensive** | Major features, architectural changes, multi-phase work | `resources/comprehensive.md` |
+| **Minimal** | Simple bugs, small improvements, clear single-file changes | `references/minimal.md` |
+| **Standard** | Most features, complex bugs, team collaboration | `references/standard.md` |
+| **Comprehensive** | Major features, architectural changes, multi-phase work | `references/comprehensive.md` |
 
 ## Selection Criteria
 

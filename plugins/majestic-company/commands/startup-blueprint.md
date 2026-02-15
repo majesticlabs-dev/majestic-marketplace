@@ -2,6 +2,7 @@
 name: majestic:startup-blueprint
 description: Interactive 7-phase startup planning tailored to skills, budget, and goals
 argument-hint: "[optional: industry, idea, or constraints to start with]"
+disable-model-invocation: true
 ---
 
 # Startup Blueprint

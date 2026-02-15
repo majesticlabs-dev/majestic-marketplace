@@ -1,6 +1,6 @@
 ---
 name: skill-linter
-description: Validate skills against agentskills.io specification. Use when adding new skills to the marketplace, reviewing skill PRs, checking skill compliance, or running quality gates on skills. Validates frontmatter fields (name, description, license, compatibility, metadata, allowed-tools), directory naming, line limits, and structure.
+description: Validate skills against agentskills.io specification. Use when adding new skills to the marketplace, reviewing skill PRs, checking skill compliance, or running quality gates on skills. Validates frontmatter fields (name, description, compatibility, metadata, allowed-tools), directory naming, line limits, and structure.
 allowed-tools: Bash Read Glob Grep
 ---
 
@@ -26,10 +26,9 @@ allowed-tools: Bash Read Glob Grep
 
 | Field | Constraints |
 |-------|-------------|
-| `license` | Short license name or file reference |
 | `compatibility` | 1-500 chars, environment requirements |
 | `metadata` | Key-value pairs (string values only) |
-| `allowed-tools` | Space-delimited tool list |
+| `allowed-tools` | Space-delimited tool list (FAIL on commas or array syntax) |
 
 ### Structure Requirements
 

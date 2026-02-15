@@ -1,7 +1,7 @@
 ---
 name: cloudflare-worker
 description: Build edge-first TypeScript applications on Cloudflare Workers. Covers Workers API, Hono framework, KV/D1/R2 storage, Durable Objects, Queues, and testing patterns. Use when creating serverless workers, edge functions, or Cloudflare-deployed services.
-allowed-tools: Read, Write, Edit, MultiEdit, Grep, Glob, Bash, WebSearch, WebFetch
+allowed-tools: Read Write Edit MultiEdit Grep Glob Bash WebSearch WebFetch
 ---
 
 # Cloudflare Workers
@@ -57,7 +57,7 @@ compatibility_date = "2024-12-01"
 compatibility_flags = ["nodejs_compat"]
 ```
 
-See [resources/setup.md](resources/setup.md) for full configuration with all bindings.
+See [references/setup.md](references/setup.md) for full configuration with all bindings.
 
 ### Basic Hono App
 
@@ -74,7 +74,7 @@ app.notFound((c) => c.json({ error: 'Not Found' }, 404));
 export default app;
 ```
 
-See [resources/hono.md](resources/hono.md) for route organization and middleware patterns.
+See [references/hono.md](references/hono.md) for route organization and middleware patterns.
 
 ## Storage Quick Reference
 
@@ -100,7 +100,7 @@ await env.STORAGE.put('path/file.json', JSON.stringify(data));
 const object = await env.STORAGE.get('path/file.json');
 ```
 
-See [resources/storage.md](resources/storage.md) for caching patterns, migrations, and queries.
+See [references/storage.md](references/storage.md) for caching patterns, migrations, and queries.
 
 ## Durable Objects
 
@@ -113,7 +113,7 @@ const stub = c.env.COUNTER.get(id);
 const response = await stub.fetch(new Request('http://do/increment'));
 ```
 
-See [resources/durable-objects.md](resources/durable-objects.md) for full patterns including WebSocket Hibernation.
+See [references/durable-objects.md](references/durable-objects.md) for full patterns including WebSocket Hibernation.
 
 ## Queues
 
@@ -130,7 +130,7 @@ async queue(batch: MessageBatch, env: Env) {
 }
 ```
 
-See [resources/queues-testing.md](resources/queues-testing.md) for consumer patterns and testing setup.
+See [references/queues-testing.md](references/queues-testing.md) for consumer patterns and testing setup.
 
 ## CLI Commands
 

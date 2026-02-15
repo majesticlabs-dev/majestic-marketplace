@@ -12,7 +12,7 @@ triggers:
   - review my landing page
   - improve conversion
   - cro audit
-allowed-tools: Read, Write, Edit, AskUserQuestion, WebFetch
+allowed-tools: Read Write Edit AskUserQuestion WebFetch
 disable-model-invocation: true
 ---
 

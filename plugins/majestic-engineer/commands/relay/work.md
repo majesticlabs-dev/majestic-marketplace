@@ -3,6 +3,7 @@ name: majestic-relay:work
 description: Execute epic tasks with fresh-context Claude instances and quality gate verification
 argument-hint: "[task_id] [--max-attempts N]"
 allowed-tools: Bash(${CLAUDE_PLUGIN_ROOT}/scripts/relay/relay-work.sh:*)
+disable-model-invocation: true
 ---
 
 # Execute Epic Tasks

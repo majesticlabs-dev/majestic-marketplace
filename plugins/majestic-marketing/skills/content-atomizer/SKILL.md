@@ -8,7 +8,7 @@ triggers:
   - turn article into
   - repurpose article
   - content repurposing
-allowed-tools: Read, Write, Edit, Grep, Glob, WebSearch, AskUserQuestion
+allowed-tools: Read Write Edit Grep Glob WebSearch AskUserQuestion
 disable-model-invocation: true
 ---
 
@@ -36,7 +36,7 @@ If the user just pastes content, proceed immediately. Don't over-ask.
 
 ## Output Formats
 
-**19 formats across 5 categories.** Templates in `resources/`:
+**19 formats across 5 categories.** Templates in `assets/`:
 - `social-templates.yaml` - Twitter, LinkedIn, IG, Threads, Pinterest
 - `video-audio-templates.yaml` - Video, TikTok, Shorts, Audiogram, Podcast
 - `written-templates.yaml` - Email, Blog spin-offs, SEO snippets

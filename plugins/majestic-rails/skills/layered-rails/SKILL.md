@@ -50,7 +50,7 @@ Diagnostic for misplaced code:
 - Notification preferences → Domain (keep as concern)
 - Activity logging → Infrastructure (extract to observer/event)
 
-See [resources/extraction-signals.md](resources/extraction-signals.md) for the full methodology.
+See [references/extraction-signals.md](references/extraction-signals.md) for the full methodology.
 
 ## Callback Scoring
 
@@ -136,13 +136,13 @@ When to extract code from existing locations:
 |--------|-----------|--------|
 | Method length | > 15 lines | Extract method or object |
 | External API call in model | Any | Extract to service/gateway |
-| God object | High churn × high complexity | Decompose (see [resources/extraction-signals.md](resources/extraction-signals.md)) |
+| God object | High churn × high complexity | Decompose (see [references/extraction-signals.md](references/extraction-signals.md)) |
 | Spec exceeds layer concern | Specification test fails | Extract to appropriate layer |
 | Callback score | 1-2/5 | Extract to service or event handler |
 | Duplicated query logic | 2+ locations | Extract Query Object |
 | `Current.*` in model | Any usage | Pass as explicit parameter |
 
-See [resources/extraction-signals.md](resources/extraction-signals.md) for the complete methodology.
+See [references/extraction-signals.md](references/extraction-signals.md) for the complete methodology.
 
 ## Model Organization
 
@@ -203,5 +203,5 @@ This skill complements `dhh-coder`, not replaces it.
 | JSON attributes | `store-model-coder` |
 | Refactoring execution | `rails-refactorer` |
 | DHH-style simplicity | `dhh-coder` |
-| Pattern catalog details | [resources/pattern-catalog.md](resources/pattern-catalog.md) |
-| Extraction methodology | [resources/extraction-signals.md](resources/extraction-signals.md) |
+| Pattern catalog details | [references/pattern-catalog.md](references/pattern-catalog.md) |
+| Extraction methodology | [references/extraction-signals.md](references/extraction-signals.md) |

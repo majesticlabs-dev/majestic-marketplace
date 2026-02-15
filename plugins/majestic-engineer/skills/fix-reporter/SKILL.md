@@ -1,11 +1,7 @@
 ---
 name: fix-reporter
 description: Capture solved problems as categorized documentation with YAML frontmatter for fast lookup
-allowed-tools:
-  - Read
-  - Write
-  - Bash
-  - Grep
+allowed-tools: Read Write Bash Grep
 preconditions:
   - Problem has been solved (not in-progress)
   - Solution has been verified working

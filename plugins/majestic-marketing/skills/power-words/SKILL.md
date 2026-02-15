@@ -10,7 +10,7 @@ triggers:
   - make more compelling
   - persuasive copy
   - convert better
-allowed-tools: Read, Write, Edit, Grep, Glob, AskUserQuestion
+allowed-tools: Read Write Edit Grep Glob AskUserQuestion
 disable-model-invocation: true
 ---
 
@@ -20,7 +20,7 @@ Transform ordinary copy into emotionally compelling content using psychological 
 
 ## Resources
 
-- [Word Library](resources/word-library.txt) — Complete word lists by category
+- [Word Library](assets/word-library.txt) — Complete word lists by category
 
 ## What Are Power Words?
 
@@ -65,7 +65,7 @@ Use `AskUserQuestion`:
 | **Safety** | Security | Protection content |
 | **Mind-blowing** | Amazement | Shareability |
 
-See [resources/word-library.txt](resources/word-library.txt) for complete word lists.
+See [assets/word-library.txt](assets/word-library.txt) for complete word lists.
 
 ## Enhancement Process
 

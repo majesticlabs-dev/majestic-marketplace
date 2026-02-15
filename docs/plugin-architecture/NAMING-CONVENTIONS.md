@@ -92,43 +92,30 @@ Omit `name:` field to use automatic path-based naming.
 2. Omit `name:` field for tier 3 (utility) commands to use automatic naming
 3. Never use full plugin prefix (e.g., `majestic-engineer:git:commit`) - inconsistent with convention
 
-## Resource & Script References
+## Skill Subdirectories
 
-Skills can include supporting files in `resources/` and `scripts/` subdirectories. Use these patterns for referencing them.
+Skills use three subdirectory types based on content (agentskills.io spec):
 
-### Resources (Documentation, Templates, Examples)
+| Directory | Content | Examples |
+|-----------|---------|----------|
+| `references/` | Documentation, templates, guides (`.md`) | `references/patterns.md`, `references/template.md` |
+| `assets/` | Data files, configs (`.yaml`, `.yml`, `.json`, `.txt`) | `assets/config.yaml`, `assets/word-library.txt` |
+| `scripts/` | Executable tools (`.py`, `.ts`, `.sh`) | `scripts/validate.sh`, `scripts/agent.py` |
 
-**Always use markdown link format:**
-
-```markdown
-See [resources/patterns.md](resources/patterns.md) for detailed examples.
-Read [resources/template.md](resources/template.md) before implementing.
-```
-
-| Aspect | Pattern |
-|--------|---------|
-| **Format** | `[resources/filename.md](resources/filename.md)` |
-| **Location** | `skills/{skill-name}/resources/` |
-| **Why links?** | Clickable in editors, GitHub preview, enables LSP navigation |
-
-**Avoid backtick references in prose:**
+**Always use markdown link format for references:**
 
 ```markdown
-# ❌ WRONG - not clickable, harder to navigate
-See `resources/patterns.md` for details.
-
-# ✅ CORRECT - clickable, navigable
-See [resources/patterns.md](resources/patterns.md) for details.
+See [references/patterns.md](references/patterns.md) for detailed examples.
+Read [references/template.md](references/template.md) before implementing.
 ```
 
 **Exception: Tables displaying file paths as data are acceptable with backticks:**
 
 ```markdown
-# ✅ OK - table data showing file paths, not navigation instruction
 | Template | File |
 |----------|------|
-| Rails    | `resources/rails.yaml` |
-| Python   | `resources/python.yaml` |
+| Rails    | `assets/rails.yaml` |
+| Python   | `assets/python.yaml` |
 ```
 
 ### Scripts (Executable Tools)
@@ -146,27 +133,13 @@ bash {baseDir}/scripts/script_name.sh [arguments]
 | **Template variable** | `{baseDir}` is replaced at runtime with skill's actual path |
 | **Script requirements** | Must be executable, include shebang, handle arguments |
 
-**Example skill with scripts:**
-
-```markdown
-## Usage
-
-Run the worktree manager:
-
-\`\`\`bash
-bash {baseDir}/scripts/worktree-manager.sh create feature-branch
-bash {baseDir}/scripts/worktree-manager.sh list
-bash {baseDir}/scripts/worktree-manager.sh cleanup --force
-\`\`\`
-```
-
 ### Agent & Command Resources
 
 For agents and commands, resources go in dedicated subdirectories:
 
 | Component | Resource Location |
 |-----------|------------------|
-| Skills | `skills/{skill-name}/resources/` |
+| Skills | `skills/{skill-name}/references/`, `assets/`, `scripts/` |
 | Agents | `agents/**/resources/{agent-name}/` |
 | Commands | `commands/**/resources/{command-name}/` |
 

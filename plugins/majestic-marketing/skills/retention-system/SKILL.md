@@ -1,7 +1,7 @@
 ---
 name: retention-system
 description: Design customer retention systems with health scoring, churn prediction, and proactive engagement workflows. Use when reducing churn or maximizing LTV.
-allowed-tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch, AskUserQuestion
+allowed-tools: Read Write Edit Grep Glob WebSearch WebFetch AskUserQuestion
 disable-model-invocation: true
 ---
 
@@ -64,7 +64,7 @@ Use WebSearch to find:
 | 40-59 | At-Risk (Orange) | Intervention required |
 | 0-39 | Critical (Red) | Immediate escalation |
 
-See [resources/playbooks.md](resources/playbooks.md) for detailed scoring criteria.
+See [references/playbooks.md](references/playbooks.md) for detailed scoring criteria.
 
 ### 3. Onboarding System
 
@@ -103,7 +103,7 @@ See [resources/playbooks.md](resources/playbooks.md) for detailed scoring criter
 
 ### 5. Intervention Playbooks
 
-See [resources/playbooks.md](resources/playbooks.md) for detailed playbooks:
+See [references/playbooks.md](references/playbooks.md) for detailed playbooks:
 - Usage Decline (14-day sequence)
 - Support Escalation (72-hour response)
 - Competitor Threat (48-hour response)

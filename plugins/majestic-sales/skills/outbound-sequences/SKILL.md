@@ -1,7 +1,7 @@
 ---
 name: outbound-sequences
 description: Templates and frameworks for cold outreach sequences. Email templates, cold call scripts, LinkedIn messages, subject lines, and response handling.
-allowed-tools: Read, Write, Edit, WebSearch
+allowed-tools: Read Write Edit WebSearch
 disable-model-invocation: true
 ---
 
@@ -51,9 +51,9 @@ Objection → Objection handler sequence
 
 | Channel | Resource |
 |---------|----------|
-| Email | [resources/email-outreach.md](resources/email-outreach.md) |
-| Cold Calling | [resources/cold-call-scripts.md](resources/cold-call-scripts.md) |
-| LinkedIn | [resources/linkedin-outreach.md](resources/linkedin-outreach.md) |
+| Email | [references/email-outreach.md](references/email-outreach.md) |
+| Cold Calling | [references/cold-call-scripts.md](references/cold-call-scripts.md) |
+| LinkedIn | [references/linkedin-outreach.md](references/linkedin-outreach.md) |
 
 ## Response Handling
 

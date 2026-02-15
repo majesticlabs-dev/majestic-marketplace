@@ -1,7 +1,7 @@
 ---
 name: django-coder
 description: Build Django applications with models, views, forms, templates, REST APIs, and modern Django 5.x patterns.
-allowed-tools: Read, Write, Edit, Grep, Glob, Bash, WebSearch
+allowed-tools: Read Write Edit Grep Glob Bash WebSearch
 ---
 
 # Django Coder

@@ -1,7 +1,7 @@
 ---
 name: kamal-coder
 description: This skill guides deploying Rails applications with Kamal. Use when configuring deploy.yml, setting up accessories, managing secrets, or preparing servers for container deployment.
-allowed-tools: Read, Write, Edit, Grep, Glob, Bash
+allowed-tools: Read Write Edit Grep Glob Bash
 ---
 
 # Kamal Coder

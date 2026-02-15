@@ -1,7 +1,7 @@
 ---
 name: referral-program
 description: Design viral referral programs with incentive structures, sharing mechanics, tracking systems, and optimization strategies to turn customers into advocates who drive new customer acquisition.
-allowed-tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch, AskUserQuestion
+allowed-tools: Read Write Edit Grep Glob WebSearch WebFetch AskUserQuestion
 disable-model-invocation: true
 ---
 
@@ -109,7 +109,7 @@ Full templates for:
 - Social share copy (Twitter, LinkedIn, Facebook)
 - Thank you messages (referrer and referee)
 
-See [resources/messaging-templates.yaml](resources/messaging-templates.yaml)
+See [assets/messaging-templates.yaml](assets/messaging-templates.yaml)
 
 ### 5. Viral Coefficient Framework
 
@@ -136,7 +136,7 @@ Where:
 - Fraud prevention measures
 - Attribution window recommendations
 
-See [resources/tracking-launch.yaml](resources/tracking-launch.yaml)
+See [assets/tracking-launch.yaml](assets/tracking-launch.yaml)
 
 ### 7. Launch Plan
 
@@ -155,7 +155,7 @@ See [resources/tracking-launch.yaml](resources/tracking-launch.yaml)
 - Add gamification
 - Scale sustainably
 
-Full roadmap: [resources/tracking-launch.yaml](resources/tracking-launch.yaml)
+Full roadmap: [assets/tracking-launch.yaml](assets/tracking-launch.yaml)
 
 ## Output Format
 

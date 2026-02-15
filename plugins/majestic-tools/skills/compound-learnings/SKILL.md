@@ -1,7 +1,7 @@
 ---
 name: compound-learnings
 description: Extract patterns from git history and session files, recommend artifacts (skill/rule/hook/agent) based on frequency thresholds
-allowed-tools: [Bash, Read, Glob, Grep]
+allowed-tools: Bash Read Glob Grep
 ---
 
 # Compound Learnings

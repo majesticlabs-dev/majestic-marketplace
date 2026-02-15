@@ -1,7 +1,7 @@
 ---
 name: rubocop-fixer
 description: Use when fixing Rubocop violations. Runs Rubocop to identify issues, applies fixes following project conventions, and explains non-obvious corrections.
-allowed-tools: Read, Write, Edit, Bash, Grep, Glob
+allowed-tools: Read Write Edit Bash Grep Glob
 ---
 
 # Rubocop Fixer

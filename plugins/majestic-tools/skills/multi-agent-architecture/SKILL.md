@@ -72,7 +72,7 @@ Before writing any agent code:
 ```
 skills/project-manager/
 ├── SKILL.md              # Entry point, routes to chapters
-└── resources/
+└── references/
     ├── 01-foundation.md  # Who we are, tools, escalation, standards
     ├── 02-daily-ops.md   # Data gathering procedures
     ├── 03-dashboards.md  # Structure, quality checks

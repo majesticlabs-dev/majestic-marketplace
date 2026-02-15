@@ -8,7 +8,7 @@ triggers:
   - tone of voice
   - brand style
   - voice document
-allowed-tools: Read, Write, Edit, Grep, Glob, WebSearch, AskUserQuestion
+allowed-tools: Read Write Edit Grep Glob WebSearch AskUserQuestion
 ---
 
 # Brand Voice Architect

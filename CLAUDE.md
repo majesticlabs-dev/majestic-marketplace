@@ -82,7 +82,9 @@ Use `qmd` to search indexed plugin docs, skills, agents, and architecture files 
 - Never use: `0A`, `8.5`, `Step 0`, letter suffixes, `2.5`
 
 ### File Locations
-- Skill resources → `skills/*/resources/`
+- Skill references → `skills/*/references/`
+- Skill assets → `skills/*/assets/`
+- Skill scripts → `skills/*/scripts/`
 - Agent resources → `agents/**/resources/{agent-name}/`
 - Command resources → `commands/**/resources/{command-name}/`
 - Resources referenced via relative paths from the markdown file

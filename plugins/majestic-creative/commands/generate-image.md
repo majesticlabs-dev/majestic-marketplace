@@ -2,6 +2,7 @@
 description: Generate images using Gemini API from text prompts
 allowed-tools: Read, Write, Bash, Glob
 argument-hint: "<prompt> <output-path> [--aspect RATIO] [--size SIZE]"
+disable-model-invocation: true
 ---
 
 # Generate Image with Gemini

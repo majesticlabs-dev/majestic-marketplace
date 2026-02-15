@@ -1,7 +1,7 @@
 ---
 name: marketing-strategy
 description: Build a custom marketing strategy through an interactive interview. Develops business positioning, audience targeting, channel selection, and customer journey—then exports as a reusable JSON profile.
-allowed-tools: Read, Write, Edit, AskUserQuestion
+allowed-tools: Read Write Edit AskUserQuestion
 ---
 
 # Marketing Strategy Builder

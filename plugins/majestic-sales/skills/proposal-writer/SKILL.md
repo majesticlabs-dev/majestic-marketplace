@@ -1,7 +1,7 @@
 ---
 name: proposal-writer
 description: Templates and frameworks for creating winning sales proposals. Executive summaries, scope of work, pricing strategies, and closing elements.
-allowed-tools: Read, Write, Edit, WebSearch
+allowed-tools: Read Write Edit WebSearch
 disable-model-invocation: true
 ---
 

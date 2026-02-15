@@ -1,7 +1,7 @@
 ---
 name: backblaze-coder
 description: This skill guides Backblaze B2 Cloud Storage integration with OpenTofu/Terraform and B2 CLI. Use when managing B2 buckets, application keys, file uploads, lifecycle rules, or S3-compatible storage.
-allowed-tools: Read, Write, Edit, Grep, Glob, Bash
+allowed-tools: Read Write Edit Grep Glob Bash
 ---
 
 # Backblaze Coder
@@ -416,7 +416,7 @@ rclone copy -P /local/path backblaze:my-bucket/
 
 ## Complete Production Setup
 
-See [resources/production-setup.md](resources/production-setup.md) for a complete production setup with storage buckets, backup bucket with retention, public assets bucket, and application keys.
+See [references/production-setup.md](references/production-setup.md) for a complete production setup with storage buckets, backup bucket with retention, public assets bucket, and application keys.
 
 ## Makefile Automation
 

@@ -9,7 +9,7 @@ triggers:
   - content for keyword
   - write for ranking
   - create blog post
-allowed-tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch, AskUserQuestion
+allowed-tools: Read Write Edit Grep Glob WebSearch WebFetch AskUserQuestion
 ---
 
 # SEO Content Workflow

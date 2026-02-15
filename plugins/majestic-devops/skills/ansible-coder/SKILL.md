@@ -1,7 +1,7 @@
 ---
 name: ansible-coder
 description: This skill guides writing Ansible playbooks for server configuration. Use when hardening servers, installing packages, or automating post-provisioning tasks that cloud-init cannot handle.
-allowed-tools: Read, Write, Edit, Grep, Glob, Bash
+allowed-tools: Read Write Edit Grep Glob Bash
 ---
 
 # Ansible Coder
@@ -365,9 +365,9 @@ ansible-playbook -i hosts.ini playbook.yml --check --diff
 ansible-playbook -i hosts.ini playbook.yml --limit web
 ```
 
-See [Kamal Server Preparation](resources/kamal-playbook.md) for a complete Kamal deployment server playbook.
+See [Kamal Server Preparation](references/kamal-playbook.md) for a complete Kamal deployment server playbook.
 
-See [Integration with Terraform](resources/provision-script.md) for the Terraform-Ansible-Kamal provisioning pipeline.
+See [Integration with Terraform](references/provision-script.md) for the Terraform-Ansible-Kamal provisioning pipeline.
 
 ## Troubleshooting
 

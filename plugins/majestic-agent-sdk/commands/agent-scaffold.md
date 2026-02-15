@@ -3,6 +3,7 @@ name: agent-sdk:agent-scaffold
 description: Scaffold a new Claude Agent SDK project with interactive configuration
 allowed-tools: Read, Write, Edit, AskUserQuestion, Bash, Skill
 argument-hint: "[project-name]"
+disable-model-invocation: true
 ---
 
 # Agent SDK Project Scaffold

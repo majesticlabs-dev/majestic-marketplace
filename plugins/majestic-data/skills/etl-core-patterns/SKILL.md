@@ -1,7 +1,7 @@
 ---
 name: etl-core-patterns
 description: Core ETL reliability patterns including idempotency, checkpointing, error handling, chunking, retry logic, and logging.
-allowed-tools: Read, Write, Edit, Grep, Glob, Bash
+allowed-tools: Read Write Edit Grep Glob Bash
 ---
 
 # ETL Core Patterns

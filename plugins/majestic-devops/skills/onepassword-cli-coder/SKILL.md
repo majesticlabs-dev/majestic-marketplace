@@ -1,7 +1,7 @@
 ---
 name: onepassword-cli-coder
 description: This skill guides integrating 1Password CLI (op) for secret management in development workflows. Use when loading secrets for infrastructure, deployments, or local development.
-allowed-tools: Read, Write, Edit, Bash, Grep, Glob
+allowed-tools: Read Write Edit Bash Grep Glob
 ---
 
 # 1Password CLI Coder
@@ -415,7 +415,7 @@ op run --account acme.1password.com --env-file=.op.env -- ./deploy.sh
 
 **Key rule:** Always specify account in automation scripts - never rely on "last signed in".
 
-See [resources/multiple-accounts.md](resources/multiple-accounts.md) for detailed patterns including cross-account workflows and Makefile integration.
+See [references/multiple-accounts.md](references/multiple-accounts.md) for detailed patterns including cross-account workflows and Makefile integration.
 
 ## Multi-Environment Pattern
 

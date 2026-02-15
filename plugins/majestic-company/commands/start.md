@@ -2,6 +2,7 @@
 name: majestic-company:start
 allowed-tools: Read, Write, Edit, Grep, Glob, AskUserQuestion
 description: Business strategist that routes you to the right skill or agent. Use when you need product, strategy, or business planning help.
+disable-model-invocation: true
 ---
 
 # Company Orchestrator

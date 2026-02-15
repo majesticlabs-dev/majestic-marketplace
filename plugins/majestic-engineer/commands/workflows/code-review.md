@@ -3,6 +3,7 @@ name: majestic:code-review
 description: Generic code review that auto-detects tech stack and delegates to appropriate framework-specific orchestrator
 argument-hint: "[PR #/URL | --staged | --branch | files...]"
 allowed-tools: Bash, Read, Grep, Glob, Task
+disable-model-invocation: true
 ---
 
 # Code Review

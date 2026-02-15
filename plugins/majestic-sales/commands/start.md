@@ -2,6 +2,7 @@
 name: majestic-sales:start
 allowed-tools: Read, Write, Edit, Grep, Glob, AskUserQuestion
 description: Sales strategist that routes you to the right skill(s). Use when you don't know where to start or need a multi-step sales workflow.
+disable-model-invocation: true
 ---
 
 # Sales Orchestrator

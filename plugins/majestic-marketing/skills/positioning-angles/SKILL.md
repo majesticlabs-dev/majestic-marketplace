@@ -9,7 +9,7 @@ triggers:
   - copywriting angle
   - what angle should I use
   - how to position this
-allowed-tools: AskUserQuestion, Read, Write, Edit
+allowed-tools: AskUserQuestion Read Write Edit
 disable-model-invocation: true
 ---
 
