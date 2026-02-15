@@ -1,6 +1,7 @@
 ---
 name: omtm-growth
 description: YC growth framework - identify One Metric That Matters, commit to 7% weekly growth, install public accountability. Focus-forcing system for early-stage startups.
+disable-model-invocation: true
 ---
 
 # OMTM Growth Framework

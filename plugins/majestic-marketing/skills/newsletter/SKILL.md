@@ -8,6 +8,7 @@ triggers:
   - weekly newsletter
   - email newsletter
 allowed-tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch, AskUserQuestion
+disable-model-invocation: true
 ---
 
 # Newsletter Architect

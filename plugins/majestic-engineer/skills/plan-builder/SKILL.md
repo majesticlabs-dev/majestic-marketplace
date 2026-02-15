@@ -2,6 +2,7 @@
 name: plan-builder
 description: Write implementation plans with appropriate templates based on complexity. Use when planning features or changes. Provides minimal, standard, and full templates for different scope levels.
 allowed-tools: Read, Write, Edit
+disable-model-invocation: true
 ---
 
 # Plan Builder

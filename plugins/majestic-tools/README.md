@@ -1,6 +1,6 @@
 # Majestic Tools
 
-Claude Code customization tools. Includes 1 agent, 11 commands, and 5 skills.
+Claude Code customization tools. Includes 1 agent, 11 commands, and 4 skills.
 
 ## Installation
 
@@ -73,7 +73,6 @@ Invoke with: `skill majestic-tools:<name>`
 | Skill | Description |
 |-------|-------------|
 | `brainstorming` | Refine rough ideas into fully-formed designs through collaborative questioning |
-| `command-patterns` | Best practices for generating Claude Code commands |
 | `compound-learnings` | Identify and persist valuable patterns as reusable artifacts |
 | `devils-advocate` | Challenge ideas and expose weak reasoning |
 | `skill-first` | Check for relevant skills before starting any task |

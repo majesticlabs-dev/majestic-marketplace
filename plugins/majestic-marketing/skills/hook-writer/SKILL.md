@@ -2,6 +2,7 @@
 name: hook-writer
 description: Generate attention-grabbing hooks from 5 investor archetype perspectives to find angles that resonate with different audience motivations.
 allowed-tools: AskUserQuestion
+disable-model-invocation: true
 ---
 
 # Hook Writer

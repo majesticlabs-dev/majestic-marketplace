@@ -1,7 +1,7 @@
 ---
+name: reflect
 allowed-tools: Bash, Read, Edit, AskUserQuestion
 description: Reflect on current session and suggest AGENTS.md improvements based on patterns and feedback.
-model: haiku
 ---
 
 # Reflect

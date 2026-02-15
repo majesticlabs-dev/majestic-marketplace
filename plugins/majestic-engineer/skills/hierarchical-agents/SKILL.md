@@ -1,6 +1,7 @@
 ---
 name: hierarchical-agents
 description: Generate hierarchical AGENTS.md structure for codebases to optimize AI agent token usage. Use when creating AGENTS.md files, documenting codebase structure, setting up agent guidance, organizing project documentation for AI tools, implementing JIT indexing, or working with monorepos that need lightweight root guidance with detailed sub-folder documentation. Covers repository analysis, root AGENTS.md generation, sub-folder AGENTS.md creation, and token-efficient documentation patterns.
+disable-model-invocation: true
 ---
 
 # Hierarchical Agents Documentation Generator

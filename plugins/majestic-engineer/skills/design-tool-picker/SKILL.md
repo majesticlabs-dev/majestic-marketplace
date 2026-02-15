@@ -1,6 +1,7 @@
 ---
 name: design-tool-picker
 description: Help choose the right design tool based on your current task. Use when unsure whether to use frontend-design, ui-ux-designer, visual-validator, or ui-code-auditor.
+disable-model-invocation: true
 ---
 
 # Design Tool Picker

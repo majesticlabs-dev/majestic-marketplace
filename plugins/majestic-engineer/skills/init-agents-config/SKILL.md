@@ -2,6 +2,7 @@
 name: init-agents-config
 description: Generate .agents.yml config from user answers. Provides tech stack templates for Rails, Python, Node, and Generic projects.
 allowed-tools: Read, Write
+disable-model-invocation: true
 ---
 
 # Init Agents Config

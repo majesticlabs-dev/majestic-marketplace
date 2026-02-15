@@ -2,6 +2,7 @@
 name: calendar-optimization
 description: Balance the 4 types of professional time (Management, Creation, Consumption, Ideation). Use when discussing productivity, calendar management, time allocation, or work-life balance.
 allowed-tools: AskUserQuestion
+disable-model-invocation: true
 ---
 
 # Calendar Optimization

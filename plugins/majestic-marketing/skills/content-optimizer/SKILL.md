@@ -2,6 +2,7 @@
 name: content-optimizer
 description: Content optimization workflow covering keyword integration, semantic enhancement, structure optimization, and AI extractability. Use for improving existing content for both search engines and LLMs.
 allowed-tools: Read, Write, Edit, Grep, Glob, WebSearch
+disable-model-invocation: true
 ---
 
 # Content Optimizer Skill

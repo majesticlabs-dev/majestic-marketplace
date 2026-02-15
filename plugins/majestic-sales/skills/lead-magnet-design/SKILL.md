@@ -1,6 +1,7 @@
 ---
 name: lead-magnet-design
 description: Design high-converting lead magnets and entry points with opt-in mechanisms, traffic strategies, and segmentation.
+disable-model-invocation: true
 ---
 
 # Lead Magnet Design

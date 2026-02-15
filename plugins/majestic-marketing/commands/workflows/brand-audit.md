@@ -3,6 +3,7 @@ name: majestic:brand-audit
 description: Comprehensive brand health check. Evaluates voice consistency, visual coherence, positioning alignment, and competitor differentiation across all brand touchpoints.
 allowed-tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch, AskUserQuestion, Task
 argument-hint: "[scope: full, voice, visual, positioning]"
+disable-model-invocation: true
 ---
 
 # Brand Audit

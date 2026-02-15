@@ -2,6 +2,7 @@
 name: majestic:style-guide:new
 description: Create a project style guide interactively. Generates STYLE_GUIDE.md that copy-editor and other skills reference.
 allowed-tools: Read, Write, Edit, Grep, Glob, AskUserQuestion, Skill
+disable-model-invocation: true
 ---
 
 # Style Guide Generator

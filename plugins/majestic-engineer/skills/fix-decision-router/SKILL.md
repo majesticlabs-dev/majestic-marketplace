@@ -11,6 +11,7 @@ allowed-tools:
 preconditions:
   - fix-reporter has created documentation
   - File path known from fix-reporter output
+disable-model-invocation: true
 ---
 
 # fix-decision-router Skill

@@ -1,6 +1,6 @@
 # Majestic Engineer
 
-Language-agnostic engineering workflows. Includes 30 specialized agents, 23 commands, and 18 skills.
+Language-agnostic engineering workflows. Includes 38 specialized agents, 32 commands, and 28 skills.
 
 ## Installation
 
@@ -150,6 +150,16 @@ graph TD
 
 Invoke with: `agent <name>`
 
+### Root
+
+| Agent | Description |
+|-------|-------------|
+| `ci-resolver` | Resolve CI failures by fetching logs, analyzing errors, implementing fixes |
+| `github-resolver` | Resolve CI failures and PR review comments (auto-detects project type) |
+| `pr-comment-resolver` | Address PR review comments by implementing reviewer feedback |
+| `rp-reviewer` | Code review using RepoPrompt MCP (chat_send mode=review) |
+| `session-checkpoint` | Save session state to ledger file for continuity across crashes |
+
 ### design
 
 | Agent | Description |
@@ -164,61 +174,97 @@ Invoke with: `agent <name>`
 | `plan-review` | Thorough review of development plans before implementation |
 | `refactor-plan` | Analyze code structure and create comprehensive refactoring plans |
 | `spec-reviewer` | Analyze specs and plans for user flows, gaps, and missing requirements |
+| `task-breakdown` | Break plans into small tasks (1-3 story points) with dependency matrix |
 
 ### qa
 
 | Agent | Description |
 |-------|-------------|
+| `acceptance-criteria-verifier` | Verify acceptance criteria from a plan, task, or issue |
 | `security-review` | OWASP Top 10 vulnerability scanning, secrets detection |
-| `slop-remover` | Remove AI-generated code slop (over-commenting, defensive overkill, type escapes) |
+| `slop-remover` | Remove AI-generated code slop (over-commenting, defensive overkill) |
 | `test-create` | Automated test creation across frameworks (RSpec, Minitest, Jest) |
 | `test-reviewer` | Review test quality, coverage, edge cases, and assertion quality |
+| `test-runner` | Run test suite and return structured results (directory, file, or test) |
+| `ui-code-auditor` | Static code analysis for UI quality, accessibility, and performance |
 | `visual-validator` | Verify UI changes achieved their goals through skeptical visual analysis |
+
+### relay
+
+| Agent | Description |
+|-------|-------------|
+| `blueprint-to-epics` | Split blueprint into epics by logical phase |
+| `init-playlist` | Generate playlist.yml from epics folder |
+| `learning-processor` | Aggregate learnings from relay epic into lessons |
 
 ### research
 
 | Agent | Description |
 |-------|-------------|
-| `best-practices-researcher` | Research external best practices and documentation with structured citations |
+| `best-practices-researcher` | Research external best practices with structured citations |
 | `docs-architect` | Create comprehensive technical documentation from codebases |
 | `docs-researcher` | Fetch and summarize library documentation |
-| `git-researcher` | Analyze git history, trace code evolution, and identify contributor expertise |
-| `repo-analyst` | Repository onboarding - analyze structure, conventions, templates, and patterns |
-| `web-research` | Internet research for debugging, finding solutions, and technical problems |
+| `git-researcher` | Analyze git history, trace code evolution, identify contributor expertise |
+| `repo-analyst` | Repository onboarding — structure, conventions, templates, patterns |
+| `web-research` | Internet research for debugging, solutions, and technical problems |
 
 ### workflow
 
 | Agent | Description |
 |-------|-------------|
 | `always-works-verifier` | Verify implementations actually work before declaring completion |
-| `github-resolver` | Resolve CI failures and PR review comments (auto-detects project type) |
+| `build-task-workflow-manager` | Orchestrate build execution: build, verify, quality, fix loop, ship |
+| `context-proxy` | Wrap agent invocations with output budget enforcement |
+| `lessons-discoverer` | Discover and rank relevant lessons using semantic scoring |
 | `quality-gate` | Orchestrate parallel code review based on tech stack configuration |
 | `ship` | Complete shipping workflow: lint, commit, PR |
 | `task-fetcher` | Fetch task from configured backend (GitHub, Beads, Linear, file) |
 | `task-status-updater` | Update task status (claim/ship) across backends |
+| `toolbox-resolver` | Discover and resolve tech-stack toolbox manifests from plugins |
 | `workspace-setup` | Create branch or worktree based on project configuration |
-| `toolbox-resolver` | Discover and resolve tech-stack toolbox manifests from installed plugins |
 
 ## Commands
 
-Invoke with: `/majestic-engineer:<category>:<name>`
+Invoke with: `/majestic-engineer:<name>`
+
+### Top-level
+
+| Command | Description |
+|---------|-------------|
+| `config-reader` | Get a config value from .agents.yml (with local overrides) |
+| `explain` | Explain a concept using real examples from your project |
+| `favicon` | Generate complete favicon set from source image |
 
 ### git
 
 | Command | Description |
 |---------|-------------|
 | `git:changelog` | Create engaging changelogs from recent merges |
-| `git:code-story` | Generate documentary-style narrative of repository development history |
+| `git:code-story` | Generate documentary-style narrative of repository history |
 | `git:commit` | Create git commit with proper message formatting |
 | `git:create-pr` | Create a pull request for the current feature branch |
 | `git:pr-review` | Review and address Pull Request comments from GitHub |
+| `git:triage-prs` | Triage open PRs with parallel review, label, and merge decisions |
+| `git:worktree-cleanup` | Clean up merged and stale git worktrees |
+
+### relay
+
+| Command | Description |
+|---------|-------------|
+| `relay:init` | Parse blueprint markdown into epic.yml for fresh-context execution |
+| `relay:playlist-status` | Show playlist progress across all epics |
+| `relay:run-playlist` | Output terminal command to execute playlist |
+| `relay:status` | Show current epic progress and task status |
+| `relay:work` | Execute epic tasks with fresh-context Claude instances |
 
 ### session
 
 | Command | Description |
 |---------|-------------|
 | `session:handoff` | Create a detailed handoff plan for continuing work |
+| `session:ledger-clear` | Clear the session ledger file to start fresh |
 | `session:pickup` | Resume work from a previous handoff session |
+| `session:smart-compact` | Analyze conversation and generate optimized /compact command |
 
 ### tasks
 
@@ -230,35 +276,54 @@ Invoke with: `/majestic-engineer:<category>:<name>`
 
 | Command | Description |
 |---------|-------------|
-| `workflows:run-blueprint` | Execute all tasks in a blueprint using build-task workflow with ralph-loop iteration |
-| `workflows:build-task` | Autonomous task implementation from any task management system (GitHub, Beads, Linear, file) |
-| `workflows:debug` | Debug errors, test failures, or unexpected behavior (auto-detects project type) |
-| `workflows:init` | Initialize AGENTS.md with hierarchical structure and create CLAUDE.md symlink |
 | `workflows:blueprint` | Transform feature descriptions into well-structured project blueprints |
-| `workflows:prd` | Create a PRD for a product/feature. Use `--guided` flag for interactive discovery |
+| `workflows:build-task` | Autonomous task implementation from any task management system |
+| `workflows:code-review` | Generic code review that auto-detects tech stack |
+| `workflows:debug` | Debug errors, test failures, or unexpected behavior |
+| `workflows:init` | Initialize AGENTS.md with hierarchical structure |
+| `workflows:prd` | Create a PRD for a product/feature (`--guided` for interactive) |
+| `workflows:quality-gate` | Run quality gate checks with tech stack-aware reviewers |
 | `workflows:question` | Answer questions about project structure without coding |
-| `workflows:ship-it` | Complete checkout workflow - runs linting, creates commit, and opens PR |
+| `workflows:refactor-agents` | Refactor existing AGENTS.md to follow progressive disclosure |
+| `workflows:run-blueprint` | Execute all blueprint tasks using build-task with ralph-loop |
+| `workflows:ship-it` | Complete checkout workflow: lint, commit, PR |
+| `workflows:ux-brief` | Create junior-dev-ready design systems through guided discovery |
 
 ## Skills
 
 Invoke with: `skill majestic-engineer:<name>`
 
-| Skill | Description |
-|-------|-------------|
-| `ast-grep-searching` | Structural code search and AST-based pattern matching for safe refactoring |
-| `backlog-manager` | Manage project backlogs and task prioritization |
-| `check-ci` | Monitor PR CI checks by polling GitHub status |
-| `cloudflare-worker` | Build edge-first TypeScript apps on Cloudflare Workers (Hono, KV, D1, R2, Durable Objects) |
-| `create-adr` | Create Architecture Decision Records for significant technical decisions |
-| `fix-reporter` | Capture solved problems as categorized documentation with YAML frontmatter |
-| `frontend-design` | Create distinctive, production-grade frontend interfaces for Tailwind, React, Vue, and Rails/Hotwire |
-| `git-worktree` | Manage git worktrees for parallel development |
-| `hierarchical-agents` | Generate hierarchical AGENTS.md structure for codebases |
-| `mermaid-builder` | Create syntactically correct Mermaid diagrams |
-| `pr-screenshot-docs` | Capture and document UI changes with before/after screenshots for PRs |
-| `ripgrep-search` | Fast, intelligent code and text searching with ripgrep |
-| `subagent-driven-development` | Execute plans with fresh subagent per task and code review between tasks |
-| `tdd-workflow` | Test-driven development using red-green-refactor cycle |
+| Skill | Description | Auto |
+|-------|-------------|------|
+| `backlog-manager` | Manage project backlogs and task prioritization | |
+| `blueprint-discovery` | Discovery phase for blueprint workflow | |
+| `blueprint-execution` | Execution phase for blueprint workflow | |
+| `blueprint-research` | Research phase for blueprint workflow | |
+| `check-ci` | Monitor PR CI checks by polling GitHub status | |
+| `cloudflare-worker` | Build edge-first TypeScript apps on Cloudflare Workers | |
+| `code-story` | Narrative templates for git changelog stories | |
+| `config-reader` | Read project config from .agents.yml | |
+| `create-adr` | Create Architecture Decision Records | |
+| `design-tool-picker` | Choose the right design tool for your task | |
+| `fix-decision-router` | Post-documentation routing for fix-reporter | |
+| `fix-reporter` | Capture solved problems as categorized documentation | |
+| `frontend-css-patterns` | Framework-agnostic CSS patterns and utilities | yes |
+| `frontend-design` | Create distinctive, production-grade frontend interfaces | yes |
+| `frontend-design-philosophy` | Design thinking principles for distinctive interfaces | yes |
+| `git-worktree` | Manage git worktrees for parallel development | |
+| `hierarchical-agents` | Generate hierarchical AGENTS.md structure | |
+| `init-agents-config` | Generate .agents.yml configuration | |
+| `mermaid-builder` | Create syntactically correct Mermaid diagrams | yes |
+| `plan-builder` | Write implementation plans from templates | |
+| `pr-screenshot-docs` | Capture and document UI changes with screenshots | |
+| `readme-craft` | Production-grade README.md patterns for any project | yes |
+| `relay/attempt-ledger` | Track relay task attempts and outcomes | |
+| `research-compound` | Compound learnings into AGENTS.md during research | yes |
+| `structured-logging` | Production logging patterns for observability | yes |
+| `task-coordinator` | Orchestrate multi-step workflows with task tracking | |
+| `tdd-workflow` | Test-driven development using red-green-refactor | yes |
+| `technical-writer` | Write technical tutorials and educational content | yes |
+| `ux-brief` | Design system templates and UX documentation | |
 
 ## Configuration
 

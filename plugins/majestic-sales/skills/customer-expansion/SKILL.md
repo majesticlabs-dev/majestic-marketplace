@@ -2,6 +2,7 @@
 name: customer-expansion
 description: Create expansion roadmaps, QBR templates, and upsell playbooks to grow existing customer revenue through strategic account development.
 allowed-tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch, AskUserQuestion
+disable-model-invocation: true
 ---
 
 # Customer Expansion Playbook Builder
