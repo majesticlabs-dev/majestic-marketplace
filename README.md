@@ -51,24 +51,38 @@ Then install a plugin:
 /plugin install {plugin-name}
 ```
 
-#### Codex CLI (OpenAI)
+#### OpenCode and Codex
 
-Export Majestic skills and commands to Codex CLI:
+Export Majestic plugins to OpenCode or Codex with schema-aware conversion:
 
 ```bash
-# Interactive selection
 ./scripts/install-codex.sh
 
 # Install all plugins
 ./scripts/install-codex.sh --all
 
+# Install all plugins to OpenCode
+./scripts/install-opencode.sh --all
+
 # Install specific plugins
 ./scripts/install-codex.sh engineer rails tools
+./scripts/install-opencode.sh engineer rails tools
+
+# Install one plugin (short or prefixed)
+./scripts/install-codex.sh engineer
+./scripts/install-codex.sh majestic-tools
 ```
 
-This copies skills to `~/.codex/skills/` and commands to `~/.codex/prompts/`.
+Both commands are now local to this repository and only require Ruby (`scripts/convert-plugin.rb`).
 
-**Limitations:** Codex doesn't support Claude Code's Task tool, so subagents (parallel research) won't run. Core skills and commands still provide valuable guidance.
+This runs a converter pipeline (not a plain file copy), so incompatible Claude metadata is translated for target formats.
+
+Output locations:
+
+- Codex: `~/.codex/skills/` and `~/.codex/prompts/`
+- OpenCode: `~/.config/opencode` (`opencode.json`, `agents/`, `skills/`, `plugins/`)
+
+**Limitations:** Codex still does not support some Claude Code features (Task, hooks, some MCP integrations), so behavior is reduced there.
 
 ## Majestic Plugins
 

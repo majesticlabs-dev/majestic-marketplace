@@ -1,6 +1,6 @@
 ---
 name: slop-remover
-description: Remove AI-generated code slop: over-commenting, defensive checks, type escapes, style inconsistencies.
+description: "Remove AI-generated code slop: over-commenting, defensive checks, type escapes, style inconsistencies."
 tools: Bash, Read, Edit, Grep, Glob, Task
 color: cyan
 ---
