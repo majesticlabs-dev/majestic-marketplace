@@ -5,24 +5,15 @@ description: Production-grade README.md patterns for any project type. Use when 
 
 # README Craft
 
-**Audience:** Developers creating or improving project documentation.
-
-**Goal:** Generate README files that convert scanners into users within 60 seconds.
-
-## Core Philosophy
-
-A README is a sales pitch, onboarding guide, AND reference manual. Lead with value, prove with examples, document with precision.
+For general technical writing patterns, see `technical-writer` skill.
 
 ## Common Failures
 
-| Failure | Fix |
-|---------|-----|
-| Installation first | Lead with TL;DR and value prop |
-| Describes what it IS | Describe what problem it SOLVES |
-| No examples | One example per feature minimum |
-| Hidden limitations | Dedicated limitations section |
-| Single install method | Three+ pathways (curl, package manager, source) |
-| No troubleshooting | Document top 5 common errors |
+- Installation first -> Lead with TL;DR and value prop
+- Describes what it IS -> Describe what problem it SOLVES
+- No examples -> One example per feature minimum
+- Hidden limitations -> Dedicated limitations section
+- Single install method -> Three+ pathways
 
 ## Golden Structure
 
@@ -48,6 +39,8 @@ curl -sSL https://example.com/install.sh | bash
 ```
 ```
 
+Badge templates: see [references/badge-reference.md](references/badge-reference.md)
+
 ### Tier 2: TL;DR
 
 ```markdown
@@ -64,7 +57,7 @@ curl -sSL https://example.com/install.sh | bash
 | Feature 3 | Quantified benefit |
 ```
 
-### Tier 3: Quick Example
+### Tier 3: Quick Start
 
 ```markdown
 ## Quick Start
@@ -113,7 +106,6 @@ mytool status
 | Speed | 50ms | 200ms | 150ms |
 | Memory | 10MB | 50MB | 30MB |
 | Feature X | Yes | No | Partial |
-| Feature Y | Yes | Yes | No |
 
 **Choose [Tool] when:** [specific use case]
 **Choose Alternative A when:** [specific use case]
@@ -175,16 +167,6 @@ mytool init                    # Interactive setup
 mytool init --template minimal # Use template
 mytool init --force            # Overwrite existing
 ```
-
-### `mytool run`
-
-Execute the main workflow.
-
-```bash
-mytool run input.txt           # Basic usage
-mytool run -o output.json      # Custom output
-mytool run --dry-run           # Preview changes
-```
 ```
 
 ### Troubleshooting
@@ -210,15 +192,6 @@ chmod +x install.sh
 ```bash
 export PATH="$HOME/.local/bin:$PATH"
 # Add to ~/.bashrc or ~/.zshrc for persistence
-```
-
-### Error: "Config file not found"
-
-**Cause:** Missing configuration.
-
-**Fix:**
-```bash
-mytool init --config
 ```
 ```
 
@@ -248,59 +221,10 @@ mytool init --config
 <details>
 <summary><b>Q: How does this compare to [Alternative]?</b></summary>
 
-[Tool] focuses on [specific strength], while [Alternative] excels at [different use case]. Choose [Tool] when you need [criteria].
-
-</details>
-
-<details>
-<summary><b>Q: Can I use this in production?</b></summary>
-
-Yes. [Tool] is used in production by [companies/projects]. See our [stability policy](link).
+[Tool] focuses on [specific strength], while [Alternative] excels at [different use case].
 
 </details>
 ```
-
-## Badge Reference
-
-```markdown
-<!-- CI Status -->
-![CI](https://github.com/USER/REPO/actions/workflows/ci.yml/badge.svg)
-
-<!-- Version -->
-![Version](https://img.shields.io/github/v/release/USER/REPO)
-
-<!-- License -->
-![License](https://img.shields.io/badge/license-MIT-blue)
-
-<!-- Downloads -->
-![Downloads](https://img.shields.io/github/downloads/USER/REPO/total)
-
-<!-- Package Managers -->
-![npm](https://img.shields.io/npm/v/PACKAGE)
-![PyPI](https://img.shields.io/pypi/v/PACKAGE)
-![Crates.io](https://img.shields.io/crates/v/PACKAGE)
-![Gem](https://img.shields.io/gem/v/PACKAGE)
-```
-
-## Progressive Disclosure
-
-For long READMEs (1000+ lines):
-
-```markdown
-<details>
-<summary><b>Advanced Configuration</b></summary>
-
-[Detailed content here]
-
-</details>
-```
-
-Or externalize:
-- `docs/CONFIGURATION.md`
-- `docs/ARCHITECTURE.md`
-- `docs/CONTRIBUTING.md`
-
-Keep README focused on the 80% use case.
 
 ## Pre-Publication Checklist
 
@@ -322,11 +246,6 @@ Keep README focused on the 80% use case.
 - [ ] Top 5 errors in troubleshooting
 - [ ] All links verified
 
-**Polish:**
-- [ ] Consistent terminology
-- [ ] No stale badges
-- [ ] Grammar/spelling checked
-
 ## Anti-Patterns
 
 | Do NOT | Do Instead |
@@ -336,8 +255,6 @@ Keep README focused on the 80% use case.
 | Screenshot-only demos | Executable code blocks |
 | Claim without example | Example per feature |
 | Hide limitations | Dedicated section |
-| Single install method | Multiple pathways |
-| Ignore errors | Troubleshooting section |
 
 ## Reference Examples
 

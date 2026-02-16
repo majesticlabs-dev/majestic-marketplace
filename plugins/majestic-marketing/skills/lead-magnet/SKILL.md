@@ -16,16 +16,6 @@ disable-model-invocation: true
 
 Create lead magnets that people actually want—and that convert visitors into subscribers.
 
-## What Makes a Great Lead Magnet
-
-| Criteria | Why It Matters |
-|----------|----------------|
-| **Specific** | Solves ONE problem, not everything |
-| **Quick win** | Delivers value in <10 minutes |
-| **Actionable** | They can DO something with it |
-| **Relevant** | Attracts your ideal customer |
-| **High perceived value** | Looks worth giving email for |
-
 ## The Three Principles
 
 ### 1. The Specificity Principle
@@ -304,81 +294,29 @@ When you're ready to [next level], check out [your offer].
 
 ## Hook Generators
 
-Every lead magnet needs a hook—the reason someone would want it badly enough to give their email.
+Every lead magnet needs a hook — the reason someone gives their email.
 
-### Hook Type 1: The Shortcut
-"Get the [outcome] without [usual pain/time/effort]"
-> "The 5-Minute Morning Routine That Replaced My 2-Hour Gym Sessions"
-
-### Hook Type 2: The Secret
-"The [hidden thing] that [impressive result]"
-> "The Pricing Secret That Doubled My Agency's Revenue"
-
-### Hook Type 3: The System
-"The [named method] for [specific outcome]"
-> "The PASTOR Framework: Write Sales Pages in 30 Minutes"
-
-### Hook Type 4: The Specific Number
-"[Number] [things] to [outcome]"
-> "7 Email Subject Lines That Get 40%+ Open Rates"
-
-### Hook Type 5: The Assessment
-"Discover your [type/score/level]"
-> "What's Your Entrepreneur Personality Type? Take the 2-Minute Quiz"
-
-### Hook Type 6: The Transformation
-"How to go from [painful current state] to [desired outcome]"
-> "From Stuck at $5k/month to Consistent $20k Months: The Roadmap"
-
-### Hook Type 7: The Case Study
-"How [specific person/company] achieved [specific result]"
-> "How Sarah Built a 10,000-Person Email List in 90 Days (And You Can Too)"
+| Hook Type | Formula | Example |
+|-----------|---------|---------|
+| **Shortcut** | "Get [outcome] without [pain]" | "The 5-Minute Routine That Replaced My 2-Hour Gym Sessions" |
+| **Secret** | "The [hidden thing] that [result]" | "The Pricing Secret That Doubled My Agency's Revenue" |
+| **System** | "The [named method] for [outcome]" | "The PASTOR Framework: Write Sales Pages in 30 Minutes" |
+| **Specific Number** | "[Number] [things] to [outcome]" | "7 Subject Lines That Get 40%+ Open Rates" |
+| **Assessment** | "Discover your [type/score/level]" | "What's Your Entrepreneur Personality Type?" |
+| **Transformation** | "From [current state] to [desired]" | "From $5k/month to Consistent $20k Months" |
+| **Case Study** | "How [person] achieved [result]" | "How Sarah Built a 10K Email List in 90 Days" |
 
 ## Landing Page Copy
 
-For every lead magnet, generate landing page copy:
+For every lead magnet, generate landing page copy with:
 
-```markdown
-## Landing Page Elements
-
-### Headline Options
-1. **[Benefit-focused headline]**
-2. **[Problem/solution headline]**
-3. **[Curiosity headline]**
-
-### Subheadline
-[Expand on headline, add specificity]
-
-### Bullet Points (What They'll Get)
-✓ [Benefit 1 - specific outcome]
-✓ [Benefit 2 - specific outcome]
-✓ [Benefit 3 - specific outcome]
-✓ [Bonus element if applicable]
-
-### Social Proof (if available)
-"[Testimonial]" — [Name, Title]
-
-OR
-
-**[Number]+ [people] have downloaded this [lead magnet]**
-
-### CTA Button
-Primary: [Action verb] + [Outcome]
-Examples:
-- "Get the Checklist"
-- "Download Free Template"
-- "Send Me the Guide"
-
-### Below CTA
-[Privacy assurance] — "No spam. Unsubscribe anytime."
-
-### Objection Handling (optional)
-**"But I don't have time..."**
-→ [This takes X minutes]
-
-**"I've tried this before..."**
-→ [This is different because...]
-```
+- **3 headline options** (benefit-focused, problem/solution, curiosity)
+- **Subheadline** expanding on headline with specificity
+- **3-4 benefit bullets** (specific outcomes, not features)
+- **Social proof** (testimonial or download count)
+- **CTA button** (action verb + outcome: "Get the Checklist", "Send Me the Guide")
+- **Privacy line** ("No spam. Unsubscribe anytime.")
+- **Objection handling** (1-2 common objections with responses)
 
 ## Output Format
 

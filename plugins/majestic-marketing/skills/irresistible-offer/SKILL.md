@@ -7,33 +7,21 @@ disable-model-invocation: true
 
 # Irresistible Offer Creator
 
-**Audience:** Founders and marketers who have a product but weak conversion, looking to restructure their offer without discounting.
-
-**Goal:** Build a complete offer using the 7-part formula: core promise, value stack, risk reversal, urgency, social proof, guarantee, and CTA. Make saying "yes" the only logical choice.
-
 ## Conversation Starter
 
-Use `AskUserQuestion` to gather initial context. Begin by asking:
+Use `AskUserQuestion` to gather context:
 
 "I'll help you craft an offer so compelling that saying 'yes' becomes the only logical choice.
 
-Please provide:
 1. **Product/Service**: What are you selling?
 2. **Price Point**: Current or planned price?
 3. **Target Customer**: Who buys this and why?
 4. **Current Offer**: How do you present it now? (if applicable)
-5. **Competition**: What alternatives do customers consider?
-
-I'll develop a complete irresistible offer framework with psychological triggers, value stacking, and risk reversal strategies."
+5. **Competition**: What alternatives do customers consider?"
 
 ## Research Methodology
 
-Use WebSearch to find:
-- Proven direct response marketing frameworks
-- Split-test data on offer elements
-- Psychology research on buying decisions
-- Case studies of successful offer transformations
-- Current best practices in conversion optimization
+Use WebSearch for: direct response frameworks, split-test data on offer elements, buying decision psychology, offer transformation case studies.
 
 ## Required Deliverables
 
@@ -95,11 +83,6 @@ Create genuine urgency without manipulation:
 - **Seasonal relevance**: "Before the Q4 rush begins"
 - **Inventory limits**: "Limited to current stock"
 
-**Authenticity Test:**
-- Is this scarcity real and verifiable?
-- Would I be embarrassed if customers discovered it was fake?
-- Does it serve the customer (not just create pressure)?
-
 #### Part 5: Social Proof Integration
 Weave proof throughout the offer:
 
@@ -143,27 +126,16 @@ Examples:
 
 ### 2. Psychological Trigger Words
 
-Words proven to increase conversion:
+| Category | Words |
+|----------|-------|
+| **Immediacy** | Instant, Immediately, Now, Today, Quick, Fast, Seconds |
+| **Exclusivity** | Limited, Exclusive, Members-only, Invitation, Secret, Private |
+| **Value** | Free, Bonus, Extra, Included, Value, Save, Discount |
+| **Trust** | Guaranteed, Proven, Tested, Certified, Verified, Backed |
+| **Curiosity** | Discover, Revealed, Secret, Hidden, Unlock, New |
+| **Power** | You, Your, Because, Easy, Simple, Results |
 
-**Immediacy Triggers:**
-- Instant, Immediately, Now, Today, Quick, Fast, Seconds
-
-**Exclusivity Triggers:**
-- Limited, Exclusive, Members-only, Invitation, Secret, Private
-
-**Value Triggers:**
-- Free, Bonus, Extra, Included, Value, Save, Discount
-
-**Trust Triggers:**
-- Guaranteed, Proven, Tested, Certified, Verified, Backed
-
-**Curiosity Triggers:**
-- Discover, Revealed, Secret, Hidden, Unlock, New
-
-**Power Triggers:**
-- You, Your, Because, Easy, Simple, Results
-
-**Include specific placement recommendations for each trigger category.**
+Include specific placement recommendations for each trigger category in the offer.
 
 ### 3. Mental Models for Offer Design
 
@@ -345,15 +317,3 @@ Prioritized elements to test:
 [ ] CTA copy finalized
 [ ] Split-test plan documented
 ```
-
-## Quality Standards
-
-- **Research-backed**: Cite sources for psychological principles
-- **Specific to their business**: No generic advice
-- **Ethically sound**: No manipulation or false scarcity
-- **Ready to implement**: Copy should be usable immediately
-- **Testable**: Include measurable improvement predictions
-
-## Tone
-
-Direct, confident, results-focused. Write like a $10,000/day copywriter who's done this hundreds of times. No fluff, no filler—every word earns its place.

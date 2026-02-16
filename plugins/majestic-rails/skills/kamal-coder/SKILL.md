@@ -6,22 +6,7 @@ allowed-tools: Read Write Edit Grep Glob Bash
 
 # Kamal Coder
 
-## Overview
-
-Kamal deploys containerized applications to bare metal or VMs using Docker. It handles zero-downtime deployments with Traefik as reverse proxy.
-
-## Server Requirements
-
-Before Kamal can deploy, servers need:
-
-| Requirement | Purpose |
-|-------------|---------|
-| Docker | Container runtime |
-| SSH access | Kamal connects via SSH |
-| Ports 80, 443 open | HTTP/HTTPS traffic |
-| Port 22 open | SSH for deployments |
-
-**Provision with:** Ansible (`infra/bin/provision --config`) or cloud-init at boot time.
+Servers need Docker, SSH access, and ports 22/80/443 open. Provision with Ansible or cloud-init.
 
 ## Configuration: config/deploy.yml
 

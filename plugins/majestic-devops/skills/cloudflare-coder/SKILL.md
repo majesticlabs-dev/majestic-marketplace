@@ -4,12 +4,6 @@ description: This skill guides provisioning Cloudflare infrastructure with OpenT
 allowed-tools: Read Write Edit Grep Glob Bash
 ---
 
-# Cloudflare Coder
-
-## Overview
-
-Cloudflare provides CDN, DNS, security, and edge computing services. This skill covers OpenTofu/Terraform patterns for Cloudflare resources.
-
 ## Provider Setup
 
 ```hcl
@@ -23,36 +17,19 @@ terraform {
 }
 
 provider "cloudflare" {
-  # API Token from environment: CLOUDFLARE_API_TOKEN
-  # Or explicitly (not recommended):
-  # api_token = var.cloudflare_api_token
+  # Uses CLOUDFLARE_API_TOKEN env var
 }
 ```
 
 ### Authentication
 
 ```bash
-# Preferred: API Token (scoped permissions)
 export CLOUDFLARE_API_TOKEN="your-api-token"
-
 # Or with 1Password
 CLOUDFLARE_API_TOKEN=op://Infrastructure/Cloudflare/api_token
-
-# Legacy: Global API Key (full access - avoid if possible)
-export CLOUDFLARE_API_KEY="your-global-api-key"
-export CLOUDFLARE_EMAIL="your-email@example.com"
 ```
 
-**API Token Permissions (minimum required):**
-
-| Resource | Permission | Use Case |
-|----------|------------|----------|
-| Zone | Read | List zones, read settings |
-| Zone | Edit | Modify zone settings |
-| DNS | Edit | Manage DNS records |
-| Firewall | Edit | WAF, firewall rules |
-| SSL | Edit | Certificate management |
-| Cache | Purge | Cache invalidation |
+See [references/cloudflare-api-permissions.md](references/cloudflare-api-permissions.md) for token permissions and legacy API key setup.
 
 ## Data Sources
 
@@ -61,12 +38,6 @@ export CLOUDFLARE_EMAIL="your-email@example.com"
 ```hcl
 data "cloudflare_zone" "main" {
   name = "example.com"
-}
-
-# Use in resources
-resource "cloudflare_record" "www" {
-  zone_id = data.cloudflare_zone.main.id
-  # ...
 }
 ```
 
@@ -87,7 +58,6 @@ output "account_id" {
 ### Basic Records
 
 ```hcl
-# A Record
 resource "cloudflare_record" "root" {
   zone_id = data.cloudflare_zone.main.id
   name    = "@"
@@ -97,7 +67,6 @@ resource "cloudflare_record" "root" {
   proxied = true
 }
 
-# CNAME Record
 resource "cloudflare_record" "www" {
   zone_id = data.cloudflare_zone.main.id
   name    = "www"
@@ -107,7 +76,6 @@ resource "cloudflare_record" "www" {
   proxied = true
 }
 
-# MX Records
 resource "cloudflare_record" "mx_primary" {
   zone_id  = data.cloudflare_zone.main.id
   name     = "@"
@@ -116,15 +84,6 @@ resource "cloudflare_record" "mx_primary" {
   ttl      = 3600
   priority = 10
   proxied  = false  # MX cannot be proxied
-}
-
-# TXT Record (SPF)
-resource "cloudflare_record" "spf" {
-  zone_id = data.cloudflare_zone.main.id
-  name    = "@"
-  type    = "TXT"
-  content = "v=spf1 include:_spf.google.com ~all"
-  ttl     = 3600
 }
 ```
 
@@ -172,32 +131,20 @@ resource "cloudflare_zone_settings_override" "ssl" {
   zone_id = data.cloudflare_zone.main.id
 
   settings {
-    # SSL mode: off, flexible, full, strict (recommended)
-    ssl = "strict"
-
-    # Minimum TLS version
-    min_tls_version = "1.2"
-
-    # Always use HTTPS
-    always_use_https = "on"
-
-    # Automatic HTTPS Rewrites
+    ssl                      = "strict"
+    min_tls_version          = "1.2"
+    always_use_https         = "on"
     automatic_https_rewrites = "on"
+    tls_1_3                  = "on"
+    opportunistic_encryption = "on"
 
-    # HTTP Strict Transport Security
     security_header {
       enabled            = true
-      max_age            = 31536000  # 1 year
+      max_age            = 31536000
       include_subdomains = true
       preload            = true
       nosniff            = true
     }
-
-    # TLS 1.3
-    tls_1_3 = "on"
-
-    # Opportunistic Encryption
-    opportunistic_encryption = "on"
   }
 }
 ```
@@ -212,7 +159,6 @@ resource "cloudflare_origin_ca_certificate" "origin" {
   requested_validity = 5475  # 15 years (max)
 }
 
-# Generate private key and CSR
 resource "tls_private_key" "origin" {
   algorithm = "RSA"
   rsa_bits  = 2048
@@ -233,10 +179,6 @@ output "origin_certificate" {
 }
 ```
 
-## Firewall & WAF
-
-See [references/waf.md](references/waf.md) for IP access rules, WAF custom rules with rate limiting, and managed rulesets (Cloudflare + OWASP).
-
 ## Cache Rules
 
 ### Modern Cache Rules (Rulesets)
@@ -249,7 +191,6 @@ resource "cloudflare_ruleset" "cache" {
   kind        = "zone"
   phase       = "http_request_cache_settings"
 
-  # Cache static assets aggressively
   rules {
     action = "set_cache_settings"
     action_parameters {
@@ -268,7 +209,6 @@ resource "cloudflare_ruleset" "cache" {
     enabled     = true
   }
 
-  # Bypass cache for API
   rules {
     action = "set_cache_settings"
     action_parameters {
@@ -279,54 +219,6 @@ resource "cloudflare_ruleset" "cache" {
     enabled     = true
   }
 
-  # Bypass cache for admin
-  rules {
-    action = "set_cache_settings"
-    action_parameters {
-      cache = false
-    }
-    expression  = "(starts_with(http.request.uri.path, \"/admin\"))"
-    description = "Bypass cache for admin"
-    enabled     = true
-  }
-}
-```
-
-### Legacy Page Rules
-
-```hcl
-# Cache everything for static paths
-resource "cloudflare_page_rule" "cache_static" {
-  zone_id  = data.cloudflare_zone.main.id
-  target   = "example.com/assets/*"
-  priority = 1
-
-  actions {
-    cache_level = "cache_everything"
-    edge_cache_ttl = 2592000  # 30 days
-  }
-}
-
-# Bypass cache for API
-resource "cloudflare_page_rule" "bypass_api" {
-  zone_id  = data.cloudflare_zone.main.id
-  target   = "example.com/api/*"
-  priority = 2
-
-  actions {
-    cache_level = "bypass"
-  }
-}
-
-# Force HTTPS
-resource "cloudflare_page_rule" "force_https" {
-  zone_id  = data.cloudflare_zone.main.id
-  target   = "http://example.com/*"
-  priority = 3
-
-  actions {
-    always_use_https = true
-  }
 }
 ```
 
@@ -340,7 +232,6 @@ resource "cloudflare_ruleset" "redirects" {
   kind        = "zone"
   phase       = "http_request_dynamic_redirect"
 
-  # www to apex redirect
   rules {
     action = "redirect"
     action_parameters {
@@ -357,7 +248,6 @@ resource "cloudflare_ruleset" "redirects" {
     enabled     = true
   }
 
-  # Old URL to new URL
   rules {
     action = "redirect"
     action_parameters {
@@ -384,39 +274,18 @@ resource "cloudflare_zone_settings_override" "performance" {
   zone_id = data.cloudflare_zone.main.id
 
   settings {
-    # Compression
-    brotli = "on"
+    brotli        = "on"
+    early_hints   = "on"
+    http2         = "on"
+    http3         = "on"
+    zero_rtt      = "on"
+    rocket_loader = "on"
 
-    # Speed optimizations
     minify {
       css  = "on"
       html = "on"
       js   = "on"
     }
-
-    # Early Hints
-    early_hints = "on"
-
-    # HTTP/2 and HTTP/3
-    http2 = "on"
-    http3 = "on"
-
-    # 0-RTT
-    zero_rtt = "on"
-
-    # Rocket Loader (async JS loading)
-    rocket_loader = "on"
-
-    # Image optimization (requires Pro+)
-    # polish = "lossless"
-    # mirage = "on"
-
-    # Mobile redirect (if needed)
-    # mobile_redirect {
-    #   mobile_subdomain = "m"
-    #   status           = "on"
-    #   strip_uri        = false
-    # }
   }
 }
 ```
@@ -428,38 +297,20 @@ resource "cloudflare_zone_settings_override" "security" {
   zone_id = data.cloudflare_zone.main.id
 
   settings {
-    # Security level: off, essentially_off, low, medium, high, under_attack
-    security_level = "medium"
-
-    # Challenge Passage TTL
-    challenge_ttl = 1800
-
-    # Browser Integrity Check
-    browser_check = "on"
-
-    # Email Obfuscation
-    email_obfuscation = "on"
-
-    # Server Side Excludes
+    security_level      = "medium"  # off, essentially_off, low, medium, high, under_attack
+    challenge_ttl       = 1800
+    browser_check       = "on"
+    email_obfuscation   = "on"
     server_side_exclude = "on"
-
-    # Hotlink Protection
-    hotlink_protection = "on"
-
-    # IP Geolocation
-    ip_geolocation = "on"
+    hotlink_protection  = "on"
+    ip_geolocation      = "on"
   }
 }
 ```
 
-## Argo & Load Balancing
-
-See [references/load-balancer.md](references/load-balancer.md) for Argo Smart Routing and Load Balancer configuration with origin pools, health checks, and session affinity.
-
 ## Workers Routes
 
 ```hcl
-# Deploy Worker via Terraform (see wrangler-coder for full Worker management)
 resource "cloudflare_worker_route" "api" {
   zone_id     = data.cloudflare_zone.main.id
   pattern     = "example.com/api/*"
@@ -484,17 +335,9 @@ resource "cloudflare_worker_script" "api" {
 }
 ```
 
-## Complete Production Zone
+## References
 
-See [references/production-zone.md](references/production-zone.md) for a complete Terraform configuration with DNS, SSL/TLS, WAF, caching, redirects, and variables template.
-
-## Best Practices
-
-- **Use API Tokens** - Scoped permissions over global API key
-- **Enable Strict SSL** - Always use Full (Strict) mode with valid origin certs
-- **Use Rulesets** - Modern rulesets over legacy Page Rules
-- **Cache Strategically** - Static assets cached, dynamic bypassed
-- **Rate Limit APIs** - Protect endpoints from abuse
-- **Enable WAF** - Deploy managed rulesets as baseline
-- **HSTS Preload** - Add to browser preload list for max security
-- **Terraform State** - Store state securely, not in version control
+- [references/cloudflare-api-permissions.md](references/cloudflare-api-permissions.md) - Token permissions and auth setup
+- [references/waf.md](references/waf.md) - IP access rules, WAF custom rules, managed rulesets
+- [references/load-balancer.md](references/load-balancer.md) - Argo Smart Routing, load balancer config
+- [references/production-zone.md](references/production-zone.md) - Complete production Terraform configuration

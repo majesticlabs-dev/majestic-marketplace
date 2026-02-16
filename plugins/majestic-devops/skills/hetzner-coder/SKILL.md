@@ -4,12 +4,6 @@ description: This skill guides provisioning Hetzner Cloud infrastructure with Op
 allowed-tools: Read Write Edit Grep Glob Bash
 ---
 
-# Hetzner Coder
-
-## Overview
-
-Hetzner Cloud offers high-performance, cost-effective cloud infrastructure with European data centers. This skill covers OpenTofu/Terraform patterns for Hetzner resources.
-
 ## Provider Setup
 
 ```hcl
@@ -23,74 +17,29 @@ terraform {
 }
 
 provider "hcloud" {
-  # Token from environment: HCLOUD_TOKEN
-  # Or explicitly (not recommended):
-  # token = var.hcloud_token
+  # Uses HCLOUD_TOKEN env var
 }
 ```
 
 ### Authentication
 
 ```bash
-# Set token via environment variable
 export HCLOUD_TOKEN="your-api-token"
-
 # Or with 1Password
 HCLOUD_TOKEN=op://Infrastructure/Hetzner/api_token
 ```
 
-**Token Permissions:**
-- **Read** - GET requests only (monitoring, auditing)
-- **Read & Write** - Full access (required for Terraform)
+## Locations
 
-## Locations and Datacenters
+| Code | Region | Network Zone |
+|------|--------|--------------|
+| `fsn1` | Germany | `eu-central` |
+| `nbg1` | Germany | `eu-central` |
+| `hel1` | Finland | `eu-central` |
+| `ash` | US East | `us-east` |
+| `hil` | US West | `us-west` |
 
-| Location | Code | Region | Network Zone |
-|----------|------|--------|--------------|
-| Falkenstein | `fsn1` | Germany | `eu-central` |
-| Nuremberg | `nbg1` | Germany | `eu-central` |
-| Helsinki | `hel1` | Finland | `eu-central` |
-| Ashburn | `ash` | US East | `us-east` |
-| Hillsboro | `hil` | US West | `us-west` |
-
-## Server Types
-
-### Shared CPU (Best for general workloads)
-
-| Type | vCPUs | RAM | Storage | Best For |
-|------|-------|-----|---------|----------|
-| `cx22` | 2 | 4 GB | 40 GB | Small apps |
-| `cx32` | 4 | 8 GB | 80 GB | Medium apps |
-| `cx42` | 8 | 16 GB | 160 GB | Production |
-| `cx52` | 16 | 32 GB | 320 GB | High traffic |
-
-### AMD EPYC (CPX - Better single-thread)
-
-| Type | vCPUs | RAM | Storage |
-|------|-------|-----|---------|
-| `cpx11` | 2 | 2 GB | 40 GB |
-| `cpx21` | 3 | 4 GB | 80 GB |
-| `cpx31` | 4 | 8 GB | 160 GB |
-| `cpx41` | 8 | 16 GB | 240 GB |
-| `cpx51` | 16 | 32 GB | 360 GB |
-
-### ARM64 (CAX - Best price/performance)
-
-| Type | vCPUs | RAM | Storage |
-|------|-------|-----|---------|
-| `cax11` | 2 | 4 GB | 40 GB |
-| `cax21` | 4 | 8 GB | 80 GB |
-| `cax31` | 8 | 16 GB | 160 GB |
-| `cax41` | 16 | 32 GB | 320 GB |
-
-### Dedicated vCPU (CCX - Guaranteed resources)
-
-| Type | vCPUs | RAM | Storage |
-|------|-------|-----|---------|
-| `ccx13` | 2 | 8 GB | 80 GB |
-| `ccx23` | 4 | 16 GB | 160 GB |
-| `ccx33` | 8 | 32 GB | 240 GB |
-| `ccx43` | 16 | 64 GB | 360 GB |
+See [references/hetzner-server-types.md](references/hetzner-server-types.md) for all server types (CX, CPX, CAX, CCX).
 
 ## Servers (Compute)
 
@@ -158,24 +107,6 @@ resource "hcloud_server" "app" {
 }
 ```
 
-### ARM64 Server (Cost-Effective)
-
-```hcl
-resource "hcloud_server" "worker" {
-  name        = "${var.project}-worker"
-  server_type = "cax21"  # ARM64 - great price/performance
-  image       = "ubuntu-24.04"
-  location    = "fsn1"
-
-  ssh_keys = [hcloud_ssh_key.deploy.id]
-
-  labels = {
-    role = "worker"
-    arch = "arm64"
-  }
-}
-```
-
 ## Private Networks
 
 ### Network with Subnet
@@ -193,7 +124,7 @@ resource "hcloud_network" "private" {
 resource "hcloud_network_subnet" "private" {
   network_id   = hcloud_network.private.id
   type         = "cloud"
-  network_zone = "eu-central"  # Must match server location zone
+  network_zone = "eu-central"
   ip_range     = "10.0.1.0/24"
 }
 ```
@@ -209,13 +140,11 @@ resource "hcloud_server" "db" {
 
   ssh_keys = [hcloud_ssh_key.deploy.id]
 
-  # Attach to private network
   network {
     network_id = hcloud_network.private.id
-    ip         = "10.0.1.10"  # Optional: specific IP
+    ip         = "10.0.1.10"
   }
 
-  # Optionally disable public IP for security
   public_net {
     ipv4_enabled = false
     ipv6_enabled = false
@@ -231,22 +160,22 @@ resource "hcloud_server" "db" {
 
 ## Firewalls
 
+Never default SSH to `0.0.0.0/0`. Force explicit IP: `tofu apply -var="admin_ip=$(curl -s ifconfig.me)/32"`
+
 ### Web Server Firewall
 
 ```hcl
 resource "hcloud_firewall" "web" {
   name = "${var.project}-web-firewall"
 
-  # SSH from specific IPs only (NEVER use 0.0.0.0/0!)
   rule {
     description = "SSH"
     direction   = "in"
     protocol    = "tcp"
     port        = "22"
-    source_ips  = [var.admin_ip]  # Use variable, no default
+    source_ips  = [var.admin_ip]
   }
 
-  # HTTP/HTTPS from anywhere
   rule {
     description = "HTTP"
     direction   = "in"
@@ -263,32 +192,15 @@ resource "hcloud_firewall" "web" {
     source_ips  = ["0.0.0.0/0", "::/0"]
   }
 
-  # ICMP for debugging (ping)
-  rule {
-    description = "ICMP"
-    direction   = "in"
-    protocol    = "icmp"
-    source_ips  = ["0.0.0.0/0", "::/0"]
-  }
-
-  # Apply to servers with label
   apply_to {
     label_selector = "role=web"
   }
 }
 
-# IMPORTANT: admin_ip variable has NO default for security
 variable "admin_ip" {
-  description = "Admin IP for SSH access (CIDR) - REQUIRED, no default"
+  description = "Admin IP for SSH access (CIDR)"
   type        = string
-  # NO DEFAULT - forces explicit value
 }
-```
-
-**Security pattern:** Never default SSH access to `0.0.0.0/0`. Force explicit IP:
-
-```bash
-tofu apply -var="admin_ip=$(curl -s ifconfig.me)/32"
 ```
 
 ### Database Firewall (Private Only)
@@ -297,22 +209,20 @@ tofu apply -var="admin_ip=$(curl -s ifconfig.me)/32"
 resource "hcloud_firewall" "db" {
   name = "${var.project}-db-firewall"
 
-  # PostgreSQL from private network only
   rule {
     description = "PostgreSQL"
     direction   = "in"
     protocol    = "tcp"
     port        = "5432"
-    source_ips  = ["10.0.0.0/16"]  # Private network range
+    source_ips  = ["10.0.0.0/16"]
   }
 
-  # SSH from bastion only
   rule {
     description = "SSH from bastion"
     direction   = "in"
     protocol    = "tcp"
     port        = "22"
-    source_ips  = ["10.0.1.1/32"]  # Bastion IP
+    source_ips  = ["10.0.1.1/32"]
   }
 
   apply_to {
@@ -328,11 +238,6 @@ resource "hcloud_floating_ip" "app" {
   type          = "ipv4"
   name          = "${var.project}-vip"
   home_location = "fsn1"
-
-  labels = {
-    project = var.project
-    purpose = "failover"
-  }
 }
 
 resource "hcloud_floating_ip_assignment" "app" {
@@ -456,18 +361,13 @@ resource "hcloud_volume_attachment" "data" {
 resource "hcloud_ssh_key" "deploy" {
   name       = "${var.project}-deploy"
   public_key = file(var.ssh_public_key_path)
-
-  labels = {
-    project = var.project
-    purpose = "deployment"
-  }
 }
 ```
 
-See [Ansible Integration](references/ansible-integration.md) for Hetzner+Ansible patterns, Kamal-ready playbooks, and provisioning scripts.
+## References
 
-## Additional Resources
-
+- [references/hetzner-server-types.md](references/hetzner-server-types.md) - All server types with specs
+- [references/ansible-integration.md](references/ansible-integration.md) - Hetzner+Ansible patterns, Kamal-ready playbooks
 - [references/best-practices.md](references/best-practices.md) - Labels, cost optimization, placement groups, snapshots
-- [references/object-storage.md](references/object-storage.md) - S3-compatible Object Storage with AWS provider configuration
-- [references/production-stack.md](references/production-stack.md) - Complete production setup with app servers, database, load balancer, firewalls, volumes, and networking
+- [references/object-storage.md](references/object-storage.md) - S3-compatible Object Storage with AWS provider
+- [references/production-stack.md](references/production-stack.md) - Complete production setup

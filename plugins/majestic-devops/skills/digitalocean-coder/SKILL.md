@@ -4,12 +4,6 @@ description: This skill guides writing DigitalOcean infrastructure with OpenTofu
 allowed-tools: Read Write Edit Grep Glob Bash
 ---
 
-# DigitalOcean Coder
-
-## Overview
-
-DigitalOcean provides simple, developer-friendly cloud infrastructure. This skill covers OpenTofu/Terraform patterns for DO resources.
-
 ## Provider Setup
 
 ```hcl
@@ -23,7 +17,7 @@ terraform {
 }
 
 provider "digitalocean" {
-  # Token from environment: DIGITALOCEAN_TOKEN
+  # Uses DIGITALOCEAN_TOKEN env var
 }
 ```
 
@@ -95,16 +89,7 @@ resource "digitalocean_droplet" "app" {
 }
 ```
 
-### Common Droplet Sizes
-
-| Size | vCPUs | Memory | Use Case |
-|------|-------|--------|----------|
-| `s-1vcpu-1gb` | 1 | 1 GB | Testing, small apps |
-| `s-1vcpu-2gb` | 1 | 2 GB | Small production |
-| `s-2vcpu-4gb` | 2 | 4 GB | Medium apps |
-| `s-4vcpu-8gb` | 4 | 8 GB | Production workloads |
-| `c-2` | 2 | 4 GB | CPU-intensive |
-| `m-2vcpu-16gb` | 2 | 16 GB | Memory-intensive |
+See [references/digitalocean-sizes.md](references/digitalocean-sizes.md) for droplet and database sizes.
 
 ## Reserved IP (Static IP)
 
@@ -133,11 +118,10 @@ resource "digitalocean_firewall" "web" {
 
   droplet_ids = [digitalocean_droplet.app.id]
 
-  # Inbound rules
   inbound_rule {
     protocol         = "tcp"
     port_range       = "22"
-    source_addresses = var.ssh_allowed_ips  # Restrict SSH access
+    source_addresses = var.ssh_allowed_ips
   }
 
   inbound_rule {
@@ -152,7 +136,6 @@ resource "digitalocean_firewall" "web" {
     source_addresses = ["0.0.0.0/0", "::/0"]
   }
 
-  # Outbound rules
   outbound_rule {
     protocol              = "tcp"
     port_range            = "all"
@@ -184,13 +167,11 @@ variable "db_allowed_ips" {
 resource "digitalocean_database_firewall" "postgres" {
   cluster_id = digitalocean_database_cluster.postgres.id
 
-  # Always allow app droplet
   rule {
     type  = "droplet"
     value = digitalocean_droplet.app.id
   }
 
-  # Dynamic IP whitelist for developers
   dynamic "rule" {
     for_each = var.db_allowed_ips
     content {
@@ -214,13 +195,11 @@ resource "digitalocean_database_cluster" "postgres" {
   region     = var.region
   node_count = 1  # Increase for HA
 
-  # CRITICAL: Use private network
   private_network_uuid = digitalocean_vpc.main.id
 
   tags = [var.project, var.environment]
 }
 
-# Database firewall - restrict access
 resource "digitalocean_database_firewall" "postgres" {
   cluster_id = digitalocean_database_cluster.postgres.id
 
@@ -240,15 +219,6 @@ output "database_private_uri" {
   sensitive = true
 }
 ```
-
-### Database Sizes
-
-| Size | vCPUs | Memory | Storage | Use Case |
-|------|-------|--------|---------|----------|
-| `db-s-1vcpu-1gb` | 1 | 1 GB | 10 GB | Development |
-| `db-s-1vcpu-2gb` | 1 | 2 GB | 25 GB | Small production |
-| `db-s-2vcpu-4gb` | 2 | 4 GB | 38 GB | Production |
-| `db-s-4vcpu-8gb` | 4 | 8 GB | 115 GB | High traffic |
 
 ### Redis Cluster
 
@@ -273,7 +243,7 @@ resource "digitalocean_spaces_bucket" "assets" {
   name   = "${var.project}-assets"
   region = var.spaces_region  # nyc3, sfo3, ams3, sgp1, fra1
 
-  acl = "private"  # or "public-read"
+  acl = "private"
 }
 
 resource "digitalocean_spaces_bucket_cors_configuration" "assets" {
@@ -320,142 +290,19 @@ resource "digitalocean_record" "www" {
 ## SSH Keys
 
 ```hcl
-# Reference existing key
 data "digitalocean_ssh_key" "deploy" {
   name = "deploy-key"
 }
 
-# Or create new key
 resource "digitalocean_ssh_key" "deploy" {
   name       = "${var.project}-deploy"
   public_key = file("~/.ssh/deploy.pub")
 }
 ```
 
-## Complete Production Stack
+See [references/digitalocean-production-stack.md](references/digitalocean-production-stack.md) for a complete production setup with VPC, droplet, firewall, database, and outputs.
 
-```hcl
-locals {
-  name_prefix = "${var.project}-${var.environment}"
-}
+## References
 
-# VPC
-resource "digitalocean_vpc" "main" {
-  name     = "${local.name_prefix}-vpc"
-  region   = var.region
-  ip_range = "10.10.0.0/16"
-}
-
-# App Server
-resource "digitalocean_droplet" "app" {
-  name     = "${local.name_prefix}-app"
-  region   = var.region
-  size     = var.droplet_size
-  image    = "ubuntu-22-04-x64"
-  vpc_uuid = digitalocean_vpc.main.id
-
-  ssh_keys   = [data.digitalocean_ssh_key.deploy.id]
-  monitoring = true
-
-  user_data = file("${path.module}/cloud-init.yaml")
-  tags      = [var.project, var.environment]
-}
-
-# Static IP
-resource "digitalocean_reserved_ip" "app" {
-  region = var.region
-}
-
-resource "digitalocean_reserved_ip_assignment" "app" {
-  ip_address = digitalocean_reserved_ip.app.ip_address
-  droplet_id = digitalocean_droplet.app.id
-}
-
-# Firewall
-resource "digitalocean_firewall" "app" {
-  name        = "${local.name_prefix}-firewall"
-  droplet_ids = [digitalocean_droplet.app.id]
-
-  inbound_rule {
-    protocol         = "tcp"
-    port_range       = "22"
-    source_addresses = var.ssh_allowed_ips
-  }
-
-  inbound_rule {
-    protocol         = "tcp"
-    port_range       = "80"
-    source_addresses = ["0.0.0.0/0", "::/0"]
-  }
-
-  inbound_rule {
-    protocol         = "tcp"
-    port_range       = "443"
-    source_addresses = ["0.0.0.0/0", "::/0"]
-  }
-
-  outbound_rule {
-    protocol              = "tcp"
-    port_range            = "all"
-    destination_addresses = ["0.0.0.0/0", "::/0"]
-  }
-
-  outbound_rule {
-    protocol              = "udp"
-    port_range            = "all"
-    destination_addresses = ["0.0.0.0/0", "::/0"]
-  }
-}
-
-# Database
-resource "digitalocean_database_cluster" "postgres" {
-  name                 = "${local.name_prefix}-pg"
-  engine               = "pg"
-  version              = "16"
-  size                 = var.db_size
-  region               = var.region
-  node_count           = 1
-  private_network_uuid = digitalocean_vpc.main.id
-  tags                 = [var.project]
-}
-
-resource "digitalocean_database_firewall" "postgres" {
-  cluster_id = digitalocean_database_cluster.postgres.id
-
-  rule {
-    type  = "droplet"
-    value = digitalocean_droplet.app.id
-  }
-}
-
-# Outputs
-output "app_ip" {
-  value = digitalocean_reserved_ip.app.ip_address
-}
-
-output "database_uri" {
-  value     = digitalocean_database_cluster.postgres.private_uri
-  sensitive = true
-}
-```
-
-## Best Practices
-
-### Security
-- Always use VPC for private networking
-- Restrict database to droplet access only
-- Use reserved IPs for consistent addressing
-- Limit SSH to specific IPs via firewall
-- Use cloud-init to disable root login
-
-### Cost Optimization
-- Use appropriate droplet sizes
-- Single-node databases for non-critical workloads
-- Reserved IPs are free when assigned
-- Monitor with built-in metrics
-
-### Networking
-- Use `private_uri` for database connections
-- Place all resources in same VPC
-- Use firewall rules, not iptables
-- Enable monitoring on droplets
+- [references/digitalocean-sizes.md](references/digitalocean-sizes.md) - Droplet and database sizes
+- [references/digitalocean-production-stack.md](references/digitalocean-production-stack.md) - Complete production setup

@@ -5,48 +5,14 @@ description: Write technical tutorials, blog posts, and educational content with
 
 # Technical Writer
 
-**Audience:** Developers creating educational content, tutorials, blog posts, or technical articles.
+For README-specific patterns (hero, TL;DR, quick start), see `readme-craft` skill.
 
-**Goal:** Produce technically accurate content that teaches effectively through progressive disclosure and concrete examples.
-
-## Core Pedagogy
-
-### The Learning Progression
-
-Every technical concept follows this arc:
-
-```
-WHY → WHAT → HOW → GOTCHAS → MASTERY
-```
-
-| Stage | Purpose | Reader State |
-|-------|---------|--------------|
-| WHY | Motivation and context | "Why should I care?" |
-| WHAT | Conceptual model | "What is this thing?" |
-| HOW | Practical application | "How do I use it?" |
-| GOTCHAS | Edge cases and pitfalls | "What will trip me up?" |
-| MASTERY | Advanced patterns | "How do experts use this?" |
-
-### Progressive Disclosure
-
-Layer information by expertise level:
-
-```
-Level 1: "Here's how to do X" (copy-paste solution)
-Level 2: "Here's why it works" (understanding)
-Level 3: "Here's when to use alternatives" (judgment)
-Level 4: "Here's how to extend it" (mastery)
-```
-
-**Rule:** Each level should be valuable standalone. Readers can stop at any point with useful knowledge.
-
-## Content Types
+## Content Types & Writing Guidelines
 
 ### 1. Concept Explanation
 
-**Purpose:** Build mental models for abstract ideas.
+Build mental models for abstract ideas.
 
-**Structure:**
 ```markdown
 # [Concept Name]
 
@@ -80,15 +46,16 @@ Level 4: "Here's how to extend it" (mastery)
 [Explicit boundaries - this builds trust]
 ```
 
-**Example opening:**
+**Opening example:**
 > Bad: "Dependency injection is a design pattern where..."
-> Good: "Your class needs a database connection. Do you create it inside the class, or pass it in from outside? This choice—seemingly trivial—determines whether your code is testable or a nightmare."
+> Good: "Your class needs a database connection. Do you create it inside the class, or pass it in from outside? This choice determines whether your code is testable or a nightmare."
+
+**Voice:** "This works because..." not "As you can see...". "You might expect X, but actually Y" not "Obviously...". Never "simply" or "just" (these dismiss difficulty).
 
 ### 2. How-To Guide
 
-**Purpose:** Get the reader from A to B with minimum friction.
+Get the reader from A to B with minimum friction.
 
-**Structure:**
 ```markdown
 # How to [Accomplish Specific Goal]
 
@@ -136,17 +103,12 @@ Level 4: "Here's how to extend it" (mastery)
 - [Advanced topic]
 ```
 
-**Rules:**
-- One action per step
-- Every step has expected output
-- Code is copy-paste ready
-- No "simply" or "just" (these dismiss difficulty)
+**Rules:** One action per step. Every step has expected output. Code is copy-paste ready.
 
 ### 3. Tutorial (Teaching Through Building)
 
-**Purpose:** Teach concepts by building something real.
+Teach concepts by building something real.
 
-**Structure:**
 ```markdown
 # Build [Something Concrete]
 
@@ -179,10 +141,6 @@ By the end, you'll understand:
 
 [Repeat pattern, each part introducing one new concept]
 
-## Part 3: [Complete Picture]
-
-[Final integration]
-
 ## Recap
 
 | Concept | Where We Used It |
@@ -197,17 +155,12 @@ By the end, you'll understand:
 3. **[Hard extension]** - [Hint]
 ```
 
-**Rules:**
-- One concept per section
-- Build something that actually works
-- Show mistakes and corrections (learning from errors)
-- Include "checkpoints" to verify progress
+**Rules:** One concept per section. Build something that actually works. Show mistakes and corrections. Include checkpoints to verify progress.
 
 ### 4. Deep Dive / Technical Article
 
-**Purpose:** Comprehensive exploration for readers who want mastery.
+Comprehensive exploration for mastery-level readers.
 
-**Structure:**
 ```markdown
 # [Topic]: A Deep Dive
 
@@ -240,14 +193,6 @@ By the end, you'll understand:
 
 [Code example from production-quality source]
 
-### Pattern 2: [Name]
-
-[Another example]
-
-## Performance Considerations
-
-[Benchmarks, complexity analysis, or profiling results]
-
 ## Common Pitfalls
 
 ### Pitfall 1: [Name]
@@ -267,21 +212,9 @@ By the end, you'll understand:
 ## Further Reading
 
 - [Resource 1] - [What it covers]
-- [Resource 2] - [What it covers]
 ```
 
-## Writing Guidelines
-
-### Voice and Tone
-
-| Do | Don't |
-|----|-------|
-| "This works because..." | "As you can see..." |
-| "You might expect X, but actually Y" | "Obviously..." |
-| "A common mistake is..." | "Don't be stupid and..." |
-| "Let's explore why" | "Trivially, we can see..." |
-
-### Code Examples
+## Code Examples
 
 **Every code block needs:**
 1. Context (what file, what situation)
@@ -294,23 +227,21 @@ By the end, you'll understand:
 def authenticate(self, credentials):
     user = self.repository.find_by_email(credentials.email)
     if not user:
-        return AuthResult.failure("User not found")  # ← Early return pattern
+        return AuthResult.failure("User not found")  # <- Early return pattern
 
     if not user.verify_password(credentials.password):
         return AuthResult.failure("Invalid password")
 
-    return AuthResult.success(user)  # ← Only success path reaches here
+    return AuthResult.success(user)  # <- Only success path reaches here
 ```
 
-### Explaining Code
+**Explaining code:**
+Bad: "This code authenticates the user."
+Good: "We check for failure conditions first (lines 4-8), returning early. Only valid credentials reach the success path on line 10. This 'guard clause' pattern keeps the happy path unindented."
 
-**Bad:** "This code authenticates the user."
+## Analogies
 
-**Good:** "We check for failure conditions first (lines 4-8), returning early. Only valid credentials reach the success path on line 10. This 'guard clause' pattern keeps the happy path unindented."
-
-### Analogies
-
-Use analogies to bridge unfamiliar concepts to familiar ones:
+Bridge unfamiliar concepts to familiar ones:
 
 | Concept | Analogy |
 |---------|---------|
@@ -319,28 +250,15 @@ Use analogies to bridge unfamiliar concepts to familiar ones:
 | Caching | Keeping frequently-used items on your desk vs. filing cabinet |
 | Load balancing | Multiple checkout lanes at a grocery store |
 
-**Rules for analogies:**
-- Map the key properties (not just surface similarity)
-- Acknowledge where the analogy breaks down
-- Use familiar domains (not other technical concepts)
+**Rules:** Map key properties (not just surface similarity). Acknowledge where the analogy breaks down. Use familiar domains (not other technical concepts).
 
-### Handling Complexity
+## Handling Complexity
 
-When explaining complex topics:
+1. **Start with the simple case** - "In the basic scenario, X happens"
+2. **Add one complication** - "But what if Y?" Show how the solution adapts
+3. **Show the full picture** - "In production, you'll also handle Z"
 
-1. **Start with the simple case**
-   - "In the basic scenario, X happens"
-   - Get this working first
-
-2. **Add one complication**
-   - "But what if Y?"
-   - Show how the solution adapts
-
-3. **Show the full picture**
-   - "In production, you'll also handle Z"
-   - Complete implementation
-
-### Common Failures
+## Common Failures
 
 | Failure | Fix |
 |---------|-----|
@@ -353,61 +271,36 @@ When explaining complex topics:
 
 ## Quality Checklist
 
-Before publishing:
-
 **Structure:**
 - [ ] Opens with WHY (motivation)
-- [ ] Progressive complexity (simple → complex)
+- [ ] Progressive complexity (simple -> complex)
 - [ ] Each section provides standalone value
-- [ ] Clear conclusion or next steps
 
 **Code:**
 - [ ] All code is tested and works
 - [ ] Copy-paste ready (no hidden dependencies)
 - [ ] Key lines annotated
-- [ ] Error cases shown
 
 **Clarity:**
 - [ ] No undefined jargon
 - [ ] Analogies for abstract concepts
 - [ ] Explicit prerequisites listed
-- [ ] "Gotchas" section included
 
 **Trust:**
 - [ ] Acknowledges limitations
-- [ ] Links to authoritative sources
 - [ ] Shows when NOT to use this approach
-- [ ] Honest about complexity level
 
 ## Anti-Patterns
 
-| Pattern | Problem | Fix |
-|---------|---------|-----|
-| "Simply do X" | Dismisses difficulty | Remove "simply" |
-| "It's obvious that..." | Alienates confused readers | Explain anyway |
-| Screenshot-only instructions | Can't copy-paste, accessibility issues | Add text/code |
-| Massive code dump | Overwhelming, unclear focus | Break into pieces |
-| "Exercise left to reader" | Abandons the learner | Show the solution |
-| "See the docs" | Breaks flow | Summarize key points |
+| Pattern | Fix |
+|---------|-----|
+| "Simply do X" | Remove "simply" |
+| "It's obvious that..." | Explain anyway |
+| Screenshot-only instructions | Add text/code |
+| Massive code dump | Break into pieces |
+| "Exercise left to reader" | Show the solution |
+| "See the docs" | Summarize key points |
 
-## Reference: Sentence Structures
+## Reference
 
-### Introducing concepts
-- "Think of X as..."
-- "The core insight is..."
-- "What makes X different from Y is..."
-
-### Transitions
-- "Now that we have X, we can..."
-- "This leads to an important question:..."
-- "But there's a catch:..."
-
-### Caveats
-- "This works well when... but not when..."
-- "In practice, you'll also need to consider..."
-- "A common gotcha here is..."
-
-### Reinforcement
-- "Notice how X connects to Y we discussed earlier"
-- "This is the same principle as..., applied to..."
-- "The key takeaway is..."
+- [Sentence Structures](references/sentence-structures.md) - Intro, transition, caveat, and reinforcement phrases

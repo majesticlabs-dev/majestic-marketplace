@@ -7,9 +7,7 @@ disable-model-invocation: true
 
 # Viral Content Blueprint
 
-**Audience:** Content creators and marketers at zero-budget startups who need organic reach without paid promotion.
-
-**Goal:** Build a platform-specific viral content playbook with psychological hooks, posting schedules, and replicable frameworks based on current algorithm behavior.
+Build a platform-specific viral content playbook with psychological hooks, posting schedules, and replicable frameworks based on current algorithm behavior. For zero-budget organic reach.
 
 ## Conversation Starter
 
@@ -136,16 +134,8 @@ Triggers that make content irresistible to share:
 | FOMO | Fear of missing out | "Everyone's talking about..." | Trend content |
 
 **Hook Formulas:**
-```
-[Number] + [Unexpected adjective] + [Topic] + [Promise]
-"7 Brutal Truths About Starting a Business Nobody Tells You"
-
-[Contrarian statement] + [Proof/reason]
-"Cold outreach is dead. Here's what's working instead."
-
-[Relatable problem] + [Unexpected solution]
-"Struggling to get clients? Stop selling. Do this instead."
-```
+- `[Number] + [Unexpected adjective] + [Topic] + [Promise]` — "7 Brutal Truths About Starting a Business Nobody Tells You"
+- `[Contrarian statement] + [Proof/reason]` — "Cold outreach is dead. Here's what's working instead."
 
 ### 4. One-Day Content Creation System
 
@@ -293,89 +283,18 @@ Platform-specific timing data:
 
 ## Output Format
 
-```markdown
-# VIRAL CONTENT BLUEPRINT: [Business Type]
+Structure the deliverable as:
 
-## Executive Summary
-[2-3 sentences on the overall strategy and expected reach potential]
-
----
-
-## SECTION 1: YOUR 10 VIRAL FRAMEWORKS
-[All 10 frameworks customized to their niche]
-
----
-
-## SECTION 2: PLATFORM PLAYBOOKS
-[Detailed breakdown for each platform they use]
-
----
-
-## SECTION 3: PSYCHOLOGICAL HOOK LIBRARY
-[Complete hook toolkit with examples]
-
----
-
-## SECTION 4: ONE-DAY CONTENT SPRINT
-[Step-by-step process]
-
----
-
-## SECTION 5: INSPIRATION CASE STUDIES
-[3-5 relevant zero-budget success stories]
-
----
-
-## SECTION 6: DAILY SCHEDULE
-[Complete daily/weekly system]
-
----
-
-## SECTION 7: TIMING OPTIMIZATION
-[Platform-specific posting times]
-
----
-
-## QUICK START: FIRST 7 DAYS
-
-### Day 1:
-- Create content using Framework #[X]
-- Post at [optimal time]
-- Engage for 30 min after posting
-
-### Day 2-7:
-[Specific daily actions]
-
----
-
-## CONTENT CALENDAR TEMPLATE
-
-| Week | Mon | Tue | Wed | Thu | Fri | Sat | Sun |
-|------|-----|-----|-----|-----|-----|-----|-----|
-| 1 | [Framework] | [Framework] | [Framework] | [Framework] | [Framework] | [Framework] | [Framework] |
-| 2 | ... | ... | ... | ... | ... | ... | ... |
-
----
-
-## VIRALITY CHECKLIST
-
-Before posting, verify:
-- [ ] Hook stops the scroll in <1 second
-- [ ] First line creates curiosity gap
-- [ ] Content delivers genuine value
-- [ ] Clear takeaway or emotion
-- [ ] CTA encourages engagement (not just follows)
-- [ ] Posted at optimal time
-- [ ] Ready to engage for first hour
-```
-
-## Quality Standards
-
-- **Research current trends**: What worked 6 months ago may not work today
-- **Platform-specific advice**: Generic advice is useless
-- **Cite sources**: Link to viral examples when possible
-- **Be realistic**: Viral is probabilistic, not guaranteed
-- **Focus on consistency**: One viral hit matters less than consistent quality
+1. **Executive Summary** (2-3 sentences)
+2. **10 Viral Frameworks** (customized to niche)
+3. **Platform Playbooks** (per-platform breakdown)
+4. **Psychological Hook Library** (with examples)
+5. **One-Day Content Sprint** (step-by-step)
+6. **Case Studies** (3-5 zero-budget success stories)
+7. **Daily Schedule + Timing** (platform-specific)
+8. **Quick Start: First 7 Days** (daily actions)
+9. **Content Calendar Template** (weekly grid with framework assignments)
+10. **Virality Checklist** (hook stops scroll, curiosity gap, genuine value, clear CTA, optimal timing, engagement plan)
 
 ## Tone
 

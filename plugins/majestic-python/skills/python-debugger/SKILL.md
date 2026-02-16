@@ -8,55 +8,28 @@ allowed-tools: Read Write Edit Grep Glob Bash WebSearch
 
 ## Debugging Process
 
-```
-1. Understand the Error → 2. Reproduce → 3. Isolate → 4. Identify Root Cause → 5. Fix → 6. Verify
-```
+1. Understand the Error -> 2. Reproduce -> 3. Isolate -> 4. Identify Root Cause -> 5. Fix -> 6. Verify
 
 ## Step 1: Understand the Error
 
 ### Reading Tracebacks
 
 ```
-Traceback (most recent call last):        ← Read bottom to top
-  File "app.py", line 45, in main         ← Entry point
-    result = process_data(data)           ← Call chain
+Traceback (most recent call last):        <- Read bottom to top
+  File "app.py", line 45, in main         <- Entry point
+    result = process_data(data)           <- Call chain
   File "processor.py", line 23, in process_data
-    return transform(item)                ← Getting closer
+    return transform(item)                <- Getting closer
   File "transformer.py", line 12, in transform
-    return item["value"] / item["count"]  ← Error location
-ZeroDivisionError: division by zero       ← The actual error
+    return item["value"] / item["count"]  <- Error location
+ZeroDivisionError: division by zero       <- The actual error
 ```
 
-### Common Error Types
-
-| Error | Typical Cause | First Check |
-|-------|---------------|-------------|
-| `AttributeError` | Wrong type, None value | Print type and value |
-| `KeyError` | Missing dict key | Check dict keys |
-| `TypeError` | Wrong argument type | Check function signature |
-| `ValueError` | Right type, wrong value | Validate input ranges |
-| `ImportError` | Missing module/path | Check installed packages |
-| `IndexError` | List access out of bounds | Check list length |
-| `ZeroDivisionError` | Division by zero | Add zero check |
-| `FileNotFoundError` | Wrong path | Print absolute path |
+Common error types: see [references/python-error-types.md](references/python-error-types.md)
 
 ## Step 2: Reproduce the Issue
 
-### Minimal Reproduction
-
-```python
-# Create minimal test case that triggers the error
-def test_reproduces_error():
-    # Exact inputs that cause the failure
-    data = {"value": 10, "count": 0}  # The problematic input
-
-    # Call the failing function
-    result = transform(data)  # Should raise ZeroDivisionError
-```
-
-### Gathering Context
-
-Questions to answer:
+Create a minimal test case that triggers the error. Answer these questions:
 - What input triggered this?
 - Is it consistent or intermittent?
 - When did it start happening?
@@ -91,18 +64,7 @@ def problematic_function(x):
     return result
 ```
 
-**pdb Commands:**
-
-| Command | Action |
-|---------|--------|
-| `n` | Next line |
-| `s` | Step into function |
-| `c` | Continue execution |
-| `p var` | Print variable |
-| `pp var` | Pretty print |
-| `l` | List source code |
-| `w` | Show call stack |
-| `q` | Quit debugger |
+pdb commands: see [references/pdb-commands.md](references/pdb-commands.md)
 
 ### Using icecream
 
@@ -118,74 +80,16 @@ def calculate(x, y):
 
 ## Step 4: Common Root Causes
 
-### None Values
-
-```python
-# Problem
-user = get_user(user_id)  # Returns None if not found
-name = user.name  # AttributeError: 'NoneType' has no attribute 'name'
-
-# Fix
-user = get_user(user_id)
-if user is None:
-    raise ValueError(f"User {user_id} not found")
-name = user.name
-```
-
-### Type Mismatches
-
-```python
-# Problem
-def add_numbers(a, b):
-    return a + b
-
-add_numbers("5", 3)  # TypeError: can only concatenate str to str
-
-# Fix
-def add_numbers(a: int, b: int) -> int:
-    return int(a) + int(b)
-```
-
-### Mutable Default Arguments
-
-```python
-# Problem - shared list across calls!
-def append_to(item, target=[]):
-    target.append(item)
-    return target
-
-# Fix
-def append_to(item, target=None):
-    if target is None:
-        target = []
-    target.append(item)
-    return target
-```
-
-### Circular Imports
-
-```python
-# Problem: a.py imports b.py, b.py imports a.py
-
-# Fix: Import inside function or restructure
-def get_processor():
-    from .processor import Processor  # Lazy import
-    return Processor()
-```
-
-### Async/Await Issues
-
-```python
-# Problem: Forgetting await
-async def fetch_data():
-    result = fetch_from_api()  # Missing await!
-    return result  # Returns coroutine, not result
-
-# Fix
-async def fetch_data():
-    result = await fetch_from_api()
-    return result
-```
+- **None values**: Check return values before accessing attributes. Guard with `if x is None: raise ValueError(...)`
+- **Type mismatches**: Add type hints, cast inputs explicitly. `int(a) + int(b)` not `a + b`
+- **Mutable default arguments**: Use `def f(items=None):` then `items = items or []` inside
+- **Circular imports**: Use lazy imports inside functions: `from .module import Class`
+- **Async/await**: Missing `await` returns coroutine instead of result
+- **Key/Index errors**: Use `.get(key, default)` for dicts, check `len()` for lists
+- **Scope issues**: `global`/`nonlocal` declarations, closure variable capture in loops
+- **Encoding**: Specify `encoding="utf-8"` in `open()` calls
+- **Float precision**: Use `decimal.Decimal` or `math.isclose()` for comparisons
+- **Resource leaks**: Use `with` statements for files, connections, locks
 
 ## Step 5: Fix Patterns
 
@@ -212,8 +116,6 @@ def process_user(user_id: int, data: dict) -> dict:
     missing = [f for f in required_fields if f not in data]
     if missing:
         raise ValueError(f"Missing required fields: {missing}")
-
-    # Process...
 ```
 
 ### Exception Handling
@@ -237,8 +139,6 @@ def fetch_user_data(user_id: int) -> dict:
 ```
 
 ## Step 6: Verify the Fix
-
-### Write a Test
 
 ```python
 import pytest
@@ -272,18 +172,6 @@ logging.basicConfig(
         logging.StreamHandler(),
     ],
 )
-
-logger = logging.getLogger(__name__)
-
-def process(data):
-    logger.debug(f"Processing data: {data}")
-    try:
-        result = transform(data)
-        logger.info(f"Success: {result}")
-        return result
-    except Exception as e:
-        logger.exception(f"Failed to process: {e}")
-        raise
 ```
 
 ### Profiling
@@ -304,28 +192,15 @@ def memory_heavy_function():
 ### Using rich for better output
 
 ```python
-from rich import print
 from rich.traceback import install
-
 install(show_locals=True)  # Enhanced tracebacks
-
-print({"data": data, "result": result})  # Pretty printing
 ```
 
-## Debug Checklist
+## References
 
-1. [ ] Read the full traceback (bottom to top)
-2. [ ] Identify the exact line causing the error
-3. [ ] Check variable types and values at that point
-4. [ ] Create minimal reproduction
-5. [ ] Add print/logging statements around the issue
-6. [ ] Check for None values
-7. [ ] Check for type mismatches
-8. [ ] Verify external dependencies (APIs, files, DBs)
-9. [ ] Write a test that reproduces the bug
-10. [ ] Implement fix
-11. [ ] Verify test passes
-12. [ ] Check for similar issues elsewhere
+- [Debug Checklist](references/debug-checklist.md)
+- [Common Error Types](references/python-error-types.md)
+- [pdb Commands](references/pdb-commands.md)
 
 ## When to Use WebSearch
 
