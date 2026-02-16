@@ -66,6 +66,9 @@ Export Majestic plugins to OpenCode or Codex with schema-aware conversion:
 
 # Install specific plugins
 ./scripts/install-codex.sh engineer rails tools
+
+# Example (explicit): convert engineer, rails, and tools to OpenCode
+# Output target: ~/.config/opencode
 ./scripts/install-opencode.sh engineer rails tools
 
 # Install one plugin (short or prefixed)
@@ -76,6 +79,8 @@ Export Majestic plugins to OpenCode or Codex with schema-aware conversion:
 Both commands are now local to this repository and only require Ruby (`scripts/convert-plugin.rb`).
 
 This runs a converter pipeline (not a plain file copy), so incompatible Claude metadata is translated for target formats.
+
+`disable-model-invocation` frontmatter is preserved as part of source metadata parsing, but it does not exclude a command from conversion for OpenCode/Codex output.
 
 Output locations:
 

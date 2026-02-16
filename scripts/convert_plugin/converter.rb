@@ -84,8 +84,6 @@ module ConvertPlugin
       generated_skills = []
 
       plugin.commands.each do |command|
-        next if command.disable_model_invocation
-
         skill_name = Parser.unique_name(Parser.normalize_name(command.name), used_names)
         skill_description = Parser.sanitize_description(command.description || "Converted from Claude command #{command.name}")
         skill_sections = []
@@ -154,11 +152,14 @@ module ConvertPlugin
       }
     end
 
-    def convert_to_opencode(plugin, agent_mode: 'subagent', infer_temperature: true, permissions: 'broad')
+    def convert_to_opencode(
+      plugin,
+      agent_mode: 'subagent',
+      infer_temperature: true,
+      permissions: 'broad'
+    )
       command_map = {}
       plugin.commands.each do |command|
-        next if command.disable_model_invocation
-
         entry = {
           'description' => command.description,
           'template' => Loader.rewrite_claude_paths(command.body)
