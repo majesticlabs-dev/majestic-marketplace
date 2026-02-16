@@ -61,14 +61,46 @@ Analyze the codebase:
 
 Create lightweight root file with these sections:
 
-1. **Project Snapshot** (3-5 lines) - Repo type, tech stack, sub-package note
-2. **Root Setup Commands** (5-10 lines) - Install, build, typecheck, test
-3. **Universal Conventions** (5-10 lines) - Code style, commit format, PR requirements
-4. **Implementation Rules** (2-3 lines) - Version verification for external deps
-5. **Development Workflow** (5-7 lines) - Plan -> approve -> code -> verify cycle
-6. **Security & Secrets** (3-5 lines) - Token handling, env patterns, PII
-7. **JIT Index - Directory Map** (10-20 lines) - Links to sub-AGENTS.md files
-8. **Acceptance Criteria** (3-5 lines) - Pre-PR checklist
+1. **Project Snapshot** (3-5 lines)
+   - Repo type
+   - Primary tech stack
+   - Note about sub-package AGENTS.md files
+2. **Root Setup Commands** (5-10 lines)
+   - Install dependencies, build all, typecheck all, test all
+3. **Universal Conventions** (5-10 lines)
+   - Code style (TypeScript strict? Prettier? ESLint?)
+   - Commit format (Conventional Commits?)
+   - Branch strategy
+   - PR requirements
+4. **Implementation Rules** (2-3 lines)
+   - Version verification for external dependencies
+   - Never trust training data for version numbers
+5. **Development Workflow** (5-7 lines)
+   - Plan before code: describe approach, wait for approval
+   - Ambiguous requirements? Ask before coding
+   - >3 files affected? Decompose into smaller tasks
+   - After coding: list breakage risks, suggest tests
+   - Bug fix: write failing test first, fix until green
+   - When corrected: add lesson to .agents/lessons/
+6. **Security & Secrets** (3-5 lines)
+   - Never commit tokens
+   - Where secrets go (.env patterns)
+   - PII handling
+7. **JIT Index - Directory Map** (10-20 lines)
+   - Links to sub-AGENTS.md files
+   - Quick find commands
+8. **Acceptance Criteria** (3-5 lines)
+   - Pre-PR checklist
+   - What must pass
+
+**Example Implementation Rules**:
+```markdown
+## Implementation Rules
+
+Before adding ANY external dependency (gems, npm packages, GitHub Actions, Docker images, APIs, CDN links):
+- Use WebSearch to verify the latest stable version BEFORE implementation
+- Never trust training data for version numbers
+```
 
 **Example JIT Index**:
 ```markdown
