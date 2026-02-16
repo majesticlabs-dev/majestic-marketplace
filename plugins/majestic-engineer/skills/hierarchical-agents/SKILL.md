@@ -17,32 +17,7 @@ Create a **hierarchical AGENTS.md system** for codebases that enables AI coding 
 - Optimizing existing documentation for token efficiency
 - Implementing JIT (Just-In-Time) indexing patterns
 
-## Core Principles
-
-### 1. Root AGENTS.md is LIGHTWEIGHT
-- Only universal guidance and links to sub-files
-- ~100-200 lines maximum
-- Acts as index and navigation hub
-
-### 2. Nearest-Wins Hierarchy
-- Agents read the closest AGENTS.md to the file being edited
-- Sub-folder AGENTS.md files override root guidance
-
-### 3. JIT (Just-In-Time) Indexing
-- Provide paths, globs, and search commands — NOT full file content
-- Enable discovery, not copy-paste
-
-### 4. Token Efficiency
-- Reference files by path, not content
-- Examples point to actual files in codebase
-- Single-line commands that can be executed
-
-### 5. Sub-Folder Detail
-- Sub-folder AGENTS.md files have MORE detail
-- Specific patterns with file examples
-- Technology-specific conventions
-
-## Process Overview
+## Process
 
 Follow these phases in order. See [references/generation-process.md](references/generation-process.md) for complete details.
 
@@ -59,7 +34,9 @@ Analyze the codebase:
 
 ### Phase 2: Generate Root AGENTS.md
 
-Create lightweight root file with these sections:
+Root must be lightweight: ~100-200 lines maximum, universal guidance only. Acts as index and navigation hub. Agents read the closest AGENTS.md to the file being edited — sub-folder files override root (nearest-wins).
+
+Create root file with these sections:
 
 1. **Project Snapshot** (3-5 lines)
    - Repo type
@@ -72,23 +49,15 @@ Create lightweight root file with these sections:
    - Commit format (Conventional Commits?)
    - Branch strategy
    - PR requirements
-4. **Implementation Rules** (2-3 lines)
-   - Version verification for external dependencies
-   - Never trust training data for version numbers
-5. **Development Workflow** (5-7 lines)
-   - Plan before code: describe approach, wait for approval
-   - Ambiguous requirements? Ask before coding
-   - >3 files affected? Decompose into smaller tasks
-   - After coding: list breakage risks, suggest tests
-   - Bug fix: write failing test first, fix until green
-   - When corrected: add lesson to .agents/lessons/
+4. **Implementation Rules** (2-3 lines) — see example below
+5. **Development Workflow** (5-7 lines) — see example below
 6. **Security & Secrets** (3-5 lines)
    - Never commit tokens
    - Where secrets go (.env patterns)
    - PII handling
-7. **JIT Index - Directory Map** (10-20 lines)
-   - Links to sub-AGENTS.md files
-   - Quick find commands
+7. **JIT Index - Directory Map** (10-20 lines) — see example below
+   - Reference files by path, not content
+   - Provide search commands that agents can execute
 8. **Acceptance Criteria** (3-5 lines)
    - Pre-PR checklist
    - What must pass
@@ -131,6 +100,8 @@ Before adding ANY external dependency (gems, npm packages, GitHub Actions, Docke
 
 ### Phase 3: Generate Sub-Folder AGENTS.md Files
 
+Sub-folders have MORE detail than root — specific patterns, technology-specific conventions, real file examples from the codebase.
+
 For EACH major package/directory, create detailed AGENTS.md:
 
 1. **Package Identity** (2-3 lines)
@@ -148,20 +119,9 @@ For EACH major package/directory, create detailed AGENTS.md:
 Adapt templates for specific package types (Design System, Database, API, Testing).
 See [references/generation-process.md](references/generation-process.md) for specialized templates.
 
-## Quality Checklist
+## Directory Structures
 
-- [ ] Root AGENTS.md is under 200 lines
-- [ ] Root links to all sub-AGENTS.md files
-- [ ] Each sub-file has concrete examples (actual file paths)
-- [ ] Commands are copy-paste ready
-- [ ] No duplication between root and sub-files
-- [ ] Every DO has a real file example
-- [ ] Every DON'T references real anti-pattern
-- [ ] All paths are relative and correct
-
-## Common Patterns and Workflow
-
-### Monorepo Structure
+### Monorepo
 ```
 AGENTS.md                    # Root (lightweight)
 apps/
@@ -172,7 +132,7 @@ packages/
   shared/AGENTS.md          # Shared code details
 ```
 
-### Simple Project Structure
+### Simple Project
 ```
 AGENTS.md                    # Root (can be more detailed)
 src/
@@ -180,13 +140,17 @@ src/
   services/AGENTS.md        # Service patterns
 ```
 
-## Anti-Patterns
+## Quality Checklist
 
-- Don't include full file content in AGENTS.md -> Reference file paths and provide search commands
-- Don't duplicate guidance in root and sub-files -> Keep root minimal, detail in sub-files
-- Don't write vague examples ("use best practices") -> Point to specific files
-- Don't create AGENTS.md for every directory -> Only for major packages/domains
-- Don't use placeholder paths -> Verify all paths exist in codebase
+- [ ] Root AGENTS.md is under 200 lines
+- [ ] Root links to all sub-AGENTS.md files
+- [ ] Each sub-file has concrete examples (actual file paths)
+- [ ] Commands are copy-paste ready
+- [ ] No duplication between root and sub-files
+- [ ] Every DO has a real file example
+- [ ] Every DON'T references real anti-pattern
+- [ ] All paths are relative and verified to exist
+- [ ] Only major packages/domains have AGENTS.md — not every directory
 
 ## Maintenance
 
