@@ -356,3 +356,20 @@ For comprehensive patterns and examples, see:
 7. **Hotwire-first**: Model-level broadcasting, Turbo Streams, Stimulus
 8. **Readable code**: Semantic naming, small methods, no comments needed
 
+## Success Indicators
+
+Code aligns with DHH style when:
+
+- [ ] Controllers map CRUD verbs to resources (no custom actions)
+- [ ] Models use concerns for horizontal behavior sharing
+- [ ] State uses records instead of boolean columns
+- [ ] Abstractions remain minimal (no unnecessary service objects)
+- [ ] Database backs solutions (Solid Queue/Cache, not Redis)
+- [ ] Turbo/Stimulus handle all interactivity
+- [ ] Authorization lives on User model (`can_*?` methods)
+- [ ] Current attributes provide request context
+- [ ] Scopes follow naming conventions (`chronologically`, `with_*`, etc.)
+- [ ] Uses `pluck` over `map` for attribute extraction
+- [ ] Current user resources use `My::` namespace
+- [ ] Data computed at write time, not presentation
+

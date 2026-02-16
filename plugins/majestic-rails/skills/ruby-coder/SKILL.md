@@ -42,11 +42,23 @@ class UserProfileNotifier   # Notification logic
 **Limit**: Maximum 5 lines per method. Each if/else branch counts as lines.
 
 ```ruby
+# Good - 5 lines or fewer
 def process_order
   validate_order
   calculate_totals
   apply_discounts
   finalize_payment
+end
+
+# Avoid - extract when too long
+def process_order
+  return unless items.any?
+  return unless valid_address?
+  self.subtotal = items.sum(&:price)
+  self.tax = subtotal * tax_rate
+  self.total = subtotal + tax
+  charge_customer
+  send_confirmation
 end
 ```
 
@@ -70,9 +82,19 @@ end
 **Limit**: Controllers should instantiate only one object; other objects come through that via facade pattern.
 
 ```ruby
+# Good - single object via facade
 class DashboardController < ApplicationController
   def show
     @dashboard = DashboardFacade.new(current_user)
+  end
+end
+
+# Avoid - multiple instance variables
+class DashboardController < ApplicationController
+  def show
+    @user = current_user
+    @posts = @user.posts.recent
+    @notifications = @user.notifications.unread
   end
 end
 ```
@@ -131,6 +153,19 @@ Create facades when:
 - Controllers need multiple objects (Sandi Metz Rule 4)
 - Views access nested collaborators
 - Complex data aggregation is needed
+
+## When to Break Rules
+
+Sandi Metz's "Rule 0": Break any of the 4 rules only with pair approval or clear justification.
+
+| Rule | Valid Exception |
+|------|---------------|
+| 100 lines | Clear SRP justification required |
+| 5 lines | Complex but irreducible algorithms |
+| 4 params | Rails view helpers exempt |
+| 1 object | Simple views without facades |
+
+Document all exceptions with clear reasoning in code comments.
 
 ## References
 

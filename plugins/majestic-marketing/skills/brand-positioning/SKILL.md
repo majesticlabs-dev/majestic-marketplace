@@ -26,6 +26,14 @@ Define your brand's strategic foundation - the internal identity that drives eve
 | **Brand Promise** | Core commitment to customers |
 | **Positioning Statement** | Classic strategic framework |
 
+## Relationship to Other Tools
+
+| Tool | Focus | Relationship |
+|------|-------|--------------|
+| `brand-positioning` | WHO you are (identity) | **This tool** - foundation |
+| `competitive-positioning` | HOW you differ (comparison) | Uses this as input |
+| `brand-voice` | HOW you sound (expression) | Derives from personality |
+
 ## Conversation Starter
 
 Use `AskUserQuestion` to gather context:
