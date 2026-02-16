@@ -6,6 +6,10 @@ disable-model-invocation: true
 
 # Hierarchical Agents Documentation Generator
 
+## Purpose
+
+Create a **hierarchical AGENTS.md system** for codebases that enables AI coding agents to work efficiently with minimal token usage. Generates lightweight root documentation with detailed sub-folder guidance following the "nearest-wins" principle.
+
 ## When to Use
 
 - Creating AGENTS.md documentation for a new project
