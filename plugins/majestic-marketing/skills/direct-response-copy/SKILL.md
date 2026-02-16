@@ -15,9 +15,7 @@ disable-model-invocation: true
 
 # Direct Response Copy
 
-Copy that converts sounds like a person talking to you. Not a marketing team. Not a guru. Not a robot. A person who figured something out and wants to share it.
-
-**Core principle:** Write like you're explaining to a smart friend who's skeptical but curious. Back up every claim with specifics. Make the transformation viscerally clear.
+Write like you're explaining to a smart friend who's skeptical but curious. Back up every claim with specifics. Make the transformation viscerally clear.
 
 ---
 
@@ -71,30 +69,15 @@ The contrast version ("days, not weeks") creates before/after in six words.
 
 The first sentence has one job: get them to read the second.
 
-### Patterns That Hook
+| Pattern | Example |
+|---------|---------|
+| **Direct Challenge** | "You've been using Claude wrong." |
+| **Story Opening** | "Last Tuesday, I opened my laptop and saw $47,329 in one day." |
+| **Confession** | "I'll be honest. I almost gave up on this business three times." |
+| **Specific Result** | "In 9 months, we did $400k+ using these exact methods." |
+| **Question** | "Have you ever stared at a blank page, knowing you need to write something that sells... and just froze?" |
 
-**Direct Challenge:**
-> "You've been using Claude wrong."
-
-**Story Opening:**
-> "Last Tuesday, I opened my laptop and saw $47,329 in one day."
-
-**Confession:**
-> "I'll be honest. I almost gave up on this business three times."
-
-**Specific Result:**
-> "In 9 months, we did $400k+ using these exact methods."
-
-**Question:**
-> "Have you ever stared at a blank page, knowing you need to write something that sells... and just froze?"
-
-### Openings to Avoid
-
-- "In today's fast-paced world..."
-- "Are you ready to take your business to the next level?"
-- "Welcome! I'm so glad you're here."
-- "In this article, you'll learn..."
-- "Let's dive in!"
+**Avoid:** "In today's fast-paced world...", "Are you ready to take your business to the next level?", "Welcome! I'm so glad you're here.", "Let's dive in!"
 
 ---
 
@@ -177,16 +160,11 @@ Pattern: Hook (short) → Expand (breathe) → Land it (kicker) → Repeat.
 
 ## The Founder Story
 
-Almost every high-converting page includes a first-person story.
-
 **The arc:** vulnerability → credibility → shared journey
 
 > "Hey, it's Marc. In 2018, I believed I was Mark Zuckerberg, built a startup for 1 year, and got 0 users. A few years after my burnout, I shipped like a madman—16 startups in 2 years. Now I earn $45,000 a month."
 
-Why it works:
-- Self-deprecating humor disarms skepticism
-- Specific numbers prove results
-- Implicit message: I was where you are
+Self-deprecating humor disarms skepticism. Specific numbers prove results. Implicit message: I was where you are.
 
 ---
 
@@ -268,60 +246,18 @@ Signals "written by someone who lives online, not a marketing team":
 
 ---
 
-## AI Tells to Avoid
-
-### Words (Kill These)
-delve, dive into, comprehensive, robust, cutting-edge, utilize, leverage, crucial, vital, essential, unlock, unleash, supercharge, game-changer, landscape, streamline
-
-### Phrases (Kill These)
-- "In today's fast-paced world..."
-- "It's important to note..."
-- "When it comes to..."
-- "In order to..." (just "to")
-- "Whether you're a... or a..."
-- "Let's dive in"
-
-### Structural Tells
-- Every paragraph same length
-- Every bullet starts the same way
-- Overly organized with too many headings
-- Numbered lists where numbers don't matter
-
-### The Fix
-Real humans:
-- Use contractions
-- Write sentence fragments
-- Have opinions without hedging
-- Use "I" and "you" freely
-- Make unexpected word choices
+For AI detection patterns and word avoidance lists, see `brand-voice` skill.
 
 ---
 
 ## The Test
 
-Before shipping, read it out loud. Ask:
+Read it out loud. If any answer is no, rewrite that part:
 
-1. Does it sound like someone talking, or someone "writing copy"?
-2. Would I actually say this to a friend?
-3. Is every claim backed by a specific number or proof?
-4. Does the rhythm alternate (punchy, then breathing room)?
-5. Is it about THEM (their transformation) or about ME (my product)?
-6. Does it end with momentum?
+- Sounds like someone talking, not "writing copy"?
+- Would you actually say this to a friend?
+- Every claim backed by a specific number or proof?
+- Rhythm alternates (punchy, then breathing room)?
+- About THEM (their transformation), not ME (my product)?
+- Ends with momentum?
 
-If any answer is no, rewrite that part.
-
----
-
-## Integration
-
-Works with:
-- `positioning-angles` - Find the angle before writing
-- `brand-voice` - Match the established voice
-- `landing-page-builder` - Structure the page, then write copy
-- `hook-writer` - Generate headline options
-- `email-sequences` - Apply these principles to emails
-
-**Workflow:**
-```
-positioning-angles → brand-voice → direct-response-copy → landing-page-builder
-```

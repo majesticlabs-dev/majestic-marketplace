@@ -14,22 +14,7 @@ allowed-tools: Read Write Edit Grep Glob WebSearch WebFetch AskUserQuestion
 
 # SEO Content Workflow
 
-SEO content has a reputation problem. Most of it is garbage—keyword-stuffed, AI-sounding, says nothing new. It ranks for a month, then dies.
-
-This skill creates content that ranks AND builds trust. Content that sounds like an expert sharing what they know, not a content mill churning out filler.
-
-The goal: Would someone bookmark this? Would they share it? Would they come back?
-
----
-
-## The Core Job
-
-Transform a keyword target into **publication-ready content** that:
-- Answers the search intent completely
-- Sounds like a knowledgeable human wrote it
-- Is structured for both readers and search engines
-- Includes proper on-page optimization
-- Passes the "would I actually read this?" test
+Transform a keyword target into **publication-ready content** that answers search intent completely, sounds human-written, and is structured for both readers and search engines.
 
 ---
 
@@ -100,47 +85,7 @@ After reviewing competitors, identify:
 
 ## Phase 2: Content Brief
 
-Before drafting, create a brief:
-
-```markdown
-# Content Brief: [Title]
-
-## Target Keyword
-Primary: [keyword]
-Secondary: [keyword], [keyword], [keyword]
-
-## Search Intent
-[Informational / Commercial / Transactional]
-
-## Content Type
-[Pillar Guide / How-To / Comparison / Listicle / etc.]
-
-## Target Word Count
-[Based on competitor analysis]
-
-## Audience
-Who is searching this? What do they need?
-
-## Unique Angle
-What makes our take different?
-
-## Key Points to Cover
-- [Point 1]
-- [Point 2]
-- [Point 3]
-
-## Questions to Answer (from PAA)
-- [Question 1]
-- [Question 2]
-- [Question 3]
-
-## Competitor Gaps to Fill
-- [Gap 1]
-- [Gap 2]
-
-## CTA
-What action should readers take?
-```
+Before drafting, create a brief covering: primary/secondary keywords, search intent, content type, target word count (from competitor analysis), audience, unique angle, key points, PAA questions to answer, competitor gaps to fill, and CTA.
 
 ---
 
@@ -178,50 +123,11 @@ What action should readers take?
 
 ### How-To Tutorial (2,000-3,000 words)
 
-```
-1. What You'll Achieve (150-200 words)
-   - End result shown first
-   - Time estimate
-   - Prerequisites
-
-2. Why This Method (200-300 words)
-   - Context and alternatives
-   - Why this approach works
-
-3. Step-by-Step Instructions (1,200-2,000 words)
-   - Numbered steps
-   - One action per step
-   - Troubleshooting inline
-
-4. Variations / Advanced Tips (300-400 words)
-
-5. Common Mistakes (200-300 words)
-
-6. Next Steps with CTA (100-150 words)
-```
+Result shown first + prerequisites -> step-by-step instructions (one action per step, troubleshooting inline) -> variations/advanced tips -> common mistakes -> CTA.
 
 ### Comparison (2,500-4,000 words)
 
-```
-1. Quick Verdict (200-300 words)
-   - Bottom line recommendation
-   - "Choose X if... Choose Y if..."
-
-2. Comparison Table
-   - 8-12 key differentiators
-   - Pricing, best for, key features
-
-3. Deep Dive: Option A (800-1,000 words)
-
-4. Deep Dive: Option B (800-1,000 words)
-
-5. Head-to-Head Comparison (300-500 words)
-   - Specific scenarios
-
-6. FAQ (3-5 questions)
-
-7. Final Recommendation with CTA
-```
+Quick verdict ("Choose X if... Choose Y if...") -> comparison table (8-12 differentiators) -> deep dive each option -> head-to-head scenarios -> FAQ -> final recommendation with CTA.
 
 ---
 
@@ -301,20 +207,11 @@ AI content has tells. Remove them ruthlessly.
 
 Add these—AI content lacks them:
 
-**Personal experience:**
-> "I made this mistake for two years. Cost me roughly $40K in lost revenue."
+**Personal experience:** "I made this mistake for two years. Cost me roughly $40K in lost revenue."
 
-**Opinion with reasoning:**
-> "Honestly, most SEO advice is written by people who've never ranked anything."
+**Admission of limitations:** "This won't work for everyone. If you're in YMYL niches, ignore this entirely."
 
-**Admission of limitations:**
-> "This won't work for everyone. If you're in YMYL niches, ignore this entirely."
-
-**Specific examples:**
-> "When we implemented this for [client]—an e-commerce brand selling outdoor gear—their organic traffic went from 12K to 89K monthly."
-
-**Uncertainty where honest:**
-> "I'm not 100% sure why this works. Best guess: the semantic density signals topical authority."
+Also inject: opinions with reasoning, specific client examples with numbers, honest uncertainty.
 
 ### The Detection Checklist
 
@@ -457,17 +354,3 @@ Works with:
 keyword-research → positioning-angles → brand-voice → seo-content → content-atomizer
 ```
 
----
-
-## Quality Test
-
-Before publishing, ask:
-
-1. **Does it answer the query better than what's ranking?**
-2. **Would an expert approve of the accuracy?**
-3. **Would a reader bookmark or share this?**
-4. **Does it sound like a person, not a content mill?**
-5. **Is there at least one thing here they can't find elsewhere?**
-6. **Does it pass the AI detection checklist?**
-
-If any answer is no, revise before publishing.

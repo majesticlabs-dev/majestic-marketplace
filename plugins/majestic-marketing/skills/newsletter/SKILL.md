@@ -253,73 +253,9 @@ P.S. [Teaser for next week or bonus link]
 
 ## Section Templates
 
-### Intros That Hook
+**Intro styles:** Story open (personal anecdote), observation (pattern you noticed), confession (honest admission), direct (topic + no fluff).
 
-**The Story Open:**
-```
-Last Tuesday, I made a mistake that cost me [result].
-
-Here's what happened...
-```
-
-**The Observation:**
-```
-I've noticed something lately.
-
-Every time I [action], [pattern emerges].
-```
-
-**The Confession:**
-```
-I have to be honest with you.
-
-I've been [doing/thinking/avoiding] something, and it's time to talk about it.
-```
-
-**The Direct:**
-```
-This week: [topic].
-
-No fluff. Let's get into it.
-```
-
-### Sign-offs That Connect
-
-**The Personal:**
-```
-That's all for this week.
-
-I'm off to [personal activity]. Talk soon.
-
-[Name]
-```
-
-**The Forward Ask:**
-```
-Found this useful? Forward to one person who'd benefit.
-
-It helps more than you know.
-
-[Name]
-```
-
-**The Reply Prompt:**
-```
-Hit reply and tell me: [specific question]
-
-I read every response.
-
-[Name]
-```
-
-**The Teaser:**
-```
-Next week: [topic preview].
-
-You won't want to miss it.
-
-[Name]
-```
+**Sign-off styles:** Personal (where you're headed), forward ask (share request), reply prompt (specific question), teaser (next week preview).
 
 ## Subject Line Toolkit
 
@@ -335,57 +271,13 @@ You won't want to miss it.
 | FOMO | `[Number] people already know this` | 10,000 people already know this |
 | Direct | `[Benefit] inside` | Your productivity playbook inside |
 
-### Power Words for Opens
-
-- "Actually" - signals contrarian
-- "Finally" - signals solution
-- "Warning" - signals urgency
-- "Secretly" - signals insider info
-- "Quick" - signals low commitment
-- "Real" - signals authenticity
-
-### Words to Avoid
-
-- "Newsletter" - boring, expected
-- "Update" - no curiosity
-- "Monthly/Weekly" - screams routine
-- "Don't miss" - overused
-- "Exciting news" - generic hype
+**Power words:** "Actually" (contrarian), "Finally" (solution), "Warning" (urgency), "Secretly" (insider), "Quick" (low commitment). **Avoid:** "Newsletter", "Update", "Monthly/Weekly", "Don't miss", "Exciting news".
 
 ## Content Sourcing
 
-### For Curators
-
-**Where to find links:**
-- Twitter/X lists of industry experts
-- Hacker News, Reddit niche subs
-- Industry Slack/Discord communities
-- Pocket/Instapaper saved articles
-- Google Alerts on key topics
-- Competitor newsletters (add value, don't copy)
-
-**Curation criteria:**
-- Would I send this to a smart friend?
-- Does it teach something actionable?
-- Is it fresh (not everyone has seen it)?
-- Does it fit my audience's level?
-
-### For Educators
-
-**Content mining:**
-- Questions from readers/customers
-- Mistakes you've made
-- Processes that work for you
-- Books you're reading (one insight per newsletter)
-- Conversations that sparked ideas
-
-### For Thought Leaders
-
-**Opinion generators:**
-- What common practice do you disagree with?
-- What do beginners get wrong?
-- What changed your mind recently?
-- What would you do differently knowing what you know now?
+- **Curators:** Twitter/X lists, HN, Reddit, Slack/Discord communities, Google Alerts. Curation test: "Would I send this to a smart friend?"
+- **Educators:** Reader questions, your mistakes, processes that work, book insights, sparked conversations
+- **Thought Leaders:** Disagreements with common practice, beginner mistakes, changed minds, hindsight lessons
 
 ## Output Format
 

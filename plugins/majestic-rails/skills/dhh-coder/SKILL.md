@@ -99,27 +99,11 @@ Current.user.can_administer?(@message)
 
 ### Ruby Syntax Preferences
 
+DHH-specific style (for general Ruby style, see `ruby-coder` skill):
+
 ```ruby
 # Symbol arrays with spaces inside brackets
 before_action :set_message, only: %i[ show edit update destroy ]
-
-# Modern hash syntax exclusively
-params.require(:message).permit(:body, :attachment)
-
-# Single-line blocks with braces
-users.each { |user| user.notify }
-
-# Ternaries for simple conditionals
-@room.direct? ? @room.users : @message.mentionees
-
-# Bang methods for fail-fast
-@message = Message.create!(params)
-@message.update!(message_params)
-
-# Predicate methods with question marks
-@room.direct?
-user.can_administer?(@message)
-@messages.any?
 
 # Expression-less case for cleaner conditionals
 case
@@ -134,19 +118,7 @@ end
 
 ### Query Optimization
 
-```ruby
-# WRONG: Load all records then extract attribute
-users.map(&:name)
-
-# CORRECT: Pluck directly from database
-users.pluck(:name)
-
-# WRONG: Count via Ruby
-messages.to_a.count
-
-# CORRECT: Count via SQL
-messages.count
-```
+Prefer `pluck(:name)` over `map(&:name)` and `messages.count` over `messages.to_a.count` -- push work to the database.
 
 ### StringInquirer for Predicates
 
@@ -167,19 +139,7 @@ event.action.failed?
 
 ### Controller Response Patterns
 
-```ruby
-# Return 204 No Content for successful updates without body
-def update
-  @message.update!(message_params)
-  head :no_content
-end
-
-# Return 201 Created for successful creates
-def create
-  @message = Message.create!(message_params)
-  head :created
-end
-```
+Use `head :no_content` for updates without body, `head :created` for creates. Bang methods (`create!`, `update!`) for fail-fast.
 
 ### My:: Namespace for Current User Resources
 
@@ -396,19 +356,3 @@ For comprehensive patterns and examples, see:
 7. **Hotwire-first**: Model-level broadcasting, Turbo Streams, Stimulus
 8. **Readable code**: Semantic naming, small methods, no comments needed
 
-## Success Indicators
-
-Code aligns with DHH style when:
-
-- [ ] Controllers map CRUD verbs to resources (no custom actions)
-- [ ] Models use concerns for horizontal behavior sharing
-- [ ] State uses records instead of boolean columns
-- [ ] Abstractions remain minimal (no unnecessary service objects)
-- [ ] Database backs solutions (Solid Queue/Cache, not Redis)
-- [ ] Turbo/Stimulus handle all interactivity
-- [ ] Authorization lives on User model (`can_*?` methods)
-- [ ] Current attributes provide request context
-- [ ] Scopes follow naming conventions (`chronologically`, `with_*`, etc.)
-- [ ] Uses `pluck` over `map` for attribute extraction
-- [ ] Current user resources use `My::` namespace
-- [ ] Data computed at write time, not presentation

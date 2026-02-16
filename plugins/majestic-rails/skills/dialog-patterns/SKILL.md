@@ -123,93 +123,9 @@ Wrap modal content in matching turbo-frame with nested inner frame:
 
 ### Step 4: Stimulus Controller
 
-```javascript
-// app/javascript/controllers/dialog_controller.js
-import { Controller } from "@hotwired/stimulus"
+Key behaviors: `showModal()` on connect, `replaceChildren()` on disconnect (prevents stale content), `clickOutside` for backdrop close.
 
-export default class extends Controller {
-  connect() {
-    // Auto-open when content loads via Turbo
-    this.element.showModal()
-
-    // Store original scroll position
-    this.scrollY = window.scrollY
-  }
-
-  disconnect() {
-    // Clean up turbo-frame to prevent stale content flash
-    const frame = this.element.closest("turbo-frame")
-    if (frame) {
-      frame.removeAttribute("src")
-      // Safe DOM clearing without innerHTML
-      frame.replaceChildren()
-    }
-  }
-
-  close() {
-    this.element.close()
-  }
-
-  clickOutside(event) {
-    // Close when clicking backdrop (the dialog element itself, not content)
-    if (event.target === this.element) {
-      this.close()
-    }
-  }
-
-  // Handle ESC key (native behavior, but can customize)
-  keydown(event) {
-    if (event.key === "Escape") {
-      this.close()
-    }
-  }
-}
-```
-
-### Step 5: Styling
-
-```css
-/* app/assets/stylesheets/components/dialog.css */
-dialog {
-  border: none;
-  border-radius: 0.5rem;
-  padding: 0;
-  max-width: 32rem;
-  width: 90vw;
-  box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
-}
-
-dialog::backdrop {
-  background: rgb(0 0 0 / 0.5);
-  backdrop-filter: blur(2px);
-}
-
-dialog article {
-  padding: 1.5rem;
-}
-
-dialog header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1rem;
-}
-
-/* Prevent background scroll when modal open */
-body:has(dialog[open]) {
-  overflow: hidden;
-}
-```
-
-With Tailwind:
-
-```erb
-<dialog class="rounded-lg shadow-xl max-w-lg w-[90vw] p-0 backdrop:bg-black/50 backdrop:backdrop-blur-sm"
-        data-controller="dialog"
-        data-action="click->dialog#clickOutside">
-  <!-- content -->
-</dialog>
-```
+See [references/dialog-examples.md](references/dialog-examples.md) for full Stimulus controller, CSS styling, and Tailwind variant.
 
 ## Why Nested Turbo Frames?
 
@@ -260,72 +176,13 @@ render :new, status: :unprocessable_entity
 
 ### Turbo Stream Response (Stay in Modal)
 
-To update content without closing:
-
-```ruby
-def create
-  @post = Post.new(post_params)
-
-  if @post.save
-    respond_to do |format|
-      format.turbo_stream {
-        render turbo_stream: [
-          turbo_stream.append("posts", partial: "posts/post", locals: { post: @post }),
-          turbo_stream.update("modal", "")  # Clear modal
-        ]
-      }
-      format.html { redirect_to posts_path }
-    end
-  else
-    render :new, status: :unprocessable_entity
-  end
-end
-```
+Use `turbo_stream.update("modal", "")` to clear modal without full redirect. See [references/dialog-examples.md](references/dialog-examples.md) for full example.
 
 ## Confirmation Dialog Pattern
 
-For destructive actions like delete:
+For destructive actions: add a `confirm_delete` member route, render a dialog in a turbo frame, trigger via `link_to` with `data: { turbo_frame: :modal }`.
 
-### The View
-
-```erb
-<%# app/views/posts/confirm_delete.html.erb %>
-<%= turbo_frame_tag :modal do %>
-  <dialog data-controller="dialog" data-action="click->dialog#clickOutside" open>
-    <article>
-      <h2>Delete Post?</h2>
-      <p>Are you sure you want to delete "<%= @post.title %>"? This cannot be undone.</p>
-
-      <footer class="flex gap-2 justify-end mt-4">
-        <button data-action="dialog#close" class="btn btn-secondary">
-          Cancel
-        </button>
-        <%= button_to "Delete", @post,
-              method: :delete,
-              class: "btn btn-danger",
-              data: { turbo_confirm: false } %>
-      </footer>
-    </article>
-  </dialog>
-<% end %>
-```
-
-### The Route
-
-```ruby
-# config/routes.rb
-resources :posts do
-  member do
-    get :confirm_delete
-  end
-end
-```
-
-### The Trigger
-
-```erb
-<%= link_to "Delete", confirm_delete_post_path(@post), data: { turbo_frame: :modal } %>
-```
+See [references/dialog-examples.md](references/dialog-examples.md) for full confirmation dialog view, route, and trigger.
 
 ## Alert/Toast Pattern
 
@@ -352,44 +209,15 @@ For side panels (settings, filters, details). See [references/toast-slideover-pa
 </dialog>
 ```
 
-## Accessibility Checklist
+## Accessibility
 
-Native `<dialog>` handles most accessibility, but verify:
+Native `<dialog>` provides focus trapping, ESC close, background inert, and top layer automatically. Additionally ensure:
 
-- [ ] **Focus management** - First focusable element receives focus on open
-- [ ] **Focus trap** - Tab cycling stays within dialog (native behavior)
-- [ ] **ESC closes** - Native behavior with `showModal()`
-- [ ] **Background inert** - Content behind dialog is not interactive (native)
-- [ ] **Visible close button** - Not just ESC, provide visible control
-- [ ] **Descriptive title** - Use `<h2>` or `aria-labelledby`
-- [ ] **Return focus** - Focus returns to trigger element on close
+- Visible close button (not just ESC)
+- `aria-labelledby` / `aria-describedby` for descriptive context
+- Focus return to trigger element on close (store `document.activeElement` in `connect()`)
 
-### Enhanced Accessibility
-
-```erb
-<dialog aria-labelledby="dialog-title"
-        aria-describedby="dialog-description"
-        data-controller="dialog">
-  <h2 id="dialog-title">Confirm Action</h2>
-  <p id="dialog-description">This action cannot be undone.</p>
-  <!-- content -->
-</dialog>
-```
-
-### Focus Return
-
-```javascript
-// Enhanced dialog controller with focus return
-connect() {
-  this.previouslyFocused = document.activeElement
-  this.element.showModal()
-}
-
-close() {
-  this.element.close()
-  this.previouslyFocused?.focus()
-}
-```
+See [references/dialog-examples.md](references/dialog-examples.md) for enhanced accessibility and focus return examples.
 
 ## Common Patterns Summary
 

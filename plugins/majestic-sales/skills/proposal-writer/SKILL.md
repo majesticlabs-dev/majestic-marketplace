@@ -7,41 +7,7 @@ disable-model-invocation: true
 
 # Proposal Writer
 
-Create proposals that close deals. Connect discovery insights to clear solutions, present pricing strategically, and make it easy for buyers to say yes.
-
-## Input Context
-
-Expect structured context from orchestrator:
-
-```yaml
-prospect:
-  company: string
-  industry: string
-  size: string
-deal_size: <$10K | $10-50K | $50K+
-stakeholders:
-  - title: string
-    concern: string
-pain_points: [list from discovery]
-solution: string
-pricing: number | range
-competition:
-  - name: string
-    weakness: string
-objections: [list to address]
-timeline:
-  decision_date: date
-  implementation_date: date
-```
-
-## Proposal Length by Deal Size
-
-| Deal Size | Pages | Sections |
-|-----------|-------|----------|
-| <$10K | 3-5 | Exec summary, Scope, Pricing, Next steps |
-| $10K-$50K | 5-10 | + Understanding, Case study, Team |
-| $50K-$250K | 10-15 | + Detailed timeline, Multiple options, Risk mitigation |
-| >$250K | 15-25 | + Implementation methodology, Comprehensive terms, Appendix |
+Input schema: see [references/proposal-input-schema.md](references/proposal-input-schema.md)
 
 ## Proposal Structure
 
@@ -50,7 +16,7 @@ timeline:
 ```markdown
 # PROPOSAL
 
-**[Your Company] → [Prospect Company]**
+**[Your Company] -> [Prospect Company]**
 
 **Prepared for:** [Name, Title]
 **Prepared by:** [Name, Title]
@@ -144,9 +110,9 @@ Based on our conversations, [Company] is facing:
 
 ### Not Included
 
-- [Item 1] — available as add-on
-- [Item 2] — future phase
-- [Item 3] — client responsibility
+- [Item 1] -- available as add-on
+- [Item 2] -- future phase
+- [Item 3] -- client responsibility
 
 ### Assumptions
 
@@ -187,7 +153,7 @@ Based on our conversations, [Company] is facing:
 
 **Investment: $XX,XXX**
 
-### Option B: Recommended ⭐
+### Option B: Recommended
 [Core solution, best value for most situations]
 - [Feature 1]
 - [Feature 2]
@@ -206,8 +172,6 @@ Based on our conversations, [Company] is facing:
 ```
 
 ### ROI Justification
-
-Use when price is a concern:
 
 ```markdown
 ## Return on Investment
@@ -245,7 +209,7 @@ Use when price is a concern:
 ### Client Testimonial
 
 > "[Quote about working with you and results achieved]"
-> — [Name, Title, Company]
+> -- [Name, Title, Company]
 
 ### By the Numbers
 
@@ -264,7 +228,6 @@ Use when price is a concern:
 |------|------|----------------|
 | Project Lead | [Name] | Overall delivery, your primary contact |
 | [Specialist] | [Name] | [Specific responsibility] |
-| [Support] | [Name] | [Ongoing support] |
 
 ### Support Model
 
@@ -297,51 +260,18 @@ Use when price is a concern:
 
 ---
 
-**To proceed:** [Clear instruction — sign and return, schedule call, etc.]
+**To proceed:** [Clear instruction -- sign and return, schedule call, etc.]
 
 **Questions?** Contact [Name] at [email/phone]
 ```
 
-## One-Pager Template (Quick Deals)
-
-For deals <$5K or early-stage exploration:
-
-```markdown
-# [Your Company] + [Prospect Company]
-
-## The Problem
-- [Pain point 1 - quantified]
-- [Pain point 2 - quantified]
-
-## Our Solution
-- [Outcome 1 - measurable]
-- [Outcome 2 - measurable]
-
-## Investment
-$[Amount] for [scope] delivered in [timeframe]
-
-## Next Step
-[Single clear action with date]
-
----
-Valid until [Date] | [Your contact info]
-```
-
-## Tone Guidelines
-
-- **Confident, not arrogant**: "We will deliver" not "We're the best"
-- **Consultative**: Trusted advisor solving their problem
-- **Specific**: Reference their words, their situation
-- **Action-oriented**: Every section moves toward next step
-- **Clean**: White space, scannable, professional
-
 ## Anti-Patterns
 
-| Mistake | Why It Fails | Fix |
-|---------|--------------|-----|
-| Lead with company history | They don't care yet | Lead with their pain |
-| Generic scope | Feels like template | Reference specific discovery |
-| Bury pricing | Seems evasive | Put in exec summary |
-| Feature lists | Doesn't resonate | Focus on outcomes |
-| No next steps | Deal stalls | Action table with dates |
-| Wall of text | Won't be read | Headers, tables, bullets |
+| Mistake | Fix |
+|---------|-----|
+| Lead with company history | Lead with their pain |
+| Generic scope | Reference specific discovery |
+| Bury pricing | Put in exec summary |
+| Feature lists | Focus on outcomes |
+| No next steps | Action table with dates |
+| Wall of text | Headers, tables, bullets |

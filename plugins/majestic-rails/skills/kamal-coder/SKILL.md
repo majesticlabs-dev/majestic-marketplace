@@ -6,22 +6,7 @@ allowed-tools: Read Write Edit Grep Glob Bash
 
 # Kamal Coder
 
-## Overview
-
-Kamal deploys containerized applications to bare metal or VMs using Docker. It handles zero-downtime deployments with Traefik as reverse proxy.
-
-## Server Requirements
-
-Before Kamal can deploy, servers need:
-
-| Requirement | Purpose |
-|-------------|---------|
-| Docker | Container runtime |
-| SSH access | Kamal connects via SSH |
-| Ports 80, 443 open | HTTP/HTTPS traffic |
-| Port 22 open | SSH for deployments |
-
-**Provision with:** Ansible (`infra/bin/provision --config`) or cloud-init at boot time.
+Servers need Docker, SSH access, and ports 22/80/443 open. Provision with Ansible or cloud-init.
 
 ## Configuration: config/deploy.yml
 
@@ -189,15 +174,7 @@ servers:
       traefik.http.routers.myapp.tls.certresolver: letsencrypt
 ```
 
-### Health Checks
-
-```yaml
-healthcheck:
-  path: /up
-  port: 3000
-  interval: 10s
-  max_attempts: 30
-```
+Health checks default to `path: /up`, `port: 3000`. Adjust `max_attempts` for slow-starting apps.
 
 ## Common Commands
 
@@ -262,40 +239,9 @@ kamal accessory exec db --interactive psql -U postgres
 
 ## Provisioning Workflow
 
-### Terraform + Ansible + Kamal Pipeline
+Pipeline: Terraform (create infra) -> Ansible (configure server) -> `kamal server bootstrap` (install Docker/containers).
 
-```bash
-# infra/bin/provision
-#!/usr/bin/env bash
-set -euo pipefail
-
-# 1. Terraform: Create infrastructure
-cd infra && tofu apply
-
-# 2. Ansible: Configure server
-SERVER_IP=$(tofu output -raw server_ip)
-cd ansible
-echo "[web]\n$SERVER_IP ansible_user=root" > hosts.ini
-ansible-playbook -i hosts.ini playbook.yml
-
-# 3. Kamal: Bootstrap containers
-cd ../..
-bundle exec kamal server bootstrap
-```
-
-### What Ansible Should Configure
-
-Based on [kamal-ansible-manager](https://github.com/guillaumebriday/kamal-ansible-manager):
-
-| Task | Purpose |
-|------|---------|
-| Install Docker | Container runtime |
-| Configure fail2ban | SSH intrusion prevention |
-| Setup UFW | Firewall (22, 80, 443) |
-| Enable NTP | Time synchronization |
-| Create swap | Memory overflow protection |
-| Harden SSH | Disable password auth, root login |
-| Kernel tuning | swappiness, somaxconn |
+Ansible should handle: Docker, fail2ban, UFW (22/80/443), NTP, swap, SSH hardening, kernel tuning. See [kamal-ansible-manager](https://github.com/guillaumebriday/kamal-ansible-manager).
 
 ## Builder Configuration
 
@@ -337,20 +283,7 @@ echo "Running migrations..."
 kamal app exec "bin/rails db:migrate"
 ```
 
-## Directory Structure
-
-```
-myapp/
-├── config/
-│   └── deploy.yml        # Main Kamal config
-├── .kamal/
-│   ├── secrets           # Secret values (git-ignored)
-│   ├── secrets.staging   # Staging secrets (git-ignored)
-│   └── hooks/
-│       ├── pre-deploy
-│       └── post-deploy
-└── Dockerfile            # Application container
-```
+Key files: `config/deploy.yml` (main config), `.kamal/secrets` (git-ignored), `.kamal/hooks/pre-deploy` and `post-deploy`, `Dockerfile`.
 
 ## Troubleshooting
 

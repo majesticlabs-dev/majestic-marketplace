@@ -67,18 +67,8 @@ Standard help article structure:
 
 ### 3. Write for Customers
 
-**Language rules:**
-- Second person ("you") throughout
-- Present tense for instructions
-- Active voice only
-- No jargon — explain technical terms if unavoidable
-- Short sentences (max 20 words)
-
-**Instruction format:**
-- Numbered steps for sequences
-- One action per step
-- Start each step with a verb
-- Include what the user should see after each action
+- Second person ("you"), present tense, active voice, no jargon
+- Numbered steps: one action per step, start with verb, include expected result after each action
 
 ## Article Templates
 
@@ -312,76 +302,6 @@ Before delivery, verify:
 - Add page descriptions
 - Use tabs for multi-platform instructions
 
-## Example Output
-
-**Input:** Document the "Export to CSV" feature
-
-**Output (Markdown):**
-
-```markdown
-# How to export your data to CSV
-
-Download your data as a CSV file to use in spreadsheets or other tools.
-
-## Before you start
-
-- You need **Editor** or **Admin** permissions
-- Exports include data from the last 90 days by default
-
-## Steps
-
-1. **Go to Reports**
-
-   Click **Reports** in the left sidebar.
-
-   ![Screenshot: Left sidebar with Reports highlighted]
-
-2. **Select the data to export**
-
-   Use the filters to narrow down your data. You can filter by:
-   - Date range
-   - User
-   - Status
-
-3. **Click Export**
-
-   Click the **Export** button in the top right corner.
-
-   ![Screenshot: Export button location]
-
-4. **Choose CSV format**
-
-   Select **CSV** from the dropdown menu.
-
-5. **Download your file**
-
-   Your browser will download a file named `export-[date].csv`.
-
-## Tips
-
-- Large exports (over 10,000 rows) may take a few minutes
-- The CSV uses UTF-8 encoding — compatible with Excel, Google Sheets, and Numbers
-
-## Troubleshooting
-
-### The Export button is grayed out
-
-You don't have permission to export. Ask an Admin to grant you Editor access.
-
-### My export is missing data
-
-Check your date range filter. The default is 90 days. Adjust it to include older data.
-
-### The file won't open in Excel
-
-The file may be too large. Try opening it in Google Sheets, or filter your export to reduce the size.
-
-## Related articles
-
-- [Understanding your Reports dashboard](#)
-- [Filtering and sorting data](#)
-- [User permissions guide](#)
-```
 
 ## What This Skill Does NOT Do
 
