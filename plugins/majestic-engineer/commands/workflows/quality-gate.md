@@ -12,11 +12,15 @@ Run comprehensive code review through the quality gate agent, which orchestrates
 
 ## Config
 
-Read config values:
-- Tech stack: !`claude -p "/majestic:config tech_stack generic"`
-- Default branch: !`git remote show origin | grep 'HEAD branch' | awk '{print $NF}'`
-- App status: !`claude -p "/majestic:config app_status development"`
-- Lessons path: !`claude -p "/majestic:config lessons_path .agents/lessons/"`
+```
+TECH_STACK = /majestic:config tech_stack generic
+APP_STATUS = /majestic:config app_status development
+LESSONS_PATH = /majestic:config lessons_path .agents/lessons/
+```
+
+```bash
+DEFAULT_BRANCH=$(git remote show origin | grep 'HEAD branch' | awk '{print $NF}')
+```
 
 ## Arguments
 

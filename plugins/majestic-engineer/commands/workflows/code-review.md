@@ -12,9 +12,13 @@ Generic code review command that detects your project's tech stack and delegates
 
 ## Config
 
-Read config values:
-- Tech stack: !`claude -p "/majestic:config tech_stack generic"`
-- Default branch: !`git remote show origin | grep 'HEAD branch' | awk '{print $NF}'`
+```
+TECH_STACK = /majestic:config tech_stack generic
+```
+
+```bash
+DEFAULT_BRANCH=$(git remote show origin | grep 'HEAD branch' | awk '{print $NF}')
+```
 
 ## Arguments
 

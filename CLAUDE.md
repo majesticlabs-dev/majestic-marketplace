@@ -58,7 +58,7 @@ Use `qmd` to search indexed plugin docs, skills, agents, and architecture files 
 ## Config Access
 
 ```
-!`claude -p "/majestic:config field default"`
+VARIABLE = /majestic:config field default
 ```
 
 ## Key Rules

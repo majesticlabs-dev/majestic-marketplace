@@ -64,11 +64,17 @@ Run `/rename <task-title>` to set the terminal title for visibility.
 
 ### 4. Setup Workspace
 
-**Read config values (run these 4 bash commands in parallel):**
-- Workflow: !`claude -p "/majestic:config workflow branches"`
-- Branch naming: !`claude -p "/majestic:config branch_naming issue-desc"`
-- Default branch: !`git remote show origin | grep 'HEAD branch' | awk '{print $NF}'`
-- Post-create hook: !`claude -p "/majestic:config workspace_setup.post_create ''"`
+**Read config values:**
+
+```
+WORKFLOW = /majestic:config workflow branches
+BRANCH_NAMING = /majestic:config branch_naming issue-desc
+POST_CREATE = /majestic:config workspace_setup.post_create ''
+```
+
+```bash
+DEFAULT_BRANCH=$(git remote show origin | grep 'HEAD branch' | awk '{print $NF}')
+```
 
 **Then setup workspace:**
 ```

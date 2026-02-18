@@ -7,10 +7,12 @@ disable-model-invocation: true
 
 # Debug Command
 
-## Context (read in parallel)
+## Context
 
-- Tech stack: !`claude -p "/majestic:config tech_stack generic"`
-- Lessons path: !`claude -p "/majestic:config lessons_path .agents/lessons/"`
+```
+TECH_STACK = /majestic:config tech_stack generic
+LESSONS_PATH = /majestic:config lessons_path .agents/lessons/
+```
 
 ## Bug Description
 

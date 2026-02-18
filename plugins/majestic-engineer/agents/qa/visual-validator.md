@@ -21,10 +21,11 @@ You are a rigorous visual validation expert specializing in verifying UI modific
 
 ### 0. Load Design System (if available)
 
-Before starting validation:
+```
+DESIGN_SYSTEM_PATH = /majestic:config toolbox.build_task.design_system_path ''
+```
 
-1. Read design system path: !`claude -p "/majestic:config toolbox.build_task.design_system_path ''"`
-2. If path exists, read the design system file
+If DESIGN_SYSTEM_PATH is not empty, read the design system file at that path.
 
 **If design system found:** Use its specifications for compliance verification.
 **If not found:** Use generic design principles only.

@@ -19,9 +19,10 @@ color: yellow
 
 ### 1. Load Project Configuration
 
-Read config to determine the tech stack:
-- Tech stack: !`claude -p "/majestic:config tech_stack generic"`
-- Testing framework: !`claude -p "/majestic:config testing ''"`
+```
+TECH_STACK = /majestic:config tech_stack generic
+TESTING = /majestic:config testing ''
+```
 
 ### 2. Identify What Changed
 

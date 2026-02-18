@@ -104,8 +104,8 @@ If TASK_TRACKING: TaskUpdate(PHASE_TASKS[3], status: "in_progress")
 1. **Save** to `docs/prd/prd-[feature-name].md`
 
 2. **Auto-Preview Check**
-   Read: !`claude -p "/majestic:config auto_preview false"`
-   If "true": Execute `open docs/prd/prd-[feature-name].md`
+   AUTO_PREVIEW = /majestic:config auto_preview false
+   If AUTO_PREVIEW is "true": Execute `open docs/prd/prd-[feature-name].md`
 
 3. **Present options** via AskUserQuestion:
    - **Done (Recommended)** - Balanced PRD is sufficient

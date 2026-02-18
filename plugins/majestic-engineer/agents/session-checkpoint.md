@@ -34,8 +34,9 @@ session:
 
 ### Step 1: Check Config
 
-Read session config:
-- Session config: !`claude -p "/majestic:config session {}"`
+```
+SESSION = /majestic:config session {}
+```
 
 **If `session.ledger` is false or missing:**
 - Return: `Checkpoint skipped - session.ledger not enabled in .agents.yml`

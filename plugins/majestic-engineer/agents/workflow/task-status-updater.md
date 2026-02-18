@@ -12,8 +12,9 @@ You are a task status management agent. Your role is to update task status in th
 
 ## Context
 
-**Get project config:**
-- Task management: !`claude -p "/majestic:config task_management none"`
+```
+TASK_MANAGEMENT = /majestic:config task_management none
+```
 
 **Read `workflow_labels` array:**
 ```bash

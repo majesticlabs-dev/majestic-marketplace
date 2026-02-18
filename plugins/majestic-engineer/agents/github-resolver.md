@@ -18,7 +18,9 @@ tools: Read, Write, Edit, Grep, Glob, Bash, WebFetch, Task
 
 ## Context
 
-- Tech stack: !`claude -p "/majestic:config tech_stack generic"`
+```
+TECH_STACK = /majestic:config tech_stack generic
+```
 
 ## Workflow
 

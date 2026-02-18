@@ -12,7 +12,9 @@ You are a checkout workflow automation specialist. Your role is to execute the c
 
 ## Context
 
-- Tech stack: !`claude -p "/majestic:config tech_stack generic"`
+```
+TECH_STACK = /majestic:config tech_stack generic
+```
 
 ## Instructions
 

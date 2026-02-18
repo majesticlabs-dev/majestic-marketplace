@@ -134,11 +134,12 @@ Write the handoff summary to `$HANDOFF_DIR/$FILENAME`.
 
 **BEFORE telling the user about the file, you MUST:**
 
-1. Read auto_preview: !`claude -p "/majestic:config auto_preview false"`
-2. **If auto_preview is "true":**
+AUTO_PREVIEW = /majestic:config auto_preview false
+
+1. **If AUTO_PREVIEW is "true":**
    - Execute: `open "$HANDOFF_DIR/$FILENAME"`
    - Tell user: "Opened handoff in your editor."
-3. **If "false":** Skip auto-preview
+2. **If "false":** Skip auto-preview
 
 ### 5. Tell the User
 
