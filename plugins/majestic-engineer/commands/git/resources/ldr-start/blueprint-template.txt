@@ -1,0 +1,39 @@
+# Blueprint: {SLUG}
+
+**Date:** {DATE}
+**Branch:** `feature/{NNN}-{SLUG}`
+**Prompt:** [`{NNN}-{SLUG}.md`](../prompts/{NNN}-{SLUG}.md)
+**Status:** Draft
+
+## Problem
+
+[Refined problem statement derived from the prompt.]
+
+## Approach
+
+[High-level solution design. What approach was chosen and why.]
+
+## Implementation
+
+[Step-by-step implementation plan.]
+
+1. [First step]
+2. [Second step]
+3. [Third step]
+
+## Files Modified
+
+| File | Change |
+|------|--------|
+| `path/to/file` | [What changes and why] |
+
+## Success Criteria
+
+- [ ] [Measurable outcome that proves this works]
+- [ ] [Another criterion]
+
+## Alternatives Considered
+
+| Alternative | Why Not |
+|-------------|---------|
+| [Option B] | [Reason it was rejected] |

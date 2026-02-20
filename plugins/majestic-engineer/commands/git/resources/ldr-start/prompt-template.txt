@@ -1,0 +1,21 @@
+# Prompt: {SLUG}
+
+**Date:** {DATE}
+**Branch:** `feature/{NNN}-{SLUG}`
+**Author:** {AUTHOR}
+
+## What I Know
+
+[Describe the problem, feature request, or bug report. Capture raw intent — what you knew at the time you started.]
+
+## Why It Matters
+
+[Who is affected? What's the impact of not solving this?]
+
+## Constraints
+
+[Any known limitations, deadlines, or technical constraints.]
+
+## Open Questions
+
+- [ ] [Questions you don't have answers to yet]
