@@ -18,6 +18,8 @@ Routes product discovery tasks to specialized frameworks.
 | Assumption testing | `pm-assumption-mapping` | Validating product hypotheses |
 | Understanding needs | `pm-jobs-to-be-done` | Identifying why customers "hire" solutions |
 | Feature prioritization | `pm-prioritization` | RICE/ICE scoring, opportunity mapping |
+| Roadmap planning | `pm-roadmap` | Theme-based Now/Next/Later roadmaps |
+| Feature briefs & decisions | `pm-one-pager` | Lightweight briefs, decision records |
 
 ## When to Use Each
 
@@ -26,6 +28,9 @@ Interview synthesis needed? → pm-customer-interviews
 Testing assumptions? → pm-assumption-mapping
 Understanding motivation? → pm-jobs-to-be-done
 Prioritizing features? → pm-prioritization
+Planning roadmap? → pm-roadmap
+Early exploration or recording decisions? → pm-one-pager
+Full feature specification? → /majestic:prd
 ```
 
 ## Discovery Synthesis
