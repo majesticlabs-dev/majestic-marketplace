@@ -12,7 +12,7 @@ disable-model-invocation: true
 - Current git status: !`git status`
 - Current branch: !`git branch --show-current`
 - Pending changes: !`git diff --stat`
-- Commits for PR: !`git log --oneline origin/main..HEAD 2>/dev/null || git log --oneline HEAD~10..HEAD`
+- Commits for PR: !`DEFAULT=$(git remote show origin 2>/dev/null | grep 'HEAD branch' | awk '{print $NF}'); git log --oneline origin/${DEFAULT:-main}..HEAD 2>/dev/null || git log --oneline -10`
 
 ## Your Task
 
@@ -26,7 +26,7 @@ Create a pull request with a well-structured description based on commit analysi
 
 ### Step 2: Analyze Commits
 
-Run: `git log --format="### %s%n%n%b%n---" origin/main..HEAD`
+Run: `git log --format="### %s%n%n%b%n---" origin/<default-branch>..HEAD` (use default branch from Context above)
 
 For each commit, extract:
 - **What** changed (from subject + diff)
