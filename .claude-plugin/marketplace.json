@@ -32,8 +32,8 @@
     },
     {
       "name": "majestic-rails",
-      "description": "Ruby on Rails development tools. Includes 15 specialized agents, 3 commands, 31 skills, enhanced toolbox with 6 research hooks, and LSP support.",
-      "version": "3.19.4",
+      "description": "Ruby on Rails development tools. Includes 15 specialized agents, 3 commands, 31 skills, and enhanced toolbox with 6 research hooks.",
+      "version": "3.19.5",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -73,11 +73,7 @@
         "modal",
         "kamal",
         "docker",
-        "deployment",
-        "lsp",
-        "ruby-lsp",
-        "stimulus-lsp",
-        "language-server"
+        "deployment"
       ],
       "source": "./plugins/majestic-rails"
     },
