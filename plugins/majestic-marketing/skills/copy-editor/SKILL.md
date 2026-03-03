@@ -37,10 +37,14 @@ Note these factors as they influence which style rules apply. Marketing copy all
 
 Locate the applicable style guide in this order:
 
-1. **Project root**: Check for `STYLE_GUIDE.md`
-2. **Claude directory**: Check for `.claude/style-guide.md`
-3. **Docs folder**: Check for `docs/style-guide.md`
-4. **Default fallback**: Use `references/DEFAULT_STYLE_GUIDE.md` from this skill
+1. **Voice DNA**: Check for `.claude/voice-dna.md` (personal voice rules)
+2. **Brand voice**: Check for `docs/brand-voice.md` or `.claude/brand-voice.md`
+3. **Project root**: Check for `STYLE_GUIDE.md`
+4. **Claude directory**: Check for `.claude/style-guide.md`
+5. **Docs folder**: Check for `docs/style-guide.md`
+6. **Default fallback**: Use `references/DEFAULT_STYLE_GUIDE.md` from this skill
+
+Voice DNA and brand voice files take precedence over generic style guides. Apply their banned phrases and writing rules as hard constraints.
 
 ```bash
 # Search for project style guide
@@ -85,6 +89,10 @@ Systematically review the copy for:
 - Vague attributions ("some experts", "widely regarded")
 - Structural patterns (mechanical balance, essay format)
 - Sycophantic phrases ("I hope this helps")
+- Negation-assertion pattern ("This isn't X. This is Y.") - fatal
+- Engagement bait ("Let that sink in", "Read that again")
+- AI cringe terms ("Supercharge", "Unlock", "Future-proof")
+- Generic insider claims ("Here's what nobody tells you")
 
 ### Phase 4: Structured Report
 

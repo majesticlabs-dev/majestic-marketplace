@@ -1,6 +1,6 @@
 ---
 name: brand-voice
-description: Codify brand writing style into a reusable voice guide. Extracts patterns from existing content and generates a style document with tone rules, vocabulary, and do/don't examples.
+description: Use when codifying brand or personal writing style into a reusable voice guide. Extracts patterns from existing content and generates a style document with tone rules, vocabulary, banned phrases, and do/don't examples. Not for editing content (use copy-editor).
 triggers:
   - brand voice
   - voice guide
@@ -8,12 +8,27 @@ triggers:
   - tone of voice
   - brand style
   - voice document
+  - voice dna
+  - my voice
+  - personal voice
+  - writing voice
+  - pre-ai voice
 allowed-tools: Read Write Edit Grep Glob WebSearch AskUserQuestion
 ---
 
 # Brand Voice Architect
 
-Codify your brand's unique voice into a living style guide that ensures consistency across all content—website, emails, social, ads, and beyond.
+Codify your brand's or personal writing voice into a living style guide. Two modes: **Brand Voice** (organizational) and **Voice DNA** (personal).
+
+## Mode Selection
+
+Detect mode from trigger context:
+
+| Signal | Mode |
+|--------|------|
+| "my voice", "personal voice", "voice dna", "pre-ai voice", "how I write" | Voice DNA |
+| "brand voice", "company voice", "our voice", "brand style" | Brand Voice |
+| Ambiguous | Ask with `AskUserQuestion` |
 
 ## Deep Discovery (Optional)
 
@@ -23,18 +38,24 @@ For thorough voice exploration before creating the guide, run:
 /majestic-tools:interview "brand voice"
 ```
 
-This triggers a conversational interview with brand-specific questions about voice identity, audience connection, tone boundaries, and existing patterns. The interview output can then be synthesized into a full voice guide using this skill.
-
-## Why This Matters
-
-- **Consistency builds trust** - Readers recognize you instantly
-- **Scales content creation** - Anyone can write on-brand
-- **Saves editing time** - Clear rules reduce revisions
-- **Enables AI assistance** - Voice guides make AI-generated content usable
+This triggers a conversational interview with voice-specific questions about identity, audience connection, tone boundaries, and existing patterns. Works for both modes.
 
 ## Conversation Starter
 
-Use `AskUserQuestion` to gather initial context. Begin by asking:
+Use `AskUserQuestion` to gather initial context.
+
+### Voice DNA Mode (Personal)
+
+"I'll help you capture your writing voice so Claude matches it every session.
+
+**Paste 3-5 writing samples** (the more, the better):
+- Old blog posts, tweets, emails, Slack messages, anything you wrote before AI
+- Pre-2023 writing works best (before AI defaults crept in)
+- Variety helps: mix formal and casual if you write both
+
+I'll extract your patterns, build your rules, and generate a voice-dna.md file."
+
+### Brand Voice Mode (Organizational)
 
 "I'll help you codify your brand voice into a reusable style guide.
 
@@ -98,7 +119,45 @@ Use WebSearch to find:
 
 Then synthesize a voice based on inputs.
 
-## Voice Guide Structure
+## Voice DNA Output (Personal Mode)
+
+When in Voice DNA mode, use the template at [references/voice-dna-template.md](references/voice-dna-template.md). The output is simpler than brand voice: writing rules, formatting rules, banned phrases, and preserved writing samples.
+
+### Voice DNA Analysis
+
+Extract these from writing samples (measure, don't guess):
+
+1. **Contraction rate** - count contractions vs full forms across samples
+2. **Sentence length** - measure average and range (short punch vs long explanation)
+3. **Paragraph length** - typical sentences per paragraph
+4. **Person preference** - I/you/we distribution
+5. **Verb style** - does the author use physical verbs for abstract processes? ("sanded down" vs "improved")
+6. **Humor mechanism** - specificity, self-deprecation, parenthetical asides, or none
+7. **Punctuation signature** - em dash heavy? Semicolons? Parenthetical asides?
+8. **Directness** - does the author get to the point fast or build context first?
+9. **Hedging style** - how does the author express uncertainty? ("I think", "probably", "kinda")
+10. **Absence patterns** - what the author NEVER does (formal transitions, exclamation points, etc.)
+
+### Banned Phrases Generation
+
+For Voice DNA output, generate a personalized banned phrases section:
+
+1. Start with the common AI patterns from `copy-editor/references/AI_WRITING_TELLS.md`
+2. Filter to phrases that **specifically conflict** with the author's voice
+3. Add author-specific bans based on what would sound wrong in their voice
+4. Include the negation-assertion pattern ("This isn't X. This is Y.") - it's always banned
+
+### Voice DNA File Placement
+
+After generating, offer to save:
+
+- `.claude/voice-dna.md` - Claude reads it every session (recommended)
+- Project CLAUDE.md - inline, always loaded
+- `docs/voice-dna.md` - version controlled, shareable
+
+For maximum effect: `.claude/voice-dna.md`
+
+## Brand Voice Guide Structure
 
 ### 1. Voice DNA (Core Identity)
 
@@ -354,11 +413,13 @@ Before publishing, verify:
 
 After generating the guide, offer to save it:
 
-"Would you like me to save this voice guide to a file?
+**Brand Voice mode:**
+- `docs/brand-voice.md` or `.claude/brand-voice.md`
+- Referenced by content-writer, email-nurture, content-atomizer
 
-Suggested location: `docs/brand-voice.md` or `.claude/brand-voice.md`
-
-This file can be referenced by other skills (content-writer, email-nurture, content-atomizer) to maintain consistency."
+**Voice DNA mode:**
+- `.claude/voice-dna.md` (recommended, Claude reads every session)
+- `docs/voice-dna.md` (version controlled, shareable)
 
 ## Quality Standards
 

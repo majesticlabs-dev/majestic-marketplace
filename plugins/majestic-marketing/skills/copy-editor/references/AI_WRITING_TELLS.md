@@ -403,9 +403,87 @@ Use this checklist when reviewing content:
 - Title case in headings (may be house style)
 - Curly quotes (may be document convention)
 
+### Fatal (Immediate Rewrite)
+- **Negation-then-assertion pattern** (see Section 8)
+- Any "This isn't X. This is Y." construction
+
 ---
 
-## 8. Before/After Examples
+## 8. Negation-Assertion Pattern (Fatal)
+
+The most recognizable AI writing pattern. Any sentence that negates one framing then asserts a "corrected" one. If even one appears, the output reads as AI-generated.
+
+### Patterns to Eliminate
+
+| Pattern | Example |
+|---------|---------|
+| "This isn't X. This is Y." | "This isn't a tool. This is a paradigm shift." |
+| "Not X. Y." | "Not a framework. A philosophy." |
+| "Forget X. This is Y." | "Forget everything you know. This is different." |
+| "Less X, more Y." | "Less theory, more action." |
+| "Stop X. Start Y." | "Stop guessing. Start knowing." |
+
+**Fix:** Delete the negation. State the positive claim directly.
+
+- Bad: "This isn't a CRM. It's a revenue engine."
+- Good: "It's a revenue engine."
+
+---
+
+## 9. Engagement Bait
+
+Phrases designed to manufacture urgency or importance. Common in AI-generated social and marketing copy.
+
+| Pattern | Category |
+|---------|----------|
+| "Let that sink in" | False profundity |
+| "Read that again" | False profundity |
+| "Full stop." | False finality |
+| "This changes everything" | Hype inflation |
+| "Are you paying attention?" | Engagement bait |
+| "You're not ready for this" | Engagement bait |
+
+**Fix:** Remove entirely. If the point is strong, it doesn't need a prompt to re-read it.
+
+---
+
+## 10. AI Cringe (Marketing Slop)
+
+Buzzwords that signal AI-generated marketing copy specifically.
+
+| Word/Phrase | Human Alternative |
+|-------------|-------------------|
+| Supercharge | speed up, boost, improve |
+| Unlock | get access to, enable |
+| Future-proof | prepare for change, build to last |
+| 10x your [anything] | improve, double, significantly increase |
+| The AI revolution | AI tools, current AI capabilities |
+| In the age of AI | now that AI tools exist, with AI |
+| Game-changer | useful, effective, significant |
+| Next-level | better, improved |
+
+---
+
+## 11. Generic Insider Claims
+
+Phrases that claim exclusive knowledge without delivering any.
+
+| Pattern | Problem |
+|---------|---------|
+| "Here's the part nobody's talking about" | Everybody is talking about it |
+| "What nobody tells you" | Plenty of people tell you |
+| "Most people don't realize" | Vague authority claim |
+| "The secret is..." | Rarely an actual secret |
+| "What they don't want you to know" | Conspiracy framing |
+
+**Fix:** Remove the frame. Just state the information.
+
+- Bad: "Here's what nobody tells you about SEO: content quality matters."
+- Good: "Content quality matters more than keyword density."
+
+---
+
+## 13. Before/After Examples
 
 ### Example 1: Opening Paragraph
 

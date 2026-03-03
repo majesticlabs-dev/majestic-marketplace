@@ -1,6 +1,6 @@
 ---
 name: content-writer
-description: Write well-structured articles with outline-first workflow. Includes sentence variation, readability guidelines, and formatting best practices.
+description: Use when writing new articles, blog posts, or guides from scratch. Outline-first workflow with sentence variation, readability guidelines, and formatting best practices. Not for editing existing content (use copy-editor).
 triggers:
   - write article
   - content writer
@@ -156,9 +156,17 @@ AI-generated text has telltale patterns. Avoid them to sound human.
 
 **Full reference:** See `references/AI_WRITING_TELLS.md` in `copy-editor` skill for:
 - 50+ AI vocabulary words with replacements
-- Phrase patterns to avoid
+- Phrase patterns to avoid (including negation-assertion pattern)
+- Engagement bait and AI cringe terms
 - Structural tells (formulaic sections)
 - Detection checklist
+
+**Voice matching:** Before writing, check for a voice guide:
+1. `.claude/voice-dna.md` (personal voice)
+2. `docs/brand-voice.md` or `.claude/brand-voice.md` (brand voice)
+3. `STYLE_GUIDE.md` (project style guide)
+
+If found, apply its rules throughout. Personal voice overrides defaults.
 
 ---
 
