@@ -119,6 +119,19 @@ Bash(command: ".claude/skills/skill-linter/scripts/validate-skill.sh [skill-path
 
 If validation fails: fix issues and re-validate.
 
+### Step 9: Offer Eval and Optimization
+
+After successful creation:
+
+```
+AskUserQuestion:
+  question: "Skill created. Want to test it with eval runs?"
+  options:
+    - "Yes, run evals" → /majestic:skill-eval [skill-path]
+    - "Optimize description" → /majestic:skill-optimize [skill-path]
+    - "No, I'm done"
+```
+
 ## Output
 
 Report created skill:
@@ -127,3 +140,4 @@ Report created skill:
 - Description
 - Archetype used
 - Validation status
+- Next steps (eval / optimize if declined)
