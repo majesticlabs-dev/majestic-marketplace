@@ -11,7 +11,6 @@ triggers:
   - too generic
   - pass AI detector
 allowed-tools: Read Write Edit Glob Grep AskUserQuestion
-disable-model-invocation: true
 ---
 
 # Humanizer
@@ -85,9 +84,22 @@ Read the input text and score it against five detection signals.
 **Structural patterns:** [list patterns detected]
 ```
 
+**Early exit:** If AI Confidence is Low (0-1 signals flagged, no banned word clusters), stop and tell the user the text already reads human. Don't transform text that doesn't need it.
+
 ### Phase 2: Transform
 
 Apply transformations from `references/humanization-playbook.md` in this order:
+
+**Step 0: Lock factual anchors**
+
+Before any transformation, identify and protect content that must survive unchanged:
+- Specific numbers, dollar amounts, percentages, dates
+- Proper nouns: people, companies, products, places
+- URLs, file paths, code blocks, technical terms
+- Direct quotes and attributed statements
+- Statistics and data points ("45,000 rows", "$14,000/month", "130,000 times")
+
+These are untouchable. External humanizer tools destroy meaning by replacing "20 million views" with "20 black views" or "$14,000" with garbled text. Our advantage is understanding what words mean — never trade accuracy for style.
 
 **Step 1: Kill prohibited words**
 - Replace every banned word/phrase using substitution tables
@@ -140,6 +152,7 @@ Run the detection self-test after transformation.
 **Verification checklist:**
 
 ```
+[ ] All factual anchors preserved (numbers, names, stats, quotes unchanged)
 [ ] No 3+ banned words in any single paragraph
 [ ] Sentence lengths vary (some under 5 words, some over 25)
 [ ] At least one personal opinion or experience per 500 words
