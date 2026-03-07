@@ -9,7 +9,6 @@ triggers:
   - email opt-in
   - gated content
 allowed-tools: Read Write Edit Grep Glob WebSearch AskUserQuestion
-disable-model-invocation: true
 ---
 
 # Lead Magnet Builder

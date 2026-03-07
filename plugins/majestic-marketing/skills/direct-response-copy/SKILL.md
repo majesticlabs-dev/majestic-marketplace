@@ -10,7 +10,6 @@ triggers:
   - persuasive copy
   - conversion copy
 allowed-tools: Read Write Edit Grep Glob WebSearch AskUserQuestion
-disable-model-invocation: true
 ---
 
 # Direct Response Copy

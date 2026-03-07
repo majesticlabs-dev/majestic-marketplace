@@ -2,7 +2,6 @@
 name: win-back
 description: Design win-back campaigns to re-engage dormant customers and recover churned users with targeted messaging, special offers, and feedback collection to understand and address churn reasons.
 allowed-tools: Read Write Edit Grep Glob WebSearch WebFetch AskUserQuestion
-disable-model-invocation: true
 ---
 
 # Win-Back Campaign Designer

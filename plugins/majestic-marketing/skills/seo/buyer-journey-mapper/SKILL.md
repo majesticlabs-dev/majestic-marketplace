@@ -2,7 +2,6 @@
 name: buyer-journey-mapper
 description: Create persona × journey grids for AEO (Answer Engine Optimization) content strategy. Maps specific questions to buyer stages for AI citation optimization.
 allowed-tools: Read Write Edit WebSearch
-disable-model-invocation: true
 ---
 
 # Buyer Journey Mapper

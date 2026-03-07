@@ -8,7 +8,6 @@ triggers:
   - success story
   - customer case study
 allowed-tools: Read Write Edit Grep Glob AskUserQuestion
-disable-model-invocation: true
 ---
 
 # Customer Case Study Writer

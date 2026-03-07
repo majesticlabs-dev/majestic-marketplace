@@ -2,7 +2,6 @@
 name: traffic-magnet
 description: Organic traffic strategy orchestrator for zero-budget customer acquisition. Routes to specialized skills for implementation.
 allowed-tools: WebSearch AskUserQuestion
-disable-model-invocation: true
 ---
 
 # Traffic Magnet Orchestrator

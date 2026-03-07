@@ -10,7 +10,6 @@ triggers:
   - knowledge base
   - how-to guide
 allowed-tools: Read Write Edit Grep Glob AskUserQuestion
-disable-model-invocation: true
 ---
 
 # Help Documentation Writer

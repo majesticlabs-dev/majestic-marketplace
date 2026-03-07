@@ -11,7 +11,6 @@ triggers:
   - persuasive copy
   - convert better
 allowed-tools: Read Write Edit Grep Glob AskUserQuestion
-disable-model-invocation: true
 ---
 
 # Power Words Library

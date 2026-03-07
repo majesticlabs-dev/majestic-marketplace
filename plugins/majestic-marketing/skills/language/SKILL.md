@@ -11,7 +11,6 @@ triggers:
   - resonance
   - product copy
 allowed-tools: Read Write Edit Grep Glob WebSearch WebFetch AskUserQuestion
-disable-model-invocation: true
 ---
 
 # Customer Language Mastery

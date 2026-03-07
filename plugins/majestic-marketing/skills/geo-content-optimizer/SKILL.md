@@ -1,7 +1,6 @@
 ---
 name: geo-content-optimizer
 description: Optimize content structure and framing for AI citation. Covers trust formats, extractability, and fact-density.
-disable-model-invocation: true
 ---
 
 # GEO Content Optimizer

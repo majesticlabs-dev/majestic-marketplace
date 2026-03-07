@@ -8,7 +8,6 @@ triggers:
   - write a thread
   - turn into thread
 allowed-tools: Read Write Edit AskUserQuestion
-disable-model-invocation: true
 ---
 
 # Thread Builder

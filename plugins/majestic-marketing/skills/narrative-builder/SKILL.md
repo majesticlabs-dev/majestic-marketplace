@@ -8,7 +8,6 @@ triggers:
   - story format
   - make it a story
 allowed-tools: Read Write Edit AskUserQuestion
-disable-model-invocation: true
 ---
 
 # Narrative Builder

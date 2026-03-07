@@ -1,7 +1,6 @@
 ---
 name: topical-authority
 description: Build and measure topical authority through comprehensive coverage, content mapping, and competitor analysis.
-disable-model-invocation: true
 ---
 
 # Topical Authority

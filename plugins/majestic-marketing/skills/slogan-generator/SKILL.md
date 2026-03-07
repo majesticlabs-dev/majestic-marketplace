@@ -8,7 +8,6 @@ triggers:
   - brand slogan
   - company tagline
 allowed-tools: Read Write Edit Grep Glob
-disable-model-invocation: true
 ---
 
 # Marketing Slogan Generator

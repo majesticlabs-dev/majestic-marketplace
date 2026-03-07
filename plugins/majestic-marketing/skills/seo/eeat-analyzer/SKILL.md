@@ -1,7 +1,6 @@
 ---
 name: eeat-analyzer
 description: Analyze and optimize E-E-A-T signals (Experience, Expertise, Authority, Trust) for content credibility.
-disable-model-invocation: true
 ---
 
 # E-E-A-T Analyzer

@@ -1,7 +1,6 @@
 ---
 name: style-guide-builder
 description: Style guide templates for content creation. Used by /majestic:style-guide:new command.
-disable-model-invocation: true
 ---
 
 # Style Guide Builder Skill

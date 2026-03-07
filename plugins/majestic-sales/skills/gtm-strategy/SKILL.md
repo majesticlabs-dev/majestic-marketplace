@@ -1,7 +1,6 @@
 ---
 name: gtm-strategy
 description: Build go-to-market strategy with channel selection, motion matching, and capacity planning for sales teams.
-disable-model-invocation: true
 ---
 
 # Go-to-Market Strategy

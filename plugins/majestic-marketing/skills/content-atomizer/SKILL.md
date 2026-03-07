@@ -9,7 +9,6 @@ triggers:
   - repurpose article
   - content repurposing
 allowed-tools: Read Write Edit Grep Glob WebSearch AskUserQuestion
-disable-model-invocation: true
 ---
 
 # Content Atomizer

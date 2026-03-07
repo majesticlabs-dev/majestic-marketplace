@@ -1,7 +1,6 @@
 ---
 name: sales-metrics
 description: Sales metrics frameworks with leading/lagging indicators, benchmarks, and capacity models.
-disable-model-invocation: true
 ---
 
 # Sales Metrics

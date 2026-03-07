@@ -14,7 +14,6 @@ triggers:
   - style dna
   - write like me
 allowed-tools: Read Write Edit Glob Grep AskUserQuestion
-disable-model-invocation: true
 ---
 
 # Style Writer
