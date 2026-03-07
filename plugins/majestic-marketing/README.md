@@ -1,6 +1,6 @@
 # Majestic Marketing
 
-Marketing and SEO tools for Claude Code. Includes 14 specialized agents, 3 commands, and 31 skills.
+Marketing and SEO tools for Claude Code. Includes 16 specialized agents, 6 commands, and 56 skills.
 
 ## Installation
 
@@ -20,12 +20,56 @@ claude /plugin install majestic-marketing
 | Build brand authority | `agent authority-builder` |
 | Generate brand names | `agent namer` |
 | **Codify brand voice** | `skill brand-voice` |
+| **Write in someone's voice** | `skill style-writer` |
+| **Make AI text sound human** | `skill humanizer` |
 | **Repurpose content multi-platform** | `skill content-atomizer` |
 | **Write newsletter editions** | `skill newsletter` |
 | **Create lead magnets** | `skill lead-magnet` |
 | Create sales page | `skill sales-page` |
 | Design email nurture | `skill email-nurture` |
 | Build content calendar | `skill content-calendar` |
+
+## Content Creation: Which Skill Do I Use?
+
+Multiple skills handle writing and content — each for a different job. Use this guide to pick the right one.
+
+### The Content Pipeline
+
+```
+brand-voice → style-writer → humanizer → copy-editor
+(create DNA)  (write in voice) (strip AI)   (polish)
+```
+
+### Decision Table
+
+| I want to... | Use this | Why not the others? |
+|--------------|----------|---------------------|
+| **Write an article from scratch** | `content-writer` | General-purpose, outline-first workflow. No SEO or voice targeting. |
+| **Write an SEO article that ranks** | `seo-content` | Keyword research → draft → built-in humanization → on-page SEO. Has its own AI-detection pass. |
+| **Write matching someone's exact voice** | `style-writer` | Takes a Style DNA report, hits measured metrics (sentence length, comma density, device frequency). Precision ghostwriting. |
+| **Capture my/brand writing voice** | `brand-voice` | Creates the Style DNA or brand voice guide. Run this *before* style-writer. |
+| **Make AI text sound human** | `humanizer` | Rewrites existing AI-generated text. Strips banned words, injects burstiness and voice, defeats detectors. |
+| **Polish grammar and style** | `copy-editor` | Reviews and reports issues. Doesn't rewrite — diagnoses. Run *after* other skills. |
+| **Repurpose content for social** | `content-atomizer` | Transforms long-form into Twitter threads, LinkedIn posts, email excerpts, video scripts. |
+| **Write a newsletter** | `newsletter` | Edition-focused: curator, educator, or thought leader archetypes. |
+| **Build a case study** | `case-study-writer` | Customer story format with problem → solution → results. |
+
+### Common Workflows
+
+**Blog post (no voice target):**
+`content-writer` → `humanizer` → `copy-editor`
+
+**SEO article:**
+`seo-content` (handles everything including humanization)
+
+**Ghostwriting in someone's style:**
+`brand-voice` (once, to create DNA) → `style-writer` → `humanizer` → `copy-editor`
+
+**Fix robotic AI draft:**
+`humanizer` → `copy-editor`
+
+**Content repurposing:**
+Any writing skill → `content-atomizer`
 
 ## Agents
 
@@ -87,11 +131,13 @@ Invoke with: `skill majestic-marketing:<name>`
 | `content-optimizer` | Content optimization workflow for search and AI |
 | `content-writer` | Articles with outline-first workflow and readability guidelines |
 | `copy-editor` | Review and edit copy for grammar, style, and clarity |
+| `humanizer` | Rewrite AI-generated text to sound naturally human-written, defeat detection patterns |
 | `hook-writer` | Attention-grabbing hooks from 5 investor archetype perspectives |
 | `linkedin-content` | LinkedIn content with hooks, pillars, and posting strategy |
 | `power-words` | Enhance copy with emotional trigger words from 18 categories |
 | `seo-audit` | Comprehensive SEO and GEO audit methodology |
 | `slogan-generator` | Marketing slogans with scoring and recommendations |
+| `style-writer` | Write articles matching a specific author's voice from a Style DNA report |
 | `viral-content` | Viral content frameworks with platform-specific patterns |
 
 ### Marketing & Strategy
@@ -229,6 +275,12 @@ skill majestic-marketing:content-calendar
 
 # Write articles with outline-first workflow
 skill majestic-marketing:content-writer
+
+# Write matching a specific author's voice
+skill majestic-marketing:style-writer
+
+# Rewrite AI text to sound human
+skill majestic-marketing:humanizer
 
 # Enhance copy with emotional trigger words
 skill majestic-marketing:power-words
