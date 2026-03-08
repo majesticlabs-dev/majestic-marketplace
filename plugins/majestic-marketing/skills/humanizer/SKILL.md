@@ -31,12 +31,38 @@ Rewrite AI-generated text so it reads like a skilled human wrote it. Not paraphr
 - Grammar/style review without rewriting → use `copy-editor` skill
 - Writing in a specific brand voice → use `brand-voice` + `style-writer`
 - Creating SEO content from scratch → use `seo-content` (has built-in humanization)
+- **After `style-writer` without providing the Style DNA report** → the humanizer will treat intentional stylistic devices (anaphora, fragment pairs, zero-hedging, zero-em-dash styles) as AI tells and replace them with its own AI tells. If you must humanize voice-matched content, provide the Style DNA report (`style-forensics` output) as style context (see Phase 0)
 
 ---
 
 ## Methodology
 
-Three phases: Diagnose → Transform → Verify.
+Four phases: Style Context → Diagnose → Transform → Verify.
+
+### Phase 0: Style Context Detection
+
+Before diagnosing, check if the input has style constraints that override default rules.
+
+**Detection order:**
+1. User explicitly provides a Style DNA report (`*-style-dna.md` from `style-forensics`), brand-voice guide, or style constraints
+2. User mentions the text was written with `style-writer` or matches a specific author
+3. A `*-style-dna.md` file exists alongside the source content
+
+If style context is found, read it and extract these overrides:
+
+| Constraint | Style DNA Report Section | Default (no context) |
+|------------|--------------------------|----------------------|
+| Permitted rhetorical devices | Signature Devices → anaphora, fragment patterns, contrast patterns | None — flag all repetition |
+| Punctuation rules | Punctuation DNA → em dash total, semicolons, colons | Em dashes, parentheticals OK |
+| Hedging tolerance | Tone Profile → Hedging Language (count per 100 words) | Require 1 caveat per 1000 words |
+| Aside frequency | Punctuation DNA → parenthetical asides (total, per 100 words) | Inject where natural |
+| Absence patterns | Any metric reporting zero — absence is data | No restrictions |
+
+**Zero counts are constraints.** If the Style DNA reports 0 em dashes, 0 parenthetical asides, or 0 hedging instances, these are hard constraints — do not inject what the author never uses.
+
+**Store as `STYLE_OVERRIDES` for Phase 1-3.** When no style context exists, all defaults apply and the skill works exactly as before.
+
+**If style context is detected but not provided:** Ask with `AskUserQuestion`: "This text appears to be voice-matched. Do you have a Style DNA report or brand-voice file I should respect? Without it, I may rewrite intentional stylistic devices."
 
 ### Phase 1: Diagnose
 
@@ -49,7 +75,7 @@ Read the input text and score it against five detection signals.
 | Perplexity | Every word feels predictable, "safe" | No surprising word choices anywhere |
 | Burstiness | Sentences all similar length | Std dev of sentence length < 5 words |
 | Entropy | Same words/phrases repeated | 3+ banned words in one paragraph |
-| Stylometry | Perfect grammar, uniform structure | Mechanical parallelism, rule-of-three |
+| Stylometry | Perfect grammar, uniform structure | Mechanical parallelism, rule-of-three (but see style-aware check below) |
 | Coherence | Every sentence flows too smoothly | No asides, digressions, or opinion |
 
 **Prohibited words scan:**
@@ -62,8 +88,21 @@ Read the input text and score it against five detection signals.
 - Mechanical "on one hand / on the other" balance?
 - Formulaic "Challenges and Future Prospects" section?
 - Everything grouped in threes?
-- Negation-assertion pattern? ("This isn't X. This is Y.") — fatal, always rewrite
+- Negation-assertion pattern? Distinguish two forms:
+  - **Mechanical** (rewrite): "This isn't just X. This is Y." / "It's not about X. It's about Y." — full-sentence negation followed by full-sentence assertion with parallel structure
+  - **Rhetorical fragment** (preserve): "Not a question. A system." / "Not theory. Practice." — short fragment pairs used for emphasis. These are a deliberate device, not an AI tell
+  - If `STYLE_OVERRIDES` lists fragment pairs as a signature move → always preserve
 - **Bolded Inline Header:** colon pattern?
+
+**Style-aware check (when `STYLE_OVERRIDES` exist):**
+
+Before flagging a pattern, check whether the style context explains it:
+- Anaphoric repetition (e.g., "Context means X" ×5) → check Style DNA Signature Devices for anaphora/repetition patterns. If documented, mark as **intentional device**, not a detection signal
+- Consistent fragment pairs → check Style DNA for fragment stacking patterns
+- "Not X. Y." contrast patterns → check Style DNA Signature Devices for this exact pattern
+- Uniform sentence structure in a passage → check Style DNA sentence length distribution for documented rhythm patterns
+
+**Rule:** A pattern explained by style context is not an AI tell. Only flag patterns that exist *despite* (or *absent*) style context.
 
 **Report format:**
 
@@ -109,7 +148,7 @@ These are untouchable. External humanizer tools destroy meaning by replacing "20
 **Step 2: Break the structure**
 - If essay template detected: start with the most interesting point, cut the summary conclusion
 - If everything is in threes: use the actual count (2, 4, 5, whatever fits)
-- If negation-assertion found: delete the negation, keep only the positive claim
+- If mechanical negation-assertion found: delete the negation, keep only the positive claim. Preserve rhetorical fragment pairs ("Not X. Y.") — these are intentional devices, not AI tells
 - If sections are suspiciously uniform length: merge short ones, split long ones
 - Replace generic headers ("Overview", "Key Features") with specific ones
 
@@ -119,11 +158,11 @@ These are untouchable. External humanizer tools destroy meaning by replacing "20
 - Add a single-sentence paragraph where emphasis helps
 - Allow one fragment per 500 words
 
-**Step 4: Add voice**
+**Step 4: Add voice** (respect `STYLE_OVERRIDES` — skip any injection the style prohibits)
 - Insert at least one opinion or stance per 500 words
-- Add at least one caveat or limitation per 1000 words ("This won't work if...")
+- Add at least one caveat or limitation per 1000 words ("This won't work if...") — **skip if `STYLE_OVERRIDES` indicate zero-hedging voice** (author presents claims as settled fact)
 - Replace smooth transitions with opinion bridges
-- Add parenthetical asides where natural (like this)
+- Add parenthetical asides where natural (like this) — **skip or limit if `STYLE_OVERRIDES` specify low aside frequency** (e.g., "max 2 per 1200 words")
 - Use rhetorical questions sparingly (one per 1000 words max)
 
 **Step 5: Make it specific**
@@ -132,11 +171,12 @@ These are untouchable. External humanizer tools destroy meaning by replacing "20
 - Replace "experts say" with named sources or remove the claim
 - Convert abstract benefits to concrete outcomes
 
-**Step 6: Conversational pass**
+**Step 6: Conversational pass** (respect `STYLE_OVERRIDES` punctuation rules)
 - Add contractions (it's, don't, won't, can't, we're)
 - Use "you" and "your" for direct address
 - Start some sentences with "And" or "But"
 - End with prepositions when natural
+- Add em dashes for rhythm and texture — **skip if `STYLE_OVERRIDES` specify zero em dashes** (some voices rely entirely on commas and periods)
 - Write how you'd explain it over coffee — then tighten
 
 **Step 7: Final perplexity boost**
@@ -157,14 +197,16 @@ Run the detection self-test after transformation.
 [ ] Sentence lengths vary (some under 5 words, some over 25)
 [ ] At least one personal opinion or experience per 500 words
 [ ] At least one specific number or named example per 500 words
-[ ] At least one limitation or caveat per 1000 words
+[ ] At least one limitation or caveat per 1000 words (SKIP if STYLE_OVERRIDES = zero-hedging)
 [ ] Not everything grouped in threes
 [ ] No "In today's..." openings or "In conclusion..." closings
-[ ] No negation-assertion patterns ("This isn't X. This is Y.")
+[ ] No mechanical negation-assertion patterns — rhetorical fragment pairs are OK
 [ ] Each paragraph has different rhythm than neighbors
 [ ] No section suspiciously same length as another
 [ ] No engagement bait ("Let that sink in", "Read that again")
 [ ] No sycophantic phrases ("I hope this helps")
+[ ] Punctuation matches STYLE_OVERRIDES constraints (em dashes, asides, etc.)
+[ ] Intentional rhetorical devices from style context preserved (anaphora, fragments)
 [ ] Would I say this out loud to a smart friend?
 ```
 
@@ -241,3 +283,12 @@ Complementary skills in the writing pipeline:
 - **After humanizer:** `copy-editor` for grammar/style polish, `brand-voice` for voice consistency
 - **Instead of humanizer:** `seo-content` (has built-in humanization for new content)
 - **For code:** `slop-remover` agent (different domain, same concept)
+
+**Pipeline with voice-matched content:**
+
+```
+[source samples] → style-forensics → Style DNA report
+[AI draft] → style-writer (with Style DNA) → humanizer (with same Style DNA) → copy-editor
+```
+
+Never run humanizer after `style-writer` without providing the same Style DNA report as style context. The humanizer will destroy the voice work otherwise.

@@ -170,7 +170,7 @@ Wait for the user's direction before saving.
 
 ## Execution Notes
 
-- If the user doesn't specify a style-dna.md file, check for any `*-style-dna.md` or `voice-dna.md` files in `.claude/` and the current directory. Ask which one to use.
+- If the user doesn't specify a style-dna.md file, check for any `*-style-dna.md` files in the current directory and `docs/`. Ask which one to use.
 - If multiple DNA files exist for the same author, prefer the one from the longer source article (it captures the fuller voice).
 - Target word count: match the source article's length unless the user specifies otherwise.
 - Never sacrifice readability to hit a metric. If hitting a number makes a sentence awkward, prioritize natural flow and note the deviation.
@@ -183,9 +183,9 @@ Wait for the user's direction before saving.
 Works with the content creation pipeline:
 
 ```
-brand-voice (create DNA) → style-writer (write in that voice) → humanizer (strip AI tells) → copy-editor (polish)
+style-forensics (create DNA) → style-writer (write in that voice) → humanizer (with same DNA, strip AI tells) → copy-editor (polish)
 ```
 
-- **Before style-writer:** `brand-voice` to create the Style DNA report
+- **Before style-writer:** `style-forensics` to create the Style DNA report from writing samples
 - **After style-writer:** `humanizer` to strip any remaining AI patterns, `copy-editor` for final polish
 - **Instead of style-writer:** `content-writer` for general articles without a voice target, `seo-content` for SEO-first articles

@@ -1,6 +1,6 @@
 # Majestic Marketing
 
-Marketing and SEO tools for Claude Code. Includes 16 specialized agents, 6 commands, and 56 skills.
+Marketing and SEO tools for Claude Code. Includes 16 specialized agents, 6 commands, and 49 skills.
 
 ## Installation
 
@@ -19,6 +19,7 @@ claude /plugin install majestic-marketing
 | Optimize for AI citation | `agent llm-optimizer` |
 | Build brand authority | `agent authority-builder` |
 | Generate brand names | `agent namer` |
+| **Analyze my writing voice** | `skill style-forensics` |
 | **Codify brand voice** | `skill brand-voice` |
 | **Write in someone's voice** | `skill style-writer` |
 | **Make AI text sound human** | `skill humanizer` |
@@ -36,8 +37,8 @@ Multiple skills handle writing and content — each for a different job. Use thi
 ### The Content Pipeline
 
 ```
-brand-voice → style-writer → humanizer → copy-editor
-(create DNA)  (write in voice) (strip AI)   (polish)
+style-forensics → style-writer → humanizer (with DNA) → copy-editor
+(measure voice)   (write in voice)  (strip AI tells)      (polish)
 ```
 
 ### Decision Table
@@ -47,8 +48,9 @@ brand-voice → style-writer → humanizer → copy-editor
 | **Write an article from scratch** | `content-writer` | General-purpose, outline-first workflow. No SEO or voice targeting. |
 | **Write an SEO article that ranks** | `seo-content` | Keyword research → draft → built-in humanization → on-page SEO. Has its own AI-detection pass. |
 | **Write matching someone's exact voice** | `style-writer` | Takes a Style DNA report, hits measured metrics (sentence length, comma density, device frequency). Precision ghostwriting. |
-| **Capture my/brand writing voice** | `brand-voice` | Creates the Style DNA or brand voice guide. Run this *before* style-writer. |
-| **Make AI text sound human** | `humanizer` | Rewrites existing AI-generated text. Strips banned words, injects burstiness and voice, defeats detectors. |
+| **Measure my personal writing voice** | `style-forensics` | Forensic analysis producing quantitative Style DNA report. Run this *before* style-writer. |
+| **Codify organizational brand voice** | `brand-voice` | Qualitative brand voice guide with tone spectrum, vocabulary, do/don'ts. For companies, not individuals. |
+| **Make AI text sound human** | `humanizer` | Rewrites existing AI-generated text. Strips banned words, injects burstiness and voice, defeats detectors. Accepts Style DNA to preserve intentional devices. |
 | **Polish grammar and style** | `copy-editor` | Reviews and reports issues. Doesn't rewrite — diagnoses. Run *after* other skills. |
 | **Repurpose content for social** | `content-atomizer` | Transforms long-form into Twitter threads, LinkedIn posts, email excerpts, video scripts. |
 | **Write a newsletter** | `newsletter` | Edition-focused: curator, educator, or thought leader archetypes. |
@@ -63,7 +65,7 @@ brand-voice → style-writer → humanizer → copy-editor
 `seo-content` (handles everything including humanization)
 
 **Ghostwriting in someone's style:**
-`brand-voice` (once, to create DNA) → `style-writer` → `humanizer` → `copy-editor`
+`style-forensics` (once, to create DNA) → `style-writer` → `humanizer` (with same DNA) → `copy-editor`
 
 **Fix robotic AI draft:**
 `humanizer` → `copy-editor`
@@ -125,7 +127,7 @@ Invoke with: `skill majestic-marketing:<name>`
 
 | Skill | Description |
 |-------|-------------|
-| `brand-voice` | Codify your brand's writing style into a reusable voice guide for consistent messaging |
+| `brand-voice` | Codify organizational brand voice into a reusable style guide with tone spectrum, vocabulary, and do/don'ts |
 | `content-atomizer` | Transform long-form content into Twitter threads, LinkedIn carousels, email excerpts, video scripts, and Instagram posts |
 | `content-calendar` | 30-day content calendar with viral ideas, formats, hooks, and CTAs |
 | `content-optimizer` | Content optimization workflow for search and AI |
@@ -137,6 +139,7 @@ Invoke with: `skill majestic-marketing:<name>`
 | `power-words` | Enhance copy with emotional trigger words from 18 categories |
 | `seo-audit` | Comprehensive SEO and GEO audit methodology |
 | `slogan-generator` | Marketing slogans with scoring and recommendations |
+| `style-forensics` | Forensic style analysis producing quantitative Style DNA reports with measured metrics |
 | `style-writer` | Write articles matching a specific author's voice from a Style DNA report |
 | `viral-content` | Viral content frameworks with platform-specific patterns |
 
@@ -276,10 +279,13 @@ skill majestic-marketing:content-calendar
 # Write articles with outline-first workflow
 skill majestic-marketing:content-writer
 
+# Analyze writing samples to create Style DNA report
+skill majestic-marketing:style-forensics path/to/writing-sample.md
+
 # Write matching a specific author's voice
 skill majestic-marketing:style-writer
 
-# Rewrite AI text to sound human
+# Rewrite AI text to sound human (respects Style DNA if provided)
 skill majestic-marketing:humanizer
 
 # Enhance copy with emotional trigger words

@@ -54,6 +54,8 @@ Detectors measure five signals. Humanization must move ALL five toward human bas
 
 **Target signal:** Stylometry (structural patterns)
 
+**Style context override:** Distinguish mechanical parallelism from intentional rhetorical devices. Anaphora (deliberate repetition of an opening phrase, e.g., "Context means X" ×5) is a rhetorical device, not an AI tell. If the pattern matches a signature move in the style context, preserve it. Dissolving anaphora into subject-verb enumeration ("It understands... It catches... The output sounds...") creates a stronger AI summarization signal than the original.
+
 **What to do:**
 - Break the intro-body-conclusion template
 - Start with the conclusion or a specific example
@@ -61,15 +63,21 @@ Detectors measure five signals. Humanization must move ALL five toward human bas
 - Avoid mechanical headers ("Overview", "Key Features", "Conclusion")
 - Break the rule of three — use 2 items, or 4, or 7
 - Mix prose with lists instead of all-list or all-prose
+- Preserve intentional repetition patterns that match style context signature moves
 
 ### 4. Voice Injection
 
 **Target signal:** Semantic coherence + Stylometry
 
+**Style context override:** When `STYLE_OVERRIDES` exist, skip any injection that conflicts:
+- Zero-hedging voice → skip limitation/caveat injection entirely
+- Low aside frequency (e.g., "max 2 per 1200 words") → respect the limit
+- Author never hedges → don't add hedges. The caveat will read as the most AI-detectable paragraph in the piece.
+
 **What to do:**
 - Add personal experience or opinion with reasoning
-- Include admissions of limitation ("This won't work if...")
-- Insert parenthetical asides (they break the smooth flow)
+- Include admissions of limitation ("This won't work if...") — unless style context specifies zero hedging
+- Insert parenthetical asides (they break the smooth flow) — unless style context limits aside frequency
 - Use rhetorical questions
 - Add contextual humor — not jokes, just wry observations
 - Show thought evolution ("I assumed X at first. Wrong.")
@@ -83,12 +91,15 @@ Detectors measure five signals. Humanization must move ALL five toward human bas
 
 **Target signal:** Stylometry + Entropy
 
+**Style context override:** When `STYLE_OVERRIDES` specify punctuation rules, respect them. Some voices use zero em dashes (commas and periods only), zero parenthetical asides, or zero semicolons. Injecting these punctuation marks creates a stronger AI signal than the one you're trying to fix.
+
 **What to do:**
 - Use contractions (it's, don't, won't, can't)
 - Address the reader directly (you, your)
 - Use colloquialisms appropriate to audience
 - Deploy metaphors and analogies from everyday life
 - Include the occasional self-correction or qualification
+- Add em dashes for rhythm — unless style context prohibits them
 - Write how you'd explain it to a smart friend over coffee
 
 ### 6. Specificity Over Abstraction
@@ -110,7 +121,7 @@ Detectors measure five signals. Humanization must move ALL five toward human bas
 - Allow natural contractions and informal grammar
 - Don't over-edit into corporate polish
 - Let some sentences start with "And" or "But"
-- Permit the occasional dash-heavy sentence — like this one — when it fits
+- Permit the occasional dash-heavy sentence — like this one — when it fits (skip if style context = zero em dashes)
 - End with prepositions when it sounds natural (that's what we're here for)
 - Use "they" as singular when appropriate
 
@@ -141,9 +152,12 @@ After humanizing, verify:
 [ ] Sentence lengths vary (some under 5 words, some over 25)
 [ ] At least one personal opinion or experience per 500 words
 [ ] At least one specific number or named example per 500 words
-[ ] At least one admission of limitation or caveat per 1000 words
+[ ] At least one admission of limitation or caveat per 1000 words (SKIP if style context = zero hedging)
 [ ] Not everything grouped in threes
 [ ] No "In today's..." openings or "In conclusion..." closings
+[ ] No mechanical negation-assertion patterns — rhetorical fragment pairs are OK
+[ ] Punctuation respects style context constraints (em dashes, asides, etc.)
+[ ] Intentional rhetorical devices from style context preserved
 [ ] Would I say this out loud to a smart friend?
 [ ] Each paragraph has a different rhythm than the one before it
 [ ] No section is suspiciously the same length as another
