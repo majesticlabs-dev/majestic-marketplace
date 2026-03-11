@@ -1,13 +1,14 @@
 ---
 name: schema-discoverer
 description: Infer schema from sample data files (CSV, JSON, Parquet) and generate type definitions.
-color: blue
-tools: Read, Grep, Glob, Bash
+allowed-tools: Read Grep Glob Bash
 ---
 
-# Schema-Discoverer
+# Schema Discoverer
 
-Autonomous agent that analyzes data files to infer schema and generate type definitions.
+**Audience:** Data engineers and analysts working with unfamiliar data files.
+
+**Goal:** Analyze data files to infer schema and generate type definitions in multiple output formats.
 
 ## Workflow
 
@@ -93,16 +94,12 @@ interface Record {
 
 ## Execution Steps
 
-1. Read file sample using appropriate method:
+1. Read file sample:
    - CSV: `pd.read_csv(path, nrows=1000)`
    - JSON: `pd.read_json(path, lines=True, nrows=1000)`
    - Parquet: `pd.read_parquet(path).head(1000)`
 
-2. For each column, analyze:
-   - Null percentage
-   - Unique count and ratio
-   - Sample values
-   - Pattern matches
+2. For each column, analyze: null percentage, unique count/ratio, sample values, pattern matches
 
 3. Generate confidence score (0-100) for each type inference
 

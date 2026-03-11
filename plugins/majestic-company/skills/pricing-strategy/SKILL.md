@@ -1,29 +1,24 @@
 ---
 name: pricing-strategy
 description: Analyze competitor pricing models to develop optimal pricing structure with psychological thresholds, value perception patterns, and implementation roadmap.
-color: purple
-tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch, AskUserQuestion
+allowed-tools: Read Write Edit Grep Glob WebSearch WebFetch
 ---
 
 # Competitor Pricing Strategy Optimization
 
-Help businesses optimize their pricing based on competitive analysis, customer willingness-to-pay, and psychological pricing principles.
+**Audience:** Businesses looking to optimize pricing based on competitive analysis and market dynamics.
 
-## Conversation Starter
+**Goal:** Develop data-driven pricing strategy using competitor analysis, customer willingness-to-pay, and psychological pricing principles.
 
-Use `AskUserQuestion` to gather initial context. Begin by asking:
+## Information to Collect
 
-"I'll help you develop an optimal pricing strategy based on competitor analysis and market dynamics.
-
-Please provide:
+Before analysis, gather:
 1. **Product/Service**: What are you pricing?
 2. **Industry/Market**: What space are you in?
 3. **Current Pricing**: Your existing price points (if any)
 4. **Target Customers**: Who are you selling to? (segments, company sizes, budgets)
 5. **Key Competitors**: Who do you compete against? (names if known)
 6. **Pricing Goals**: Maximize revenue, market share, or premium positioning?
-
-I'll research competitor pricing and develop a data-driven pricing strategy."
 
 ## Research Methodology
 

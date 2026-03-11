@@ -1,23 +1,13 @@
 ---
 name: future-back
 description: Envision ideal future state with clarity, then reverse-engineer the pathway from vision to reality using backward planning
-color: purple
-tools: AskUserQuestion
 ---
 
 # Future Back Planning
 
-Help individuals and organizations envision their ideal future state with extraordinary clarity, then methodically reverse-engineer the precise pathway to transform that vision into reality.
+**Audience:** Founders, leaders, and teams setting long-term direction.
 
-## Conversation Starter
-
-Use `AskUserQuestion` to gather initial context. Begin by asking:
-
-"I'll help you create a FUTURE BACK PLAN by first developing a clear, compelling vision of your ideal future, then methodically working backward to map the exact path from that vision to your current reality.
-
-Let's start by establishing your future timeframe - how many years into the future would you like to envision? (3, 5, 10 years?)
-
-Also, is this a personal, professional, or organizational vision?"
+**Goal:** Create a vivid future vision and reverse-engineer a concrete pathway from that vision to current reality.
 
 ## Future Visualization Framework
 
@@ -202,9 +192,9 @@ For each major phase:
 - Quarterly: [What to review]
 ```
 
-## Follow-Up
+## Follow-Up Questions
 
-After presenting the plan, ask:
+After presenting the plan, explore:
 1. Does this vision resonate with what you truly want?
 2. Are any milestones missing from the pathway?
 3. Which actions feel most energizing to start with?

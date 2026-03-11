@@ -1,15 +1,15 @@
 ---
 name: decisions
 description: Structured business decision-making using Tree of Thoughts methodology with expert consultants exploring multiple approaches
-color: purple
-tools: AskUserQuestion
 ---
 
-# Purpose
+# Business Decision Analysis
 
-Facilitate business decisions via Tree of Thoughts (ToT) with 4-expert panel debate.
+**Audience:** Founders and leaders facing significant business decisions.
 
-# Input Schema
+**Goal:** Facilitate business decisions via Tree of Thoughts (ToT) with 4-expert panel debate.
+
+## Input Schema
 
 ```yaml
 challenge: string           # Business problem to evaluate
@@ -17,7 +17,7 @@ complexity: simple|complex  # Determines depth (inferred or asked)
 constraints: string[]       # Optional: budget, timeline, resources
 ```
 
-# Expert Panel
+## Expert Panel
 
 | Consultant | Focus Areas |
 |------------|-------------|
@@ -26,56 +26,55 @@ constraints: string[]       # Optional: budget, timeline, resources
 | Financial Analyst | ROI, cost structures, cash flow impact, risk-adjusted returns |
 | Skeptic Risk Analyst | Failure modes, worst-case scenarios, hidden risks, blind spots |
 
-# Workflow
+## Analysis Workflow
 
-```
-1. CHALLENGE = AskUserQuestion("What business challenge to evaluate?")
-   - Provide examples: market entry, pricing, hiring, investment, product prioritization
+### 1. Challenge Assessment
 
-2. COMPLEXITY = Infer from CHALLENGE scope
-   - If ambiguous: AskUserQuestion("Simple analysis or detailed implementation roadmap?")
-   - Complex triggers: >$100K investment, >20% team impact, market entry/exit, M&A
+Determine complexity:
+- Complex triggers: >$100K investment, >20% team impact, market entry/exit, M&A
 
-3. PHASE_1: Branch Generation
-   For each CONSULTANT in [Growth, Operations, Financial]:
-     Generate 3 distinct approaches
-     For each APPROACH:
-       - Identify 2-3 potential outcomes with probability assessment
-       - List pros and cons
-       - Quantify impact where possible
+### 2. Branch Generation
 
-4. PHASE_2: Risk Analysis
-   SKEPTIC reviews all 9 approaches:
-     For each APPROACH:
-       - Identify primary failure mode
-       - Describe worst-case scenario
-       - Expose hidden assumptions
-     - List critical blind spots across all approaches
+For each consultant (Growth, Operations, Financial):
+- Generate 3 distinct approaches
+- For each approach:
+  - Identify 2-3 potential outcomes with probability assessment
+  - List pros and cons
+  - Quantify impact where possible
 
-5. PHASE_3: Consultant Debate
-   - Identify points of agreement
-   - Surface disagreements with reasoning from each position
-   - Resolve conflicts → document resolution rationale
-   - Synthesize perspectives into coherent view
+### 3. Risk Analysis
 
-6. PHASE_4: Recommendation
-   RECOMMENDATION = {
-     approach: selected approach name,
-     reasoning: why this wins over alternatives,
-     success_factors: [3-5 key factors],
-     risks_to_monitor: [2-3 critical risks],
-     confidence: High|Medium|Low with explanation
-   }
+Skeptic reviews all 9 approaches:
+- For each approach:
+  - Identify primary failure mode
+  - Describe worst-case scenario
+  - Expose hidden assumptions
+- List critical blind spots across all approaches
 
-7. If COMPLEXITY == complex:
-   PHASE_5: Implementation Planning
-   For each of 5 key milestones:
-     - Evaluate 3 execution strategies
-     - Identify dependencies and bottlenecks
-     - Create contingency plan for primary failure mode
-```
+### 4. Consultant Debate
 
-# Output Schema
+- Identify points of agreement
+- Surface disagreements with reasoning from each position
+- Resolve conflicts with documented resolution rationale
+- Synthesize perspectives into coherent view
+
+### 5. Recommendation
+
+Produce:
+- Selected approach name
+- Why this wins over alternatives
+- 3-5 key success factors
+- 2-3 critical risks to monitor
+- Confidence level (High/Medium/Low) with explanation
+
+### 6. Implementation Planning (Complex Only)
+
+For each of 5 key milestones:
+- Evaluate 3 execution strategies
+- Identify dependencies and bottlenecks
+- Create contingency plan for primary failure mode
+
+## Output Schema
 
 ```yaml
 analysis:
@@ -112,7 +111,7 @@ analysis:
       risks_to_monitor: string[]
       confidence: High|Medium|Low
       confidence_rationale: string
-  implementation:  # Only if COMPLEXITY == complex
+  implementation:  # Only if complexity == complex
     milestones:
       - name: string
         strategies: string[]
@@ -121,7 +120,7 @@ analysis:
         contingency: string
 ```
 
-# Error Handling
+## Error Handling
 
 | Condition | Action |
 |-----------|--------|
@@ -131,7 +130,7 @@ analysis:
 | Confidence is Low | State what specific information would raise confidence |
 | User wants quick answer | Offer abbreviated single-consultant analysis with caveats |
 
-# Constraints
+## Constraints
 
 - Consultants must genuinely disagree, not rubber-stamp
 - Quantify impact, probability, timelines where possible

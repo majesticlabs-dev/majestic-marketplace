@@ -100,31 +100,33 @@
 
 ---
 
-## 3. majestic-company (17 agents → 8 keep) — PENDING
+## 3. majestic-company (17 agents → 8 remain) — DONE ✅
+
+> **Commit:** pending — 9 agents converted/merged. 17→8 agents, 18→24 skills (v3.9.2)
 
 ### KEEP (8) — research-heavy with multi-step orchestration
 
 - `problem-research`, `idea-validator`, `growth-audit`, `startup-blueprint`
 - `financial-model`, `elevator-pitch`, `funding-ask-optimizer`, `tam-calculator`
 
-### CONVERT to skill (6) — ⏳ TODO
+### CONVERT to skill (6) — ✅ DONE
 
-| Agent | Reasoning | Status |
+| Agent | Actual Skill Name | Status |
+|-------|-------------------|--------|
+| `future-back` | `future-back` | ✅ Done |
+| `thirty-day-launch` | `thirty-day-launch` | ✅ Done |
+| `decisions` | `decisions` | ✅ Done |
+| `pricing-strategy` | `pricing-strategy` | ✅ Done |
+| `market-expansion` | `market-expansion` | ✅ Done |
+| `blind-spot-analyzer` | `blind-spot-analyzer` | ✅ Done |
+
+### MERGE (3) — ✅ DONE
+
+| Agent | Merged Into | Status |
 |-------|-----------|--------|
-| `future-back` | Pure backward-planning methodology | ⏳ |
-| `thirty-day-launch` | Template-driven playbook | ⏳ |
-| `decisions` | Internal Tree-of-Thoughts debate, no external tools | ⏳ |
-| `pricing-strategy` | Research-driven content generation | ⏳ |
-| `market-expansion` | Decision framework, not orchestration | ⏳ |
-| `blind-spot-analyzer` | Conversational self-reflection framework | ⏳ |
-
-### MERGE (3) — ⏳ TODO
-
-| Agent | Merge Into | Status |
-|-------|-----------|--------|
-| `people-ops` | `strategic-planning` skill | ⏳ |
-| `industry-research` | `industry-pulse` skill | ⏳ |
-| `ai-advantage` | `industry-pulse` skill | ⏳ |
+| `people-ops` | `strategic-planning` skill | ✅ Done (resources moved) |
+| `industry-research` | `industry-pulse` skill | ✅ Done |
+| `ai-advantage` | `industry-pulse` skill | ✅ Done |
 
 ---
 
@@ -159,32 +161,34 @@
 
 ---
 
-## 5. majestic-data (11 agents → 3 keep) — PENDING
+## 5. majestic-data (11 agents → 3 remain) — DONE ✅
+
+> **Commit:** pending — 8 agents converted/merged/deleted. 11→3 agents, 17→19 skills (v1.1.5)
 
 ### KEEP (3)
 
 - `etl-orchestrator`, `backfill-planner`, `pipeline-tester`
 
-### CONVERT to skill (5) — ⏳ TODO
+### CONVERT to skill (5) — ✅ DONE
 
-| Agent | Target Skill | Status |
-|-------|-------------|--------|
-| `csv-to-sql` | merge into `csv-wrangler` or new skill | ⏳ |
-| `json-flattener` | merge into `pandas-coder` or new skill | ⏳ |
-| `migration-builder` | merge into `etl-core-patterns` | ⏳ |
-| `source-analyzer` | new `source-characterization` skill | ⏳ |
-| `schema-discoverer` | new `schema-inference` skill | ⏳ |
+| Agent | Actual Destination | Status |
+|-------|-------------------|--------|
+| `csv-to-sql` | merged into `csv-wrangler` skill | ✅ Done |
+| `json-flattener` | merged into `pandas-coder` skill | ✅ Done |
+| `migration-builder` | merged into `etl-core-patterns` skill | ✅ Done |
+| `source-analyzer` | new `source-analyzer` skill | ✅ Done |
+| `schema-discoverer` | new `schema-discoverer` skill | ✅ Done |
 
-### MERGE (2) — ⏳ TODO
+### MERGE (2) — ✅ DONE
 
-| Agent | Merge Into | Status |
+| Agent | Merged Into | Status |
 |-------|-----------|--------|
-| `data-profiler` (agent) | `data-profiler` skill (duplicate name) | ⏳ |
-| `drift-detector` | `data-quality` skill | ⏳ |
+| `data-profiler` (agent) | `data-profiler` skill | ✅ Done |
+| `drift-detector` | `data-quality` skill | ✅ Done |
 
-### REMOVE (1) — ⏳ TODO
+### REMOVE (1) — ✅ DONE
 
-- `data-validator` — redundant with `data-validation`, `pandera-validation`, `pydantic-validation`, `great-expectations` skills
+- ~~`data-validator`~~ — deleted, redundant with `data-validation`, `pandera-validation`, `pydantic-validation`, `great-expectations` skills
 
 ---
 
@@ -271,7 +275,7 @@
 
 1. ✅ **Quick wins (low risk):** Sales (4), tools (2), creative (1), devops (1) — 8 agents converted
 2. ✅ **High impact:** Engineer review agents (8) + research agents (9) + 1 deletion — 18 agents converted/merged
-3. ⏳ **Moderate effort:** Marketing (11 ✅), company (9), rails (9) — require merging content
-4. ⏳ **Careful handling:** Data (8), python (4), llm (4) — need skill creation alongside conversion
+3. ⏳ **Moderate effort:** Marketing (11 ✅), company (9 ✅), rails (9) — require merging content
+4. ⏳ **Careful handling:** Data (8 ✅), python (4), llm (4) — need skill creation alongside conversion
 
-**Progress:** 37 of 72 conversions complete (51%) | Commits: `9e5cfa7`, pending
+**Progress:** 54 of 72 conversions complete (75%) | Commits: `9e5cfa7`, `b5ad50e`, pending

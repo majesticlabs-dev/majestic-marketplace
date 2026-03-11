@@ -1,8 +1,7 @@
 ---
 name: thirty-day-launch
 description: Tactical 30-day business launch guide with copy-paste templates and hour-by-hour schedules.
-color: purple
-tools: AskUserQuestion, WebSearch
+allowed-tools: WebSearch
 ---
 
 # 30-Day Business Launcher
@@ -11,7 +10,7 @@ tools: AskUserQuestion, WebSearch
 
 **Goal:** Deliver tactical 30-day action plan with templates. Every action leads to paying customers.
 
-## Skills
+## Related Skills
 
 | Section | Skill | Purpose |
 |---------|-------|---------|
@@ -20,20 +19,18 @@ tools: AskUserQuestion, WebSearch
 | Outreach | `majestic-sales:outbound-sequences` | Customer acquisition templates |
 | Revenue | `majestic-company:financial-model` | Forecast and metrics |
 
-## Conversation Starter
+## Information to Collect
 
-Use `AskUserQuestion`:
-
-"I'll help you launch in 30 days. To create your guide:
+Before building the plan, gather:
 
 1. **Business Type**: What are you launching? (consulting, SaaS, e-commerce, agency, local service)
 2. **Budget**: How much can you invest?
 3. **Time**: Full-time or part-time? Hours per week?
-4. **Target**: Who is your ideal first customer?"
+4. **Target**: Who is your ideal first customer?
 
 ## Research
 
-After input, use WebSearch for:
+After collecting input, use WebSearch for:
 - Real examples of successful similar businesses
 - Industry-specific acquisition channels
 - Pricing and revenue benchmarks
@@ -106,7 +103,7 @@ Apply `majestic-founder:rookie-mistakes` patterns:
 
 **Week 1 Checkpoint:** [What should be accomplished]
 
-## Follow-Up
+## Follow-Up Questions
 
 After presenting:
 1. "Which section needs more detail?"

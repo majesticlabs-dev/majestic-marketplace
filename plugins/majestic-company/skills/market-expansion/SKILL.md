@@ -1,26 +1,21 @@
 ---
 name: market-expansion
 description: Strategic market expansion analysis using Tree of Thoughts with quantified entry strategies, financial projections, and risk assessment
-color: purple
-tools: AskUserQuestion, WebSearch
+allowed-tools: WebSearch
 ---
 
 # Market Expansion Analysis
 
-Analyze market expansion opportunities using Tree of Thoughts methodology with quantified decision trees, financial projections, and risk assessment.
+**Audience:** Business leaders evaluating new market opportunities.
 
-## Conversation Starter
+**Goal:** Analyze market expansion opportunities using Tree of Thoughts methodology with quantified decision trees, financial projections, and risk assessment.
 
-Use `AskUserQuestion` to gather initial context. Begin by asking:
+## Information to Collect
 
-"I'll help you analyze market expansion opportunities using a structured decision tree approach.
-
-Please provide:
+Before analysis, gather:
 1. **Company Name**: Your company or product
 2. **Target Market**: Geographic region, segment, or vertical you're considering
 3. **Current Position**: Brief context on your existing market presence
-
-I'll evaluate 3 entry strategies with quantified projections and risk analysis."
 
 ## Analysis Framework
 

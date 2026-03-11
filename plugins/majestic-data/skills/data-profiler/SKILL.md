@@ -108,8 +108,89 @@ columns:
     date_range_days: int
 ```
 
+## Analysis Dimensions
+
+### Numeric Columns
+- Min, max, range, mean, median, mode
+- Standard deviation, variance, skewness, kurtosis
+- Percentiles (5, 25, 50, 75, 95)
+- Zero count, negative count
+- Outlier detection (IQR method)
+
+### String Columns
+- Min/max/avg length
+- Pattern analysis (emails, phones, URLs)
+- Top N frequent values
+- Whitespace issues (leading/trailing)
+- Case distribution (upper/lower/mixed)
+- Empty string count
+
+### DateTime Columns
+- Min/max dates, date range span
+- Missing dates in sequence
+- Day of week distribution
+- Hour distribution (if timestamp)
+
+### Categorical Columns
+- Cardinality, value distribution
+- Imbalance ratio
+- Rare categories (< 1%)
+
+## Correlation Analysis
+
+```python
+correlation_matrix = df.select_dtypes(include=[np.number]).corr()
+
+# Highly correlated pairs (> 0.8)
+high_corr = []
+for i in range(len(correlation_matrix.columns)):
+    for j in range(i+1, len(correlation_matrix.columns)):
+        if abs(correlation_matrix.iloc[i, j]) > 0.8:
+            high_corr.append((
+                correlation_matrix.columns[i],
+                correlation_matrix.columns[j],
+                correlation_matrix.iloc[i, j]
+            ))
+```
+
+## Quality Flags
+
+Automatically flag:
+- **High nulls:** > 50% missing values
+- **Constant column:** Only 1 unique value
+- **High cardinality:** Unique ratio > 95% (possible ID)
+- **Suspected duplicates:** Based on key columns
+- **Data type mismatch:** Numeric stored as string
+- **Future dates:** Dates beyond today
+- **Negative values:** In typically positive columns
+
+## Report Sections
+
+### Executive Summary
+- Dataset shape (rows x columns), memory footprint
+- Overall quality score, critical issues count
+
+### Column-by-Column Analysis
+- Statistics table, distribution histogram (ASCII for terminal)
+- Top values (for categorical), quality warnings
+
+### Relationships
+- Correlation heatmap summary
+- Potential foreign key relationships, column dependencies
+
+### Recommendations
+- Suggested data type optimizations
+- Columns to investigate, potential data quality rules
+
+## Output Formats
+
+- **Markdown Report:** Full detailed report with tables
+- **JSON Summary:** Machine-readable profile for programmatic use
+- **HTML Dashboard:** Interactive report with charts (if ydata-profiling available)
+
 ## Dependencies
 
 ```
 pandas
+numpy
 ```

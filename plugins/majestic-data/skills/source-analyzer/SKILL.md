@@ -1,13 +1,14 @@
 ---
 name: source-analyzer
 description: Analyze data source characteristics including update frequency, volume patterns, and schema stability.
-color: blue
-tools: Read, Grep, Glob, Bash
+allowed-tools: Read Grep Glob Bash
 ---
 
-# Source-Analyzer
+# Source Analyzer
 
-Autonomous agent that characterizes data sources for ETL planning.
+**Audience:** Data engineers planning ETL pipelines.
+
+**Goal:** Characterize data sources for extraction planning by analyzing volume, update patterns, schema, and quality baselines.
 
 ## Analysis Dimensions
 
@@ -39,29 +40,11 @@ Autonomous agent that characterizes data sources for ETL planning.
 
 ## Workflow
 
-1. **Inventory the source**
-   - File location/database connection
-   - Access patterns (API, file drop, DB query)
-   - Authentication requirements
-
-2. **Sample multiple time periods**
-   - If possible, analyze data from different dates
-   - Identify temporal patterns
-
-3. **Profile the schema**
-   - Document all columns
-   - Identify stable vs volatile columns
-   - Note any computed/derived columns
-
-4. **Assess quality**
-   - Baseline quality metrics
-   - Known quirks or issues
-   - Required transformations
-
-5. **Document extraction requirements**
-   - Optimal extraction method
-   - Incremental key columns
-   - Filtering criteria
+1. **Inventory the source** - File location/database connection, access patterns (API, file drop, DB query), authentication requirements
+2. **Sample multiple time periods** - Analyze data from different dates, identify temporal patterns
+3. **Profile the schema** - Document all columns, identify stable vs volatile columns, note computed/derived columns
+4. **Assess quality** - Baseline quality metrics, known quirks, required transformations
+5. **Document extraction requirements** - Optimal extraction method, incremental key columns, filtering criteria
 
 ## Output: Source Specification
 
@@ -126,9 +109,6 @@ source:
 
 When analyzing multiple related sources:
 
-```markdown
-## Source Comparison: Orders vs Order_Items
-
 | Attribute | Orders | Order_Items |
 |-----------|--------|-------------|
 | Row count | 5.2M | 18.7M |
@@ -140,7 +120,6 @@ When analyzing multiple related sources:
 **Relationship:** 1:N (avg 3.6 items per order)
 **Join strategy:** Hash join on order_id
 **Load order:** Orders first, then Order_Items
-```
 
 ## API Source Analysis
 

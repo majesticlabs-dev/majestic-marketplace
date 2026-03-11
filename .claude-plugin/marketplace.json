@@ -163,8 +163,8 @@
     },
     {
       "name": "majestic-data",
-      "description": "Data engineering and ETL tools. Includes 11 specialized agents, 4 commands, and 17 skills for pandas, SQL, ETL pipelines, data validation, and quality monitoring.",
-      "version": "1.1.4",
+      "description": "Data engineering and ETL tools. Includes 3 specialized agents, 4 commands, and 19 skills for pandas, SQL, ETL pipelines, data validation, and quality monitoring.",
+      "version": "1.1.5",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -223,8 +223,8 @@
     },
     {
       "name": "majestic-company",
-      "description": "Business operations tools. Includes 17 specialized agents, 1 command, and 11 skills.",
-      "version": "3.9.1",
+      "description": "Business operations tools. Includes 8 specialized agents, 2 commands, and 24 skills.",
+      "version": "3.9.2",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
