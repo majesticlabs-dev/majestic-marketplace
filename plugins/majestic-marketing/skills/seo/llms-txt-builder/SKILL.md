@@ -1,6 +1,6 @@
 ---
 name: llms-txt-builder
-description: Create llms.txt files that help AI systems navigate and understand your site structure for better citations.
+description: Create llms.txt files that help AI systems navigate and understand your site structure. Use when setting up AI visibility for a website, improving LLM citation rates, or want AI crawlers to discover your key content. Generates the llms.txt file format for your domain.
 allowed-tools: Read Write Edit Glob
 ---
 

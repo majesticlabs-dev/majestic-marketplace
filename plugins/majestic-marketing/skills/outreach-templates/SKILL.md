@@ -1,6 +1,6 @@
 ---
 name: outreach-templates
-description: Copy-paste templates for cold outreach, guest posts, podcast pitches, and link building with follow-up sequences.
+description: Copy-paste templates for cold outreach, guest posts, podcast pitches, and link building. Use when doing guest post pitching, cold email outreach, podcast booking, or link building campaigns. Includes follow-up sequences and personalization frameworks.
 ---
 
 # Outreach Templates

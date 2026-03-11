@@ -1,6 +1,6 @@
 ---
 name: brand-positioning
-description: Define your brand's core identity - purpose, values, personality, and positioning statement. Creates the strategic foundation that informs voice, design, and all brand decisions.
+description: Define your brand's core identity - purpose, values, personality, and positioning statement. Use when building a new brand, rebranding, or need a strategic foundation for voice, design, and brand decisions. Not for personal voice extraction (use style-forensics).
 triggers:
   - brand positioning
   - brand strategy

@@ -1,6 +1,6 @@
 ---
 name: power-words
-description: Enhance copy with emotional trigger words from 21 psychological categories. Transform bland text into compelling, conversion-focused content.
+description: Enhance copy with emotional trigger words from 21 psychological categories. Use when headlines feel flat, CTAs lack urgency, copy needs more punch, or conversion rates are low. Transforms bland text into compelling, conversion-focused content.
 triggers:
   - power words
   - emotional words

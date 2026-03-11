@@ -1,6 +1,6 @@
 ---
 name: google-ads-strategy
-description: Build Google Ads campaign structures with keyword research, ad copy, audience targeting, and budget allocation. Use for B2B or B2C paid search planning.
+description: Build Google Ads campaign structures with keyword research, ad copy, audience targeting, and budget allocation. Use when planning paid search campaigns, setting up Google Ads for the first time, or restructuring underperforming ad accounts. Supports B2B and B2C.
 allowed-tools: Read Write Edit Grep Glob WebSearch WebFetch AskUserQuestion
 ---
 

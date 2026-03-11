@@ -1,6 +1,6 @@
 ---
 name: traffic-magnet
-description: Organic traffic strategy orchestrator for zero-budget customer acquisition. Routes to specialized skills for implementation.
+description: Build an organic traffic strategy for zero-budget customer acquisition. Use when launching a new website, need traffic without ad spend, or planning content-driven growth. Routes to specialized skills for SEO, community, and content implementation.
 allowed-tools: WebSearch AskUserQuestion
 ---
 

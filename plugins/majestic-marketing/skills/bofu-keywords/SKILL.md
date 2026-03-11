@@ -1,6 +1,6 @@
 ---
 name: bofu-keywords
-description: Find bottom-of-funnel keywords with high purchase intent for any product. Uses Perplexity for real-time search data.
+description: Find bottom-of-funnel keywords with high purchase intent for any product. Use when targeting buyers ready to convert, planning conversion-focused content, or building high-intent keyword lists. Uses Perplexity for real-time search data. Not for broad topic research (use keyword-research).
 triggers:
   - bofu keywords
   - bottom of funnel keywords

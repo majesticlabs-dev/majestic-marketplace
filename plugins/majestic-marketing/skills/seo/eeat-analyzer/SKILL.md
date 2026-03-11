@@ -1,6 +1,6 @@
 ---
 name: eeat-analyzer
-description: Analyze and optimize E-E-A-T signals (Experience, Expertise, Authority, Trust) for content credibility.
+description: Analyze and optimize E-E-A-T signals (Experience, Expertise, Authority, Trust) for content credibility. Use when auditing content for Google quality signals, improving author credibility markers, or diagnosing why content lacks trust signals. Provides signal-by-signal implementation framework.
 ---
 
 # E-E-A-T Analyzer

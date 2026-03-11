@@ -1,6 +1,6 @@
 ---
 name: viral-content
-description: Create viral content frameworks with platform-specific patterns, psychological hooks, and daily schedules that maximize organic reach without paid promotion.
+description: Create viral content frameworks with platform-specific patterns and posting schedules. Use when building a content playbook for TikTok, LinkedIn, X, Instagram, or YouTube, or when maximizing organic reach without paid promotion. Includes psychological hooks and algorithm-optimized formats.
 allowed-tools: Read Write Edit Grep Glob WebSearch WebFetch AskUserQuestion
 ---
 

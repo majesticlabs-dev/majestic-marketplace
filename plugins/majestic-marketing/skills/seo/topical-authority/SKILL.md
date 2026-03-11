@@ -1,6 +1,6 @@
 ---
 name: topical-authority
-description: Build and measure topical authority through comprehensive coverage, content mapping, and competitor analysis.
+description: Build and measure topical authority through comprehensive content coverage. Use when planning content clusters, measuring topic coverage gaps, analyzing competitor content depth, or building a content moat around your core subject areas.
 ---
 
 # Topical Authority

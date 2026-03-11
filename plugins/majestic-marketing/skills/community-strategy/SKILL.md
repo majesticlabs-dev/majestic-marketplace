@@ -1,6 +1,6 @@
 ---
 name: community-strategy
-description: Community infiltration strategies for Reddit, Discord, and Facebook that won't get you banned. Value-first engagement plans.
+description: Build community engagement strategies for Reddit, Discord, and Facebook that generate traffic without getting banned. Use when planning organic community outreach, building audience through forums, or need value-first engagement templates with platform-specific rules.
 allowed-tools: WebSearch
 ---
 

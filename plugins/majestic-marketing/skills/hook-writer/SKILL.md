@@ -1,6 +1,6 @@
 ---
 name: hook-writer
-description: Generate attention-grabbing hooks from 5 investor archetype perspectives to find angles that resonate with different audience motivations.
+description: Generate attention-grabbing hooks from 5 investor archetype perspectives. Use when writing headlines, social media openers, email subject lines, or ad copy and need multiple angle options. Each archetype surfaces different audience motivations to find what resonates.
 allowed-tools: AskUserQuestion
 ---
 

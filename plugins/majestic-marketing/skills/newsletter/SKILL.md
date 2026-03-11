@@ -1,6 +1,6 @@
 ---
 name: newsletter
-description: Create engaging newsletter editions with proven structures, subject lines, and content formats. Supports curator, educator, and thought leader archetypes for ongoing audience communication.
+description: Create engaging newsletter editions with proven structures, subject lines, and content formats. Use when writing a weekly or monthly newsletter, need email content that gets opened and read, or building an audience through email. Supports curator, educator, and thought leader archetypes.
 triggers:
   - newsletter
   - write newsletter
