@@ -1,6 +1,6 @@
 ---
 name: style-guide-builder
-description: Style guide templates for content creation. Used by /majestic:style-guide:new command.
+description: Generate project-specific style guides for content creation. Use when setting up content standards, creating editorial guidelines, or invoked automatically by /majestic:style-guide:new. Provides templates for tone, formatting, and writing conventions.
 ---
 
 # Style Guide Builder Skill

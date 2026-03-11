@@ -1,6 +1,6 @@
 ---
 name: content-optimizer
-description: Content optimization workflow covering keyword integration, semantic enhancement, structure optimization, and AI extractability. Use for improving existing content for both search engines and LLMs.
+description: Optimize existing content for search engines and LLMs. Use when improving underperforming pages, refreshing old content, preparing articles for publication, or enhancing AI citation potential. Covers keyword integration, semantic enhancement, structure optimization, and AI extractability.
 allowed-tools: Read Write Edit Grep Glob WebSearch
 ---
 

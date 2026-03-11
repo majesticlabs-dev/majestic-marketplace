@@ -1,6 +1,6 @@
 ---
 name: entity-triplets
-description: Build entity triplets and brand associations that LLMs recognize and cite consistently.
+description: Build entity triplets and brand associations that LLMs recognize and cite consistently. Use when establishing brand identity in AI knowledge bases, creating structured entity relationships, or improving how AI systems associate your brand with your category.
 ---
 
 # Entity Triplets

@@ -12,7 +12,7 @@
     {
       "name": "majestic-engineer",
       "description": "Language-agnostic engineering workflows. Includes 38 specialized agents, 33 commands, 31 skills, and 5 toolbox presets. Now includes relay orchestration for fresh-context task execution with quality gates and compound learning.",
-      "version": "3.67.0",
+      "version": "3.67.1",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -33,7 +33,7 @@
     {
       "name": "majestic-rails",
       "description": "Ruby on Rails development tools. Includes 15 specialized agents, 3 commands, 31 skills, and enhanced toolbox with 6 research hooks.",
-      "version": "3.19.5",
+      "version": "3.19.6",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -103,7 +103,7 @@
     {
       "name": "majestic-agent-sdk",
       "description": "Claude Agent SDK tools for building custom AI agents. Includes 1 command and 1 skill.",
-      "version": "1.0.3",
+      "version": "1.0.4",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -122,7 +122,7 @@
     {
       "name": "majestic-tools",
       "description": "Claude Code customization tools. Includes 2 agents, 13 commands, and 11 skills.",
-      "version": "3.17.0",
+      "version": "3.17.1",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -141,7 +141,7 @@
     {
       "name": "majestic-python",
       "description": "Python development tools. Includes 6 specialized agents and 5 skills.",
-      "version": "3.4.4",
+      "version": "3.4.5",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -164,7 +164,7 @@
     {
       "name": "majestic-data",
       "description": "Data engineering and ETL tools. Includes 11 specialized agents, 4 commands, and 17 skills for pandas, SQL, ETL pipelines, data validation, and quality monitoring.",
-      "version": "1.1.3",
+      "version": "1.1.4",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -192,7 +192,7 @@
     {
       "name": "majestic-marketing",
       "description": "Marketing and SEO tools for Claude Code. Includes 16 specialized agents, 6 commands, and 49 skills.",
-      "version": "3.25.1",
+      "version": "3.25.2",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -224,7 +224,7 @@
     {
       "name": "majestic-company",
       "description": "Business operations tools. Includes 17 specialized agents, 1 command, and 11 skills.",
-      "version": "3.9.0",
+      "version": "3.9.1",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -275,7 +275,7 @@
     {
       "name": "majestic-sales",
       "description": "Sales acceleration and revenue tools. Includes 4 agents, 1 command, and 16 skills.",
-      "version": "3.2.4",
+      "version": "3.2.5",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -299,7 +299,7 @@
     {
       "name": "majestic-react",
       "description": "Modern React development toolkit for TypeScript/React stacks. Includes 2 specialized agents and 4 skills.",
-      "version": "3.2.2",
+      "version": "3.2.3",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -344,7 +344,7 @@
     {
       "name": "majestic-devops",
       "description": "Infrastructure as Code and DevOps tools. Includes 1 agent and 14 skills for OpenTofu, Ansible, Hetzner, DigitalOcean, Cloudflare, 1Password CLI, cloud-init, and devops-plan.",
-      "version": "1.4.4",
+      "version": "1.4.5",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -398,7 +398,7 @@
     {
       "name": "majestic-founder",
       "description": "Personal effectiveness tools for founders, solopreneurs, and business builders. Includes 4 skills.",
-      "version": "1.1.2",
+      "version": "1.1.3",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -420,7 +420,7 @@
     {
       "name": "majestic-ralph",
       "description": "Autonomous AI coding loops. Ship features while you sleep with iterative prompt re-feeding. Includes 3 commands, 1 skill, and stop hook.",
-      "version": "1.2.1",
+      "version": "1.2.2",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",

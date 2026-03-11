@@ -115,6 +115,13 @@ if ! echo "$NAME" | grep -qE '^[a-z][a-z0-9]*(-[a-z0-9]+)*$'; then
 fi
 pass "Name '$NAME' valid ($NAME_LEN chars)"
 
+# 4b. Check name doesn't use reserved words
+if echo "$NAME" | grep -qiE '(claude|anthropic)'; then
+  fail "Name contains reserved word (claude/anthropic): $NAME"
+  exit 3
+fi
+pass "Name has no reserved words"
+
 # 5. Check name matches directory
 DIR_NAME=$(basename "$SKILL_DIR")
 if [ "$NAME" != "$DIR_NAME" ]; then
@@ -143,6 +150,18 @@ if [ "$DESC_LEN" -gt 1024 ]; then
   exit 4
 fi
 pass "Description valid ($DESC_LEN chars)"
+
+# 6b. Check for XML angle brackets in frontmatter (security)
+if echo "$FRONTMATTER" | grep -qE '<[^>]+>'; then
+  fail "XML angle brackets (< >) found in frontmatter - security risk (prompt injection)"
+  exit 4
+fi
+pass "No XML tags in frontmatter"
+
+# 6c. Check for README.md inside skill folder
+if [ -f "$SKILL_DIR/README.md" ]; then
+  warn "README.md found inside skill folder - all docs should go in SKILL.md or references/"
+fi
 
 # 7. Validate optional fields if present
 

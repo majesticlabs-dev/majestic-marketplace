@@ -1,6 +1,6 @@
 ---
 name: case-study-writer
-description: Create compelling customer case studies for marketing. Guides through information gathering and produces polished case study documents.
+description: Create compelling customer case studies for marketing and sales enablement. Use when writing customer success stories, building social proof assets, or documenting client results. Guides through information gathering and produces polished case study documents.
 triggers:
   - case study
   - write case study

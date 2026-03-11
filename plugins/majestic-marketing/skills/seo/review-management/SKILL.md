@@ -1,6 +1,6 @@
 ---
 name: review-management
-description: Optimize review scores and leverage user-generated content for AI visibility and brand trust.
+description: Optimize review scores and leverage user-generated content for AI visibility and brand trust. Use when building review presence across platforms, improving review response rates, or leveraging reviews for AI recommendation signals. Covers target metrics and platform prioritization.
 ---
 
 # Review Management

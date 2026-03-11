@@ -1,6 +1,6 @@
 ---
 name: lead-magnet
-description: Create high-converting lead magnets that generate email subscribers. Supports checklists, templates, swipe files, mini-courses, and guides with landing page copy.
+description: Create high-converting lead magnets that generate email subscribers. Use when building an email list, creating opt-in offers, or need a freebie to drive signups. Supports checklists, templates, swipe files, mini-courses, and guides with landing page copy.
 triggers:
   - lead magnet
   - create lead magnet

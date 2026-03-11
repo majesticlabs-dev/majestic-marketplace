@@ -1,6 +1,6 @@
 ---
 name: help-docs-writer
-description: Create customer-facing help documentation for product features. Analyzes codebase to extract feature details, transforms into user-friendly walkthroughs with troubleshooting sections.
+description: Create customer-facing help documentation for product features. Use when writing help articles, knowledge base entries, how-to guides, or support documentation. Analyzes codebase to extract feature details and transforms them into user-friendly walkthroughs with troubleshooting sections.
 triggers:
   - help docs
   - help article

@@ -1,6 +1,6 @@
 ---
 name: press-release-aeo
-description: Frame press releases for AI/LLM citation and authority building using research-based positioning.
+description: Frame press releases for AI/LLM citation and authority building. Use when writing press releases optimized for AI training data, building authority signals through newswire distribution, or positioning company news as research findings for higher AI trust.
 ---
 
 # Press Release AEO Strategy

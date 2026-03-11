@@ -1,6 +1,6 @@
 ---
 name: behavioral-seo
-description: Optimize for behavioral SEO signals including CTR, dwell time, engagement metrics, and Bing-specific factors.
+description: Optimize for behavioral SEO signals including CTR, dwell time, and engagement metrics. Use when diagnosing low click-through rates, improving dwell time, optimizing for Bing behavioral factors, or improving user engagement signals that affect search rankings.
 ---
 
 # Behavioral SEO

@@ -1,6 +1,6 @@
 ---
 name: narrative-builder
-description: Transform lessons and insights into compelling short stories with tension, conflict, reversal, and clear takeaways. Includes story arc templates, emotional beat patterns, and micro-story formats for social content.
+description: Transform lessons and insights into compelling short stories with tension, conflict, and clear takeaways. Use when turning a business lesson into a story, writing narrative social posts, or making dry insights engaging through storytelling. Includes story arc templates and micro-story formats for social content.
 triggers:
   - turn into story
   - write as narrative

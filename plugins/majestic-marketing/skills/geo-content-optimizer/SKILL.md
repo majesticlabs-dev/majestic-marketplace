@@ -1,6 +1,6 @@
 ---
 name: geo-content-optimizer
-description: Optimize content structure and framing for AI citation. Covers trust formats, extractability, and fact-density.
+description: Optimize content structure and framing for AI citation in ChatGPT, Perplexity, and Gemini. Use when preparing content for GEO (Generative Engine Optimization), improving AI extractability, or increasing chances of being cited in LLM responses. Covers trust formats, fact-density, and semantic depth.
 ---
 
 # GEO Content Optimizer

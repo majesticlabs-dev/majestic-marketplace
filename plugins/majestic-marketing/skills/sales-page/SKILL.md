@@ -1,6 +1,6 @@
 ---
 name: sales-page
-description: Create high-converting sales pages by orchestrating competitive research, positioning, copywriting, and offer skills. Assembles components into a complete sales page blueprint.
+description: Create high-converting sales pages by orchestrating competitive research, positioning, copywriting, and offer design. Use when building a sales page from scratch, launching a product, or need a complete sales page blueprint with copy, structure, and offer stack.
 allowed-tools: Read Write Edit Grep Glob WebSearch WebFetch AskUserQuestion
 ---
 

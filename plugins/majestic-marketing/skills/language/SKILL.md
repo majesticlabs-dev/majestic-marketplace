@@ -1,6 +1,6 @@
 ---
 name: language
-description: Research and use customer language across Product and Marketing. Sales Safari methodology for finding watering holes, extracting pain language, and creating "OH YEAH!" resonance.
+description: Research and use customer language across Product and Marketing. Use when writing product copy, crafting landing page messaging, or need to understand how customers describe their problems. Sales Safari methodology for finding watering holes, extracting pain language, and creating resonance.
 triggers:
   - sales safari
   - customer language

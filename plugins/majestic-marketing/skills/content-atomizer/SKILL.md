@@ -1,6 +1,6 @@
 ---
 name: content-atomizer
-description: Transform long-form content into 15+ platform-ready assets. One article becomes threads, carousels, audiograms, video scripts, quizzes, discussion prompts, and more.
+description: Transform long-form content into 15+ platform-ready assets. Use when repurposing a blog post, article, or guide into social media content. One piece becomes threads, carousels, audiograms, video scripts, quizzes, and discussion prompts across all major platforms.
 triggers:
   - atomize content
   - repurpose content

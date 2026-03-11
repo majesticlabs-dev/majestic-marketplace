@@ -1,6 +1,6 @@
 ---
 name: analyst-positioning
-description: Position team members as industry analysts and experts for AI credibility and citation authority.
+description: Position team members as industry analysts and experts for AI credibility and citation authority. Use when building thought leadership profiles, creating expert entity signals for E-E-A-T, or establishing personal brands that AI systems recognize and cite as authorities.
 ---
 
 # Analyst Positioning

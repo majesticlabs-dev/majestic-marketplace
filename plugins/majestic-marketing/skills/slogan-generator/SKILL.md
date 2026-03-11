@@ -1,6 +1,6 @@
 ---
 name: slogan-generator
-description: Generate and evaluate marketing slogans for any product or service. Creates options across multiple angles, scores against criteria, and recommends the best fit.
+description: Generate and evaluate marketing slogans and taglines for any product or service. Use when naming a campaign, need a tagline for branding, or want scored slogan options across multiple angles. Creates options, scores against criteria, and recommends the best fit.
 triggers:
   - slogan
   - tagline

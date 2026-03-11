@@ -1,6 +1,6 @@
 ---
 name: marketing-strategy
-description: Build a custom marketing strategy through an interactive interview. Develops business positioning, audience targeting, channel selection, and customer journey—then exports as a reusable JSON profile.
+description: Build a custom marketing strategy through an interactive interview. Use when starting a new business, launching a product, or need a structured marketing plan. Develops positioning, audience targeting, channel selection, and customer journey, then exports as a reusable JSON profile.
 allowed-tools: Read Write Edit AskUserQuestion
 ---
 

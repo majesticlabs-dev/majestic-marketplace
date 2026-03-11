@@ -1,6 +1,6 @@
 ---
 name: linkedin-content
-description: Create high-performing LinkedIn content with algorithm-optimized hooks, content pillar strategy, posting cadence, and performance tracking. Includes format templates for text posts, carousels, and polls.
+description: Create high-performing LinkedIn content with algorithm-optimized hooks and posting strategy. Use when building a personal brand on LinkedIn, planning LinkedIn content, or writing posts that drive engagement. Includes format templates for text posts, carousels, polls, and content pillar strategy.
 allowed-tools: Read Write Edit Grep Glob WebSearch WebFetch AskUserQuestion
 ---
 

@@ -19,8 +19,8 @@ allowed-tools: Bash Read Glob Grep
 
 | Field | Constraints |
 |-------|-------------|
-| `name` | 1-64 chars, lowercase alphanumeric + hyphens, no leading/trailing/consecutive hyphens, must match parent directory name |
-| `description` | 1-1024 chars, non-empty, should include keywords for discoverability |
+| `name` | 1-64 chars, lowercase alphanumeric + hyphens, no leading/trailing/consecutive hyphens, must match parent directory name. Cannot contain "claude" or "anthropic" (reserved). |
+| `description` | 1-1024 chars, non-empty, should include keywords for discoverability. No XML angle brackets (< >). |
 
 ### Optional Frontmatter
 
@@ -36,6 +36,7 @@ allowed-tools: Bash Read Glob Grep
 |------|-------------|
 | Directory name | Must match `name` field exactly |
 | SKILL.md | Required, must exist |
+| README.md | Must NOT exist inside skill folder (docs go in SKILL.md or references/) |
 | Line limit | Max 500 lines in SKILL.md |
 | Subdirectories | Only `scripts/`, `references/`, `assets/` allowed |
 
@@ -172,14 +173,17 @@ The linter script at `scripts/validate-skill.sh` performs these checks:
 1. **Directory exists** with SKILL.md file
 2. **Frontmatter present** with YAML delimiters
 3. **Name field valid** - pattern, length, matches directory
-4. **Description field valid** - present, length constraints
-5. **Optional fields valid** - if present, match constraints
-6. **Line count** - under 500 lines
-7. **Subdirectory names** - only allowed directories
-8. **No ASCII art** - box-drawing characters outside fenced code blocks (WARN)
-9. **No persona statements** - "You are a/an/the" outside fenced code blocks (FAIL)
-10. **Description routing quality** - routing keywords present (WARN)
-11. **Marketing copy detection** - buzzwords in description (WARN)
+4. **Reserved words** - name cannot contain "claude" or "anthropic" (FAIL)
+5. **Description field valid** - present, length constraints
+6. **XML tags in frontmatter** - no angle brackets `< >` (security, FAIL)
+7. **No README.md** - inside skill folder (WARN)
+8. **Optional fields valid** - if present, match constraints
+9. **Line count** - under 500 lines
+10. **Subdirectory names** - only allowed directories
+11. **No ASCII art** - box-drawing characters outside fenced code blocks (WARN)
+12. **No persona statements** - "You are a/an/the" outside fenced code blocks (FAIL)
+13. **Description routing quality** - routing keywords present (WARN)
+14. **Marketing copy detection** - buzzwords in description (WARN)
 
 ## Error Codes
 

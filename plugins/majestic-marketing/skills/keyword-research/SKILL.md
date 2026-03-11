@@ -1,6 +1,6 @@
 ---
 name: keyword-research
-description: Strategic content planning without expensive tools. 6 Circles Method to find what to write about and prioritize it.
+description: Find content topics and prioritize them without expensive SEO tools. Use when planning a content strategy, deciding what to write about, or doing keyword research on a budget. Uses the 6 Circles Method for systematic topic discovery and prioritization.
 triggers:
   - keyword research
   - content topics

@@ -1,6 +1,6 @@
 ---
 name: plg-ai-funnel
-description: Framework for Product-Led Growth in the AI agent era. The new PLG funnel is agent query → documentation scan → feature match → recommendation.
+description: Framework for Product-Led Growth in the AI agent era. Use when optimizing how AI agents discover and recommend your product, designing self-service activation flows, or building documentation for AI-driven discovery. Covers the agent query to recommendation funnel.
 triggers:
   - PLG strategy
   - product-led growth
