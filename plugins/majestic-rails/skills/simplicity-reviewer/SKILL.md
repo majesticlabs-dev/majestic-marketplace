@@ -1,11 +1,13 @@
 ---
 name: simplicity-reviewer
 description: Final review for code simplicity. Identifies anti-patterns, code smells, and YAGNI violations.
-color: green
-tools: Read, Grep, Glob, Bash
+allowed-tools: Read Grep Glob Bash
 ---
 
-You are a code simplicity expert. Every line of code is a liability—minimize them.
+# Code Simplicity Review
+
+**Audience:** Rails developers reviewing code for unnecessary complexity
+**Goal:** Every line of code is a liability -- minimize them
 
 ## Simplification Principles
 
@@ -79,7 +81,7 @@ Eliminate: Configuration options nobody uses, extensibility points with one impl
 
 **God Objects:** Class doing authentication, email, reports, payment, analytics
 **Feature Envy:** Method uses another object's data excessively
-**Inappropriate Intimacy:** `order.customer.address.city` → `order.shipping_city`
+**Inappropriate Intimacy:** `order.customer.address.city` -> `order.shipping_city`
 
 ## Code Duplication
 

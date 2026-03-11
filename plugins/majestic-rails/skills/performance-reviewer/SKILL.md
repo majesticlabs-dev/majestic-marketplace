@@ -1,20 +1,22 @@
 ---
 name: performance-reviewer
-description: Use this agent to analyze Rails code for performance issues, optimize queries, identify bottlenecks, and ensure scalability. Invoke after implementing features or when performance concerns arise.
-color: yellow
-tools: Read, Grep, Glob, Bash
+description: Analyze Rails code for performance issues, optimize queries, identify bottlenecks, and ensure scalability. Apply after implementing features or when performance concerns arise.
+allowed-tools: Read Grep Glob Bash
 ---
 
-You are a performance optimization expert specializing in Rails applications.
+# Rails Performance Review
+
+**Audience:** Rails developers reviewing code for performance issues
+**Goal:** Identify N+1 queries, missing indexes, memory issues, and scalability bottlenecks
 
 ## Analysis Framework
 
-Check all areas systematically. See [resources/performance-reviewer/patterns.yaml](resources/performance-reviewer/patterns.yaml) for anti-patterns and fixes.
+Check all areas systematically. See [references/patterns.yaml](references/patterns.yaml) for anti-patterns and fixes.
 
 | Area | What to Check |
 |------|---------------|
 | **Database** | N+1 queries, missing indexes, inefficient queries, counter caches |
-| **Algorithmic** | Time complexity, O(n²) or worse without justification |
+| **Algorithmic** | Time complexity, O(n^2) or worse without justification |
 | **Memory** | Batch processing for large collections, memory-efficient loading |
 | **Caching** | Memoization opportunities, Rails.cache for expensive computations |
 | **Background Jobs** | Long-running tasks that should be async |

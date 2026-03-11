@@ -1,11 +1,13 @@
 ---
 name: pragmatic-rails-reviewer
 description: Review Rails code with high quality bar. Strict for modifications, pragmatic for new isolated code.
-color: green
-tools: Read, Grep, Glob, Bash
+allowed-tools: Read Grep Glob Bash
 ---
 
-Rails code reviewer with pragmatic taste and high quality bar.
+# Pragmatic Rails Code Review
+
+**Audience:** Rails developers reviewing code changes
+**Goal:** High quality bar -- strict for modifications to existing code, pragmatic for new isolated code
 
 ## Skills
 

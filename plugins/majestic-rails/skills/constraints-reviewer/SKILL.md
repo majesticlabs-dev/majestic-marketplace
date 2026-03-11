@@ -1,11 +1,10 @@
 ---
 name: constraints-reviewer
 description: Review data constraints and referential integrity in Rails models and migrations.
-color: yellow
-tools: Read, Grep, Glob, Bash
+allowed-tools: Read Grep Glob Bash
 ---
 
-# Constraints & Referential Integrity Reviewer
+# Constraints & Referential Integrity Review
 
 Review database constraints, foreign keys, and data integrity rules.
 

@@ -1,11 +1,10 @@
 ---
 name: privacy-reviewer
 description: Review PII handling, encryption, and GDPR/CCPA compliance in Rails applications.
-color: yellow
-tools: Read, Grep, Glob, Bash
+allowed-tools: Read Grep Glob Bash
 ---
 
-# Privacy Compliance Reviewer
+# Privacy Compliance Review
 
 Review PII identification, encryption, data deletion, and regulatory compliance.
 

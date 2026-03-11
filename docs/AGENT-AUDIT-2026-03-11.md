@@ -130,34 +130,36 @@
 
 ---
 
-## 4. majestic-rails (15 agents → 5-6 keep) — PENDING
+## 4. majestic-rails (15 agents → 5 remain) — DONE ✅
+
+> **Commit:** pending — 10 agents converted/merged. 15→5 agents, 31→39 skills (v3.19.7)
 
 ### KEEP (5)
 
 - `code-review-orchestrator`, `data-integrity-reviewer`
 - `database-optimizer`, `database-admin`, `gem-research`
 
-### CONVERT to skill (7+1 borderline) — ⏳ TODO
+### CONVERT to skill (8) — ✅ DONE
 
-| Agent | Reasoning | Status |
+| Agent | Actual Skill Name | Status |
+|-------|-------------------|--------|
+| `graphql-architect` | `graphql-architect` | ✅ Done |
+| `lint` | `lint` | ✅ Done |
+| `simplicity-reviewer` | `simplicity-reviewer` | ✅ Done |
+| `dhh-code-reviewer` | `dhh-code-reviewer` | ✅ Done |
+| `constraints-reviewer` | `constraints-reviewer` | ✅ Done |
+| `privacy-reviewer` | `privacy-reviewer` | ✅ Done |
+| `performance-reviewer` | `performance-reviewer` | ✅ Done (resources moved) |
+| `pragmatic-rails-reviewer` | `pragmatic-rails-reviewer` | ✅ Done (converted per recommendation) |
+
+### MERGE (2) — ✅ DONE
+
+| Agent | Merged Into | Status |
 |-------|-----------|--------|
-| `graphql-architect` | 162 lines of patterns, no autonomous execution | ⏳ |
-| `lint` | Linting workflow guidance, not orchestration | ⏳ |
-| `simplicity-reviewer` | Review framework/principles | ⏳ |
-| `dhh-code-reviewer` | Review philosophy, not autonomous reviewer | ⏳ |
-| `constraints-reviewer` | Checklist-based review guidance | ⏳ |
-| `privacy-reviewer` | Compliance checklists | ⏳ |
-| `performance-reviewer` | Analysis framework | ⏳ |
-| `pragmatic-rails-reviewer` | **Borderline** — keep if used by orchestrator | ⏳ |
+| `migration-reviewer` | `rails-refactorer` skill | ✅ Done |
+| `transaction-reviewer` | `business-logic-coder` skill | ✅ Done |
 
-### MERGE (2) — ⏳ TODO
-
-| Agent | Merge Into | Status |
-|-------|-----------|--------|
-| `migration-reviewer` | `rails-refactorer` skill | ⏳ |
-| `transaction-reviewer` | `business-logic-coder` skill | ⏳ |
-
-**Key insight:** 6 of 7 CONVERT agents are in review/ — they're review guidance frameworks, not autonomous code reviewers.
+Post-conversion: `code-review-orchestrator` and `data-integrity-reviewer` agents updated to reference skills instead of Task subagents.
 
 ---
 
@@ -283,7 +285,7 @@ Post-conversion: `multi-llm-coordinator` agent updated to reference skills inste
 
 1. ✅ **Quick wins (low risk):** Sales (4), tools (2), creative (1), devops (1) — 8 agents converted
 2. ✅ **High impact:** Engineer review agents (8) + research agents (9) + 1 deletion — 18 agents converted/merged
-3. ⏳ **Moderate effort:** Marketing (11 ✅), company (9 ✅), rails (9) — require merging content
+3. ✅ **Moderate effort:** Marketing (11 ✅), company (9 ✅), rails (10 ✅) — content merged
 4. ✅ **Careful handling:** Data (8 ✅), python (4 ✅), llm (4 ✅) — skill creation alongside conversion
 
-**Progress:** 62 of 72 conversions complete (86%) | Remaining: rails (10)
+**Progress:** 72 of 72 conversions complete (100%) ✅

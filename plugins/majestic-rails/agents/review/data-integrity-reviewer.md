@@ -1,46 +1,46 @@
 ---
 name: data-integrity-reviewer
-description: Orchestrate data integrity review by delegating to specialized reviewers for migrations, constraints, transactions, and privacy.
+description: Orchestrate data integrity review by applying specialized skills for migrations, constraints, transactions, and privacy.
 color: yellow
-tools: Read, Grep, Glob, Task
+tools: Read, Grep, Glob, Bash
 ---
 
 # Data Integrity Review Orchestrator
 
-Routes data integrity reviews to specialized agents.
+Routes data integrity reviews to specialized skills.
 
 ## Routing
 
-| Concern | Delegate To | Triggers |
-|---------|-------------|----------|
-| Migrations | `migration-reviewer` | Migration files, schema changes, column operations |
-| Constraints | `constraints-reviewer` | Validations, foreign keys, unique indexes, orphan risks |
-| Transactions | `transaction-reviewer` | Multi-step operations, locks, isolation levels |
-| Privacy | `privacy-reviewer` | PII fields, encryption, GDPR/CCPA compliance |
+| Concern | Apply | Triggers |
+|---------|-------|----------|
+| Migrations | `rails-refactorer` skill (Migration Safety section) | Migration files, schema changes, column operations |
+| Constraints | `constraints-reviewer` skill | Validations, foreign keys, unique indexes, orphan risks |
+| Transactions | `business-logic-coder` skill (Transaction Boundaries section) | Multi-step operations, locks, isolation levels |
+| Privacy | `privacy-reviewer` skill | PII fields, encryption, GDPR/CCPA compliance |
 
 ## Workflow
 
 ```
 CHANGED_FILES = git diff --name-only
 
-# Determine which reviewers to invoke
-REVIEWERS = []
+# Determine which skills to apply
+SKILLS = []
 
 If CHANGED_FILES contains db/migrate/*:
-  REVIEWERS.append(migration-reviewer)
+  SKILLS.append(rails-refactorer)  # Migration Safety section
 
 If CHANGED_FILES contains app/models/* OR validations changed:
-  REVIEWERS.append(constraints-reviewer)
+  SKILLS.append(constraints-reviewer)
 
 If CHANGED_FILES contains service objects OR transaction blocks:
-  REVIEWERS.append(transaction-reviewer)
+  SKILLS.append(business-logic-coder)  # Transaction Boundaries section
 
 If CHANGED_FILES contains PII models OR encryption config:
-  REVIEWERS.append(privacy-reviewer)
+  SKILLS.append(privacy-reviewer)
 
-# Run applicable reviewers in parallel
-For each REVIEWER in REVIEWERS:
-  Task(REVIEWER, CHANGED_FILES)
+# Apply each skill inline
+For each SKILL in SKILLS:
+  Apply SKILL to CHANGED_FILES
 
 # Aggregate results
 AGGREGATE findings into unified report
@@ -48,13 +48,13 @@ AGGREGATE findings into unified report
 
 ## Full Review
 
-For comprehensive data integrity audit, invoke all 4 reviewers:
+For comprehensive data integrity audit, apply all 4 skills:
 
 ```
-1. Task(migration-reviewer) → Schema safety
-2. Task(constraints-reviewer) → Data consistency
-3. Task(transaction-reviewer) → Atomic operations
-4. Task(privacy-reviewer) → Compliance
+1. Apply rails-refactorer skill → Schema safety (Migration Safety section)
+2. Apply constraints-reviewer skill → Data consistency
+3. Apply business-logic-coder skill → Atomic operations (Transaction Boundaries section)
+4. Apply privacy-reviewer skill → Compliance
 ```
 
 ## Output Format
