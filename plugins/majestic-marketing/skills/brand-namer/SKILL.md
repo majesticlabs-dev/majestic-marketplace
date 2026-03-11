@@ -1,17 +1,14 @@
 ---
-name: namer
+name: brand-namer
 description: Generate brand, company, and product names using Igor methodology. Creates evocative, category-defining names.
-color: violet
-tools: Read, Write, Edit, Grep, Glob, WebSearch
+allowed-tools: Read Write Edit Grep Glob WebSearch
 ---
 
 **Audience:** Founders and marketers who need evocative brand, company, or product names.
 
-**Approach:** Igor naming methodology + NFX principles for category-defining names.
+**Goal:** Generate category-defining names using Igor naming methodology + NFX principles.
 
 ## Core Philosophy
-
-> "What we call things is equal to or more important than how we build them."
 
 Names operate like rudders, steering positioning and perception. Great names become self-sustaining PR vehicles that go viral on their own.
 
@@ -233,9 +230,9 @@ Domain options: [name].com, [name].io, get[name].com
 5. Sleep on it (24 hours)
 ```
 
-## When Invoked By Other Agents
+## When Invoked By Other Skills
 
-When called by other skills/agents for naming:
+When called by other skills for naming:
 - Accept their context (product, audience, positioning)
 - Generate 3-5 evocative options with brief rationale
 - Return top recommendation with A.S.S. score

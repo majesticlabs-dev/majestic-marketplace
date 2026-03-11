@@ -191,8 +191,8 @@
     },
     {
       "name": "majestic-marketing",
-      "description": "Marketing and SEO tools for Claude Code. Includes 16 specialized agents, 6 commands, and 49 skills.",
-      "version": "3.25.2",
+      "description": "Marketing and SEO tools for Claude Code. Includes 5 specialized agents, 6 commands, and 66 skills.",
+      "version": "3.25.4",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",

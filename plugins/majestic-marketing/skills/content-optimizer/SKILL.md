@@ -242,6 +242,66 @@ For rapid optimization:
 - [ ] Author/expertise signals
 - [ ] Updated date visible
 
+## Cannibalization Detection
+
+When optimizing multiple pages, check for keyword cannibalization — pages competing against each other for the same queries.
+
+### Cannibalization Types
+
+**Title/Meta Overlap:**
+- Similar page titles targeting same keyword
+- Duplicate meta descriptions
+- Same target keywords across pages
+
+**Content Overlap:**
+- Similar topic coverage
+- Duplicate sections
+- Same search intent served by multiple pages
+
+**Structural Issues:**
+- Identical header patterns
+- Similar content depth on same topic
+- Overlapping keyword focus
+
+### Detection Process
+
+1. Analyze keywords across provided pages
+2. Identify topic and keyword overlap
+3. Compare search intent targets
+4. Assess content similarity
+5. Find differentiation opportunities
+6. Recommend consolidation if needed
+
+### Prevention Strategy
+
+1. **Clear keyword mapping** - One primary keyword per page
+2. **Distinct search intent** - Different user needs per page
+3. **Unique angles** - Different perspectives on related topics
+4. **Differentiated metadata** - Unique titles/descriptions
+5. **Strategic consolidation** - Merge when appropriate
+
+### Resolution Tactics
+
+- Merge similar content into single authoritative page
+- 301 redirect weak pages to stronger ones
+- Rewrite competing pages for different intent
+- Update internal anchor text for clarity
+- Implement canonical tags to primary
+- Create hub/spoke structure with topic clusters
+
+### Cannibalization Report Format
+
+```
+Conflict: [Keyword]
+Competing Pages:
+- Page A: [URL] | Focus: [angle]
+- Page B: [URL] | Focus: [angle]
+
+Resolution:
+- Consolidate / Differentiate / Canonical
+- Specific actions for each page
+```
+
 ## Guiding Principles
 
 1. **User-first** - Optimize for humans, not just algorithms

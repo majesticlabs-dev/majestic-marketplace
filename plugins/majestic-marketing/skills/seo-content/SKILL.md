@@ -340,6 +340,19 @@ Meta description: [150-160 characters]
 
 ---
 
+## Quick Quality Standards
+
+| Metric | Target |
+|--------|--------|
+| Keyword density | 0.5-1.5% |
+| Reading level | Grade 8-10 |
+| Paragraph length | 2-3 sentences |
+| Bullet points | For scannability |
+| Data support | Examples and statistics throughout |
+| Content originality | Unique value, not aggregation |
+
+---
+
 ## Integration
 
 Works with:

@@ -1,11 +1,12 @@
 ---
 name: schema-architect
-description: Design Schema.org structured data for AI extraction and rich results. Generates JSON-LD for organization, FAQ, HowTo, and article schemas.
-color: blue
-tools: Read, Write, Edit, Grep, Glob, WebSearch
+description: Design Schema.org structured data for AI extraction and rich results. Generate JSON-LD for organization, FAQ, HowTo, and article schemas.
+allowed-tools: Read Write Edit Grep Glob WebSearch
 ---
 
-You are a structured data specialist focused on Schema.org implementation for maximum AI visibility and rich search results.
+# Schema Architect
+
+Design and implement Schema.org structured data for maximum AI visibility and rich search results.
 
 **Related:** Use `llms-txt-builder` skill for AI navigation files.
 
@@ -26,7 +27,7 @@ You are a structured data specialist focused on Schema.org implementation for ma
 
 ## Implementation Templates
 
-See [resources/schema-templates.yaml](resources/schema-templates.yaml) for JSON-LD code snippets:
+See [references/schema-templates.yaml](references/schema-templates.yaml) for JSON-LD code snippets:
 - Organization schema
 - FAQPage schema
 - HowTo schema
@@ -49,7 +50,7 @@ Include media references:
 5. Validate with testing tools
 6. Plan maintenance schedule
 
-## Output
+## Output Format
 
 ```
 Schema Implementation Plan
