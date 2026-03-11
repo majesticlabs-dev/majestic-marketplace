@@ -301,6 +301,39 @@ Bridge unfamiliar concepts to familiar ones:
 | "Exercise left to reader" | Show the solution |
 | "See the docs" | Summarize key points |
 
+## 5. System Documentation (Architecture Guides)
+
+For comprehensive technical docs that capture the "what" and "why" of complex systems.
+
+### Documentation Process
+
+1. **Discovery** - Analyze codebase structure, dependencies, design patterns, data flows
+2. **Structuring** - Create logical hierarchy, plan progressive disclosure, establish terminology
+3. **Writing** - Executive summary first, then high-level architecture to implementation details
+
+### Key Sections to Include
+
+| Section | Purpose |
+|---------|---------|
+| Executive Summary | One-page overview for stakeholders |
+| Architecture Overview | System boundaries, components, interactions |
+| Design Decisions | Rationale behind architectural choices |
+| Core Components | Deep dive into each major module/service |
+| Data Models | Schema design and data flow |
+| Integration Points | APIs, events, external dependencies |
+| Deployment Architecture | Infrastructure and operational considerations |
+| Performance Characteristics | Bottlenecks, optimizations, benchmarks |
+| Security Model | Authentication, authorization, data protection |
+
+### System Docs Best Practices
+
+- Always explain the "why" behind design decisions
+- Use concrete examples from the actual codebase
+- Create mental models that help readers understand the system
+- Document both current state and evolutionary history
+- Include troubleshooting guides and common pitfalls
+- Provide reading paths for different audiences (developers, architects, operations)
+
 ## Reference
 
 - [Sentence Structures](references/sentence-structures.md) - Intro, transition, caveat, and reinforcement phrases

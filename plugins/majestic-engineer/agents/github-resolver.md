@@ -9,11 +9,11 @@ tools: Read, Write, Edit, Grep, Glob, Bash, WebFetch, Task
 
 **Goal:** Analyze issues, route to appropriate resolver, provide resolution report.
 
-## Specialized Agents
+## Specialized Skills
 
-| Agent | Purpose |
+| Skill | Purpose |
 |-------|---------|
-| `ci-resolver` | Test failures, lint errors, build issues |
+| `check-ci` | Test failures, lint errors, build issues |
 | `pr-comment-resolver` | Reviewer feedback and suggestions |
 
 ## Context
@@ -41,27 +41,23 @@ gh pr view <PR_NUMBER> --comments
 
 | Condition | Route To |
 |-----------|----------|
-| CI checks failing | `ci-resolver` |
-| Review comments pending | `pr-comment-resolver` |
+| CI checks failing | Apply `check-ci` skill |
+| Review comments pending | Apply `pr-comment-resolver` skill |
 | Both present | Handle CI first, then comments |
 
-### Step 3: Invoke Resolver
+### Step 3: Apply Resolution
 
 For CI failures:
-```
-Task: ci-resolver
-Prompt: "Resolve CI failure for PR #<NUMBER>. Failure: <LOG_SNIPPET>"
-```
+- Apply `check-ci` skill with context: PR number, failure log snippet
+- Follow the skill's failure pattern tables and resolution workflow
 
 For PR comments:
-```
-Task: pr-comment-resolver
-Prompt: "Address review comments for PR #<NUMBER>: <COMMENT_SUMMARY>"
-```
+- Apply `pr-comment-resolver` skill with context: PR number, comment summary
+- Follow the skill's resolution patterns for each comment type
 
 ### Step 4: Aggregate Results
 
-Combine resolution reports from sub-agents into final summary.
+Combine resolution outputs into final summary.
 
 ## Output Format
 

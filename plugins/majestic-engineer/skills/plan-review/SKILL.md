@@ -1,0 +1,71 @@
+---
+name: plan-review
+description: Review development plans for issues, missing considerations, architectural violations, and alternatives. Includes SOLID compliance, circular dependency detection, and coupling analysis.
+---
+
+# Plan Review
+
+**Audience:** Development teams with draft implementation plans.
+
+**Goal:** Identify critical flaws, missing considerations, and potential failure points in development plans before they become costly implementation problems.
+
+## Core Responsibilities
+
+1. **Deep System Analysis**: Research and understand all systems, technologies, and components mentioned in the plan. Verify compatibility, limitations, and integration requirements.
+2. **Database Impact Assessment**: Analyze how the plan affects database schema, performance, migrations, and data integrity. Identify missing indexes, constraint issues, or scaling concerns.
+3. **Dependency Mapping**: Identify all dependencies, both explicit and implicit, that the plan relies on. Check for version conflicts, deprecated features, or unsupported combinations.
+4. **Alternative Solution Evaluation**: Consider if there are better approaches, simpler solutions, or more maintainable alternatives that weren't explored.
+5. **Risk Assessment**: Identify potential failure points, edge cases, and scenarios where the plan might break down.
+
+## Review Process
+
+1. **Context Deep Dive**: Thoroughly understand the existing system architecture, current implementations, and constraints from the provided context.
+2. **Plan Deconstruction**: Break down the plan into individual components and analyze each step for feasibility and completeness.
+3. **Research Phase**: Investigate any technologies, APIs, or systems mentioned. Verify current documentation, known issues, and compatibility requirements.
+4. **Gap Analysis**: Identify what's missing from the plan - error handling, rollback strategies, testing approaches, monitoring, etc.
+5. **Impact Analysis**: Consider how changes affect existing functionality, performance, security, and user experience.
+
+## Critical Areas to Examine
+
+- **Authentication/Authorization**: Verify compatibility with existing auth systems, token handling, session management
+- **Database Operations**: Check for proper migrations, indexing strategies, transaction handling, and data validation
+- **API Integrations**: Validate endpoint availability, rate limits, authentication requirements, and error handling
+- **Type Safety**: Ensure proper TypeScript types are defined for new data structures and API responses
+- **Error Handling**: Verify comprehensive error scenarios are addressed
+- **Performance**: Consider scalability, caching strategies, and potential bottlenecks
+- **Security**: Identify potential vulnerabilities or security gaps
+- **Testing Strategy**: Ensure the plan includes adequate testing approaches
+- **Rollback Plans**: Verify there are safe ways to undo changes if issues arise
+- **Microservice Boundaries**: Assess service boundaries and inter-service communication patterns where applicable
+
+## Architectural Compliance Analysis
+
+- **Circular Dependencies**: Map component dependencies by examining import statements; verify no cycles are introduced
+- **SOLID Principles**: Check adherence to Single Responsibility, Open/Closed, Liskov Substitution, Interface Segregation, Dependency Inversion
+- **Component Boundaries**: Verify changes respect established module/layer boundaries and don't introduce inappropriate intimacy
+- **Coupling Assessment**: Analyze import depth and coupling metrics; flag high coupling between components
+- **API Contract Stability**: Ensure existing interfaces remain stable or are properly versioned when changed
+- **Design Pattern Consistency**: Verify that changes follow established patterns in the codebase rather than introducing conflicting approaches
+- **Abstraction Levels**: Check that changes maintain appropriate abstraction levels throughout the architecture
+- **Architectural Documentation**: Ensure significant architectural decisions are documented (ADRs, architecture docs)
+
+## Output Requirements
+
+1. **Executive Summary**: Brief overview of plan viability and major concerns
+2. **Critical Issues**: Show-stopping problems that must be addressed before implementation
+3. **Missing Considerations**: Important aspects not covered in the original plan
+4. **Alternative Approaches**: Better or simpler solutions if they exist
+5. **Implementation Recommendations**: Specific improvements to make the plan more robust
+6. **Risk Mitigation**: Strategies to handle identified risks
+7. **Research Findings**: Key discoveries from your investigation of mentioned technologies/systems
+
+## Quality Standards
+
+- Only flag genuine issues - don't create problems where none exist
+- Provide specific, actionable feedback with concrete examples
+- Reference actual documentation, known limitations, or compatibility issues when possible
+- Suggest practical alternatives, not theoretical ideals
+- Focus on preventing real-world implementation failures
+- Consider the project's specific context and constraints
+
+Create your review as a comprehensive markdown report that saves the development team from costly implementation mistakes. The goal is to catch the "gotchas" before they become roadblocks.

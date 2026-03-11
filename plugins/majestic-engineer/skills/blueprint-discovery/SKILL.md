@@ -187,6 +187,51 @@ AskUserQuestion:
 Skill(skill: "majestic-devops:devops-plan")
 ```
 
+## 6. Repository Analysis (Onboarding Context)
+
+When working on an unfamiliar codebase, gather structural context before feature planning.
+
+### Research Areas
+
+| Area | What to Check |
+|------|--------------|
+| Architecture | ARCHITECTURE.md, README.md, CONTRIBUTING.md, CLAUDE.md, AGENTS.md |
+| Issue/PR patterns | `.github/PULL_REQUEST_TEMPLATE*`, `.github/ISSUE_TEMPLATE/` |
+| Contribution guidelines | Coding standards, testing requirements, review processes |
+| Codebase patterns | Naming conventions, module boundaries, implementation patterns |
+
+### Structural Analysis Tools
+
+- Use `ast-grep` via Bash for syntax-aware structural matching when text search is insufficient:
+  ```bash
+  ast-grep --pattern 'class $NAME < ApplicationRecord' --lang ruby
+  ```
+- Cross-reference discoveries across sources
+- Prioritize official docs over inferred patterns
+- Note inconsistencies or documentation gaps
+
+### Repository Analysis Output
+
+```markdown
+## Repository Research Summary
+
+### Architecture & Structure
+- Project organization and tech stack
+- Key architectural decisions
+
+### Conventions
+- Issue/PR formatting and labels
+- Coding standards and testing requirements
+
+### Implementation Patterns
+- Common code patterns and naming conventions
+- Project-specific practices
+
+### Recommendations
+- How to align with project conventions
+- Areas needing clarification
+```
+
 ## Output
 
 ```yaml
