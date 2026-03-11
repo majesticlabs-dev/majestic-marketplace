@@ -192,42 +192,50 @@
 
 ---
 
-## 6. majestic-python (6 agents → 2 keep) — PENDING
+## 6. majestic-python (6 agents → 2 remain) — DONE ✅
+
+> **Commit:** pending — 4 agents → 3 skills (db-queries+db-models merged). 6→2 agents, 5→8 skills (v3.4.6)
 
 ### KEEP (2)
 
 - `python-code-review` (orchestrator), `python-db` (router)
 
-### CONVERT to skill (4) — ⏳ TODO
+### CONVERT to skill (4) — ✅ DONE
 
-| Agent | Target Skill | Status |
-|-------|-------------|--------|
-| `python-reviewer` | `python-code-review` skill (review guidance) | ⏳ |
-| `python-db-queries` | `sqlalchemy-patterns` skill | ⏳ |
-| `python-db-migrations` | `alembic-patterns` skill | ⏳ |
-| `python-db-models` | merge with `sqlalchemy-patterns` | ⏳ |
+| Agent | Actual Skill Name | Status |
+|-------|-------------------|--------|
+| `python-reviewer` | `python-reviewer` | ✅ Done |
+| `python-db-queries` | `sqlalchemy-patterns` (merged with db-models) | ✅ Done |
+| `python-db-migrations` | `alembic-patterns` | ✅ Done |
+| `python-db-models` | `sqlalchemy-patterns` (merged with db-queries) | ✅ Done |
+
+Post-conversion: `python-db` and `python-code-review` agents updated to reference skills instead of Task subagents.
 
 ---
 
-## 7. majestic-llm (5 agents → 1 keep) — PENDING
+## 7. majestic-llm (5 agents → 1 remain) — DONE ✅
+
+> **Commit:** pending — 4 agents → 2 unified skills. 5→1 agent, 0→2 skills (v1.1.3)
 
 ### KEEP (1)
 
 - `multi-llm-coordinator` (parallel LLM orchestration)
 
-### CONVERT to skill (2) — ⏳ TODO
+### CONVERT to skill (2) — ✅ DONE
 
-| Agent | Target | Status |
-|-------|--------|--------|
-| `codex-consult` | merge into `external-llm-consulting` skill | ⏳ |
-| `gemini-consult` | merge into `external-llm-consulting` skill | ⏳ |
+| Agent | Actual Skill Name | Status |
+|-------|-------------------|--------|
+| `codex-consult` | `external-llm-consulting` (merged) | ✅ Done |
+| `gemini-consult` | `external-llm-consulting` (merged) | ✅ Done |
 
-### MERGE (2) — ⏳ TODO
+### MERGE (2) — ✅ DONE
 
-| Agent | Merge Into | Status |
-|-------|-----------|--------|
-| `codex-reviewer` | new `external-llm-review` skill | ⏳ |
-| `gemini-reviewer` | new `external-llm-review` skill | ⏳ |
+| Agent | Actual Skill Name | Status |
+|-------|-------------------|--------|
+| `codex-reviewer` | `external-llm-review` (merged) | ✅ Done |
+| `gemini-reviewer` | `external-llm-review` (merged) | ✅ Done |
+
+Post-conversion: `multi-llm-coordinator` agent updated to reference skills instead of Task subagents.
 
 ---
 
@@ -276,6 +284,6 @@
 1. ✅ **Quick wins (low risk):** Sales (4), tools (2), creative (1), devops (1) — 8 agents converted
 2. ✅ **High impact:** Engineer review agents (8) + research agents (9) + 1 deletion — 18 agents converted/merged
 3. ⏳ **Moderate effort:** Marketing (11 ✅), company (9 ✅), rails (9) — require merging content
-4. ⏳ **Careful handling:** Data (8 ✅), python (4), llm (4) — need skill creation alongside conversion
+4. ✅ **Careful handling:** Data (8 ✅), python (4 ✅), llm (4 ✅) — skill creation alongside conversion
 
-**Progress:** 54 of 72 conversions complete (75%) | Commits: `9e5cfa7`, `b5ad50e`, pending
+**Progress:** 62 of 72 conversions complete (86%) | Remaining: rails (10)

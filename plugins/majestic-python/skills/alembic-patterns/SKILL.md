@@ -1,13 +1,13 @@
 ---
-name: python-db-migrations
+name: alembic-patterns
 description: Alembic database migrations for Python applications - setup, auto-generation, manual migrations, and safe deployment patterns.
-color: blue
-tools: Read, Write, Edit, Grep, Glob, Bash
+allowed-tools: Read Write Edit Grep Glob Bash
 ---
 
-# Python Database Migrations Agent
+# Alembic Migration Patterns
 
-Migration expert for Alembic with SQLAlchemy applications.
+**Audience:** Python developers working with SQLAlchemy databases
+**Goal:** Provide migration patterns for safe schema evolution with Alembic
 
 ## Alembic Setup
 
@@ -231,6 +231,6 @@ def upgrade() -> None:
 - [ ] Auto-generate for schema changes
 - [ ] Manual migrations for data transformations
 - [ ] Downgrade tested before deploying
-- [ ] Non-nullable columns added safely (nullable → backfill → constrain)
+- [ ] Non-nullable columns added safely (nullable -> backfill -> constrain)
 - [ ] Large table indexes created CONCURRENTLY
 - [ ] Data migrations use batching for large datasets

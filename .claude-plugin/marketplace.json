@@ -79,8 +79,8 @@
     },
     {
       "name": "majestic-llm",
-      "description": "External LLM integration tools. Get second opinions from Codex and Gemini on architecture and code review. Includes 5 agents and 2 commands.",
-      "version": "1.1.2",
+      "description": "External LLM integration tools. Get second opinions from Codex and Gemini on architecture and code review. Includes 1 agent, 2 commands, and 2 skills.",
+      "version": "1.1.3",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -140,8 +140,8 @@
     },
     {
       "name": "majestic-python",
-      "description": "Python development tools. Includes 6 specialized agents and 5 skills.",
-      "version": "3.4.5",
+      "description": "Python development tools. Includes 2 specialized agents and 8 skills.",
+      "version": "3.4.6",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
