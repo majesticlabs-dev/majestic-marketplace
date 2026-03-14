@@ -140,6 +140,11 @@ When an agent invokes a skill:
 3. Run `skill-linter` on modified skill(s)
 4. Verify line count remains under 500
 
+**How to invoke `skill-linter`:** It is a **skill** at `.claude/skills/skill-linter/`, NOT an agent.
+- Correct: `Skill("skill-linter", args: "path/to/skill")`
+- Wrong: `Agent(subagent_type: "majestic-tools:skill-linter")` ← does not exist
+- The bash script also works: `bash .claude/skills/skill-linter/scripts/validate-skill.sh path/to/skill`
+
 ### Content Rules
 Skills = LLM instructions, not human docs. Must contain NEW info Claude doesn't know.
 

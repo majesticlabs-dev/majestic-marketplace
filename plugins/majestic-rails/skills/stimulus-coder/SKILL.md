@@ -343,6 +343,42 @@ Global events use `@window` or `@document` suffix in `data-action`.
 
 See [lifecycle-and-events.md](references/lifecycle-and-events.md) for complete patterns.
 
+## Application Controller
+
+Create `app/javascript/controllers/application_controller.js` as a base for shared functionality:
+
+```javascript
+import { Controller } from "@hotwired/stimulus"
+
+export default class ApplicationController extends Controller {
+  handleError(error, context = {}) {
+    console.error(`[${this.identifier}]`, error, context)
+    // Sentry.captureException(error, { extra: context })
+  }
+}
+```
+
+Extend it in domain controllers:
+
+```javascript
+import ApplicationController from "./application_controller"
+
+export default class extends ApplicationController {
+  async save() {
+    try {
+      await this.persist()
+    } catch (error) {
+      this.handleError(error, { action: "save", id: this.idValue })
+    }
+  }
+}
+```
+
+Rules:
+- Use `try-catch` for async operations and third-party library calls
+- Never swallow errors — log or report via `handleError()`
+- Use `requestSubmit()` not `submit()` for forms — fires validation and Turbo intercept
+
 ## Anti-Patterns
 
 | Anti-Pattern | Problem | Solution |
