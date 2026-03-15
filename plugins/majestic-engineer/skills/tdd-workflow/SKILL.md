@@ -152,3 +152,61 @@ For Ruby projects:
 - **Minitest:** Apply `minitest-coder` skill
 
 A Rails example is available in [references/rails-tdd-workflow.md](references/rails-tdd-workflow.md).
+
+## Test Generation Patterns
+
+When writing tests outside a TDD loop (e.g., adding coverage to existing code), follow these patterns.
+
+### Framework Detection
+
+| Evidence | Framework |
+|----------|-----------|
+| `spec/` + `_spec.rb` + `.rspec` | RSpec |
+| `test/` + `_test.rb` + `test_helper.rb` | Minitest |
+| `*.test.js` + `jest.config.js` | Jest |
+| `*.spec.ts` in `tests/` or `e2e/` | Playwright |
+| `vitest.config.js` | Vitest |
+
+### Test Plan Structure
+
+Before writing tests, create a plan covering:
+
+1. **Scope** - What functionality will be tested
+2. **Happy path scenarios** - Expected successful flows
+3. **Sad path scenarios** - Error handling, validations, failures
+4. **Edge cases** - Boundary conditions, null/empty values, unusual inputs
+5. **Auth checks** - Authorization/authentication (if applicable)
+6. **Test data requirements** - Fixtures or data needed
+7. **Mocking strategy** - External services/dependencies to mock
+
+### Test Case Matrix
+
+Use for complex scenarios with multiple parameters:
+
+| Objective | Inputs | Expected Output | Test Type |
+|-----------|--------|-----------------|-----------|
+| Validate creation | valid params | Created, 201 | Happy Path |
+| Reject duplicate | existing data | Error, 422 | Sad Path |
+| Handle empty | missing field | Validation error | Edge Case |
+
+### Completion Criteria
+
+Tests are complete when ALL of these are met:
+
+**Coverage:** All public methods tested, happy/sad/edge paths covered, auth checks included.
+
+**Quality:** Tests pass (verified by running), isolated (no shared state), follow AAA pattern (Arrange-Act-Assert), descriptive names.
+
+**Framework compliance:** Proper matchers, appropriate mocking, follows project patterns.
+
+### Test Writing Best Practices
+
+- Test behavior, not implementation details
+- One assertion focus per test
+- Use descriptive test names that document expected behavior
+- Prefer explicit assertions over implicit ones
+- Use test doubles sparingly and purposefully
+- Group related tests with describe/context blocks
+- Test data should be minimal but sufficient
+- For Rails: use transactional fixtures and database cleaner
+- For Playwright: proper waiting strategies, avoid flaky selectors

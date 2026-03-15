@@ -68,8 +68,8 @@ git diff --name-only --diff-filter=d | grep -E "\.py$"
 ## Step 2: Select Review Agents
 
 ### Always Run
-- `majestic-engineer:review/simplicity-reviewer` - YAGNI violations, unnecessary complexity
-- `majestic-python:python-reviewer` - Python conventions, type hints, Pythonic patterns
+- `majestic-engineer:review/simplicity-reviewer` (agent) - YAGNI violations, unnecessary complexity
+- Apply `python-reviewer` skill - Python conventions, type hints, Pythonic patterns
 
 ### Future Conditional Agents
 
@@ -95,8 +95,7 @@ Launch ALL selected agents simultaneously using the Task tool. Each agent receiv
 Task 1: majestic-engineer:review/simplicity-reviewer
 Prompt: "Review these Python files for YAGNI violations, unnecessary complexity, and anti-patterns: [file list]"
 
-Task 2: majestic-python:python-reviewer
-Prompt: "Review these Python files for conventions, type hints, and Pythonic patterns: [file list]"
+Apply `python-reviewer` skill for: "Review these Python files for conventions, type hints, and Pythonic patterns: [file list]"
 ```
 
 **CRITICAL:** Launch all tasks in a SINGLE message with multiple Task tool calls to ensure parallel execution.

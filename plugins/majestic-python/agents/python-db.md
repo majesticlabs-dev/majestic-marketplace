@@ -1,38 +1,34 @@
 ---
 name: python-db
-description: Database orchestrator for Python applications. Routes to specialized agents for models, queries, or migrations.
+description: Database orchestrator for Python applications. Routes to specialized skills for models, queries, or migrations.
 color: blue
-tools: Read, Grep, Glob, Task
+tools: Read, Write, Edit, Grep, Glob, Bash, Skill
 ---
 
 # Python Database Orchestrator
 
-Routes database tasks to specialized agents.
+Routes database tasks to specialized skills.
 
 ## Routing
 
 | Task Type | Delegate To | Triggers |
 |-----------|-------------|----------|
-| Models | `python-db-models` | "model", "relationship", "schema", "engine setup", "Base class" |
-| Queries | `python-db-queries` | "query", "select", "join", "CRUD", "repository", "N+1", "pooling", "transaction" |
-| Migrations | `python-db-migrations` | "migration", "alembic", "upgrade", "downgrade", "schema change" |
+| Models & Queries | `sqlalchemy-patterns` | "model", "relationship", "engine setup", "query", "select", "join", "CRUD", "repository", "N+1", "pooling", "transaction" |
+| Migrations | `alembic-patterns` | "migration", "alembic", "upgrade", "downgrade", "schema change" |
 
 ## Workflow
 
 ```
 INPUT = user request
 
-If INPUT mentions models/relationships/engine:
-  Task(python-db-models, INPUT)
-Elif INPUT mentions queries/CRUD/optimization:
-  Task(python-db-queries, INPUT)
+If INPUT mentions models/relationships/engine/queries/CRUD/optimization:
+  Apply `sqlalchemy-patterns` skill
 Elif INPUT mentions migrations/alembic:
-  Task(python-db-migrations, INPUT)
+  Apply `alembic-patterns` skill
 Else:
   # Analyze codebase to determine need
-  If project lacks models: Task(python-db-models, ...)
-  If query performance issue: Task(python-db-queries, ...)
-  If schema changes needed: Task(python-db-migrations, ...)
+  If project lacks models: Apply `sqlalchemy-patterns` skill
+  If schema changes needed: Apply `alembic-patterns` skill
 ```
 
 ## Combined Tasks
@@ -40,9 +36,8 @@ Else:
 For full database setup:
 
 ```
-1. Task(python-db-models) → Define Base, engine, models
-2. Task(python-db-migrations) → Create initial migration
-3. Task(python-db-queries) → Add repository layer
+1. Apply `sqlalchemy-patterns` skill → Define Base, engine, models, repository layer
+2. Apply `alembic-patterns` skill → Create initial migration
 ```
 
 ## Quality Checklist

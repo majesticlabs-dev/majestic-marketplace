@@ -192,3 +192,125 @@ filtered = df.query('status == "active" and value > 100')
 min_val = 100
 filtered = df.query('value > @min_val')
 ```
+
+## JSON Flattening
+
+Normalize nested JSON structures into tabular format.
+
+### Flattening Strategies
+
+1. **Dot Notation (Full Flatten)** - `user.address.city` column naming
+2. **Array Explosion** - One row per array element, parent fields duplicated
+3. **Selective Flatten** - Keep complex nested paths as JSON columns
+
+### Core Implementation
+
+```python
+def flatten_json(
+    data: dict,
+    parent_key: str = '',
+    sep: str = '.',
+    max_depth: int = None,
+    current_depth: int = 0
+) -> dict:
+    """Recursively flatten nested JSON."""
+    items = {}
+    for key, value in data.items():
+        new_key = f"{parent_key}{sep}{key}" if parent_key else key
+        if isinstance(value, dict):
+            if max_depth is None or current_depth < max_depth:
+                items.update(flatten_json(value, new_key, sep, max_depth, current_depth + 1))
+            else:
+                items[new_key] = value
+        elif isinstance(value, list):
+            items[new_key] = value
+        else:
+            items[new_key] = value
+    return items
+
+def explode_arrays(df: pd.DataFrame, array_columns: list[str]) -> pd.DataFrame:
+    """Explode array columns into separate rows."""
+    for col in array_columns:
+        df = df.explode(col).reset_index(drop=True)
+        if df[col].apply(lambda x: isinstance(x, dict)).any():
+            expanded = pd.json_normalize(df[col])
+            expanded.columns = [f"{col}.{c}" for c in expanded.columns]
+            df = pd.concat([df.drop(col, axis=1), expanded], axis=1)
+    return df
+
+def json_to_dataframe(
+    json_data: list[dict],
+    array_columns: list[str] = None,
+    max_depth: int = None
+) -> pd.DataFrame:
+    """Convert JSON array to flattened DataFrame."""
+    flattened = [flatten_json(record, max_depth=max_depth) for record in json_data]
+    df = pd.DataFrame(flattened)
+    if array_columns:
+        df = explode_arrays(df, array_columns)
+    return df
+```
+
+### SQL JSON Flattening (PostgreSQL)
+
+```sql
+-- Flatten nested JSON
+SELECT
+    id,
+    json_data->>'name' as name,
+    json_data->'address'->>'city' as city,
+    (json_data->>'created_at')::timestamp as created_at
+FROM source_table;
+
+-- Explode JSON array
+SELECT
+    id,
+    item->>'sku' as sku,
+    (item->>'quantity')::int as quantity
+FROM source_table,
+LATERAL jsonb_array_elements(data->'items') as item;
+```
+
+### dbt JSON Flattening
+
+```sql
+-- models/staging/stg_api_events.sql
+{{ config(materialized='view') }}
+
+with source as (
+    select * from {{ source('raw', 'api_events') }}
+),
+flattened as (
+    select
+        id,
+        json_data->>'event_type' as event_type,
+        json_data->'user'->>'id' as user_id,
+        json_data->'user'->>'email' as user_email,
+        json_data->'properties' as properties_json
+    from source
+)
+select * from flattened
+```
+
+### Output Schema Generation
+
+```yaml
+flattened_schema:
+  source: events.json
+  original_depth: 4
+  flattening_strategy: dot_notation
+  array_handling: explode
+  columns:
+    - path: user.name
+      original_path: ["user", "name"]
+      type: string
+      nullable: false
+    - path: items.sku
+      original_path: ["items", "[*]", "sku"]
+      type: string
+      note: "Exploded from array"
+  row_multiplication:
+    source_rows: 1000
+    output_rows: 3500
+    reason: "items array avg 3.5 elements"
+```

@@ -87,6 +87,75 @@ Structure the response as follows:
 [Specific actions based on results]
 ```
 
+## CI Failure Resolution
+
+When checks fail, diagnose and fix by stack:
+
+```
+TECH_STACK = /majestic:config tech_stack generic
+```
+
+### Failure Patterns by Stack
+
+#### Ruby/Rails
+
+| Failure | Indicators | Fix |
+|---------|------------|-----|
+| Test | `FAILED`, `Error` | Fix test or code |
+| Rubocop | `Offenses:` | `bundle exec rubocop -a` |
+| Types | `TypeError` | Add nil checks |
+| Bundle | `bundle install failed` | Fix Gemfile |
+
+**Verify:** `bundle exec rspec && bundle exec rubocop`
+
+#### Node.js
+
+| Failure | Indicators | Fix |
+|---------|------------|-----|
+| Test | `FAIL`, `expected` | Fix test or code |
+| ESLint | rule names | `npm run lint -- --fix` |
+| TypeScript | `TS2xxx` | Fix type errors |
+| Deps | `npm ERR!` | Fix package.json |
+
+**Verify:** `npm test && npm run lint`
+
+#### Python
+
+| Failure | Indicators | Fix |
+|---------|------------|-----|
+| Test | `FAILED`, `AssertionError` | Fix test or code |
+| Ruff | `Found x error(s)` | `ruff check --fix` |
+| Types | `mypy` | Fix type hints |
+| Deps | `ModuleNotFoundError` | Update deps |
+
+**Verify:** `pytest && ruff check .`
+
+#### Go
+
+| Failure | Indicators | Fix |
+|---------|------------|-----|
+| Test | `--- FAIL:` | Fix test or code |
+| Lint | linter warnings | `golangci-lint run --fix` |
+| Build | `cannot find package` | `go mod tidy` |
+
+**Verify:** `go test ./... && golangci-lint run`
+
+### Resolution Workflow
+
+1. **Fetch** - Get failed workflow logs via `gh run view <RUN_ID> --log-failed`
+2. **Parse** - Identify failure type (test, lint, build, deps)
+3. **Locate** - Find relevant code files
+4. **Fix** - Make minimal, focused changes
+5. **Verify** - Run tests/linters locally
+
+### Resolution Principles
+
+- Fetch actual logs before assuming
+- Detect project type first
+- Make minimal changes
+- Verify locally before reporting
+- If unclear, state interpretation
+
 ## Advanced Usage
 
 ### Auto-Detection Requirements

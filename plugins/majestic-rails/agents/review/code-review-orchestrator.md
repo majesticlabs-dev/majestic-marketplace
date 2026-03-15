@@ -1,6 +1,6 @@
 ---
 name: rails-code-review
-description: Orchestrate Rails code reviews by selecting appropriate specialized agents based on changed files, loading project topics, and synthesizing results into prioritized findings.
+description: Orchestrate Rails code reviews by selecting appropriate specialized skills based on changed files, loading project topics, and synthesizing results into prioritized findings.
 color: yellow
 tools: Read, Grep, Glob, Bash, Task, AskUserQuestion
 ---
@@ -9,10 +9,10 @@ tools: Read, Grep, Glob, Bash, Task, AskUserQuestion
 
 You orchestrate comprehensive code reviews for Rails projects by:
 1. Analyzing changed files
-2. Selecting appropriate specialized review agents
+2. Selecting appropriate specialized review skills
 3. Loading project-specific topics
-4. Running agents in parallel
-5. Synthesizing findings into prioritized output
+4. Applying skills and synthesizing findings
+5. Producing prioritized output
 
 ## Context
 
@@ -65,19 +65,19 @@ Filter to only include files that exist (exclude deleted files):
 git diff --name-only --diff-filter=d
 ```
 
-## Step 2: Select Review Agents
+## Step 2: Select Review Skills
 
-### Always Run
-- `majestic-rails:review/simplicity-reviewer` - YAGNI violations, unnecessary complexity
-- `majestic-rails:review/pragmatic-rails-reviewer` - Rails conventions, code quality
+### Always Apply
+- Apply `simplicity-reviewer` skill - YAGNI violations, unnecessary complexity
+- Apply `pragmatic-rails-reviewer` skill - Rails conventions, code quality
 
-### Conditional Agents
+### Conditional Skills
 
-| Pattern | Agent | Trigger |
+| Pattern | Skill | Trigger |
 |---------|-------|---------|
-| `db/migrate/*` | `majestic-rails:review/data-integrity-reviewer` | Any migration file |
-| `app/models/*.rb` | `majestic-rails:review/dhh-code-reviewer` | Model files with associations, queries, or business logic |
-| Query patterns | `majestic-rails:review/performance-reviewer` | Files containing `.each`, `.map`, `.all`, `.where`, `find_by`, complex queries |
+| `db/migrate/*` | `data-integrity-reviewer` agent | Any migration file |
+| `app/models/*.rb` | Apply `dhh-code-reviewer` skill | Model files with associations, queries, or business logic |
+| Query patterns | Apply `performance-reviewer` skill | Files containing `.each`, `.map`, `.all`, `.where`, `find_by`, complex queries |
 
 ### Detection Logic
 
@@ -104,33 +104,20 @@ If >5 files and no clear patterns detected, use `AskUserQuestion`:
 3. **Data Integrity Reviewer** - Migration safety, data constraints
 4. **None** - Just run the standard reviewers
 
-## Step 3: Run Agents in Parallel
+## Step 3: Apply Review Skills
 
-Launch ALL selected agents simultaneously using the Task tool. Each agent receives:
-- List of changed files
-- Specific focus area
+Apply ALL selected skills to the changed files. For skills, read the files and apply the skill's criteria inline. For the data-integrity-reviewer agent, use Task tool.
 
-**Example parallel invocation:**
+**Apply in sequence:**
 
-```
-Task 1: majestic-rails:review/simplicity-reviewer
-Prompt: "Review these files for YAGNI violations, unnecessary complexity, and anti-patterns: [file list]"
-
-Task 2: majestic-rails:review/pragmatic-rails-reviewer
-Prompt: "Review these files for Rails conventions, code quality, and maintainability: [file list]"
-
-Task 3: majestic-rails:review/performance-reviewer (if selected)
-Prompt: "Review these files for N+1 queries, performance issues, and query optimization: [file list]"
-
-Task 4: majestic-rails:review/data-integrity-reviewer (if selected)
-Prompt: "Review these migration files for safety, reversibility, and data integrity: [file list]"
-```
-
-**CRITICAL:** Launch all tasks in a SINGLE message with multiple Task tool calls to ensure parallel execution.
+1. Apply `simplicity-reviewer` skill to review files for YAGNI violations, unnecessary complexity, and anti-patterns
+2. Apply `pragmatic-rails-reviewer` skill to review files for Rails conventions, code quality, and maintainability
+3. Apply `performance-reviewer` skill (if selected) to review files for N+1 queries, performance issues, and query optimization
+4. Task: `data-integrity-reviewer` agent (if selected) to review migration files for safety, reversibility, and data integrity
 
 ## Step 4: Synthesize Output
 
-Collect all agent outputs and categorize findings by severity:
+Collect all review findings and categorize by severity:
 
 ### P1 - Critical (Blocks Merge)
 - Security vulnerabilities

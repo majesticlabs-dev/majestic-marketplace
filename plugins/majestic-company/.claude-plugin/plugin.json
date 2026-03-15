@@ -1,7 +1,7 @@
 {
   "name": "majestic-company",
-  "version": "3.9.1",
-  "description": "Business operations tools. Includes 17 specialized agents, 1 command, and 11 skills.",
+  "version": "4.0.0",
+  "description": "Business operations tools. Includes 8 specialized agents, 2 commands, and 24 skills.",
   "author": {
     "name": "David Paluy",
     "url": "https://github.com/dpaluy",

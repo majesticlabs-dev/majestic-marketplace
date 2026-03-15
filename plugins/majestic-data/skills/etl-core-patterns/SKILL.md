@@ -200,3 +200,168 @@ def process_with_logging(batch_id: str, records: list[dict]) -> None:
         log.error("batch_failed", error=str(e))
         raise
 ```
+
+## Data Migration Scripts
+
+Create production-safe migration scripts with rollback and validation.
+
+### Migration Template (PostgreSQL)
+
+```sql
+-- Migration: 20240115_add_customer_tier
+-- Description: Add column and backfill from order history
+
+-- PRE-MIGRATION CHECKS
+DO $$
+BEGIN
+    IF (SELECT COUNT(*) FROM customers) = 0 THEN
+        RAISE EXCEPTION 'No customers found - aborting migration';
+    END IF;
+END $$;
+
+CREATE TEMP TABLE migration_baseline AS
+SELECT COUNT(*) as total_customers, NOW() as snapshot_time
+FROM customers;
+
+-- FORWARD MIGRATION
+BEGIN;
+
+ALTER TABLE customers ADD COLUMN IF NOT EXISTS tier VARCHAR(20);
+
+-- Batch backfill
+DO $$
+DECLARE
+    batch_size INT := 10000;
+    affected INT;
+BEGIN
+    LOOP
+        WITH batch AS (
+            SELECT id FROM customers
+            WHERE tier IS NULL
+            LIMIT batch_size
+            FOR UPDATE SKIP LOCKED
+        )
+        UPDATE customers c
+        SET tier = CASE
+            WHEN total_orders >= 100 THEN 'platinum'
+            WHEN total_orders >= 50 THEN 'gold'
+            WHEN total_orders >= 10 THEN 'silver'
+            ELSE 'bronze'
+        END
+        FROM (
+            SELECT customer_id, COUNT(*) as total_orders
+            FROM orders GROUP BY customer_id
+        ) o
+        WHERE c.id = o.customer_id AND c.id IN (SELECT id FROM batch);
+
+        GET DIAGNOSTICS affected = ROW_COUNT;
+        EXIT WHEN affected = 0;
+        COMMIT;
+        BEGIN;
+    END LOOP;
+END $$;
+
+ALTER TABLE customers ALTER COLUMN tier SET DEFAULT 'bronze';
+ALTER TABLE customers ADD CONSTRAINT chk_tier
+    CHECK (tier IN ('bronze', 'silver', 'gold', 'platinum'));
+COMMIT;
+
+-- POST-MIGRATION VALIDATION
+DO $$
+DECLARE
+    before_count INT;
+    after_count INT;
+BEGIN
+    SELECT total_customers INTO before_count FROM migration_baseline;
+    SELECT COUNT(*) INTO after_count FROM customers;
+    IF before_count != after_count THEN
+        RAISE EXCEPTION 'Row count mismatch: before=%, after=%', before_count, after_count;
+    END IF;
+END $$;
+```
+
+### Rollback Script
+
+```sql
+BEGIN;
+ALTER TABLE customers DROP CONSTRAINT IF EXISTS chk_tier;
+ALTER TABLE customers ALTER COLUMN tier DROP DEFAULT;
+ALTER TABLE customers DROP COLUMN IF EXISTS tier;
+COMMIT;
+```
+
+### Python Migration Framework
+
+```python
+@dataclass
+class Migration:
+    id: str
+    description: str
+    up: Callable
+    down: Callable
+    validate: Callable
+
+class MigrationRunner:
+    def __init__(self, engine):
+        self.engine = engine
+
+    def run(self, migration: Migration, dry_run: bool = False) -> bool:
+        with self.engine.begin() as conn:
+            baseline = self._capture_baseline(conn)
+            if dry_run:
+                return True
+            try:
+                migration.up(conn)
+                if not migration.validate(conn, baseline):
+                    raise ValueError("Validation failed")
+                return True
+            except Exception as e:
+                migration.down(conn)
+                raise
+```
+
+### Safe Migration Patterns
+
+```sql
+-- Adding a column: nullable first, backfill, then constraint
+ALTER TABLE t ADD COLUMN new_col TYPE;
+UPDATE t SET new_col = compute_value();
+ALTER TABLE t ALTER COLUMN new_col SET NOT NULL;
+
+-- Renaming a column: add new, copy, drop old
+ALTER TABLE t ADD COLUMN new_name TYPE;
+UPDATE t SET new_name = old_name;
+ALTER TABLE t DROP COLUMN old_name;
+
+-- Changing column type: add new, migrate, swap
+ALTER TABLE t ADD COLUMN col_new NEWTYPE;
+UPDATE t SET col_new = col::NEWTYPE;
+ALTER TABLE t DROP COLUMN col;
+ALTER TABLE t RENAME COLUMN col_new TO col;
+
+-- Large table batch updates
+DO $$
+DECLARE
+    batch_size INT := 10000;
+    total_updated INT := 0;
+BEGIN
+    LOOP
+        WITH batch AS (
+            SELECT id FROM large_table
+            WHERE needs_update = true
+            LIMIT batch_size
+        )
+        UPDATE large_table SET ...
+        WHERE id IN (SELECT id FROM batch);
+        GET DIAGNOSTICS rows_affected = ROW_COUNT;
+        total_updated := total_updated + rows_affected;
+        EXIT WHEN rows_affected = 0;
+        PERFORM pg_sleep(0.1);
+    END LOOP;
+END $$;
+```
+
+### Migration Safety Checklist
+
+Before: tested on staging, rollback tested, backup taken, maintenance window scheduled.
+After: validation queries passed, application health checked, performance normal.

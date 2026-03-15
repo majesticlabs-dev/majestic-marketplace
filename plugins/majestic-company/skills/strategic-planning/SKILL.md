@@ -1,7 +1,6 @@
 ---
 name: strategic-planning
-description: Build strategic plans for business goals. Creates one-page briefs with core objective, key milestones, leverage points, and risks. Use when setting direction, pitching initiatives, or aligning teams around a goal.
-disable-model-invocation: true
+description: Build strategic plans for business goals. Creates one-page briefs with core objective, key milestones, leverage points, and risks. Includes people operations templates for hiring, onboarding, and performance management.
 ---
 
 # Strategic Planning
@@ -106,3 +105,68 @@ Clear and direct, action-oriented, executive-friendly, honest about risks, focus
 ## Mission
 
 Transform goals into actionable one-page plans that create clarity, build alignment, and drive execution.
+
+---
+
+## People Operations
+
+When strategic plans involve hiring, onboarding, or team management, apply these compliance-aware principles.
+
+**LEGAL DISCLAIMER:** NOT LEGAL ADVICE. Provides general HR information and templates only. Consult qualified local legal counsel before implementing policies.
+
+### Scope
+
+| Area | Templates |
+|------|-----------|
+| Hiring | [resources/strategic-planning/hiring-templates.yaml](resources/strategic-planning/hiring-templates.yaml) |
+| Onboarding | [resources/strategic-planning/onboarding-templates.yaml](resources/strategic-planning/onboarding-templates.yaml) |
+| Performance | [resources/strategic-planning/performance-templates.yaml](resources/strategic-planning/performance-templates.yaml) |
+| PTO, Relations, Offboarding | [resources/strategic-planning/pto-offboarding-templates.yaml](resources/strategic-planning/pto-offboarding-templates.yaml) |
+
+### Operating Principles
+
+1. **Compliance-first**: Follow applicable labor/privacy laws. Ask for jurisdiction.
+2. **Evidence-based**: Structured interviews, job-related criteria, objective rubrics.
+3. **Privacy & data minimization**: Only request minimum personal data needed.
+4. **Bias mitigation**: Use inclusive language and standardized evaluation.
+5. **Clarity**: Deliver checklists, templates, tables, step-by-step playbooks.
+6. **Guardrails**: Flag uncertainty, escalate to qualified counsel.
+
+### People Ops Information to Collect
+
+Ask up to 3 questions before proceeding:
+- **Jurisdiction** (country/state), union presence, policy constraints
+- **Company profile**: size, industry, org structure, remote/hybrid/on-site
+- **Employment types**: full-time, part-time, contractors; working hours
+
+### People Ops Output Format
+
+```markdown
+## Summary
+[What you produced and why]
+
+## Inputs & Assumptions
+- Jurisdiction: {{Jurisdiction}}
+- Company size: {{Size}}
+- Constraints: {{Constraints}}
+
+## Artifacts
+[Policies, JD, interview kits, templates with placeholders]
+
+## Implementation Checklist
+- [ ] Step 1: [action] (Owner: [name], Due: [date])
+- [ ] Step 2: ...
+
+## Communication Draft
+[Email/Slack announcement]
+
+## Metrics
+- Time-to-fill, pass-through rates, eNPS
+```
+
+### People Ops Guardrails
+
+- Not a substitute for licensed legal advice
+- Consult local counsel on high-risk matters (terminations, protected leaves, immigration, unions)
+- Avoid collecting sensitive personal data unless strictly necessary
+- If jurisdiction rules are unclear, ask before proceeding

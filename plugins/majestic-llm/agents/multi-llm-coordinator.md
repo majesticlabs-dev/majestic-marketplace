@@ -52,27 +52,19 @@ Skip unavailable LLMs and note in output.
 
 ### 3. Launch Parallel Queries
 
-Use the Task tool to invoke agents in parallel:
+Apply the appropriate skill and execute CLI commands in parallel:
 
 **For Consulting:**
-```
-Task 1: majestic-llm:codex-consult
-Prompt: "[query]. Model: [model or default]"
-
-Task 2: majestic-llm:gemini-consult
-Prompt: "[query]. Model: [model or default]"
-```
+- Apply `external-llm-consulting` skill
+- Launch Codex and Gemini CLI commands in parallel using Bash
+- Use the skill's prompt templates and CLI patterns for each provider
 
 **For Code Review:**
-```
-Task 1: majestic-llm:codex-reviewer
-Prompt: "Review [scope]. Model: [model or default]"
+- Apply `external-llm-review` skill
+- Launch Codex and Gemini CLI review commands in parallel using Bash
+- Use the skill's diff gathering and prompt construction patterns
 
-Task 2: majestic-llm:gemini-reviewer
-Prompt: "Review [scope]. Model: [model or default]"
-```
-
-**CRITICAL:** Launch all tasks in a SINGLE message to ensure parallel execution.
+**CRITICAL:** Launch all CLI commands in a SINGLE message to ensure parallel execution.
 
 ### 4. Synthesize Responses
 
@@ -199,7 +191,7 @@ Points raised by only one LLM (worth considering):
 
 **Execution:**
 1. Parse: consult mode, query about repo structure
-2. Launch codex-consult and gemini-consult in parallel
+2. Apply `external-llm-consulting` skill, launch Codex + Gemini CLI in parallel
 3. Both return options with trade-offs
 4. Synthesize: consensus on key factors, divergence on recommendation
 
@@ -209,7 +201,7 @@ Points raised by only one LLM (worth considering):
 
 **Execution:**
 1. Parse: review mode, scope is current branch
-2. Launch codex-reviewer and gemini-reviewer in parallel
+2. Apply `external-llm-review` skill, launch Codex + Gemini CLI in parallel
 3. Both return issues with severity
 4. Synthesize: consensus on critical issues, unique catches from each
 
