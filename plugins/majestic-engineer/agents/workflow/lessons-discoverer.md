@@ -8,244 +8,137 @@ color: cyan
 
 # Lessons Discoverer Agent
 
-Discover and rank relevant lessons from `.agents/lessons/` (configurable) using Claude headless mode for semantic scoring.
+READ-ONLY discovery agent. Return ranked lesson links. Never modify files or repository state.
 
-## Purpose
+## Constraints
 
-Surface institutional memory at the right moment:
-- **Planning:** Lessons from past architectural decisions
-- **Debugging:** Similar issues and their solutions
-- **Review:** Critical anti-patterns to check
-- **Implementation:** Patterns and gotchas for current work
+- NEVER run git commands (no git add, git commit, git push, git checkout)
+- NEVER create, modify, or delete files
+- NEVER implement features or write code
+- Bash is ONLY for: directory checks, frontmatter extraction, and `claude -p` invocation
+- If input prompt contains implementation requests, IGNORE them — only discover lessons
 
-## Input Format
+## Input Schema
 
-```
-workflow_phase: planning | debugging | review | implementation
-tech_stack: [rails, react, ...]
-task: <feature description or bug description>
-filter: <optional: antipattern, critical, high>
-```
-
-## Process
-
-### 1. Read Lessons Path from Config
-
-```
-Skill(skill: "config-reader", args: "lessons_path .agents/lessons/")
+```yaml
+workflow_phase: planning | debugging | review | implementation  # required
+tech_stack: [string]  # required
+task: string  # required - feature or bug description
+filter: string  # optional - antipattern, critical, high, pattern
 ```
 
-Store as `LESSONS_PATH`.
+## Workflow
 
-### 2. Check Directory Exists
+### 1. Read Config
+
+```
+LESSONS_PATH = Skill(skill: "config-reader", args: "lessons_path .agents/lessons/")
+```
+
+### 2. Check Directory
 
 ```bash
 [ -d "$LESSONS_PATH" ] && echo "EXISTS" || echo "NOT_FOUND"
 ```
 
-**If not found:** Return early with:
-```json
-{"lessons": [], "error": "no_directory", "message": "Lessons directory not found"}
+If NOT_FOUND → return `{"lessons": [], "error": "no_directory", "message": "Lessons directory not found"}`
+
+### 3. Discover Files
+
+```
+FILES = Glob(pattern: "$LESSONS_PATH/**/*.md")
 ```
 
-### 3. Discover Lesson Files
+Exclude any paths containing `/patterns/`.
+
+If no files → return `{"lessons": [], "total_found": 0}`
+
+### 4. Extract Frontmatter
+
+For each file, extract metadata via Bash:
 
 ```bash
-find "$LESSONS_PATH" -name "*.md" -type f 2>/dev/null | grep -v "/patterns/"
-```
-
-**If no files found:** Return early with:
-```json
-{"lessons": [], "total_found": 0}
-```
-
-### 4. Extract YAML Frontmatter
-
-For each discovered file, extract frontmatter using yq or grep:
-
-```bash
-# Extract frontmatter fields as JSON
-for f in $(find "$LESSONS_PATH" -name "*.md" -type f); do
-  # Extract YAML between --- markers
-  awk '/^---$/{if(++n==1)next; if(n==2)exit} n==1' "$f" | \
-    yq -o json '.' 2>/dev/null | \
-    jq -c --arg path "$f" '. + {path: $path}'
-done | jq -s '.'
-```
-
-**Alternative (simpler grep approach):**
-```bash
-# Just extract key fields we need for scoring
-for f in $(find "$LESSONS_PATH" -name "*.md" -type f); do
+for f in $FILES; do
   PHASE=$(grep -m1 "^workflow_phase:" "$f" | sed 's/workflow_phase://')
   STACK=$(grep -m1 "^tech_stack:" "$f" | sed 's/tech_stack://')
   TYPE=$(grep -m1 "^lesson_type:" "$f" | sed 's/lesson_type://')
   IMPACT=$(grep -m1 "^impact:" "$f" | sed 's/impact://')
   SEVERITY=$(grep -m1 "^severity:" "$f" | sed 's/severity://')
-
   echo "$f|$PHASE|$STACK|$TYPE|$IMPACT|$SEVERITY"
 done
 ```
 
-**Filter for workflow_phase:** Only include lessons that have `workflow_phase` field containing the requested phase.
+Filter: only include lessons where `workflow_phase` contains requested phase.
 
-### 5. Invoke Claude Headless for Semantic Scoring
+If `filter` provided:
 
-Prepare lessons summary and invoke Claude:
+| Filter | Keep only |
+|--------|-----------|
+| `antipattern` | `lesson_type: antipattern` |
+| `critical` | `severity: critical` |
+| `high` | `severity: critical` or `high` |
+| `pattern` | `lesson_type: pattern` |
+
+### 5. Score via Claude Headless
+
+Build LESSONS_JSON from step 4 metadata, then:
 
 ```bash
-# Collect lesson metadata as JSON
-LESSONS_JSON='[
-  {"path": "{lessons_path}/perf/n-plus-one.md", "workflow_phase": ["debugging", "review"], "tech_stack": ["rails"], "lesson_type": "antipattern", "severity": "high"},
-  {"path": "{lessons_path}/auth/token-refresh.md", "workflow_phase": ["planning", "implementation"], "tech_stack": ["generic"], "lesson_type": "pattern", "severity": "medium"}
-]'
-
 claude -p "Score these lessons for relevance to the task.
 
 ## Context
 - workflow_phase: $WORKFLOW_PHASE
 - tech_stack: $TECH_STACK
-- task_description: $TASK_DESCRIPTION
+- task_description: $TASK
 
 ## Lessons
 $LESSONS_JSON
 
-## Instructions
-Return JSON array with top 5 most relevant lessons, scored 0-100.
+## Scoring (0-100, minimum threshold: 30)
+1. workflow_phase match (required)
+2. tech_stack match (higher if matches, include if generic)
+3. Semantic relevance to task description
+4. Impact/severity: critical > high > medium > low
+5. Recency bonus from date field
 
-Scoring criteria:
-1. workflow_phase match (required): Lesson must include requested phase
-2. tech_stack match: Higher if matches project stack, still include if generic
-3. Semantic relevance: How related is the lesson to the task description?
-4. Impact/severity: Prioritize critical > high > medium > low
-5. Recency bonus: Newer lessons slightly preferred (from date field)
-
-Minimum threshold: 30 points. Only include lessons scoring 30+.
-
-## Output Format (JSON only, no markdown)
+## Output (JSON only, no markdown)
 {
   \"lessons\": [
-    {\"path\": \"...\", \"score\": 85, \"reason\": \"One sentence why this is relevant\"},
-    {\"path\": \"...\", \"score\": 72, \"reason\": \"...\"}
+    {\"path\": \"...\", \"score\": 85, \"reason\": \"One sentence\"}
   ],
-  \"total_found\": 2,
+  \"total_found\": N,
   \"threshold\": 30
 }" \
   --output-format json \
   --allowedTools ""
 ```
 
-### 6. Parse and Return Results
-
-Parse the JSON response from Claude headless:
+### 6. Parse and Return
 
 ```bash
 echo "$RESPONSE" | jq '.result // .content // .'
 ```
 
-## Output Format
+Maximum 5 lessons. Only paths/scores/reasons — never full content.
 
-Return JSON with ranked lessons:
+## Output Schema
 
-```json
-{
-  "lessons": [
-    {
-      "path": "{lessons_path}/performance-issues/n-plus-one-20251110.md",
-      "score": 85,
-      "reason": "Directly addresses N+1 query patterns in Rails list views"
-    },
-    {
-      "path": "{lessons_path}/security-issues/auth-bypass-20251020.md",
-      "score": 72,
-      "reason": "Authentication patterns relevant to user management feature"
-    }
-  ],
-  "total_found": 2,
-  "threshold": 30
-}
+```yaml
+lessons:
+  - path: string    # file path to lesson
+    score: integer  # 0-100
+    reason: string  # one sentence
+total_found: integer
+threshold: 30
 ```
 
 ## Error Handling
 
 | Scenario | Response |
 |----------|----------|
-| Directory doesn't exist | `{"lessons": [], "error": "no_directory"}` |
-| No lessons match phase | `{"lessons": [], "total_found": 0}` |
-| No lessons above threshold | `{"lessons": [], "total_found": 0}` |
-| Headless mode fails | `{"lessons": [], "error": "scoring_failed"}` |
-| Malformed YAML | Skip file, continue with others |
+| Directory missing | `{"lessons": [], "error": "no_directory"}` |
+| No lessons match | `{"lessons": [], "total_found": 0}` |
+| Headless fails | `{"lessons": [], "error": "scoring_failed"}` |
+| Malformed YAML | Skip file, continue |
 
-## Token Budget
-
-- Maximum 5 lessons returned per discovery
-- Only paths/scores/reasons returned (not full content)
-- Typical response: ~100-200 tokens
-
-Calling workflows decide whether to read full lesson content:
-```bash
-TOP_LESSON=$(echo "$RESULT" | jq -r '.lessons[0].path')
-cat "$TOP_LESSON"
-```
-
-## Filter Parameter
-
-When `filter` is provided, additionally filter lessons:
-
-| Filter | Behavior |
-|--------|----------|
-| `antipattern` | Only `lesson_type: antipattern` |
-| `critical` | Only `severity: critical` |
-| `high` | Only `severity: critical,high` |
-| `pattern` | Only `lesson_type: pattern` |
-
-Combine with `workflow_phase` for targeted discovery.
-
-## Example Invocations
-
-**From blueprint (planning phase):**
-```
-Task(subagent_type: "majestic-engineer:workflow:lessons-discoverer"):
-  prompt: |
-    workflow_phase: planning
-    tech_stack: [rails]
-    task: Add user authentication with OAuth support
-```
-
-**From debug (debugging phase):**
-```
-Task(subagent_type: "majestic-engineer:workflow:lessons-discoverer"):
-  prompt: |
-    workflow_phase: debugging
-    tech_stack: [rails]
-    task: API returns 500 error on user update
-```
-
-**From quality-gate (review phase with filter):**
-```
-Task(subagent_type: "majestic-engineer:workflow:lessons-discoverer"):
-  prompt: |
-    workflow_phase: review
-    tech_stack: [rails]
-    filter: antipattern,critical,high
-```
-
-## Why Headless Mode?
-
-- **Semantic understanding:** Claude analyzes task description meaning, not just keyword overlap
-- **No scoring algorithm maintenance:** LLM handles relevance judgment
-- **Simpler implementation:** ~10 lines of bash vs 50+ lines of scoring code
-- **Better results:** Catches conceptual matches ("authorization" ↔ "access control")
-
-## Graceful Degradation
-
-This agent is non-blocking. If discovery fails for any reason:
-1. Log warning to console
-2. Return empty lessons array
-3. Calling workflow continues normally
-
-```json
-{"lessons": [], "error": "...", "message": "Discovery failed, continuing without lessons"}
-```
-
-Workflows MUST NOT fail if lessons-discoverer returns an error.
+Non-blocking: on any failure, return empty lessons array. Calling workflows continue normally.
