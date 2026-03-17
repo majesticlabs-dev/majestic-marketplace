@@ -1,6 +1,6 @@
 ---
 name: brand-namer
-description: Generate brand, company, and product names using Igor methodology. Creates evocative, category-defining names.
+description: Generate brand, company, and product names using Igor methodology. Creates evocative, category-defining names. Use when naming a company, product, feature, or app.
 allowed-tools: Read Write Edit Grep Glob WebSearch
 ---
 
@@ -41,6 +41,17 @@ Free-associate from brand adjectives — write everything without judgment:
 
 ### Imagery Lists
 Generate 20+ words in each category relevant to positioning, then blend/transform.
+
+### Cross-Domain Exploration
+Search for words in seemingly unrelated domains to find surprising connections:
+- **Mythology:** Greek, Roman, Norse gods and heroes (Atlas, Mercury, Odin)
+- **Science:** Periodic table elements, physics terms, astronomy (Cobalt, Quark, Nebula)
+- **Nature:** Geological formations, weather, botany (Mesa, Cirrus, Sequoia)
+- **Aviation/Maritime:** Aerodynamics, navigation, sailing (Mach, Zenith, Helm)
+- **Architecture:** Structural terms, materials (Keystone, Lattice, Canopy)
+- **Music/Art:** Movements, techniques, instruments (Forte, Mosaic, Crescendo)
+
+**Principle:** The best names come from lateral thinking. A fintech named "Stripe" beats "PayProcessor" because it borrows from an unrelated domain.
 
 ### Power Words for Naming
 
@@ -118,6 +129,7 @@ Score: -2 (worst) to +5 (best)
 | **Sound** | Pleasing AND easy to say |
 | **"33" Factor** | Word-of-mouth buzz potential |
 | **Spellable** | No confusion |
+| **Fluency** | Brain processes it easily despite being surprising (Impossible Burger, BlackBerry) |
 
 ## Phonetic Principles
 
@@ -129,6 +141,11 @@ Sound shapes perception. Use these patterns intentionally:
 | **Long vowels** (ee, oo, ay) | Regal, expansive, magical | Google, YouTube, PayPal |
 | **Soft consonants** (S, L, M) | Smooth, luxurious, gentle | Tesla, Lexus, Calm |
 | **Hard consonants** (X, Z, K) | Edgy, tech, distinctive | Xerox, Zoom, Slack |
+
+### CVCV Pattern
+Consonant-Vowel-Consonant-Vowel is the most fundamental language structure. Names following this pattern are instinctively easy to learn and recall:
+- **Two syllable:** Sonos, Hulu, Roku, Visa, Lego, Nike
+- **Three syllable:** Toyota, Banana, Adidas
 
 ### Memorability Boosters
 - **Alliteration:** Coca-Cola, PayPal, Best Buy
@@ -176,6 +193,10 @@ More associations = more cultural depth = stronger name.
 Bridgescape, Bridgespan, Everbridge, Flybridge
 **Red flag:** Generic word pairs = forgettable white noise.
 
+### The Comfort Trap
+Choosing the name everyone "likes" in research. Consensus = mediocrity.
+**Red flag:** If nobody hates it, nobody will love it either. Polarization signals energy — if half the room feels the name is "dangerous," it likely has the strength to cut through market noise. Safe names compound friction; bold names compound advantage.
+
 ## Output Format
 
 ```markdown
@@ -201,8 +222,8 @@ Bridgescape, Bridgespan, Everbridge, Flybridge
 
 ### Evaluation Matrix
 
-| # | Name | Appear | Distinct | Depth | Energy | Human | Position | Sound | "33" | Spell | **Total** |
-|---|------|--------|----------|-------|--------|-------|----------|-------|------|-------|-----------|
+| # | Name | Appear | Distinct | Depth | Energy | Human | Position | Sound | "33" | Spell | Fluency | **Total** |
+|---|------|--------|----------|-------|--------|-------|----------|-------|------|-------|---------|-----------|
 
 ### A.S.S. Test (Top 3)
 
@@ -212,7 +233,7 @@ Bridgescape, Bridgespan, Everbridge, Flybridge
 
 ### Top Recommendation
 
-**[Name]** (Score: X/45)
+**[Name]** (Score: X/50)
 
 Why it wins:
 - [Positioning alignment]
@@ -221,6 +242,12 @@ Why it wins:
 - [Sound/memorability]
 
 Domain options: [name].com, [name].io, get[name].com
+
+### Proof of Concept
+Place top name in real-world contexts to test believability:
+- **Headline test:** "[Name] Raises $10M Series A" — does it carry weight?
+- **Intro test:** "I work at [Name]" — does it spark curiosity?
+- **Search test:** Is it Google-able without competing with dominant results?
 
 ### Next Steps
 1. Domain availability check
