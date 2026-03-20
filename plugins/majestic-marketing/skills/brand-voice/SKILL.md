@@ -1,6 +1,10 @@
 ---
 name: brand-voice
-description: Use when codifying organizational brand voice into a reusable style guide. Extracts patterns from existing content and generates a style document with tone rules, vocabulary, banned phrases, and do/don't examples. Not for personal voice extraction (use style-forensics). Not for editing content (use copy-editor).
+description: |
+  Create AI-optimized style guides for brand or personal voice. Extracts patterns
+  from writing samples and produces a reusable guide with tone rules, structure patterns,
+  signature moves, anti-pattern blacklists, and examples. Output is optimized for LLM
+  consumption (Claude Projects, system prompts). Not for editing content (use copy-editor).
 triggers:
   - brand voice
   - voice guide
@@ -9,14 +13,27 @@ triggers:
   - voice document
   - company voice
   - our voice
+  - my voice
+  - my writing style
+  - ai style guide
+  - writing style guide
+  - how I write
+  - personal voice
 allowed-tools: Read Write Edit Grep Glob WebSearch AskUserQuestion
 ---
 
-# Brand Voice Architect
+# Voice Architect
 
-Codify your organization's brand voice into a living style guide.
+Create an AI-optimized style guide — an operating manual that makes LLMs converge toward a specific voice instead of generic default output.
 
-For **personal** voice extraction (my voice, how I write, pre-AI voice), use `style-forensics` instead — it produces quantitative Style DNA reports with exact metrics.
+## Mode Detection
+
+Detect from user input or ask:
+
+- **Personal voice** ("my voice", "how I write", "ai style guide") → Focus on individual writing patterns, signature techniques, personal anti-patterns
+- **Brand voice** ("our voice", "brand style", "company voice") → Focus on organizational identity, cross-context tone, team-wide standards
+
+For **quantitative** voice metrics (sentence length distribution, punctuation DNA, lexical diversity scores), use `style-forensics` — it produces Style DNA reports with exact numbers. This skill produces the **qualitative operating manual** that complements those metrics.
 
 ## Deep Discovery (Optional)
 
@@ -30,14 +47,36 @@ This triggers a conversational interview with voice-specific questions about ide
 
 ## Conversation Starter
 
-Use `AskUserQuestion` to gather initial context.
+Use `AskUserQuestion` to gather initial context. Adapt phrasing to detected mode.
 
-"I'll help you codify your brand voice into a reusable style guide.
+**For personal voice:**
+
+"I'll help you create an AI style guide — a reusable document that makes AI write like you, not like generic AI.
+
+**Please provide one of these:**
+
+**Option A - Writing Samples (Preferred)**
+Share 3-5 pieces YOU wrote that represent your best voice:
+- Blog posts, newsletters, essays, social posts, or emails
+- Paste directly or provide file paths
+- Choose pieces where you sound most like *yourself*
+
+**Option B - Voice Interview**
+If you don't have samples handy, I'll ask targeted questions:
+1. Show you example paragraphs and ask which feel closer to your style
+2. Ask about your writing instincts (do you start with stories or arguments?)
+3. Probe your anti-patterns (what makes you cringe in AI writing?)
+
+React to examples rather than self-describe — specifics emerge faster."
+
+**For brand voice:**
+
+"I'll help you codify your brand voice into a reusable AI style guide.
 
 **Please provide one of these:**
 
 **Option A - Existing Content (Preferred)**
-Share 3-5 pieces of content you love that represent your voice:
+Share 3-5 pieces of content that represent your brand voice:
 - Website copy, emails, social posts, or blog articles
 - Paste directly or provide URLs/file paths
 
@@ -146,7 +185,46 @@ Our voice stays consistent, but tone adapts to context.
 [Mark where brand sits: e.g., "We sit at 7/10—we're excited about what we do and it shows."]
 ```
 
-### 3. Vocabulary Guide
+### 3. Structure Patterns
+
+```markdown
+## Structure
+
+How pieces organize ideas — the architectural blueprint AI must follow.
+
+### Opening Pattern
+[How pieces begin: e.g., "Open with friction — a problem, tension, or surprising claim"]
+
+### Body Organization
+[How the middle works: e.g., "Alternate between concept and concrete example. Never explain without showing."]
+
+### Closing Pattern
+[How pieces end: e.g., "Land on a usable takeaway — something the reader can do today"]
+
+### Transitions
+[How sections connect: e.g., "Jump-cut between ideas. No 'Furthermore' or 'Additionally.'"]
+```
+
+### 4. Signature Moves
+
+```markdown
+## Signature Moves
+
+Named techniques that make this voice distinctive. AI should deploy these at natural frequency.
+
+| Move | Description | Frequency |
+|------|-------------|-----------|
+| [Name] | [What it looks like — e.g., "Starts with a concrete anecdote, then zooms out to the principle"] | [Every piece / Often / Occasionally] |
+| [Name] | [e.g., "Drops a one-sentence paragraph for emphasis after a longer passage"] | [Frequency] |
+| [Name] | [e.g., "Uses parenthetical asides to add personality — like this"] | [Frequency] |
+
+### Moves to Avoid
+| Move | Why It's Wrong |
+|------|---------------|
+| [Name] | [e.g., "Listicle structure — feels like content marketing, not our voice"] |
+```
+
+### 5. Vocabulary Guide
 
 ```markdown
 ## Vocabulary
@@ -169,9 +247,17 @@ Our voice stays consistent, but tone adapts to context.
 - **You/Your**: [When to use]
 - **I/My**: [When to use, if ever]
 - **They/The company**: [When to use, if ever]
+
+### Anti-Pattern Blacklist
+Patterns to eliminate — these are structural, not just word-level:
+| Pattern | Example | Fix |
+|---------|---------|-----|
+| [e.g., "Correlative construction"] | ["Not X, but Y"] | ["Rewrite as direct claim"] |
+| [e.g., "Throat-clearing opener"] | ["In today's fast-paced world..."] | ["Cut to the point"] |
+| [e.g., "Hedge stacking"] | ["It might perhaps be worth considering..."] | ["State the claim, then qualify once"] |
 ```
 
-### 4. Sentence Style
+### 6. Sentence Style
 
 ```markdown
 ## Sentence Style
@@ -195,7 +281,7 @@ Our voice stays consistent, but tone adapts to context.
 - **Emojis**: [Never/sparingly/frequently + which ones]
 ```
 
-### 5. Formatting Conventions
+### 7. Formatting Conventions
 
 ```markdown
 ## Formatting
@@ -220,7 +306,7 @@ Our voice stays consistent, but tone adapts to context.
 - **Currency**: [$X vs X dollars]
 ```
 
-### 6. Do/Don't Examples
+### 8. Do/Don't Examples
 
 ```markdown
 ## Do/Don't Examples
@@ -250,108 +336,94 @@ Our voice stays consistent, but tone adapts to context.
 ✅ "[Direct statement or hook]."
 ```
 
-### 7. Voice Validation Checklist
+### 9. Revision Checklist
 
 ```markdown
-## Voice Checklist
+## Revision Checklist
 
-Before publishing, verify:
+Run through before publishing. Each question should produce a confident "yes."
 
-### Personality Check
-- [ ] Could this only be written by us? (Not generic)
-- [ ] Does it match our personality traits?
-- [ ] Would our ideal customer feel spoken to?
+### Voice
+- [ ] Does this sound like a real person — not a committee?
+- [ ] Could this only be written by us/me? (Not generic AI)
+- [ ] Are 2+ signature moves deployed naturally?
+- [ ] Zero blacklisted patterns present?
 
-### Tone Check
-- [ ] Is the tone appropriate for this context?
-- [ ] Does it match our position on the tone dials?
+### Tone
+- [ ] Is the tone calibrated for this context?
+- [ ] Does it match the tone dial positions?
 
-### Language Check
+### Language
 - [ ] No words from the "avoid" list?
-- [ ] Jargon level appropriate for audience?
-- [ ] Contractions used consistently?
+- [ ] Anti-pattern blacklist clear?
+- [ ] Contractions/pronouns consistent?
 
-### Style Check
-- [ ] Sentence length varied?
-- [ ] Active voice dominant?
-- [ ] Formatting follows conventions?
+### Structure
+- [ ] Opening follows the structure pattern?
+- [ ] Transitions feel like jump-cuts, not academic bridges?
+- [ ] Closing lands on something usable?
 
-### Final Gut Check
-- [ ] Read it aloud—does it sound like us?
+### Gut Check
+- [ ] Read it aloud — does it sound like talking, not writing?
 ```
 
 ## Output Format
 
-```markdown
-# BRAND VOICE GUIDE: [Brand Name]
+Use "VOICE GUIDE" for personal, "BRAND VOICE GUIDE" for organizational.
 
-*Version 1.0 | Created [Date]*
+```markdown
+# [BRAND] VOICE GUIDE: [Name]
+
+*Version 1.0 | Created [Date] | Optimized for AI consumption*
 
 ---
 
 ## Quick Reference
 
-**We are:** [3 traits]
-**We sound like:** [1-sentence description]
-**We never sound:** [What to avoid]
+**Voice:** [3 traits]
+**Sounds like:** [1-sentence description]
+**Never sounds:** [What to avoid]
 
 ---
 
 ## 1. VOICE DNA
-[Brand personality section]
-
----
+[Personality traits + identity]
 
 ## 2. TONE SPECTRUM
 [Context-based tone adjustments]
 
----
+## 3. STRUCTURE PATTERNS
+[Opening, body, closing, transition patterns]
 
-## 3. VOCABULARY
-[Words we love/avoid + jargon rules]
+## 4. SIGNATURE MOVES
+[Named techniques with frequency]
 
----
+## 5. VOCABULARY + ANTI-PATTERNS
+[Words we love/avoid + structural blacklist]
 
-## 4. SENTENCE STYLE
-[Length, structure, punctuation rules]
+## 6. SENTENCE STYLE
+[Length, rhythm, punctuation rules]
 
----
-
-## 5. FORMATTING
+## 7. FORMATTING
 [Headlines, CTAs, lists, numbers]
 
----
-
-## 6. DO/DON'T EXAMPLES
+## 8. DO/DON'T EXAMPLES
 [Before/after examples by content type]
 
----
-
-## 7. VOICE CHECKLIST
-[Pre-publish validation]
-
----
+## 9. REVISION CHECKLIST
+[Pre-publish validation questions]
 
 ## APPENDIX: Sample Rewrites
-
-### Original (Off-Brand)
-> [Example of generic/wrong voice]
-
-### Revised (On-Brand)
-> [Same content in brand voice]
-
-### What Changed
-- [Change 1]
-- [Change 2]
-- [Change 3]
+[Off-voice → on-voice with annotations]
 ```
 
 ## File Output
 
 After generating the guide, offer to save it:
 
-- `docs/brand-voice.md` (recommended)
-- Referenced by content-writer, content-atomizer, linkedin-content, landing-page-builder
+- **Brand:** `docs/brand-voice.md` (recommended)
+- **Personal:** `docs/style-guide.md` or user's preferred location (e.g., Claude Projects)
+- Referenced by content-writer, content-atomizer, linkedin-content, landing-page-builder, style-writer
 
 ## Quality Standards
 
