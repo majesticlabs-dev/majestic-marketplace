@@ -3,7 +3,6 @@ name: majestic:skill-optimize
 description: Optimize a skill's description for better trigger accuracy. Generates eval queries, runs automated optimization loop with train/test split, and applies the best description. Use after creating or improving a skill.
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep, AskUserQuestion
 argument-hint: "[path/to/skill]"
-disable-model-invocation: true
 ---
 
 # Skill Description Optimizer

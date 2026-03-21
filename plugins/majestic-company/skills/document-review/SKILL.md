@@ -1,7 +1,6 @@
 ---
 name: document-review
 description: Review legal documents as an experienced attorney. Analyzes contracts, ToS, privacy policies, NDAs, and corporate docs section-by-section. Identifies risks, gaps, and unfavorable terms with specific replacement text for problematic clauses.
-disable-model-invocation: true
 ---
 
 # Document Review

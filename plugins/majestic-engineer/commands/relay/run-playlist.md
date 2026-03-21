@@ -2,7 +2,6 @@
 name: majestic-relay:run-playlist
 description: Output terminal command to execute playlist
 argument-hint: "[playlist.yml]"
-disable-model-invocation: true
 ---
 
 # Run Playlist

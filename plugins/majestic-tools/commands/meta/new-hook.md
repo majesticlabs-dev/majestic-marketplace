@@ -3,7 +3,6 @@ name: majesitc:new-hook
 description: Create and configure Claude Code hooks for automating workflows and behavior control
 allowed-tools: Read, Edit, Write, Bash, WebFetch, AskUserQuestion
 argument-hint: "[hook-description]"
-disable-model-invocation: true
 ---
 
 # New Hook Builder `/new-hook`

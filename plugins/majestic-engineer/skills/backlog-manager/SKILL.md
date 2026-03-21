@@ -1,7 +1,6 @@
 ---
 name: backlog-manager
 description: Manage backlog items across multiple backends (GitHub Issues, Linear, Beads). Configure task_management in .agents.yml.
-disable-model-invocation: true
 ---
 
 # Backlog Manager Skill

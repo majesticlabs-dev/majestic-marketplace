@@ -1,7 +1,6 @@
 ---
 name: skill-design-philosophy
 description: Core philosophy for designing Claude Code skills - when to use skills vs agents, the knowledge test, and what makes skills valuable. Use when deciding component type or evaluating skill quality.
-disable-model-invocation: true
 ---
 
 # Skill Design Philosophy

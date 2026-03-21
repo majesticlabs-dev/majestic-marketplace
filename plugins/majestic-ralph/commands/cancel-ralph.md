@@ -2,7 +2,6 @@
 name: majestic-ralph:cancel
 description: Cancel active Ralph Loop
 allowed-tools: Bash
-disable-model-invocation: true
 ---
 
 # Cancel Ralph Loop

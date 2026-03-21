@@ -2,7 +2,6 @@
 name: majestic-founder:start
 allowed-tools: AskUserQuestion
 description: Founder toolkit — choose your thinking framework
-disable-model-invocation: true
 ---
 
 # Founder Toolkit

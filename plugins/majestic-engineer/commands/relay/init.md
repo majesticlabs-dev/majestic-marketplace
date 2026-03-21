@@ -2,7 +2,6 @@
 name: majestic-relay:init
 description: Parse blueprint markdown into epic.yml for fresh-context execution
 argument-hint: "<path/to/blueprint.md>"
-disable-model-invocation: true
 ---
 
 # Initialize Relay from Blueprint

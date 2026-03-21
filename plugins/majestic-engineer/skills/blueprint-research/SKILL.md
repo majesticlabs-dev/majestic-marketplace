@@ -1,7 +1,6 @@
 ---
 name: blueprint-research
 description: Research phase for blueprint workflow - toolbox resolution, lessons discovery, and parallel research agents
-disable-model-invocation: true
 ---
 
 # Blueprint Research

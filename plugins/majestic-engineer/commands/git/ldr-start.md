@@ -4,7 +4,6 @@ allowed-tools: Bash(git *), Bash(mkdir *), Bash(ls *), Read, Write, Glob
 description: Start a Linked Decision Record — creates numbered branch, prompt, and blueprint files
 argument-hint: "[short description of the feature or fix]"
 model: haiku
-disable-model-invocation: true
 ---
 
 ## Context

@@ -120,13 +120,13 @@ allowed-tools: Read Bash      # Optional, space-delimited
 | Frontmatter | User can invoke | Claude can invoke | When loaded |
 |-------------|----------------|-------------------|-------------|
 | (default) | Yes | Yes | Description always in context, full content on invocation |
-| `disable-model-invocation: true` | Yes | No | Description not in context, loads only on user invoke |
 | `user-invocable: false` | No | Yes | Description always in context, loads when relevant |
 
 **Decision guide:**
-- Side-effect workflows (`/deploy`, `/commit`, `/triage-prs`) -> `disable-model-invocation: true`
 - Background knowledge (conventions, domain context) -> `user-invocable: false`
-- General guidance (coding patterns, best practices) -> defaults
+- Everything else -> defaults (both user and model can invoke)
+
+**Note:** Avoid `disable-model-invocation: true`. Commands/skills with side effects should use confirmation steps (`AskUserQuestion`) rather than blocking model invocation entirely.
 
 ## Dynamic Features
 
@@ -137,7 +137,6 @@ Use `$ARGUMENTS` for user input. If not present in content, arguments are append
 ```yaml
 ---
 name: fix-issue
-disable-model-invocation: true
 ---
 Fix GitHub issue $ARGUMENTS following our coding standards.
 ```
@@ -193,7 +192,7 @@ Research $ARGUMENTS thoroughly...
 - [ ] Description under 1024 chars with trigger keywords
 - [ ] Uses standard markdown headings (not XML tags)
 - [ ] SKILL.md under 500 lines
-- [ ] `disable-model-invocation: true` if skill has side effects
+- [ ] Uses `AskUserQuestion` for confirmation if skill has side effects
 - [ ] `allowed-tools` set if specific tools needed
 - [ ] No persona statements or attribution
 - [ ] Subdirectories only: `scripts/`, `references/`, `assets/`

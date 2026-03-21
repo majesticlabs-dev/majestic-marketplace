@@ -6,7 +6,6 @@ triggers:
   - product roadmap
   - roadmap planning
   - now next later
-disable-model-invocation: true
 ---
 
 # Product Roadmap Planning

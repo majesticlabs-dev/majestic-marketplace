@@ -1,7 +1,6 @@
 ---
 name: create-adr
 description: Create Architecture Decision Records (ADRs) to document significant technical decisions, their context, alternatives considered, and consequences. Use when making architectural choices, selecting libraries/frameworks, or designing system components.
-disable-model-invocation: true
 ---
 
 # Create ADR Skill

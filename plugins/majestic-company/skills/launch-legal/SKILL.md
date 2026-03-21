@@ -1,7 +1,6 @@
 ---
 name: launch-legal
 description: Minimum viable legal setup for business launches without expensive lawyers.
-disable-model-invocation: true
 ---
 
 # Launch Legal Shortcuts

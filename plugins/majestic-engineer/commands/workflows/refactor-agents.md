@@ -9,7 +9,6 @@ allowed-tools:
   - Glob
   - AskUserQuestion
   - Skill
-disable-model-invocation: true
 ---
 
 # Refactor AGENTS.md

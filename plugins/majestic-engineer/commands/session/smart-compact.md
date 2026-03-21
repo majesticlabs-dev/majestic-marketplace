@@ -2,7 +2,6 @@
 name: session:smart-compact
 description: Analyze conversation and generate optimized /compact command
 model: haiku
-disable-model-invocation: true
 ---
 
 # Smart Compact

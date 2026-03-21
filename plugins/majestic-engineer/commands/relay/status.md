@@ -2,7 +2,6 @@
 name: majestic-relay:status
 description: Show current epic progress and task status
 argument-hint: "[--verbose]"
-disable-model-invocation: true
 ---
 
 # Epic Status

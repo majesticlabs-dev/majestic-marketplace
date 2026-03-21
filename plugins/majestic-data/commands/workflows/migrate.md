@@ -2,7 +2,6 @@
 name: majestic-data:migrate
 description: Generate or execute data migration scripts with safety checks.
 argument-hint: "<action> [options]"
-disable-model-invocation: true
 ---
 
 # Data Migrate Command

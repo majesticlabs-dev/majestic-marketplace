@@ -7,7 +7,6 @@ triggers:
   - decision document
   - product decision
   - decision record
-disable-model-invocation: true
 ---
 
 # Feature Brief & Decision Document

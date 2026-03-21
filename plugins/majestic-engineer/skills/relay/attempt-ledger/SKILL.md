@@ -8,7 +8,6 @@ triggers:
   - attempt
   - gating
   - retry
-disable-model-invocation: true
 ---
 
 # Attempt Ledger Pattern

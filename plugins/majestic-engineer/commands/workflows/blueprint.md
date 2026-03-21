@@ -2,7 +2,6 @@
 name: majestic:blueprint
 description: Transform feature descriptions into well-structured project plans
 argument-hint: "[feature description, bug report, or improvement idea]"
-disable-model-invocation: true
 ---
 
 # Create a Blueprint

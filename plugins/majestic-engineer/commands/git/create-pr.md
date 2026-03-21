@@ -3,7 +3,6 @@ name: create-pr
 allowed-tools: Bash(git *), Bash(gh *), Task
 description: Create a pull request for the current feature branch
 model: haiku
-disable-model-invocation: true
 ---
 
 ## Context

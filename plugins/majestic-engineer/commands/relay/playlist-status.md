@@ -2,7 +2,6 @@
 name: majestic-relay:playlist-status
 description: Show playlist progress across all epics
 argument-hint: ""
-disable-model-invocation: true
 ---
 
 # Playlist Status

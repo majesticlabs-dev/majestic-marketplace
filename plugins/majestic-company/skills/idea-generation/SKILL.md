@@ -1,7 +1,6 @@
 ---
 name: idea-generation
 description: Generate and validate startup ideas through market research, skill-market fit, and iterative refinement.
-disable-model-invocation: true
 ---
 
 # Idea Generation

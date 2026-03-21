@@ -1,7 +1,6 @@
 ---
 description: Explain a concept using real examples from YOUR project, not abstract theory
 allowed-tools: Read, Grep, Glob, Bash
-disable-model-invocation: true
 ---
 
 # Contextual Concept Explainer

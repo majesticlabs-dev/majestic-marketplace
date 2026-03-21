@@ -3,7 +3,6 @@ name: majestic:list-tools
 description: List all available tools with detailed information
 model: haiku
 argument-hint: "[optional: context or category]"
-disable-model-invocation: true
 ---
 
 # How to list all available tools

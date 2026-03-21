@@ -2,7 +2,6 @@
 description: Get code review from external LLMs (Codex, Gemini) on current changes
 allowed-tools: Bash, Read, Grep, Glob, Task
 argument-hint: "[--uncommitted|--staged|--branch|--base <branch>] [--llm codex|gemini|all] [--model <model>]"
-disable-model-invocation: true
 ---
 
 # External Review

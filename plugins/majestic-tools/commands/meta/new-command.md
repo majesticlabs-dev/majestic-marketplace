@@ -2,7 +2,6 @@
 name: new-command
 description: Generate any Claude Code command with production-quality patterns
 allowed-tools: Read, Write, Edit, WebFetch, AskUserQuestion, Skill
-disable-model-invocation: true
 ---
 
 # New Command Builder `/new-command`

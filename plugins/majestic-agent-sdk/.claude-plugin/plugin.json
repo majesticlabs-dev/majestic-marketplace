@@ -1,6 +1,6 @@
 {
   "name": "majestic-agent-sdk",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Claude Agent SDK tools for building custom AI agents. Includes 1 command and 1 skill.",
   "author": {
     "name": "David Paluy",

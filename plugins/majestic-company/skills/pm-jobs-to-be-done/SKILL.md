@@ -7,7 +7,6 @@ triggers:
   - customer jobs
   - hiring criteria
   - firing criteria
-disable-model-invocation: true
 ---
 
 # Jobs-to-be-Done (JTBD)

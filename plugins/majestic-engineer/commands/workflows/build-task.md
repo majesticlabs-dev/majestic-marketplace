@@ -3,7 +3,6 @@ name: majestic:build-task
 description: Autonomous task implementation - research, plan, build, review, fix, ship
 argument-hint: "<task-reference or plan-file>"
 allowed-tools: Bash, Read, Grep, Glob, WebFetch, TaskCreate, TaskList, TaskUpdate, Task, Skill
-disable-model-invocation: true
 ---
 
 # Build Task

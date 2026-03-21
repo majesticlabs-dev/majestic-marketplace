@@ -1,7 +1,6 @@
 ---
 name: code-story
 description: Narrative templates for git history documentation. Used by /git:code-story command.
-disable-model-invocation: true
 ---
 
 # Code Story Skill
