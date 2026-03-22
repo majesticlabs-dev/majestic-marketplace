@@ -192,7 +192,7 @@
     {
       "name": "majestic-marketing",
       "description": "Marketing and SEO tools for Claude Code. Includes 5 specialized agents, 6 commands, and 66 skills.",
-      "version": "4.0.3",
+      "version": "4.0.4",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -377,7 +377,7 @@
     {
       "name": "majestic-creative",
       "description": "AI-powered creative tools for image generation, editing, and visual content creation. Includes 1 command and 1 skill for Gemini image generation.",
-      "version": "2.0.1",
+      "version": "2.0.2",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",

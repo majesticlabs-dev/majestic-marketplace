@@ -184,6 +184,34 @@ for part in response.parts:
         img.save("output.png", format="PNG")  # Explicit conversion
 ```
 
+## Multi-Image Consistency
+
+When generating a set of images that must look like the same scene (e.g., room makeovers, product variations, before/after sequences):
+
+**Lock the architecture, vary only the style.**
+
+1. Write one detailed base description: dimensions, camera angle, window count/position, door location, furniture size, ceiling height, floor type
+2. Copy the base description identically into every prompt
+3. Change only the style portion: colors, materials, decor, lighting fixtures
+
+**Common failures without this technique:**
+- Windows appear/disappear between images
+- Room dimensions change, furniture moves
+- Result looks like N different rooms, not one room in N styles
+
+**Prompt structure:**
+```
+[Camera/phone type]. [Detailed room architecture — identical across all images].
+[Natural lighting description]. [Orientation].
+**[STYLE VARIATION — only this part changes per image]**
+```
+
+**Tips:**
+- Include "iPhone photo" and "realistic lighting" for photorealistic output
+- Add signs of life (mugs, remotes, books) so spaces feel inhabited, not staged
+- "Before" images should look modern but tired, not derelict
+- Always use portrait orientation (9:16 / 2:3) for social media slideshows
+
 ## Notes
 
 - All generated images include SynthID watermarks

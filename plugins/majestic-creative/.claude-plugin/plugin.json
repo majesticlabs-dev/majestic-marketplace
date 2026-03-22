@@ -1,6 +1,6 @@
 {
   "name": "majestic-creative",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "AI-powered creative tools for image generation, editing, and visual content creation. Includes 0 agents, 1 command, and 1 skill for Gemini image generation.",
   "author": {
     "name": "David Paluy",

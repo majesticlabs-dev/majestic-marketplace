@@ -131,10 +131,12 @@ Triggers that make content irresistible to share:
 | Pattern Interrupt | Stops the scroll | "STOP doing [common thing]" | Educational content |
 | Identity Signal | Reflects who they are | "If you're a [type]..." | Tribe content |
 | FOMO | Fear of missing out | "Everyone's talking about..." | Trend content |
+| Reaction Story | Viewer pictures the other person's face | "My [person] said [doubt] until I showed them [result]" | Transformation/product content |
 
 **Hook Formulas:**
 - `[Number] + [Unexpected adjective] + [Topic] + [Promise]` — "7 Brutal Truths About Starting a Business Nobody Tells You"
 - `[Contrarian statement] + [Proof/reason]` — "Cold outreach is dead. Here's what's working instead."
+- `[Person] + [conflict/doubt] → showed them [thing] → they changed their mind` — "My landlord said I can't change anything so I showed her what AI thinks it could look like" (consistently clears 100K+ views on TikTok slideshows)
 
 ### 4. One-Day Content Creation System
 
