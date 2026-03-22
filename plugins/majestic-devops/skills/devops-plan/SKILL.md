@@ -67,9 +67,7 @@ Based on detection, recommend skills:
 
 If existing IaC files found, run security audit:
 
-```
-Task(subagent_type: "majestic-devops:infra-security-review", prompt: "Audit existing infrastructure code for security issues")
-```
+Apply `infra-security-review` skill to audit existing infrastructure code for security issues.
 
 Capture findings for the plan.
 

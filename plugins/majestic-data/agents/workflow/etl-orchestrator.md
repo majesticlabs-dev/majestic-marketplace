@@ -266,12 +266,12 @@ failure_policies:
 ## Integration with Subagents
 
 ```
-Task(subagent_type="majestic-data:research:source-analyzer",
-     prompt="Analyze source: postgres.orders for extraction planning")
+Apply source-analyzer skill:
+  context: "Analyze source: postgres.orders for extraction planning"
 
-Task(subagent_type="majestic-data:qa:data-validator",
-     prompt="Validate output: marts/daily_sales.parquet")
+Apply data-validation skill:
+  context: "Validate output: marts/daily_sales.parquet"
 
-Task(subagent_type="majestic-data:qa:drift-detector",
-     prompt="Compare today's output to yesterday's baseline")
+Apply anomaly-detector skill:
+  context: "Compare today's output to yesterday's baseline"
 ```

@@ -47,12 +47,7 @@ with open(suite_path) as f:
 
 ### Step 3: Run Validations
 
-Invoke the data-validator agent:
-
-```
-Task(subagent_type="majestic-data:qa:data-validator",
-     prompt="Run validation suite against the loaded dataset and report results")
-```
+Apply `data-validation` skill to run validation suite against the loaded dataset and report results.
 
 ### Step 4: Output Results
 

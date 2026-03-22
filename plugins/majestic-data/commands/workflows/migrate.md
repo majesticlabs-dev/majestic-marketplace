@@ -56,17 +56,8 @@ Executes with:
 
 ### For `generate`:
 
-```
-Task(subagent_type="majestic-data:transform:csv-to-sql",
-     prompt="Generate migration scripts for loading CSV to database table")
-```
-
-Or:
-
-```
-Task(subagent_type="majestic-data:transform:migration-builder",
-     prompt="Generate schema migration with safety checks")
-```
+Apply `sql-patterns` skill to generate migration scripts for loading CSV to database table.
+Apply `schema-discoverer` skill to infer schema and generate CREATE TABLE with safety checks.
 
 ### For `backfill`:
 

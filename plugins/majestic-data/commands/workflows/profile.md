@@ -36,12 +36,7 @@ else:
 
 ### Step 2: Generate Profile
 
-Invoke the data-profiler agent:
-
-```
-Task(subagent_type="majestic-data:research:data-profiler",
-     prompt="Profile this dataset and generate comprehensive statistics report")
-```
+Apply `data-profiler` skill to profile the dataset and generate comprehensive statistics report.
 
 ### Step 3: Output Report
 

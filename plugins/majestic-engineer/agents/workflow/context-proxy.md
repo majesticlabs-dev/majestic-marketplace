@@ -40,7 +40,6 @@ If agent name doesn't contain `:`, resolve to full path:
 | `git-researcher` | `majestic-engineer:research:git-researcher` |
 | `best-practices-researcher` | `majestic-engineer:research:best-practices-researcher` |
 | `architect` | `majestic-engineer:plan:architect` |
-| `spec-reviewer` | `majestic-engineer:plan:spec-reviewer` |
 
 If name contains `:`, use as-is.
 
@@ -236,6 +235,6 @@ This proxy is designed for research and planning agents:
 | Category | Agents |
 |----------|--------|
 | Research | `docs-researcher`, `git-researcher`, `best-practices-researcher` |
-| Planning | `architect`, `spec-reviewer` |
+| Planning | `architect` |
 
 Build, review, and workflow agents should NOT be proxied as their outputs are critical for execution.

@@ -106,8 +106,8 @@ For each hook in research_hooks:
 
 **Run in parallel:**
 ```
-Task(majestic-engineer:plan:spec-reviewer):
-  prompt: "Feature: {feature} | Research: {combined_research}"
+Apply spec-reviewer skill:
+  context: "Feature: {feature} | Research: {combined_research}"
 
 For each skill in coding_styles:
   Skill(skill: skill)

@@ -46,7 +46,7 @@ Bash: mkdir -p .agents/relay/epics/
 ### 3. Call blueprint-to-epics Agent
 
 ```
-RESULT = Task(subagent_type="majestic-relay:blueprint-to-epics"):
+RESULT = Task(subagent_type="majestic-engineer:relay:blueprint-to-epics"):
   prompt: |
     Split the blueprint into epics by logical phase.
 
@@ -68,7 +68,7 @@ EPICS_CREATED = RESULT.epics_created
 ### 4. Call init-playlist Agent
 
 ```
-PLAYLIST = Task(subagent_type="majestic-relay:init-playlist"):
+PLAYLIST = Task(subagent_type="majestic-engineer:relay:init-playlist"):
   prompt: |
     Generate playlist.yml from epics folder.
 

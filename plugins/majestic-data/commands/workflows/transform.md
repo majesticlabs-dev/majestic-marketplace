@@ -57,16 +57,15 @@ if source_ext == '.csv' and target_ext == '.parquet':
 ```
 
 **With flattening (JSON):**
-```
-Task(subagent_type="majestic-data:transform:json-flattener",
-     prompt="Flatten nested JSON and convert to target format")
+```python
+# Use pandas json_normalize for nested structures
+from pandas import json_normalize
+df = json_normalize(json_data, sep='_')
+df.to_parquet(target, compression='snappy', index=False)
 ```
 
 **With schema application:**
-```
-Task(subagent_type="majestic-data:research:schema-discoverer",
-     prompt="Infer and apply schema, then convert")
-```
+Apply `schema-discoverer` skill to infer and apply schema, then convert.
 
 ### Step 3: Validate Output
 

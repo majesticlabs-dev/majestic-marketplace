@@ -12,7 +12,7 @@
     {
       "name": "majestic-engineer",
       "description": "Language-agnostic engineering workflows. Includes 20 specialized agents, 33 commands, 43 skills, and 5 toolbox presets. Now includes relay orchestration for fresh-context task execution with quality gates and compound learning.",
-      "version": "4.0.3",
+      "version": "4.0.4",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -164,7 +164,7 @@
     {
       "name": "majestic-data",
       "description": "Data engineering and ETL tools. Includes 3 specialized agents, 4 commands, and 19 skills for pandas, SQL, ETL pipelines, data validation, and quality monitoring.",
-      "version": "2.0.1",
+      "version": "2.0.2",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -344,7 +344,7 @@
     {
       "name": "majestic-devops",
       "description": "Infrastructure as Code and DevOps tools. Includes 0 agents and 15 skills for OpenTofu, Ansible, Hetzner, DigitalOcean, Cloudflare, 1Password CLI, cloud-init, and devops-plan.",
-      "version": "2.0.0",
+      "version": "2.0.1",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
