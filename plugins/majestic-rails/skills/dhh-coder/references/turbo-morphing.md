@@ -215,6 +215,28 @@ class Card < ApplicationRecord
 end
 ```
 
+### Multi-Stream Broadcasting
+
+When one model update must refresh multiple independent views (e.g., multitenant dashboards, kitchen displays):
+
+```ruby
+class LineItem < ApplicationRecord
+  belongs_to :order
+
+  after_update_commit :broadcast_refreshes, if: :saved_change_to_status?
+
+  private
+    def broadcast_refreshes
+      broadcast_refresh_to "order_#{order_id}"
+      broadcast_refresh_to "store_#{order.store_id}_kitchen"
+      broadcast_refresh_to "store_#{order.store_id}_tables"
+      broadcast_refresh_to "store_#{order.store_id}_takeouts"
+    end
+end
+```
+
+Each view subscribes to its own stream and morphs independently. This replaces dozens of targeted `broadcast_replace_to` / `broadcast_append_to` / `broadcast_remove_to` calls with a flat list of refresh signals.
+
 ### Debounced Broadcasting
 
 ```ruby
@@ -272,6 +294,19 @@ end
 3. **Stable IDs** - Let morphing match elements efficiently
 4. **Debounce rapid updates** - Batch changes with short delays
 5. **data-turbo-permanent** - Exclude heavy elements from morphing
+
+## Trade-offs
+
+| Morphing | Traditional Streams |
+|----------|-------------------|
+| Higher server load (full page re-render per refresh) | Lower server load (renders single partial) |
+| Zero client-side coordination | Requires DOM target IDs, partial paths, action types |
+| Always renders fresh data (no stale associations) | Can render stale data if associations not loaded |
+| Single broadcast signal per action | Multiple broadcasts can cause flicker |
+
+**When morph fits well:** Moderate-scale views (dashboards, queues with ~15-50 items), pages where multiple elements change together, multitenant apps broadcasting to several views.
+
+**When morph needs help:** Audio/visual notifications triggered by specific events still need targeted streams or a supplementary Stimulus controller listening on a dedicated channel — morph alone only updates DOM, it can't trigger side effects like playing a sound.
 
 ## Key Benefits
 
