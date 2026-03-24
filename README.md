@@ -123,6 +123,7 @@ Output locations:
 | [claude-hud](https://github.com/jarrodwatts/claude-hud) | Real-time session insights - context window usage, active tools, todo progress, git status in statusline | `/plugin marketplace add jarrodwatts/claude-hud` |
 | [browser-cdp](https://github.com/dpaluy/browser-cdp) | Browser automation via Chrome DevTools Protocol - control Chrome, Brave, Edge with real profiles | `npm install -g browser-cdp` or `bunx browser-cdp` |
 | [agent-browser](https://github.com/vercel-labs/agent-browser) | Fast Rust CLI for AI agents - semantic locators, accessibility snapshots, session isolation | `npm install -g agent-browser && agent-browser install` |
+| [minimalist-entrepreneur](https://github.com/slavingia/skills) | Business frameworks from *The Minimalist Entrepreneur* by Sahil Lavingia — community discovery, idea validation, MVP, pricing, sustainable growth | `git clone https://github.com/slavingia/skills.git ~/.claude/plugins/skills` |
 
 ## Recommended Settings
 
