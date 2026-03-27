@@ -1,6 +1,6 @@
 ---
 name: keyword-strategist
-description: Analyze keyword density, suggest LSI keywords and semantic variations for content optimization.
+description: "Analyze keyword density, generate LSI keywords, map entity relationships, and flag over-optimization in content. Use when optimizing content for SEO, researching keywords, checking keyword density, or improving search rankings."
 allowed-tools: Read Write Edit Grep Glob WebSearch
 ---
 
@@ -8,70 +8,51 @@ allowed-tools: Read Write Edit Grep Glob WebSearch
 
 Analyze content for semantic optimization opportunities and keyword strategy.
 
-## Focus Areas
-
-- Primary/secondary keyword identification
-- Keyword density calculation and optimization
-- Entity and topical relevance analysis
-- LSI keyword generation from content
-- Semantic variation suggestions
-- Natural language patterns
-- Over-optimization detection
-
-## Keyword Density Guidelines
-
-**Best Practice Recommendations:**
-- Primary keyword: 0.5-1.5% density
-- Avoid keyword stuffing
-- Natural placement throughout content
-- Entity co-occurrence patterns
-- Semantic variations for diversity
-
-## Entity Analysis Framework
-
-1. Identify primary entity relationships
-2. Map related entities and concepts
-3. Analyze competitor entity usage
-4. Build topical authority signals
-5. Create entity-rich content sections
-
 ## Process
 
 1. Extract current keyword usage from provided content
-2. Calculate keyword density percentages
-3. Identify entities and related concepts in text
-4. Determine likely search intent from content type
-5. Generate LSI keywords based on topic
-6. Suggest optimal keyword distribution
-7. Flag over-optimization issues
+2. Calculate keyword density percentages per term
+   - Primary keyword target: 0.5–1.5% density
+   - If density exceeds 2%, flag specific sentences for revision
+3. Identify entities and map related concepts
+4. Determine search intent from content type and structure
+5. Generate 20–30 LSI keywords based on topic clustering
+6. Suggest optimal keyword distribution across headings, body, and meta
+7. Flag over-optimization issues (stuffing, unnatural placement)
+
+## Keyword Density Calculation
+
+```
+density = (keyword_occurrences / total_words) * 100
+```
+
+Example analysis:
+```
+Total words: 1,500
+"project management" appears 12 times → 0.8% ✓
+"best software" appears 45 times → 3.0% ✗ (over-optimized)
+```
+
+## Entity Analysis
+
+1. Identify primary entity relationships in the content
+2. Map co-occurring entities and concepts (people, tools, methods)
+3. Identify gaps where competitor content includes entities this content misses
+4. Recommend entity-rich sections to build topical authority
 
 ## Output Format
 
-**Keyword Strategy Package:**
 ```
-Primary: [keyword] (0.8% density, 12 uses)
-Secondary: [keywords] (3-5 targets)
-LSI Keywords: [20-30 semantic variations]
-Entities: [related concepts to include]
+Primary: [keyword] ([density]%, [count] uses) — [status: OK/HIGH/LOW]
+Secondary: [3-5 keywords with target density]
+LSI Keywords: [20-30 semantic variations grouped by subtopic]
+Entities: [related concepts to weave in]
+Over-optimization flags: [specific sentences needing revision]
 ```
 
-**Deliverables:**
-- Keyword density analysis
-- Entity and concept mapping
-- LSI keyword suggestions (20-30)
-- Search intent assessment
-- Content optimization checklist
-- Keyword placement recommendations
-- Over-optimization warnings
+## Advanced Recommendations
 
-**Advanced Recommendations:**
-- Question-based keywords for PAA
-- Voice search optimization terms
-- Featured snippet opportunities
-- Keyword clustering for topic hubs
-
-**Platform Integration:**
-- WordPress: Integration with SEO plugins
-- Static sites: Frontmatter keyword schema
-
-Focus on natural keyword integration and semantic relevance. Build topical depth through related concepts.
+- Question-based keywords for People Also Ask (PAA)
+- Voice search long-tail variations
+- Featured snippet keyword opportunities
+- Keyword clustering for topic hub architecture
