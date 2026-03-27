@@ -1,6 +1,6 @@
 ---
 name: content-refresher
-description: Identify outdated elements in provided content and suggest updates to maintain freshness. Find statistics, dates, and examples that need updating.
+description: "Audit content for outdated statistics, dates, examples, and stale references, then produce a prioritized refresh plan. Use when reviewing content freshness, updating old articles, checking for outdated information, or auditing content decay."
 allowed-tools: Read Write Edit Grep Glob WebSearch
 ---
 
@@ -8,93 +8,44 @@ allowed-tools: Read Write Edit Grep Glob WebSearch
 
 Identify update opportunities in existing content to maintain freshness and relevance.
 
-## Focus Areas
+## Process
 
-- Outdated dates and statistics
-- Old examples and case studies
-- Missing recent developments
-- Seasonal content updates
-- Expired links or references
-- Dated terminology or trends
-- Content expansion opportunities
-- Freshness signal optimization
-
-## Content Freshness Guidelines
-
-**Update Priorities:**
-- Statistics older than 2 years
-- Dates in titles and content
-- Examples from 3+ years ago
-- Missing recent industry changes
-- Expired or changed information
+1. Scan content for dates, year references, and time-sensitive phrases
+   - Flag any statistic older than 2 years
+   - Flag year mentions in titles or headers (e.g., "Best Tools 2024")
+2. Identify data points and verify whether current equivalents exist
+   - If current data is unavailable, note as "needs research" rather than fabricating
+3. Find examples and case studies — flag anything 3+ years old
+4. Check for dated terminology or deprecated tool/service names
+5. Assess topic completeness against current industry state
+6. Prioritize updates using the matrix below
+7. Recommend new sections to fill content gaps
 
 ## Refresh Priority Matrix
 
-**High Priority (Immediate):**
-- Pages losing rankings (>3 positions)
-- Content with outdated information
-- High-traffic pages declining
-- Seasonal content approaching
-
-**Medium Priority (This Month):**
-- Stagnant rankings (6+ months)
-- Competitor content updates
-- Missing current trends
-- Low engagement metrics
-
-## Process
-
-1. Scan content for dates and time references
-2. Identify statistics and data points
-3. Find examples and case studies
-4. Check for dated terminology
-5. Assess topic completeness
-6. Suggest update priorities
-7. Recommend new sections
+| Priority | Criteria | Action |
+|----------|----------|--------|
+| **High** | Pages losing 3+ ranking positions; factually outdated info; high-traffic pages declining | Update within 1 week |
+| **Medium** | Stagnant rankings 6+ months; competitors published fresher content; missing current trends | Update this month |
+| **Low** | Minor date references; cosmetic freshness signals; supplementary examples | Batch in next content cycle |
 
 ## Output Format
 
-**Content Refresh Plan:**
 ```
-Page: [URL]
-Last Updated: [Date]
-Priority: High/Medium/Low
+Page: [URL or file path]
+Last Updated: [date]
+Priority: High / Medium / Low
+
 Refresh Actions:
-- Update statistics from [old year] to [current year]
-- Add section on [new trend]
-- Refresh examples with current ones
-- Update meta title with current year
+- [specific item]: Update [old value] → [suggested replacement or "needs research"]
+- Add section on [new trend/development]
+- Replace [old example] with [current equivalent]
+- Update meta title/description with current year if applicable
 ```
 
-**Deliverables:**
-- Content decay analysis
-- Refresh priority queue
-- Update checklist per page
-- New section recommendations
-- Trend integration opportunities
-- Competitor freshness tracking
-- Publishing calendar
+## Freshness Signals to Update
 
-**Refresh Tactics:**
-- Statistical updates (quarterly)
-- New case studies/examples
-- Additional FAQ questions
-- Expert quotes (fresh E-E-A-T)
-- Video/multimedia additions
-- Related posts internal links
-- Schema markup updates
-
-**Freshness Signals:**
-- Modified date in schema
-- Updated publish date
-- New internal links to content
-- Fresh images with current dates
-- Social media resharing
-- Comment engagement reactivation
-
-**Platform Implementation:**
-- WordPress: Modified date display
-- Static sites: Frontmatter date updates
-- Sitemap priority adjustments
-
-Focus on meaningful updates that add value. Identify specific elements that need refreshing.
+- Modified date in schema markup
+- Internal links to/from recently published content
+- Fresh images with current context
+- New FAQ entries reflecting recent questions
