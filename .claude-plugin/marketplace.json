@@ -33,7 +33,7 @@
     {
       "name": "majestic-rails",
       "description": "Ruby on Rails development tools. Includes 5 specialized agents, 3 commands, 39 skills, and enhanced toolbox with 6 research hooks.",
-      "version": "4.0.2",
+      "version": "4.0.3",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -344,7 +344,7 @@
     {
       "name": "majestic-devops",
       "description": "Infrastructure as Code and DevOps tools. Includes 0 agents and 15 skills for OpenTofu, Ansible, Hetzner, DigitalOcean, Cloudflare, 1Password CLI, cloud-init, and devops-plan.",
-      "version": "2.0.1",
+      "version": "2.0.2",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
