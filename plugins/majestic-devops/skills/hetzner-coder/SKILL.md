@@ -371,3 +371,4 @@ resource "hcloud_ssh_key" "deploy" {
 - [references/best-practices.md](references/best-practices.md) - Labels, cost optimization, placement groups, snapshots
 - [references/object-storage.md](references/object-storage.md) - S3-compatible Object Storage with AWS provider
 - [references/production-stack.md](references/production-stack.md) - Complete production setup
+- [references/storage-box.md](references/storage-box.md) - CIFS-mounted backup storage for Litestream and docker-volume-backup

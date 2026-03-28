@@ -1,10 +1,10 @@
 ---
 name: kamal-coder
-description: This skill guides deploying Rails applications with Kamal. Use when configuring deploy.yml, setting up accessories, managing secrets, or preparing servers for container deployment.
+description: This skill guides deploying Rails applications with Kamal 2. Use when configuring deploy.yml, setting up kamal-proxy, managing secrets, accessories, or preparing servers for container deployment.
 allowed-tools: Read Write Edit Grep Glob Bash
 ---
 
-# Kamal Coder
+# Kamal 2 Coder
 
 Servers need Docker, SSH access, and ports 22/80/443 open. Provision with Ansible or cloud-init.
 
@@ -14,14 +14,15 @@ Servers need Docker, SSH access, and ports 22/80/443 open. Provision with Ansibl
 
 ```yaml
 service: myapp
-image: username/myapp
+image: myapp
 
 servers:
   web:
-    hosts:
-      - 192.168.1.1
-    labels:
-      traefik.http.routers.myapp.rule: Host(`myapp.com`)
+    - 203.0.113.10
+
+proxy:
+  ssl: true
+  host: myapp.com
 
 registry:
   username: username
@@ -34,27 +35,25 @@ env:
     RAILS_LOG_TO_STDOUT: "true"
   secret:
     - RAILS_MASTER_KEY
-    - DATABASE_URL
 ```
 
-### Multi-Role Setup
+### Multi-Role Setup (Web + Job Worker)
 
 ```yaml
 service: myapp
-image: username/myapp
+image: myapp
 
 servers:
   web:
+    - 203.0.113.10
+  job:
     hosts:
-      - 192.168.1.1
-      - 192.168.1.2
-    labels:
-      traefik.http.routers.myapp.rule: Host(`myapp.com`)
-  worker:
-    hosts:
-      - 192.168.1.3
-    cmd: bundle exec sidekiq
-    traefik: false  # No HTTP traffic
+      - 203.0.113.10
+    cmd: bin/jobs start
+
+proxy:
+  ssl: true
+  host: myapp.com
 
 registry:
   username: username
@@ -64,27 +63,47 @@ registry:
 env:
   clear:
     RAILS_ENV: production
+    SOLID_QUEUE_IN_PUMA: false
   secret:
     - RAILS_MASTER_KEY
-    - DATABASE_URL
-    - REDIS_URL
 ```
 
-### With Accessories (Databases, Redis)
+**Job worker notes:**
+- `cmd: bin/jobs start` runs Solid Queue in a separate container
+- Set `SOLID_QUEUE_IN_PUMA: false` to disable in-process queue
+- Job role has no proxy — only web role serves HTTP traffic
+
+### With Local Registry
+
+Eliminates Docker Hub dependency, rate limits, and external costs:
 
 ```yaml
-service: myapp
-image: username/myapp
+registry:
+  server: localhost:5555
+  username: ignored
+  password:
+    - KAMAL_REGISTRY_PASSWORD
+```
 
-servers:
-  web:
-    hosts:
-      - 192.168.1.1
+Deploy the registry as an accessory:
 
+```yaml
+accessories:
+  registry:
+    image: registry:2
+    host: 203.0.113.10
+    port: "5555:5000"
+    volumes:
+      - registry_data:/var/lib/registry
+```
+
+### With Accessories
+
+```yaml
 accessories:
   db:
     image: postgres:16
-    host: 192.168.1.1
+    host: 203.0.113.10
     port: 5432
     env:
       clear:
@@ -98,11 +117,88 @@ accessories:
 
   redis:
     image: redis:7-alpine
-    host: 192.168.1.1
+    host: 203.0.113.10
     port: 6379
     directories:
       - data:/data
     cmd: redis-server --appendonly yes
+```
+
+### Docker Volumes for Persistence
+
+For SQLite + ActiveStorage apps, mount a named volume:
+
+```yaml
+servers:
+  web:
+    hosts:
+      - 203.0.113.10
+    volumes:
+      - myapp_storage:/rails/storage
+    labels:
+      docker-volume-backup.stop-during-backup: "true"
+  job:
+    hosts:
+      - 203.0.113.10
+    cmd: bin/jobs start
+    volumes:
+      - myapp_storage:/rails/storage
+```
+
+Both web and job containers share the same volume for database access.
+
+## Proxy Configuration (kamal-proxy)
+
+Kamal 2 uses kamal-proxy (not Traefik). It handles SSL termination, routing, and zero-downtime deploys.
+
+### Basic SSL
+
+```yaml
+proxy:
+  ssl: true
+  host: myapp.com
+```
+
+Automatic Let's Encrypt certificate provisioning — no manual cert management.
+
+### Custom Port
+
+```yaml
+proxy:
+  ssl: true
+  host: myapp.com
+  app_port: 3000
+```
+
+### Multiple Hosts
+
+```yaml
+proxy:
+  ssl: true
+  hosts:
+    - myapp.com
+    - www.myapp.com
+```
+
+### Health Check
+
+```yaml
+proxy:
+  ssl: true
+  host: myapp.com
+  healthcheck:
+    path: /up
+    interval: 3
+    timeout: 3
+```
+
+### Response Timeout
+
+```yaml
+proxy:
+  ssl: true
+  host: myapp.com
+  response_timeout: 30
 ```
 
 ## Secrets: .kamal/secrets
@@ -112,17 +208,14 @@ Kamal reads secrets from `.kamal/secrets` (git-ignored).
 ### With 1Password CLI
 
 ```bash
-# .kamal/secrets
 KAMAL_REGISTRY_PASSWORD=$(op read "op://Infrastructure/DockerHub/password")
 RAILS_MASTER_KEY=$(op read "op://MyApp/production/master_key")
 DATABASE_URL=$(op read "op://MyApp/production/database_url")
-POSTGRES_PASSWORD=$(op read "op://MyApp/production-db/password")
 ```
 
 ### With Environment Variables
 
 ```bash
-# .kamal/secrets
 KAMAL_REGISTRY_PASSWORD=$DOCKERHUB_TOKEN
 RAILS_MASTER_KEY=$RAILS_MASTER_KEY
 DATABASE_URL=$DATABASE_URL
@@ -131,12 +224,16 @@ DATABASE_URL=$DATABASE_URL
 ### Multi-Environment
 
 ```yaml
-# config/deploy.yml
-<% if ENV["KAMAL_DESTINATION"] == "staging" %>
-service: myapp-staging
-<% else %>
+# config/deploy.yml — base config
 service: myapp
-<% end %>
+
+# config/deploy.staging.yml — overrides
+service: myapp-staging
+servers:
+  web:
+    - 203.0.113.20
+proxy:
+  host: staging.myapp.com
 ```
 
 ```bash
@@ -144,128 +241,116 @@ service: myapp
 RAILS_MASTER_KEY=$(op read "op://MyApp/staging/master_key")
 ```
 
-## Traefik Configuration
-
-### SSL with Let's Encrypt
-
-```yaml
-traefik:
-  options:
-    publish:
-      - "443:443"
-    volume:
-      - /letsencrypt:/letsencrypt
-  args:
-    entryPoints.web.address: ":80"
-    entryPoints.websecure.address: ":443"
-    entryPoints.web.http.redirections.entryPoint.to: websecure
-    entryPoints.web.http.redirections.entryPoint.scheme: https
-    certificatesResolvers.letsencrypt.acme.email: admin@myapp.com
-    certificatesResolvers.letsencrypt.acme.storage: /letsencrypt/acme.json
-    certificatesResolvers.letsencrypt.acme.httpchallenge.entrypoint: web
-
-servers:
-  web:
-    hosts:
-      - 192.168.1.1
-    labels:
-      traefik.http.routers.myapp.rule: Host(`myapp.com`)
-      traefik.http.routers.myapp.entrypoints: websecure
-      traefik.http.routers.myapp.tls.certresolver: letsencrypt
-```
-
-### Health Checks
-
-```yaml
-healthcheck:
-  path: /up
-  port: 3000
-  interval: 10s
-  max_attempts: 30
-```
+Deploy with: `kamal deploy -d staging`
 
 ## Common Commands
 
 ### First Deployment
 
 ```bash
-# Bootstrap server (installs Docker, creates directories)
-kamal server bootstrap
-
-# Full setup (push config, start traefik, deploy app)
+# One-time: installs kamal-proxy, pushes image, deploys
 kamal setup
+
+# Subsequent: builds, pushes, rolling restart
+kamal deploy
 ```
 
-### Regular Deployment
+### Regular Operations
 
 ```bash
-# Deploy latest
-kamal deploy
-
-# Deploy specific version
-kamal deploy --version=abc123
-
-# Deploy to staging
-kamal deploy -d staging
+kamal deploy                    # Deploy latest
+kamal deploy --version=abc123   # Deploy specific version
+kamal deploy -d staging         # Deploy to staging
+kamal redeploy                  # Redeploy without building
 ```
 
 ### Rollback
 
 ```bash
-# List available versions
-kamal app containers
-
-# Rollback to previous
-kamal rollback
+kamal app containers            # List available versions
+kamal rollback <version>        # Rollback to specific version
 ```
 
 ### Debugging
 
 ```bash
-# SSH into container
-kamal app exec --interactive bash
-
-# View logs
-kamal app logs -f
-
-# Rails console
-kamal app exec --interactive "bin/rails console"
+kamal app exec --interactive bash              # Shell into container
+kamal app logs -f                              # Tail logs
+kamal app exec --interactive "bin/rails console"  # Rails console
+kamal app exec "bin/rails db:migrate"          # Run migrations
 ```
 
 ### Accessories
 
 ```bash
-# Start all accessories
-kamal accessory boot all
+kamal accessory boot all        # Start all accessories
+kamal accessory reboot db       # Restart specific accessory
+kamal accessory exec db --interactive "psql -U postgres"
+kamal accessory logs litestream  # View accessory logs
+```
 
-# Restart specific accessory
-kamal accessory reboot db
+## Builder Configuration
 
-# Exec into accessory
-kamal accessory exec db --interactive psql -U postgres
+### Native Builds
+
+```yaml
+builder:
+  arch: amd64
+```
+
+### Multi-Architecture
+
+```yaml
+builder:
+  multiarch: true
+```
+
+### Remote Builder
+
+```yaml
+builder:
+  remote:
+    arch: amd64
+    host: ssh://builder@build-server
+```
+
+### Build Arguments
+
+```yaml
+builder:
+  args:
+    RUBY_VERSION: "3.3.0"
+```
+
+## Hooks
+
+### Pre-Deploy
+
+```bash
+# .kamal/hooks/pre-deploy
+#!/bin/sh
+echo "Running pre-deploy checks..."
+```
+
+### Post-Deploy
+
+```bash
+# .kamal/hooks/post-deploy
+#!/bin/sh
+echo "Deploy complete: $(date)"
+curl -s https://notify.example.com/deploy
 ```
 
 ## Provisioning Workflow
 
-### Terraform + Ansible + Kamal Pipeline
+### Ansible + Kamal Pipeline
 
 ```bash
-# infra/bin/provision
-#!/usr/bin/env bash
-set -euo pipefail
-
-# 1. Terraform: Create infrastructure
-cd infra && tofu apply
-
-# 2. Ansible: Configure server
-SERVER_IP=$(tofu output -raw server_ip)
-cd ansible
-echo "[web]\n$SERVER_IP ansible_user=root" > hosts.ini
+# 1. Ansible: Configure server
 ansible-playbook -i hosts.ini playbook.yml
 
-# 3. Kamal: Bootstrap containers
-cd ../..
-bundle exec kamal server bootstrap
+# 2. Kamal: Bootstrap and deploy
+kamal setup
 ```
 
 ### What Ansible Should Configure
@@ -280,69 +365,60 @@ Based on [kamal-ansible-manager](https://github.com/guillaumebriday/kamal-ansibl
 | Enable NTP | Time synchronization |
 | Create swap | Memory overflow protection |
 | Harden SSH | Disable password auth, root login |
-| Kernel tuning | swappiness, somaxconn |
+| Unattended upgrades | Automatic security patches |
 
-## Builder Configuration
+## Litestream Backup Accessory
 
-### Native ARM64 Builds (Hetzner CAX)
-
-```yaml
-builder:
-  arch: arm64
-  # OR for multi-arch:
-  # multiarch: true
-```
-
-### Remote Builder
+For SQLite apps, add Litestream as an accessory (see `litestream-coder` for full config):
 
 ```yaml
-builder:
-  remote:
-    arch: amd64
-    host: ssh://builder@build-server
+accessories:
+  litestream:
+    image: litestream/litestream:0.3
+    host: 203.0.113.10
+    cmd: replicate
+    volumes:
+      - myapp_storage:/rails/storage:ro
+    files:
+      - config/litestream.yml:/etc/litestream.yml
+    env:
+      secret:
+        - LITESTREAM_ACCESS_KEY_ID
+        - LITESTREAM_SECRET_ACCESS_KEY
 ```
 
-## Hooks
-
-### Pre-Deploy
-
-```bash
-# .kamal/hooks/pre-deploy
-#!/bin/sh
-echo "Running pre-deploy tasks..."
-bundle exec rails assets:precompile
-```
-
-### Post-Deploy
-
-```bash
-# .kamal/hooks/post-deploy
-#!/bin/sh
-echo "Running migrations..."
-kamal app exec "bin/rails db:migrate"
-```
+Mount storage as read-only (`:ro`) — Litestream only reads WAL files.
 
 ## Directory Structure
 
 ```
 myapp/
 ├── config/
-│   └── deploy.yml        # Main Kamal config
+│   ├── deploy.yml           # Main Kamal config
+│   └── deploy.staging.yml   # Staging overrides
 ├── .kamal/
-│   ├── secrets           # Secret values (git-ignored)
-│   ├── secrets.staging   # Staging secrets (git-ignored)
+│   ├── secrets              # Production secrets (git-ignored)
+│   ├── secrets.staging      # Staging secrets (git-ignored)
 │   └── hooks/
 │       ├── pre-deploy
 │       └── post-deploy
-└── Dockerfile            # Application container
+├── Dockerfile               # Application container
+└── docker-entrypoint.sh     # Entrypoint script
 ```
 
 ## Troubleshooting
 
 | Issue | Cause | Fix |
 |-------|-------|-----|
-| Connection refused | Docker not running | `kamal server bootstrap` |
-| Permission denied | SSH key not authorized | Check server's authorized_keys |
+| Connection refused | Docker not running | `kamal setup` or check Docker service |
+| Permission denied | SSH key not authorized | Check server's `authorized_keys` |
 | Health check failing | App not starting | Check `kamal app logs` |
 | Registry auth failed | Wrong credentials | Verify `.kamal/secrets` |
-| Traefik 502 | Container not healthy | Increase `max_attempts` |
+| 502 Bad Gateway | Container not healthy | Increase healthcheck timeout |
+| SSL cert not issued | DNS not pointing to server | Verify DNS A record |
+| Asset 404 after deploy | Volume not mounted | Check `volumes:` in deploy.yml |
+
+## References
+
+- [references/request-flow.md](references/request-flow.md) — Request architecture and Cloudflare integration
+- [references/docker-patterns.md](references/docker-patterns.md) — Production Dockerfile, entrypoint, and volume patterns
