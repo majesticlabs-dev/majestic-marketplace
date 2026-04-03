@@ -106,6 +106,16 @@ Worth a 15-min call to see if we can help with {{specific_goal}}?
 {{sender_name}}
 ```
 
+## Writing Rules
+
+| Rule | Why |
+|------|-----|
+| 5-8 sentences max | 70%+ of emails read on mobile — must fit one screen |
+| Line break every 2 sentences | Readers skim — wall of text kills response rate |
+| Zero product features | Lead with their pain, their company, their role |
+| One CTA per email | Multiple asks create decision paralysis |
+| First line = about them | "I" as first word = instant delete |
+
 ## Subject Line Library
 
 ### Pattern Interrupt (Highest Opens)

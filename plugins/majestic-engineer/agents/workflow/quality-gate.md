@@ -89,7 +89,6 @@ Task(majestic-engineer:workflow:lessons-discoverer):
 If patterns found → include in reviewer prompts. Non-blocking on failure.
 
 ### Reviewer Precedence
-
 ```
 1. CUSTOM_REVIEWERS from .agents.yml (user override)     → use directly
 2. TOOLBOX_RESULT.quality_gate.reviewers (toolbox manifest) → use if #1 empty
@@ -99,7 +98,6 @@ If patterns found → include in reviewer prompts. Non-blocking on failure.
 **Never SKIP.** Always fall through to hardcoded defaults.
 
 ### 3. Determine Review Agents
-
 If no reviewers resolved from steps 2/2.5, use tech-stack defaults:
 
 | Tech Stack | Default Reviewers |
@@ -126,9 +124,7 @@ If TASK_TRACKING:
 
 ### 3.5. AC Verification
 
-If AC Path provided AND no Verifier Result passed in:
-
-Add `majestic-engineer:qa:acceptance-criteria-verifier` to the parallel reviewer set.
+If AC Path provided AND no Verifier Result passed in, add `majestic-engineer:qa:acceptance-criteria-verifier` to the parallel reviewer set.
 
 - `PASS` → No findings
 - `FAIL` → Add failed items as HIGH severity
@@ -140,6 +136,15 @@ If APP_STATUS == "production" AND TECH_STACK contains "rails":
   Add data-integrity-reviewer to FINAL_REVIEWERS (if not already present)
   Flag breaking changes as HIGH severity
 ```
+
+### 4.5. Infer Change Intent
+
+Build an intent packet from the diff and context:
+- **Changes:** What behavior is meant to change
+- **Preserves:** What behavior must remain unchanged
+- **Constraints:** Compatibility, security, migration expectations
+
+If intent not stated by user, infer from diff. Note inference may be incomplete.
 
 ## Parallel Execution
 
@@ -158,7 +163,7 @@ Launch ALL reviewers in a **single message** using Task() calls:
 For each REVIEWER in FINAL_REVIEWERS:  # ALL in ONE message
   Task(
     subagent_type: REVIEWER,
-    prompt: "Review this diff:\n{DIFF}\n\nContext: {CONTEXT}\nAC: {AC_CONTENT}\nCritical patterns: {LESSONS}",
+    prompt: "Review this diff:\n{DIFF}\n\nContext: {CONTEXT}\nIntent: {INTENT_PACKET}\nAC: {AC_CONTENT}\nCritical patterns: {LESSONS}",
     name: REVIEWER,
     run_in_background: true
   )
@@ -216,9 +221,7 @@ If TASK_TRACKING:
 ```
 
 ### 6.1. Deferred Findings (Non-Pedantic)
-
 Output for shell parsing:
-
 ```
 DEFERRED_FINDINGS_START
 severity: LOW
@@ -235,9 +238,7 @@ DEFERRED_FINDINGS_END
 ```
 
 ## Report Format
-
 All reports use this header table:
-
 ```
 | Field | Value |
 |-------|-------|
@@ -278,6 +279,13 @@ Verdict: NEEDS CHANGES | Fix Count: <n>
 <findings>
 Verdict: BLOCKED | Requires: Human review
 ```
+
+### Path Forward (non-APPROVED verdicts)
+
+After findings, group into actionable tiers:
+- **Fix now**: HIGH+ severity, blocks merge
+- **Fix soon**: MEDIUM severity, fix before next release
+- **Follow-up**: LOW severity, track for later
 
 ## Error Handling
 
