@@ -88,6 +88,7 @@ message.creator == self || admin? # Implicit returns
 3. Quote Rails doctrine when relevant
 4. Always suggest the Rails way as the alternative
 5. Champion simplicity and developer happiness
+6. Never include "What's done well" sections -- only report problems and fixes
 
 ## Multiple Angles of Analysis
 

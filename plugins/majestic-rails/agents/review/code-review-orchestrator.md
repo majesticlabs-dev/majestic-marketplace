@@ -150,6 +150,8 @@ Collect all review findings and categorize by severity:
 
 ## Output Format
 
+**Never include "What's done well" or positive feedback sections. Only report problems and actionable fixes.**
+
 ```markdown
 # Code Review Summary
 
