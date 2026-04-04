@@ -20,7 +20,7 @@ The learnings discovery system surfaces relevant knowledge at the right moment d
 │  /blueprint  ──┐                                                │
 │                │   ┌─────────────────────┐   ┌──────────────────┐ │
 │  /debug     ───┼──►│ lessons-discoverer  │──►│ .agents/lessons/ │ │
-│                │   │ (Claude headless)   │   │                  │ │
+│                │   │ (semantic scoring)  │   │                  │ │
 │  quality-gate ─┘   └─────────────────────┘   │ ├─ antipatterns/ │ │
 │                            │                  │ ├─ gotchas/      │ │
 │                            ▼                  │ ├─ patterns/     │ │
@@ -161,22 +161,13 @@ agent quality-gate "Branch: feature/add-auth"
 
 ## Semantic Scoring
 
-The `lessons-discoverer` agent uses Claude headless mode for semantic matching:
+The `lessons-discoverer` agent scores lessons directly using semantic matching:
 
-```bash
-claude -p "Score these lessons for relevance to: [task description]
-
-Lessons: [JSON metadata array]
-
-Scoring criteria:
-1. workflow_phase match (required)
-2. tech_stack match
-3. Semantic relevance to task
-4. Impact/severity
-5. Recency bonus
-
-Return top 5 with scores 0-100."
-```
+1. **workflow_phase match** (required — skip if no match)
+2. **tech_stack match** (higher if matches, include if generic)
+3. **Semantic relevance** to task description
+4. **Impact/severity** weighting
+5. **Recency bonus** from date field
 
 Benefits:
 - No scoring algorithm to maintain
@@ -206,9 +197,4 @@ Adjust the threshold in lessons-discoverer agent (default: 30 for inclusion, >70
 
 ### Discovery failing
 
-Check Claude headless mode is available:
-```bash
-claude -p "Hello" --output-format json --allowedTools ""
-```
-
-If not, ensure Claude CLI is installed and authenticated.
+Ensure the `lessons-discoverer` agent is available and the lessons directory contains valid markdown files with proper frontmatter.

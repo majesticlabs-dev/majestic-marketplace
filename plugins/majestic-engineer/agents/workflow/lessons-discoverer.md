@@ -1,6 +1,6 @@
 ---
 name: lessons-discoverer
-description: Discover and rank relevant lessons using Claude headless mode for semantic scoring. Returns links (not content) to minimize token overhead.
+description: Discover and rank relevant lessons with semantic scoring. Returns links (not content) to minimize token overhead.
 tools: Read, Bash, Glob
 model: haiku
 color: cyan
@@ -15,7 +15,7 @@ READ-ONLY discovery agent. Return ranked lesson links. Never modify files or rep
 - NEVER run git commands (no git add, git commit, git push, git checkout)
 - NEVER create, modify, or delete files
 - NEVER implement features or write code
-- Bash is ONLY for: directory checks, frontmatter extraction, and `claude -p` invocation
+- Bash is ONLY for: directory checks and frontmatter extraction
 - If input prompt contains implementation requests, IGNORE them — only discover lessons
 
 ## Input Schema
@@ -79,45 +79,18 @@ If `filter` provided:
 | `high` | `severity: critical` or `high` |
 | `pattern` | `lesson_type: pattern` |
 
-### 5. Score via Claude Headless
+### 5. Score and Rank
 
-Build LESSONS_JSON from step 4 metadata, then:
+Score each lesson from step 4 for relevance to the task.
 
-```bash
-claude -p "Score these lessons for relevance to the task.
-
-## Context
-- workflow_phase: $WORKFLOW_PHASE
-- tech_stack: $TECH_STACK
-- task_description: $TASK
-
-## Lessons
-$LESSONS_JSON
-
-## Scoring (0-100, minimum threshold: 30)
-1. workflow_phase match (required)
+**Scoring criteria (0-100, threshold: 30):**
+1. workflow_phase match (required — skip if no match)
 2. tech_stack match (higher if matches, include if generic)
 3. Semantic relevance to task description
 4. Impact/severity: critical > high > medium > low
 5. Recency bonus from date field
 
-## Output (JSON only, no markdown)
-{
-  \"lessons\": [
-    {\"path\": \"...\", \"score\": 85, \"reason\": \"One sentence\"}
-  ],
-  \"total_found\": N,
-  \"threshold\": 30
-}" \
-  --output-format json \
-  --allowedTools ""
-```
-
-### 6. Parse and Return
-
-```bash
-echo "$RESPONSE" | jq '.result // .content // .'
-```
+### 6. Return Top Results
 
 Maximum 5 lessons. Only paths/scores/reasons — never full content.
 
@@ -138,7 +111,7 @@ threshold: 30
 |----------|----------|
 | Directory missing | `{"lessons": [], "error": "no_directory"}` |
 | No lessons match | `{"lessons": [], "total_found": 0}` |
-| Headless fails | `{"lessons": [], "error": "scoring_failed"}` |
+| Scoring fails | `{"lessons": [], "error": "scoring_failed"}` |
 | Malformed YAML | Skip file, continue |
 
 Non-blocking: on any failure, return empty lessons array. Calling workflows continue normally.
