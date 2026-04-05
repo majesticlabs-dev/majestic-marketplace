@@ -62,13 +62,6 @@ else
 fi
 
 # Check .gitignore entries
-echo -n ".claude/current_task.txt in .gitignore: "
-if [ -f .gitignore ] && grep -q "^\.claude/current_task\.txt$" .gitignore; then
-  echo "✓"
-else
-  echo "○ not found"
-fi
-
 echo ""
 if [ "$errors" -eq 0 ]; then
   echo "=== Setup Complete ==="

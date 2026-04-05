@@ -126,8 +126,6 @@ Replace placeholders with collected values. Handle conditionals:
 
 ### Gitignore + Local Config
 
-Always add: !`${CLAUDE_PLUGIN_ROOT}/commands/workflows/init/gitignore-add.sh .claude/current_task.txt`
-
 If not tracking in git: !`${CLAUDE_PLUGIN_ROOT}/commands/workflows/init/gitignore-add.sh .agents.yml`
 
 If local overrides requested: !`${CLAUDE_PLUGIN_ROOT}/commands/workflows/init/gitignore-add.sh .agents.local.yml`
