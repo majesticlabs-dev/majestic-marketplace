@@ -113,6 +113,36 @@ It's about creating psychological safety so your team tells you the truth.
 What's worked for you?
 ```
 
+## Short Video (Under 90 Seconds)
+
+```
+[0-3 sec: Visual or spoken hook that stops scroll]
+
+[3-15 sec: Set up the one problem/insight]
+
+[15-60 sec: Deliver the core value — one clear takeaway]
+
+[60-90 sec: Recap + CTA]
+```
+
+**Requirements:**
+- Captions on every video (80%+ watch muted)
+- One insight per video, not a mini-course
+- Face on camera builds trust faster than slides
+
+**Example script:**
+```
+[0-3s] "You're posting on LinkedIn at the worst possible time."
+[3-15s] "I analyzed 500 posts from founders in my niche.
+The ones posted between 7-8 AM got 3x more impressions."
+[15-50s] "Here's why: your audience checks LinkedIn during their commute.
+By 9 AM, the feed is flooded. Your post is buried.
+Post before the rush. Be the first thing they see."
+[50-70s] "Try it this week. Post at 7:15 AM, then spend
+60 minutes replying to every comment."
+[70-85s] "Follow me for more LinkedIn growth tactics."
+```
+
 ## Hook Formulas
 
 ### Contrarian Professional
@@ -139,6 +169,12 @@ What's worked for you?
 **Formula:** Stop [common action]. Do this instead...
 - "Stop saying 'let me know if you have questions.' Say this instead..."
 - "Stop posting on LinkedIn at 9am. Here's when you should actually post..."
+
+### Value-First
+**Formula:** [Audience] waste [X]% of their effort on [Y]. Here's the [Z]% that actually works...
+- "Founders waste 80% of their LinkedIn effort on content that never converts. Here's the 20% that actually does."
+- "Most managers spend 70% of their 1:1s on status updates. Here's what high-performing teams discuss instead."
+- "Sales teams lose 60% of deals in the first email. Here's the opening line that gets replies."
 
 ## Performance Benchmarks
 
