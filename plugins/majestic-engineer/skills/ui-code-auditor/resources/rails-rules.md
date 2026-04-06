@@ -11,6 +11,9 @@ Patterns specific to Rails views, ERB templates, and Hotwire.
 | `image_tag` without `alt:` | Missing alt text | Add `alt: "description"` |
 | `link_to` with only icon/image | Link without accessible name | Add text or `aria-label:` |
 | `button_tag` with only icon | Button without accessible name | Add text or `aria-label:` |
+| SVG inside `button`/`link_to` without `aria_hidden: true` | Icon announced by screen reader, conflicts with parent label | Add `aria: { hidden: true }` to SVG, ensure parent has `aria-label` |
+| Icon-only `button_tag` without `aria-label` | Button has no accessible name | Add `aria: { label: "action description" }` |
+| Icon-only `link_to` without `aria: { label: }` | Link has no accessible name | Add `aria: { label: "destination description" }` |
 
 ### Serious
 

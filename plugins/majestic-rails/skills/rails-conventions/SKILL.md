@@ -149,6 +149,50 @@ fact_check_modal
 _fact_frame
 ```
 
+## JavaScript & Importmap
+
+Rails 7+ uses importmap for JS dependency management. Scope dependencies to the narrowest entrypoint.
+
+### Multiple Entrypoints
+
+```ruby
+# config/importmap.rb
+pin "application"                    # Public entrypoint
+pin "@hotwired/turbo-rails", to: "turbo.min.js"
+pin "@hotwired/stimulus", to: "stimulus.min.js"
+
+# Admin-only dependencies - pinned but only imported in admin entrypoint
+pin "chartkick", to: "chartkick.js"
+pin "Chart.bundle", to: "Chart.bundle.js"
+```
+
+```javascript
+// app/javascript/application.js — public pages only
+import "@hotwired/turbo-rails"
+import "@hotwired/stimulus"
+import "controllers"
+
+// app/javascript/admin.js — imports public base + admin-only libs
+import "application"
+import "chartkick"
+import "Chart.bundle"
+```
+
+```erb
+<%# Admin layout %>
+<%= javascript_importmap_tags("admin") %>
+
+<%# All other layouts %>
+<%= javascript_importmap_tags %>
+```
+
+### Adding New JS Dependencies
+
+1. Determine scope: public-facing or admin-only?
+2. Pin in `config/importmap.rb`
+3. Import in the **correct** entrypoint
+4. Never add admin-only libraries to `application.js`
+
 ## Performance
 
 - Consider scale impact
