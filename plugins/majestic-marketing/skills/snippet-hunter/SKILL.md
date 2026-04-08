@@ -1,6 +1,6 @@
 ---
 name: snippet-hunter
-description: Format content to be eligible for featured snippets and SERP features. Create snippet-optimized content blocks based on best practices.
+description: "Format content for featured snippet eligibility by structuring answers, lists, tables, and FAQ schema markup. Use when optimizing for position zero, Google featured snippets, rich results, answer boxes, or People Also Ask."
 allowed-tools: Read Write Edit Grep Glob WebSearch
 ---
 
@@ -8,89 +8,73 @@ allowed-tools: Read Write Edit Grep Glob WebSearch
 
 Format content for position zero potential and featured snippet eligibility.
 
-## Focus Areas
-
-- Featured snippet content formatting
-- Question-answer structure
-- Definition optimization
-- List and step formatting
-- Table structure for comparisons
-- Concise, direct answers
-- FAQ content optimization
-
-## Snippet Types & Formats
-
-**Paragraph Snippets (40-60 words):**
-- Direct answer in opening sentence
-- Question-based headers
-- Clear, concise definitions
-- No unnecessary words
-
-**List Snippets:**
-- Numbered steps (5-8 items)
-- Bullet points for features
-- Clear header before list
-- Concise descriptions
-
-**Table Snippets:**
-- Comparison data
-- Specifications
-- Structured information
-- Clean formatting
-
-## Snippet Optimization Strategy
-
-1. Format content for snippet eligibility
-2. Create multiple snippet formats
-3. Place answers near content beginning
-4. Use questions as headers
-5. Provide immediate, clear answers
-6. Include relevant context
-
 ## Process
 
-1. Identify questions in provided content
-2. Determine best snippet format
-3. Create snippet-optimized blocks
-4. Format answers concisely
-5. Structure surrounding context
-6. Suggest FAQ schema markup
-7. Create multiple answer variations
+1. Identify questions the content answers (explicit headers + implicit queries)
+2. Determine best snippet format using decision criteria:
+   - **Paragraph**: definition queries, "what is" → 40–60 word direct answer
+   - **List**: "how to", "steps", "ways to" → 5–8 numbered/bulleted items
+   - **Table**: comparisons, specifications, pricing → structured rows and columns
+3. Create snippet-optimized content blocks for each target query
+4. Place direct answers immediately after the question header (first sentence)
+5. Add surrounding context that enriches without diluting the snippet
+6. Generate FAQ schema markup for question clusters
+7. Validate: answer length within snippet limits, question in H2/H3, answer is self-contained
 
-## Output Format
+## Snippet Template
 
-**Snippet Package:**
 ```markdown
-## [Exact Question from SERP]
+## [Exact question users search for]
 
-[40-60 word direct answer paragraph with keyword in first sentence. Clear, definitive response that fully answers the query.]
+[40-60 word direct answer with primary keyword in the first sentence.
+Clear, definitive response that fully answers the query without
+requiring surrounding context.]
 
-### Supporting Details:
-- Point 1 (enriching context)
-- Point 2 (related entity)
-- Point 3 (additional value)
+### Supporting Details
+- [Enriching context point]
+- [Related entity or statistic]
+- [Additional value or next step]
 ```
 
-**Deliverables:**
-- Snippet-optimized content blocks
-- PAA question/answer pairs
-- Competitor snippet analysis
-- Format recommendations (paragraph/list/table)
-- Schema markup (FAQPage, HowTo)
-- Position tracking targets
-- Content placement strategy
+## FAQ Schema Markup
 
-**Advanced Tactics:**
-- Jump links for long content
-- FAQ sections for PAA dominance
-- Comparison tables for products
-- Step-by-step with images
-- Video timestamps for snippets
-- Voice search optimization
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is [topic]?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "[40-60 word direct answer]"
+      }
+    }
+  ]
+}
+```
 
-**Platform Implementation:**
-- WordPress: FAQ block setup
-- Static sites: Structured content components
-- Schema.org markup templates
+## HowTo Schema Markup
 
-Focus on clear, direct answers. Format content to maximize featured snippet eligibility.
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to [action]",
+  "step": [
+    {
+      "@type": "HowToStep",
+      "text": "[Step description]"
+    }
+  ]
+}
+```
+
+## Validation Checklist
+
+- Answer is 40–60 words for paragraph snippets
+- Question appears as H2 or H3 header
+- Answer starts immediately after the header (no preamble)
+- List items are concise (under 15 words each)
+- Table has clean markdown formatting with header row
