@@ -1,7 +1,7 @@
 {
   "name": "majestic-engineer",
-  "version": "4.0.8",
-  "description": "Language-agnostic engineering workflows. Includes 20 specialized agents, 33 commands, 43 skills, and 5 toolbox presets. Now includes relay orchestration for fresh-context task execution with quality gates and compound learning.",
+  "version": "4.0.9",
+  "description": "Language-agnostic engineering workflows. Includes specialized agents, commands, skills, and toolbox presets for autonomous task execution with quality gates.",
   "author": {
     "name": "David Paluy",
     "url": "https://github.com/dpaluy",

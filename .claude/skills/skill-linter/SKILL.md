@@ -127,7 +127,7 @@ Skills should primarily provide knowledge, not orchestration. If invocations are
 ```
 /majestic:config tech_stack generic
 /majestic-engineer:tdd-workflow
-/majestic-ralph:start "task" --max-iterations 50
+/majestic-engineer:workflows:build-task "T1"
 ```
 
 **❌ Deprecated patterns:**

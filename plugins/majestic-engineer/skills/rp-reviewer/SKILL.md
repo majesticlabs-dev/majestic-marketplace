@@ -1,11 +1,11 @@
 ---
 name: rp-reviewer
-description: Code review using RepoPrompt MCP (chat_send mode=review). Returns structured verdict for relay workflow.
+description: Code review using RepoPrompt MCP (chat_send mode=review). Returns structured verdict.
 ---
 
 # RP Reviewer
 
-**Audience:** Developers using the relay workflow who need automated code review via RepoPrompt.
+**Audience:** Developers who need automated code review via RepoPrompt.
 
 **Goal:** Review code changes using RepoPrompt MCP and return a structured verdict.
 
@@ -89,4 +89,4 @@ Or on rejection:
 | Workspace switch fails | Return `{ "verdict": "approved", "reason": "Could not switch workspace" }` |
 | chat_send fails | Return `{ "verdict": "approved", "reason": "Review failed - auto-approved" }` |
 
-**Design principle:** Fail-open to avoid blocking relay workflow.
+**Design principle:** Fail-open to avoid blocking automated workflows.

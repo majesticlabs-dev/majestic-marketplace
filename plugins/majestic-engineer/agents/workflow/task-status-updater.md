@@ -86,8 +86,8 @@ mcp__plugin_beads_beads__update:
 First verify CI passed, then update to "ready for review":
 
 **Step 1: Check CI Status**
-```
-skill check-ci
+```bash
+gh pr checks <PR_NUMBER> --watch --fail-fast
 ```
 
 **If CI fails:**

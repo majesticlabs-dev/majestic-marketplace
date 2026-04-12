@@ -127,7 +127,6 @@ AskUserQuestion:
   question: "Skill created. Want to test it with eval runs?"
   options:
     - "Yes, run evals" → /majestic:skill-eval [skill-path]
-    - "Optimize description" → /majestic:skill-optimize [skill-path]
     - "No, I'm done"
 ```
 

@@ -73,7 +73,6 @@ AskUserQuestion:
   question: "Start building?"
   options:
     - "Build all tasks now" → /majestic:run-blueprint "{plan_path}"
-    - "Build with ralph" → /majestic-ralph:ralph-loop "/majestic:run-blueprint {plan_path}"
     - "Done for now" → End workflow
 ```
 

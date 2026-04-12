@@ -26,13 +26,7 @@ If TASK_TRACKING:
 
 ## Workflow
 
-### 1. Start Ralph Loop
-
-```
-/majestic-ralph:ralph-loop "complete all blueprint tasks" --completion-promise "RUN_BLUEPRINT_COMPLETE"
-```
-
-### 2. Load Blueprint
+### 1. Load Blueprint
 
 ```
 Read(file_path: plan_path)
@@ -51,7 +45,7 @@ Parse the `## Implementation Tasks` section:
 - ✅ Completed
 - 🔴 Failed
 
-### 2.5. Create Tasks from Table (if tracking enabled)
+### 1.5. Create Tasks from Table (if tracking enabled)
 
 ```
 If TASK_TRACKING:
@@ -68,7 +62,7 @@ If TASK_TRACKING:
     TaskUpdate(TASK_MAP[ROW.id], addBlockedBy: BLOCKED_BY)
 ```
 
-### 3. Find Next Task
+### 2. Find Next Task
 
 ```
 If TASK_TRACKING:
@@ -83,15 +77,15 @@ Else:
         Break
 ```
 
-If no task found (all ✅ or 🔴): Go to Step 6.
+If no task found (all ✅ or 🔴): Go to Step 5.
 
-### 4. Execute Task
+### 3. Execute Task
 
 ```
 /majestic:build-task "{task.id}" --no-ship
 ```
 
-### 5. Update Status
+### 4. Update Status
 
 ```
 If TASK_TRACKING:
@@ -107,22 +101,14 @@ Edit(file_path: plan_path):
   If build failed: task.status = 🔴
 ```
 
-Go to Step 3 (next task).
+Go to Step 2 (next task).
 
-### 6. Ship
+### 5. Ship
 
 When all tasks are ✅ or 🔴:
 
 ```
 /majestic:ship-it
-```
-
-### 7. Complete
-
-Output completion promise:
-
-```
-<promise>RUN_BLUEPRINT_COMPLETE</promise>
 ```
 
 ## Task ID Formats

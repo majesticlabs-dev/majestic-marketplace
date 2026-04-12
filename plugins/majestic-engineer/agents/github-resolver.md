@@ -13,7 +13,6 @@ tools: Read, Write, Edit, Grep, Glob, Bash, WebFetch, Task
 
 | Skill | Purpose |
 |-------|---------|
-| `check-ci` | Test failures, lint errors, build issues |
 | `pr-comment-resolver` | Reviewer feedback and suggestions |
 
 ## Context
@@ -41,15 +40,15 @@ gh pr view <PR_NUMBER> --comments
 
 | Condition | Route To |
 |-----------|----------|
-| CI checks failing | Apply `check-ci` skill |
+| CI checks failing | Analyze failure logs, apply fixes directly |
 | Review comments pending | Apply `pr-comment-resolver` skill |
 | Both present | Handle CI first, then comments |
 
 ### Step 3: Apply Resolution
 
 For CI failures:
-- Apply `check-ci` skill with context: PR number, failure log snippet
-- Follow the skill's failure pattern tables and resolution workflow
+- Fetch failure logs: `gh pr checks <PR_NUMBER> --json name,state,detailsUrl`
+- Analyze failure output, identify root cause, apply fixes directly
 
 For PR comments:
 - Apply `pr-comment-resolver` skill with context: PR number, comment summary

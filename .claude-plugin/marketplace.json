@@ -11,8 +11,8 @@
   "plugins": [
     {
       "name": "majestic-engineer",
-      "description": "Language-agnostic engineering workflows. Includes 20 specialized agents, 33 commands, 43 skills, and 5 toolbox presets. Now includes relay orchestration for fresh-context task execution with quality gates and compound learning.",
-      "version": "4.0.8",
+      "description": "Language-agnostic engineering workflows. Includes specialized agents, commands, skills, and toolbox presets for autonomous task execution with quality gates.",
+      "version": "4.0.9",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -101,28 +101,9 @@
       "source": "./plugins/majestic-llm"
     },
     {
-      "name": "majestic-agent-sdk",
-      "description": "Claude Agent SDK tools for building custom AI agents. Includes 1 command and 1 skill.",
-      "version": "1.0.5",
-      "author": {
-        "name": "David Paluy",
-        "url": "https://github.com/dpaluy",
-        "email": "marketplace@it.majesticlabs.dev"
-      },
-      "homepage": "https://github.com/majesticlabs-dev/majestic-marketplace/tree/master/plugins/majestic-agent-sdk",
-      "tags": [
-        "claude-agent-sdk",
-        "ai-agents",
-        "sdk",
-        "scaffolding",
-        "agent-infrastructure"
-      ],
-      "source": "./plugins/majestic-agent-sdk"
-    },
-    {
       "name": "majestic-tools",
-      "description": "Claude Code customization tools. Includes 0 agents, 13 commands, and 12 skills.",
-      "version": "4.0.1",
+      "description": "Claude Code customization tools. Includes 0 agents, 10 commands, and 12 skills.",
+      "version": "4.0.2",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -416,29 +397,6 @@
         "indie-hacker"
       ],
       "source": "./plugins/majestic-founder"
-    },
-    {
-      "name": "majestic-ralph",
-      "description": "Autonomous AI coding loops. Ship features while you sleep with iterative prompt re-feeding. Includes 3 commands, 1 skill, and stop hook.",
-      "version": "1.2.3",
-      "author": {
-        "name": "David Paluy",
-        "url": "https://github.com/dpaluy",
-        "email": "marketplace@it.majesticlabs.dev"
-      },
-      "homepage": "https://github.com/majesticlabs-dev/majestic-marketplace/tree/master/plugins/majestic-ralph",
-      "tags": [
-        "ralph",
-        "autonomous",
-        "iteration",
-        "loop",
-        "agentic",
-        "ship-while-sleeping",
-        "tdd",
-        "learnings",
-        "compound"
-      ],
-      "source": "./plugins/majestic-ralph"
     }
   ]
 }

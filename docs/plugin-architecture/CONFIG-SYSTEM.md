@@ -83,7 +83,7 @@ quality_gate:
 - `strict` - Fix MEDIUM+ issues, defer LOW to log
 - `standard` - Fix HIGH+ issues, defer MEDIUM/LOW to log
 
-**Why the change:** Previously, MEDIUM/LOW findings were "approved with notes" but never addressed. With `pedantic` default, all issues are fixed while the session has context. Lower strictness defers findings to `.agents/relay/deferred-findings.log`.
+**Why the change:** Previously, MEDIUM/LOW findings were "approved with notes" but never addressed. With `pedantic` default, all issues are fixed while the session has context. Lower strictness defers findings to `.agents/deferred-findings.log`.
 
 **No action required** - existing configs continue to work with `pedantic` default.
 
@@ -476,7 +476,7 @@ Controls the minimum severity that triggers the fix loop:
 
 **Why pedantic is default:** Fix issues while context is fresh. Deferring loses context and accumulates tech debt.
 
-**Deferred findings log:** When strictness is not `pedantic`, findings below threshold are logged to `.agents/relay/deferred-findings.log` for later review.
+**Deferred findings log:** When strictness is not `pedantic`, findings below threshold are logged to `.agents/deferred-findings.log` for later review.
 
 ```yaml
 # .agents.yml

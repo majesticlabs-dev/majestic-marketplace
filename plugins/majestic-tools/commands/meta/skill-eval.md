@@ -171,8 +171,7 @@ If user has feedback:
   5. If yes: goto Step 3 (new iteration)
 
 If user is satisfied:
-  "Skill looks good. Want to optimize the description for better triggering?"
-  If yes: suggest /majestic:skill-optimize SKILL_PATH
+  "Skill looks good!"
 ```
 
 ## Improvement Guidelines

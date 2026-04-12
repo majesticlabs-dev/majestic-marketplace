@@ -17,7 +17,7 @@ NEVER modify `~/.claude/`. All plugin work goes in `majestic-marketplace/plugins
 ## Structure
 
 ```
-plugins/{engineer,rails,python,react,marketing,sales,company,llm,tools,agent-sdk,devops,experts,ralph}/
+plugins/{engineer,rails,python,react,marketing,sales,company,llm,tools,devops,experts}/
 ```
 
 **Wiki repo**: `../majestic-marketplace.wiki/` (separate git repo, requires separate commit/push)
@@ -26,10 +26,9 @@ plugins/{engineer,rails,python,react,marketing,sales,company,llm,tools,agent-sdk
 
 | Plugin | Can Reference |
 |--------|--------------|
-| `engineer` | rails, python, react, llm, tools, ralph |
+| `engineer` | rails, python, react, llm, tools |
 | `rails`, `python`, `react` | engineer |
-| `ralph` | (none) |
-| `marketing`, `sales`, `company`, `llm`, `tools`, `agent-sdk`, `devops`, `experts` | (none) |
+| `marketing`, `sales`, `company`, `llm`, `tools`, `devops`, `experts` | (none) |
 
 ## Documentation
 
@@ -126,9 +125,9 @@ When an agent invokes a skill:
 
 ### Command Naming
 - Command names in frontmatter must include full plugin prefix
-- Format: `name: plugin-name:command-name` (e.g., `majestic-ralph:start`)
-- Matches cross-plugin invocation: `/majestic-ralph:start`
-- Avoid redundant patterns like `ralph:ralph` — use descriptive names (`start`, `cancel`, `help`)
+- Format: `name: plugin-name:command-name` (e.g., `majestic-engineer:git:commit`)
+- Matches cross-plugin invocation: `/majestic-engineer:git:commit`
+- Avoid redundant patterns — use descriptive names (`start`, `cancel`, `help`)
 
 ### Validation
 
@@ -242,7 +241,7 @@ When in doubt: keep it, ask user. Don't assume "cleanup" is correct.
 
 ### State Files: Ephemeral vs Permanent
 - Session working files: Use `.local.` suffix (gitignored)
-- Example: `.claude/ralph-progress.local.yml` during iteration
+- Example: `.claude/workflow-progress.local.yml` during iteration
 - Promote valuable patterns to permanent docs (AGENTS.md) at session end
 - Ephemeral files = working memory; Permanent docs = durable knowledge
 

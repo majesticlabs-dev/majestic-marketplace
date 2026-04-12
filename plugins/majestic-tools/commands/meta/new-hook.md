@@ -1,5 +1,5 @@
 ---
-name: majesitc:new-hook
+name: majestic:new-hook
 description: Create and configure Claude Code hooks for automating workflows and behavior control
 allowed-tools: Read, Edit, Write, Bash, WebFetch, AskUserQuestion
 argument-hint: "[hook-description]"

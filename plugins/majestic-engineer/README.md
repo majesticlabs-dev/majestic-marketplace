@@ -189,14 +189,6 @@ Invoke with: `agent <name>`
 | `ui-code-auditor` | Static code analysis for UI quality, accessibility, and performance |
 | `visual-validator` | Verify UI changes achieved their goals through skeptical visual analysis |
 
-### relay
-
-| Agent | Description |
-|-------|-------------|
-| `blueprint-to-epics` | Split blueprint into epics by logical phase |
-| `init-playlist` | Generate playlist.yml from epics folder |
-| `learning-processor` | Aggregate learnings from relay epic into lessons |
-
 ### research
 
 | Agent | Description |
@@ -247,16 +239,6 @@ Invoke with: `/majestic-engineer:<name>`
 | `git:triage-prs` | Triage open PRs with parallel review, label, and merge decisions |
 | `git:worktree-cleanup` | Clean up merged and stale git worktrees |
 
-### relay
-
-| Command | Description |
-|---------|-------------|
-| `relay:init` | Parse blueprint markdown into epic.yml for fresh-context execution |
-| `relay:playlist-status` | Show playlist progress across all epics |
-| `relay:run-playlist` | Output terminal command to execute playlist |
-| `relay:status` | Show current epic progress and task status |
-| `relay:work` | Execute epic tasks with fresh-context Claude instances |
-
 ### session
 
 | Command | Description |
@@ -285,7 +267,7 @@ Invoke with: `/majestic-engineer:<name>`
 | `workflows:quality-gate` | Run quality gate checks with tech stack-aware reviewers |
 | `workflows:question` | Answer questions about project structure without coding |
 | `workflows:refactor-agents` | Refactor existing AGENTS.md to follow progressive disclosure |
-| `workflows:run-blueprint` | Execute all blueprint tasks using build-task with ralph-loop |
+| `workflows:run-blueprint` | Execute all blueprint tasks using build-task workflow |
 | `workflows:ship-it` | Complete checkout workflow: lint, commit, PR |
 | `workflows:ux-brief` | Create junior-dev-ready design systems through guided discovery |
 
@@ -299,7 +281,6 @@ Invoke with: `skill majestic-engineer:<name>`
 | `blueprint-discovery` | Discovery phase for blueprint workflow | |
 | `blueprint-execution` | Execution phase for blueprint workflow | |
 | `blueprint-research` | Research phase for blueprint workflow | |
-| `check-ci` | Monitor PR CI checks by polling GitHub status | |
 | `cloudflare-worker` | Build edge-first TypeScript apps on Cloudflare Workers | |
 | `code-story` | Narrative templates for git changelog stories | |
 | `config-reader` | Read project config from .agents.yml | |
@@ -317,7 +298,6 @@ Invoke with: `skill majestic-engineer:<name>`
 | `plan-builder` | Write implementation plans from templates | |
 | `pr-screenshot-docs` | Capture and document UI changes with screenshots | |
 | `readme-craft` | Production-grade README.md patterns for any project | yes |
-| `relay/attempt-ledger` | Track relay task attempts and outcomes | |
 | `research-compound` | Compound learnings into AGENTS.md during research | yes |
 | `structured-logging` | Production logging patterns for observability | yes |
 | `task-coordinator` | Orchestrate multi-step workflows with task tracking | |
@@ -363,9 +343,6 @@ agent majestic-engineer:plan:architect "Design user authentication system"
 # Create commit and PR
 /majestic-engineer:git:commit
 /majestic-engineer:git:create-pr
-
-# Monitor CI (using skill)
-skill majestic-engineer:check-ci
 
 # Use git-worktree skill for parallel development
 skill majestic-engineer:git-worktree
