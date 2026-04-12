@@ -1,0 +1,112 @@
+# Site Archetype → Page-to-Schema Mappings
+# Maps common page types per site archetype to recommended schemas and expected rich results.
+
+saas:
+  pages:
+    homepage:
+      schemas: [Organization, WebSite]
+      rich_result: Sitelinks search box
+    pricing:
+      schemas: [Product, Offer]
+      rich_result: Price in search
+      notes: One Product per plan tier, each with its own Offer
+    blog:
+      schemas: [Article, FAQPage]
+      rich_result: FAQ dropdowns
+      notes: Add FAQPage only when post contains Q&A sections
+    docs:
+      schemas: [HowTo]
+      rich_result: Step-by-step snippet
+      notes: Best for tutorial/guide pages with sequential steps
+    reviews:
+      schemas: [AggregateRating]
+      rich_result: Star ratings
+      notes: Must reflect genuine user reviews, not self-assessed
+    changelog:
+      schemas: [Article]
+      rich_result: Article carousel
+    about:
+      schemas: [Organization, Person]
+      rich_result: Knowledge panel
+      notes: Person schema for founders/team with sameAs links
+
+ecommerce:
+  pages:
+    homepage:
+      schemas: [Organization, WebSite]
+      rich_result: Sitelinks search box
+    product:
+      schemas: [Product, Offer, AggregateRating]
+      rich_result: Price + star ratings
+    category:
+      schemas: [BreadcrumbList, ItemList]
+      rich_result: Breadcrumb trail
+    faq:
+      schemas: [FAQPage]
+      rich_result: FAQ dropdowns
+    blog:
+      schemas: [Article]
+      rich_result: Article carousel
+    reviews:
+      schemas: [AggregateRating]
+      rich_result: Star ratings
+
+agency:
+  pages:
+    homepage:
+      schemas: [Organization, WebSite]
+      rich_result: Sitelinks search box
+    services:
+      schemas: [Service, Offer]
+      rich_result: Price in search
+      notes: One Service per offering with associated Offer
+    case_studies:
+      schemas: [Article]
+      rich_result: Article carousel
+    blog:
+      schemas: [Article, FAQPage]
+      rich_result: FAQ dropdowns
+    about:
+      schemas: [Organization, Person]
+      rich_result: Knowledge panel
+    contact:
+      schemas: [LocalBusiness]
+      rich_result: Map pack
+      notes: Only if physical location exists
+
+blog:
+  pages:
+    homepage:
+      schemas: [Organization, WebSite]
+      rich_result: Sitelinks search box
+    post:
+      schemas: [Article, Person]
+      rich_result: Article carousel
+      notes: Person schema for author with sameAs linking to social profiles
+    tutorial:
+      schemas: [HowTo]
+      rich_result: Step-by-step snippet
+    listicle:
+      schemas: [ItemList]
+      rich_result: List snippet
+    faq:
+      schemas: [FAQPage]
+      rich_result: FAQ dropdowns
+
+docs:
+  pages:
+    homepage:
+      schemas: [WebSite]
+      rich_result: Sitelinks search box
+    guide:
+      schemas: [HowTo]
+      rich_result: Step-by-step snippet
+    reference:
+      schemas: [Article, BreadcrumbList]
+      rich_result: Breadcrumb trail
+    faq:
+      schemas: [FAQPage]
+      rich_result: FAQ dropdowns
+    changelog:
+      schemas: [Article]
+      rich_result: Article carousel

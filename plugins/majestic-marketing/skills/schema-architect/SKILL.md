@@ -1,6 +1,6 @@
 ---
 name: schema-architect
-description: Design Schema.org structured data for AI extraction and rich results. Generate JSON-LD for organization, FAQ, HowTo, and article schemas.
+description: Use when adding or auditing Schema.org structured data for AI extraction and rich results. Generate JSON-LD for organization, FAQ, HowTo, product, and article schemas. Not for content structure — use structure-architect instead.
 allowed-tools: Read Write Edit Grep Glob WebSearch
 ---
 
@@ -14,16 +14,21 @@ Design and implement Schema.org structured data for maximum AI visibility and ri
 
 **High-Impact (Implement First):**
 
-| Schema Type | Use Case | AI Benefit |
-|-------------|----------|------------|
-| `Organization` | Company info | Entity recognition |
-| `FAQPage` | Q&A content | Direct answer extraction |
-| `HowTo` | Tutorials/guides | Step extraction |
-| `Article/BlogPosting` | Blog content | Content attribution |
-| `Product` | E-commerce | Product info extraction |
-| `BreadcrumbList` | Navigation | Site structure |
+| Schema Type | Use Case | AI Benefit | Rich Result |
+|-------------|----------|------------|-------------|
+| `Organization` + `WebSite` | Company info | Entity recognition | Sitelinks search box |
+| `FAQPage` | Q&A content | Direct answer extraction | FAQ dropdowns |
+| `HowTo` | Tutorials/guides | Step extraction | Step-by-step snippet |
+| `Article/BlogPosting` | Blog content | Content attribution | Article carousel |
+| `Product` + `Offer` | Pricing/e-commerce | Product info extraction | Price in search |
+| `AggregateRating` | Reviews/testimonials | Trust signals | Star ratings |
+| `BreadcrumbList` | Navigation | Site structure | Breadcrumb trail |
 
-**Medium-Impact:** `Person`, `Review/AggregateRating`, `LocalBusiness`, `Event`, `Course`
+**Medium-Impact:** `Person`, `LocalBusiness`, `Event`, `Course`, `SoftwareApplication`
+
+## Site Archetype Mappings
+
+See [references/site-archetypes.yaml](references/site-archetypes.yaml) for page-to-schema mappings per site type (SaaS, e-commerce, agency, blog, docs).
 
 ## Implementation Templates
 
