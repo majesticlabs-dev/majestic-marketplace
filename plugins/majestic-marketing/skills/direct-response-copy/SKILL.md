@@ -243,6 +243,19 @@ Signals "written by someone who lives online, not a marketing team":
 9. **Urgency** — Only if authentic
 10. **Final CTA** — Benefit-oriented, friction reducers
 
+### Shorthand: PRESTO
+
+Simplified 6-step variant for shorter pages or email sequences:
+
+| Step | Action | Maps to above |
+|------|--------|---------------|
+| **P**ain | Name the audience's struggle | Steps 2-3 |
+| **R**esonate | Connect emotionally (shared experience) | Step 4 |
+| **E**ducate | Share the insight they're missing | Step 5 |
+| **S**implify | Make the offer dead-obvious | Step 8 |
+| **T**estify | Social proof / testimonials | Step 6 |
+| **O**ffer | Present the solution + CTA | Steps 9-10 |
+
 ---
 
 For AI detection patterns and word avoidance lists, see `brand-voice` skill.
