@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.2.0] - 2026-04-12
+
+### Added
+
+- **Blind spots** - All 22 expert definitions now declare `blind_spots:` in frontmatter
+  - 4 declared limitations per expert, specific to their perspective and experience
+  - Expert perspective agent parses and surfaces blind spots in responses
+  - Output format includes "Where I might be wrong" line
+- **Minority Report** - New synthesis section capturing dissenting positions explicitly
+  - Documents: position, core argument, what majority may miss, conditions where minority wins
+  - Added to both full and compact synthesis templates
+- **Anti-recursion rules** - Prevent infinite loops in multi-round discussions
+  - Evidence rule: force position when question already answered with evidence
+  - 3-level depth limit on back-and-forth sub-topics
+  - 2-message pair cutoff for bilateral debates
+  - New Step 5.5 in orchestrator applies rules between rounds
+
 ## [3.1.1] - 2025-12-23
 
 ### Fixed

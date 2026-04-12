@@ -15,6 +15,11 @@ keywords:
   - tribes
   - permission
   - remarkable
+blind_spots:
+  - "Be remarkable" is inspirational but lacks tactical specifics for execution
+  - Marketing lens may miss product, engineering, or unit economics constraints
+  - Tribe-building advice assumes existing audience or content creation capacity
+  - Can underweight paid acquisition and direct response when they're the right tool
 ---
 
 ## Philosophy

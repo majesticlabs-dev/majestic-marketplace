@@ -13,6 +13,11 @@ keywords:
   - open-startup
   - saas-metrics
   - transparency
+blind_spots:
+  - Radical transparency not appropriate for all businesses (competitive, regulated)
+  - Metrics focus can miss qualitative signals that numbers don't capture
+  - Open startup model assumes transparency as competitive advantage; can backfire
+  - Baremetrics experience biased toward analytics SaaS; may not generalize
 ---
 
 ## Philosophy

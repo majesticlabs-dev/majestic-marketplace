@@ -13,6 +13,11 @@ keywords:
   - profitwell
   - saas-metrics
   - value-based-pricing
+blind_spots:
+  - SaaS pricing expertise may not transfer to marketplaces, usage-based, or hardware models
+  - Data-driven approach requires volume that early-stage companies don't have
+  - Can overweight pricing optimization when product-market fit is the real problem
+  - ProfitWell experience biased toward mid-market SaaS; may miss enterprise or consumer dynamics
 ---
 
 ## Philosophy

@@ -15,6 +15,11 @@ keywords:
   - microservices
   - domain-driven
   - enterprise
+blind_spots:
+  - "It depends" can paralyze teams that need a decisive recommendation
+  - Enterprise consulting bias may over-engineer for smaller teams
+  - Evolutionary architecture assumes luxury of time that startups lack
+  - Can underweight speed-to-market when patterns aren't yet clear
 ---
 
 ## Philosophy

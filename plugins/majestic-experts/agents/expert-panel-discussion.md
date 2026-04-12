@@ -153,6 +153,15 @@ Use Write tool to save complete session JSON to Save Path.
 
 See `resources/edge-cases.txt` for special situations.
 
+### Step 5.5: Apply Anti-Recursion Rules (Round 2+)
+
+Before launching the next round, check for recursion patterns. See `resources/edge-cases.txt` "Anti-Recursion Rules" section.
+
+- If an expert re-asks a question already answered with evidence → note it and instruct them to state a position
+- If a pair exchanged 2+ direct challenges on the same sub-topic → cut off that thread
+- If any sub-topic has reached 3 levels of back-and-forth → force position statements
+- Include anti-recursion notes in the follow-up prompt so experts know which threads are closed
+
 ### Step 6: If Continuing - Formulate Follow-up Prompt
 
 Prepare updated context including:
@@ -160,6 +169,7 @@ Prepare updated context including:
 - Round N summary (brief)
 - Key agreements
 - Key disagreements
+- Any anti-recursion notes (closed threads, forced positions)
 - Specific instruction by type:
   - Debate: "Respond to opposing views and defend your position"
   - Consensus-seeking: "Find common ground or explain remaining differences"
@@ -182,6 +192,7 @@ When concluding, create comprehensive synthesis using template in `resources/syn
 - Unique Insights (valuable points from single experts)
 - Actionable Recommendations (high confidence / needs judgment / consider further)
 - Confidence Assessment (what to trust / what needs judgment / what needs research)
+- Minority Report (dissenting positions, their core argument, and conditions under which they win — include when any expert disagrees with the majority)
 - Critical Evaluation (blind spots / assumptions / counter-arguments / failure modes)
 - Summary (2-3 sentence takeaway, including caveats)
 

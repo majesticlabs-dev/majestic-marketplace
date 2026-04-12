@@ -102,6 +102,24 @@ Based on the panel discussion, here are concrete actions:
 
 ---
 
+## Minority Report
+
+When consensus exists, document the dissenting position(s) explicitly. The minority view often surfaces the risk that the majority misses.
+
+**Include when:** Any expert holds a position that the majority rejected. Skip only if all experts fully agree.
+
+### [Dissenting Expert Color + Name]
+
+**Position:** [Their rejected stance in 1-2 sentences]
+
+**Core Argument:** [Why they held this position despite majority disagreement]
+
+**What the Majority May Be Missing:** [The specific risk or blind spot their position highlights]
+
+**Conditions Under Which This View Wins:** [When would the minority be right and the majority wrong?]
+
+---
+
 ## Critical Evaluation
 
 **IMPORTANT:** Never conclude without this section. Challenge the panel's own conclusions.
@@ -171,6 +189,9 @@ For simpler discussions or when brevity is preferred:
 ## Key Divergence
 - [Topic]: 🔴 says X, 🔵 says Y
 - Tradeoff: [What to consider when choosing]
+
+## Minority Report
+- **[Expert]:** [Their dissenting position and the risk it highlights]
 
 ## Critical Check
 - **Blind spot:** [What wasn't considered]

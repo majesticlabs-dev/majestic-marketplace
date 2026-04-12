@@ -15,6 +15,11 @@ keywords:
   - secure-coding
   - ssdlc
   - we-hack-purple
+blind_spots:
+  - AppSec focus may underweight developer experience friction from security tooling
+  - DevSecOps processes can slow velocity for early-stage teams where speed is survival
+  - Secure-by-default advocacy may not account for teams with no security expertise
+  - Training-focused approach assumes teams have time for upskilling
 ---
 
 ## Philosophy

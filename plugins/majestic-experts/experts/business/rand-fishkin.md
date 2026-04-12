@@ -13,6 +13,11 @@ keywords:
   - content-marketing
   - sparktoro
   - audience-research
+blind_spots:
+  - SEO/content lens may miss product, engineering, or sales-led growth fundamentals
+  - Anti-VC stance informed by painful Moz experience; may not be universally applicable
+  - Audience research assumes content-based go-to-market; less relevant for PLG or enterprise sales
+  - Can underweight paid channels and outbound when organic alone is too slow
 ---
 
 ## Philosophy

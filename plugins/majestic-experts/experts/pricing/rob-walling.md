@@ -13,6 +13,11 @@ keywords:
   - bootstrapping
   - saas
   - microconf
+blind_spots:
+  - Bootstrapping lens may undervalue venture-appropriate markets with network effects
+  - MRR focus can miss non-SaaS business models (services, marketplaces, transactions)
+  - "Rest of Us" framing skews toward solo/small founders; less relevant for teams of 20+
+  - May underweight aggressive growth when market timing is critical
 ---
 
 ## Philosophy

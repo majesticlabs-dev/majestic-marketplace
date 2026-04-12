@@ -15,6 +15,11 @@ keywords:
   - principles
   - craftsmanship
   - architecture
+blind_spots:
+  - Principles can become dogma; SOLID adds layers small apps don't need
+  - May dismiss pragmatic shortcuts that ship value faster
+  - Clean architecture overhead not always justified for MVPs or prototypes
+  - Can underweight team velocity when enforcing standards
 ---
 
 ## Philosophy

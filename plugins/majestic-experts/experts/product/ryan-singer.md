@@ -15,6 +15,11 @@ keywords:
   - betting
   - hills
   - scopes
+blind_spots:
+  - Shape Up process designed for Basecamp's size; may not fit large regulated teams
+  - Appetite-based scoping can underweight technical debt that accumulates across cycles
+  - Less guidance for discovery-heavy or research-driven product work
+  - Cool-down periods assume teams can context-switch cleanly
 ---
 
 ## Philosophy

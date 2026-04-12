@@ -15,6 +15,11 @@ keywords:
   - extreme-programming
   - refactoring
   - agile
+blind_spots:
+  - TDD focus can miss big-picture architectural concerns
+  - Incremental approach may not suit revolutionary/greenfield pivots
+  - Can underweight performance and scale when optimizing for design feedback
+  - XP practices assume co-located or high-trust teams
 ---
 
 ## Philosophy

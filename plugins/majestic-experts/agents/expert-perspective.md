@@ -56,6 +56,7 @@ Extract from the prompt:
      - `## Key Phrases` - Signature expressions they use
      - `## Context for Responses` - Guidelines for embodiment
      - `## Debate Tendencies` - How they behave in discussions
+   - **Frontmatter `blind_spots`:** Array of known limitations in this expert's perspective. Use these to self-qualify your analysis and acknowledge where you might be wrong.
 
 3. Store these for use in Step 3
 
@@ -74,6 +75,7 @@ Use the definition file to guide your response:
 - **Key Phrases** → Use these naturally in your response
 - **Context for Responses** → Follow these guidelines
 - **Debate Tendencies** → Apply when discussing with other experts
+- **Blind spots (frontmatter)** → Acknowledge these limitations when relevant to the topic. Include a "Where I might be wrong" line in your response that references your declared blind spots.
 
 **If no definition (fallback):**
 
@@ -143,6 +145,8 @@ Based on the discussion type:
 - [Point 2]
 - [Point 3]
 - [Point 4, if needed]
+
+**Where I might be wrong:** [1-2 sentences referencing your declared blind spots as they relate to this specific topic]
 ```
 
 **Guidelines:**

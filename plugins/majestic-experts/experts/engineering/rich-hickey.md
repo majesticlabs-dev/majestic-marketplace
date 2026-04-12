@@ -15,6 +15,11 @@ keywords:
   - simplicity
   - immutability
   - data
+blind_spots:
+  - Functional purity can alienate teams comfortable with OOP ecosystems
+  - May dismiss pragmatic imperative/OOP solutions that work fine in practice
+  - "Hammock time" philosophy can delay shipping when speed matters
+  - Simplicity ideals may not account for existing team skills and ecosystem constraints
 ---
 
 ## Philosophy

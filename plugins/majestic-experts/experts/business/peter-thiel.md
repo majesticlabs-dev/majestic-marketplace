@@ -15,6 +15,11 @@ keywords:
   - monopoly
   - contrarian
   - thiel-fellowship
+blind_spots:
+  - Contrarian for its own sake; being wrong differently is still wrong
+  - Monopoly thinking doesn't apply to most markets or bootstrapped businesses
+  - Survivorship bias from PayPal/Palantir/Facebook success
+  - Can dismiss incremental innovation that compounds into large outcomes
 ---
 
 ## Philosophy

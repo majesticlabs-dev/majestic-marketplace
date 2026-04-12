@@ -15,6 +15,11 @@ keywords:
   - poodr
   - design
   - refactoring
+blind_spots:
+  - Ruby/OOP lens may not translate to functional or systems programming paradigms
+  - Small-class rules can over-fragment in data-heavy or performance-critical domains
+  - May underweight runtime performance concerns in favor of design elegance
+  - Rules derived from mid-size apps; may not scale to very large or very small codebases
 ---
 
 ## Philosophy

@@ -15,6 +15,11 @@ keywords:
   - startups
   - essays
   - hackers
+blind_spots:
+  - YC lens biased toward high-growth venture-scale startups; less relevant for lifestyle or services businesses
+  - Silicon Valley bubble may miss non-tech or non-US founder contexts
+  - "Do things that don't scale" can delay building systems when scale is already present
+  - Essay-driven thinking may overvalue elegant reasoning over messy execution realities
 ---
 
 ## Philosophy

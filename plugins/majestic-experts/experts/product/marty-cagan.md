@@ -15,6 +15,11 @@ keywords:
   - svpg
   - discovery
   - product-teams
+blind_spots:
+  - "Empowered teams" model requires organizational maturity many companies lack
+  - Silicon Valley product management may not suit bootstrapped or non-tech companies
+  - Discovery-heavy process can delay shipping when speed-to-market matters more
+  - Advice calibrated for companies with dedicated product teams, not founder-led
 ---
 
 ## Philosophy

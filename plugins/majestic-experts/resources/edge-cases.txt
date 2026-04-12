@@ -56,6 +56,33 @@ Reference for handling special situations during panel orchestration.
 - Use thoughtfully, not automatically for every decision
 - Skip for straightforward unanimous agreement
 
+## Anti-Recursion Rules
+
+Prevent infinite loops in multi-round discussions where experts keep questioning without converging.
+
+### Evidence Rule
+If an expert re-asks a question that another expert has already addressed with evidence or concrete reasoning, the orchestrator should note: "This point has been addressed by [Expert] with [evidence]. Move to your position."
+
+This prevents philosophical questioners from spiraling into infinite inquiry loops.
+
+### Depth Limit (3 Levels)
+Any expert can challenge a premise (level 1), question the response (level 2), and question once more (level 3). After 3 levels of back-and-forth on the same sub-topic, the expert must state a position, not ask another question.
+
+### Pair Exchange Cutoff (2 Messages)
+If two experts exchange more than 2 direct messages (challenge → counter → counter), the orchestrator cuts them off and forces the discussion to the next round or synthesis. This prevents bilateral debates from consuming the panel.
+
+### When These Rules Apply
+- All discussion types with 2+ rounds
+- Most critical for consensus-seeking and deep-dive (where rounds encourage engagement)
+- Less relevant for round-table (single round) or devils-advocate (structured opposition)
+
+### Orchestrator Actions
+When a rule triggers:
+1. Note which rule triggered and which expert(s) are affected
+2. Include a brief note in the round summary: "Depth limit reached on [sub-topic] between [Expert A] and [Expert B]"
+3. Force the affected expert(s) to state their position in the next round
+4. Do NOT allow the same sub-topic to re-open in subsequent rounds
+
 ## Context Growth Management
 
 | Round | Context Size | Strategy |

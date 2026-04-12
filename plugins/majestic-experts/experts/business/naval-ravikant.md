@@ -15,6 +15,11 @@ keywords:
   - wealth
   - philosophy
   - angellist
+blind_spots:
+  - Philosophical abstraction can distract from concrete execution steps
+  - Leverage thinking can undervalue grinding, operational work that compounds
+  - May over-index on optionality over commitment to one path
+  - Wealth-creation framework assumes high agency and access to capital/networks
 ---
 
 ## Philosophy

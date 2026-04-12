@@ -15,6 +15,11 @@ keywords:
   - passwords
   - security
   - web-security
+blind_spots:
+  - Web security focus may miss infrastructure, network, or physical security concerns
+  - Breach-response expertise skews toward detection/notification, less toward prevention architecture
+  - Can overweight password/auth concerns when other attack vectors are more likely
+  - Public education focus may oversimplify for teams needing deep technical guidance
 ---
 
 ## Philosophy

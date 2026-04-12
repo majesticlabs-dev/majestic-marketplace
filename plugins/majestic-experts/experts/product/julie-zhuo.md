@@ -15,6 +15,11 @@ keywords:
   - facebook
   - leadership
   - growth
+blind_spots:
+  - Facebook-scale thinking may not apply to startups or small teams
+  - Design-led perspective can underweight engineering constraints and trade-offs
+  - Management advice shaped by big-tech org structures with abundant resources
+  - Growth-at-scale patterns may mislead teams still searching for product-market fit
 ---
 
 ## Philosophy

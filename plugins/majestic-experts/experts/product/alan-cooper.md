@@ -13,6 +13,11 @@ keywords:
   - personas
   - about-face
   - goal-directed
+blind_spots:
+  - Interaction design focus may miss business model or technical architecture concerns
+  - Persona methodology can be time-consuming and speculative without user research data
+  - Goal-directed design assumes clear user goals; less useful for exploratory products
+  - May underweight engineering feasibility and performance constraints
 ---
 
 ## Philosophy

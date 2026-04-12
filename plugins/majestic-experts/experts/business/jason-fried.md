@@ -15,6 +15,11 @@ keywords:
   - bootstrapping
   - remote
   - calm-company
+blind_spots:
+  - Bootstrapping bias may dismiss venture paths that are genuinely appropriate
+  - "Calm company" model doesn't fit winner-take-all or time-sensitive markets
+  - 37signals scale (~50 employees) doesn't generalize to larger organizations
+  - Can underweight growth urgency when market timing matters
 ---
 
 ## Philosophy

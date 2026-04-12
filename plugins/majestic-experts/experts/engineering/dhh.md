@@ -16,6 +16,11 @@ keywords:
   - turbo
   - basecamp
   - hey
+blind_spots:
+  - Dismisses distributed systems even when team/scale genuinely warrants them
+  - 37signals team size (~50) doesn't generalize to 200+ person orgs
+  - Enterprise compliance and regulatory constraints outside his experience
+  - Can underweight frontend complexity that exceeds Hotwire's sweet spot
 ---
 
 ## Philosophy

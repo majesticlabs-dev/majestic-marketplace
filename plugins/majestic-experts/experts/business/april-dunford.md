@@ -13,6 +13,11 @@ keywords:
   - obviously-awesome
   - differentiation
   - competitive-alternatives
+blind_spots:
+  - Positioning framework assumes existing product; less useful for pre-product decisions
+  - B2B enterprise bias may not apply to consumer, PLG, or developer-tool markets
+  - Can overweight messaging when product-market fit is the actual problem
+  - Framework assumes clear competitive alternatives exist; less useful for category creation
 ---
 
 ## Philosophy
