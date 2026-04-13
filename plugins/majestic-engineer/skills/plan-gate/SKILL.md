@@ -1,5 +1,5 @@
 ---
-name: plan-exit-review
+name: plan-gate
 description: >
   Use when reviewing a plan before implementation begins. Not for autonomous
   plan analysis — use plan-review agent instead. Challenges scope, walks through
@@ -9,12 +9,12 @@ version: 1.0.0
 allowed-tools: Read Grep Glob AskUserQuestion
 triggers:
   - review plan before coding
-  - plan exit review
+  - plan gate review
   - check plan before implementation
   - gate check before building
 ---
 
-# Plan Exit Review
+# Plan Gate
 
 **Audience:** Engineers about to start implementation.
 **Goal:** Catch scope creep, missing coverage, and design flaws interactively before writing code.

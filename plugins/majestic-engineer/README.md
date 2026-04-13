@@ -232,7 +232,6 @@ Invoke with: `/majestic-engineer:<name>`
 | Command | Description |
 |---------|-------------|
 | `git:changelog` | Create engaging changelogs from recent merges |
-| `git:code-story` | Generate documentary-style narrative of repository history |
 | `git:commit` | Create git commit with proper message formatting |
 | `git:create-pr` | Create a pull request for the current feature branch |
 | `git:pr-review` | Review and address Pull Request comments from GitHub |
@@ -282,7 +281,6 @@ Invoke with: `skill majestic-engineer:<name>`
 | `blueprint-execution` | Execution phase for blueprint workflow | |
 | `blueprint-research` | Research phase for blueprint workflow | |
 | `cloudflare-worker` | Build edge-first TypeScript apps on Cloudflare Workers | |
-| `code-story` | Narrative templates for git changelog stories | |
 | `config-reader` | Read project config from .agents.yml | |
 | `create-adr` | Create Architecture Decision Records | |
 | `design-tool-picker` | Choose the right design tool for your task | |
