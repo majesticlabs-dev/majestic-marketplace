@@ -116,6 +116,22 @@ Score: -2 (worst) to +5 (best)
 
 **Find the empty quadrant** for differentiation.
 
+## Quick-Pass Filter (Before Full Evaluation)
+
+Eliminate weak candidates fast. Each name must pass all 7:
+
+| Criterion | Question |
+|---|---|
+| **Evocative** | Does it make you feel something? |
+| **Memorable** | Can someone repeat it 3 days later with no cue? |
+| **Spellable** | Can someone spell it after hearing it once? |
+| **Speakable** | Does it sound good said out loud? |
+| **Ownable** | Is it distinctive enough to trademark? |
+| **Scalable** | Will it still make sense as the company grows or pivots? |
+| **Domain-viable** | Is a good domain/handle available or acquirable? |
+
+Names that fail 2+ criteria → cut. Survivors go to full evaluation below.
+
 ## Name Evaluation (Score 1-5 Each)
 
 | Criterion | Measures |
@@ -256,6 +272,28 @@ Place top name in real-world contexts to test believability:
 4. Test pronunciation with 5 people
 5. Sleep on it (24 hours)
 ```
+
+## Special Scenarios
+
+### Renaming an Existing Company
+- Acknowledge what equity exists in the current name (recognizability, SEO, community)
+- Map what the new name must fix or unlock
+- Less than 1% of your potential market has heard your name — optimize for the 99% who haven't
+
+### Naming a Product Within a Company
+- Check brand architecture first: Branded house (FedEx)? House of brands (P&G)? Endorsed brand (Courtyard by Marriott)?
+- Product name must be consistent with or intentionally contrast the parent brand
+
+### Naming for Global Markets
+- Avoid names with negative connotations in target languages
+- Favor phonetically neutral names (vowel-heavy, no harsh consonant combos)
+- Check for unintended meanings in Spanish, French, Mandarin, Arabic at minimum
+- Famous failures: Chevy Nova ("no va" = "doesn't go"), Mitsubishi Pajero (obscene in Spanish), Clairol Mist Stick ("mist" = manure in German)
+
+## References
+
+- Extended naming types and category decision matrix: `references/naming-types.md`
+- Domain strategy, trademark research, and social handle checks: `references/domain-trademark.md`
 
 ## When Invoked By Other Skills
 
