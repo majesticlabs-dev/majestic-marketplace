@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Minto Pyramid: {{TOPIC_TITLE}}</title>
+<style>
+ * { box-sizing: border-box; margin: 0; padding: 0; }
+ body {
+ font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+ background: #f7f7f5;
+ color: #1a1a1a;
+ padding: 40px 20px;
+ line-height: 1.5;
+ }
+ .container { max-width: 1100px; margin: 0 auto; }
+ h1 { font-size: 28px; font-weight: 700; margin-bottom: 6px; }
+ .subtitle { color: #666; font-size: 15px; margin-bottom: 40px; }
+ .section-label {
+ font-size: 11px; font-weight: 700; letter-spacing: 1.5px;
+ color: #888; text-transform: uppercase; margin-bottom: 16px;
+ }
+ .pyramid {
+ background: white; border-radius: 12px; padding: 40px 30px;
+ margin-bottom: 40px; box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+ }
+ .tier { display: flex; justify-content: center; gap: 14px; margin-bottom: 36px; }
+ .tier:last-child { margin-bottom: 0; }
+ .node { border-radius: 10px; padding: 18px 20px; font-size: 14px; line-height: 1.5; flex: 1; max-width: 320px; }
+ .node-title { font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; opacity: 0.7; margin-bottom: 6px; }
+ .answer {
+ background: #1a1a1a; color: white; max-width: 720px;
+ font-size: 16px; font-weight: 500; text-align: center; padding: 24px 28px;
+ }
+ .answer .node-title { color: #c4c4c4; }
+ .argument { background: #fff8e6; border: 1px solid #f2d98a; }
+ .argument .node-title { color: #a07b00; }
+ .evidence { background: #eef5ff; border: 1px solid #bcd2f0; font-size: 13px; }
+ .evidence .node-title { color: #2e5aa6; }
+ .evidence.missing { background: #ffeeee; border: 1px solid #f0bcbc; }
+ .evidence.missing .node-title { color: #a63030; }
+ .opener-box {
+ background: white; border-left: 4px solid #1a1a1a; border-radius: 8px;
+ padding: 24px 28px; margin-bottom: 40px; box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+ }
+ .opener-box .quote { font-size: 18px; font-weight: 500; line-height: 1.5; color: #1a1a1a; margin-top: 10px; font-style: italic; }
+ .opener-box .note { font-size: 13px; color: #666; margin-top: 12px; }
+ .plan { background: white; border-radius: 12px; padding: 30px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+ .step { display: flex; gap: 16px; padding: 16px 0; border-bottom: 1px solid #eee; }
+ .step:last-child { border-bottom: none; }
+ .step-num {
+ flex-shrink: 0; width: 30px; height: 30px; border-radius: 50%;
+ background: #1a1a1a; color: white; font-weight: 700;
+ display: flex; align-items: center; justify-content: center; font-size: 14px;
+ }
+ .step-content h3 { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+ .step-content p { font-size: 14px; color: #444; line-height: 1.55; }
+ .step-content .example {
+ background: #f4f4f2; border-radius: 6px; padding: 10px 14px;
+ margin-top: 8px; font-size: 13.5px; font-style: italic; color: #333;
+ }
+ @media (max-width: 720px) {
+ .tier { flex-direction: column; align-items: center; }
+ .node { max-width: 100%; width: 100%; }
+ }
+</style>
+</head>
+<body>
+<div class="container">
+
+ <h1>Minto Pyramid: {{TOPIC_TITLE}}</h1>
+ <div class="subtitle">Extracted structure + the fix, in one view.</div>
+
+ <div class="section-label">The Pyramid</div>
+ <div class="pyramid">
+
+ <div class="tier">
+ <div class="node answer">
+ <div class="node-title">The Answer (one sentence)</div>
+ {{LEVEL_1_ANSWER}}
+ </div>
+ </div>
+
+ <div class="tier">
+ <div class="node argument">
+ <div class="node-title">Argument 1</div>
+ {{ARGUMENT_1}}
+ </div>
+ <div class="node argument">
+ <div class="node-title">Argument 2</div>
+ {{ARGUMENT_2}}
+ </div>
+ <div class="node argument">
+ <div class="node-title">Argument 3</div>
+ {{ARGUMENT_3}}
+ </div>
+ </div>
+
+ <div class="tier">
+ <div class="node evidence {{E1_MISSING_CLASS}}">
+ <div class="node-title">Evidence 1 {{E1_STRENGTH_LABEL}}</div>
+ {{EVIDENCE_1}}
+ </div>
+ <div class="node evidence {{E2_MISSING_CLASS}}">
+ <div class="node-title">Evidence 2 {{E2_STRENGTH_LABEL}}</div>
+ {{EVIDENCE_2}}
+ </div>
+ <div class="node evidence {{E3_MISSING_CLASS}}">
+ <div class="node-title">Evidence 3 {{E3_STRENGTH_LABEL}}</div>
+ {{EVIDENCE_3}}
+ </div>
+ </div>
+
+ </div>
+
+ <div class="section-label">Your Opener (replace current opener)</div>
+ <div class="opener-box">
+ <div style="font-size:13px;color:#888;">{{OPENER_CONTEXT}}</div>
+ <div class="quote">"{{OPENER_QUOTE}}"</div>
+ <div class="note">{{OPENER_NOTE}}</div>
+ </div>
+
+ <div class="section-label">Restructuring Plan</div>
+ <div class="plan">
+
+ <div class="step">
+ <div class="step-num">1</div>
+ <div class="step-content">
+ <h3>{{STEP_1_HEADLINE}}</h3>
+ <p>{{STEP_1_BODY}}</p>
+ <div class="example">{{STEP_1_EXAMPLE_OR_OMIT}}</div>
+ </div>
+ </div>
+
+ <!-- Repeat for steps 2-N. Keep numbered sequence. Omit .example div when no example line is needed. -->
+
+ </div>
+
+</div>
+</body>
+</html>
