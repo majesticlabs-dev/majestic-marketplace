@@ -13,8 +13,8 @@ Coding is no longer the bottleneck. Planning, review, and learning loops matter 
 | Step | What Happens | Key Tools |
 |------|--------------|-----------|
 | **Plan** | Agents research codebase + best practices, produce detailed implementation plans | `/majestic:plan`, `architect` agent |
-| **Work** | Agents write code, tests, and iterate using real app feedback | `/majestic:build-task`, coder skills |
-| **Assess** | Multi-angle review: security, performance, simplicity, conventions | `/majestic:code-review`, `quality-gate` |
+| **Work** | Agents write code, tests, and iterate using real app feedback | `/majestic-engineer:build-task`, coder skills |
+| **Assess** | Multi-angle review: security, performance, simplicity, conventions | `/majestic-engineer:code-review`, `quality-gate` |
 | **Reflect** | Analyze session patterns, capture lessons so future agents improve | `/majestic-tools:insight:reflect`, `/majestic:add-lesson` |
 
 See the [Workflow Guide](https://github.com/majesticlabs-dev/majestic-marketplace/wiki/Workflow-Guide) for detailed documentation.
@@ -206,7 +206,7 @@ See [Output Styles](output-styles/README.md) for full documentation and customiz
 After installing plugins, run this command in your project to set up AI agent configuration:
 
 ```bash
-/majestic:init
+/majestic-engineer:init
 ```
 
 This creates:
@@ -229,7 +229,7 @@ branch_naming: type/issue-desc # feature/desc | issue-desc | type/issue-desc | u
 lessons_path: .agents/lessons/
 ```
 
-Commands like `/majestic:code-review`, `/git:create-pr`, and `/majestic:build-task` read this config automatically.
+Commands like `/majestic-engineer:code-review`, `/git:create-pr`, and `/majestic-engineer:build-task` read this config automatically.
 
 **Custom Config Path:** Override the config filename with `AGENTS_CONFIG` environment variable:
 

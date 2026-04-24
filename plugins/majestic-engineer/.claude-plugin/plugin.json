@@ -1,6 +1,6 @@
 {
   "name": "majestic-engineer",
-  "version": "4.0.15",
+  "version": "4.0.16",
   "description": "Language-agnostic engineering workflows. Includes specialized agents, commands, skills, and toolbox presets for autonomous task execution with quality gates.",
   "author": {
     "name": "David Paluy",

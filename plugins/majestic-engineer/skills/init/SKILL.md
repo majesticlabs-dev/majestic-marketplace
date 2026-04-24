@@ -1,16 +1,7 @@
 ---
-name: majestic:init
+name: init
 description: Initialize AGENTS.md with hierarchical structure and .agents.yml config
-allowed-tools:
-  - Bash(${CLAUDE_PLUGIN_ROOT}/commands/workflows/init/*)
-  - Bash(ln -s *)
-  - Bash(mv *)
-  - Write
-  - Read
-  - Grep
-  - Glob
-  - AskUserQuestion
-  - Skill
+allowed-tools: Bash Write Read Grep Glob AskUserQuestion Skill
 ---
 
 # Initialize AGENTS.md
@@ -21,7 +12,7 @@ Set up AI agent documentation and machine-readable config for this project.
 
 ## Step 1: Generate AGENTS.md
 
-Check existing state first: !`${CLAUDE_PLUGIN_ROOT}/commands/workflows/init/check-existing.sh`
+Check existing state first: !`${CLAUDE_PLUGIN_ROOT}/skills/init/scripts/check-existing.sh`
 
 **If AGENTS.md exists**, ask: Regenerate | Enhance | Skip
 
@@ -102,8 +93,8 @@ Use `AskUserQuestion` to gather config. Ask in batches of max 4 questions.
 
 **Run these operations in parallel:**
 
-- Default branch: !`${CLAUDE_PLUGIN_ROOT}/commands/workflows/init/detect-branch.sh`
-- Tech stack: !`${CLAUDE_PLUGIN_ROOT}/commands/workflows/init/detect-tech-stack.sh stack`
+- Default branch: !`${CLAUDE_PLUGIN_ROOT}/skills/init/scripts/detect-branch.sh`
+- Tech stack: !`${CLAUDE_PLUGIN_ROOT}/skills/init/scripts/detect-tech-stack.sh stack`
 - Design system: `Glob: "**/design-system.md"`
 
 If design system found, record path in toolbox config.
@@ -126,21 +117,21 @@ Replace placeholders with collected values. Handle conditionals:
 
 ### Gitignore + Local Config
 
-If not tracking in git: !`${CLAUDE_PLUGIN_ROOT}/commands/workflows/init/gitignore-add.sh .agents.yml`
+If not tracking in git: !`${CLAUDE_PLUGIN_ROOT}/skills/init/scripts/gitignore-add.sh .agents.yml`
 
-If local overrides requested: !`${CLAUDE_PLUGIN_ROOT}/commands/workflows/init/gitignore-add.sh .agents.local.yml`
+If local overrides requested: !`${CLAUDE_PLUGIN_ROOT}/skills/init/scripts/gitignore-add.sh .agents.local.yml`
 
 If local overrides requested, write `.agents.local.yml` using template from `resources/local-config-template.yaml`.
 
 ## Step 5: Finalize Setup
 
 1. **Create symlink** - `ln -s AGENTS.md CLAUDE.md` (backup if exists)
-2. **Verify** - Run verification: !`${CLAUDE_PLUGIN_ROOT}/commands/workflows/init/verify-setup.sh`
+2. **Verify** - Run verification: !`${CLAUDE_PLUGIN_ROOT}/skills/init/scripts/verify-setup.sh`
 
 ## Output Summary
 
 Report what was created:
 - AGENTS.md structure (line count, sub-folders)
 - .agents.yml (key settings)
-- Design system status (detected path or suggest /majestic:ux-brief)
+- Design system status (detected path or suggest /majestic-engineer:ux-brief)
 - Symlink and local config status

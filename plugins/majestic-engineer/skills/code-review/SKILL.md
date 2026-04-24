@@ -1,8 +1,8 @@
 ---
-name: majestic:code-review
+name: code-review
 description: Generic code review that auto-detects tech stack and delegates to appropriate framework-specific orchestrator
 argument-hint: "[PR #/URL | --staged | --branch | files...]"
-allowed-tools: Bash, Read, Grep, Glob, Task
+allowed-tools: Bash Read Grep Glob Task
 ---
 
 # Code Review
@@ -146,17 +146,17 @@ tech_stack: rails  # rails | python | javascript | generic
 
 ```bash
 # Review unstaged changes (auto-detect tech stack)
-/majestic:code-review
+/majestic-engineer:code-review
 
 # Review staged changes
-/majestic:code-review --staged
+/majestic-engineer:code-review --staged
 
 # Review current branch vs main
-/majestic:code-review --branch
+/majestic-engineer:code-review --branch
 
 # Review a PR
-/majestic:code-review #123
+/majestic-engineer:code-review #123
 
 # Review specific files
-/majestic:code-review app/models/user.rb app/controllers/users_controller.rb
+/majestic-engineer:code-review app/models/user.rb app/controllers/users_controller.rb
 ```

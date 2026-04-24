@@ -82,7 +82,7 @@ If no task found (all ✅ or 🔴): Go to Step 5.
 ### 3. Execute Task
 
 ```
-/majestic:build-task "{task.id}" --no-ship
+/majestic-engineer:build-task "{task.id}" --no-ship
 ```
 
 ### 4. Update Status
@@ -108,7 +108,7 @@ Go to Step 2 (next task).
 When all tasks are ✅ or 🔴:
 
 ```
-/majestic:ship-it
+/majestic-engineer:ship-it
 ```
 
 ## Task ID Formats

@@ -31,7 +31,7 @@ AskUserQuestion:
 Execute entire plan as one task:
 
 ```
-/majestic:build-task "{plan_path}"
+/majestic-engineer:build-task "{plan_path}"
 ```
 
 **End workflow.**

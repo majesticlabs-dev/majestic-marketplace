@@ -1,8 +1,8 @@
 ---
-name: majestic:build-task
+name: build-task
 description: Autonomous task implementation - research, plan, build, review, fix, ship
-argument-hint: "<task-reference or plan-file>"
-allowed-tools: Bash, Read, Grep, Glob, WebFetch, TaskCreate, TaskList, TaskUpdate, Task, Skill
+argument-hint: "[task-reference or plan-file]"
+allowed-tools: Bash Read Grep Glob WebFetch TaskCreate TaskList TaskUpdate Task Skill
 ---
 
 # Build Task
@@ -224,10 +224,10 @@ The agent handles:
 ## Examples
 
 ```bash
-/majestic:build-task                           # Auto-detect recent plan
-/majestic:build-task docs/plans/add-auth.md    # Explicit plan
-/majestic:build-task #42                       # GitHub issue
-/majestic:build-task PROJ-123                  # Beads/Linear
+/majestic-engineer:build-task                           # Auto-detect recent plan
+/majestic-engineer:build-task docs/plans/add-auth.md    # Explicit plan
+/majestic-engineer:build-task #42                       # GitHub issue
+/majestic-engineer:build-task PROJ-123                  # Beads/Linear
 ```
 
 ---

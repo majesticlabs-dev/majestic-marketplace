@@ -53,7 +53,7 @@ Use `majestic:` prefix for workflows that work across all project types.
 | Aspect | Pattern |
 |--------|---------|
 | **Pattern** | `name: majestic:command-name` |
-| **Examples** | `/majestic:plan`, `/majestic:debug`, `/majestic:prd`, `/majestic:code-review` |
+| **Examples** | `/majestic:plan`, `/majestic-engineer:debug`, `/majestic-engineer:prd`, `/majestic-engineer:code-review` |
 | **When to use** | Workflows that are language/framework-agnostic |
 | **Location** | `plugins/majestic-engineer/commands/workflows/` |
 

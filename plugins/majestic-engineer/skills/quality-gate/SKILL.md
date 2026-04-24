@@ -1,8 +1,8 @@
 ---
-name: majestic:quality-gate
+name: quality-gate
 description: Run quality gate checks on code changes with tech stack-aware reviewers
 argument-hint: "[PR #/URL | --staged | --branch | files...]"
-allowed-tools: Bash, Read, Grep, Glob, Task
+allowed-tools: Bash Read Grep Glob Task
 ---
 
 # Quality Gate
@@ -53,7 +53,7 @@ gh pr diff <PR_NUMBER> --name-only
 If no changes found, report:
 
 ```
-## Quality Gate: APPROVED ✅
+## Quality Gate: APPROVED
 
 **Reason:** No changes to review.
 ```
@@ -90,27 +90,27 @@ Prompt: |
 The quality-gate agent returns a structured verdict. Present the full report to the user.
 
 **Verdict outcomes:**
-- **APPROVED ✅** - Ready to ship
-- **NEEDS CHANGES ⚠️** - Fix required issues before shipping
-- **BLOCKED 🛑** - Critical issues require immediate attention
+- **APPROVED** - Ready to ship
+- **NEEDS CHANGES** - Fix required issues before shipping
+- **BLOCKED** - Critical issues require immediate attention
 
 ## Examples
 
 ```bash
 # Review unstaged changes
-/majestic:quality-gate
+/majestic-engineer:quality-gate
 
 # Review staged changes
-/majestic:quality-gate --staged
+/majestic-engineer:quality-gate --staged
 
 # Review current branch vs main
-/majestic:quality-gate --branch
+/majestic-engineer:quality-gate --branch
 
 # Review a PR
-/majestic:quality-gate #123
+/majestic-engineer:quality-gate #123
 
 # Review specific files
-/majestic:quality-gate app/models/user.rb app/controllers/users_controller.rb
+/majestic-engineer:quality-gate app/models/user.rb app/controllers/users_controller.rb
 ```
 
 ## Configuration

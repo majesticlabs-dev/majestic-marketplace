@@ -7,9 +7,9 @@ Unified institutional memory for Claude Code workflows.
 The learnings discovery system surfaces relevant knowledge at the right moment during development:
 
 - **Planning** (`/majestic-engineer:blueprint`): Past architectural decisions, proven patterns
-- **Debugging** (`/majestic:debug`): Similar issues and their solutions
+- **Debugging** (`/majestic-engineer:debug`): Similar issues and their solutions
 - **Review** (`quality-gate`): Critical anti-patterns to check
-- **Implementation** (`/majestic:build-task`): Patterns and gotchas for current work
+- **Implementation** (`/majestic-engineer:build-task`): Patterns and gotchas for current work
 
 ## How It Works
 
@@ -139,7 +139,7 @@ Create a markdown file in the appropriate category directory with YAML frontmatt
 ### Debug (Debugging Phase)
 
 ```
-/majestic:debug "API returns 500 error on user update"
+/majestic-engineer:debug "API returns 500 error on user update"
 ```
 
 1. Gathers bug description

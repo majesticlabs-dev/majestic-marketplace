@@ -1,8 +1,8 @@
 ---
-name: majestic:prd
+name: prd
 description: Create a Product Requirements Document (PRD) for a new product or feature
 argument-hint: "[--guided] [product or feature description]"
-allowed-tools: Read, Write, Edit, WebSearch, WebFetch, AskUserQuestion, TaskCreate, TaskUpdate, TaskList, TaskGet
+allowed-tools: Read Write Edit WebSearch WebFetch AskUserQuestion TaskCreate TaskUpdate TaskList TaskGet
 ---
 
 # Create a Product Requirements Document (PRD)
@@ -84,7 +84,7 @@ If TASK_TRACKING: TaskUpdate(PHASE_TASKS[1], status: "completed")
 
 If TASK_TRACKING: TaskUpdate(PHASE_TASKS[2], status: "in_progress")
 
-Read the PRD template from `resources/prd/prd-template.txt` (relative to this command file).
+Read the PRD template from `assets/prd-template.txt` (relative to this skill file).
 
 Customize with user's answers:
 - Fill in problem statement, user personas
@@ -135,7 +135,7 @@ Else:
   If TASK_TRACKING: TaskUpdate(PHASE_TASKS[4], status: "completed")
   Skip to Phase 5
 
-Add sections from `resources/prd/technical-expansion.txt`:
+Add sections from `assets/technical-expansion.txt`:
 - API Specifications (endpoints, schemas, auth)
 - Data Model with Mermaid ERD
 - Security Considerations (AuthN/AuthZ, OWASP)

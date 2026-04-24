@@ -251,7 +251,7 @@ Consider:
 
 This command complements Claude's built-in review capabilities:
 
-1. Run Claude's review first: `/majestic:code-review`
+1. Run Claude's review first: `/majestic-engineer:code-review`
 2. Get external perspectives: `/majestic-llm:review`
 3. Compare findings to identify blind spots
 

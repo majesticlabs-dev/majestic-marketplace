@@ -1,14 +1,7 @@
 ---
-name: majestic:refactor-agents
+name: refactor-agents
 description: Refactor existing AGENTS.md to follow progressive disclosure principles
-allowed-tools:
-  - Read
-  - Write
-  - Edit
-  - Grep
-  - Glob
-  - AskUserQuestion
-  - Skill
+allowed-tools: Read Write Edit Grep Glob AskUserQuestion Skill
 ---
 
 # Refactor AGENTS.md
@@ -22,7 +15,7 @@ AGENTS_FILES = Glob("**/AGENTS.md")
 ROOT_AGENTS = Read("AGENTS.md")
 ```
 
-If no AGENTS.md exists: suggest `/majestic:init` instead.
+If no AGENTS.md exists: suggest `/majestic-engineer:init` instead.
 
 ## Step 2: Find Contradictions
 
@@ -180,7 +173,7 @@ Original saved to: AGENTS.md.backup
 
 | Condition | Action |
 |-----------|--------|
-| No AGENTS.md found | Suggest `/majestic:init` |
+| No AGENTS.md found | Suggest `/majestic-engineer:init` |
 | Already minimal (<100 lines) | Ask if optimization still wanted |
 | No contradictions found | Skip to Step 3 |
 | User cancels at any step | Preserve original, no changes |

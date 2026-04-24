@@ -61,4 +61,4 @@ Configure your backend in `.agents.yml`:
 task_management: github  # Options: file, github, linear, beads, none
 ```
 
-Run `/majestic:init` to set up project configuration.
+Run `/majestic-engineer:init` to set up project configuration.

@@ -30,7 +30,7 @@ Understanding motivation? → pm-jobs-to-be-done
 Prioritizing features? → pm-prioritization
 Planning roadmap? → pm-roadmap
 Early exploration or recording decisions? → pm-one-pager
-Full feature specification? → /majestic:prd
+Full feature specification? → /majestic-engineer:prd
 ```
 
 ## Discovery Synthesis
@@ -78,5 +78,5 @@ After using individual frameworks, synthesize findings:
 ## Integration
 
 - **Before:** Use `problem-research` for market pain points
-- **After:** Use `/majestic:prd` for requirements documentation
+- **After:** Use `/majestic-engineer:prd` for requirements documentation
 - **After:** Use `/majestic:plan` for implementation planning

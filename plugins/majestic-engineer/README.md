@@ -13,7 +13,7 @@ claude /plugin install majestic-engineer
 After installing, initialize your project:
 
 ```bash
-/majestic:init
+/majestic-engineer:init
 ```
 
 This creates:
@@ -29,7 +29,7 @@ The command auto-detects your tech stack (Rails, Python, Node, etc.) and configu
 
 ### PRD vs Blueprint
 
-| Aspect | `/majestic:prd` | `/majestic-engineer:blueprint` |
+| Aspect | `/majestic-engineer:prd` | `/majestic-engineer:blueprint` |
 |--------|-----------------|----------------------|
 | **Purpose** | Define WHAT to build & WHY | Define HOW to build it |
 | **Output** | `docs/prd/prd-[name].md` | `docs/plans/[timestamp]_[name].md` |
@@ -64,8 +64,8 @@ graph LR
 
 | When | Use | Purpose |
 |------|-----|---------|
-| **Clear idea** | `/majestic:prd` | Batch questions → generate PRD → architect designs → plan-review validates |
-| **Fuzzy idea** | `/majestic:prd --guided` | Interactive one-at-a-time discovery → then generates PRD |
+| **Clear idea** | `/majestic-engineer:prd` | Batch questions → generate PRD → architect designs → plan-review validates |
+| **Fuzzy idea** | `/majestic-engineer:prd --guided` | Interactive one-at-a-time discovery → then generates PRD |
 
 ---
 
@@ -84,7 +84,7 @@ graph LR
 | Command | Purpose |
 |---------|---------|
 | `/majestic-engineer:blueprint` | Create blueprint → plan-review validates |
-| `/majestic:build-task` | Build → test → review → ship (autonomous) |
+| `/majestic-engineer:build-task` | Build → test → review → ship (autonomous) |
 
 ---
 
@@ -93,9 +93,9 @@ graph LR
 Autonomous implementation from any task management system:
 
 ```bash
-/majestic:build-task #42          # GitHub Issue
-/majestic:build-task PROJ-123     # Beads task
-/majestic:build-task LIN-456      # Linear issue
+/majestic-engineer:build-task #42          # GitHub Issue
+/majestic-engineer:build-task PROJ-123     # Beads task
+/majestic-engineer:build-task LIN-456      # Linear issue
 ```
 
 **What happens:**
@@ -141,7 +141,7 @@ graph TD
 |--------------|----------|
 | Plan a feature or bug fix | `/majestic-engineer:blueprint` |
 | Analyze a spec for gaps | `agent spec-reviewer` |
-| Define what to build (requirements) | `/majestic:prd` |
+| Define what to build (requirements) | `/majestic-engineer:prd` |
 | Design how to build it (architecture) | `agent architect` |
 | Plan a refactoring effort | `agent refactor-plan` |
 | Review a plan before implementing | `agent plan-review` |
