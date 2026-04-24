@@ -75,7 +75,6 @@ Invoke with: `skill majestic-tools:<name>`
 | `brainstorming` | Refine rough ideas into fully-formed designs through collaborative questioning |
 | `compound-learnings` | Identify and persist valuable patterns as reusable artifacts |
 | `devils-advocate` | Challenge ideas and expose weak reasoning |
-| `skill-first` | Check for relevant skills before starting any task |
 
 ## Hooks
 
