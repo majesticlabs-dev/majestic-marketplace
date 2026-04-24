@@ -126,6 +126,49 @@ Is orchestrator context a concern?
 └── Yes → Status-only returns + file paths
 ```
 
+## Shared-State Mutation Safety
+
+When multiple agents can transition the same work item (issue, task, label) through states, silent race conditions cause duplicate work or skipped transitions.
+
+**Three-step guard (apply before every state write):**
+
+```
+1. READ   — Re-fetch current state immediately before mutation (never use cached state)
+2. VERIFY — Confirm state matches expected pre-condition
+3. WRITE  — Apply transition in a single atomic operation
+```
+
+**Implementation pattern:**
+
+```
+CURRENT_STATE = fetch_state(item_id)           # live read, not cached
+If CURRENT_STATE != EXPECTED_PRE_STATE:
+  ABORT — log stale-race, do not mutate
+Else:
+  apply_transition(item_id, NEW_STATE)         # single atomic call
+```
+
+**For GitHub labels specifically:**
+
+```
+CURRENT_LABELS = gh issue view {id} --json labels
+If EXPECTED_LABEL not in CURRENT_LABELS:
+  ABORT — another agent already transitioned this item
+Else:
+  gh issue edit {id} --remove-label {old} --add-label {new}  # one call
+```
+
+**Decision table:**
+
+| Scenario | Action |
+|----------|--------|
+| State matches expectation | Apply transition atomically |
+| State already at target | Skip silently (idempotent) |
+| State at unexpected value | Abort, log conflict, do not retry |
+| Item not found | Abort, log missing item |
+
+**Why single atomic call matters:** Two separate `--remove-label` and `--add-label` calls create a window where another agent reads the item in an intermediate state. Combine into one `gh issue edit` invocation.
+
 ## Anti-Patterns
 
 | Pattern | Problem | Fix |

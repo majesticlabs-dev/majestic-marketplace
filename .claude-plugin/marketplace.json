@@ -12,7 +12,7 @@
     {
       "name": "majestic-engineer",
       "description": "Language-agnostic engineering workflows. Includes specialized agents, commands, skills, and toolbox presets for autonomous task execution with quality gates.",
-      "version": "4.0.12",
+      "version": "4.0.13",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -103,7 +103,7 @@
     {
       "name": "majestic-tools",
       "description": "Claude Code customization tools. Includes 0 agents, 10 commands, and 12 skills.",
-      "version": "4.0.2",
+      "version": "4.0.3",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
