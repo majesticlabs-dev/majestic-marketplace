@@ -1,24 +1,26 @@
 ---
 name: auto-decision-framework
-description: Framework for automated decision-making during multi-step workflows. Classifies decisions as Mechanical (auto-decide silently), Taste (auto-decide but surface at gate), or User Challenge (never auto-decide). Reduces question fatigue by batching only decisions that need human judgment. Use when running blueprint, code-review, quality-gate, or any workflow that asks 5+ intermediate questions.
+description: Framework for automated decision-making during multi-step planning workflows. Classifies planning decisions as Mechanical (auto-decide silently), Taste (auto-decide but surface at gate), or User Challenge (never auto-decide). Reduces question fatigue by batching only decisions that need human judgment. Use when running blueprint, PRD, refactor-plan, or any workflow that asks 5+ intermediate planning questions.
 triggers:
-  - auto review
-  - run all reviews automatically
-  - make the decisions for me
-  - review without asking me everything
+  - plan automatically
+  - make planning decisions for me
+  - blueprint without asking me everything
+  - plan without asking me everything
 ---
 
 # Auto-Decision Framework
 
-**Audience:** Engineers running multi-step review or planning workflows who want fewer interruptions without losing oversight.
+**Audience:** Engineers running multi-step planning workflows who want fewer interruptions without losing oversight.
 
 **Goal:** Reduce 15-30 intermediate questions to 3-5 that actually need human judgment, while maintaining a full audit trail of automated decisions.
 
 ## When to Apply
 
-Apply this framework when orchestrating any multi-step workflow where intermediate decisions would otherwise interrupt the user repeatedly. The workflow must still perform full analysis at each step — auto-decision replaces the user's answer, not the analysis.
+Apply this framework when orchestrating any multi-step planning workflow where intermediate decisions would otherwise interrupt the user repeatedly. The workflow must still perform full analysis at each step — auto-decision replaces the user's answer, not the analysis.
 
-Compatible workflows: blueprint, code-review, quality-gate, build-task, refactor-plan, or any custom multi-phase process.
+Compatible workflows: blueprint, PRD, refactor-plan, architecture planning, or any custom multi-phase planning process.
+
+Do not apply this framework to code review, quality gates, autonomous build/ship workflows, or any flow with an existing verdict/status contract.
 
 ## The 6 Decision Principles
 
@@ -32,9 +34,9 @@ Apply when: choosing between partial and full implementations, deciding test cov
 
 ### P2: Blast Radius Coverage
 
-Fix everything in the blast radius — files modified by this change plus their direct importers. Auto-approve expansions that are inside blast radius AND under 1 day effort (fewer than 5 files, no new infrastructure).
+Cover the full implementation blast radius — components directly affected by the plan plus their direct dependents. Auto-approve expansions only when they stay inside that blast radius AND remain clearly small (for example, fewer than 5 files or one adjacent module, and no new infrastructure).
 
-Apply when: deciding whether to fix adjacent issues discovered during review, scoping related cleanup work.
+Apply when: deciding whether to include adjacent work discovered during planning, scoping related cleanup work.
 
 ### P3: Pragmatic
 
@@ -54,11 +56,11 @@ A 10-line obvious fix beats a 200-line abstraction. Pick what a new contributor 
 
 Apply when: choosing between simple and sophisticated implementations, deciding whether to add an abstraction layer.
 
-### P6: Bias Toward Action
+### P6: Bias Toward Progress
 
-Merge over review cycles over stale deliberation. Flag concerns but don't block progress. A shipped improvement beats a perfect plan.
+Finish the plan instead of reopening settled minor questions. Flag concerns, but don't stall the planning loop on small ambiguities that implementation can safely resolve later.
 
-Apply when: deciding whether to request another review round, choosing between shipping now with known minor issues vs. blocking for perfection.
+Apply when: deciding whether to reopen planning for minor issues, choosing between a complete handoff and more deliberation on low-risk details.
 
 ### Tiebreaker Rules
 
@@ -70,7 +72,7 @@ When principles conflict, context determines which wins:
 | Architecture/implementation | P5 (explicit) + P3 (pragmatic) |
 | Design/UX decisions | P5 (explicit) + P1 (completeness) |
 | Test coverage | P1 (completeness) + P4 (no duplication) |
-| Shipping decisions | P6 (action) + P3 (pragmatic) |
+| Plan handoff decisions | P6 (progress) + P3 (pragmatic) |
 
 ## Decision Classification
 
@@ -93,11 +95,11 @@ Reasonable people could disagree. Auto-decide using the principles, but surface 
 Three sources of taste decisions:
 - **Close approaches** — top two options are both viable with genuinely different tradeoffs
 - **Borderline scope** — in blast radius but 3-5 files, or ambiguous whether it's in scope
-- **Reviewer disagreement** — multiple reviewers (or subagents) recommend different approaches with valid reasoning on both sides
+- **Planner disagreement** — multiple research, architecture, or planning inputs recommend different approaches with valid reasoning on both sides
 
 ### User Challenge
 
-Both the analysis AND any independent review agree the user's stated direction should change — merge features, split a component, add or remove something the user specified. This is qualitatively different from taste decisions because it questions the user's intent, not just implementation details.
+Both the analysis AND any independent planning input agree the user's stated direction should change — merge features, split a component, add or remove something the user specified. This is qualitatively different from taste decisions because it questions the user's intent, not just implementation details.
 
 User Challenges are NEVER auto-decided. Present them at the approval gate with:
 - **What the user said:** (their original direction)
@@ -114,11 +116,11 @@ The user's original direction is the default. The analysis must make the case fo
 
 ### Before Starting
 
-Tell the user: "I'll auto-decide obvious intermediate questions and batch the judgment calls for you at the end. Full audit trail available."
+Tell the user: "I'll auto-decide obvious planning questions and batch the judgment calls for you at the end. Full audit trail available."
 
 ### During Execution
 
-For each decision point in the workflow:
+For each decision point in the planning workflow:
 
 ```
 DECISION = evaluate_options(current_question)
@@ -127,7 +129,7 @@ If one option clearly wins by principles:
   classification = MECHANICAL
   action = decide silently, log to audit trail
 
-If top options are close, or reviewers disagree:
+If top options are close, or planners disagree:
   classification = TASTE
   action = decide by principles, add to approval gate batch
 
@@ -140,7 +142,7 @@ The underlying analysis must still run at full depth. Auto-decision replaces the
 
 ### Approval Gate
 
-After all phases complete, present a single approval gate:
+After planning phases complete, present a single approval gate:
 
 ```
 ## Auto-Decision Summary
@@ -182,4 +184,5 @@ Class codes: M = Mechanical, T = Taste, UC = User Challenge.
 - Does not skip analysis steps — every section runs at full depth
 - Does not compress findings into summaries — findings are reported normally
 - Does not override user's explicit instructions — only auto-answers questions the workflow would have asked
+- Does not apply to code review, quality-gate, build-task, ship, or other workflows with explicit verdict/status contracts
 - Does not apply to one-way-door decisions (data deletion, production deploys, irreversible migrations) — those always go to the user regardless of classification
