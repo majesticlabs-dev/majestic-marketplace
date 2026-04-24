@@ -14,6 +14,7 @@ Based on needs, invoke specialized skills:
 
 | Need | Skill | Content |
 |------|-------|---------|
+| Design tokens | See `references/design-md-format.md` | DESIGN.md token parsing, export |
 | Design direction | `frontend-design-philosophy` | Aesthetic extremes, anti-patterns |
 | CSS implementation | `frontend-css-patterns` | Typography, color, motion, spatial |
 | React/Vue patterns | See `references/react-vue.md` | Framer Motion, Vue Transitions |
@@ -49,19 +50,25 @@ See [references/rails-hotwire.md](references/rails-hotwire.md) for:
 ## Workflow
 
 ```
-1. Clarify design direction
+1. Check for design tokens
+   - Look for DESIGN.md in project root
+   - If found: parse tokens, use as source of truth for colors, typography, spacing
+   - See references/design-md-format.md for format details
+
+2. Clarify design direction
    - Invoke `frontend-design-philosophy` for aesthetic guidance
    - User picks: brutalist, minimalist, luxury, playful, etc.
 
-2. Implement CSS foundation
+3. Implement CSS foundation
    - Invoke `frontend-css-patterns` for typography, color, motion
-   - Customize Tailwind or write CSS variables
+   - If DESIGN.md tokens exist: map tokens to CSS variables or Tailwind theme
+   - Otherwise: customize Tailwind or write CSS variables
 
-3. Apply framework patterns
+4. Apply framework patterns
    - React/Vue: Use references/react-vue.md
    - Rails/Hotwire: Use references/rails-hotwire.md
 
-4. Polish and validate
+5. Polish and validate
    - Use references/css-polish-tips.md for accessibility
    - Use references/motion-patterns.md for animation
    - Run validation checklist from philosophy skill

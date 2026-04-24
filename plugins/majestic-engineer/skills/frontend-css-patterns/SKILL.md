@@ -7,6 +7,22 @@ description: Framework-agnostic CSS patterns for typography, color, motion, and 
 
 Implementation patterns for distinctive visual design.
 
+## Design Token Integration
+
+If the project contains a `DESIGN.md` file, use its tokens as the source of truth:
+
+```css
+/* Map DESIGN.md tokens to CSS custom properties */
+:root {
+  --color-primary: /* from {colors.primary} */;
+  --color-accent: /* from {colors.accent} */;
+  --font-display: /* from {typography.display.fontFamily} */;
+  --spacing-md: /* from {spacing.md} */;
+}
+```
+
+Do not invent colors, fonts, or spacing values when tokens are defined. Resolve `{token.ref}` references from YAML frontmatter before generating CSS.
+
 ## Typography
 
 ```css
@@ -105,7 +121,13 @@ Focus on: page load sequences, scroll-triggered reveals, state transitions.
 
 ## Tailwind Customization
 
-**Customize the theme—don't use defaults:**
+**If DESIGN.md exists**, export tokens directly:
+
+```bash
+npx design-md export --format tailwind
+```
+
+**Otherwise**, customize the theme manually—don't use defaults:
 
 ```javascript
 // tailwind.config.js
