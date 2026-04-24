@@ -1,6 +1,11 @@
 ---
 name: pmf-validation
-description: Validate product-market fit through assumption testing, customer discovery, and MVP strategy.
+description: Use when validating product-market fit through demand interrogation, assumption testing, customer discovery, and MVP strategy. Starts with forcing questions to expose demand reality before investing in validation. Don't use for side projects or hackathons — use brainstorming instead.
+triggers:
+  - is this worth building
+  - validate this idea
+  - product market fit
+  - does anyone want this
 ---
 
 # PMF Validation
@@ -12,6 +17,97 @@ Frameworks for achieving and measuring product-market fit.
 - `pm-assumption-mapping` - Prioritizing assumptions by risk
 - `pm-customer-interviews` - Discovery interview techniques
 - `pm-jobs-to-be-done` - Understanding customer motivations
+
+**Side project, hackathon, or learning exercise?** Use `brainstorming` instead. This skill is for ideas where demand validation matters.
+
+## Phase 0: Demand Interrogation
+
+Before testing assumptions, expose whether real demand exists. Ask these questions **one at a time**. Push on each until the answer is specific, evidence-based, and uncomfortable.
+
+### Route by Stage
+
+| Stage | Questions to Ask |
+|-------|-----------------|
+| Pre-product | Q1, Q2, Q3 |
+| Has users | Q2, Q4, Q5 |
+| Has paying customers | Q4, Q5, Q6 |
+
+Skip questions already answered by earlier responses.
+
+### Operating Principles
+
+- **Specificity is the only currency.** "Enterprises in healthcare" is not a customer. You need a name, a role, a company, a reason.
+- **Interest is not demand.** Waitlists, signups, "that's interesting" — none count. Behavior counts. Money counts. Panic when it breaks counts.
+- **The status quo is the real competitor.** Not the other startup — the spreadsheet-and-Slack workaround they already live with.
+- **Narrow beats wide, early.** The smallest version someone will pay for this week beats the full platform vision.
+
+### The Six Forcing Questions
+
+#### Q1: Demand Reality
+
+"What's the strongest evidence someone actually wants this — not 'is interested,' but would be genuinely upset if it disappeared tomorrow?"
+
+Push until you hear specific behavior: someone paying, expanding usage, building workflow around it, scrambling if it vanished.
+
+Red flags: "People say it's interesting." "500 waitlist signups." "VCs are excited."
+
+After the first answer, check: Are key terms defined and measurable? What does the framing take for granted? Is evidence real or hypothetical?
+
+#### Q2: Status Quo
+
+"What are your users doing right now to solve this — even badly? What does that workaround cost them?"
+
+Push until you hear a specific workflow: hours spent, dollars wasted, tools duct-taped together, people hired to do it manually.
+
+Red flags: "Nothing — no solution exists." If no one does anything about it, the problem probably isn't painful enough.
+
+#### Q3: Desperate Specificity
+
+"Name the actual human who needs this most. Title? What gets them promoted? What gets them fired? What keeps them up at night?"
+
+Push until you hear a name, a role, a specific consequence they face. Match the consequence to the domain — B2B: career impact. Consumer: daily pain. Developer tools: the weekend project that gets unblocked.
+
+Red flags: Category-level answers. "SMBs." "Marketing teams." You can't email a category.
+
+#### Q4: Narrowest Wedge
+
+"What's the smallest version someone would pay real money for — this week, not after you build the platform?"
+
+Push until you hear one feature, one workflow, something shippable in days.
+
+Red flags: "Need to build the full platform first." "Stripping it down removes differentiation." Attachment to architecture over value.
+
+Bonus push: "What if the user got value with zero setup — no login, no integration?"
+
+#### Q5: Observation
+
+"Have you sat down and watched someone use this without helping them? What surprised you?"
+
+Push until you hear a specific surprise — something the user did that contradicted assumptions.
+
+Red flags: "We sent a survey." "We did demo calls." "Going as expected." Surveys lie. Demos are theater. "As expected" means filtered through assumptions.
+
+The gold: users doing something the product wasn't designed for. That's often the real product.
+
+#### Q6: Future-Fit
+
+"If the world looks meaningfully different in 3 years — and it will — does your product become more essential or less?"
+
+Push until you hear a specific claim about how their users' world changes and why that makes the product more valuable.
+
+Red flags: "Market growing 20% YoY." Growth rate is not a vision. "AI makes everything better." That's not a thesis — every competitor says the same.
+
+### Demand Interrogation Verdict
+
+After questions, synthesize:
+
+| Signal | Verdict | Next Step |
+|--------|---------|-----------|
+| Specific demand evidence, named users, clear wedge | **Proceed** | Move to Assumption Risk Framework below |
+| Mixed signals, some evidence, vague on specifics | **Sharpen** | Use `pm-customer-interviews` to fill gaps |
+| No evidence, hypothetical users, category-level answers | **Pause** | Use `idea-generation` to find a better angle |
+
+---
 
 ## Assumption Risk Framework
 
