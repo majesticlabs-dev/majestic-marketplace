@@ -1,7 +1,7 @@
 ---
-name: majestic:run-blueprint
+name: run-blueprint
 description: Execute all tasks in a blueprint using build-task workflow
-argument-hint: "<blueprint-file.md>"
+argument-hint: "[blueprint-file.md]"
 ---
 
 # Run Blueprint

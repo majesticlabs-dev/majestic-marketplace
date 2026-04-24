@@ -1,12 +1,12 @@
 ---
-name: majestic:blueprint
+name: blueprint
 description: Transform feature descriptions into well-structured project plans
 argument-hint: "[feature description, bug report, or improvement idea]"
 ---
 
 # Create a Blueprint
 
-**CRITICAL: This is a WORKFLOW COMMAND, not Claude's built-in plan mode.**
+**CRITICAL: This is a WORKFLOW SKILL, not Claude's built-in plan mode.**
 Do NOT use EnterPlanMode or ExitPlanMode tools.
 
 ## Task Tracking Setup
@@ -257,7 +257,7 @@ If TASK_TRACKING: TaskUpdate(PHASE_TASKS[9], status: "completed")
 
 ## Notes
 
-- Blueprint-only command - no implementation code
+- Blueprint-only skill - no implementation code
 - Research and spec-review run in parallel (inside blueprint-research)
 - Architect MUST wait for research completion
 - All phases are mandatory except branches (8.1, 9a/9b/9c)

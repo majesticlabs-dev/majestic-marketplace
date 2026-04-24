@@ -72,7 +72,7 @@ Update plan with task reference, go to Step 5.
 AskUserQuestion:
   question: "Start building?"
   options:
-    - "Build all tasks now" → /majestic:run-blueprint "{plan_path}"
+    - "Build all tasks now" → /majestic-engineer:run-blueprint "{plan_path}"
     - "Done for now" → End workflow
 ```
 

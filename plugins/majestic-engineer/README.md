@@ -29,7 +29,7 @@ The command auto-detects your tech stack (Rails, Python, Node, etc.) and configu
 
 ### PRD vs Blueprint
 
-| Aspect | `/majestic:prd` | `/majestic:blueprint` |
+| Aspect | `/majestic:prd` | `/majestic-engineer:blueprint` |
 |--------|-----------------|----------------------|
 | **Purpose** | Define WHAT to build & WHY | Define HOW to build it |
 | **Output** | `docs/prd/prd-[name].md` | `docs/plans/[timestamp]_[name].md` |
@@ -83,7 +83,7 @@ graph LR
 
 | Command | Purpose |
 |---------|---------|
-| `/majestic:blueprint` | Create blueprint → plan-review validates |
+| `/majestic-engineer:blueprint` | Create blueprint → plan-review validates |
 | `/majestic:build-task` | Build → test → review → ship (autonomous) |
 
 ---
@@ -139,7 +139,7 @@ graph TD
 
 | I want to... | Use this |
 |--------------|----------|
-| Plan a feature or bug fix | `/majestic:blueprint` |
+| Plan a feature or bug fix | `/majestic-engineer:blueprint` |
 | Analyze a spec for gaps | `agent spec-reviewer` |
 | Define what to build (requirements) | `/majestic:prd` |
 | Design how to build it (architecture) | `agent architect` |

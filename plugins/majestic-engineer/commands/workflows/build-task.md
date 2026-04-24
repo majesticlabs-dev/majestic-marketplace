@@ -15,7 +15,7 @@ Implement a task autonomously through the full development lifecycle.
 
 **Formats:**
 - *(empty)* → Auto-detect most recent `docs/plans/*.md`
-- `docs/plans/*.md` → Blueprint file from `/majestic:blueprint`
+- `docs/plans/*.md` → Blueprint file from `/majestic-engineer:blueprint`
 - `#123`, `PROJ-123`, URL → Task reference (GitHub, Beads, Linear)
 - `--no-ship` → Flag to skip shipping (used by run-blueprint for batch shipping)
 
