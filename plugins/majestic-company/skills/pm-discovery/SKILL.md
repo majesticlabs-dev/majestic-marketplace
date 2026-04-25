@@ -79,4 +79,4 @@ After using individual frameworks, synthesize findings:
 
 - **Before:** Use `problem-research` for market pain points
 - **After:** Use `/majestic-engineer:prd` for requirements documentation
-- **After:** Use `/majestic:plan` for implementation planning
+- **After:** Use `/majestic-engineer:blueprint` for implementation planning

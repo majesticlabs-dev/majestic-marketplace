@@ -184,7 +184,7 @@ auto_preview: true
 
 # Planning
 plan:
-  auto_create_task: true # Auto-create task when /majestic:plan completes
+  auto_create_task: true # Auto-create task when /majestic-engineer:blueprint completes
 
 # Toolbox customization (optional - overrides plugin defaults)
 toolbox:
@@ -259,7 +259,7 @@ plan:
 | `branch_naming` | Branch naming convention | `feature/desc` \| `issue-desc` \| `type/issue-desc` \| `user/desc` | `feature/desc` |
 | `lessons_path` | Path to lessons directory for discovery | directory path | `.agents/lessons/` |
 | `auto_preview` | Auto-open markdown files (plans, PRDs, briefs, handoffs) | `true` \| `false` | `false` |
-| `plan.auto_create_task` | Auto-create task when `/majestic:plan` completes | `true` \| `false` | `false` |
+| `plan.auto_create_task` | Auto-create task when `/majestic-engineer:blueprint` completes | `true` \| `false` | `false` |
 | `session.ledger` | Enable session state checkpointing to file | `true` \| `false` | `false` |
 | `session.ledger_path` | Path to session ledger file | file path | `.session_ledger.md` |
 | `workspace_setup.post_create` | Script to run after creating workspace | script path | (none) |
@@ -563,7 +563,7 @@ When commands create markdown files (plans, PRDs, briefs, handoffs), they follow
 3. **If false/missing**: Present options including "Preview in editor" first
 
 **Commands using this pattern:**
-- `/majestic:plan` → `docs/plans/<title>.md`
+- `/majestic-engineer:blueprint` → `docs/plans/<title>.md`
 - `/majestic-engineer:prd` → `docs/prd/prd-<name>.md`
 - `/majestic-engineer:ux-brief` → `docs/design/<name>-brief.md`
 - `/majestic:handoff` → `.agents/handoffs/<timestamp>-<slug>.md`

@@ -29,14 +29,14 @@ npm install -g stimulus-language-server
 
 ```mermaid
 graph LR
-    A(/majestic:plan) --> B(/rails:build)
+    A(/majestic-engineer:blueprint) --> B(/rails:build)
     B --> C(/majestic-engineer:code-review)
     C --> D{{ship}}
 ```
 
 | Step | Tool | Purpose |
 |------|------|---------|
-| 1 | `/majestic:plan` | Research and create plan (from majestic-engineer) |
+| 1 | `/majestic-engineer:blueprint` | Research and create plan (from majestic-engineer) |
 | 2 | Choose next step | Build, review, backlog, or refine |
 | 3 | `/rails:build` | Implement the plan |
 | 4 | `/majestic-engineer:code-review` | Smart multi-agent code review (auto-detects Rails) |
@@ -45,7 +45,7 @@ graph LR
 
 | I want to... | Use this |
 |--------------|----------|
-| Plan a new feature | `/majestic:plan "feature"` |
+| Plan a new feature | `/majestic-engineer:blueprint "feature"` |
 | Build from a plan | `/rails:build docs/plans/feature.md` |
 | Review code changes | `/majestic-engineer:code-review` |
 | Debug Rails issues | `agent rails-debugger` |

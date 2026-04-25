@@ -123,7 +123,7 @@ AskUserQuestion:
 AskUserQuestion:
   question: "This feature could benefit from a requirements interview. Explore in depth first?"
   options:
-    - "Yes, interview me first" → Invoke /majestic:interview with feature_description
+    - "Yes, interview me first" → Invoke /majestic-tools:workflows:interview with feature_description
     - "No, proceed to planning" → Continue
 ```
 
