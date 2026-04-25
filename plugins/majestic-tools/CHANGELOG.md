@@ -2,6 +2,19 @@
 
 All notable changes to majestic-tools will be documented in this file.
 
+## [4.0.9] - 2026-04-25
+
+### Changed
+
+- **`skill-eval` converted from command to skill** - Moved `commands/meta/skill-eval.md` → `skills/skill-eval/SKILL.md`
+  - Invoke with `Skill("skill-eval")` instead of `/skill-eval`
+
+## [4.0.8] - 2026-04-25
+
+### Removed
+
+- **`/commands-hud` command deleted** - Removed `commands/meta/commands-hud.md`
+
 ## [3.13.0] - 2026-01-30
 
 ### Added

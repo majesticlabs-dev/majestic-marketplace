@@ -1,6 +1,6 @@
 # Majestic Tools
 
-Claude Code customization tools. Includes 1 agent, 5 commands, and 11 skills.
+Claude Code customization tools. Includes 0 agents, 3 commands, and 12 skills.
 
 ## Installation
 
@@ -19,17 +19,8 @@ claude /plugin install majestic-tools
 | Export panel discussion to markdown | `/expert-panel --export {panel-id}` |
 | Reflect on session improvements | `/reflect` |
 | Capture learnings | `/learn` |
-| List all available tools | `/commands-hud` |
-| Evaluate a skill | `/skill-eval` |
+| Evaluate a skill | `Skill("skill-eval")` |
 | Brainstorm ideas | `Skill("brainstorming")` |
-
-## Agents
-
-Invoke with: `agent <name>`
-
-| Agent | Description |
-|-------|-------------|
-| `reasoning-verifier` | Verify LLM reasoning using RCoT - detect overlooked conditions and hallucinations |
 
 ## Commands
 
@@ -37,8 +28,6 @@ Invoke with: `agent <name>`
 |---------|-------------|
 | `/learn` | Capture session insights as compound learnings |
 | `/reflect` | Suggest improvements to AGENTS.md based on patterns |
-| `/commands-hud` | List all available tools with detailed information |
-| `/skill-eval` | Evaluate skill quality and routing |
 | `/interview` | Domain-aware discovery for engineering, brand, product, marketing, or sales |
 
 ## Skills
@@ -50,6 +39,7 @@ Invoke with: `skill majestic-tools:<name>`
 | `brainstorming` | Refine rough ideas into fully-formed designs through collaborative questioning |
 | `compound-learnings` | Identify and persist valuable patterns as reusable artifacts |
 | `devils-advocate` | Challenge ideas and expose weak reasoning |
+| `skill-eval` | Test and iterate on a skill using parallel eval runs with graded results |
 
 ## Hooks
 

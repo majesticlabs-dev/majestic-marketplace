@@ -144,10 +144,23 @@ When an agent invokes a skill:
 3. Run `skill-linter` on modified skill(s)
 4. Verify line count remains under 500
 
+**When to run skill-linter (precondition gate):**
+- Run ONLY when the diff contains `SKILL.md` files
+- Gate: `git diff --name-only HEAD | grep -E '^plugins/.*/skills/[^/]+/SKILL\.md$'`
+- If empty → skip lint entirely (no skills modified, nothing to validate)
+- Never point at plugin roots, repo roots, or arbitrary paths — `[FAIL] SKILL.md not found` is operator error, not a real signal
+- Do not run reflexive "smoke checks" to look thorough; lint exists to validate skills, nothing else
+
 **How to invoke `skill-linter`:** It is a **skill** at `.claude/skills/skill-linter/`, NOT an agent.
-- Correct: `Skill("skill-linter", args: "path/to/skill")`
+- Correct: `Skill("skill-linter", args: "path/to/skill-dir")` — path must be a directory containing `SKILL.md`
 - Wrong: `Agent(subagent_type: "majestic-tools:skill-linter")` ← does not exist
-- The bash script also works: `bash .claude/skills/skill-linter/scripts/validate-skill.sh path/to/skill`
+- Wrong: pointing at plugin root or repo root (no `SKILL.md` there)
+- Bash equivalent: `bash .claude/skills/skill-linter/scripts/validate-skill.sh path/to/skill-dir`
+- Batch over modified skills:
+  ```
+  git diff --name-only HEAD | grep -E '^plugins/.*/skills/[^/]+/SKILL\.md$' | xargs -n1 dirname | sort -u | \
+    xargs -I{} bash .claude/skills/skill-linter/scripts/validate-skill.sh {}
+  ```
 
 ### Content Rules
 Skills = LLM instructions, not human docs. Must contain NEW info Claude doesn't know.

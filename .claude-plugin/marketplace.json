@@ -32,8 +32,8 @@
     },
     {
       "name": "majestic-rails",
-      "description": "Ruby on Rails development tools. Includes 5 specialized agents, 3 commands, 39 skills, and enhanced toolbox with 6 research hooks.",
-      "version": "4.0.10",
+      "description": "Ruby on Rails development tools. Includes 5 specialized agents, 44 skills, and enhanced toolbox with 6 research hooks.",
+      "version": "4.1.0",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -102,8 +102,8 @@
     },
     {
       "name": "majestic-tools",
-      "description": "Claude Code customization tools. Includes 0 agents, 10 commands, and 12 skills.",
-      "version": "4.0.7",
+      "description": "Claude Code customization tools. Includes 0 agents, 3 commands, and 12 skills.",
+      "version": "4.0.9",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",

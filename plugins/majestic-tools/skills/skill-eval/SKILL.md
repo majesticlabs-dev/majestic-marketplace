@@ -1,8 +1,7 @@
 ---
 name: skill-eval
 description: Test and iterate on a skill using parallel eval runs. Spawns with-skill and baseline runs, grades results, and helps improve the skill based on feedback. Use when testing skill quality or iterating on skill improvements.
-allowed-tools: Read, Write, Edit, Bash, Glob, Grep, AskUserQuestion, Agent
-argument-hint: "[path/to/skill]"
+allowed-tools: Read Write Edit Bash Glob Grep AskUserQuestion Agent
 ---
 
 # Skill Eval

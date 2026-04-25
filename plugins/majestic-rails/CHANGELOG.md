@@ -2,6 +2,13 @@
 
 All notable changes to majestic-rails will be documented in this file.
 
+## [4.1.0] - 2026-04-25
+
+### Changed
+
+- Convert `/gemfile:organize` and `/gemfile:upgrade` commands to skills (`gemfile-organize`, `gemfile-upgrade`)
+- Removed empty `commands/` directory; plugin is now skills-only
+
 ## [3.12.3] - 2026-01-05
 
 ### Added
