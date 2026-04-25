@@ -51,7 +51,7 @@ Bare names by default. Prefix only when the bare name loses meaning.
 | Aspect | Pattern |
 |--------|---------|
 | **Pattern** | `name: command-name` (no prefix) |
-| **Examples** | `/commit`, `/handoff`, `/migrate`, `/build`, `/triage-prs`, `/expert-panel` |
+| **Examples** | `/commit`, `/handoff`, `/migrate`, `/upgrade`, `/triage-prs`, `/expert-panel` |
 | **When to use** | Self-descriptive verb commands — name communicates what it does |
 | **Invocation** | `/<command-name>` |
 

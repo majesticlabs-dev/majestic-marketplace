@@ -1,6 +1,6 @@
 # Majestic Rails
 
-Ruby on Rails development tools. Includes 11 specialized agents, 3 commands, 26 skills, and LSP support for Ruby and Stimulus.
+Ruby on Rails development tools. Includes 11 specialized agents, 2 commands, 26 skills, and LSP support for Ruby and Stimulus.
 
 ## Installation
 
@@ -29,7 +29,7 @@ npm install -g stimulus-language-server
 
 ```mermaid
 graph LR
-    A(Skill("blueprint")) --> B(/build)
+    A(Skill("blueprint")) --> B(Skill("build-task"))
     B --> C(Skill("code-review"))
     C --> D{{ship}}
 ```
@@ -38,7 +38,7 @@ graph LR
 |------|------|---------|
 | 1 | `Skill("blueprint")` | Research and create plan (from majestic-engineer) |
 | 2 | Choose next step | Build, review, backlog, or refine |
-| 3 | `/build` | Implement the plan |
+| 3 | `Skill("build-task")` | Autonomous implementation - research, build, review, ship (auto-discovers Rails toolbox) |
 | 4 | `Skill("code-review")` | Smart multi-agent code review (auto-detects Rails) |
 
 ## Quick Reference
@@ -46,7 +46,7 @@ graph LR
 | I want to... | Use this |
 |--------------|----------|
 | Plan a new feature | `Skill("blueprint") "feature"` |
-| Build from a plan | `/build docs/plans/feature.md` |
+| Build from a plan | `Skill("build-task") docs/plans/feature.md` |
 | Review code changes | `Skill("code-review")` |
 | Debug Rails issues | `agent rails-debugger` |
 | Fix Rubocop violations | `agent rubocop-fixer` |
@@ -112,9 +112,8 @@ Invoke with: `agent <name>`
 |---------|-------------|
 | `/organize` | Organize Gemfile with categorized sections and alphabetized gems |
 | `/upgrade` | Upgrade a gem safely with changelog review and testing |
-| `/build` | Execute work plans efficiently - build features following Rails conventions |
 
-> **Note:** For code review, use `Skill("code-review")` from majestic-engineer (auto-detects Rails).
+> **Note:** For implementation, use `Skill("build-task")` from majestic-engineer (auto-discovers Rails toolbox: reviewers, hooks, coding styles). For code review, use `Skill("code-review")` (auto-detects Rails).
 
 ## Skills
 
@@ -137,11 +136,11 @@ Invoke with: `skill majestic-rails:<name>`
 ## Usage Examples
 
 ```bash
-# Plan a feature (use generic /plan from majestic-engineer)
-/plan "Add user authentication with OAuth"
+# Plan a feature (use blueprint from majestic-engineer)
+Skill("blueprint") "Add user authentication with OAuth"
 
-# Build from a plan
-/build docs/plans/add-user-authentication.md
+# Build from a plan (autonomous lifecycle: research, build, AC verify, quality gate, ship)
+Skill("build-task") docs/plans/add-user-authentication.md
 
 # Code review (auto-detects Rails)
 Skill("code-review")              # Review current branch vs main
