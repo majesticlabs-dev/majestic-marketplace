@@ -1,5 +1,5 @@
 ---
-name: majestic:new-skill
+name: majestic-tools:meta:new-skill
 description: Generate Claude Code skills following best practices. Creates skill files with proper structure, naming, and content.
 allowed-tools: Read, Write, Edit, WebFetch, AskUserQuestion, Bash, Glob
 argument-hint: "[skill-description]"
@@ -126,7 +126,7 @@ After successful creation:
 AskUserQuestion:
   question: "Skill created. Want to test it with eval runs?"
   options:
-    - "Yes, run evals" → /majestic:skill-eval [skill-path]
+    - "Yes, run evals" → /majestic-tools:meta:skill-eval [skill-path]
     - "No, I'm done"
 ```
 

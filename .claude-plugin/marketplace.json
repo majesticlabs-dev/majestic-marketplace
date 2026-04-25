@@ -103,7 +103,7 @@
     {
       "name": "majestic-tools",
       "description": "Claude Code customization tools. Includes 0 agents, 10 commands, and 12 skills.",
-      "version": "4.0.4",
+      "version": "4.0.5",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -173,7 +173,7 @@
     {
       "name": "majestic-marketing",
       "description": "Marketing and SEO tools for Claude Code. Includes 5 specialized agents, 6 commands, and 67 skills.",
-      "version": "4.0.9",
+      "version": "4.0.10",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",

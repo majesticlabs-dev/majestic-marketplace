@@ -20,7 +20,7 @@ claude /plugin install majestic-tools
 | Create a new agent | `/majestic-tools:meta:new-agent` |
 | Create a new command | `/majestic-tools:meta:new-command` |
 | Create a new hook | `/majestic-tools:meta:new-hook` |
-| Create a new skill | `/majestic:new-skill` |
+| Create a new skill | `/majestic-tools:meta:new-skill` |
 | Brainstorm ideas | `skill brainstorming` |
 
 ## Agents
@@ -184,7 +184,7 @@ Triggers Raycast confetti celebration when Claude completes a task.
 /majestic-tools:meta:new-command "Create a command for database backup"
 
 # Create a new skill
-/majestic:new-skill "Best practices for writing Stimulus controllers"
+/majestic-tools:meta:new-skill "Best practices for writing Stimulus controllers"
 
 # Reflect on improvements
 /majestic-tools:insight:reflect

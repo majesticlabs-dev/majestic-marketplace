@@ -15,7 +15,7 @@ Coding is no longer the bottleneck. Planning, review, and learning loops matter 
 | **Plan** | Agents research codebase + best practices, produce detailed implementation plans | `/majestic-engineer:blueprint`, `architect` agent |
 | **Work** | Agents write code, tests, and iterate using real app feedback | `/majestic-engineer:build-task`, coder skills |
 | **Assess** | Multi-angle review: security, performance, simplicity, conventions | `/majestic-engineer:code-review`, `quality-gate` |
-| **Reflect** | Analyze session patterns, capture lessons so future agents improve | `/majestic-tools:insight:reflect`, `/majestic:add-lesson` |
+| **Reflect** | Analyze session patterns, capture lessons so future agents improve | `/majestic-tools:insight:reflect` |
 
 See the [Workflow Guide](https://github.com/majesticlabs-dev/majestic-marketplace/wiki/Workflow-Guide) for detailed documentation.
 
