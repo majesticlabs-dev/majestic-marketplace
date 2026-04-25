@@ -123,7 +123,7 @@ AskUserQuestion:
 AskUserQuestion:
   question: "This feature could benefit from a requirements interview. Explore in depth first?"
   options:
-    - "Yes, interview me first" → Invoke /majestic-tools:workflows:interview with feature_description
+    - "Yes, interview me first" → Invoke /interview with feature_description
     - "No, proceed to planning" → Continue
 ```
 
@@ -179,7 +179,7 @@ AskUserQuestion:
 **UI Feature Flow:**
 1. Read config: `config_read("design_system_path")`
 2. If empty, check: `docs/design/design-system.md`
-3. If no design system: Suggest `/majestic-engineer:ux-brief` first
+3. If no design system: Suggest `Skill("ux-brief")` first
 
 **DevOps Feature Flow:**
 ```

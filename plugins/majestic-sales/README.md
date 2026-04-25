@@ -12,7 +12,7 @@ Sales acceleration and revenue tools. Includes 1 command and 7 skills.
 
 | Task | Invocation |
 |------|------------|
-| Build sales funnel | `/majestic-sales:workflows:funnel-builder` |
+| Build sales funnel | `/funnel-builder` |
 | Create sales playbook | `skill majestic-sales:sales-playbook` |
 | Design outbound sequences | `skill majestic-sales:outbound-sequences` |
 | Write proposals | `skill majestic-sales:proposal-writer` |
@@ -23,13 +23,10 @@ Sales acceleration and revenue tools. Includes 1 command and 7 skills.
 
 ## Commands
 
-### workflows
-
-Invoke with: `/majestic-sales:workflows:<command>`
-
 | Command | Description |
 |---------|-------------|
-| `funnel-builder` | Build comprehensive, high-converting sales funnels through a guided 5-phase process |
+| `/funnel-builder` | Build comprehensive, high-converting sales funnels through a guided 5-phase process |
+| `/majestic-sales:start` | Sales workflow orchestrator — routes to the right skill or agent |
 
 ## Skills
 
@@ -60,7 +57,7 @@ Invoke with: `/majestic-sales:workflows:<command>`
 ### Build a Sales Funnel
 
 ```bash
-/majestic-sales:workflows:funnel-builder
+/funnel-builder
 
 # Provide product details and target market when prompted
 ```

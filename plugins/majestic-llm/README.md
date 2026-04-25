@@ -21,8 +21,8 @@ Install at least one CLI:
 
 | Command | Description |
 |---------|-------------|
-| `/majestic-llm:consult` | Get architecture/design perspectives from external LLMs |
-| `/majestic-llm:review` | Get code review from external LLMs on current changes |
+| `/consult` | Get architecture/design perspectives from external LLMs |
+| `/review` | Get code review from external LLMs on current changes |
 
 ## Agents
 
@@ -58,26 +58,26 @@ Install at least one CLI:
 
 ```bash
 # Quick consult with both LLMs
-/majestic-llm:consult Should we use Redis or PostgreSQL for session storage?
+/consult Should we use Redis or PostgreSQL for session storage?
 
 # Consult only Codex
-/majestic-llm:consult --llm codex Best approach for API versioning?
+/consult --llm codex Best approach for API versioning?
 
 # High-stakes decision with max model
-/majestic-llm:consult --codex-model gpt-5.1-codex-max Database migration strategy
+/consult --codex-model gpt-5.1-codex-max Database migration strategy
 ```
 
 ### Code Review
 
 ```bash
 # Review uncommitted changes with both LLMs
-/majestic-llm:review
+/review
 
 # Review staged changes with Codex only
-/majestic-llm:review --staged --llm codex
+/review --staged --llm codex
 
 # Review branch against main
-/majestic-llm:review --branch --llm all
+/review --branch --llm all
 ```
 
 ## When to Use

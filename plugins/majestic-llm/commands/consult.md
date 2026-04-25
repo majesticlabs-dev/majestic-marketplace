@@ -1,4 +1,5 @@
 ---
+name: consult
 description: Get external LLM perspectives on architecture/design decisions from Codex and Gemini
 allowed-tools: Bash, Read, Grep, Glob, Task
 argument-hint: "<question> [--llm codex|gemini|all] [--codex-model <model>] [--gemini-model <model>]"
@@ -23,10 +24,10 @@ Get alternative AI perspectives on architectural decisions and feature planning 
 
 **Example:**
 ```
-/majestic-llm:consult Should we use Redis or PostgreSQL for caching?
-/majestic-llm:consult --llm codex What's the best way to structure this API?
-/majestic-llm:consult --codex-model gpt-5.1-codex-max Critical architecture decision
-/majestic-llm:consult --codex-model gpt-5.1-codex-max --gemini-model gemini-2.5-pro Compare approaches
+/consult Should we use Redis or PostgreSQL for caching?
+/consult --llm codex What's the best way to structure this API?
+/consult --codex-model gpt-5.1-codex-max Critical architecture decision
+/consult --codex-model gpt-5.1-codex-max --gemini-model gemini-2.5-pro Compare approaches
 ```
 
 ## Available Models
@@ -171,22 +172,22 @@ Where they disagree:
 
 ### Simple Query (Both LLMs with Defaults)
 ```
-/majestic-llm:consult Should we use a service object or concern for this logic?
+/consult Should we use a service object or concern for this logic?
 ```
 
 ### Specific LLM
 ```
-/majestic-llm:consult --llm gemini How should we structure the API versioning?
+/consult --llm gemini How should we structure the API versioning?
 ```
 
 ### High-Stakes with Max Codex Model
 ```
-/majestic-llm:consult --codex-model gpt-5.1-codex-max Critical: Database migration strategy for 10M rows
+/consult --codex-model gpt-5.1-codex-max Critical: Database migration strategy for 10M rows
 ```
 
 ### Both LLMs with Custom Models
 ```
-/majestic-llm:consult --codex-model gpt-5.1-codex-max --gemini-model gemini-2.5-pro Architecture review
+/consult --codex-model gpt-5.1-codex-max --gemini-model gemini-2.5-pro Architecture review
 ```
 
 ## Error Handling

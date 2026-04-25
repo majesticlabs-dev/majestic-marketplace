@@ -133,5 +133,5 @@ If local overrides requested, write `.agents.local.yml` using template from `res
 Report what was created:
 - AGENTS.md structure (line count, sub-folders)
 - .agents.yml (key settings)
-- Design system status (detected path or suggest /majestic-engineer:ux-brief)
+- Design system status (detected path or suggest Skill("ux-brief"))
 - Symlink and local config status

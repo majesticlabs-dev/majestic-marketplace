@@ -12,7 +12,7 @@
     {
       "name": "majestic-engineer",
       "description": "Language-agnostic engineering workflows. Includes specialized agents, commands, skills, and toolbox presets for autonomous task execution with quality gates.",
-      "version": "4.0.20",
+      "version": "4.0.21",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -33,7 +33,7 @@
     {
       "name": "majestic-rails",
       "description": "Ruby on Rails development tools. Includes 5 specialized agents, 3 commands, 39 skills, and enhanced toolbox with 6 research hooks.",
-      "version": "4.0.8",
+      "version": "4.0.9",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -80,7 +80,7 @@
     {
       "name": "majestic-llm",
       "description": "External LLM integration tools. Get second opinions from Codex and Gemini on architecture and code review. Includes 1 agent, 2 commands, and 2 skills.",
-      "version": "2.0.2",
+      "version": "2.0.3",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -103,7 +103,7 @@
     {
       "name": "majestic-tools",
       "description": "Claude Code customization tools. Includes 0 agents, 10 commands, and 12 skills.",
-      "version": "4.0.6",
+      "version": "4.0.7",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -122,7 +122,7 @@
     {
       "name": "majestic-python",
       "description": "Python development tools. Includes 2 specialized agents and 8 skills.",
-      "version": "4.0.0",
+      "version": "4.0.1",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -173,7 +173,7 @@
     {
       "name": "majestic-marketing",
       "description": "Marketing and SEO tools for Claude Code. Includes 5 specialized agents, 6 commands, and 67 skills.",
-      "version": "4.0.12",
+      "version": "4.0.13",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -205,7 +205,7 @@
     {
       "name": "majestic-company",
       "description": "Business operations tools. Includes 8 specialized agents, 2 commands, and 24 skills.",
-      "version": "4.0.6",
+      "version": "4.0.7",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -256,7 +256,7 @@
     {
       "name": "majestic-sales",
       "description": "Sales acceleration and revenue tools. Includes 0 agents, 2 commands, and 20 skills.",
-      "version": "4.0.3",
+      "version": "4.0.4",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -304,7 +304,7 @@
     {
       "name": "majestic-experts",
       "description": "Expert panel discussion system with 22 curated personas. Includes 2 agents, 1 command, and 22 expert definitions.",
-      "version": "3.2.1",
+      "version": "3.2.2",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -325,7 +325,7 @@
     {
       "name": "majestic-devops",
       "description": "Infrastructure as Code and DevOps tools. Includes 0 agents and 15 skills for OpenTofu, Ansible, Hetzner, DigitalOcean, Cloudflare, 1Password CLI, cloud-init, and devops-plan.",
-      "version": "2.0.3",
+      "version": "2.0.4",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",
@@ -358,7 +358,7 @@
     {
       "name": "majestic-creative",
       "description": "AI-powered creative tools for image generation, editing, and visual content creation. Includes 1 command and 1 skill for Gemini image generation.",
-      "version": "2.0.2",
+      "version": "2.0.3",
       "author": {
         "name": "David Paluy",
         "url": "https://github.com/dpaluy",

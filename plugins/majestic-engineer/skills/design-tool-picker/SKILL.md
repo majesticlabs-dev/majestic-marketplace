@@ -12,7 +12,7 @@ When users ask "which design tool should I use?" or seem unsure about design too
 | Your Situation | Recommended Tool | Type | Invocation |
 |----------------|------------------|------|------------|
 | Writing new UI code | `frontend-design` | skill | Loaded automatically |
-| Need a design system template | `ux-brief` | command | `/majestic-engineer:ux-brief` |
+| Need a design system template | `ux-brief` | command | `Skill("ux-brief")` |
 | Refining existing UI iteratively | `ui-ux-designer` | agent | `Task(majestic-engineer:design:ui-ux-designer)` |
 | Verifying visual changes match intent | `visual-validator` | agent | `Task(majestic-engineer:qa:visual-validator)` |
 | Reviewing code for accessibility | `ui-code-auditor` | agent | `Task(majestic-engineer:qa:ui-code-auditor)` |
@@ -25,7 +25,7 @@ When users ask "which design tool should I use?" or seem unsure about design too
 ### Question 1: Do you have code written, or are you starting fresh?
 
 **Starting fresh →** Choose based on what you need:
-- Need design system from scratch: `/majestic-engineer:ux-brief`
+- Need design system from scratch: `Skill("ux-brief")`
 - Just need design guidance while coding: `frontend-design` skill (auto-loads)
 
 **Have code →** Continue to Question 2
@@ -101,7 +101,7 @@ Work on source code without running UI.
 
 ### New Feature with UI
 
-1. `/majestic-engineer:ux-brief` if no design system exists
+1. `Skill("ux-brief")` if no design system exists
 2. `frontend-design` skill while implementing
 3. `ui-code-auditor` before PR to catch a11y issues
 4. `visual-validator` to verify visuals match intent
@@ -118,5 +118,5 @@ Work on source code without running UI.
 
 ### Design System Update
 
-1. `/majestic-engineer:ux-brief` to update design system docs
+1. `Skill("ux-brief")` to update design system docs
 2. `visual-validator` to verify components match spec

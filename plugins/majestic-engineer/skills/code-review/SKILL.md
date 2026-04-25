@@ -104,7 +104,7 @@ Changed files:
 JavaScript code review orchestrator is not yet available.
 
 For now, you can run the generic simplicity reviewer:
-`/majestic-engineer:review/simplicity-reviewer [files]`
+`Task(subagent_type: "simplicity-reviewer") [files]`
 
 Or configure `tech_stack: generic` in AGENTS.md to use generic reviewers.
 ```
@@ -146,17 +146,17 @@ tech_stack: rails  # rails | python | javascript | generic
 
 ```bash
 # Review unstaged changes (auto-detect tech stack)
-/majestic-engineer:code-review
+Skill("code-review")
 
 # Review staged changes
-/majestic-engineer:code-review --staged
+Skill("code-review") --staged
 
 # Review current branch vs main
-/majestic-engineer:code-review --branch
+Skill("code-review") --branch
 
 # Review a PR
-/majestic-engineer:code-review #123
+Skill("code-review") #123
 
 # Review specific files
-/majestic-engineer:code-review app/models/user.rb app/controllers/users_controller.rb
+Skill("code-review") app/models/user.rb app/controllers/users_controller.rb
 ```

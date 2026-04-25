@@ -12,7 +12,7 @@ Discover stack-specific toolbox configurations and return merged config for orch
 
 ## Purpose
 
-Generic orchestrators (`/majestic-engineer:blueprint`, `/majestic-engineer:build-task`, `quality-gate`) invoke this agent to get stack-specific capabilities without hardcoding stack logic.
+Generic orchestrators (`Skill("blueprint")`, `Skill("build-task")`, `quality-gate`) invoke this agent to get stack-specific capabilities without hardcoding stack logic.
 
 ## Resolution Order (Layered)
 

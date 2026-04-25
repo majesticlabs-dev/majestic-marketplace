@@ -15,7 +15,7 @@ Implement a task autonomously through the full development lifecycle.
 
 **Formats:**
 - *(empty)* → Auto-detect most recent `docs/plans/*.md`
-- `docs/plans/*.md` → Blueprint file from `/majestic-engineer:blueprint`
+- `docs/plans/*.md` → Blueprint file from `Skill("blueprint")`
 - `#123`, `PROJ-123`, URL → Task reference (GitHub, Beads, Linear)
 - `--no-ship` → Flag to skip shipping (used by run-blueprint for batch shipping)
 
@@ -224,10 +224,10 @@ The agent handles:
 ## Examples
 
 ```bash
-/majestic-engineer:build-task                           # Auto-detect recent plan
-/majestic-engineer:build-task docs/plans/add-auth.md    # Explicit plan
-/majestic-engineer:build-task #42                       # GitHub issue
-/majestic-engineer:build-task PROJ-123                  # Beads/Linear
+Skill("build-task")                           # Auto-detect recent plan
+Skill("build-task") docs/plans/add-auth.md    # Explicit plan
+Skill("build-task") #42                       # GitHub issue
+Skill("build-task") PROJ-123                  # Beads/Linear
 ```
 
 ---

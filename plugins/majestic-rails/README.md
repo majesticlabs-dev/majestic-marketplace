@@ -29,25 +29,25 @@ npm install -g stimulus-language-server
 
 ```mermaid
 graph LR
-    A(/majestic-engineer:blueprint) --> B(/build)
-    B --> C(/majestic-engineer:code-review)
+    A(Skill("blueprint")) --> B(/build)
+    B --> C(Skill("code-review"))
     C --> D{{ship}}
 ```
 
 | Step | Tool | Purpose |
 |------|------|---------|
-| 1 | `/majestic-engineer:blueprint` | Research and create plan (from majestic-engineer) |
+| 1 | `Skill("blueprint")` | Research and create plan (from majestic-engineer) |
 | 2 | Choose next step | Build, review, backlog, or refine |
 | 3 | `/build` | Implement the plan |
-| 4 | `/majestic-engineer:code-review` | Smart multi-agent code review (auto-detects Rails) |
+| 4 | `Skill("code-review")` | Smart multi-agent code review (auto-detects Rails) |
 
 ## Quick Reference
 
 | I want to... | Use this |
 |--------------|----------|
-| Plan a new feature | `/majestic-engineer:blueprint "feature"` |
+| Plan a new feature | `Skill("blueprint") "feature"` |
 | Build from a plan | `/build docs/plans/feature.md` |
-| Review code changes | `/majestic-engineer:code-review` |
+| Review code changes | `Skill("code-review")` |
 | Debug Rails issues | `agent rails-debugger` |
 | Fix Rubocop violations | `agent rubocop-fixer` |
 | Optimize database queries | `agent database-optimizer` |
@@ -108,22 +108,13 @@ Invoke with: `agent <name>`
 
 ## Commands
 
-Invoke with: `/majestic-rails:<category>:<name>`
-
-### gemfile
-
 | Command | Description |
 |---------|-------------|
-| `gemfile:organize` | Organize Gemfile with categorized sections and alphabetized gems |
-| `gemfile:upgrade` | Upgrade a gem safely with changelog review and testing |
-
-### workflows
-
-| Command | Description |
-|---------|-------------|
+| `/organize` | Organize Gemfile with categorized sections and alphabetized gems |
+| `/upgrade` | Upgrade a gem safely with changelog review and testing |
 | `/build` | Execute work plans efficiently - build features following Rails conventions |
 
-> **Note:** For code review, use `/majestic-engineer:code-review` from majestic-engineer (auto-detects Rails).
+> **Note:** For code review, use `Skill("code-review")` from majestic-engineer (auto-detects Rails).
 
 ## Skills
 
@@ -153,15 +144,15 @@ Invoke with: `skill majestic-rails:<name>`
 /build docs/plans/add-user-authentication.md
 
 # Code review (auto-detects Rails)
-/majestic-engineer:code-review              # Review current branch vs main
-/majestic-engineer:code-review #123         # Review PR #123
-/majestic-engineer:code-review --staged     # Review staged changes
-/majestic-engineer:code-review app/models/  # Review specific files
+Skill("code-review")              # Review current branch vs main
+Skill("code-review") #123         # Review PR #123
+Skill("code-review") --staged     # Review staged changes
+Skill("code-review") app/models/  # Review specific files
 
 # Gemfile management
-/majestic-rails:gemfile:organize              # Organize Gemfile with categories
-/majestic-rails:gemfile:upgrade rails         # Upgrade a specific gem
-/majestic-rails:gemfile:upgrade --outdated    # Review all outdated gems
+/organize              # Organize Gemfile with categories
+/upgrade rails         # Upgrade a specific gem
+/upgrade --outdated    # Review all outdated gems
 
 # Refactor Rails code
 agent majestic-rails:rails-refactorer "Refactor the User model to follow Sandi Metz rules"

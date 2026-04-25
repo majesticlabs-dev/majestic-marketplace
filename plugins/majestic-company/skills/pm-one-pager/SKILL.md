@@ -1,6 +1,6 @@
 ---
 name: pm-one-pager
-description: Use when writing feature briefs or decision documents. Not for full PRDs (use /majestic-engineer:prd).
+description: Use when writing feature briefs or decision documents. Not for full PRDs (use Skill("prd")).
 triggers:
   - one pager
   - feature brief
@@ -11,7 +11,7 @@ triggers:
 
 # Feature Brief & Decision Document
 
-Lightweight PM artifacts for early exploration and decision recording. Use before committing to a full PRD (`/majestic-engineer:prd`).
+Lightweight PM artifacts for early exploration and decision recording. Use before committing to a full PRD (`Skill("prd")`).
 
 ## Feature Brief Template
 
@@ -107,12 +107,12 @@ Lightweight PM artifacts for early exploration and decision recording. Use befor
 |----------|------|----------|
 | **Feature Brief** | Early exploration, before committing resources | PRD if approved, backlog item if small |
 | **Decision Document** | Choosing between approaches, recording rationale | Implementation plan |
-| **PRD** (`/majestic-engineer:prd`) | Approved feature needing full specification | Blueprint, implementation |
+| **PRD** (`Skill("prd")`) | Approved feature needing full specification | Blueprint, implementation |
 
 ## File Conventions
 
 ```
 docs/briefs/brief-[feature-name].md    # Feature briefs
 docs/decisions/decision-[topic].md      # Decision records
-docs/prd/prd-[feature-name].md         # Full PRDs (via /majestic-engineer:prd)
+docs/prd/prd-[feature-name].md         # Full PRDs (via Skill("prd"))
 ```

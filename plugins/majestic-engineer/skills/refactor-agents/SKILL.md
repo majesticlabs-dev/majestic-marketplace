@@ -15,7 +15,7 @@ AGENTS_FILES = Glob("**/AGENTS.md")
 ROOT_AGENTS = Read("AGENTS.md")
 ```
 
-If no AGENTS.md exists: suggest `/majestic-engineer:init` instead.
+If no AGENTS.md exists: suggest `Skill("init")` instead.
 
 ## Step 2: Find Contradictions
 
@@ -173,7 +173,7 @@ Original saved to: AGENTS.md.backup
 
 | Condition | Action |
 |-----------|--------|
-| No AGENTS.md found | Suggest `/majestic-engineer:init` |
+| No AGENTS.md found | Suggest `Skill("init")` |
 | Already minimal (<100 lines) | Ask if optimization still wanted |
 | No contradictions found | Skip to Step 3 |
 | User cancels at any step | Preserve original, no changes |

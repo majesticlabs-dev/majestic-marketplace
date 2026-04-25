@@ -59,7 +59,7 @@ If TASK_TRACKING:
 If TASK_TRACKING: TaskUpdate(PHASE_TASKS[1], status: "in_progress")
 
 ```
-/majestic-engineer:blueprint-discovery
+Skill("blueprint-discovery")
 ```
 
 Handles: Idea Refinement, Interview decision, Acceptance Criteria, Feature Classification.
@@ -73,7 +73,7 @@ If TASK_TRACKING: TaskUpdate(PHASE_TASKS[1], status: "completed")
 If TASK_TRACKING: TaskUpdate(PHASE_TASKS[2], status: "in_progress")
 
 ```
-/majestic-engineer:blueprint-research feature_description, discovery_result
+Skill("blueprint-research") feature_description, discovery_result
 ```
 
 Handles: Toolbox resolution, lessons discovery, parallel research agents, spec review.
@@ -235,7 +235,7 @@ Update plan with findings, return to Phase 8.
 If TASK_TRACKING: TaskUpdate(PHASE_TASKS[9], status: "in_progress")
 
 ```
-/majestic-engineer:blueprint-execution plan_path, user_choice
+Skill("blueprint-execution") plan_path, user_choice
 ```
 
 Handles: Task breakdown, task creation, build offering.

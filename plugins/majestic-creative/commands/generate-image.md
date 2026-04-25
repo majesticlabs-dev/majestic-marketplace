@@ -1,4 +1,5 @@
 ---
+name: generate-image
 description: Generate images using Gemini API from text prompts
 allowed-tools: Read, Write, Bash, Glob
 argument-hint: "<prompt> <output-path> [--aspect RATIO] [--size SIZE]"
@@ -20,9 +21,9 @@ Generate images from text prompts using Google's Gemini API.
 
 **Examples:**
 ```
-/majestic-creative:generate-image "A cat in space" cat.jpg
-/majestic-creative:generate-image "Epic landscape" landscape.jpg --aspect 16:9
-/majestic-creative:generate-image "Product mockup" product.jpg --aspect 1:1 --size 2K
+/generate-image "A cat in space" cat.jpg
+/generate-image "Epic landscape" landscape.jpg --aspect 16:9
+/generate-image "Product mockup" product.jpg --aspect 1:1 --size 2K
 ```
 
 ## Prerequisites

@@ -1,4 +1,5 @@
 ---
+name: favicon
 description: Generate complete favicon set from source image and update project HTML
 allowed-tools: Bash, Read, Write, Edit, Glob, AskUserQuestion
 argument-hint: "<source-image>"
@@ -18,8 +19,8 @@ Generate a complete set of favicons from a source image and integrate them into 
 
 **Examples:**
 ```
-/majestic-engineer:favicon logo.png
-/majestic-engineer:favicon assets/icon.svg
+/favicon logo.png
+/favicon assets/icon.svg
 ```
 
 ## Prerequisites

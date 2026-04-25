@@ -13,9 +13,9 @@ claude /plugin install majestic-marketing
 | I want to... | Use this |
 |--------------|----------|
 | **Where do I start?** | `skill marketing-playbook` |
-| **Complete AEO workflow** | `/majestic-marketing:workflows:aeo-workflow` |
-| Quick SEO audit | `/majestic-marketing:workflows:seo-audit` |
-| Comprehensive content check | `/majestic-marketing:workflows:content-check` |
+| **Complete AEO workflow** | `/aeo-workflow` |
+| Quick SEO audit | `/seo-audit` |
+| Comprehensive content check | `/content-check` |
 | Optimize for AI citation | `agent llm-optimizer` |
 | Build brand authority | `agent authority-builder` |
 | Generate brand names | `agent namer` |
@@ -112,7 +112,7 @@ Invoke with: `agent <name>`
 
 ## Commands
 
-Invoke with: `/majestic-marketing:workflows:<name>`
+Invoke with: `/<name>`
 
 | Command | Description |
 |---------|-------------|
@@ -252,10 +252,10 @@ agent majestic-marketing:branding:namer
 
 ```bash
 # Quick SEO audit
-/majestic-marketing:workflows:seo-audit path/to/content.md
+/seo-audit path/to/content.md
 
 # Content quality check
-/majestic-marketing:workflows:content-check path/to/article.md
+/content-check path/to/article.md
 ```
 
 ### Content & Copy Skills

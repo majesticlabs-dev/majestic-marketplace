@@ -42,7 +42,7 @@ If a skill and command share the same name, the skill takes precedence.
 ```
 plugins/majestic-rails/skills/stimulus-coder/SKILL.md
 -> name: stimulus-coder
--> invoked as: /majestic-rails:stimulus-coder
+-> invoked as: Skill("stimulus-coder")
 ```
 
 ### Nested Structure (categorized skills)
@@ -50,7 +50,7 @@ plugins/majestic-rails/skills/stimulus-coder/SKILL.md
 ```
 plugins/majestic-company/skills/ceo/strategic-planning/SKILL.md
 -> name: strategic-planning
--> invoked as: /majestic-company:ceo:strategic-planning
+-> invoked as: Skill("strategic-planning")
 ```
 
 **Key Points:**

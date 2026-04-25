@@ -215,7 +215,7 @@ If an agent fails to complete:
 
 ```markdown
 **Warning:** Python reviewer did not complete. Consider running manually:
-`/majestic-python:python-reviewer [files]`
+`Task(subagent_type: "python-reviewer") [files]`
 ```
 
 ## Python-Specific Checks

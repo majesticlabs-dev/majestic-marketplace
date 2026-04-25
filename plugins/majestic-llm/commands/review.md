@@ -1,4 +1,5 @@
 ---
+name: review
 description: Get code review from external LLMs (Codex, Gemini) on current changes
 allowed-tools: Bash, Read, Grep, Glob, Task
 argument-hint: "[--uncommitted|--staged|--branch|--base <branch>] [--llm codex|gemini|all] [--model <model>]"
@@ -27,10 +28,10 @@ Get code review feedback from external LLMs (Codex, Gemini) on your current chan
 
 **Examples:**
 ```
-/majestic-llm:review
-/majestic-llm:review --staged --llm codex
-/majestic-llm:review --branch --llm all
-/majestic-llm:review --base main --model gpt-5.2-codex
+/review
+/review --staged --llm codex
+/review --branch --llm all
+/review --base main --model gpt-5.2-codex
 ```
 
 ## Available Models
@@ -198,22 +199,22 @@ Issues only Gemini caught:
 
 ### Quick Review of Uncommitted Changes
 ```
-/majestic-llm:review
+/review
 ```
 
 ### Review Staged Changes with Codex Only
 ```
-/majestic-llm:review --staged --llm codex
+/review --staged --llm codex
 ```
 
 ### Thorough Branch Review
 ```
-/majestic-llm:review --branch --model gpt-5.2-codex
+/review --branch --model gpt-5.2-codex
 ```
 
 ### Review Against Specific Branch
 ```
-/majestic-llm:review --base develop --llm all
+/review --base develop --llm all
 ```
 
 ## Error Handling
@@ -251,8 +252,8 @@ Consider:
 
 This command complements Claude's built-in review capabilities:
 
-1. Run Claude's review first: `/majestic-engineer:code-review`
-2. Get external perspectives: `/majestic-llm:review`
+1. Run Claude's review first: `Skill("code-review")`
+2. Get external perspectives: `/review`
 3. Compare findings to identify blind spots
 
 The multi-LLM approach helps catch issues that any single model might miss.

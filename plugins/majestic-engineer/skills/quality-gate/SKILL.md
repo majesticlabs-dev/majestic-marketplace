@@ -98,19 +98,19 @@ The quality-gate agent returns a structured verdict. Present the full report to 
 
 ```bash
 # Review unstaged changes
-/majestic-engineer:quality-gate
+Skill("quality-gate")
 
 # Review staged changes
-/majestic-engineer:quality-gate --staged
+Skill("quality-gate") --staged
 
 # Review current branch vs main
-/majestic-engineer:quality-gate --branch
+Skill("quality-gate") --branch
 
 # Review a PR
-/majestic-engineer:quality-gate #123
+Skill("quality-gate") #123
 
 # Review specific files
-/majestic-engineer:quality-gate app/models/user.rb app/controllers/users_controller.rb
+Skill("quality-gate") app/models/user.rb app/controllers/users_controller.rb
 ```
 
 ## Configuration

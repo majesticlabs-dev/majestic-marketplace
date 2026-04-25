@@ -1,6 +1,6 @@
 ---
 name: devops-plan
-description: Gather DevOps context for infrastructure planning. Detects IaC tools, providers, and recommends skills. Use when /majestic-engineer:blueprint detects infrastructure work.
+description: Gather DevOps context for infrastructure planning. Detects IaC tools, providers, and recommends skills. Use when Skill("blueprint") detects infrastructure work.
 allowed-tools: Read Grep Glob Bash Task
 ---
 
@@ -10,7 +10,7 @@ Gather infrastructure context for planning. Returns structured findings for the 
 
 ## When Called
 
-This skill is invoked by `/majestic-engineer:blueprint` when DevOps keywords are detected in the feature description.
+This skill is invoked by `Skill("blueprint")` when DevOps keywords are detected in the feature description.
 
 ## Workflow
 

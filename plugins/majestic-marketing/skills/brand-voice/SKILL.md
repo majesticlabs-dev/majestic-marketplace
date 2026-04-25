@@ -40,7 +40,7 @@ For **quantitative** voice metrics (sentence length distribution, punctuation DN
 For thorough voice exploration before creating the guide, run:
 
 ```
-/majestic-tools:interview "brand voice"
+/interview "brand voice"
 ```
 
 This triggers a conversational interview with voice-specific questions about identity, audience connection, tone boundaries, and existing patterns.

@@ -105,7 +105,7 @@ Choose viewport size based on what you're documenting:
 
 ## Integration with PR Workflow
 
-This skill complements the `/majestic-engineer:git:create-pr` command. Before creating a PR with UI changes:
+This skill complements the `/create-pr` command. Before creating a PR with UI changes:
 
 1. Take before screenshots (if you didn't already)
 2. Implement your changes

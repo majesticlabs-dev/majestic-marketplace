@@ -13,7 +13,7 @@ claude /plugin install majestic-engineer
 After installing, initialize your project:
 
 ```bash
-/majestic-engineer:init
+Skill("init")
 ```
 
 This creates:
@@ -29,7 +29,7 @@ The command auto-detects your tech stack (Rails, Python, Node, etc.) and configu
 
 ### PRD vs Blueprint
 
-| Aspect | `/majestic-engineer:prd` | `/majestic-engineer:blueprint` |
+| Aspect | `Skill("prd")` | `Skill("blueprint")` |
 |--------|-----------------|----------------------|
 | **Purpose** | Define WHAT to build & WHY | Define HOW to build it |
 | **Output** | `docs/prd/prd-[name].md` | `docs/plans/[timestamp]_[name].md` |
@@ -64,8 +64,8 @@ graph LR
 
 | When | Use | Purpose |
 |------|-----|---------|
-| **Clear idea** | `/majestic-engineer:prd` | Batch questions → generate PRD → architect designs → plan-review validates |
-| **Fuzzy idea** | `/majestic-engineer:prd --guided` | Interactive one-at-a-time discovery → then generates PRD |
+| **Clear idea** | `Skill("prd")` | Batch questions → generate PRD → architect designs → plan-review validates |
+| **Fuzzy idea** | `Skill("prd") --guided` | Interactive one-at-a-time discovery → then generates PRD |
 
 ---
 
@@ -83,8 +83,8 @@ graph LR
 
 | Command | Purpose |
 |---------|---------|
-| `/majestic-engineer:blueprint` | Create blueprint → plan-review validates |
-| `/majestic-engineer:build-task` | Build → test → review → ship (autonomous) |
+| `Skill("blueprint")` | Create blueprint → plan-review validates |
+| `Skill("build-task")` | Build → test → review → ship (autonomous) |
 
 ---
 
@@ -93,9 +93,9 @@ graph LR
 Autonomous implementation from any task management system:
 
 ```bash
-/majestic-engineer:build-task #42          # GitHub Issue
-/majestic-engineer:build-task PROJ-123     # Beads task
-/majestic-engineer:build-task LIN-456      # Linear issue
+Skill("build-task") #42          # GitHub Issue
+Skill("build-task") PROJ-123     # Beads task
+Skill("build-task") LIN-456      # Linear issue
 ```
 
 **What happens:**
@@ -139,9 +139,9 @@ graph TD
 
 | I want to... | Use this |
 |--------------|----------|
-| Plan a feature or bug fix | `/majestic-engineer:blueprint` |
+| Plan a feature or bug fix | `Skill("blueprint")` |
 | Analyze a spec for gaps | `agent spec-reviewer` |
-| Define what to build (requirements) | `/majestic-engineer:prd` |
+| Define what to build (requirements) | `Skill("prd")` |
 | Design how to build it (architecture) | `agent architect` |
 | Plan a refactoring effort | `agent refactor-plan` |
 | Review a plan before implementing | `agent plan-review` |
@@ -217,58 +217,24 @@ Invoke with: `agent <name>`
 
 ## Commands
 
-Invoke with: `/majestic-engineer:<name>`
-
-### Top-level
-
 | Command | Description |
 |---------|-------------|
-| `config-reader` | Get a config value from .agents.yml (with local overrides) |
-| `explain` | Explain a concept using real examples from your project |
-| `favicon` | Generate complete favicon set from source image |
+| `/explain` | Explain a concept using real examples from your project |
+| `/favicon` | Generate complete favicon set from source image |
+| `/changelog` | Create engaging changelogs from recent merges |
+| `/commit` | Create git commit with proper message formatting |
+| `/create-pr` | Create a pull request for the current feature branch |
+| `/ldr-start` | Start a Long-Distance Refactor session |
+| `/pr-review` | Review and address Pull Request comments from GitHub |
+| `/triage-prs` | Triage open PRs with parallel review, label, and merge decisions |
+| `/worktree-cleanup` | Clean up merged and stale git worktrees |
+| `/handoff` | Create a detailed handoff plan for continuing work |
+| `/ledger-clear` | Clear the session ledger file to start fresh |
+| `/pickup` | Resume work from a previous handoff session |
+| `/smart-compact` | Analyze conversation and generate optimized /compact command |
+| `/tasks:new` | Manage backlog items across files, GitHub Issues, Linear, or Beads |
 
-### git
-
-| Command | Description |
-|---------|-------------|
-| `git:changelog` | Create engaging changelogs from recent merges |
-| `git:commit` | Create git commit with proper message formatting |
-| `git:create-pr` | Create a pull request for the current feature branch |
-| `git:pr-review` | Review and address Pull Request comments from GitHub |
-| `git:triage-prs` | Triage open PRs with parallel review, label, and merge decisions |
-| `git:worktree-cleanup` | Clean up merged and stale git worktrees |
-
-### session
-
-| Command | Description |
-|---------|-------------|
-| `session:handoff` | Create a detailed handoff plan for continuing work |
-| `session:ledger-clear` | Clear the session ledger file to start fresh |
-| `session:pickup` | Resume work from a previous handoff session |
-| `session:smart-compact` | Analyze conversation and generate optimized /compact command |
-
-### tasks
-
-| Command | Description |
-|---------|-------------|
-| `tasks:new` | Manage backlog items across files, GitHub Issues, Linear, or Beads |
-
-### workflows
-
-| Command | Description |
-|---------|-------------|
-| `workflows:blueprint` | Transform feature descriptions into well-structured project blueprints |
-| `workflows:build-task` | Autonomous task implementation from any task management system |
-| `workflows:code-review` | Generic code review that auto-detects tech stack |
-| `workflows:debug` | Debug errors, test failures, or unexpected behavior |
-| `workflows:init` | Initialize AGENTS.md with hierarchical structure |
-| `workflows:prd` | Create a PRD for a product/feature (`--guided` for interactive) |
-| `workflows:quality-gate` | Run quality gate checks with tech stack-aware reviewers |
-| `workflows:question` | Answer questions about project structure without coding |
-| `workflows:refactor-agents` | Refactor existing AGENTS.md to follow progressive disclosure |
-| `workflows:run-blueprint` | Execute all blueprint tasks using build-task workflow |
-| `workflows:ship-it` | Complete checkout workflow: lint, commit, PR |
-| `workflows:ux-brief` | Create junior-dev-ready design systems through guided discovery |
+> **Note:** Workflow capabilities (blueprint, build-task, code-review, debug, init, prd, quality-gate, question, refactor-agents, run-blueprint, ship-it, ux-brief) are now skills. Invoke via `Skill("name")` — they auto-trigger from context.
 
 ## Skills
 
@@ -333,14 +299,14 @@ backend: github  # Options: files, github, linear, beads
 
 ```bash
 # Create a PRD for a new feature
-/majestic-engineer:workflows:prd "Mobile app for tracking fitness goals"
+Skill("prd") "Mobile app for tracking fitness goals"
 
 # Design implementation based on PRD
 agent majestic-engineer:plan:architect "Design user authentication system"
 
 # Create commit and PR
-/majestic-engineer:git:commit
-/majestic-engineer:git:create-pr
+/commit
+/create-pr
 
 # Use git-worktree skill for parallel development
 skill majestic-engineer:git-worktree

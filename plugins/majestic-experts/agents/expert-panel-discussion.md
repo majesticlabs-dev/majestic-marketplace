@@ -108,7 +108,7 @@ prompt: |
 description: "[Expert name] perspective on [topic]"
 ```
 
-**IMPORTANT:** `expert-perspective` is an AGENT, not a skill. Do NOT use the Skill tool or `/majestic-experts:expert-perspective` syntax. Use the Task tool with the subagent_type parameter.
+**IMPORTANT:** `expert-perspective` is an AGENT, not a skill. Do NOT use the Skill tool or `Task(subagent_type: "expert-perspective")` syntax. Use the Task tool with the subagent_type parameter.
 
 ### Step 3: Collect Responses
 

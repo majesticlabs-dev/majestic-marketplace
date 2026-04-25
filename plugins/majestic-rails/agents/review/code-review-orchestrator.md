@@ -232,5 +232,5 @@ If an agent fails to complete:
 
 ```markdown
 **Warning:** Performance reviewer did not complete. Consider running manually:
-`/majestic-rails:review/performance-reviewer [files]`
+`Task(subagent_type: "performance-reviewer") [files]`
 ```

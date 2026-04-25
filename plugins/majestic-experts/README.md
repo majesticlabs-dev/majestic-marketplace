@@ -202,7 +202,7 @@ Custom experts automatically merge with library experts.
 ## Integration
 
 This plugin is self-contained with:
-- `/majestic-experts:expert-panel` command for starting discussions
+- `/expert-panel` command for starting discussions
 - `majestic-experts:expert-panel-discussion` orchestrator agent
 - `majestic-experts:expert-perspective` panelist agent
 

@@ -6,7 +6,7 @@ allowed-tools: Read Write
 
 # Init Agents Config
 
-Assemble `.agents.yml` from collected user answers during `/majestic-engineer:init`.
+Assemble `.agents.yml` from collected user answers during `Skill("init")`.
 
 ## Resources
 

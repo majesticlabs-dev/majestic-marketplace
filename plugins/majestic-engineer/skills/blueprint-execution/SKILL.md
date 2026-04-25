@@ -31,7 +31,7 @@ AskUserQuestion:
 Execute entire plan as one task:
 
 ```
-/majestic-engineer:build-task "{plan_path}"
+Skill("build-task") "{plan_path}"
 ```
 
 **End workflow.**
@@ -72,7 +72,7 @@ Update plan with task reference, go to Step 5.
 AskUserQuestion:
   question: "Start building?"
   options:
-    - "Build all tasks now" → /majestic-engineer:run-blueprint "{plan_path}"
+    - "Build all tasks now" → Skill("run-blueprint") "{plan_path}"
     - "Done for now" → End workflow
 ```
 

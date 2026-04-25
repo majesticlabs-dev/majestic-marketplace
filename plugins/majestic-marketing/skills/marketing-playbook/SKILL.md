@@ -224,6 +224,6 @@ AI VISIBILITY:
 
 | Goal | Command |
 |------|---------|
-| SEO audit | `/majestic-marketing:workflows:seo-audit` |
-| Content check | `/majestic-marketing:workflows:content-check` |
-| AEO workflow | `/majestic-marketing:workflows:aeo-workflow` |
+| SEO audit | `/seo-audit` |
+| Content check | `/content-check` |
+| AEO workflow | `/aeo-workflow` |
