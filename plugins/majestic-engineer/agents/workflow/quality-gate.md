@@ -59,7 +59,7 @@ If reviewer name does NOT contain `:`, resolve via this table:
 | `simplicity-reviewer` | `majestic-engineer:review:simplicity-reviewer` |
 | `pragmatic-rails-reviewer` | `majestic-rails:review:pragmatic-rails-reviewer` |
 | `performance-reviewer` | `majestic-rails:review:performance-reviewer` |
-| `data-integrity-reviewer` | `majestic-rails:review:data-integrity-reviewer` |
+| `data-integrity-reviewer` | `majestic-rails:data-integrity-reviewer` (skill) |
 | `dhh-code-reviewer` | `majestic-rails:review:dhh-code-reviewer` |
 | `python-reviewer` | `majestic-python:python-reviewer` |
 | `react-reviewer` | `majestic-react:review:react-reviewer` |

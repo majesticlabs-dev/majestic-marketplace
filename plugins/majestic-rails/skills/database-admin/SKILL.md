@@ -1,6 +1,6 @@
 ---
 name: database-admin
-description: PostgreSQL and SQLite database administration for Rails apps. Use for backups, monitoring, connection pooling, vacuum/analyze, emergency procedures, restore testing, and production database health checks.
+description: PostgreSQL and SQLite database administration for Rails apps. Use when the user asks about backups, monitoring, connection pooling, vacuum/analyze, emergency procedures, restore testing, or production database health checks.
 allowed-tools: Read Grep Glob Bash
 ---
 

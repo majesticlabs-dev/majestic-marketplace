@@ -50,7 +50,7 @@ graph LR
 | Review code changes | `Skill("code-review")` |
 | Debug Rails issues | `agent rails-debugger` |
 | Fix Rubocop violations | `agent rubocop-fixer` |
-| Optimize database queries | `agent database-optimizer` |
+| Optimize database queries | `Skill("database-optimizer")` |
 | Build Hotwire components | `agent hotwire-coder` |
 | Research a gem | `agent gem-research` |
 | DHH-style code review | `agent dhh-code-reviewer` |
@@ -72,8 +72,6 @@ Invoke with: `agent <name>`
 | `action-mailer-coder` | Create emails with parameterized mailers, previews, and background delivery |
 | `action-policy-coder` | Authorization with ActionPolicy - policies, scopes, caching, GraphQL integration |
 | `active-job-coder` | Create background jobs with Rails 8 conventions, Solid Queue patterns, and retry strategies |
-| `database-admin` | Database operations, backups, monitoring, connection pooling for PostgreSQL/SQLite |
-| `database-optimizer` | Advanced query optimization, EXPLAIN analysis, complex SQL for PostgreSQL/SQLite |
 | `graphql-architect` | Design GraphQL schemas, resolvers, subscriptions using graphql-ruby patterns |
 | `lint` | Run rubocop, erblint, and brakeman before pushing |
 | `rails-debugger` | Debug Rails issues and validate bug reports by analyzing errors and reproducing issues |
@@ -100,18 +98,10 @@ Invoke with: `agent <name>`
 
 | Agent | Description |
 |-------|-------------|
-| `data-integrity-reviewer` | Review migrations, data constraints, transactions, and privacy compliance |
 | `dhh-code-reviewer` | Review code following DHH's 37signals/Rails conventions |
 | `performance-reviewer` | Analyze code for performance issues, query optimization, and scalability |
 | `pragmatic-rails-reviewer` | Review code for quality, regressions, testability with pragmatic taste |
 | `simplicity-reviewer` | Simplify code, detect anti-patterns, find duplication, enforce YAGNI |
-
-## Commands
-
-| Command | Description |
-|---------|-------------|
-| `/organize` | Organize Gemfile with categorized sections and alphabetized gems |
-| `/upgrade` | Upgrade a gem safely with changelog review and testing |
 
 > **Note:** For implementation, use `Skill("build-task")` from majestic-engineer (auto-discovers Rails toolbox: reviewers, hooks, coding styles). For code review, use `Skill("code-review")` (auto-detects Rails).
 
@@ -122,6 +112,9 @@ Invoke with: `skill majestic-rails:<name>`
 | Skill | Description |
 |-------|-------------|
 | `business-logic-coder` | Implement business logic with ActiveInteraction and AASM state machines |
+| `data-integrity-reviewer` | Review migrations, data constraints, transactions, and privacy compliance |
+| `database-admin` | Database operations, backups, monitoring, connection pooling for PostgreSQL/SQLite |
+| `database-optimizer` | Advanced query optimization, EXPLAIN analysis, complex SQL for PostgreSQL/SQLite |
 | `dhh-coder` | Code following DHH's standards for Rails elegance and simplicity |
 | `dialog-patterns` | Native HTML dialog patterns for Rails with Turbo and Stimulus (modals, confirmations, toasts) |
 | `event-sourcing-coder` | Record domain events and dispatch to inbox handlers for audit trails and activity feeds |
@@ -149,9 +142,9 @@ Skill("code-review") --staged     # Review staged changes
 Skill("code-review") app/models/  # Review specific files
 
 # Gemfile management
-/organize              # Organize Gemfile with categories
-/upgrade rails         # Upgrade a specific gem
-/upgrade --outdated    # Review all outdated gems
+Skill("gemfile-organize")              # Organize Gemfile with categories
+Skill("gemfile-upgrade") rails         # Upgrade a specific gem
+Skill("gemfile-upgrade") --outdated    # Review all outdated gems
 
 # Refactor Rails code
 agent majestic-rails:rails-refactorer "Refactor the User model to follow Sandi Metz rules"
@@ -169,7 +162,7 @@ agent majestic-rails:active-job-coder "Create a job to process uploaded files"
 agent majestic-rails:action-mailer-coder "Create a welcome email with parameterized mailer"
 
 # Optimize database queries
-agent majestic-rails:database-optimizer "Analyze slow query with EXPLAIN and recommend indexes"
+Skill("majestic-rails:database-optimizer") "Analyze slow query with EXPLAIN and recommend indexes"
 
 # Design GraphQL API
 agent majestic-rails:graphql-architect "Design schema for user posts with N+1 prevention"

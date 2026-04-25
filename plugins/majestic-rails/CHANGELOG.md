@@ -2,12 +2,42 @@
 
 All notable changes to majestic-rails will be documented in this file.
 
+## [4.2.0] - 2026-04-25
+
+### Removed
+
+- Redundant `database-admin` agent (skill version exists at `skills/database-admin/`)
+- Redundant `database-optimizer` agent (skill version exists at `skills/database-optimizer/`)
+- `data-integrity-reviewer` agent → replaced by skill at `skills/data-integrity-reviewer/`
+
+### Added
+
+- `data-integrity-reviewer` skill (router/aggregator: routes to migration / constraint / transaction / privacy reviewers)
+
+### Changed
+
+- Move `resources/database-admin/{postgresql,sqlite}.md` → `skills/database-admin/references/` (matches CLAUDE.md convention)
+- Move `resources/database-optimizer/patterns.md` → `skills/database-optimizer/references/`
+- Tighten descriptions on `database-admin` and `database-optimizer` skills with "Use when" routing keywords
+- Fix `code-review-orchestrator` agent: removed persona, corrected `config-reader` agent → skill reference, switched `data-integrity-reviewer` agent → skill, clarified "Apply X skill" semantics (Read SKILL.md and apply inline, not Task subagent)
+- Fix `gem-research` agent: corrected step numbering bug (8 was missing)
+- Update `.claude-plugin/toolbox.yml` `db_optimization` rule: redirect to `best-practices-researcher` agent (toolbox schema requires `agent:`), with database context that references the skill
+- Update `README.md`: move 3 entries from Agents → Skills tables, replace `/organize` and `/upgrade` command examples with `Skill("gemfile-organize")` and `Skill("gemfile-upgrade")`
+
+### Cross-plugin
+
+- `plugins/majestic-engineer/agents/workflow/quality-gate.md`: updated shorthand path for `data-integrity-reviewer` from `:review:` agent path to flat skill path
+
+### Result
+
+- Plugin now has 2 agents (`gem-research`, `rails-code-review`) + 47 skills
+
 ## [4.1.0] - 2026-04-25
 
 ### Changed
 
 - Convert `/gemfile:organize` and `/gemfile:upgrade` commands to skills (`gemfile-organize`, `gemfile-upgrade`)
-- Removed empty `commands/` directory; plugin is now skills-only
+- Removed empty `commands/` directory
 
 ## [3.12.3] - 2026-01-05
 

@@ -1,6 +1,6 @@
 ---
 name: database-optimizer
-description: Optimize PostgreSQL/SQLite query performance for Rails. Use for EXPLAIN ANALYZE interpretation, composite/partial/expression/covering/GIN/GiST/BRIN index design, N+1 detection, eager loading strategy, and ActiveRecord batch processing.
+description: Optimize PostgreSQL/SQLite query performance for Rails. Use when the user asks about EXPLAIN ANALYZE, slow queries, missing indexes (composite/partial/expression/covering/GIN/GiST/BRIN), N+1 detection, eager loading, or ActiveRecord batch processing.
 allowed-tools: Read Grep Glob Bash
 ---
 

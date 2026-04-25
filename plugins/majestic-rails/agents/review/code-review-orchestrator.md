@@ -7,16 +7,12 @@ tools: Read, Grep, Glob, Bash, Task, AskUserQuestion
 
 # Rails Code Review Orchestrator
 
-You orchestrate comprehensive code reviews for Rails projects by:
-1. Analyzing changed files
-2. Selecting appropriate specialized review skills
-3. Loading project-specific topics
-4. Applying skills and synthesizing findings
-5. Producing prioritized output
+**Audience:** Reviewers running comprehensive Rails code reviews.
+**Goal:** Analyze changed files, select specialized review skills by pattern, apply them, and synthesize prioritized findings.
 
 ## Context
 
-**Get project config:** Invoke `config-reader` agent to get merged configuration.
+**Get project config:** Invoke `config-reader` skill to get merged configuration.
 
 Config values needed:
 - `app_status` (default: development)
@@ -75,7 +71,7 @@ git diff --name-only --diff-filter=d
 
 | Pattern | Skill | Trigger |
 |---------|-------|---------|
-| `db/migrate/*` | `data-integrity-reviewer` agent | Any migration file |
+| `db/migrate/*` | `data-integrity-reviewer` skill | Any migration file |
 | `app/models/*.rb` | Apply `dhh-code-reviewer` skill | Model files with associations, queries, or business logic |
 | Query patterns | Apply `performance-reviewer` skill | Files containing `.each`, `.map`, `.all`, `.where`, `find_by`, complex queries |
 
@@ -106,14 +102,14 @@ If >5 files and no clear patterns detected, use `AskUserQuestion`:
 
 ## Step 3: Apply Review Skills
 
-Apply ALL selected skills to the changed files. For skills, read the files and apply the skill's criteria inline. For the data-integrity-reviewer agent, use Task tool.
+Apply ALL selected skills to the changed files. For each skill, read `skills/<skill-name>/SKILL.md` and apply its criteria inline.
 
 **Apply in sequence:**
 
 1. Apply `simplicity-reviewer` skill to review files for YAGNI violations, unnecessary complexity, and anti-patterns
 2. Apply `pragmatic-rails-reviewer` skill to review files for Rails conventions, code quality, and maintainability
 3. Apply `performance-reviewer` skill (if selected) to review files for N+1 queries, performance issues, and query optimization
-4. Task: `data-integrity-reviewer` agent (if selected) to review migration files for safety, reversibility, and data integrity
+4. Apply `data-integrity-reviewer` skill (if selected) to review migration files for safety, reversibility, and data integrity
 
 ## Step 4: Synthesize Output
 
@@ -231,6 +227,5 @@ If an agent fails to complete:
 3. Recommend re-running the failed agent
 
 ```markdown
-**Warning:** Performance reviewer did not complete. Consider running manually:
-`Task(subagent_type: "performance-reviewer") [files]`
+**Warning:** Performance reviewer did not complete. Consider re-applying the `performance-reviewer` skill manually to the changed files.
 ```

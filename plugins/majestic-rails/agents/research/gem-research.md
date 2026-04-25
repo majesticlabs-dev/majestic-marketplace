@@ -54,7 +54,7 @@ When invoked, you must follow these steps:
    - Review Gemfile and Gemfile.lock for version constraints
    - Analyze how the gem is integrated into the codebase
 
-9. **Implementation Guidance**
+8. **Implementation Guidance**
    - Provide clear installation instructions
    - Show basic usage examples
    - Highlight common pitfalls or gotchas

@@ -90,8 +90,8 @@ build_task:
     # Database optimization
     - id: db_optimization
       mode: auto
-      agent: majestic-rails:database-optimizer
-      context: "Focus on Rails database optimization, query performance, indexing"
+      agent: majestic-engineer:research:best-practices-researcher
+      context: "Focus on Rails database optimization, query performance, indexing. Apply the majestic-rails:database-optimizer skill for EXPLAIN ANALYZE and index design patterns."
       triggers:
         any_substring:
           - "migration"
