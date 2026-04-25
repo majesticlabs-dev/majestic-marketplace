@@ -234,11 +234,56 @@ Update plan with findings, return to Phase 8.
 
 If TASK_TRACKING: TaskUpdate(PHASE_TASKS[9], status: "in_progress")
 
+Dispatch on `user_choice` from Phase 8:
+
+**9a. Single Task** (`user_choice == "Build as single task"`):
+
 ```
-Skill("blueprint-execution") plan_path, user_choice
+Skill("build-task") "{plan_path}"
 ```
 
-Handles: Task breakdown, task creation, build offering.
+End workflow.
+
+**9b. Break Into Tasks** (`user_choice == "Break into small tasks"`):
+
+```
+Task(majestic-engineer:plan:task-breakdown):
+  prompt: "Plan: {plan_path}"
+```
+
+```
+AskUserQuestion:
+  question: "Tasks added to plan. Create in backlog?"
+  options:
+    - "Yes, create tasks" → For each task in plan: Skill("backlog-manager")
+    - "No, just the plan" → Skip
+```
+
+Then offer build:
+
+```
+AskUserQuestion:
+  question: "Start building?"
+  options:
+    - "Build all tasks now" → Skill("run-blueprint") "{plan_path}"
+    - "Done for now" → End workflow
+```
+
+**9c. Single Epic** (`user_choice == "Create as single epic"`):
+
+```
+Skill("backlog-manager")
+```
+
+Update plan with task reference, then offer build:
+
+```
+AskUserQuestion:
+  question: "Start building?"
+  options:
+    - "Build all tasks now" → Skill("run-blueprint") "{plan_path}"
+    - "Done for now" → End workflow
+```
 
 If TASK_TRACKING: TaskUpdate(PHASE_TASKS[9], status: "completed")
 

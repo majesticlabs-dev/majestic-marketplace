@@ -244,7 +244,6 @@ Invoke with: `skill majestic-engineer:<name>`
 |-------|-------------|------|
 | `backlog-manager` | Manage project backlogs and task prioritization | |
 | `blueprint-discovery` | Discovery phase for blueprint workflow | |
-| `blueprint-execution` | Execution phase for blueprint workflow | |
 | `blueprint-research` | Research phase for blueprint workflow | |
 | `cloudflare-worker` | Build edge-first TypeScript apps on Cloudflare Workers | |
 | `config-reader` | Read project config from .agents.yml | |
