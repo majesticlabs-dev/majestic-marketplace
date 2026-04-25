@@ -1,14 +1,14 @@
 ---
 name: reflect
-allowed-tools: Bash, Read, Edit, AskUserQuestion
-description: Reflect on current session and suggest AGENTS.md improvements based on patterns and feedback.
+description: Reflect on the current session and suggest AGENTS.md improvements based on user corrections, repeated feedback, and patterns observed during interaction. Use when ending a session to encode lessons learned. Don't use for cross-session learning from git history - use `learn` instead.
+allowed-tools: Bash Read Edit AskUserQuestion
 ---
 
 # Reflect
 
 Analyze the current session and suggest improvements to AGENTS.md based on patterns, feedback, and lessons learned.
 
-**For cross-session learning from git history and handoffs, use `/learn` instead.**
+**For cross-session learning from git history and handoffs, use `Skill("learn")` instead.**
 
 ## Data Sources
 

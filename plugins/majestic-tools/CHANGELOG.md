@@ -2,6 +2,16 @@
 
 All notable changes to majestic-tools will be documented in this file.
 
+## [4.1.0] - 2026-04-25
+
+### Changed
+
+- **`learn` and `reflect` converted from commands to skills**
+  - Moved `commands/learn.md` → `skills/learn/SKILL.md`
+  - Moved `commands/reflect.md` → `skills/reflect/SKILL.md`
+  - Invoke with `Skill("learn")` / `Skill("reflect")` instead of `/learn` / `/reflect`
+  - Bump to v4.1.0 (1 command, 14 skills)
+
 ## [4.0.9] - 2026-04-25
 
 ### Changed

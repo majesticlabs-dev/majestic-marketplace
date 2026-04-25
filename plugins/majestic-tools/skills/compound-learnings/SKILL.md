@@ -20,7 +20,7 @@ Scan these locations for patterns:
 | Handoffs | `$MAIN_WORKTREE/.agents/handoffs/*.md` | Patterns, What Worked/Failed |
 | Key Learnings | `CLAUDE.md` (Key Learnings section) | Existing encoded patterns |
 
-**Note:** Session ledger (`.agents/session_ledger.md`) is for `/reflect` only - ephemeral per-session state.
+**Note:** Session ledger (`.agents/session_ledger.md`) is for `Skill("reflect")` only - ephemeral per-session state.
 
 ## Pattern Extraction
 
@@ -121,9 +121,9 @@ Before recommending an artifact, verify:
 - [ ] **Uniqueness**: Doesn't duplicate existing CLAUDE.md rules or skills
 - [ ] **Correct Type**: Matches the categorization decision tree
 
-## Integration with /learn
+## Integration with `learn`
 
-When invoked from `/learn`:
+When invoked from `Skill("learn")`:
 
 1. Locate main worktree for centralized handoffs
 2. Gather patterns from git, PRs, and handoffs
@@ -133,4 +133,4 @@ When invoked from `/learn`:
 6. Present findings with draft content
 7. If approved, create artifacts using appropriate tools
 
-**Note:** `/reflect` is for single-session analysis. `/learn` is for cross-session compound learning.
+**Note:** `Skill("reflect")` is for single-session analysis. `Skill("learn")` is for cross-session compound learning.

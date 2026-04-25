@@ -1,6 +1,6 @@
 # Majestic Tools
 
-Claude Code customization tools. Includes 0 agents, 3 commands, and 12 skills.
+Claude Code customization tools. Includes 0 agents, 1 command, and 14 skills.
 
 ## Installation
 
@@ -17,8 +17,8 @@ claude /plugin install majestic-tools
 | Resume a saved expert panel discussion | `/expert-panel --resume {panel-id}` |
 | List all saved panel sessions | `/expert-panel --list` |
 | Export panel discussion to markdown | `/expert-panel --export {panel-id}` |
-| Reflect on session improvements | `/reflect` |
-| Capture learnings | `/learn` |
+| Reflect on session improvements | `Skill("reflect")` |
+| Capture learnings | `Skill("learn")` |
 | Evaluate a skill | `Skill("skill-eval")` |
 | Brainstorm ideas | `Skill("brainstorming")` |
 
@@ -26,8 +26,6 @@ claude /plugin install majestic-tools
 
 | Command | Description |
 |---------|-------------|
-| `/learn` | Capture session insights as compound learnings |
-| `/reflect` | Suggest improvements to AGENTS.md based on patterns |
 | `/interview` | Domain-aware discovery for engineering, brand, product, marketing, or sales |
 
 ## Skills
@@ -39,6 +37,8 @@ Invoke with: `skill majestic-tools:<name>`
 | `brainstorming` | Refine rough ideas into fully-formed designs through collaborative questioning |
 | `compound-learnings` | Identify and persist valuable patterns as reusable artifacts |
 | `devils-advocate` | Challenge ideas and expose weak reasoning |
+| `learn` | Extract cross-session patterns from git history and handoffs, recommend artifacts |
+| `reflect` | Reflect on the current session and suggest AGENTS.md improvements |
 | `skill-eval` | Test and iterate on a skill using parallel eval runs with graded results |
 
 ## Hooks
@@ -140,7 +140,10 @@ Triggers Raycast confetti celebration when Claude completes a task.
 /expert-panel --export 20251209-150000-microservices    # Export to markdown
 
 # Reflect on improvements
-/reflect
+Skill("reflect")
+
+# Capture cross-session learnings
+Skill("learn")
 
 # Brainstorm before implementing
 Skill("brainstorming")

@@ -106,7 +106,7 @@ After providing your analysis and summary:
 
 ### 1. Determine Handoff Location
 
-**Always write to main worktree** (centralizes handoffs for `/learn`):
+**Always write to main worktree** (centralizes handoffs for `Skill("learn")`):
 
 ```bash
 MAIN_WORKTREE=$(git worktree list --porcelain | grep "^worktree" | head -1 | cut -d' ' -f2)

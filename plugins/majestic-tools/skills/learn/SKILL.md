@@ -1,14 +1,14 @@
 ---
 name: learn
-allowed-tools: Bash, Read, Write, Edit, Glob, Grep, AskUserQuestion
-description: Extract cross-session patterns from git history and handoffs, recommend artifacts (skill/rule/hook/agent) based on frequency.
+description: Extract cross-session patterns from git history, PRs, and handoffs, then recommend artifacts (skill/rule/hook/agent) based on frequency thresholds. Use when consolidating recurring patterns into durable artifacts. For single-session reflection, use `reflect` instead.
+allowed-tools: Bash Read Write Edit Glob Grep AskUserQuestion
 ---
 
 # Learn
 
 Extract patterns from git history, PRs, and handoffs to create durable artifacts (skills, rules, hooks).
 
-**For single-session reflection, use `/reflect` instead.**
+**For single-session reflection, use `Skill("reflect")` instead.**
 
 **Methodology:** Use `compound-learnings` skill for frequency thresholds and artifact categorization logic.
 

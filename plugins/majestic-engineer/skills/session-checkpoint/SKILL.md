@@ -22,7 +22,7 @@ session:
   ledger_path: .agents/session_ledger.md  # optional, defaults to .agents/session_ledger.md
 ```
 
-**Note:** The ledger is per-worktree (ephemeral session state). Handoffs go to main worktree (permanent, for `/learn`).
+**Note:** The ledger is per-worktree (ephemeral session state). Handoffs go to main worktree (permanent, for `Skill("learn")`).
 
 ## Process
 
