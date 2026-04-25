@@ -128,8 +128,7 @@ Task (majestic-engineer:workflow:context-proxy):
 ### 8. Context Check (Post-Research)
 
 If research agents returned outputs and combined output > 4000 chars:
-- Run `/smart-compact` before planning
-- Focus on SUMMARIZE for research findings
+- Summarize research findings before planning (KEEP task title, description, key patterns; DISCARD verbose tool outputs)
 - Preserve task title, description, and key patterns
 
 ### 9. Plan (task source only)

@@ -2,6 +2,35 @@
 
 All notable changes to majestic-engineer will be documented in this file.
 
+## [4.2.0] - 2026-04-25
+
+### Changed
+
+- Converted `/favicon` command to `favicon` skill — auto-triggers on natural-language requests ("generate favicons", "set up apple-touch-icon", "PWA icons"), no slash invocation needed
+
+### Migration
+
+- Old: `/favicon logo.png`
+- New: ask "generate a favicon set from logo.png" — skill auto-triggers, or invoke explicitly via `Skill("favicon")`
+
+## [4.1.0] - 2026-04-25
+
+### Removed
+
+- `/smart-compact` command — meta-tool for generating `/compact` instructions, low usage
+- `/ledger-clear` command — thin `rm` wrapper for session ledger
+- `/worktree-cleanup` command — wrapper around `git-worktree` skill (invoke skill directly)
+- `/ldr-start` command — Linked Decision Record workflow superseded by `create-adr` skill and `blueprint` workflow
+- `/pr-review` command — overlaps with `pr-comment-resolver` agent and `github-resolver`
+- Removed `commands/git/resources/ldr-start/` templates
+
+### Migration
+
+- For PR comment review → use `Agent(subagent_type: "majestic-engineer:github-resolver")` or invoke `pr-comment-resolver` agent
+- For worktree cleanup → `Skill("git-worktree")` then run `worktree-manager.sh cleanup`
+- For decision records → `Skill("create-adr")`
+- For implementation plans → `Skill("blueprint")` workflow
+
 ## [3.40.0] - 2026-01-18
 
 ### Changed

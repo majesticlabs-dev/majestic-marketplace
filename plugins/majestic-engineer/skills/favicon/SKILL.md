@@ -1,27 +1,21 @@
 ---
 name: favicon
-description: Generate complete favicon set from source image and update project HTML
-allowed-tools: Bash, Read, Write, Edit, Glob, AskUserQuestion
-argument-hint: "<source-image>"
+description: Generate a complete favicon set (ICO, PNG variants, apple-touch-icon, web manifest) from a source image and integrate into the project's HTML layout. Use when user asks to generate favicons, set up PWA icons, or add an apple-touch-icon.
+allowed-tools: Bash Read Write Edit Glob AskUserQuestion
 ---
 
-# Favicon Generator
+# Favicon Generator Skill
 
-Generate a complete set of favicons from a source image and integrate them into your project.
+**Purpose:** Generate a complete set of favicons from a source image and wire them into the project's HTML layout, web manifest, and assets directory.
 
-## Arguments
+**Supported source formats:** PNG, JPG, JPEG, SVG, WEBP, GIF
 
-<input_arguments> $ARGUMENTS </input_arguments>
+## When to Use
 
-**Format:** `<source-image-path>`
-
-**Supported formats:** PNG, JPG, JPEG, SVG, WEBP, GIF
-
-**Examples:**
-```
-/favicon logo.png
-/favicon assets/icon.svg
-```
+- User asks to generate favicons or icons from an image
+- New project setup needs favicon assets
+- Replacing an outdated favicon set
+- Adding PWA-compatible icons (`web-app-manifest-*.png`)
 
 ## Prerequisites
 
@@ -32,20 +26,20 @@ which magick
 ```
 
 If missing:
-- **macOS:** `brew install imagemagick`
-- **Linux:** `sudo apt install imagemagick`
+- macOS: `brew install imagemagick`
+- Linux: `sudo apt install imagemagick`
 
 ## Workflow
 
-### Step 1: Validate Source Image
+### 1. Validate Source Image
 
-1. Check source file exists
-2. Verify supported format (PNG, JPG, JPEG, SVG, WEBP, GIF)
-3. Note if SVG (gets special handling)
+- Check source file exists
+- Verify supported format (PNG, JPG, JPEG, SVG, WEBP, GIF)
+- Note if SVG (gets special handling — direct copy + `<link rel="icon" type="image/svg+xml">`)
 
 If invalid, report error and stop.
 
-### Step 2: Detect Framework
+### 2. Detect Framework
 
 Check for marker files to identify framework and assets directory:
 
@@ -69,9 +63,10 @@ Check for marker files to identify framework and assets directory:
 
 If uncertain about asset placement → use `AskUserQuestion` to confirm target directory.
 
-### Step 3: Resolve App Name
+### 3. Resolve App Name
 
 Check sources in order (use first found):
+
 1. Existing `site.webmanifest` → `name` field
 2. `package.json` → `name` field
 3. Rails `config/application.rb` → module name
@@ -79,7 +74,7 @@ Check sources in order (use first found):
 
 Convert to title case for display.
 
-### Step 4: Generate Favicon Assets
+### 4. Generate Favicon Assets
 
 Run ImageMagick commands (preserve alpha with `-alpha on -background none`):
 
@@ -99,11 +94,12 @@ magick "<source>" -alpha on -background none -resize 512x512 "<target>/web-app-m
 ```
 
 If source is SVG, also copy directly:
+
 ```bash
 cp "<source>" "<target>/favicon.svg"
 ```
 
-### Step 5: Generate/Update Web Manifest
+### 5. Generate or Update Web Manifest
 
 Create or update `site.webmanifest` in target directory.
 
@@ -123,7 +119,7 @@ If exists: preserve `theme_color`, `background_color`, `display` values.
 }
 ```
 
-### Step 6: Update HTML Layout
+### 6. Update HTML Layout
 
 **Rails** → Edit `app/views/layouts/application.html.erb`:
 
@@ -173,7 +169,7 @@ export const metadata = {
 
 **Note:** Omit SVG-related tags if source was not SVG format.
 
-### Step 7: Report Summary
+### 7. Report Summary
 
 ```markdown
 ## Favicon Generation Complete

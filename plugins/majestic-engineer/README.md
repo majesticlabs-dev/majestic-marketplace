@@ -220,18 +220,12 @@ Invoke with: `agent <name>`
 | Command | Description |
 |---------|-------------|
 | `/explain` | Explain a concept using real examples from your project |
-| `/favicon` | Generate complete favicon set from source image |
 | `/changelog` | Create engaging changelogs from recent merges |
 | `/commit` | Create git commit with proper message formatting |
 | `/create-pr` | Create a pull request for the current feature branch |
-| `/ldr-start` | Start a Long-Distance Refactor session |
-| `/pr-review` | Review and address Pull Request comments from GitHub |
 | `/triage-prs` | Triage open PRs with parallel review, label, and merge decisions |
-| `/worktree-cleanup` | Clean up merged and stale git worktrees |
 | `/handoff` | Create a detailed handoff plan for continuing work |
-| `/ledger-clear` | Clear the session ledger file to start fresh |
 | `/pickup` | Resume work from a previous handoff session |
-| `/smart-compact` | Analyze conversation and generate optimized /compact command |
 | `/tasks:new` | Manage backlog items across files, GitHub Issues, Linear, or Beads |
 
 > **Note:** Workflow capabilities (blueprint, build-task, code-review, debug, init, prd, quality-gate, question, refactor-agents, run-blueprint, ship-it, ux-brief) are now skills. Invoke via `Skill("name")` — they auto-trigger from context.
@@ -249,6 +243,7 @@ Invoke with: `skill majestic-engineer:<name>`
 | `config-reader` | Read project config from .agents.yml | |
 | `create-adr` | Create Architecture Decision Records | |
 | `design-tool-picker` | Choose the right design tool for your task | |
+| `favicon` | Generate complete favicon set (ICO, PNG, manifest) from source image | |
 | `fix-decision-router` | Post-documentation routing for fix-reporter | |
 | `fix-reporter` | Capture solved problems as categorized documentation | |
 | `frontend-css-patterns` | Framework-agnostic CSS patterns and utilities | yes |
