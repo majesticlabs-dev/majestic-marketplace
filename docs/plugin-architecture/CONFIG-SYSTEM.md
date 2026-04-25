@@ -566,4 +566,4 @@ When commands create markdown files (plans, PRDs, briefs, handoffs), they follow
 - `/majestic-engineer:blueprint` → `docs/plans/<title>.md`
 - `/majestic-engineer:prd` → `docs/prd/prd-<name>.md`
 - `/majestic-engineer:ux-brief` → `docs/design/<name>-brief.md`
-- `/majestic:handoff` → `.agents/handoffs/<timestamp>-<slug>.md`
+- `/majestic-engineer:session:handoff` → `.agents/handoffs/<timestamp>-<slug>.md`

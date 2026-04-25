@@ -1,5 +1,5 @@
 #!/bin/bash
-# Verify /majestic:init setup is complete
+# Verify /majestic-engineer:init setup is complete
 # Usage: verify-setup.sh
 # Returns: verification results with pass/fail indicators
 
