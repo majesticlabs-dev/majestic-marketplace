@@ -124,7 +124,7 @@ Checkpoint saved to .agents/session_ledger.md
 
 - Quick tasks under 30 minutes
 - Simple bug fixes or single-file changes
-- Sessions already using `/session:handoff`
+- Sessions already using `/handoff`
 
 ## Integration Points
 
@@ -181,7 +181,7 @@ Mark assumptions as `UNCONFIRMED` when:
 | Tool | Purpose | Persistence | Trigger |
 |------|---------|-------------|---------|
 | `session-checkpoint` | Crash recovery, quick state save | File (`.agents/session_ledger.md`) | Skill-triggered |
-| `/session:handoff` | Cross-session continuity | File (main worktree `.agents/handoffs/`) | User/ship-triggered |
+| `/handoff` | Cross-session continuity | File (main worktree `.agents/handoffs/`) | User/ship-triggered |
 | `Tasks` | Session task tracking | File (`~/.claude/tasks/`) | Agent-triggered |
 
 Use `session-checkpoint` for:
@@ -190,7 +190,7 @@ Use `session-checkpoint` for:
 - Quick snapshots before risky operations
 - Context refresh after multiple compactions
 
-Use `/session:handoff` for:
+Use `/handoff` for:
 - Intentional session handoffs
 - Detailed context for new sessions
 - Structured handoff with analysis

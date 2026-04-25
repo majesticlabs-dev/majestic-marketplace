@@ -1,5 +1,5 @@
 ---
-name: git:worktree-cleanup
+name: worktree-cleanup
 description: Clean up merged and stale git worktrees
 allowed-tools: Bash
 model: haiku

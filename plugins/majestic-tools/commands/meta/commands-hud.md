@@ -1,5 +1,5 @@
 ---
-name: majestic:commands-hud
+name: commands-hud
 description: Display all available commands in a formatted HUD grouped by plugin or category
 argument-hint: "[--plugin PLUGIN] [--group plugin|category|flat]"
 model: haiku

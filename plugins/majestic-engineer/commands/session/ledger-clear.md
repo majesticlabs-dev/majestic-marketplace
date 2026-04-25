@@ -1,5 +1,5 @@
 ---
-name: session:ledger-clear
+name: ledger-clear
 description: Clear the session ledger file to start fresh
 model: haiku
 allowed-tools: Bash, Task

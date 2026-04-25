@@ -29,7 +29,7 @@ npm install -g stimulus-language-server
 
 ```mermaid
 graph LR
-    A(/majestic-engineer:blueprint) --> B(/rails:build)
+    A(/majestic-engineer:blueprint) --> B(/build)
     B --> C(/majestic-engineer:code-review)
     C --> D{{ship}}
 ```
@@ -38,7 +38,7 @@ graph LR
 |------|------|---------|
 | 1 | `/majestic-engineer:blueprint` | Research and create plan (from majestic-engineer) |
 | 2 | Choose next step | Build, review, backlog, or refine |
-| 3 | `/rails:build` | Implement the plan |
+| 3 | `/build` | Implement the plan |
 | 4 | `/majestic-engineer:code-review` | Smart multi-agent code review (auto-detects Rails) |
 
 ## Quick Reference
@@ -46,7 +46,7 @@ graph LR
 | I want to... | Use this |
 |--------------|----------|
 | Plan a new feature | `/majestic-engineer:blueprint "feature"` |
-| Build from a plan | `/rails:build docs/plans/feature.md` |
+| Build from a plan | `/build docs/plans/feature.md` |
 | Review code changes | `/majestic-engineer:code-review` |
 | Debug Rails issues | `agent rails-debugger` |
 | Fix Rubocop violations | `agent rubocop-fixer` |
@@ -121,7 +121,7 @@ Invoke with: `/majestic-rails:<category>:<name>`
 
 | Command | Description |
 |---------|-------------|
-| `/rails:build` | Execute work plans efficiently - build features following Rails conventions |
+| `/build` | Execute work plans efficiently - build features following Rails conventions |
 
 > **Note:** For code review, use `/majestic-engineer:code-review` from majestic-engineer (auto-detects Rails).
 
@@ -150,7 +150,7 @@ Invoke with: `skill majestic-rails:<name>`
 /plan "Add user authentication with OAuth"
 
 # Build from a plan
-/rails:build docs/plans/add-user-authentication.md
+/build docs/plans/add-user-authentication.md
 
 # Code review (auto-detects Rails)
 /majestic-engineer:code-review              # Review current branch vs main

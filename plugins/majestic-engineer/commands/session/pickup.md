@@ -1,5 +1,5 @@
 ---
-name: session:pickup
+name: pickup
 description: Resume work from a previous handoff session stored in .agents/handoffs
 allowed-tools: Bash, Read, AskUserQuestion, Glob, Grep
 model: haiku

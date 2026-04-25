@@ -526,7 +526,7 @@ When enabled, workflows can invoke `session-checkpoint` agent to save state:
 - After completing milestones
 - Periodically during long tasks
 
-The ledger survives session crashes but is NOT a replacement for `/session:handoff` (use handoff for intentional cross-session continuity).
+The ledger survives session crashes but is NOT a replacement for `/handoff` (use handoff for intentional cross-session continuity).
 
 ## Local Overrides
 

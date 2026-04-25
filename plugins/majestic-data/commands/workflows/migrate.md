@@ -1,5 +1,5 @@
 ---
-name: majestic-data:migrate
+name: migrate
 description: Generate or execute data migration scripts with safety checks.
 argument-hint: "<action> [options]"
 ---

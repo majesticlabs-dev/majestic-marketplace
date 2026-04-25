@@ -1,5 +1,5 @@
 ---
-name: sales:funnel-builder
+name: funnel-builder
 allowed-tools: WebSearch, AskUserQuestion, Write, Skill
 description: Build comprehensive, high-converting sales funnels through a guided 5-phase process
 ---

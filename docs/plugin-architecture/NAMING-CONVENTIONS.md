@@ -44,53 +44,34 @@ Skills use simple, descriptive names without prefixes. Claude Code automatically
 
 ## Command Naming
 
-Commands use a strategic three-tier naming system based on scope and purpose.
+Bare names by default. Prefix only when the bare name loses meaning.
 
-### Tier 1: Generic/Cross-Project Commands
-
-Use `majestic:` prefix for workflows that work across all project types.
+### Default: Bare Names
 
 | Aspect | Pattern |
 |--------|---------|
-| **Pattern** | `name: majestic:command-name` |
-| **Examples** | `/majestic:plan`, `/majestic-engineer:debug`, `/majestic-engineer:prd`, `/majestic-engineer:code-review` |
-| **When to use** | Workflows that are language/framework-agnostic |
-| **Location** | `plugins/majestic-engineer/commands/workflows/` |
+| **Pattern** | `name: command-name` (no prefix) |
+| **Examples** | `/commit`, `/handoff`, `/migrate`, `/build`, `/triage-prs`, `/expert-panel` |
+| **When to use** | Self-descriptive verb commands — name communicates what it does |
+| **Invocation** | `/<command-name>` |
 
-### Tier 2: Framework-Specific Commands
+### Exception: Workflow-Starter Prefix
 
-Use framework prefix for workflows tied to specific technologies.
-
-| Aspect | Pattern |
-|--------|---------|
-| **Pattern** | `name: framework:command-name` |
-| **Examples** | `/rails:build` |
-| **When to use** | Workflows specific to Rails, Python, etc. |
-| **Location** | `plugins/majestic-{framework}/commands/workflows/` |
-
-### Tier 3: Utility Commands
-
-Omit `name:` field to use automatic path-based naming.
+Commands that open a workflow or create a new artifact need context — bare name alone is meaningless.
 
 | Aspect | Pattern |
 |--------|---------|
-| **Pattern** | No `name:` field → auto-named as `/category:command-name` |
-| **Examples** | `/git:commit`, `/gemfile:organize`, `/tasks:new` |
-| **When to use** | Category-specific utilities (git operations, gemfile management, etc.) |
-| **Location** | `plugins/*/commands/{category}/{command-name}.md` |
-| **Result** | Invoked as `/{category}:{command-name}` |
+| **Pattern** | `name: <plugin-or-group>:<command>` |
+| **Examples** | `/majestic-founder:start`, `/majestic-company:start`, `/tasks:new`, `/style-guide:new` |
+| **When to use** | Entry-point routers (`start`) or generic verbs (`new`) where context is needed |
+| **Prefix choice** | Use plugin name for top-level entry points; use group name for subdirectory commands |
 
-### Why Three Tiers?
+### Rules
 
-- Generic `majestic:` commands work everywhere and are easy to discover
-- Framework prefixes provide context (e.g., `/rails:build` clearly indicates Rails workflow)
-- Path-based naming organizes utilities by category without manual naming
-
-### Implementation Rules
-
-1. Only add `name:` field for tier 1 (majestic:) and tier 2 (framework:) commands
-2. Omit `name:` field for tier 3 (utility) commands to use automatic naming
-3. Never use full plugin prefix (e.g., `majestic-engineer:git:commit`) - inconsistent with convention
+1. Default to bare names — choose self-descriptive verbs
+2. Add prefix only when bare would collide OR lose meaning (e.g., `/start`, `/new`)
+3. Never use full plugin prefix on top of a group prefix (e.g., `majestic-engineer:git:commit` — pick one)
+4. Every `name:` field must match one of these two patterns; no `majestic:*` legacy prefixes
 
 ## Skill Subdirectories
 

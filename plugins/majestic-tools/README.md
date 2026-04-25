@@ -1,6 +1,6 @@
 # Majestic Tools
 
-Claude Code customization tools. Includes 1 agent, 11 commands, and 4 skills.
+Claude Code customization tools. Includes 1 agent, 5 commands, and 11 skills.
 
 ## Installation
 
@@ -12,16 +12,16 @@ claude /plugin install majestic-tools
 
 | I want to... | Use this |
 |--------------|----------|
-| Discover requirements through conversation | `/majestic-tools:interview "topic"` |
+| Discover requirements through conversation | `/interview "topic"` |
 | Get expert perspectives on a difficult question | `/expert-panel "topic"` |
 | Resume a saved expert panel discussion | `/expert-panel --resume {panel-id}` |
 | List all saved panel sessions | `/expert-panel --list` |
 | Export panel discussion to markdown | `/expert-panel --export {panel-id}` |
-| Create a new agent | `/majestic-tools:meta:new-agent` |
-| Create a new command | `/majestic-tools:meta:new-command` |
-| Create a new hook | `/majestic-tools:meta:new-hook` |
-| Create a new skill | `/majestic-tools:meta:new-skill` |
-| Brainstorm ideas | `skill brainstorming` |
+| Reflect on session improvements | `/reflect` |
+| Capture learnings | `/learn` |
+| List all available tools | `/commands-hud` |
+| Evaluate a skill | `/skill-eval` |
+| Brainstorm ideas | `Skill("brainstorming")` |
 
 ## Agents
 
@@ -33,38 +33,13 @@ Invoke with: `agent <name>`
 
 ## Commands
 
-### Standalone
-
 | Command | Description |
 |---------|-------------|
-| `/expert-panel` | Lead a panel of experts to address difficult questions from multiple perspectives |
-
-### Categorized Commands
-
-Invoke with: `/majestic-tools:<category>:<name>`
-
-### insight
-
-| Command | Description |
-|---------|-------------|
-| `insight:reflect` | Suggest improvements to AGENTS.md based on patterns |
-
-### meta
-
-| Command | Description |
-|---------|-------------|
-| `meta:list-tools` | List all available tools with detailed information |
-| `meta:new-agent` | Generate new Claude Code sub-agent configuration files |
-| `meta:new-command` | Generate any Claude Code command with production patterns |
-| `meta:new-hook` | Create and configure Claude Code hooks for automation |
-| `meta:new-prompt` | Build a well-structured prompt following Anthropic's best practices |
-| `meta:new-skill` | Create Claude Code skills following Anthropic best practices |
-
-### workflows
-
-| Command | Description |
-|---------|-------------|
-| `interview` | Domain-aware discovery interview for engineering, brand, product, marketing, or sales |
+| `/learn` | Capture session insights as compound learnings |
+| `/reflect` | Suggest improvements to AGENTS.md based on patterns |
+| `/commands-hud` | List all available tools with detailed information |
+| `/skill-eval` | Evaluate skill quality and routing |
+| `/interview` | Domain-aware discovery for engineering, brand, product, marketing, or sales |
 
 ## Skills
 
@@ -161,11 +136,11 @@ Triggers Raycast confetti celebration when Claude completes a task.
 
 ```bash
 # Discovery interviews (auto-detects domain from keywords)
-/majestic-tools:interview "brand voice"       # → brand domain
-/majestic-tools:interview "new campaign"      # → marketing domain
-/majestic-tools:interview "sales pitch"       # → sales domain
-/majestic-tools:interview "user needs"        # → product domain
-/majestic-tools:interview "new feature"       # → engineering domain (default)
+/interview "brand voice"       # → brand domain
+/interview "new campaign"      # → marketing domain
+/interview "sales pitch"       # → sales domain
+/interview "user needs"        # → product domain
+/interview "new feature"       # → engineering domain (default)
 
 # Expert panel discussions
 /expert-panel "Should we migrate from monolith to microservices?"
@@ -174,28 +149,16 @@ Triggers Raycast confetti celebration when Claude completes a task.
 /expert-panel --resume 20251209-150000-microservices    # Resume discussion
 /expert-panel --export 20251209-150000-microservices    # Export to markdown
 
-# Create a new agent
-/majestic-tools:meta:new-agent "Create an agent for database migrations"
-
-# Create custom hooks
-/majestic-tools:meta:new-hook "Add a hook that notifies Slack on PR creation"
-
-# Generate a new command
-/majestic-tools:meta:new-command "Create a command for database backup"
-
-# Create a new skill
-/majestic-tools:meta:new-skill "Best practices for writing Stimulus controllers"
-
 # Reflect on improvements
-/majestic-tools:insight:reflect
+/reflect
 
 # Brainstorm before implementing
-skill majestic-tools:brainstorming
+Skill("brainstorming")
 ```
 
 ## Interview Command Deep Dive
 
-The `/majestic-tools:interview` command provides domain-aware discovery through conversational probing.
+The `/interview` command provides domain-aware discovery through conversational probing.
 
 ### Domain Detection
 

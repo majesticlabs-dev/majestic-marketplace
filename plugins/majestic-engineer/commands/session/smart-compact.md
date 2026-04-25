@@ -1,5 +1,5 @@
 ---
-name: session:smart-compact
+name: smart-compact
 description: Analyze conversation and generate optimized /compact command
 model: haiku
 ---

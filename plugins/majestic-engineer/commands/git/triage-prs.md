@@ -1,5 +1,5 @@
 ---
-name: majestic-engineer:git:triage-prs
+name: triage-prs
 description: Triage all open PRs with parallel review agents, label, group, and walk through one-by-one for merge/comment/close decisions
 argument-hint: "[optional: owner/repo or GitHub PRs URL]"
 allowed-tools: Bash(gh *), Bash(git log *)

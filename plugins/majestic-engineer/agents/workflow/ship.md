@@ -68,7 +68,7 @@ When invoked, you must follow these steps in sequence:
    - Verify the PR was created successfully
 
 4. **Create Session Handoff**
-   - Execute the `/session:handoff` slash command using SlashCommand tool
+   - Execute the `/handoff` slash command using SlashCommand tool
    - Pass the PR URL and branch name as context: `"Shipped PR #<number>: <title>"`
    - This captures learnings for future `/learn` analysis
    - Handoff is saved to main worktree's `.agents/handoffs/` for centralized access

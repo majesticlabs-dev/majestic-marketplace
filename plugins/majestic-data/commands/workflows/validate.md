@@ -1,5 +1,5 @@
 ---
-name: majestic-data:validate
+name: validate
 description: Run data validation suite against a dataset.
 argument-hint: "<file-path> [--suite <suite-file>]"
 ---

@@ -1,5 +1,5 @@
 ---
-name: session:handoff
+name: handoff
 description: Create a detailed handoff plan for continuing work in a new session
 allowed-tools: Bash, Read, Write, AskUserQuestion
 model: haiku
@@ -142,6 +142,6 @@ AUTO_PREVIEW = config_read("auto_preview", "false")
 
 ### 5. Tell the User
 
-Inform user about the file and that they can use `/session:pickup FILENAME` to continue.
+Inform user about the file and that they can use `/pickup FILENAME` to continue.
 
 **If in a worktree**, also mention: "Handoff saved to main worktree for centralized access."

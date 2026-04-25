@@ -155,7 +155,7 @@ If budget < $5000: exclude paid acquisition
 GTM_MARKETING = {channels, messaging, content_plan, launch_tactics}
 
 # 4.2 Sales Funnel
-Invoke `/sales:funnel-builder` with:
+Invoke `/funnel-builder` with:
   CHOSEN_IDEA, PHASE_2_OUTPUT.revenue_model, GTM_MARKETING.channels, USER_CONTEXT.budget
 
 GTM_FUNNEL = {funnel_stages, conversion_targets, tools_needed}
@@ -285,7 +285,7 @@ See [resources/startup-blueprint/output-schema.yml](resources/startup-blueprint/
 | Crowded market + no gaps | Offer: niche down, return to Phase 1, or differentiation play |
 | Runway < 6 months | Warn: reduce scope, seek funding, or accelerate timeline |
 | `/majestic-marketing:start` unavailable | Apply `marketing-strategy` skill as fallback |
-| `/sales:funnel-builder` unavailable | Build basic funnel inline using conversion practices |
+| `/funnel-builder` unavailable | Build basic funnel inline using conversion practices |
 | `financial-model` agent unavailable | Build simplified projections inline |
 | User requests phase revisit | Return to any prior phase; re-run from that point |
 | Mid-process abandon | Save progress via Write, offer to resume later |

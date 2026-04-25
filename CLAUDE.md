@@ -126,10 +126,13 @@ When an agent invokes a skill:
 - RULE: Remove duplication — if agent contains the template, don't duplicate in skill
 
 ### Command Naming
-- Command names in frontmatter must include full plugin prefix
-- Format: `name: plugin-name:command-name` (e.g., `majestic-engineer:git:commit`)
-- Matches cross-plugin invocation: `/majestic-engineer:git:commit`
-- Avoid redundant patterns — use descriptive names (`start`, `cancel`, `help`)
+- Bare names by default: `name: command-name` → invoked as `/command-name`
+- Choose self-descriptive verbs (`/commit`, `/migrate`, `/triage-prs`)
+- Add prefix only when bare loses meaning (workflow-starters like `start`, `new`):
+  - Plugin prefix for top-level entry points: `majestic-founder:start` → `/majestic-founder:start`
+  - Group prefix for subdirectory commands: `tasks:new` → `/tasks:new`
+- Never use `majestic:*` (legacy, refers to nonexistent plugin)
+- Never stack prefixes (`majestic-engineer:git:commit` — pick one)
 
 ### Validation
 

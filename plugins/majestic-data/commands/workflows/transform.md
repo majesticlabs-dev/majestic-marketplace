@@ -1,5 +1,5 @@
 ---
-name: majestic-data:transform
+name: transform
 description: Transform data files between formats or apply transformations.
 argument-hint: "<source> --to <target> [--flatten] [--schema]"
 ---

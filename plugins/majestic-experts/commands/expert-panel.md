@@ -1,5 +1,5 @@
 ---
-name: majestic:expert-panel
+name: expert-panel
 description: Lead a panel of experts to address difficult questions from multiple perspectives
 allowed-tools: Read, Grep, Glob, AskUserQuestion, Task, Write
 argument-hint: "[topic or question]"
