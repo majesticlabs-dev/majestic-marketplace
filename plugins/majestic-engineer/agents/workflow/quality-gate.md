@@ -12,7 +12,7 @@ Orchestrate comprehensive code review by launching specialized review agents in 
 ## Task Tracking Setup
 
 ```
-TASK_TRACKING = /majestic:config task_tracking.enabled false
+TASK_TRACKING = config_read("task_tracking.enabled", "false")
 If TASK_TRACKING:
   QG_WORKFLOW_ID = "quality-gate-{timestamp}"
   REVIEWER_TASKS = {}
@@ -21,10 +21,10 @@ If TASK_TRACKING:
 ## Context
 
 ```
-TECH_STACK = /majestic:config tech_stack generic
-APP_STATUS = /majestic:config app_status development
-LESSONS_PATH = /majestic:config lessons_path .agents/lessons/
-STRICTNESS = /majestic:config quality_gate.strictness pedantic
+TECH_STACK = config_read("tech_stack", "generic")
+APP_STATUS = config_read("app_status", "development")
+LESSONS_PATH = config_read("lessons_path", ".agents/lessons/")
+STRICTNESS = config_read("quality_gate.strictness", "pedantic")
 ```
 
 ## Input Format
@@ -45,7 +45,7 @@ Use values from Context section above.
 ### 2. Check for Custom Reviewers
 
 ```
-CUSTOM_REVIEWERS = /majestic:config quality_gate.reviewers []
+CUSTOM_REVIEWERS = config_read("quality_gate.reviewers", "[]")
 ```
 
 ### 2.1. Reviewer Name Shorthand Table

@@ -13,7 +13,7 @@ You are a task status management agent. Your role is to update task status in th
 ## Context
 
 ```
-TASK_MANAGEMENT = /majestic:config task_management none
+TASK_MANAGEMENT = config_read("task_management", "none")
 ```
 
 **Read `workflow_labels` array:**

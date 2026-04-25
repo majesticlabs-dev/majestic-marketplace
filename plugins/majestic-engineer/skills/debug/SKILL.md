@@ -9,8 +9,8 @@ argument-hint: "[error message or description]"
 ## Context
 
 ```
-TECH_STACK = /majestic:config tech_stack generic
-LESSONS_PATH = /majestic:config lessons_path .agents/lessons/
+TECH_STACK = config_read("tech_stack", "generic")
+LESSONS_PATH = config_read("lessons_path", ".agents/lessons/")
 ```
 
 ## Bug Description

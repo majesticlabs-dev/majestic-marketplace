@@ -13,7 +13,7 @@ You are a checkout workflow automation specialist. Your role is to execute the c
 ## Context
 
 ```
-TECH_STACK = /majestic:config tech_stack generic
+TECH_STACK = config_read("tech_stack", "generic")
 ```
 
 ## Instructions

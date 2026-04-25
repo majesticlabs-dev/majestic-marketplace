@@ -21,7 +21,7 @@ focus: string          # Optional: "accessibility", "performance", "all"
 ### 1. Detect Tech Stack
 
 ```bash
-/majestic:config tech_stack generic
+config_read("tech_stack", "generic")
 ```
 
 ### 2. Load Rules

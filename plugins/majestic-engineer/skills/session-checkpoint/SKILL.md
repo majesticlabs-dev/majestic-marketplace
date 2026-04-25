@@ -29,7 +29,7 @@ session:
 ### Step 1: Check Config
 
 ```
-SESSION = /majestic:config session {}
+SESSION = config_read("session", "{}")
 ```
 
 **If `session.ledger` is false or missing:**

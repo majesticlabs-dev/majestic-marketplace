@@ -12,9 +12,9 @@ Run comprehensive code review through the quality gate agent, which orchestrates
 ## Config
 
 ```
-TECH_STACK = /majestic:config tech_stack generic
-APP_STATUS = /majestic:config app_status development
-LESSONS_PATH = /majestic:config lessons_path .agents/lessons/
+TECH_STACK = config_read("tech_stack", "generic")
+APP_STATUS = config_read("app_status", "development")
+LESSONS_PATH = config_read("lessons_path", ".agents/lessons/")
 ```
 
 ```bash

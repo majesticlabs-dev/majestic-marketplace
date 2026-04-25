@@ -133,7 +133,7 @@ Write the handoff summary to `$HANDOFF_DIR/$FILENAME`.
 
 **BEFORE telling the user about the file, you MUST:**
 
-AUTO_PREVIEW = /majestic:config auto_preview false
+AUTO_PREVIEW = config_read("auto_preview", "false")
 
 1. **If AUTO_PREVIEW is "true":**
    - Execute: `open "$HANDOFF_DIR/$FILENAME"`

@@ -57,8 +57,10 @@ Use `qmd` to search indexed plugin docs, skills, agents, and architecture files 
 ## Config Access
 
 ```
-VARIABLE = /majestic:config field default
+VARIABLE = config_read("field", "default")
 ```
+
+`config_read(field, default)` is pseudocode for invoking the `config-reader` skill (reads `.agents.yml` with `.agents.local.yml` overrides, supports dot notation for nested fields).
 
 ## Key Rules
 
@@ -170,13 +172,13 @@ Skills = LLM instructions, not human docs. Must contain NEW info Claude doesn't 
 - **Variables enable control flow (required, not optional):**
   ```
   RESULT = Task(...) → If RESULT.status == PASS: proceed
-  ITEMS = /majestic:config ... → For each I in ITEMS: invoke(I)
+  ITEMS = config_read("...", "[]") → For each I in ITEMS: invoke(I)
   ```
 - **Schemas over examples:** Document I/O with YAML/JSON schemas
   - Good: `task_id: string # T1, T2 (from header)`
   - Bad: Markdown example blocks expecting agent to infer structure
 - **Command invocation:** `/command-name args` (direct slash syntax)
-- **Config reads:** `/majestic:config field default`
+- **Config reads:** `config_read("field", "default")` (invokes `config-reader` skill)
 - **Arrays for extensibility:** `methodology: [tdd]` not `methodology: tdd`
 
 ### Agent/Command Doc Structure

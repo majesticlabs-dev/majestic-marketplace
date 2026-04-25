@@ -14,7 +14,7 @@ Removes the session ledger file to start fresh.
 ### Step 1: Get Ledger Path
 
 ```
-SESSION = /majestic:config session {}
+SESSION = config_read("session", "{}")
 ```
 
 Use `session.ledger_path` if set, otherwise default to `.agents/session_ledger.md`.

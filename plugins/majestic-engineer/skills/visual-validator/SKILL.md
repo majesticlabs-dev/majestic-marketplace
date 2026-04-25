@@ -23,7 +23,7 @@ allowed-tools: Read Grep Glob Bash
 ### 0. Load Design System (if available)
 
 ```
-DESIGN_SYSTEM_PATH = /majestic:config toolbox.build_task.design_system_path ''
+DESIGN_SYSTEM_PATH = config_read("toolbox.build_task.design_system_path", "")
 ```
 
 If DESIGN_SYSTEM_PATH is not empty, read the design system file at that path.

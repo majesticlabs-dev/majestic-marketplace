@@ -1,7 +1,7 @@
 ---
 name: config-reader
-description: Read project config from .agents.yml and .agents.local.yml with local overrides. Supports dot notation for nested fields. Invoke with args "<field> <default>".
-argument-hint: "<field> [default]"
+description: Read project config from .agents.yml and .agents.local.yml with local overrides. Supports dot notation for nested fields. Invoke when agents/skills reference `config_read("field", "default")` pseudocode. Args format "FIELD DEFAULT".
+argument-hint: "FIELD [DEFAULT]"
 ---
 
 # Config Reader

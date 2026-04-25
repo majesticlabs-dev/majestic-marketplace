@@ -125,9 +125,13 @@ Skills should primarily provide knowledge, not orchestration. If invocations are
 
 **✅ Preferred command invocation:**
 ```
-/majestic:config tech_stack generic
 /majestic-engineer:tdd-workflow
 /majestic-engineer:workflows:build-task "T1"
+```
+
+**Config reads** use the function-call form (invokes `config-reader` skill):
+```
+TECH_STACK = config_read("tech_stack", "generic")
 ```
 
 **❌ Deprecated patterns:**

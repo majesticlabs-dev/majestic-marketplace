@@ -20,8 +20,8 @@ color: yellow
 ### 1. Load Project Configuration
 
 ```
-TECH_STACK = /majestic:config tech_stack generic
-TESTING = /majestic:config testing ''
+TECH_STACK = config_read("tech_stack", "generic")
+TESTING = config_read("testing", "")
 ```
 
 ### 2. Identify What Changed

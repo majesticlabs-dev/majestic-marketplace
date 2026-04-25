@@ -12,7 +12,7 @@ Do NOT use EnterPlanMode or ExitPlanMode tools.
 ## Task Tracking Setup
 
 ```
-TASK_TRACKING = /majestic:config task_tracking.enabled false
+TASK_TRACKING = config_read("task_tracking.enabled", "false")
 
 If TASK_TRACKING:
   BLUEPRINT_WORKFLOW_ID = "blueprint-{timestamp}"
@@ -185,7 +185,7 @@ If TASK_TRACKING: TaskUpdate(PHASE_TASKS[7], status: "completed")
 
 If TASK_TRACKING: TaskUpdate(PHASE_TASKS[8], status: "in_progress")
 
-Check auto_preview: `/majestic:config auto_preview false`
+Check auto_preview: `config_read("auto_preview", "false")`
 
 If `true`: `Bash(command: "open {plan_path}")`
 

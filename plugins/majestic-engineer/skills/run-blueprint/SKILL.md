@@ -17,7 +17,7 @@ plan_path: $ARGUMENTS (required)
 ## Task Tracking Setup
 
 ```
-TASK_TRACKING = /majestic:config task_tracking.enabled false
+TASK_TRACKING = config_read("task_tracking.enabled", "false")
 
 If TASK_TRACKING:
   BLUEPRINT_ID = "run-blueprint-{timestamp}"

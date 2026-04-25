@@ -19,7 +19,7 @@ Generate a comprehensive PRD that defines WHAT to build and WHY.
 ## Task Tracking Setup
 
 ```
-TASK_TRACKING = /majestic:config task_tracking.enabled false
+TASK_TRACKING = config_read("task_tracking.enabled", "false")
 
 If TASK_TRACKING:
   PRD_WORKFLOW_ID = "prd-{timestamp}"
@@ -103,7 +103,7 @@ If TASK_TRACKING: TaskUpdate(PHASE_TASKS[3], status: "in_progress")
 1. **Save** to `docs/prd/prd-[feature-name].md`
 
 2. **Auto-Preview Check**
-   AUTO_PREVIEW = /majestic:config auto_preview false
+   AUTO_PREVIEW = config_read("auto_preview", "false")
    If AUTO_PREVIEW is "true": Execute `open docs/prd/prd-[feature-name].md`
 
 3. **Present options** via AskUserQuestion:
@@ -171,7 +171,7 @@ If TASK_TRACKING: TaskUpdate(PHASE_TASKS[5], status: "completed")
 
 ```
 If TASK_TRACKING:
-  AUTO_CLEANUP = /majestic:config task_tracking.auto_cleanup true
+  AUTO_CLEANUP = config_read("task_tracking.auto_cleanup", "true")
   If AUTO_CLEANUP:
     For each TASK in PHASE_TASKS.values():
       If TASK.status != "completed":

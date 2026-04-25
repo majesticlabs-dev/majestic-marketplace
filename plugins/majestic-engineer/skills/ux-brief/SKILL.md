@@ -132,7 +132,7 @@ Check `.agents.yml` for `design_system_path`, default to `docs/design/design-sys
 
 ### Step 2: Auto-Preview Check
 
-AUTO_PREVIEW = /majestic:config auto_preview false
+AUTO_PREVIEW = config_read("auto_preview", "false")
 
 If AUTO_PREVIEW is "true": Execute `open <design-system-path>`
 

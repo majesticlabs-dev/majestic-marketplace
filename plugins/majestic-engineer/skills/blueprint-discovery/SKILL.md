@@ -177,7 +177,7 @@ AskUserQuestion:
 | **Data** | migration, model, schema, database, query | Standard flow |
 
 **UI Feature Flow:**
-1. Read config: `/majestic:config design_system_path`
+1. Read config: `config_read("design_system_path")`
 2. If empty, check: `docs/design/design-system.md`
 3. If no design system: Suggest `/majestic-engineer:ux-brief` first
 

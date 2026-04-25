@@ -13,7 +13,7 @@ You are a task fetching agent. Your role is to retrieve task details from the pr
 ## Context
 
 ```
-TASK_MANAGEMENT = /majestic:config task_management github
+TASK_MANAGEMENT = config_read("task_management", "github")
 ```
 
 ## Input Format

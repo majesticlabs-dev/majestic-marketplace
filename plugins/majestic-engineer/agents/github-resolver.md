@@ -18,7 +18,7 @@ tools: Read, Write, Edit, Grep, Glob, Bash, WebFetch, Task
 ## Context
 
 ```
-TECH_STACK = /majestic:config tech_stack generic
+TECH_STACK = config_read("tech_stack", "generic")
 ```
 
 ## Workflow

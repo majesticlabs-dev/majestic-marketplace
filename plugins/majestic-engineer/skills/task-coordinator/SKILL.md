@@ -24,10 +24,10 @@ Patterns for integrating Claude Code's native Task system into workflow orchestr
 ## Config Check (Guard Pattern)
 
 ```
-TASK_TRACKING = /majestic:config task_tracking.enabled false
-LEDGER_ENABLED = /majestic:config task_tracking.ledger false
-LEDGER_PATH = /majestic:config task_tracking.ledger_path .agents/workflow-ledger.yml
-AUTO_CLEANUP = /majestic:config task_tracking.auto_cleanup true
+TASK_TRACKING = config_read("task_tracking.enabled", "false")
+LEDGER_ENABLED = config_read("task_tracking.ledger", "false")
+LEDGER_PATH = config_read("task_tracking.ledger_path", ".agents/workflow-ledger.yml")
+AUTO_CLEANUP = config_read("task_tracking.auto_cleanup", "true")
 
 If NOT TASK_TRACKING: skip all Task operations, run workflow normally
 ```

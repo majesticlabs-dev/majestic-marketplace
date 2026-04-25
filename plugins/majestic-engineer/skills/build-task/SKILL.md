@@ -66,9 +66,9 @@ Run `/rename <task-title>` to set the terminal title for visibility.
 **Read config values:**
 
 ```
-WORKFLOW = /majestic:config workflow branches
-BRANCH_NAMING = /majestic:config branch_naming issue-desc
-POST_CREATE = /majestic:config workspace_setup.post_create ''
+WORKFLOW = config_read("workflow", "branches")
+BRANCH_NAMING = config_read("branch_naming", "issue-desc")
+POST_CREATE = config_read("workspace_setup.post_create", "")
 ```
 
 ```bash

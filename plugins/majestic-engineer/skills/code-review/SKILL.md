@@ -12,7 +12,7 @@ Generic code review command that detects your project's tech stack and delegates
 ## Config
 
 ```
-TECH_STACK = /majestic:config tech_stack generic
+TECH_STACK = config_read("tech_stack", "generic")
 ```
 
 ```bash

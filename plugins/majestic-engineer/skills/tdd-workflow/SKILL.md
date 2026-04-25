@@ -14,7 +14,7 @@ description: Test-driven development execution workflow with red-green-refactor 
 ### 1. Setup
 
 ```
-LANG = /majestic:config tech_stack "unknown"
+LANG = config_read("tech_stack", "unknown")
 If LANG == "unknown": detect from project files (package.json → TypeScript, Gemfile → Ruby, go.mod → Go, pyproject.toml → Python)
 If LANG == "unknown": AskUserQuestion("What language/framework?")
 
@@ -86,15 +86,15 @@ Suggest: remaining work, missed edge cases, integration tests needed
 ## Task Tracking Integration
 
 ```
-TASK_TRACKING = /majestic:config task_tracking.enabled false
+TASK_TRACKING = config_read("task_tracking.enabled", "false")
 WORKFLOW_ID = "tdd-{timestamp}"
 
 If TASK_TRACKING:
   For each TaskCreate: add metadata {workflow: WORKFLOW_ID, phase: "tdd-loop"}
   For each TaskUpdate: wrap with If TASK_TRACKING: TaskUpdate(...)
   On Wrap-up: update ledger if LEDGER_ENABLED
-    LEDGER_ENABLED = /majestic:config task_tracking.ledger false
-    LEDGER_PATH = /majestic:config task_tracking.ledger_path .agents/workflow-ledger.yml
+    LEDGER_ENABLED = config_read("task_tracking.ledger", "false")
+    LEDGER_PATH = config_read("task_tracking.ledger_path", ".agents/workflow-ledger.yml")
 ```
 
 ## Red-Green-Refactor Cycle

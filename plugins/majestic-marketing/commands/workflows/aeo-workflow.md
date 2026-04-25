@@ -11,9 +11,9 @@ Execute the complete Answer Engine Optimization workflow based on HubSpot's prov
 ## Task Tracking Setup
 
 ```
-TASK_TRACKING = /majestic:config task_tracking.enabled false
-LEDGER_ENABLED = /majestic:config task_tracking.ledger false
-LEDGER_PATH = /majestic:config task_tracking.ledger_path .agents/workflow-ledger.yml
+TASK_TRACKING = config_read("task_tracking.enabled", "false")
+LEDGER_ENABLED = config_read("task_tracking.ledger", "false")
+LEDGER_PATH = config_read("task_tracking.ledger_path", ".agents/workflow-ledger.yml")
 
 If TASK_TRACKING:
   AEO_WORKFLOW_ID = "aeo-workflow-{timestamp}"
@@ -323,7 +323,7 @@ If TASK_TRACKING: TaskUpdate(PHASE_TASKS[7], status: "completed", metadata: {del
 
 ```
 If TASK_TRACKING:
-  AUTO_CLEANUP = /majestic:config task_tracking.auto_cleanup true
+  AUTO_CLEANUP = config_read("task_tracking.auto_cleanup", "true")
   If AUTO_CLEANUP:
     For each TASK in PHASE_TASKS.values():
       If TASK.status != "completed":
