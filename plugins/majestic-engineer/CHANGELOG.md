@@ -2,6 +2,12 @@
 
 All notable changes to majestic-engineer will be documented in this file.
 
+## [4.2.1] - 2026-04-27
+
+### Added
+
+- `/smart-compact` command — restored; generates optimized `/compact` instructions that preserve valuable context while discarding stale information
+
 ## [4.2.0] - 2026-04-25
 
 ### Changed
