@@ -30,17 +30,11 @@ Identify update opportunities in existing content to maintain freshness and rele
 
 ## Refresh Priority Matrix
 
-**High Priority (Immediate):**
-- Pages losing rankings (>3 positions)
-- Content with outdated information
-- High-traffic pages declining
-- Seasonal content approaching
-
-**Medium Priority (This Month):**
-- Stagnant rankings (6+ months)
-- Competitor content updates
-- Missing current trends
-- Low engagement metrics
+| Priority | Criteria | Action Window |
+|----------|----------|---------------|
+| **High** | Pages losing 3+ ranking positions; factually outdated info; high-traffic pages declining; seasonal content approaching | Update within 1 week |
+| **Medium** | Stagnant rankings 6+ months; competitors published fresher content; missing current trends; low engagement metrics | Update this month |
+| **Low** | Minor date references; cosmetic freshness signals; supplementary examples | Batch in next content cycle |
 
 ## Process
 

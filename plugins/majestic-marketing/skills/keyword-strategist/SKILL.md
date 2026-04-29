@@ -27,6 +27,18 @@ Analyze content for semantic optimization opportunities and keyword strategy.
 - Entity co-occurrence patterns
 - Semantic variations for diversity
 
+## Density Formula
+
+```
+density = (keyword_occurrences / total_words) * 100
+```
+
+Worked example (1,500-word article):
+- "project management" appears 12 times → 0.8% — OK
+- "best software" appears 45 times → 3.0% — flag for revision (over-optimized)
+
+If primary keyword density exceeds 2%, list specific sentences for rewrite.
+
 ## Entity Analysis Framework
 
 1. Identify primary entity relationships

@@ -71,6 +71,51 @@ Format content for position zero potential and featured snippet eligibility.
 - Point 3 (additional value)
 ```
 
+## Schema Markup (copy-paste ready)
+
+**FAQPage JSON-LD:**
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is [topic]?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "[40-60 word direct answer]"
+      }
+    }
+  ]
+}
+```
+
+**HowTo JSON-LD:**
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to [action]",
+  "description": "[1-2 sentence summary]",
+  "step": [
+    {
+      "@type": "HowToStep",
+      "name": "[Step name]",
+      "text": "[Step description, 1-2 sentences]"
+    }
+  ]
+}
+```
+
+## Validation Checklist
+
+- Paragraph answer is 40-60 words
+- Question appears as H2 or H3 header
+- Answer starts immediately after the header (no preamble)
+- List items are concise (under 15 words each)
+- Table has clean markdown formatting with header row
+
 **Deliverables:**
 - Snippet-optimized content blocks
 - PAA question/answer pairs
