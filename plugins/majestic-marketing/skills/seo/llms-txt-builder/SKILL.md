@@ -9,6 +9,8 @@ allowed-tools: Read Write Edit Glob
 **Audience:** Site owners wanting AI visibility
 **Goal:** Generate llms.txt file for AI system navigation
 
+**Related:** Use `ai-crawler-readiness` skill for the HTTP-layer setup (robots.txt allowlist, `.md` shadow routes, `Link` headers, AI-referrer analytics) that surrounds this file.
+
 ## What is llms.txt?
 
 A file at `https://yoursite.com/llms.txt` that helps AI systems understand site structure.

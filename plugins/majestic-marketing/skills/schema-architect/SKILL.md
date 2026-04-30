@@ -8,7 +8,9 @@ allowed-tools: Read Write Edit Grep Glob WebSearch
 
 Design and implement Schema.org structured data for maximum AI visibility and rich search results.
 
-**Related:** Use `llms-txt-builder` skill for AI navigation files.
+**Related:** Use `llms-txt-builder` skill for AI navigation files. Use `ai-crawler-readiness` for HTTP-layer AI visibility.
+
+**Honest caveat:** Structured data helps Google's classic indexing and AI Overviews via search. There is no public evidence current LLMs (ChatGPT, Claude, Perplexity, Gemini) parse JSON-LD when answering — do not treat schema as a primary GEO citation lever.
 
 ## Schema Priority Matrix
 
