@@ -1,7 +1,7 @@
 ---
 name: ai-crawler-readiness
 description: Configure HTTP-layer signals so LLM clients can discover, fetch, and cite your content. Use when setting up a website for AI visibility, auditing robots.txt for AI bots, serving Markdown alternates, adding link headers, or instrumenting AI-referrer analytics. Pairs with llms-txt-builder (file format) and geo-content-optimizer (content patterns).
-allowed-tools: Read Write Edit Grep Glob
+allowed-tools: Read Write Edit Grep Glob Bash WebFetch WebSearch
 ---
 
 # AI Crawler Readiness
@@ -38,50 +38,105 @@ This skill covers the **HTTP/transport layer**. It does not write content, evalu
 
 Apply in order. Skipping layer 1 invalidates the rest.
 
+## Tools Required
+
+| Tool | Why |
+|------|-----|
+| Read / Write / Edit / Grep / Glob | Local repo edits to robots.txt, route handlers, layouts |
+| Bash | `curl -I` for `Link` header, `curl -H "Accept: text/markdown"` for content negotiation, `dig -x` for IP reverse-DNS bot verification |
+| WebFetch | Pull current operator docs (OpenAI, Anthropic, Google, Apple, Perplexity) — published bot tables change |
+| WebSearch | Locate the current operator-published User-Agent reference page when WebFetch alone is insufficient |
+
+If the audit is local-only (no live site to probe), the Bash and Web tools are unused — declare scope at start.
+
 ## Layer 1: robots.txt Allowlist
 
 Block-by-default robots.txt invalidates every other layer. Audit first.
 
-**Known AI crawler User-Agents (verify before deploying):**
+**Three orthogonal decisions — do not conflate:**
 
-| Bot | User-Agent token | Operator | Purpose |
-|-----|------------------|----------|---------|
-| GPTBot | `GPTBot` | OpenAI | Training + ChatGPT browsing |
+1. **Search/index crawlers** — drive citation in AI search products. Allow these for visibility.
+2. **User-fetch agents** — fetch URLs a logged-in user pasted into ChatGPT/Claude/Perplexity. Allow for runtime answers.
+3. **Training crawlers** — collect content for foundation-model training. Separate consent decision; not required for visibility.
+
+Allowing a search bot does NOT allow training, and vice versa. Each bot below sits in exactly one bucket.
+
+**Verify against operator docs before deploying — tokens and policies change.** Use WebFetch on:
+
+- OpenAI: `https://platform.openai.com/docs/bots`
+- Anthropic: search current docs site for `ClaudeBot`, `Claude-User`, `Claude-SearchBot`
+- Google: `https://developers.google.com/search/docs/crawling-indexing/google-common-crawlers` and overview of `Google-Extended`
+- Apple: `https://support.apple.com/en-us/119829`
+- Perplexity: `https://docs.perplexity.ai/guides/bots`
+
+**Search / index crawlers (allow for visibility):**
+
+| Bot | User-Agent token | Operator | Notes |
+|-----|------------------|----------|-------|
 | OAI-SearchBot | `OAI-SearchBot` | OpenAI | ChatGPT Search index |
-| ChatGPT-User | `ChatGPT-User` | OpenAI | User-initiated fetches |
-| ClaudeBot | `ClaudeBot` | Anthropic | Training |
-| Claude-User | `Claude-User` | Anthropic | User-initiated fetches |
 | Claude-SearchBot | `Claude-SearchBot` | Anthropic | Claude Search index |
-| PerplexityBot | `PerplexityBot` | Perplexity | Index + answers |
+| PerplexityBot | `PerplexityBot` | Perplexity | Search index + answers |
+| Applebot | `Applebot` | Apple | Crawls webpages for Siri/Spotlight; required for Apple discoverability |
+| Googlebot | `Googlebot` | Google | Classic + AI Overviews source (assumed allowed) |
+| Bingbot | `Bingbot` | Microsoft | Copilot source (assumed allowed) |
+
+**User-fetch agents (allow for runtime answers):**
+
+| Bot | User-Agent token | Operator | Notes |
+|-----|------------------|----------|-------|
+| ChatGPT-User | `ChatGPT-User` | OpenAI | Fetches URL pasted by user |
+| Claude-User | `Claude-User` | Anthropic | User-initiated fetches |
 | Perplexity-User | `Perplexity-User` | Perplexity | User-initiated fetches |
-| Google-Extended | `Google-Extended` | Google | Gemini training opt-in |
-| Applebot-Extended | `Applebot-Extended` | Apple | Apple Intelligence training |
+
+**Training / data-use crawlers (separate opt-in decision):**
+
+| Bot | User-Agent token | Operator | Controls |
+|-----|------------------|----------|----------|
+| GPTBot | `GPTBot` | OpenAI | Training data collection |
+| ClaudeBot | `ClaudeBot` | Anthropic | Training data collection |
+| Google-Extended | `Google-Extended` | Google | Gemini training opt-in (token only — not a real crawler) |
+| Applebot-Extended | `Applebot-Extended` | Apple | Apple Intelligence training opt-out (token only — not a real crawler; pair with Applebot above) |
 | Bytespider | `Bytespider` | ByteDance | Training |
 | Meta-ExternalAgent | `Meta-ExternalAgent` | Meta | Training + agents |
 
-**Default-allow template:**
+**Default visibility template (search + user-fetch only — no training opt-in):**
 
 ```
-User-agent: GPTBot
 User-agent: OAI-SearchBot
-User-agent: ChatGPT-User
-User-agent: ClaudeBot
-User-agent: Claude-User
 User-agent: Claude-SearchBot
 User-agent: PerplexityBot
+User-agent: Applebot
+User-agent: ChatGPT-User
+User-agent: Claude-User
 User-agent: Perplexity-User
-User-agent: Google-Extended
-User-agent: Applebot-Extended
 Allow: /
 
 Sitemap: https://example.com/sitemap.xml
 ```
 
+**Optional training/data-use opt-in (only if site owner has explicitly consented to model training on their content):**
+
+```
+# Add ONLY if you intend to permit training on your content.
+# This is a separate decision from visibility.
+User-agent: GPTBot
+User-agent: ClaudeBot
+User-agent: Google-Extended
+Allow: /
+
+# To explicitly OPT OUT of Apple Intelligence training while keeping
+# Applebot search crawling enabled above:
+User-agent: Applebot-Extended
+Disallow: /
+```
+
 **Audit checklist:**
-- Current `robots.txt` does not contain `Disallow: /` for any AI bot above (unless intentional)
-- WAF / Cloudflare bot fight mode is not silently blocking AI bots (check edge config separately)
+- For each bot in the three tables, current `robots.txt` reflects the intended bucket decision (visibility vs training)
+- `Applebot` (the actual crawler) is allowed if Apple discoverability matters — `Applebot-Extended` alone does NOT crawl
+- Training-only tokens (`Google-Extended`, `Applebot-Extended`) are not mistaken for crawlers — they only signal opt-in/opt-out
+- WAF / Cloudflare bot fight mode is not silently blocking allowed bots (check edge config separately)
 - `Sitemap:` directive present
-- No `Crawl-delay` higher than 10 for AI bots
+- No `Crawl-delay` higher than 10 for allowed bots
 
 **Forbidden:** Do NOT serve different `robots.txt` content based on User-Agent. That is cloaking.
 
@@ -189,15 +244,20 @@ The article's central honest point: no LLM provider formally commits to reading 
 
 ## Workflow
 
-1. Audit `robots.txt` against the AI crawler table — list any bot blocked by default
-2. Inventory content URLs that should have `.md` twins (blog, docs, landing pages, FAQ)
-3. Choose generation strategy per stack (build step vs route handler vs CMS endpoint)
-4. Add `<link rel="alternate">` to HTML `<head>` template
-5. Add `Link` response header at edge or app layer
-6. Implement `Accept: text/markdown` content negotiation with `Vary: Accept`
-7. Add structured logging on `.md` and `/llms.txt` endpoints; capture User-Agent + Referer
-8. Build a minimal dashboard or report; baseline traffic for 14 days before claiming wins
-9. Cross-link with `llms-txt-builder` output: `/llms.txt` should reference the `.md` URLs from layer 2
+1. Declare scope: local-only audit (skip live probes) OR live-site audit (Bash + WebFetch enabled)
+2. Refresh the bot tables with WebFetch on operator docs (Layer 1 link list)
+3. If live: `curl -sI https://example.com/robots.txt` and parse User-agent / Allow / Disallow blocks
+4. Audit `robots.txt` against the three crawler tables — list any bot blocked vs intended bucket
+5. Inventory content URLs that should have `.md` twins (blog, docs, landing pages, FAQ)
+6. Choose generation strategy per stack (build step vs route handler vs CMS endpoint)
+7. Add `<link rel="alternate">` to HTML `<head>` template
+8. Add `Link` response header at edge or app layer
+9. If live: `curl -sI https://example.com/blog/post` and confirm `Link:` header presence
+10. Implement `Accept: text/markdown` content negotiation with `Vary: Accept`
+11. If live: `curl -sH "Accept: text/markdown" https://example.com/blog/post` and confirm Markdown body returned
+12. Add structured logging on `.md` and `/llms.txt` endpoints; capture User-Agent + Referer
+13. Build a minimal dashboard or report; baseline traffic for 14 days before claiming wins
+14. Cross-link with `llms-txt-builder` output: `/llms.txt` should reference the `.md` URLs from layer 2
 
 ## Honest Caveats
 

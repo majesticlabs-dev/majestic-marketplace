@@ -214,10 +214,12 @@ AI VISIBILITY:
 
 ### "I need AI to recommend me"
 ```
-1. llm-optimizer agent (optimize for AI citation)
-2. entity-builder agent (build brand entity)
-3. schema-architect agent (structured data)
-4. /aeo-workflow command (full process)
+1. ai-crawler-readiness skill (HTTP-layer LLM visibility: robots.txt, .md routes, Link headers)
+2. llms-txt-builder skill (AI navigation file)
+3. llm-optimizer agent (optimize content for AI citation)
+4. entity-builder agent (build brand entity)
+5. schema-architect skill (Google rich results / AI Overviews — NOT direct LLM citation)
+6. /aeo-workflow command (full process)
 ```
 
 ## Quick Commands

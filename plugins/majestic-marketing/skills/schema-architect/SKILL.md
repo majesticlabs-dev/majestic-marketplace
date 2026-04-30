@@ -1,16 +1,19 @@
 ---
 name: schema-architect
-description: Use when adding or auditing Schema.org structured data for AI extraction and rich results. Generate JSON-LD for organization, FAQ, HowTo, product, and article schemas. Not for content structure — use structure-architect instead.
+description: Use when adding or auditing Schema.org structured data for Google Search rich results, AI Overviews, and classic search indexing. Generate JSON-LD for organization, FAQ, HowTo, product, and article schemas. Not for direct LLM citation in ChatGPT/Claude/Perplexity — use ai-crawler-readiness for HTTP-layer LLM visibility. Not for content structure — use structure-architect.
 allowed-tools: Read Write Edit Grep Glob WebSearch
 ---
 
 # Schema Architect
 
-Design and implement Schema.org structured data for maximum AI visibility and rich search results.
+Design and implement Schema.org structured data for Google Search rich results, AI Overviews, and classic indexing.
 
-**Related:** Use `llms-txt-builder` skill for AI navigation files. Use `ai-crawler-readiness` for HTTP-layer AI visibility.
+**Routing:**
+- Use this skill for: Google rich results, AI Overviews eligibility, entity disambiguation in classic search
+- Use `ai-crawler-readiness` for: LLM citation in ChatGPT, Claude, Perplexity, Gemini chat
+- Use `llms-txt-builder` for: AI navigation file content
 
-**Honest caveat:** Structured data helps Google's classic indexing and AI Overviews via search. There is no public evidence current LLMs (ChatGPT, Claude, Perplexity, Gemini) parse JSON-LD when answering — do not treat schema as a primary GEO citation lever.
+**Honest caveat:** Structured data helps Google's classic indexing and AI Overviews via search. There is no public evidence current LLMs (ChatGPT, Claude, Perplexity, Gemini chat) parse JSON-LD when answering — do not treat schema as a primary GEO citation lever.
 
 ## Schema Priority Matrix
 
