@@ -108,7 +108,7 @@ Invoke with: `agent <name>`
 |-------|-------------|
 | `entity-builder` | Brand entity and triplet optimization for LLM presence |
 | `llm-optimizer` | Optimize content for AI citation (ChatGPT, Perplexity, Gemini) |
-| `schema-architect` | Schema.org and llms.txt implementation for AI extraction |
+| `schema-architect` | Schema.org / JSON-LD for Google rich results and AI Overviews — not direct LLM citation (use `ai-crawler-readiness` skill for that) |
 
 ## Commands
 
@@ -179,6 +179,10 @@ Invoke with: `skill majestic-marketing:<name>`
 
 | Skill | Description |
 |-------|-------------|
+| `ai-crawler-readiness` | HTTP-layer LLM visibility: robots.txt allowlist (split into search/user-fetch/training buckets), `.md` shadow routes, `<link>` and `Link` headers, `Accept: text/markdown` negotiation, AI-referrer analytics |
+| `llms-txt-builder` | Generate `/llms.txt` AI navigation file content (pairs with `ai-crawler-readiness` for the surrounding HTTP setup) |
+| `geo-content-optimizer` | Content structure and framing for AI citation (trust formats, fact-density, Taco Bell chunking) |
+| `entity-triplets` | Build brand-entity associations that LLMs recognize and cite consistently |
 | `aeo-scorecard` | AEO measurement framework with AI visibility, share of voice, and citation metrics |
 
 ### Meta / Getting Started

@@ -76,6 +76,7 @@ You're the strategist layer. Ask the right questions, diagnose the situation, an
 | `query-expansion-strategy` | Query fan-out coverage for search visibility |
 | `entity-triplets` | Build entity associations that LLMs recognize and cite |
 | `llms-txt-builder` | Create llms.txt files for AI site navigation |
+| `ai-crawler-readiness` | HTTP-layer LLM visibility (robots.txt, .md routes, Link headers, AI-referrer analytics) |
 | `behavioral-seo` | Optimize CTR, dwell time, engagement, Bing-specific factors |
 | `review-management` | Leverage reviews and UGC for AI visibility |
 | `press-release-aeo` | Frame press releases for AI/LLM citation authority |
@@ -132,6 +133,11 @@ SEO/GEO (requires content)
 ├── content-optimizer (needs content to optimize)
 ├── geo-content-optimizer (needs content for AI)
 └── aeo-scorecard (needs baseline metrics)
+
+AI VISIBILITY HTTP LAYER (independent of content — runs in parallel)
+├── ai-crawler-readiness (robots.txt allowlist, .md routes, Link headers, AI analytics)
+├── llms-txt-builder (AI navigation file)
+└── entity-triplets (brand-entity associations for LLM recognition)
 
 DISTRIBUTION (requires content)
 ├── content-atomizer (needs content to atomize)
