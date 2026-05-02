@@ -1,7 +1,7 @@
 {
   "name": "majestic-company",
-  "version": "4.0.7",
-  "description": "Business operations tools. Includes 8 specialized agents, 2 commands, and 24 skills.",
+  "version": "4.0.8",
+  "description": "Business operations tools. Includes 8 specialized agents, 2 commands, and 25 skills.",
   "author": {
     "name": "David Paluy",
     "url": "https://github.com/dpaluy",
@@ -64,6 +64,11 @@
     "cfo",
     "unit-economics",
     "runway",
-    "burn-rate"
+    "burn-rate",
+    "premortem",
+    "prospective-hindsight",
+    "failure-modes",
+    "stress-test",
+    "decision-stress-test"
   ]
 }
