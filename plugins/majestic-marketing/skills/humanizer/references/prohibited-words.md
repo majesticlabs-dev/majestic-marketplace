@@ -125,6 +125,8 @@ Words and phrases that AI detectors flag and human readers recognize as machine-
 - "our suite..."
 - "unlock the secrets..."
 - "unveil the secrets..."
+- "while [X] might seem [Z], [Y] actually..."
+- "[X] may sound [Z], but [Y]..."
 
 ### Engagement Bait (Remove Entirely)
 - "Let that sink in"

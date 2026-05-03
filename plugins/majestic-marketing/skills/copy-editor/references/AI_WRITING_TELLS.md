@@ -422,8 +422,10 @@ The most recognizable AI writing pattern. Any sentence that negates one framing 
 | "Forget X. This is Y." | "Forget everything you know. This is different." |
 | "Less X, more Y." | "Less theory, more action." |
 | "Stop X. Start Y." | "Stop guessing. Start knowing." |
+| "While X might seem Z, Y actually..." | "While speed might seem critical, accuracy actually wins." |
+| "X may sound Z, but Y..." | "It may sound counterintuitive, but slower onboarding converts better." |
 
-**Fix:** Delete the negation. State the positive claim directly.
+**Fix:** Delete the negation (including soft "while/may sound" preambles). State the positive claim directly.
 
 - Bad: "This isn't a CRM. It's a revenue engine."
 - Good: "It's a revenue engine."
