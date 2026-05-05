@@ -6,6 +6,10 @@ triggers:
   - validate this idea
   - product market fit
   - does anyone want this
+  - pressure test this idea
+  - find fatal flaws
+  - strong weak or pivot
+  - kill the idea fast
 ---
 
 # PMF Validation
@@ -19,6 +23,94 @@ Frameworks for achieving and measuring product-market fit.
 - `pm-jobs-to-be-done` - Understanding customer motivations
 
 **Side project, hackathon, or learning exercise?** Use `brainstorming` instead. This skill is for ideas where demand validation matters.
+
+## Modes
+
+Choose one. If unclear, ask.
+
+| Mode | When | Path |
+|------|------|------|
+| `pressure-test` | Founder wants brutal verdict in minutes, no research | Use Pressure Test Mode below, stop |
+| `full` | Founder is serious, willing to do interrogation + research | Run Pressure Test Mode, then Phase 0 onward |
+| `customer-finder` | Idea passed, needs first 10 named buyers | Skip to Pressure Test Mode → First 10 Customer Moves |
+| `mvp-plan` | Idea passed, needs the smallest test | Skip to Pressure Test Mode → 2-Week MVP Test |
+
+## Pressure Test Mode
+
+Fast LLM-only diagnosis. No research, no interviews. Goal: kill weak ideas before founder wastes weeks.
+
+### Required Input
+
+If missing, ask once and stop:
+
+```text
+Send the idea, target customer, and what you want them to do or pay for.
+```
+
+### Operating Rules
+
+- Verdict must be one of: `strong`, `weak`, `pivot required`. No softening, no encouragement padding.
+- Every fatal flaw must be specific to this idea, not generic startup risks.
+- Core assumption must be testable this week, not after building.
+- Competitors include the status quo (spreadsheet, manual workflow, doing nothing).
+- First 10 customer moves must name channels and humans, not categories.
+- 2-week MVP test must produce a kill-or-continue signal, not vanity metrics.
+
+### Output Template
+
+Produce these sections in order. Skip none. Keep each section tight.
+
+```text
+VERDICT: <strong | weak | pivot required>
+ONE-LINE REASON: <single sentence, no hedging>
+
+SCORECARD (1-10 each):
+- Problem severity:
+- Willingness to pay:
+- Wedge clarity:
+- Founder-market fit:
+- Competition vulnerability:
+
+CORE ASSUMPTION:
+<the single belief that must be true; testable this week>
+
+FATAL FLAWS (ranked):
+1. <flaw> — why it kills the idea
+2. <flaw> — why it kills the idea
+3. <flaw> — why it kills the idea
+(Include only real flaws. Do not pad to hit a count.)
+
+PROBLEM REALITY:
+- Current behavior: <what target user does today, even badly>
+- Workaround cost: <hours, dollars, headcount, risk>
+- Pain level: <acute / chronic / nice-to-have>
+
+REAL COMPETITION:
+- Direct: <named alternatives>
+- Status quo: <the spreadsheet/manual/duct-taped workflow>
+- Switching cost: <what blocks the switch>
+
+FIRST 10 CUSTOMER MOVES:
+- Name 5 specific humans or roles to contact this week
+- Name 3 channels where they already gather
+- Name 2 messages that match their language
+
+2-WEEK MVP TEST:
+- Smallest shippable thing: <one feature, days to build>
+- Manual stand-in: <what to fake before building>
+- Kill signal: <result that ends the idea>
+- Continue signal: <result that earns next 2 weeks>
+```
+
+### Verdict Routing
+
+| Verdict | Next Step |
+|---------|-----------|
+| `strong` | Run Phase 0 only on flagged weak scorecard items, then go build the 2-Week MVP |
+| `weak` | Stop. Use `idea-generation` to find a stronger angle |
+| `pivot required` | Hold the customer + pain, change the wedge. Re-run Pressure Test Mode on the pivot |
+
+---
 
 ## Phase 0: Demand Interrogation
 
