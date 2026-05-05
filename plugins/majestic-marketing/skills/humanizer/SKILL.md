@@ -179,7 +179,16 @@ These are untouchable. External humanizer tools destroy meaning by replacing "20
 - Add em dashes for rhythm and texture — **skip if `STYLE_OVERRIDES` specify zero em dashes** (some voices rely entirely on commas and periods)
 - Write how you'd explain it over coffee — then tighten
 
-**Step 7: Final perplexity boost**
+**Step 7: Visual/typographic tells**
+- Em dashes: 3+ in 200 words → swap most for commas/periods. Zero in `STYLE_OVERRIDES` → leave none.
+- Curly quotes (" " ' ') → straight quotes (" '), unless target CMS demands typographic quotes
+- Bold acronyms/noun phrases inline → strip bold (keep max 1 emphasis per 300 words)
+- Title Case Headings → sentence case
+- Fragmented headers (heading restated as topic sentence) → cut the restatement or merge into prose
+- Emojis in body/headings → remove unless channel demands them
+- Stacked hyphenated word pairs → break the cluster or rewrite
+
+**Step 8: Final perplexity boost**
 - Read each paragraph aloud mentally
 - Where every word feels predictable, swap one for an unexpected-but-accurate choice
 - Prefer the specific over the generic, the concrete over the abstract
@@ -211,6 +220,24 @@ Run the detection self-test after transformation.
 ```
 
 If any check fails, return to Phase 2 and fix the specific issue.
+
+### Phase 4: Audit + Second Pass
+
+After Phase 3 verification, run a final "obviously AI generated" audit. Read the rewrite cold, as if you'd never seen the original. Ask:
+
+- Does any paragraph still sound like ChatGPT wrote it?
+- Are there leftover signposting phrases ("Here's the thing", "At its core")?
+- Are there cutoff disclaimers from the source ("While details are limited...") that survived?
+- Any em dash or curly quote slipped through?
+- Any title case heading or fragmented header still present?
+- Does any sentence feel like it could be the opening of an AI-generated essay?
+
+If any audit item flags, run a **second-pass rewrite** on the offending paragraph(s) only. Do not re-run the full pipeline. Targeted fixes:
+- Rewrite the flagged paragraph from scratch in plain voice
+- Re-check Phase 3 verification on the rewritten section
+- Stop when audit is clean
+
+The audit catches AI-isms the first transformation missed because the diagnose phase ran on the *original*, not the rewrite. Run audit on the rewrite.
 
 ---
 

@@ -113,7 +113,23 @@ Detectors measure five signals. Humanization must move ALL five toward human bas
 - Name tools, people, places — specifics are hard to fake
 - Include concrete examples, not hypothetical ones
 
-### 7. Imperfection Tolerance
+### 7. Visual / Typographic Tells
+
+**Target signal:** Stylometry (formatting fingerprints)
+
+**Style context override:** Respect `STYLE_OVERRIDES`. Some authors use boldface or em dashes deliberately; only flag when no style context permits the device.
+
+**What to do:**
+- **Em dash overuse:** Replace runs of em dashes with commas, periods, or parentheses. Pattern: 3+ em dashes in a 200-word window is an AI tell. Exception: zero in style context = leave none.
+- **Curly/smart quotes (" " ' '):** Convert to straight quotes (" ') unless the source CMS demands typographic quotes. AI models default to curly; most human keyboards produce straight.
+- **Boldface overuse:** Strip bold from acronyms and noun phrases used inline ("**OKRs**, **KPIs**, **BMC**" → "OKRs, KPIs, BMC"). Keep bold for genuine emphasis (max 1 per 300 words).
+- **Title Case Headings:** Convert "Strategic Negotiations And Partnerships" → "Strategic negotiations and partnerships". Sentence case reads more human.
+- **Fragmented headers:** If a heading restates the topic sentence below it ("## Performance" + "Speed matters."), let the heading do the work. Cut the restatement or merge into prose.
+- **Emojis in body copy / headers:** Remove unless the channel explicitly demands them (Twitter threads, certain newsletters). "🚀 Launch Phase:" → "Launch Phase".
+- **Inline-header lists:** Convert "**Performance:** Performance improved" patterns to flowing prose or proper sub-headings.
+- **Hyphenated word-pair stacking:** Drop hyphens on common pairs when they cluster ("cross-functional, data-driven, client-facing" → "cross functional, data driven, client facing" or rewrite for variety).
+
+### 8. Imperfection Tolerance
 
 **Target signal:** Stylometry (perfect grammar detection)
 
@@ -139,7 +155,8 @@ Apply techniques in this sequence for best results:
 4. **Voice injection** — Add personal elements, opinions, caveats
 5. **Specificity pass** — Swap abstractions for concrete details
 6. **Conversational texture** — Add contractions, direct address, informality
-7. **Perplexity boost** — Final pass for unexpected-but-accurate word choices
+7. **Visual/typographic tells** — Em dashes, curly quotes, bold, title case, fragmented headers, emojis
+8. **Perplexity boost** — Final pass for unexpected-but-accurate word choices
 
 ---
 

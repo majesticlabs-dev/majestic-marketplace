@@ -135,6 +135,30 @@ Words and phrases that AI detectors flag and human readers recognize as machine-
 - "This changes everything"
 - "Are you paying attention?"
 
+### Signposting Announcements (Cut, Start With The Content)
+- "Let's dive in"
+- "Here's what you need to know"
+- "Here's the thing"
+- "Buckle up"
+- "Stay with me"
+- "Without further ado"
+- "Let's get started"
+
+### Cutoff Disclaimers (Find Sources Or Remove)
+- "While details are limited in available sources..."
+- "Based on the information available..."
+- "While specific data is not provided..."
+- "Although comprehensive details are unavailable..."
+- "Based on what's accessible..."
+
+### Persuasive Authority Tropes (State The Point Directly)
+- "At its core, what matters is..."
+- "At the end of the day..."
+- "The truth is..."
+- "Make no mistake..."
+- "Here's the reality..."
+- "What's really happening here is..."
+
 ### Sycophantic (Remove Entirely)
 - "I hope this helps!"
 - "Great question!"
