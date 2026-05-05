@@ -2,9 +2,10 @@
 name: brand-voice
 description: |
   Create AI-optimized style guides for brand or personal voice. Extracts patterns
-  from writing samples and produces a reusable guide with tone rules, structure patterns,
-  signature moves, anti-pattern blacklists, and examples. Output is optimized for LLM
-  consumption (Claude Projects, system prompts). Not for editing content (use copy-editor).
+  from writing samples or AI-draft/final-sent calibration pairs, producing a reusable guide
+  with tone rules, structure patterns, signature moves, anti-filler checklists, anti-pattern
+  blacklists, and examples. Output is optimized for LLM consumption (Claude Projects, system
+  prompts). Not for editing content (use copy-editor).
 triggers:
   - brand voice
   - voice guide
@@ -61,7 +62,13 @@ Share 3-5 pieces YOU wrote that represent your best voice:
 - Paste directly or provide file paths
 - Choose pieces where you sound most like *yourself*
 
-**Option B - Voice Interview**
+**Option B - Calibration Pairs (Most Revealing)**
+Share 3-5 side-by-side pairs where AI wrote a draft and you revised it to send:
+- Paste AI version + your final version
+- The gap between them IS your voice — no self-description needed
+- Works with emails, posts, Slack messages, anything you've edited
+
+**Option C - Voice Interview**
 If you don't have samples handy, I'll ask targeted questions:
 1. Show you example paragraphs and ask which feel closer to your style
 2. Ask about your writing instincts (do you start with stories or arguments?)
@@ -123,7 +130,24 @@ Extract patterns across all samples:
 - Emotional warmth (distant vs intimate)
 - Authority stance (peer vs expert vs mentor)
 
-### If Description Provided (Option B)
+### If Calibration Pairs Provided (Option B)
+
+This is the highest-signal input. The edits the user made to AI drafts ARE their voice — no inference needed.
+
+For each (AI draft, final sent) pair:
+
+1. **Mark every deletion** — what did they cut? Look for filler phrases, hedge words, AI-isms
+2. **Mark every rewrite** — what did they replace? Identify the structural preference behind each swap
+3. **Mark every addition** — what did they insert? Reveals signature moves they reach for instinctively
+
+After all pairs, synthesize:
+- **Anti-Filler Phrases**: The specific phrases deleted across multiple pairs (these go into the Anti-Filler Checklist)
+- **Structural swaps**: Patterns they consistently rewrote (e.g., passive → active, listicle → prose)
+- **Signature insertions**: Recurring additions that define their voice
+
+Use the voice pattern extraction criteria from Option A on the final-sent versions only.
+
+### If Description Provided (Option C)
 
 Use WebSearch to find:
 - Example content from admired brands
@@ -255,6 +279,18 @@ Patterns to eliminate — these are structural, not just word-level:
 | [e.g., "Correlative construction"] | ["Not X, but Y"] | ["Rewrite as direct claim"] |
 | [e.g., "Throat-clearing opener"] | ["In today's fast-paced world..."] | ["Cut to the point"] |
 | [e.g., "Hedge stacking"] | ["It might perhaps be worth considering..."] | ["State the claim, then qualify once"] |
+
+### Anti-Filler Checklist
+Literal phrases to search-and-destroy on every AI pass. Derived from calibration pair deletions or stated pet peeves. Unlike the structural blacklist, these are exact strings.
+
+Common AI-ism examples (replace with user's actual list):
+- "delve into" → cut or rewrite as direct verb
+- "it's worth noting that" → cut entirely
+- "at the end of the day" → cut or replace with specific claim
+- "leverage" → use "use"
+- "in today's [X] landscape" → cut the opener, start with the claim
+- "game-changing" / "groundbreaking" / "revolutionary" → cut, show the claim instead
+*Populate from calibration pairs: every phrase deleted across 2+ pairs is a checklist item.*
 ```
 
 ### 6. Sentence Style
@@ -356,6 +392,7 @@ Run through before publishing. Each question should produce a confident "yes."
 ### Language
 - [ ] No words from the "avoid" list?
 - [ ] Anti-pattern blacklist clear?
+- [ ] Anti-filler checklist phrases removed?
 - [ ] Contractions/pronouns consistent?
 
 ### Structure
@@ -399,7 +436,7 @@ Use "VOICE GUIDE" for personal, "BRAND VOICE GUIDE" for organizational.
 [Named techniques with frequency]
 
 ## 5. VOCABULARY + ANTI-PATTERNS
-[Words we love/avoid + structural blacklist]
+[Words we love/avoid + structural blacklist + anti-filler checklist]
 
 ## 6. SENTENCE STYLE
 [Length, rhythm, punctuation rules]
