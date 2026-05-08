@@ -93,9 +93,10 @@ Final recommendation should include:
 
 ## Relationship to Other Tools
 
-- **reasoning-verifier**: Post-hoc verification of completed reasoning
+- **reasoning-verifier**: Post-hoc verification of completed reasoning — includes an iteration gate that re-runs until no critical/major gaps remain (max 3 iterations)
 - **devils-advocate**: Pre-commitment challenge before reasoning solidifies
 - Use both: devils-advocate during planning, reasoning-verifier after execution
+- For iterative confidence building: run devils-advocate once, then hand the output to reasoning-verifier for gap-closing loops
 
 ## Underlying Principle
 

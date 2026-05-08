@@ -127,6 +127,22 @@ If errors were found, provide the corrected solution:
 4. Show corrected reasoning step-by-step
 5. Provide the revised answer
 
+### Step 7: Iteration Gate
+
+After producing the revised solution, apply this stopping rule:
+
+```
+If Severity == Critical or Major:
+  Re-run from Step 1 using the Revised Solution as the new "provided solution"
+  Increment iteration counter (start at 1, cap at 3)
+  If iteration counter == 3: halt regardless of severity, flag as "max iterations reached"
+Else (Severity == Minor or None):
+  Halt — output final verified solution + iteration count
+  Label verdict: "No critical gaps remain"
+```
+
+Do NOT target "100% confidence" as a stopping criterion — that framing is unachievable and produces false certainty. The correct stopping condition is **no critical or major gaps remain**.
+
 ## Output Format
 
 ```markdown
