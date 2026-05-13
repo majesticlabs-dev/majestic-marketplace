@@ -6,7 +6,7 @@
   },
   "metadata": {
     "description": "Majestic Labs plugin marketplace for Claude Code extensions",
-    "version": "4.0.0"
+    "version": "5.0.0"
   },
   "plugins": [
     {
