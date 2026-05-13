@@ -48,9 +48,9 @@ plugins/majestic-rails/skills/stimulus-coder/SKILL.md
 ### Nested Structure (categorized skills)
 
 ```
-plugins/majestic-company/skills/ceo/strategic-planning/SKILL.md
--> name: strategic-planning
--> invoked as: Skill("strategic-planning")
+plugins/majestic-rails/skills/dhh-coder/SKILL.md
+-> name: dhh-coder
+-> invoked as: Skill("dhh-coder")
 ```
 
 **Key Points:**

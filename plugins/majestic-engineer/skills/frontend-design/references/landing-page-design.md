@@ -375,4 +375,4 @@ For self-contained landing pages:
 
 - `motion-patterns.md` - Animation timing and implementation
 - `ui-implementation-guide.md` - Form fields, buttons, typography constraints
-- `landing-page-builder` skill (majestic-marketing) - Copy structure and messaging
+- `landing-page-builder` skill (majestic-business-plugins) - Copy structure and messaging
