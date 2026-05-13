@@ -29,8 +29,8 @@ npm install -g stimulus-language-server
 
 ```mermaid
 graph LR
-    A(Skill("blueprint")) --> B(Skill("build-task"))
-    B --> C(Skill("code-review"))
+    A["Skill(blueprint)"] --> B["Skill(build-task)"]
+    B --> C["Skill(code-review)"]
     C --> D{{ship}}
 ```
 
