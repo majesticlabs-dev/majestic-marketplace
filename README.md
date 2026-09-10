@@ -1,6 +1,6 @@
 # Majestic Marketplace
 
-The Majestic marketplace where we share our workflows.
+The Majestic marketplace is archived. We recommend using [Majestic Abilities](https://github.com/majesticlabs-dev/majestic-abilities) instead.
 
 **New here?** Check out the [Marketplace Tutorial](https://tutorial.majesticmarketplace.com) for an interactive walkthrough.
 
