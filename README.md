@@ -2,8 +2,6 @@
 
 The Majestic marketplace is archived. We recommend using [Majestic Abilities](https://github.com/majesticlabs-dev/majestic-abilities) instead.
 
-**New here?** Check out the [Marketplace Tutorial](https://tutorial.majesticmarketplace.com) for an interactive walkthrough.
-
 ## The Shift: Engineers Orchestrate Agents
 
 Coding is no longer the bottleneck. Planning, review, and learning loops matter more than syntax. Each feature makes the next one easier to build.
